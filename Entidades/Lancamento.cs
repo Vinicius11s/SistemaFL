@@ -15,10 +15,10 @@ namespace Entidades
         public Decimal? FundoReserva { get; set; }
 
         public int idFlat { get; set; }
+        public virtual Flat Flat { get; set; }
 
-        // Relacionamento com Flat
-        public virtual Flat Flat { get; set; } // Alterado para referência única
-
-        public Lancamento() { }
+        public Lancamento() {
+            Flat = new Flat();
+        }
     }
 }

@@ -23,7 +23,7 @@ namespace Infraestrutura.Contexto
         public DbSet<Usuario> Usuarios { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var stringConexao = @"Server=PC-VINICIUS; 
+            var stringConexao = @"Server=PCVINICIUS;
             DataBase=dbSistemaFL;integrated security=true; TrustServerCertificate=True;";
 
             if (!optionsBuilder.IsConfigured)
@@ -35,69 +35,82 @@ namespace Infraestrutura.Contexto
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configuração de Empresa
-            modelBuilder.Entity<Empresa>(e =>
+            // Configuração das entidades de Empresa
+            modelBuilder.Entity<Empresa>(e =>   
             {
-                e.HasKey(e => e.id);
+                e.HasIndex(e => e.Cnpj).IsUnique();
+                e.Property(e => e.Cnpj).IsRequired().HasMaxLength(14);
                 e.Property(e => e.Descricao).IsRequired().HasMaxLength(150);
+
+                e.Property(e => e.Rua).IsRequired().HasMaxLength(100);
+                e.Property(e => e.Numero).IsRequired().HasMaxLength(10);
+                e.Property(e => e.Bairro).HasMaxLength(50);
+                e.Property(e => e.Cidade).IsRequired().HasMaxLength(50);
+                e.Property(e => e.Estado).IsRequired().HasMaxLength(2);
+                e.Property(e => e.Cep).IsRequired().HasMaxLength(9);
+
+                e.Property(e => e.InscricaoEstadual).HasMaxLength(20);
+                e.Property(e => e.RazaoSocial).HasMaxLength(150);
             });
 
-            // Configuração de Flat
-            modelBuilder.Entity<Flat>(e =>
+            // Configuração das entidades de Flat
+            modelBuilder.Entity<Flat>(f =>
             {
-                e.Property(f => f.DataAquisicao).IsRequired();
-                e.Property(e => e.Descricao).IsRequired().HasMaxLength(150);
-                e.Property(f => f.Unidade).IsRequired();
-                e.Property(f => f.TipoInvestimento).IsRequired();
-                e.Property(f => f.Cidade).IsRequired();
-                e.Property(f => f.Status).HasDefaultValue(true);
+                f.Property(f => f.DataAquisicao).IsRequired();
+                f.Property(f => f.Descricao).HasMaxLength(200) .IsRequired(); 
+                f.Property(f => f.TipoInvestimento).HasMaxLength(100) .IsRequired(false);
+                f.Property(f => f.Rua).HasMaxLength(100).IsRequired(false); 
+                f.Property(f => f.NumeroAp).HasMaxLength(10).IsRequired(false); 
+                f.Property(f => f.Bairro).HasMaxLength(50).IsRequired(false); 
+                f.Property(f => f.Cidade).HasMaxLength(50) .IsRequired(false);
+                f.Property(f => f.ValorInvestimento).HasColumnType("decimal(18,2)");
+                f.Property(f => f.Status).IsRequired();
 
-                // Relacionamento com Empresa
-                e.HasOne(v => v.Empresa)
-                    .WithMany(fp => fp.Flats)
-                    .HasForeignKey(v => v.idEmpresa)
-                    .HasConstraintName("fk_empresa_flat")
+                f.HasOne(e => e.Empresa)
+                    .WithMany(f => f.Flats)
+                    .HasForeignKey(e => e.idEmpresa)
                     .OnDelete(DeleteBehavior.NoAction);
             });
 
-            // Configuração de Lancamento
-            modelBuilder.Entity<Lancamento>(e =>
+            modelBuilder.Entity<Lancamento>(l =>
             {
-                e.Property(p => p.DataPagamento).IsRequired().HasMaxLength(100);
-                e.Property(p => p.ValorPagamento).IsRequired();
+                l.Property(l => l.DataPagamento).IsRequired();
+                l.Property(l => l.ValorPagamento).HasColumnType("decimal(18,2)").IsRequired(); 
+                l.Property(l => l.TipoPagamento).HasMaxLength(50).IsRequired(false); 
+                l.Property(l => l.FundoReserva).HasColumnType("decimal(18,2)");
 
-                // Relacionamento com Flat
-                e.HasOne(p => p.Flat)
+                l.HasOne(p => p.Flat)
                     .WithMany(f => f.Lancamentos)
                     .HasForeignKey(p => p.idFlat)
                     .OnDelete(DeleteBehavior.NoAction);
             });
 
-            // Configuração de Ocorrencia
-            modelBuilder.Entity<Ocorrencia>(e =>
+            modelBuilder.Entity<Ocorrencia>(o =>
             {
-                e.Property(o => o.DataAlteracao).IsRequired();
+                o.Property(o => o.valorAntigo).HasColumnType("decimal(18,2)").IsRequired();
+                o.Property(o => o.valorNovo).HasColumnType("decimal(18,2)").IsRequired(); 
+                o.Property(o => o.DataAlteracao).IsRequired();
 
-                // Relacionamento com Flat
-                e.HasOne(o => o.Flat)
-                    .WithMany(f => f.Ocorrencias)
+                o.HasOne(f => f.Flat)
+                    .WithMany(o => o.Ocorrencias)
                     .HasForeignKey(o => o.idFlat)
                     .OnDelete(DeleteBehavior.NoAction);
 
-                // Relacionamento com Usuario
-                e.HasOne(o => o.Usuario)
-                    .WithMany(u => u.Ocorrencias)
+                o.HasOne(u => u.Usuario)
+                    .WithMany(o => o.Ocorrencias)
                     .HasForeignKey(o => o.idUsuario)
                     .OnDelete(DeleteBehavior.NoAction);
             });
 
-            // Configuração de Usuario
-            modelBuilder.Entity<Usuario>(e =>
+            modelBuilder.Entity<Usuario>(u =>
             {
-                e.Property(u => u.nome).IsRequired().HasMaxLength(150);
+                u.Property(u => u.nome).IsRequired().HasMaxLength(100);
+                u.Property(u => u.login).IsRequired() .HasMaxLength(50); 
+                u.Property(u => u.Senha).IsRequired().HasMaxLength(100);
+                u.Property(u => u.DataCriacao).IsRequired();
+                u.Property(u => u.nome).IsRequired().HasMaxLength(150);
             });
         }
-
     }
 }
 
