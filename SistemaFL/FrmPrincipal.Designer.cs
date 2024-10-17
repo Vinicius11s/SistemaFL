@@ -39,7 +39,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { cadastrosToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(655, 24);
+            menuStrip1.Size = new Size(782, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -55,16 +55,17 @@
             empresaToolStripMenuItem.Name = "empresaToolStripMenuItem";
             empresaToolStripMenuItem.Size = new Size(180, 22);
             empresaToolStripMenuItem.Text = "Empresa";
+            empresaToolStripMenuItem.Click += empresaToolStripMenuItem_Click;
             // 
             // FrmPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(655, 314);
+            ClientSize = new Size(782, 428);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "FrmPrincipal";
-            Text = "FrmPrincipal";
+            Text = "Sistema Gerenciamento FL";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);

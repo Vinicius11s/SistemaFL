@@ -15,8 +15,11 @@ namespace Entidades
         }
 
         public int id { get; set; }
-        public String Cnpj { get; set; } = String.Empty;
         public String Descricao { get; set; } = String.Empty;
+        public String RazaoSocial { get; set; } = String.Empty;
+        public String Cnpj { get; set; } = String.Empty;
+        public String InscricaoEstadual { get; set; } = String.Empty;
+        
 
         // Propriedades de endereço detalhado
         public string Rua { get; set; } = String.Empty;
@@ -25,8 +28,7 @@ namespace Entidades
         public string Cidade { get; set; } = String.Empty;
         public string Estado { get; set; } = String.Empty;
         public string Cep { get; set; } = String.Empty;
-        public String InscricaoEstadual { get; set; } = String.Empty;
-        public String RazaoSocial { get; set; } = String.Empty;
+
 
         public virtual ICollection<Flat> Flats { get; set; }
     }

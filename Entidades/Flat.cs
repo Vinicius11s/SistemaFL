@@ -17,15 +17,16 @@ namespace Entidades
         }
 
         public int id { get; set; }
-        public DateTime DataAquisicao { get; set; }
         public String Descricao { get; set; } = String.Empty;
+        public DateTime DataAquisicao { get; set; }
+        public bool Status { get; set; }
         public String TipoInvestimento { get; set; } = String.Empty;
+        public Decimal ValorInvestimento { get; set; }
         public string Rua { get; set; } = String.Empty;
         public string NumeroAp { get; set; } = String.Empty;
         public string Bairro { get; set; } = String.Empty;
         public string Cidade { get; set; } = String.Empty;
-        public Decimal ValorInvestimento { get; set; }
-        public bool Status { get; set; }
+        public string Estado { get; set; } = String.Empty;
 
         public int idEmpresa { get; set; }
         public virtual Empresa Empresa { get; set; }
