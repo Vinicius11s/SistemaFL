@@ -15,6 +15,7 @@ namespace Entidades
             Usuario = new Usuario();
         }
         public int id { get; set; }
+
         public Decimal valorAntigo { get; set; }
         public Decimal valorNovo { get; set; }
         public int DataAlteracao { get; set; }

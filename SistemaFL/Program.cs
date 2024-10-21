@@ -40,11 +40,14 @@ namespace SistemaFL
             services.AddScoped<FrmConsultaEmpresa>();
             services.AddScoped<FrmConsultaFlat>();
             services.AddScoped<FrmConsultaLancamento>();
+            services.AddScoped<FrmConsultaOcorrencia>();
+            services.AddScoped<FrmConsultaUsuario>();
             services.AddScoped<FrmPrincipal>();
             
             services.AddScoped<IEmpresaRepositorio, EmpresaRepositorio>();
             services.AddScoped<IFlatRepositorio, FlatRepositorio>();
             services.AddScoped<ILancamentoRepositorio, LancamentoRepositorio>();
+            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 
         }
     }

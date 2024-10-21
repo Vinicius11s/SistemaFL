@@ -31,8 +31,12 @@ namespace SistemaFL
 
             if (lista.Count > 0)
             {
+                dgdados.Columns["id"].HeaderText = "Código";
                 dgdados.Columns["descricao"].HeaderText = "Descrição";
-
+                dgdados.Columns["RazaoSocial"].HeaderText = "Razão Social";
+                dgdados.Columns["InscricaoEstadual"].HeaderText = "Inscrição Estadual";
+                dgdados.Columns["Numero"].HeaderText = "Nº";
+                dgdados.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             }
         }
         private void dgdados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

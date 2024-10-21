@@ -23,7 +23,6 @@ namespace SistemaFL
             InitializeComponent();
             this.repositorio = repositorio;
         }
-
         private void FrmCadLancamento_Load(object sender, EventArgs e)
         {
             btnLocFlatLancamento.Enabled = false;

@@ -1,6 +1,6 @@
 ﻿namespace SistemaFL
 {
-    partial class FrmConsultaLancamento
+    partial class FrmConsultaUsuario
     {
         /// <summary>
         /// Required designer variable.
@@ -32,58 +32,58 @@
             btnlocalizar = new Button();
             txtdescricao = new TextBox();
             label1 = new Label();
-            dgdadoslancamento = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)dgdadoslancamento).BeginInit();
+            dgdadosusuario = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dgdadosusuario).BeginInit();
             SuspendLayout();
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(332, 98);
+            label2.Location = new Point(309, 97);
             label2.Name = "label2";
             label2.Size = new Size(94, 25);
-            label2.TabIndex = 11;
+            label2.TabIndex = 16;
             label2.Text = "Registros";
             // 
             // btnlocalizar
             // 
-            btnlocalizar.Location = new Point(674, 49);
+            btnlocalizar.Location = new Point(651, 48);
             btnlocalizar.Name = "btnlocalizar";
             btnlocalizar.Size = new Size(92, 38);
-            btnlocalizar.TabIndex = 10;
+            btnlocalizar.TabIndex = 15;
             btnlocalizar.Text = "Localizar";
             btnlocalizar.UseVisualStyleBackColor = true;
             btnlocalizar.Click += btnlocalizar_Click;
             // 
             // txtdescricao
             // 
-            txtdescricao.Location = new Point(147, 54);
+            txtdescricao.Location = new Point(124, 53);
             txtdescricao.Name = "txtdescricao";
             txtdescricao.Size = new Size(504, 23);
-            txtdescricao.TabIndex = 9;
+            txtdescricao.TabIndex = 14;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(53, 57);
+            label1.Location = new Point(30, 56);
             label1.Name = "label1";
             label1.Size = new Size(74, 20);
-            label1.TabIndex = 8;
+            label1.TabIndex = 13;
             label1.Text = "Descrição";
             // 
-            // dgdadoslancamento
+            // dgdadosusuario
             // 
-            dgdadoslancamento.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadoslancamento.Dock = DockStyle.Bottom;
-            dgdadoslancamento.Location = new Point(0, 148);
-            dgdadoslancamento.Name = "dgdadoslancamento";
-            dgdadoslancamento.Size = new Size(800, 302);
-            dgdadoslancamento.TabIndex = 7;
-            dgdadoslancamento.CellDoubleClick += dgdadoslancamento_CellDoubleClick;
+            dgdadosusuario.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgdadosusuario.Dock = DockStyle.Bottom;
+            dgdadosusuario.Location = new Point(0, 148);
+            dgdadosusuario.Name = "dgdadosusuario";
+            dgdadosusuario.Size = new Size(800, 302);
+            dgdadosusuario.TabIndex = 12;
+            dgdadosusuario.CellDoubleClick += dgdadosusuario_CellDoubleClick;
             // 
-            // FrmConsultaLancamento
+            // FrmConsultaUsuario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -92,10 +92,10 @@
             Controls.Add(btnlocalizar);
             Controls.Add(txtdescricao);
             Controls.Add(label1);
-            Controls.Add(dgdadoslancamento);
-            Name = "FrmConsultaLancamento";
-            Text = "FrmConsultaLancamento";
-            ((System.ComponentModel.ISupportInitialize)dgdadoslancamento).EndInit();
+            Controls.Add(dgdadosusuario);
+            Name = "FrmConsultaUsuario";
+            Text = "FrmConsultaUsuario";
+            ((System.ComponentModel.ISupportInitialize)dgdadosusuario).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -106,6 +106,6 @@
         private Button btnlocalizar;
         private TextBox txtdescricao;
         private Label label1;
-        private DataGridView dgdadoslancamento;
+        private DataGridView dgdadosusuario;
     }
 }

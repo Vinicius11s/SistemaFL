@@ -45,14 +45,6 @@ namespace SistemaFL
             limpar();
             txtnome.Focus();
         }
-        void limpar()
-        {
-            txtid.Text = "";
-            txtnome.Text = "";
-            txtlogin.Text = "";
-            txtsenha.Text = "";
-        }
-
         private void btnalterar_Click(object sender, EventArgs e)
         {
             if (txtnome.Text != "")
@@ -68,34 +60,6 @@ namespace SistemaFL
             }
             else MessageBox.Show("Localize o Usuário");
         }
-
-        public Usuario carregaPropriedades()
-        {
-            Usuario usuario;
-            if (txtid.Text != "")
-            {
-                usuario = repositorio.Recuperar(u => u.id == int.Parse(txtid.Text));
-            }
-            else usuario = new Usuario(); //inserir
-
-            usuario.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
-            usuario.nome = txtnome.Text;
-
-            return usuario;
-        }
-
-        private void btncancelar_Click(object sender, EventArgs e)
-        {
-            limpar();
-            pdados.Enabled = false;
-            btnnovo.Enabled = true;
-            btnlocalizar.Enabled = true;
-            btnalterar.Enabled = false;
-            btncancelar.Enabled = false;
-            btnexcluir.Enabled = false;
-            btnsalvar.Enabled = false;
-        }
-
         private void btnsalvar_Click(object sender, EventArgs e)
         {
             try
@@ -132,7 +96,17 @@ namespace SistemaFL
                 throw;
             }
         }
-
+        private void btncancelar_Click(object sender, EventArgs e)
+        {
+            limpar();
+            pdados.Enabled = false;
+            btnnovo.Enabled = true;
+            btnlocalizar.Enabled = true;
+            btnalterar.Enabled = false;
+            btncancelar.Enabled = false;
+            btnexcluir.Enabled = false;
+            btnsalvar.Enabled = false;
+        }
         private void btnexcluir_Click(object sender, EventArgs e)
         {
             if (txtid.Text != "")
@@ -157,9 +131,10 @@ namespace SistemaFL
                 MessageBox.Show("Localize o Usuário");
             }
         }
-
         private void btnlocalizar_Click(object sender, EventArgs e)
-        {
+        {   
+            
+
             pdados.Enabled = false;
             btnnovo.Enabled = false;
             btnlocalizar.Enabled = false;
@@ -167,6 +142,30 @@ namespace SistemaFL
             btncancelar.Enabled = true;
             btnexcluir.Enabled = true;
             btnsalvar.Enabled = false;
+        }
+        public Usuario carregaPropriedades()
+        {
+            Usuario usuario;
+            if (txtid.Text != "")
+            {
+                usuario = repositorio.Recuperar(u => u.id == int.Parse(txtid.Text));
+            }
+            else usuario = new Usuario(); //inserir
+
+            usuario.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
+            usuario.nome = txtnome.Text;
+            usuario.login = txtlogin.Text;
+            usuario.Senha = txtsenha.Text;
+
+            return usuario;
+        }
+        void limpar()
+        {
+            txtid.Text = "";
+            txtnome.Text = "";
+            txtlogin.Text = "";
+            txtsenha.Text = "";
+            dtDataCriacao.Value = DateTime.Now;
         }
     }
 }
