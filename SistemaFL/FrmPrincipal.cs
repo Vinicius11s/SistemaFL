@@ -23,5 +23,17 @@ namespace SistemaFL
             var form2 = Program.serviceProvider.GetRequiredService<FrmCadEmpresa>();
             form2.ShowDialog();
         }
+
+        private void flatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form3 = Program.serviceProvider.GetRequiredService<FrmCadFlat>();
+            form3.ShowDialog();
+        }
+
+        private void lançamentoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form4 = Program.serviceProvider.GetRequiredService<FrmCadLancamento>();
+            form4.ShowDialog();
+        }
     }
 }

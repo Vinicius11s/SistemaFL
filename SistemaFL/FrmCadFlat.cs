@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,8 +34,7 @@ namespace SistemaFL
             btnexcluir.Enabled = false;
             btnsalvar.Enabled = false;
         }
-
-        private void btnnovo_Click(object sender, EventArgs e)
+        private void btnnovo_Click_1(object sender, EventArgs e)
         {
             pdados.Enabled = true;
             btnnovo.Enabled = false;
@@ -46,23 +46,9 @@ namespace SistemaFL
             limpar();
             txtdescricao.Focus();
         }
-
-        void limpar()
-        {
-            txtid.Text = "";
-            txtdescricao.Text = "";
-            dtdataaquisicao.Value = DateTime.Now;
-            cbbStatus.Text = "";
-            cbbTipoInestimento.Text = "";
-            txtrua.Text = "";
-            txtnumeroAp.Text = "";
-            txtbairro.Text = "";
-            txtcidade.Text = "";
-            txtestado.Text = "";
-        }
-        private void btnalterar_Click(object sender, EventArgs e)
-        {
-                if (txtid.Text != "")
+        private void btnalterar_Click_1(object sender, EventArgs e)
+        {      
+            if (txtid.Text != "")
             {
                 pdados.Enabled = true;
                 btnnovo.Enabled = false;
@@ -75,37 +61,7 @@ namespace SistemaFL
             }
             else MessageBox.Show("Localize o Flat");
         }
-
-        public Flat carregaPropriedades()
-        {
-            Flat flat;
-            if (txtid.Text != "")
-            {
-                //alterar , estou recuperando o registro antigo
-                //para manter a referencia do objeto do entity
-                flat = repositorio.Recuperar(c => c.id ==
-                                int.Parse(txtid.Text));
-            }
-            else flat = new Flat(); //inserir
-
-            flat.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
-            flat.Descricao = txtdescricao.Text;
-
-            return flat;
-        }
-        private void btncancelar_Click(object sender, EventArgs e)
-        {
-            limpar();
-            pdados.Enabled = false;
-            btnnovo.Enabled = true;
-            btnlocalizar.Enabled = true;
-            btnalterar.Enabled = false;
-            btncancelar.Enabled = false;
-            btnexcluir.Enabled = false;
-            btnsalvar.Enabled = false;
-        }
-
-        private void btnsalvar_Click(object sender, EventArgs e)
+        private void btnsalvar_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -142,8 +98,18 @@ namespace SistemaFL
                 throw;
             }
         }
-
-        private void btnexcluir_Click(object sender, EventArgs e)
+        private void btncancelar_Click_1(object sender, EventArgs e)
+        {
+            limpar();
+            pdados.Enabled = false;
+            btnnovo.Enabled = true;
+            btnlocalizar.Enabled = true;
+            btnalterar.Enabled = false;
+            btncancelar.Enabled = false;
+            btnexcluir.Enabled = false;
+            btnsalvar.Enabled = false;
+        }
+        private void btnexcluir_Click_1(object sender, EventArgs e)
         {
             if (txtid.Text != "")
             {
@@ -167,26 +133,117 @@ namespace SistemaFL
                 MessageBox.Show("Localize a Empresa.");
             }
         }
-
-        private void btnlocalizar_Click(object sender, EventArgs e)
+        private void btnlocalizar_Click_1(object sender, EventArgs e)
         {
-            /*var form2 = Program.serviceProvider.GetRequiredService<FrmConsultaEmpresa>();
+            var form2 = Program.serviceProvider.GetRequiredService<FrmConsultaFlat>();
             form2.ShowDialog();
 
             if (form2.id > 0)
             {
                 //no clique do botão localizar vamos fazer um select * from empresa where id
-                var empresa = repositorio.Recuperar(e => e.id == form2.id);
-                txtid.Text = empresa.id.ToString();
-                txtdescricao.Text = empresa.Descricao;*/
-
-            pdados.Enabled = false;
-            btnnovo.Enabled = false;
-            btnlocalizar.Enabled = false;
-            btnalterar.Enabled = true;
-            btncancelar.Enabled = true;
-            btnexcluir.Enabled = true;
-            btnsalvar.Enabled = false;
+                var flat = repositorio.Recuperar(e => e.id == form2.id);
+                if (flat != null)
+                {
+                    txtid.Text = flat.id.ToString();
+                    txtdescricao.Text = flat.Descricao;
+                    cbbStatus.Text = flat.Status ? "Ativo" : "Inativo";
+                    txtValorInvestimento.Text = flat.ValorInvestimento.ToString();
+                    cbbTipoInvestimento.Text = flat.TipoInvestimento;
+                    dtdataaquisicao.Value = flat.DataAquisicao;
+                    txtrua.Text = flat.Rua;
+                    txtunidade.Text = flat.Unidade.ToString();
+                    txtbairro.Text = flat.Bairro;
+                    txtcidade.Text = flat.Cidade;
+                    txtestado.Text = flat.Estado;
+                  
+                
+                    pdados.Enabled = false;
+                    btnnovo.Enabled = false;
+                    btnlocalizar.Enabled = false;
+                    btnalterar.Enabled = true;
+                    btncancelar.Enabled = true;
+                    btnexcluir.Enabled = true;
+                    btnsalvar.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Empresa não encontrada.");
+                }
+            }
         }
+        void limpar()
+        {
+            txtid.Text = "";
+            txtdescricao.Text = "";
+            dtdataaquisicao.Value = DateTime.Now;
+            cbbStatus.Text = "";
+            cbbTipoInvestimento.Text = "";
+            txtValorInvestimento.Text = "";
+            txtrua.Text = "";
+            txtunidade.Text = "";
+            txtbairro.Text = "";
+            txtcidade.Text = "";
+            txtestado.Text = "";
+        }
+        public Flat carregaPropriedades()
+        {
+            Flat flat;
+            if (txtid.Text != "")
+            {
+                //alterar , estou recuperando o registro antigo
+                //para manter a referencia do objeto do entity
+                flat = repositorio.Recuperar(c => c.id ==
+                                int.Parse(txtid.Text));
+
+            }
+            else flat = new Flat();//inserir
+
+            flat.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
+            flat.Descricao = txtdescricao.Text;
+            flat.DataAquisicao = dtdataaquisicao.Value;
+
+            //flat.Status
+            if (cbbStatus != null && cbbStatus.SelectedItem != null)
+            {
+                if (cbbStatus.SelectedItem.ToString() == "Ativo")
+                {
+                    flat.Status = true;
+                }
+                else if (cbbStatus.SelectedItem.ToString() == "Inativo")
+                {
+                    flat.Status = false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Informe um status para Flat");
+            }
+            //flat.TipoInvestimento
+            flat.TipoInvestimento = cbbTipoInvestimento.SelectedItem?.ToString() ?? "Indefinido";
+
+            decimal valorInvestimento;
+            if (decimal.TryParse(txtValorInvestimento.Text, out valorInvestimento))
+            {
+                flat.ValorInvestimento = valorInvestimento;
+            } //out (se a conversão for bem sucedida armazenar na variável)
+            else MessageBox.Show("Valor de investimento inválido. Por favor, insira um número válido.");
+
+            flat.Rua = txtrua.Text;
+            flat.Bairro = txtbairro.Text;
+
+            int Unidade;
+            if (int.TryParse(txtunidade.Text, out Unidade))
+            {
+                flat.Unidade = Unidade;
+            }
+            else MessageBox.Show("Unidade do Flat inválida, Por favor, insira um número válido");
+
+            flat.Cidade = txtcidade.Text;
+            flat.Estado = txtestado.Text;
+            flat.idEmpresa = null;
+            return flat;
+        }
+
+        
     }
 }

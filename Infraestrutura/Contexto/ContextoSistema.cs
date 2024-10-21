@@ -24,7 +24,7 @@ namespace Infraestrutura.Contexto
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var stringConexao = @"Server=PCVINICIUS;
-            DataBase=dbSistemaFL;integrated security=true; TrustServerCertificate=True;";
+            DataBase=dbSistemaFLAT;integrated security=true; TrustServerCertificate=True;";
 
             if (!optionsBuilder.IsConfigured)
             {
@@ -38,9 +38,8 @@ namespace Infraestrutura.Contexto
             // Configuração das entidades de Empresa
             modelBuilder.Entity<Empresa>(e =>   
             {
-                e.HasIndex(e => e.Cnpj).IsUnique();
-                e.Property(e => e.Cnpj).IsRequired().HasMaxLength(14);
                 e.Property(e => e.Descricao).IsRequired().HasMaxLength(150);
+                e.Property(e => e.Cnpj).HasMaxLength(14);
 
                 e.Property(e => e.Rua).IsRequired().HasMaxLength(100);
                 e.Property(e => e.Numero).IsRequired().HasMaxLength(10);
@@ -60,16 +59,16 @@ namespace Infraestrutura.Contexto
                 f.Property(f => f.Descricao).HasMaxLength(200) .IsRequired(); 
                 f.Property(f => f.TipoInvestimento).HasMaxLength(100) .IsRequired(false);
                 f.Property(f => f.Rua).HasMaxLength(100).IsRequired(false); 
-                f.Property(f => f.NumeroAp).HasMaxLength(10).IsRequired(false); 
                 f.Property(f => f.Bairro).HasMaxLength(50).IsRequired(false); 
                 f.Property(f => f.Cidade).HasMaxLength(50) .IsRequired(false);
                 f.Property(f => f.ValorInvestimento).HasColumnType("decimal(18,2)");
                 f.Property(f => f.Status).IsRequired();
+                f.Property(f => f.Unidade).IsRequired();
 
-                f.HasOne(e => e.Empresa)
-                    .WithMany(f => f.Flats)
-                    .HasForeignKey(e => e.idEmpresa)
-                    .OnDelete(DeleteBehavior.NoAction);
+                f.HasOne(f => f.Empresa)
+                    .WithMany(e => e.Flats)
+                    .HasForeignKey(f => f.idEmpresa)
+                     .OnDelete(DeleteBehavior.SetNull);
             });
 
             modelBuilder.Entity<Lancamento>(l =>

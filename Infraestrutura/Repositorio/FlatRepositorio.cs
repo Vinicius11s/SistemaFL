@@ -12,6 +12,6 @@ namespace Infraestrutura.Repositorio
 {
     public class FlatRepositorio : BaseRepositorio<Flat>, IFlatRepositorio
     {
-        FlatRepositorio(ContextoSistema contexto) : base(contexto) { }
+        public FlatRepositorio(ContextoSistema contexto) : base(contexto) { }
     }
 }

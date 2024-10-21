@@ -29,12 +29,17 @@
         private void InitializeComponent()
         {
             pdados = new Panel();
-            textBox6 = new TextBox();
-            textBox5 = new TextBox();
-            textBox4 = new TextBox();
-            textBox3 = new TextBox();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
+            cbbflatsassociados = new ComboBox();
+            btnassociar = new Button();
+            label14 = new Label();
+            label13 = new Label();
+            dgAssociarFlat = new DataGridView();
+            txtbairro = new TextBox();
+            txtcidade = new TextBox();
+            txtestado = new TextBox();
+            txtcep = new TextBox();
+            txtnumero = new TextBox();
+            txtrua = new TextBox();
             label12 = new Label();
             label11 = new Label();
             label10 = new Label();
@@ -60,17 +65,23 @@
             btnalterar = new Button();
             btnnovo = new Button();
             pdados.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgAssociarFlat).BeginInit();
             pbotoes.SuspendLayout();
             SuspendLayout();
             // 
             // pdados
             // 
-            pdados.Controls.Add(textBox6);
-            pdados.Controls.Add(textBox5);
-            pdados.Controls.Add(textBox4);
-            pdados.Controls.Add(textBox3);
-            pdados.Controls.Add(textBox2);
-            pdados.Controls.Add(textBox1);
+            pdados.Controls.Add(cbbflatsassociados);
+            pdados.Controls.Add(btnassociar);
+            pdados.Controls.Add(label14);
+            pdados.Controls.Add(label13);
+            pdados.Controls.Add(dgAssociarFlat);
+            pdados.Controls.Add(txtbairro);
+            pdados.Controls.Add(txtcidade);
+            pdados.Controls.Add(txtestado);
+            pdados.Controls.Add(txtcep);
+            pdados.Controls.Add(txtnumero);
+            pdados.Controls.Add(txtrua);
             pdados.Controls.Add(label12);
             pdados.Controls.Add(label11);
             pdados.Controls.Add(label10);
@@ -91,68 +102,114 @@
             pdados.Dock = DockStyle.Top;
             pdados.Location = new Point(0, 0);
             pdados.Name = "pdados";
-            pdados.Size = new Size(844, 329);
+            pdados.Size = new Size(1051, 393);
             pdados.TabIndex = 0;
             // 
-            // textBox6
+            // cbbflatsassociados
             // 
-            textBox6.Location = new Point(509, 287);
-            textBox6.Margin = new Padding(3, 4, 3, 4);
-            textBox6.MaxLength = 150;
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(168, 23);
-            textBox6.TabIndex = 27;
+            cbbflatsassociados.FormattingEnabled = true;
+            cbbflatsassociados.Location = new Point(713, 321);
+            cbbflatsassociados.Name = "cbbflatsassociados";
+            cbbflatsassociados.Size = new Size(232, 23);
+            cbbflatsassociados.TabIndex = 31;
             // 
-            // textBox5
+            // btnassociar
             // 
-            textBox5.Location = new Point(181, 287);
-            textBox5.Margin = new Padding(3, 4, 3, 4);
-            textBox5.MaxLength = 150;
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(234, 23);
-            textBox5.TabIndex = 26;
+            btnassociar.Location = new Point(779, 236);
+            btnassociar.Name = "btnassociar";
+            btnassociar.Size = new Size(89, 40);
+            btnassociar.TabIndex = 12;
+            btnassociar.Text = "Associar";
+            btnassociar.UseVisualStyleBackColor = true;
+            btnassociar.Click += btnassociar_Click;
             // 
-            // textBox4
+            // label14
             // 
-            textBox4.Location = new Point(23, 291);
-            textBox4.Margin = new Padding(3, 4, 3, 4);
-            textBox4.MaxLength = 150;
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(69, 23);
-            textBox4.TabIndex = 25;
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label14.Location = new Point(713, 298);
+            label14.Name = "label14";
+            label14.Size = new Size(115, 20);
+            label14.TabIndex = 30;
+            label14.Text = "Flats associados";
             // 
-            // textBox3
+            // label13
             // 
-            textBox3.Location = new Point(23, 225);
-            textBox3.Margin = new Padding(3, 4, 3, 4);
-            textBox3.MaxLength = 150;
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(69, 23);
-            textBox3.TabIndex = 24;
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label13.Location = new Point(624, 27);
+            label13.Name = "label13";
+            label13.Size = new Size(122, 25);
+            label13.TabIndex = 29;
+            label13.Text = "Associar Flat";
             // 
-            // textBox2
+            // dgAssociarFlat
             // 
-            textBox2.Location = new Point(643, 225);
-            textBox2.Margin = new Padding(3, 4, 3, 4);
-            textBox2.MaxLength = 150;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(43, 23);
-            textBox2.TabIndex = 23;
+            dgAssociarFlat.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgAssociarFlat.Location = new Point(624, 55);
+            dgAssociarFlat.Name = "dgAssociarFlat";
+            dgAssociarFlat.Size = new Size(389, 167);
+            dgAssociarFlat.TabIndex = 28;
             // 
-            // textBox1
+            // txtbairro
             // 
-            textBox1.Location = new Point(159, 224);
-            textBox1.Margin = new Padding(3, 4, 3, 4);
-            textBox1.MaxLength = 150;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(399, 23);
-            textBox1.TabIndex = 22;
+            txtbairro.Location = new Point(23, 357);
+            txtbairro.Margin = new Padding(3, 4, 3, 4);
+            txtbairro.MaxLength = 150;
+            txtbairro.Name = "txtbairro";
+            txtbairro.Size = new Size(168, 23);
+            txtbairro.TabIndex = 27;
+            // 
+            // txtcidade
+            // 
+            txtcidade.Location = new Point(216, 357);
+            txtcidade.Margin = new Padding(3, 4, 3, 4);
+            txtcidade.MaxLength = 150;
+            txtcidade.Name = "txtcidade";
+            txtcidade.Size = new Size(234, 23);
+            txtcidade.TabIndex = 26;
+            // 
+            // txtestado
+            // 
+            txtestado.Location = new Point(479, 357);
+            txtestado.Margin = new Padding(3, 4, 3, 4);
+            txtestado.MaxLength = 150;
+            txtestado.Name = "txtestado";
+            txtestado.Size = new Size(69, 23);
+            txtestado.TabIndex = 25;
+            // 
+            // txtcep
+            // 
+            txtcep.Location = new Point(23, 300);
+            txtcep.Margin = new Padding(3, 4, 3, 4);
+            txtcep.MaxLength = 150;
+            txtcep.Name = "txtcep";
+            txtcep.Size = new Size(69, 23);
+            txtcep.TabIndex = 24;
+            // 
+            // txtnumero
+            // 
+            txtnumero.Location = new Point(479, 299);
+            txtnumero.Margin = new Padding(3, 4, 3, 4);
+            txtnumero.MaxLength = 150;
+            txtnumero.Name = "txtnumero";
+            txtnumero.Size = new Size(43, 23);
+            txtnumero.TabIndex = 23;
+            // 
+            // txtrua
+            // 
+            txtrua.Location = new Point(110, 299);
+            txtrua.Margin = new Padding(3, 4, 3, 4);
+            txtrua.MaxLength = 150;
+            txtrua.Name = "txtrua";
+            txtrua.Size = new Size(352, 23);
+            txtrua.TabIndex = 22;
             // 
             // label12
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label12.Location = new Point(23, 201);
+            label12.Location = new Point(23, 276);
             label12.Name = "label12";
             label12.Size = new Size(34, 20);
             label12.TabIndex = 21;
@@ -162,7 +219,7 @@
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label11.Location = new Point(23, 267);
+            label11.Location = new Point(479, 333);
             label11.Name = "label11";
             label11.Size = new Size(54, 20);
             label11.TabIndex = 20;
@@ -172,7 +229,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label10.Location = new Point(119, 290);
+            label10.Location = new Point(216, 333);
             label10.Name = "label10";
             label10.Size = new Size(56, 20);
             label10.TabIndex = 19;
@@ -182,7 +239,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label9.Location = new Point(454, 287);
+            label9.Location = new Point(23, 333);
             label9.Name = "label9";
             label9.Size = new Size(49, 20);
             label9.TabIndex = 18;
@@ -192,7 +249,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(611, 223);
+            label8.Location = new Point(479, 275);
             label8.Name = "label8";
             label8.Size = new Size(26, 20);
             label8.TabIndex = 17;
@@ -202,7 +259,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label7.Location = new Point(119, 223);
+            label7.Location = new Point(110, 276);
             label7.Name = "label7";
             label7.Size = new Size(34, 20);
             label7.TabIndex = 16;
@@ -212,7 +269,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(320, 172);
+            label6.Location = new Point(23, 242);
             label6.Name = "label6";
             label6.Size = new Size(95, 25);
             label6.TabIndex = 15;
@@ -220,18 +277,18 @@
             // 
             // txtrazaosocial
             // 
-            txtrazaosocial.Location = new Point(592, 112);
+            txtrazaosocial.Location = new Point(16, 116);
             txtrazaosocial.Margin = new Padding(3, 4, 3, 4);
             txtrazaosocial.MaxLength = 150;
             txtrazaosocial.Name = "txtrazaosocial";
-            txtrazaosocial.Size = new Size(199, 23);
+            txtrazaosocial.Size = new Size(228, 23);
             txtrazaosocial.TabIndex = 14;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(592, 88);
+            label5.Location = new Point(23, 92);
             label5.Name = "label5";
             label5.Size = new Size(94, 20);
             label5.TabIndex = 13;
@@ -239,7 +296,7 @@
             // 
             // txtinscricaoestadual
             // 
-            txtinscricaoestadual.Location = new Point(350, 112);
+            txtinscricaoestadual.Location = new Point(269, 116);
             txtinscricaoestadual.Margin = new Padding(3, 4, 3, 4);
             txtinscricaoestadual.MaxLength = 150;
             txtinscricaoestadual.Name = "txtinscricaoestadual";
@@ -250,7 +307,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(350, 88);
+            label4.Location = new Point(269, 92);
             label4.Name = "label4";
             label4.Size = new Size(127, 20);
             label4.TabIndex = 11;
@@ -258,18 +315,18 @@
             // 
             // txtcnpj
             // 
-            txtcnpj.Location = new Point(119, 112);
+            txtcnpj.Location = new Point(64, 153);
             txtcnpj.Margin = new Padding(3, 4, 3, 4);
             txtcnpj.MaxLength = 150;
             txtcnpj.Name = "txtcnpj";
-            txtcnpj.Size = new Size(208, 23);
+            txtcnpj.Size = new Size(180, 23);
             txtcnpj.TabIndex = 10;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(119, 88);
+            label3.Location = new Point(16, 152);
             label3.Name = "label3";
             label3.Size = new Size(41, 20);
             label3.TabIndex = 9;
@@ -291,7 +348,7 @@
             txtdescricao.Margin = new Padding(3, 4, 3, 4);
             txtdescricao.MaxLength = 150;
             txtdescricao.Name = "txtdescricao";
-            txtdescricao.Size = new Size(672, 23);
+            txtdescricao.Size = new Size(357, 23);
             txtdescricao.TabIndex = 7;
             // 
             // txtid
@@ -323,14 +380,14 @@
             pbotoes.Controls.Add(btnnovo);
             pbotoes.Dock = DockStyle.Bottom;
             pbotoes.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            pbotoes.Location = new Point(0, 328);
+            pbotoes.Location = new Point(0, 399);
             pbotoes.Name = "pbotoes";
-            pbotoes.Size = new Size(844, 108);
+            pbotoes.Size = new Size(1051, 108);
             pbotoes.TabIndex = 1;
             // 
             // btnlocalizar
             // 
-            btnlocalizar.Location = new Point(665, 26);
+            btnlocalizar.Location = new Point(727, 43);
             btnlocalizar.Name = "btnlocalizar";
             btnlocalizar.Size = new Size(89, 40);
             btnlocalizar.TabIndex = 11;
@@ -340,7 +397,7 @@
             // 
             // btnexcluir
             // 
-            btnexcluir.Location = new Point(551, 26);
+            btnexcluir.Location = new Point(613, 43);
             btnexcluir.Name = "btnexcluir";
             btnexcluir.Size = new Size(89, 40);
             btnexcluir.TabIndex = 10;
@@ -350,7 +407,7 @@
             // 
             // btncancelar
             // 
-            btncancelar.Location = new Point(444, 26);
+            btncancelar.Location = new Point(506, 43);
             btncancelar.Name = "btncancelar";
             btncancelar.Size = new Size(89, 40);
             btncancelar.TabIndex = 9;
@@ -360,7 +417,7 @@
             // 
             // btnsalvar
             // 
-            btnsalvar.Location = new Point(325, 26);
+            btnsalvar.Location = new Point(387, 43);
             btnsalvar.Name = "btnsalvar";
             btnsalvar.Size = new Size(89, 40);
             btnsalvar.TabIndex = 8;
@@ -370,7 +427,7 @@
             // 
             // btnalterar
             // 
-            btnalterar.Location = new Point(207, 26);
+            btnalterar.Location = new Point(269, 43);
             btnalterar.Name = "btnalterar";
             btnalterar.Size = new Size(89, 40);
             btnalterar.TabIndex = 7;
@@ -380,7 +437,7 @@
             // 
             // btnnovo
             // 
-            btnnovo.Location = new Point(93, 26);
+            btnnovo.Location = new Point(155, 43);
             btnnovo.Name = "btnnovo";
             btnnovo.Size = new Size(89, 40);
             btnnovo.TabIndex = 6;
@@ -392,7 +449,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(844, 436);
+            ClientSize = new Size(1051, 507);
             Controls.Add(pbotoes);
             Controls.Add(pdados);
             Name = "FrmCadEmpresa";
@@ -401,6 +458,7 @@
             Load += FrmCadEmpresa_Load;
             pdados.ResumeLayout(false);
             pdados.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgAssociarFlat).EndInit();
             pbotoes.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -425,18 +483,23 @@
         private Label label7;
         private Label label11;
         private Label label10;
-        private TextBox textBox2;
-        private TextBox textBox1;
+        private TextBox txtnumero;
+        private TextBox txtrua;
         private Label label12;
-        private TextBox textBox3;
-        private TextBox textBox5;
-        private TextBox textBox4;
-        private TextBox textBox6;
+        private TextBox txtcep;
+        private TextBox txtcidade;
+        private TextBox txtestado;
+        private TextBox txtbairro;
         private Button btnlocalizar;
         private Button btnexcluir;
         private Button btncancelar;
         private Button btnsalvar;
         private Button btnalterar;
         private Button btnnovo;
+        private DataGridView dgAssociarFlat;
+        private Label label13;
+        private Button btnassociar;
+        private Label label14;
+        private ComboBox cbbflatsassociados;
     }
 }

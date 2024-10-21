@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using Infraestrutura.Contexto;
+using Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,7 +25,7 @@ namespace SistemaFL
         private void button1_Click(object sender, EventArgs e)
         {
             //No clique do botão localizar, vamos fazer um select
-            var lista = repositorio.Listar(e=>e.Descricao.Contains(txtdescricao.Text));
+            var lista = repositorio.Listar(e => e.Descricao.Contains(txtdescricao.Text));
 
             dgdados.DataSource = lista;
 
@@ -34,10 +35,13 @@ namespace SistemaFL
 
             }
         }
-        private void gdDados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgdados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            id = (int)dgdados.Rows[e.RowIndex].Cells[0].Value;
-            this.Close();
+            if (e.RowIndex >= 0)
+            {
+                id = (int)dgdados.Rows[e.RowIndex].Cells[0].Value; // Armazena o ID
+                this.Close(); // Fecha o formulário
+            }
         }
     }
 }

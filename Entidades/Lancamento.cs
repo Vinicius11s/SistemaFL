@@ -15,7 +15,7 @@ namespace Entidades
         public Decimal? FundoReserva { get; set; }
 
         public int idFlat { get; set; }
-        public virtual Flat Flat { get; set; }
+        public Flat Flat { get; set; }
 
         public Lancamento() {
             Flat = new Flat();

@@ -9,10 +9,7 @@ namespace Entidades
     public class Empresa
     {
         
-        public Empresa()
-        {
-            this.Flats = new HashSet<Flat>();
-        }
+
 
         public int id { get; set; }
         public String Descricao { get; set; } = String.Empty;
@@ -28,8 +25,11 @@ namespace Entidades
         public string Cidade { get; set; } = String.Empty;
         public string Estado { get; set; } = String.Empty;
         public string Cep { get; set; } = String.Empty;
-
-
         public virtual ICollection<Flat> Flats { get; set; }
+
+        public Empresa()
+        {
+            this.Flats = new HashSet<Flat>();
+        }
     }
 }

@@ -71,6 +71,7 @@
             dgdados.Name = "dgdados";
             dgdados.Size = new Size(831, 275);
             dgdados.TabIndex = 3;
+            dgdados.CellDoubleClick += dgdados_CellDoubleClick;
             // 
             // label2
             // 
@@ -95,7 +96,7 @@
             Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(3, 4, 3, 4);
             Name = "FrmConsultaEmpresa";
-            Text = "FrmConsultaEmpresa";
+            Text = "Consulta de Empresa";
             ((System.ComponentModel.ISupportInitialize)dgdados).EndInit();
             ResumeLayout(false);
             PerformLayout();

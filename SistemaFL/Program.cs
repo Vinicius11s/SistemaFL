@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Interfaces;
 using System;
 using Infraestrutura.Repositorio;
+using Entidades;
 
 namespace SistemaFL
 {
@@ -30,14 +31,21 @@ namespace SistemaFL
             private static void ConfigureServices(ServiceCollection services)
             {
             services.AddDbContext<ContextoSistema>();
+
             services.AddScoped<Form1>();
-
-            services.AddScoped<FrmPrincipal>();
             services.AddScoped<FrmCadEmpresa>();
+            services.AddScoped<FrmCadFlat>();
+            services.AddScoped<FrmCadLancamento>();
+            services.AddScoped<FrmCadUsuario>();
             services.AddScoped<FrmConsultaEmpresa>();
+            services.AddScoped<FrmConsultaFlat>();
+            services.AddScoped<FrmConsultaLancamento>();
+            services.AddScoped<FrmPrincipal>();
+            
+            services.AddScoped<IEmpresaRepositorio, EmpresaRepositorio>();
+            services.AddScoped<IFlatRepositorio, FlatRepositorio>();
+            services.AddScoped<ILancamentoRepositorio, LancamentoRepositorio>();
 
-
-            services.AddSingleton<IEmpresaRepositorio, EmpresaRepositorio>();
         }
     }
 }

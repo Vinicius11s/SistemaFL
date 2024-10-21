@@ -32,7 +32,7 @@
             txtbairro = new TextBox();
             txtcidade = new TextBox();
             txtestado = new TextBox();
-            txtnumeroAp = new TextBox();
+            txtunidade = new TextBox();
             txtrua = new TextBox();
             label11 = new Label();
             label10 = new Label();
@@ -45,7 +45,7 @@
             label4 = new Label();
             txtValorInvestimento = new TextBox();
             label3 = new Label();
-            cbbTipoInestimento = new ComboBox();
+            cbbTipoInvestimento = new ComboBox();
             label6 = new Label();
             dtdataaquisicao = new DateTimePicker();
             label2 = new Label();
@@ -68,7 +68,7 @@
             pdados.Controls.Add(txtbairro);
             pdados.Controls.Add(txtcidade);
             pdados.Controls.Add(txtestado);
-            pdados.Controls.Add(txtnumeroAp);
+            pdados.Controls.Add(txtunidade);
             pdados.Controls.Add(txtrua);
             pdados.Controls.Add(label11);
             pdados.Controls.Add(label10);
@@ -81,7 +81,7 @@
             pdados.Controls.Add(label4);
             pdados.Controls.Add(txtValorInvestimento);
             pdados.Controls.Add(label3);
-            pdados.Controls.Add(cbbTipoInestimento);
+            pdados.Controls.Add(cbbTipoInvestimento);
             pdados.Controls.Add(label6);
             pdados.Controls.Add(dtdataaquisicao);
             pdados.Controls.Add(label2);
@@ -91,7 +91,7 @@
             pdados.Dock = DockStyle.Top;
             pdados.Location = new Point(0, 0);
             pdados.Name = "pdados";
-            pdados.Size = new Size(814, 325);
+            pdados.Size = new Size(875, 325);
             pdados.TabIndex = 0;
             // 
             // txtbairro
@@ -105,7 +105,7 @@
             // 
             // txtcidade
             // 
-            txtcidade.Location = new Point(19, 290);
+            txtcidade.Location = new Point(21, 290);
             txtcidade.Margin = new Padding(3, 4, 3, 4);
             txtcidade.MaxLength = 150;
             txtcidade.Name = "txtcidade";
@@ -114,21 +114,21 @@
             // 
             // txtestado
             // 
-            txtestado.Location = new Point(283, 290);
+            txtestado.Location = new Point(294, 290);
             txtestado.Margin = new Padding(3, 4, 3, 4);
             txtestado.MaxLength = 150;
             txtestado.Name = "txtestado";
             txtestado.Size = new Size(209, 27);
             txtestado.TabIndex = 43;
             // 
-            // txtnumeroAp
+            // txtunidade
             // 
-            txtnumeroAp.Location = new Point(685, 220);
-            txtnumeroAp.Margin = new Padding(3, 4, 3, 4);
-            txtnumeroAp.MaxLength = 150;
-            txtnumeroAp.Name = "txtnumeroAp";
-            txtnumeroAp.Size = new Size(62, 27);
-            txtnumeroAp.TabIndex = 41;
+            txtunidade.Location = new Point(685, 220);
+            txtunidade.Margin = new Padding(3, 4, 3, 4);
+            txtunidade.MaxLength = 150;
+            txtunidade.Name = "txtunidade";
+            txtunidade.Size = new Size(65, 27);
+            txtunidade.TabIndex = 41;
             // 
             // txtrua
             // 
@@ -143,7 +143,7 @@
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label11.Location = new Point(283, 266);
+            label11.Location = new Point(294, 266);
             label11.Name = "label11";
             label11.Size = new Size(54, 20);
             label11.TabIndex = 38;
@@ -175,9 +175,9 @@
             label8.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label8.Location = new Point(685, 196);
             label8.Name = "label8";
-            label8.Size = new Size(49, 20);
+            label8.Size = new Size(65, 20);
             label8.TabIndex = 35;
-            label8.Text = "Nº Ap";
+            label8.Text = "Unidade";
             // 
             // label7
             // 
@@ -247,14 +247,14 @@
             label3.TabIndex = 28;
             label3.Text = "Tipo Investimento";
             // 
-            // cbbTipoInestimento
+            // cbbTipoInvestimento
             // 
-            cbbTipoInestimento.FormattingEnabled = true;
-            cbbTipoInestimento.Items.AddRange(new object[] { "Aluguel", "Dividendos", "Aluguel + Dividendos", "Indefinido" });
-            cbbTipoInestimento.Location = new Point(142, 114);
-            cbbTipoInestimento.Name = "cbbTipoInestimento";
-            cbbTipoInestimento.Size = new Size(226, 28);
-            cbbTipoInestimento.TabIndex = 27;
+            cbbTipoInvestimento.FormattingEnabled = true;
+            cbbTipoInvestimento.Items.AddRange(new object[] { "Aluguel", "Dividendos", "Aluguel + Dividendos", "Indefinido" });
+            cbbTipoInvestimento.Location = new Point(142, 114);
+            cbbTipoInvestimento.Name = "cbbTipoInvestimento";
+            cbbTipoInvestimento.Size = new Size(226, 28);
+            cbbTipoInvestimento.TabIndex = 27;
             // 
             // label6
             // 
@@ -323,7 +323,7 @@
             panel2.Dock = DockStyle.Bottom;
             panel2.Location = new Point(0, 331);
             panel2.Name = "panel2";
-            panel2.Size = new Size(814, 98);
+            panel2.Size = new Size(875, 98);
             panel2.TabIndex = 1;
             // 
             // btnlocalizar
@@ -334,6 +334,7 @@
             btnlocalizar.TabIndex = 17;
             btnlocalizar.Text = "Localizar";
             btnlocalizar.UseVisualStyleBackColor = true;
+            btnlocalizar.Click += btnlocalizar_Click_1;
             // 
             // btnexcluir
             // 
@@ -343,6 +344,7 @@
             btnexcluir.TabIndex = 16;
             btnexcluir.Text = "Excluir";
             btnexcluir.UseVisualStyleBackColor = true;
+            btnexcluir.Click += btnexcluir_Click_1;
             // 
             // btncancelar
             // 
@@ -352,6 +354,7 @@
             btncancelar.TabIndex = 15;
             btncancelar.Text = "Cancelar";
             btncancelar.UseVisualStyleBackColor = true;
+            btncancelar.Click += btncancelar_Click_1;
             // 
             // btnsalvar
             // 
@@ -361,6 +364,7 @@
             btnsalvar.TabIndex = 14;
             btnsalvar.Text = "Salvar";
             btnsalvar.UseVisualStyleBackColor = true;
+            btnsalvar.Click += btnsalvar_Click_1;
             // 
             // btnalterar
             // 
@@ -370,21 +374,23 @@
             btnalterar.TabIndex = 13;
             btnalterar.Text = "Alterar";
             btnalterar.UseVisualStyleBackColor = true;
+            btnalterar.Click += btnalterar_Click_1;
             // 
             // btnnovo
             // 
-            btnnovo.Location = new Point(82, 29);
+            btnnovo.Location = new Point(84, 29);
             btnnovo.Name = "btnnovo";
             btnnovo.Size = new Size(89, 40);
             btnnovo.TabIndex = 12;
             btnnovo.Text = "Novo";
             btnnovo.UseVisualStyleBackColor = true;
+            btnnovo.Click += btnnovo_Click_1;
             // 
             // FrmCadFlat
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(814, 429);
+            ClientSize = new Size(875, 429);
             Controls.Add(panel2);
             Controls.Add(pdados);
             Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -409,7 +415,7 @@
         private Label label6;
         private DateTimePicker dtdataaquisicao;
         private Label label3;
-        private ComboBox cbbTipoInestimento;
+        private ComboBox cbbTipoInvestimento;
         private Label label4;
         private TextBox txtValorInvestimento;
         private Label label5;
@@ -417,7 +423,7 @@
         private TextBox txtbairro;
         private TextBox txtcidade;
         private TextBox txtestado;
-        private TextBox txtnumeroAp;
+        private TextBox txtunidade;
         private TextBox txtrua;
         private Label label11;
         private Label label10;

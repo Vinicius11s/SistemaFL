@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,35 @@ namespace SistemaFL
 {
     public partial class FrmConsultaFlat : Form
     {
-        public FrmConsultaFlat()
+        private IFlatRepositorio repositorio;
+        public int id;
+        public FrmConsultaFlat(IFlatRepositorio repositorio)
         {
             InitializeComponent();
+            this.repositorio = repositorio;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //No clique do botão localizar, vamos fazer um select
+            var lista = repositorio.Listar(e => e.Descricao.Contains(txtdescricao.Text));
+
+            dgdadosFlats.DataSource = lista;
+
+            if (lista.Count > 0)
+            {
+                dgdadosFlats.Columns["descricao"].HeaderText = "Descrição";
+            }
+        }
+        private void dgdadosFlats_CellDoubleClic(object sender, DataGridViewCellEventArgs e)
+        {
+            dgdadosFlats.Focus();
+
+            if (e.RowIndex >= 0)
+            {
+                id = (int)dgdadosFlats.Rows[e.RowIndex].Cells[0].Value; // Armazena o ID
+                this.Close(); // Fecha o formulário
+            };
         }
     }
-}
+} 

@@ -31,6 +31,8 @@
             menuStrip1 = new MenuStrip();
             cadastrosToolStripMenuItem = new ToolStripMenuItem();
             empresaToolStripMenuItem = new ToolStripMenuItem();
+            flatToolStripMenuItem = new ToolStripMenuItem();
+            lançamentoToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -45,7 +47,7 @@
             // 
             // cadastrosToolStripMenuItem
             // 
-            cadastrosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { empresaToolStripMenuItem });
+            cadastrosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { empresaToolStripMenuItem, flatToolStripMenuItem, lançamentoToolStripMenuItem });
             cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
             cadastrosToolStripMenuItem.Size = new Size(71, 20);
             cadastrosToolStripMenuItem.Text = "Cadastros";
@@ -56,6 +58,20 @@
             empresaToolStripMenuItem.Size = new Size(180, 22);
             empresaToolStripMenuItem.Text = "Empresa";
             empresaToolStripMenuItem.Click += empresaToolStripMenuItem_Click;
+            // 
+            // flatToolStripMenuItem
+            // 
+            flatToolStripMenuItem.Name = "flatToolStripMenuItem";
+            flatToolStripMenuItem.Size = new Size(180, 22);
+            flatToolStripMenuItem.Text = "Flat";
+            flatToolStripMenuItem.Click += flatToolStripMenuItem_Click;
+            // 
+            // lançamentoToolStripMenuItem
+            // 
+            lançamentoToolStripMenuItem.Name = "lançamentoToolStripMenuItem";
+            lançamentoToolStripMenuItem.Size = new Size(180, 22);
+            lançamentoToolStripMenuItem.Text = "Lançamento";
+            lançamentoToolStripMenuItem.Click += lançamentoToolStripMenuItem_Click;
             // 
             // FrmPrincipal
             // 
@@ -77,5 +93,7 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem cadastrosToolStripMenuItem;
         private ToolStripMenuItem empresaToolStripMenuItem;
+        private ToolStripMenuItem flatToolStripMenuItem;
+        private ToolStripMenuItem lançamentoToolStripMenuItem;
     }
 }
