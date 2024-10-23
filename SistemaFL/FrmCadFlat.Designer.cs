@@ -212,7 +212,7 @@
             // cbbStatus
             // 
             cbbStatus.FormattingEnabled = true;
-            cbbStatus.Items.AddRange(new object[] { "Ativo", "Inativo" });
+            cbbStatus.Items.AddRange(new object[] { "Ativo", "Em Construção", "Em Reforma", "Vendido" });
             cbbStatus.Location = new Point(19, 114);
             cbbStatus.Name = "cbbStatus";
             cbbStatus.Size = new Size(99, 28);
@@ -250,7 +250,7 @@
             // cbbTipoInvestimento
             // 
             cbbTipoInvestimento.FormattingEnabled = true;
-            cbbTipoInvestimento.Items.AddRange(new object[] { "Aluguel", "Dividendos", "Aluguel + Dividendos", "Indefinido" });
+            cbbTipoInvestimento.Items.AddRange(new object[] { "Aluguel Fixo", "Dividendos", "Aluguel Fixo + Dividendos", "Indefinido" });
             cbbTipoInvestimento.Location = new Point(142, 114);
             cbbTipoInvestimento.Name = "cbbTipoInvestimento";
             cbbTipoInvestimento.Size = new Size(226, 28);

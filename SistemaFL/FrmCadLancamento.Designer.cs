@@ -29,13 +29,19 @@
         private void InitializeComponent()
         {
             pdados = new Panel();
+            txtValorFunReserva = new TextBox();
+            txtValorDiv = new TextBox();
+            labelValorDiv = new Label();
+            labelFundoRes = new Label();
+            label7 = new Label();
+            cbbtipoPagamento = new ComboBox();
             txtid = new TextBox();
             label6 = new Label();
+            btnLocFlatLancamento = new Button();
             txtvalorPagamento = new TextBox();
-            label5 = new Label();
+            labelValorPag = new Label();
             dtdataLancamento = new DateTimePicker();
             label4 = new Label();
-            btnLocFlatLancamento = new Button();
             txttipoInvestimento = new TextBox();
             label3 = new Label();
             label2 = new Label();
@@ -55,10 +61,17 @@
             // 
             // pdados
             // 
+            pdados.Controls.Add(txtValorFunReserva);
+            pdados.Controls.Add(txtValorDiv);
+            pdados.Controls.Add(labelValorDiv);
+            pdados.Controls.Add(labelFundoRes);
+            pdados.Controls.Add(label7);
+            pdados.Controls.Add(cbbtipoPagamento);
             pdados.Controls.Add(txtid);
             pdados.Controls.Add(label6);
+            pdados.Controls.Add(btnLocFlatLancamento);
             pdados.Controls.Add(txtvalorPagamento);
-            pdados.Controls.Add(label5);
+            pdados.Controls.Add(labelValorPag);
             pdados.Controls.Add(dtdataLancamento);
             pdados.Controls.Add(label4);
             pdados.Controls.Add(txttipoInvestimento);
@@ -70,12 +83,65 @@
             pdados.Dock = DockStyle.Top;
             pdados.Location = new Point(0, 0);
             pdados.Name = "pdados";
-            pdados.Size = new Size(800, 178);
+            pdados.Size = new Size(1072, 281);
             pdados.TabIndex = 0;
+            // 
+            // txtValorFunReserva
+            // 
+            txtValorFunReserva.Location = new Point(302, 190);
+            txtValorFunReserva.Name = "txtValorFunReserva";
+            txtValorFunReserva.Size = new Size(143, 23);
+            txtValorFunReserva.TabIndex = 30;
+            // 
+            // txtValorDiv
+            // 
+            txtValorDiv.Location = new Point(495, 121);
+            txtValorDiv.Name = "txtValorDiv";
+            txtValorDiv.Size = new Size(145, 23);
+            txtValorDiv.TabIndex = 29;
+            // 
+            // labelValorDiv
+            // 
+            labelValorDiv.AutoSize = true;
+            labelValorDiv.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelValorDiv.Location = new Point(495, 98);
+            labelValorDiv.Name = "labelValorDiv";
+            labelValorDiv.Size = new Size(122, 20);
+            labelValorDiv.TabIndex = 28;
+            labelValorDiv.Text = "Valor Dividendos";
+            // 
+            // labelFundoRes
+            // 
+            labelFundoRes.AutoSize = true;
+            labelFundoRes.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelFundoRes.Location = new Point(302, 167);
+            labelFundoRes.Name = "labelFundoRes";
+            labelFundoRes.Size = new Size(143, 20);
+            labelFundoRes.TabIndex = 27;
+            labelFundoRes.Text = "Valor Fundo Reserva";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.Location = new Point(527, 23);
+            label7.Name = "label7";
+            label7.Size = new Size(118, 20);
+            label7.TabIndex = 26;
+            label7.Text = "Tipo Pagamento";
+            // 
+            // cbbtipoPagamento
+            // 
+            cbbtipoPagamento.FormattingEnabled = true;
+            cbbtipoPagamento.Items.AddRange(new object[] { "Aluguel Fixo", "Dividendos", "Aluguel Fixo + Dividendos", "Fundo de Reserva" });
+            cbbtipoPagamento.Location = new Point(528, 46);
+            cbbtipoPagamento.Name = "cbbtipoPagamento";
+            cbbtipoPagamento.Size = new Size(191, 23);
+            cbbtipoPagamento.TabIndex = 25;
             // 
             // txtid
             // 
-            txtid.Location = new Point(458, 46);
+            txtid.Location = new Point(302, 46);
             txtid.Name = "txtid";
             txtid.ReadOnly = true;
             txtid.Size = new Size(50, 23);
@@ -85,33 +151,43 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(458, 23);
+            label6.Location = new Point(302, 23);
             label6.Name = "label6";
             label6.Size = new Size(22, 20);
             label6.TabIndex = 23;
             label6.Text = "Id";
             // 
+            // btnLocFlatLancamento
+            // 
+            btnLocFlatLancamento.Location = new Point(70, 212);
+            btnLocFlatLancamento.Name = "btnLocFlatLancamento";
+            btnLocFlatLancamento.Size = new Size(89, 40);
+            btnLocFlatLancamento.TabIndex = 18;
+            btnLocFlatLancamento.Text = "Localizar Flat";
+            btnLocFlatLancamento.UseVisualStyleBackColor = true;
+            btnLocFlatLancamento.Click += btnLocFlatLancamento_Click;
+            // 
             // txtvalorPagamento
             // 
-            txtvalorPagamento.Location = new Point(458, 128);
+            txtvalorPagamento.Location = new Point(302, 121);
             txtvalorPagamento.Name = "txtvalorPagamento";
-            txtvalorPagamento.Size = new Size(191, 23);
+            txtvalorPagamento.Size = new Size(143, 23);
             txtvalorPagamento.TabIndex = 22;
             // 
-            // label5
+            // labelValorPag
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(458, 105);
-            label5.Name = "label5";
-            label5.Size = new Size(122, 20);
-            label5.TabIndex = 21;
-            label5.Text = "Valor Pagamento";
+            labelValorPag.AutoSize = true;
+            labelValorPag.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelValorPag.Location = new Point(302, 98);
+            labelValorPag.Name = "labelValorPag";
+            labelValorPag.Size = new Size(122, 20);
+            labelValorPag.TabIndex = 21;
+            labelValorPag.Text = "Valor Pagamento";
             // 
             // dtdataLancamento
             // 
             dtdataLancamento.Format = DateTimePickerFormat.Short;
-            dtdataLancamento.Location = new Point(529, 46);
+            dtdataLancamento.Location = new Point(373, 46);
             dtdataLancamento.Name = "dtdataLancamento";
             dtdataLancamento.Size = new Size(120, 23);
             dtdataLancamento.TabIndex = 20;
@@ -120,35 +196,25 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(529, 23);
+            label4.Location = new Point(373, 23);
             label4.Name = "label4";
             label4.Size = new Size(120, 20);
             label4.TabIndex = 19;
             label4.Text = "Data Pagamento";
             // 
-            // btnLocFlatLancamento
-            // 
-            btnLocFlatLancamento.Location = new Point(106, 184);
-            btnLocFlatLancamento.Name = "btnLocFlatLancamento";
-            btnLocFlatLancamento.Size = new Size(89, 40);
-            btnLocFlatLancamento.TabIndex = 18;
-            btnLocFlatLancamento.Text = "Localizar Flat";
-            btnLocFlatLancamento.UseVisualStyleBackColor = true;
-            btnLocFlatLancamento.Click += btnLocFlatLancamento_Click;
-            // 
             // txttipoInvestimento
             // 
-            txttipoInvestimento.Location = new Point(106, 46);
+            txttipoInvestimento.Location = new Point(24, 106);
             txttipoInvestimento.Name = "txttipoInvestimento";
             txttipoInvestimento.ReadOnly = true;
-            txttipoInvestimento.Size = new Size(191, 23);
+            txttipoInvestimento.Size = new Size(183, 23);
             txttipoInvestimento.TabIndex = 6;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(113, 23);
+            label3.Location = new Point(24, 83);
             label3.Name = "label3";
             label3.Size = new Size(128, 20);
             label3.TabIndex = 5;
@@ -158,7 +224,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(28, 83);
+            label2.Location = new Point(28, 141);
             label2.Name = "label2";
             label2.Size = new Size(74, 20);
             label2.TabIndex = 4;
@@ -174,17 +240,18 @@
             // 
             // txtDescricaoFlat
             // 
-            txtDescricaoFlat.Location = new Point(28, 106);
+            txtDescricaoFlat.Enabled = false;
+            txtDescricaoFlat.Location = new Point(28, 164);
             txtDescricaoFlat.Name = "txtDescricaoFlat";
             txtDescricaoFlat.ReadOnly = true;
-            txtDescricaoFlat.Size = new Size(269, 23);
+            txtDescricaoFlat.Size = new Size(179, 23);
             txtDescricaoFlat.TabIndex = 2;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(28, 23);
+            label1.Location = new Point(24, 23);
             label1.Name = "label1";
             label1.Size = new Size(50, 20);
             label1.TabIndex = 1;
@@ -199,9 +266,9 @@
             pbotoes.Controls.Add(btnalterar);
             pbotoes.Controls.Add(btnnovo);
             pbotoes.Dock = DockStyle.Bottom;
-            pbotoes.Location = new Point(0, 284);
+            pbotoes.Location = new Point(0, 365);
             pbotoes.Name = "pbotoes";
-            pbotoes.Size = new Size(800, 94);
+            pbotoes.Size = new Size(1072, 94);
             pbotoes.TabIndex = 1;
             // 
             // btnlocalizar
@@ -268,10 +335,9 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 378);
+            ClientSize = new Size(1072, 459);
             Controls.Add(pbotoes);
             Controls.Add(pdados);
-            Controls.Add(btnLocFlatLancamento);
             Name = "FrmCadLancamento";
             Text = "FrmCadLancamento";
             Load += FrmCadLancamento_Load;
@@ -298,11 +364,17 @@
         private Button btnalterar;
         private Button btnnovo;
         private TextBox txtvalorPagamento;
-        private Label label5;
+        private Label labelValorPag;
         private DateTimePicker dtdataLancamento;
         private Label label4;
         private Button btnLocFlatLancamento;
         private TextBox txtid;
         private Label label6;
+        private Label label7;
+        private ComboBox cbbtipoPagamento;
+        private Label labelValorDiv;
+        private Label labelFundoRes;
+        private TextBox txtValorFunReserva;
+        private TextBox txtValorDiv;
     }
 }

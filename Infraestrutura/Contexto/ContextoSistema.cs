@@ -74,9 +74,10 @@ namespace Infraestrutura.Contexto
             modelBuilder.Entity<Lancamento>(l =>
             {
                 l.Property(l => l.DataPagamento).IsRequired();
-                l.Property(l => l.ValorPagamento).HasColumnType("decimal(18,2)").IsRequired(); 
-                l.Property(l => l.TipoPagamento).HasMaxLength(50).IsRequired(false); 
+                l.Property(l => l.ValorPagamento).HasColumnType("decimal(18,2)"); 
+                l.Property(l => l.TipoPagamento).HasMaxLength(50).IsRequired(); 
                 l.Property(l => l.FundoReserva).HasColumnType("decimal(18,2)");
+                l.Property(l => l.ValorDividendos).HasColumnType("decimal(18,2)");
 
                 l.HasOne(p => p.Flat)
                     .WithMany(f => f.Lancamentos)
@@ -103,11 +104,10 @@ namespace Infraestrutura.Contexto
 
             modelBuilder.Entity<Usuario>(u =>
             {
-                u.Property(u => u.nome).IsRequired().HasMaxLength(100);
-                u.Property(u => u.login).IsRequired() .HasMaxLength(50); 
+                u.Property(u => u.Nome).IsRequired().HasMaxLength(100);
+                u.Property(u => u.Login).IsRequired() .HasMaxLength(50); 
                 u.Property(u => u.Senha).IsRequired().HasMaxLength(100);
-                u.Property(u => u.DataCriacao).IsRequired();
-                u.Property(u => u.nome).IsRequired().HasMaxLength(150);
+                u.Property(u => u.DataCriacao).IsRequired();  
             });
         }
     }

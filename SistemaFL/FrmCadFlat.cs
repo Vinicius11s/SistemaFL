@@ -205,13 +205,13 @@ namespace SistemaFL
             //flat.Status
             if (cbbStatus != null && cbbStatus.SelectedItem != null)
             {
-                if (cbbStatus.SelectedItem.ToString() == "Ativo")
-                {
-                    flat.Status = true;
-                }
-                else if (cbbStatus.SelectedItem.ToString() == "Inativo")
+                if (cbbStatus.SelectedItem.ToString() == "Vendido")
                 {
                     flat.Status = false;
+                }
+                else
+                {
+                    flat.Status = true;
                 }
             }
             else

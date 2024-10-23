@@ -8,16 +8,12 @@ namespace Entidades
 {
     public class Empresa
     {
-        
-
-
         public int id { get; set; }
         public String Descricao { get; set; } = String.Empty;
         public String RazaoSocial { get; set; } = String.Empty;
         public String Cnpj { get; set; } = String.Empty;
         public String InscricaoEstadual { get; set; } = String.Empty;
         
-
         // Propriedades de endereço detalhado
         public string Rua { get; set; } = String.Empty;
         public string Numero { get; set; } = String.Empty;
