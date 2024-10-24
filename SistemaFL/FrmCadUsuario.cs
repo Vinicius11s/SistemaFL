@@ -153,9 +153,10 @@ namespace SistemaFL
             else usuario = new Usuario(); //inserir
 
             usuario.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
-            usuario.nome = txtnome.Text;
-            usuario.login = txtlogin.Text;
+            usuario.Nome = txtnome.Text;
+            usuario.Login = txtlogin.Text;
             usuario.Senha = txtsenha.Text;
+            usuario.DataCriacao = dtDataCriacao.Value;
 
             return usuario;
         }

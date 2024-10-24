@@ -19,14 +19,15 @@ namespace SistemaFL
     public partial class FrmCadLancamento : Form
     {
         private ILancamentoRepositorio repositorio;
-        public FrmCadLancamento(ILancamentoRepositorio repositorio)
+        private IFlatRepositorio flatRepositorio;
+        public FrmCadLancamento(ILancamentoRepositorio repositorio, IFlatRepositorio flatRepositorio)
         {
             InitializeComponent();
             this.repositorio = repositorio;
+            this.flatRepositorio = flatRepositorio;
         }
         private void FrmCadLancamento_Load(object sender, EventArgs e)
         {
-            pdados.Enabled = false;
             btnnovo.Enabled = true;
             btnalterar.Enabled = false;
             btncancelar.Enabled = false;
@@ -35,8 +36,10 @@ namespace SistemaFL
             btnlocalizar.Enabled = true;
             btnLocFlatLancamento.Enabled = false;
 
+            dtdataLancamento.Enabled = false;
+            cbbtipoPagamento.Enabled = false;
             labelValorPag.Visible = false;
-            txtvalorPagamento.Visible = false;
+            txtvaloraluguel.Visible = false;
             labelValorDiv.Visible = false;
             txtValorDiv.Visible = false;
             labelFundoRes.Visible = false;
@@ -44,57 +47,34 @@ namespace SistemaFL
         }
         private void btnnovo_Click(object sender, EventArgs e)
         {
-            if (txtidFlat.Text == "")
-            {
-                limpar();
-                pdados.Enabled = false;
-                btnnovo.Enabled = false;
-                btnalterar.Enabled = false;
-                btncancelar.Enabled = true;
-                btnsalvar.Enabled = true;
-                btnexcluir.Enabled = true;
-                btnlocalizar.Enabled = false;
-                btnLocFlatLancamento.Enabled = true;
+            limpar();
+            btnnovo.Enabled = false;
+            btnalterar.Enabled = false;
+            btncancelar.Enabled = true;
+            btnsalvar.Enabled = true;
+            btnexcluir.Enabled = true;
+            btnlocalizar.Enabled = false;
+            btnLocFlatLancamento.Enabled = true;
 
-                labelValorPag.Visible = false;
-                txtvalorPagamento.Visible = false;
-                labelValorDiv.Visible = false;
-                txtValorDiv.Visible = false;
-                labelFundoRes.Visible = false;
-                txtValorFunReserva.Visible = false;
-            }
-            else
-            {
-                limpar();
-                pdados.Enabled = true;
-                btnnovo.Enabled = false;
-                btnalterar.Enabled = true;
-                btncancelar.Enabled = true;
-                btnsalvar.Enabled = true;
-                btnexcluir.Enabled = true;
-                btnlocalizar.Enabled = false;
-                btnLocFlatLancamento.Enabled = false;
+            labelValorPag.Visible = false;
+            txtvaloraluguel.Visible = false;
+            labelValorDiv.Visible = false;
+            txtValorDiv.Visible = false;
+            labelFundoRes.Visible = false;
+            txtValorFunReserva.Visible = false;
 
-                labelValorPag.Visible = false;
-                txtvalorPagamento.Visible = false;
-                labelValorDiv.Visible = false;
-                txtValorDiv.Visible = false;
-                labelFundoRes.Visible = false;
-                txtValorFunReserva.Visible = false;
-            }
         }
         private void btnalterar_Click(object sender, EventArgs e)
         {
             if (txtid.Text != "")
             {
-                pdados.Enabled = true;
                 btnnovo.Enabled = false;
                 btnalterar.Enabled = false;
                 btncancelar.Enabled = true;
                 btnsalvar.Enabled = true;
                 btnexcluir.Enabled = false;
                 btnlocalizar.Enabled = false;
-                btnLocFlatLancamento.Enabled = false;
+                btnLocFlatLancamento.Enabled = true;
 
                 /*
                 labelValorPag.Visible = false;
@@ -113,7 +93,7 @@ namespace SistemaFL
             {
                 if (cbbtipoPagamento.Text != string.Empty)
                 {
-                    if (txtvalorPagamento.Text != string.Empty || txtValorDiv.Text != String.Empty
+                    if (txtvaloraluguel.Text != string.Empty || txtValorDiv.Text != String.Empty
                          || txtValorFunReserva.Text != string.Empty)
                     {
                         carregaPropriedades();
@@ -130,8 +110,6 @@ namespace SistemaFL
         private void btncancelar_Click(object sender, EventArgs e)
         {
             limpar();
-            pdados.Enabled = false;
-            btnnovo.Enabled = true;
             btnalterar.Enabled = false;
             btncancelar.Enabled = false;
             btnsalvar.Enabled = false;
@@ -140,7 +118,7 @@ namespace SistemaFL
             btnLocFlatLancamento.Enabled = false;
 
             labelValorPag.Visible = false;
-            txtvalorPagamento.Visible = false;
+            txtvaloraluguel.Visible = false;
             labelValorDiv.Visible = false;
             txtValorDiv.Visible = false;
             labelFundoRes.Visible = false;
@@ -157,7 +135,6 @@ namespace SistemaFL
 
                 MessageBox.Show("Registro excluído com sucesso!");
                 limpar();
-                pdados.Enabled = false;
                 btnnovo.Enabled = true;
                 btnalterar.Enabled = false;
                 btncancelar.Enabled = false;
@@ -167,7 +144,7 @@ namespace SistemaFL
                 btnLocFlatLancamento.Enabled = false;
 
                 labelValorPag.Visible = false;
-                txtvalorPagamento.Visible = false;
+                txtvaloraluguel.Visible = false;
                 labelValorDiv.Visible = false;
                 txtValorDiv.Visible = false;
                 labelFundoRes.Visible = false;
@@ -181,7 +158,8 @@ namespace SistemaFL
             txttipoInvestimento.Text = "";
             txtid.Text = "";
             dtdataLancamento.Value = DateTime.Now;
-            txtvalorPagamento.Text = "";
+            txtvaloraluguel.Text = "";
+            cbbtipoPagamento.Text = "";
 
         }
         public Lancamento carregaPropriedades()
@@ -202,7 +180,7 @@ namespace SistemaFL
                 switch (cbbtipoPagamento.SelectedItem.ToString())
                 {
                     case "Aluguel Fixo":
-                        if (TryParseDecimal(txtvalorPagamento, out valorAluguel))
+                        if (TryParseDecimal(txtvaloraluguel, out valorAluguel))
                         {
                             lancamento.ValorAluguel = valorAluguel;
                         }
@@ -214,7 +192,7 @@ namespace SistemaFL
                         }
                         break;
                     case "Aluguel Fixo + Dividendos":
-                        if (TryParseDecimal(txtvalorPagamento, out valorAluguel))
+                        if (TryParseDecimal(txtvaloraluguel, out valorAluguel))
                         {
                             lancamento.ValorAluguel = valorAluguel;
                         }
@@ -230,7 +208,7 @@ namespace SistemaFL
                         }
                         break;
                 }
-            }                              
+            }
             return lancamento;
         }
         private void btnlocalizar_Click(object sender, EventArgs e)
@@ -245,7 +223,7 @@ namespace SistemaFL
                 {
                     txtid.Text = lancamento.id.ToString();
                     dtdataLancamento.Value = lancamento.DataPagamento;
-                    txtvalorPagamento.Text = lancamento.ValorAluguel.ToString();
+                    txtvaloraluguel.Text = lancamento.ValorAluguel.ToString();
                     txtValorDiv.Text = lancamento.ValorDividendos.ToString();
                     txtValorFunReserva.Text = lancamento.ValorFundoReserva.ToString();
                 }
@@ -255,60 +233,6 @@ namespace SistemaFL
                 }
             }
         }
-        private void btnLocFlatLancamento_Click(object sender, EventArgs e)
-        {
-            var form2 = Program.serviceProvider.GetRequiredService<FrmConsultaFlat>();
-            form2.ShowDialog();
-            
-            var repositorioFlat = Program.serviceProvider.GetRequiredService<IFlatRepositorio>();
-            var flat = repositorioFlat.Recuperar(f => f.id == form2.id); // Aqui o repositório está usando a entidade Flat
-            int flatId = form2.id;
-
-            if (flatId >= 0)
-            {
-                txtidFlat.Text = flatId.ToString();
-                txtDescricaoFlat.Text = flat.Descricao;
-                txttipoInvestimento.Text = flat.TipoInvestimento;
-                MessageBox.Show("Flat selecionado com sucesso!");
-
-
-                pdados.Enabled = true;
-                if (cbbtipoPagamento.SelectedItem != null) // Verifica a opção desejada do ComboBox
-                {
-                    switch (cbbtipoPagamento.SelectedItem.ToString())
-                    {
-                        case "Aluguel Fixo":
-                            labelValorPag.Visible = true;
-                            txtvalorPagamento.Visible = true;
-                            break;
-                        case "Dividendos":      
-                            labelValorDiv.Visible = true;
-                            txtValorDiv.Visible = true;
-                            break;
-                        case "Aluguel Fixo + Dividendos":
-                            labelValorPag.Visible = true;
-                            txtvalorPagamento.Visible = true;
-                            labelValorDiv.Visible = true;
-                            txtValorDiv.Visible = true;
-                            break;
-                        case "Fundo de Reserva":
-                            labelFundoRes.Visible = true;
-                            txtValorFunReserva.Visible = true;
-                            break;
-                        default:
-                            labelValorPag.Visible = false;
-                            txtvalorPagamento.Visible = false;
-                            labelValorDiv.Visible = false;
-                            txtValorDiv.Visible = false;
-                            labelFundoRes.Visible = false;
-                            txtValorFunReserva.Visible = false;
-                            break;
-                    }
-                }
-                else MessageBox.Show("Informe um Tipo de Pagamento");
-            }
-            else MessageBox.Show("Flat não encontrado.");
-        }
         private void CarregarLancamento(int idLancamento)
         {
             var lancamento = repositorio.Recuperar(l => l.id == idLancamento);
@@ -317,7 +241,7 @@ namespace SistemaFL
             {
                 txtid.Text = lancamento.id.ToString();
                 dtdataLancamento.Value = lancamento.DataPagamento;
-                txtvalorPagamento.Text = lancamento.ValorAluguel.ToString();
+                txtvaloraluguel.Text = lancamento.ValorAluguel.ToString();
 
                 // Acessa o flat associado ao lançamento
                 if (lancamento.Flat != null)
@@ -337,6 +261,105 @@ namespace SistemaFL
             {
                 MessageBox.Show($"Por favor, informe um valor válido no campo {textBox.Name}");
                 return false;
+            }
+        }
+
+        private void btnLocFlatLancamento_Click_1(object sender, EventArgs e)
+        {
+            var form2 = Program.serviceProvider.GetRequiredService<FrmConsultaFlat>();
+            form2.ShowDialog();
+
+            var flat = flatRepositorio.Recuperar(f => f.id == form2.id); // Aqui o repositório está usando a entidade Flat
+            int flatId = form2.id;
+
+            if (flatId >= 0)
+            {
+                txtidFlat.Text = flatId.ToString();
+                txtDescricaoFlat.Text = flat.Descricao;
+                txttipoInvestimento.Text = flat.TipoInvestimento;
+                MessageBox.Show("Flat selecionado com sucesso!");
+
+                dtdataLancamento.Enabled = true;
+                cbbtipoPagamento.Enabled = true;
+            }
+            else MessageBox.Show("Flat não encontrado.");
+
+
+            /*
+            if (cbbtipoPagamento.SelectedItem != null) // Verifica a opção desejada do ComboBox
+            {
+                switch (cbbtipoPagamento.SelectedItem.ToString())
+                {
+                    case "Aluguel Fixo":
+                        labelValorPag.Visible = true;
+                        txtvaloraluguel.Visible = true;
+                        break;
+                    case "Dividendos":
+                        labelValorDiv.Visible = true;
+                        txtValorDiv.Visible = true;
+                        break;
+                    case "Aluguel Fixo + Dividendos":
+                        labelValorPag.Visible = true;
+                        txtvaloraluguel.Visible = true;
+                        labelValorDiv.Visible = true;
+                        txtValorDiv.Visible = true;
+                        break;
+                    case "Fundo de Reserva":
+                        labelFundoRes.Visible = true;
+                        txtValorFunReserva.Visible = true;
+                        break;
+                    default:
+                        labelValorPag.Visible = false;
+                        txtvaloraluguel.Visible = false;
+                        labelValorDiv.Visible = false;
+                        txtValorDiv.Visible = false;
+                        labelFundoRes.Visible = false;
+                        txtValorFunReserva.Visible = false;
+                        break;
+                }
+            }
+            else MessageBox.Show("Informe um Tipo de Pagamento");*/
+        }
+
+        private void cbbtipoPagamento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cbbtipoPagamento.SelectedItem != null)
+            {
+                verificaComboBox(cbbtipoPagamento.SelectedItem);
+
+            }
+        }
+
+        private void verificaComboBox(object selectedItem)
+        {
+
+            if (selectedItem != null)
+            {
+                switch (selectedItem.ToString())
+                {
+                    case "Aluguel Fixo":
+                        txtvaloraluguel.Visible = true;
+                        break;
+                    case "Dividendos":
+                        txtValorDiv.Visible = true;
+                        break;
+                    case "Aluguel Fixo + Dividendos":
+                        txtvaloraluguel.Visible = true;
+                        txtValorDiv.Visible = true;
+                        break;
+                    case "Fundo de Reserva":
+                        txtValorFunReserva.Visible = true;
+                        break;
+                }
+            }
+            else
+            {
+                labelValorPag.Visible = false;
+                txtvaloraluguel.Visible = false;
+                labelValorDiv.Visible = false;
+                txtValorDiv.Visible = false;
+                labelFundoRes.Visible = false;
+                txtValorFunReserva.Visible = false;
             }
         }
     }

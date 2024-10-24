@@ -23,8 +23,8 @@ namespace Infraestrutura.Contexto
         public DbSet<Usuario> Usuarios { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var stringConexao = @"Server=PCVINICIUS;
-            DataBase=dbSistemaFLAT;integrated security=true; TrustServerCertificate=True;";
+            var stringConexao = @"Server=LAB11-09;
+            DataBase=dbSistemaFLATS;integrated security=true; TrustServerCertificate=True;";
 
             if (!optionsBuilder.IsConfigured)
             {
@@ -74,10 +74,10 @@ namespace Infraestrutura.Contexto
             modelBuilder.Entity<Lancamento>(l =>
             {
                 l.Property(l => l.DataPagamento).IsRequired();
-                l.Property(l => l.ValorPagamento).HasColumnType("decimal(18,2)"); 
-                l.Property(l => l.TipoPagamento).HasMaxLength(50).IsRequired(); 
-                l.Property(l => l.FundoReserva).HasColumnType("decimal(18,2)");
+                l.Property(l => l.TipoPagamento).HasMaxLength(50).IsRequired();
+                l.Property(l => l.ValorAluguel).HasColumnType("decimal(18,2)");
                 l.Property(l => l.ValorDividendos).HasColumnType("decimal(18,2)");
+                l.Property(l => l.ValorFundoReserva).HasColumnType("decimal(18,2)");
 
                 l.HasOne(p => p.Flat)
                     .WithMany(f => f.Lancamentos)

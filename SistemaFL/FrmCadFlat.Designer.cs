@@ -105,7 +105,7 @@
             // 
             // txtcidade
             // 
-            txtcidade.Location = new Point(21, 290);
+            txtcidade.Location = new Point(19, 290);
             txtcidade.Margin = new Padding(3, 4, 3, 4);
             txtcidade.MaxLength = 150;
             txtcidade.Name = "txtcidade";
@@ -153,7 +153,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label10.Location = new Point(21, 266);
+            label10.Location = new Point(19, 266);
             label10.Name = "label10";
             label10.Size = new Size(56, 20);
             label10.TabIndex = 37;
