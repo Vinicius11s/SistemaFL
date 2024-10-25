@@ -26,6 +26,7 @@ namespace SistemaFL
 
         private void FrmCadEmpresa_Load(object sender, EventArgs e)
         {
+            limpar();
             dgAssociarFlat.Enabled = false;
             btnassociar.Enabled = false;
             pdados.Enabled = false;
@@ -65,7 +66,13 @@ namespace SistemaFL
             txtcidade.Text = "";
             txtestado.Text = "";
             txtcep.Text = "";
-            cbbflatsassociados.Text = "";
+            cbbflatsassociados.Items.Clear();
+            if (dgAssociarFlat.Rows.Count > 0)
+            {
+                dgAssociarFlat.Rows.Clear(); // Limpa o DataGridView
+            }
+
+
         }
         private void btnalterar_Click(object sender, EventArgs e)
         {
@@ -90,7 +97,7 @@ namespace SistemaFL
             Empresa empresa;
             if (txtid.Text != "")
             {
-                empresa = repositorio.Recuperar(c => c.id ==int.Parse(txtid.Text));
+                empresa = repositorio.Recuperar(c => c.id == int.Parse(txtid.Text));
             }
             else empresa = new Empresa(); //inserir
 
@@ -109,7 +116,7 @@ namespace SistemaFL
             {
                 if (item is Flat flatSelecionado)
                 {
-                    empresa.Flats.Add(flatSelecionado); // Adiciona o flat à coleção
+                    empresa.Flats.Add(flatSelecionado); // Adiciona o flat à coleção                                   
                 }
             }
 
@@ -141,7 +148,7 @@ namespace SistemaFL
                     }
                     else
                     if (empresa.id != 0) // Se está atualizando
-                    {                                      
+                    {
                         repositorio.Alterar(empresa);
                     }
                     Program.serviceProvider.
@@ -213,8 +220,8 @@ namespace SistemaFL
                     txtbairro.Text = empresa.Bairro;
                     txtcidade.Text = empresa.Cidade;
                     txtestado.Text = empresa.Estado;
-                    txtcep.Text = empresa.Cep;               
-                
+                    txtcep.Text = empresa.Cep;
+
                     AtualizarComboBoxFlatsAssociados();
 
                     if (cbbflatsassociados.Items.Count > 0)
@@ -224,7 +231,7 @@ namespace SistemaFL
                     else
                     {
                         cbbflatsassociados.Items.Add("Não há nenhum Flat associado e esta empresa.");
-                    }   
+                    }
                     pdados.Enabled = false;
                     btnnovo.Enabled = false;
                     btnlocalizar.Enabled = false;
@@ -306,6 +313,48 @@ namespace SistemaFL
                     cbbflatsassociados.Items.Add(flat.Descricao); // Adiciona as descrições dos flats associados ao ComboBox
                 }
             }
+        }
+
+        private void btndesassociar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgAssociarFlat.CurrentRow != null)
+                {
+                    // Obtém o ID do flat selecionado no DataGrid
+                    int flatId = (int)dgAssociarFlat.CurrentRow.Cells["id"].Value;
+
+                    // Recupera o flat diretamente usando o contexto
+                    var contexto = Program.serviceProvider.GetRequiredService<ContextoSistema>();
+                    var flat = contexto.Flats.SingleOrDefault(f => f.id == flatId);
+
+                    // Verifica se o flat foi encontrado e está associado a uma empresa
+                    if (flat != null && flat.idEmpresa != null)
+                    {
+                        // Remove a associação do flat com a empresa
+                        flat.idEmpresa = null;
+
+                        // Atualiza o flat no banco de dados
+                        contexto.SaveChanges();
+
+                        // Remove a descrição do flat do ComboBox
+                        cbbflatsassociados.Items.Remove(flat.Descricao);
+                        AtualizarComboBoxFlatsAssociados();
+
+                        MessageBox.Show("Flat desassociado com sucesso!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Flat não está disponível para desassociação ou já não está associado a uma empresa.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocorreu um erro: " + ex.Message);
+            }
+
+
         }
     }
 }

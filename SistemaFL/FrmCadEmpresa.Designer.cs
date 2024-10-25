@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             pdados = new Panel();
+            btndesassociar = new Button();
             cbbflatsassociados = new ComboBox();
             btnassociar = new Button();
             label14 = new Label();
@@ -71,6 +72,7 @@
             // 
             // pdados
             // 
+            pdados.Controls.Add(btndesassociar);
             pdados.Controls.Add(cbbflatsassociados);
             pdados.Controls.Add(btnassociar);
             pdados.Controls.Add(label14);
@@ -105,6 +107,16 @@
             pdados.Size = new Size(1051, 393);
             pdados.TabIndex = 0;
             // 
+            // btndesassociar
+            // 
+            btndesassociar.Location = new Point(840, 237);
+            btndesassociar.Name = "btndesassociar";
+            btndesassociar.Size = new Size(89, 40);
+            btndesassociar.TabIndex = 32;
+            btndesassociar.Text = "Desassociar";
+            btndesassociar.UseVisualStyleBackColor = true;
+            btndesassociar.Click += btndesassociar_Click;
+            // 
             // cbbflatsassociados
             // 
             cbbflatsassociados.FormattingEnabled = true;
@@ -115,13 +127,12 @@
             // 
             // btnassociar
             // 
-            btnassociar.Location = new Point(779, 236);
+            btnassociar.Location = new Point(700, 237);
             btnassociar.Name = "btnassociar";
             btnassociar.Size = new Size(89, 40);
             btnassociar.TabIndex = 12;
             btnassociar.Text = "Associar";
             btnassociar.UseVisualStyleBackColor = true;
-            btnassociar.Click += btnassociar_Click;
             // 
             // label14
             // 
@@ -501,5 +512,6 @@
         private Button btnassociar;
         private Label label14;
         private ComboBox cbbflatsassociados;
+        private Button btndesassociar;
     }
 }

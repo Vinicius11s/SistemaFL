@@ -45,7 +45,7 @@
             label6 = new Label();
             btnLocFlatLancamento = new Button();
             txtvaloraluguel = new TextBox();
-            labelValorPag = new Label();
+            labelValorAlguel = new Label();
             dtdataLancamento = new DateTimePicker();
             label4 = new Label();
             txttipoInvestimento = new TextBox();
@@ -159,7 +159,7 @@
             // 
             labelFundoRes.AutoSize = true;
             labelFundoRes.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelFundoRes.Location = new Point(310, 164);
+            labelFundoRes.Location = new Point(310, 161);
             labelFundoRes.Name = "labelFundoRes";
             labelFundoRes.Size = new Size(143, 20);
             labelFundoRes.TabIndex = 46;
@@ -221,15 +221,15 @@
             txtvaloraluguel.Size = new Size(143, 23);
             txtvaloraluguel.TabIndex = 41;
             // 
-            // labelValorPag
+            // labelValorAlguel
             // 
-            labelValorPag.AutoSize = true;
-            labelValorPag.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelValorPag.Location = new Point(310, 95);
-            labelValorPag.Name = "labelValorPag";
-            labelValorPag.Size = new Size(98, 20);
-            labelValorPag.TabIndex = 40;
-            labelValorPag.Text = "Valor Aluguel";
+            labelValorAlguel.AutoSize = true;
+            labelValorAlguel.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelValorAlguel.Location = new Point(310, 95);
+            labelValorAlguel.Name = "labelValorAlguel";
+            labelValorAlguel.Size = new Size(98, 20);
+            labelValorAlguel.TabIndex = 40;
+            labelValorAlguel.Text = "Valor Aluguel";
             // 
             // dtdataLancamento
             // 
@@ -321,7 +321,7 @@
             Controls.Add(label6);
             Controls.Add(btnLocFlatLancamento);
             Controls.Add(txtvaloraluguel);
-            Controls.Add(labelValorPag);
+            Controls.Add(labelValorAlguel);
             Controls.Add(dtdataLancamento);
             Controls.Add(label4);
             Controls.Add(txttipoInvestimento);
@@ -357,7 +357,7 @@
         private Label label6;
         private Button btnLocFlatLancamento;
         private TextBox txtvaloraluguel;
-        private Label labelValorPag;
+        private Label labelValorAlguel;
         private DateTimePicker dtdataLancamento;
         private Label label4;
         private TextBox txttipoInvestimento;

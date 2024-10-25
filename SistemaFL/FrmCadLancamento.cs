@@ -38,7 +38,7 @@ namespace SistemaFL
 
             dtdataLancamento.Enabled = false;
             cbbtipoPagamento.Enabled = false;
-            labelValorPag.Visible = false;
+            labelValorAlguel.Visible = false;
             txtvaloraluguel.Visible = false;
             labelValorDiv.Visible = false;
             txtValorDiv.Visible = false;
@@ -56,7 +56,7 @@ namespace SistemaFL
             btnlocalizar.Enabled = false;
             btnLocFlatLancamento.Enabled = true;
 
-            labelValorPag.Visible = false;
+            labelValorAlguel.Visible = false;
             txtvaloraluguel.Visible = false;
             labelValorDiv.Visible = false;
             txtValorDiv.Visible = false;
@@ -89,27 +89,16 @@ namespace SistemaFL
         }
         private void btnsalvar_Click(object sender, EventArgs e)
         {
-            try
+            if (cbbtipoPagamento.SelectedItem != null)
             {
-                if (cbbtipoPagamento.Text != string.Empty)
-                {
-                    if (txtvaloraluguel.Text != string.Empty || txtValorDiv.Text != String.Empty
-                         || txtValorFunReserva.Text != string.Empty)
-                    {
-                        carregaPropriedades();
-                    }
-                    else MessageBox.Show("Informe um valor de Pagamento");
-                }
+                carregaPropriedades();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro ao Salvar. Informe um Tipo de Pagamento" + ex);
-                throw;
-            }
+            else MessageBox.Show("Informe um tipo de Pagamento");
         }
         private void btncancelar_Click(object sender, EventArgs e)
         {
             limpar();
+            btnnovo.Enabled = true;
             btnalterar.Enabled = false;
             btncancelar.Enabled = false;
             btnsalvar.Enabled = false;
@@ -117,7 +106,7 @@ namespace SistemaFL
             btnlocalizar.Enabled = true;
             btnLocFlatLancamento.Enabled = false;
 
-            labelValorPag.Visible = false;
+            labelValorAlguel.Visible = false;
             txtvaloraluguel.Visible = false;
             labelValorDiv.Visible = false;
             txtValorDiv.Visible = false;
@@ -143,7 +132,7 @@ namespace SistemaFL
                 btnlocalizar.Enabled = true;
                 btnLocFlatLancamento.Enabled = false;
 
-                labelValorPag.Visible = false;
+                labelValorAlguel.Visible = false;
                 txtvaloraluguel.Visible = false;
                 labelValorDiv.Visible = false;
                 txtValorDiv.Visible = false;
@@ -165,54 +154,49 @@ namespace SistemaFL
         public Lancamento carregaPropriedades()
         {
             Lancamento lancamento;
-            if (txtid.Text != "")
-            {
-                lancamento = repositorio.Recuperar(c => c.id == int.Parse(txtid.Text));
-            }
-            else lancamento = new Lancamento();
 
-            lancamento.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
-            lancamento.DataPagamento = dtdataLancamento.Value;
-            lancamento.TipoPagamento = cbbtipoPagamento.SelectedIndex.ToString();
-            decimal valorAluguel, valorDividendos, valorFunReserva;
-            if (cbbtipoPagamento.SelectedItem != null)
+            // Verifica se o id do lançamento já existe
+            if (!string.IsNullOrWhiteSpace(txtid.Text) && int.TryParse(txtid.Text, out int id))
             {
-                switch (cbbtipoPagamento.SelectedItem.ToString())
-                {
-                    case "Aluguel Fixo":
-                        if (TryParseDecimal(txtvaloraluguel, out valorAluguel))
-                        {
-                            lancamento.ValorAluguel = valorAluguel;
-                        }
-                        break;
-                    case "Dividendos":
-                        if (TryParseDecimal(txtValorDiv, out valorDividendos))
-                        {
-                            lancamento.ValorDividendos = valorDividendos;
-                        }
-                        break;
-                    case "Aluguel Fixo + Dividendos":
-                        if (TryParseDecimal(txtvaloraluguel, out valorAluguel))
-                        {
-                            lancamento.ValorAluguel = valorAluguel;
-                        }
-                        if (TryParseDecimal(txtValorDiv, out valorDividendos))
-                        {
-                            lancamento.ValorDividendos = valorDividendos;
-                        }
-                        break;
-                    case "Fundo de Reserva":
-                        if (TryParseDecimal(txtValorDiv, out valorFunReserva))
-                        {
-                            lancamento.ValorFundoReserva = valorFunReserva;
-                        }
-                        break;
-                }
+                lancamento = repositorio.Recuperar(c => c.id == id) ?? new Lancamento();
             }
+            else
+            {
+                lancamento = new Lancamento();
+            }
+
+            // Atribui as propriedades ao lançamento
+            lancamento.id = int.Parse(txtid.Text); // Pode ser 0 ou o valor recuperado
+            lancamento.DataPagamento = dtdataLancamento.Value;
+
+            // Atribui o tipo de pagamento usando o valor selecionado
+            if(cbbtipoPagamento.SelectedItem != null)
+            {
+                lancamento.TipoPagamento = cbbtipoPagamento.SelectedItem.ToString();
+
+            }
+
+            // Lógica para definir valores com base no tipo de pagamento
+            if (decimal.TryParse(txtvaloraluguel.Text, out decimal valorAluguel))
+            {
+                lancamento.ValorAluguel = valorAluguel;
+            }
+
+            if (decimal.TryParse(txtValorDiv.Text, out decimal valorDividendos))
+            {
+                lancamento.ValorDividendos = valorDividendos;
+            }
+
+            if (decimal.TryParse(txtValorFunReserva.Text, out decimal valorFunReserva))
+            {
+                lancamento.ValorFundoReserva = valorFunReserva;
+            }
+
             return lancamento;
         }
+
         private void btnlocalizar_Click(object sender, EventArgs e)
-        {
+        {       
             var form2 = Program.serviceProvider.GetRequiredService<FrmConsultaLancamento>();
             form2.ShowDialog();
 
@@ -263,7 +247,6 @@ namespace SistemaFL
                 return false;
             }
         }
-
         private void btnLocFlatLancamento_Click_1(object sender, EventArgs e)
         {
             var form2 = Program.serviceProvider.GetRequiredService<FrmConsultaFlat>();
@@ -329,7 +312,6 @@ namespace SistemaFL
 
             }
         }
-
         private void verificaComboBox(object selectedItem)
         {
 
@@ -338,23 +320,28 @@ namespace SistemaFL
                 switch (selectedItem.ToString())
                 {
                     case "Aluguel Fixo":
+                        labelValorAlguel.Visible = true;
                         txtvaloraluguel.Visible = true;
                         break;
                     case "Dividendos":
+                        labelValorDiv.Visible = true;
                         txtValorDiv.Visible = true;
                         break;
                     case "Aluguel Fixo + Dividendos":
+                        labelValorAlguel.Visible = true;
                         txtvaloraluguel.Visible = true;
+                        labelValorDiv.Visible = true;
                         txtValorDiv.Visible = true;
                         break;
                     case "Fundo de Reserva":
+                        labelFundoRes.Visible = true;
                         txtValorFunReserva.Visible = true;
                         break;
                 }
             }
             else
             {
-                labelValorPag.Visible = false;
+                labelValorAlguel.Visible = false;
                 txtvaloraluguel.Visible = false;
                 labelValorDiv.Visible = false;
                 txtValorDiv.Visible = false;
