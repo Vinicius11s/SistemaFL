@@ -73,7 +73,7 @@
             // 
             // btnlocalizar
             // 
-            btnlocalizar.Location = new Point(642, 27);
+            btnlocalizar.Location = new Point(675, 25);
             btnlocalizar.Name = "btnlocalizar";
             btnlocalizar.Size = new Size(89, 40);
             btnlocalizar.TabIndex = 17;
@@ -83,7 +83,7 @@
             // 
             // btnexcluir
             // 
-            btnexcluir.Location = new Point(528, 27);
+            btnexcluir.Location = new Point(561, 25);
             btnexcluir.Name = "btnexcluir";
             btnexcluir.Size = new Size(89, 40);
             btnexcluir.TabIndex = 16;
@@ -93,7 +93,7 @@
             // 
             // btncancelar
             // 
-            btncancelar.Location = new Point(421, 27);
+            btncancelar.Location = new Point(454, 25);
             btncancelar.Name = "btncancelar";
             btncancelar.Size = new Size(89, 40);
             btncancelar.TabIndex = 15;
@@ -103,7 +103,7 @@
             // 
             // btnsalvar
             // 
-            btnsalvar.Location = new Point(302, 27);
+            btnsalvar.Location = new Point(335, 25);
             btnsalvar.Name = "btnsalvar";
             btnsalvar.Size = new Size(89, 40);
             btnsalvar.TabIndex = 14;
@@ -113,7 +113,7 @@
             // 
             // btnalterar
             // 
-            btnalterar.Location = new Point(184, 27);
+            btnalterar.Location = new Point(217, 25);
             btnalterar.Name = "btnalterar";
             btnalterar.Size = new Size(89, 40);
             btnalterar.TabIndex = 13;
@@ -123,7 +123,7 @@
             // 
             // btnnovo
             // 
-            btnnovo.Location = new Point(70, 27);
+            btnnovo.Location = new Point(103, 25);
             btnnovo.Name = "btnnovo";
             btnnovo.Size = new Size(89, 40);
             btnnovo.TabIndex = 12;

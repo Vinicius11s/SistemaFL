@@ -23,8 +23,8 @@ namespace Infraestrutura.Contexto
         public DbSet<Usuario> Usuarios { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var stringConexao = @"Server=LAB11-09;
-            DataBase=dbSistemaFLATS;integrated security=true; TrustServerCertificate=True;";
+            var stringConexao = @"Server=PCVINICIUS;Database=dbSistemaFLATS;Integrated Security=True;TrustServerCertificate=True;";
+
 
             if (!optionsBuilder.IsConfigured)
             {

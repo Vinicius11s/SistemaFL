@@ -59,6 +59,7 @@
             txtid = new TextBox();
             label1 = new Label();
             pbotoes = new Panel();
+            btnvoltar = new Button();
             btnlocalizar = new Button();
             btnexcluir = new Button();
             btncancelar = new Button();
@@ -109,7 +110,7 @@
             // 
             // btndesassociar
             // 
-            btndesassociar.Location = new Point(840, 237);
+            btndesassociar.Location = new Point(924, 313);
             btndesassociar.Name = "btndesassociar";
             btndesassociar.Size = new Size(89, 40);
             btndesassociar.TabIndex = 32;
@@ -120,25 +121,26 @@
             // cbbflatsassociados
             // 
             cbbflatsassociados.FormattingEnabled = true;
-            cbbflatsassociados.Location = new Point(713, 321);
+            cbbflatsassociados.Location = new Point(674, 321);
             cbbflatsassociados.Name = "cbbflatsassociados";
             cbbflatsassociados.Size = new Size(232, 23);
             cbbflatsassociados.TabIndex = 31;
             // 
             // btnassociar
             // 
-            btnassociar.Location = new Point(700, 237);
+            btnassociar.Location = new Point(792, 237);
             btnassociar.Name = "btnassociar";
             btnassociar.Size = new Size(89, 40);
             btnassociar.TabIndex = 12;
             btnassociar.Text = "Associar";
             btnassociar.UseVisualStyleBackColor = true;
+            btnassociar.Click += btnassociar_Click_1;
             // 
             // label14
             // 
             label14.AutoSize = true;
             label14.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label14.Location = new Point(713, 298);
+            label14.Location = new Point(674, 298);
             label14.Name = "label14";
             label14.Size = new Size(115, 20);
             label14.TabIndex = 30;
@@ -383,6 +385,7 @@
             // 
             // pbotoes
             // 
+            pbotoes.Controls.Add(btnvoltar);
             pbotoes.Controls.Add(btnlocalizar);
             pbotoes.Controls.Add(btnexcluir);
             pbotoes.Controls.Add(btncancelar);
@@ -395,6 +398,15 @@
             pbotoes.Name = "pbotoes";
             pbotoes.Size = new Size(1051, 108);
             pbotoes.TabIndex = 1;
+            // 
+            // btnvoltar
+            // 
+            btnvoltar.Location = new Point(3, 74);
+            btnvoltar.Name = "btnvoltar";
+            btnvoltar.Size = new Size(52, 31);
+            btnvoltar.TabIndex = 12;
+            btnvoltar.Text = "Voltar";
+            btnvoltar.UseVisualStyleBackColor = true;
             // 
             // btnlocalizar
             // 
@@ -513,5 +525,6 @@
         private Label label14;
         private ComboBox cbbflatsassociados;
         private Button btndesassociar;
+        private Button btnvoltar;
     }
 }

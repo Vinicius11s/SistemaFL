@@ -26,6 +26,7 @@ namespace SistemaFL
             //No clique do botão localizar, vamos fazer um select
             var lista = repositorio.Listar(e => e.Descricao.Contains(txtdescricao.Text));
 
+           
             dgdadosFlats.DataSource = lista;
 
             if (lista.Count > 0)
@@ -35,6 +36,8 @@ namespace SistemaFL
                 dgdadosFlats.Columns["DataAquisicao"].HeaderText = "Data Aquisição";
                 dgdadosFlats.Columns["TipoInvestimento"].HeaderText = "Tipo Investimento";
                 dgdadosFlats.Columns["ValorInvestimento"].HeaderText = "Valor Investimento";
+                dgdadosFlats.Columns["Empresa"].HeaderText = "Descrição";
+
                 dgdadosFlats.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             }
         }
@@ -48,5 +51,6 @@ namespace SistemaFL
                 this.Close(); // Fecha o formulário
             };
         }
+
     }
 } 

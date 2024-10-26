@@ -18,14 +18,17 @@ namespace SistemaFL
     public partial class FrmCadFlat : Form
     {
         private IFlatRepositorio repositorio;
-        public FrmCadFlat(IFlatRepositorio repositorio)
+        private IEmpresaRepositorio empresaRepositorio;
+        public FrmCadFlat(IFlatRepositorio repositorio, IEmpresaRepositorio empresaRepositorio)
         {
             InitializeComponent();
             this.repositorio = repositorio;
+            this.empresaRepositorio = empresaRepositorio;
         }
 
         private void FrmCadFlat_Load(object sender, EventArgs e)
         {
+            limpar();
             pdados.Enabled = false;
             btnnovo.Enabled = true;
             btnlocalizar.Enabled = true;
@@ -47,7 +50,7 @@ namespace SistemaFL
             txtdescricao.Focus();
         }
         private void btnalterar_Click_1(object sender, EventArgs e)
-        {      
+        {
             if (txtid.Text != "")
             {
                 pdados.Enabled = true;
@@ -155,8 +158,21 @@ namespace SistemaFL
                     txtbairro.Text = flat.Bairro;
                     txtcidade.Text = flat.Cidade;
                     txtestado.Text = flat.Estado;
-                  
-                
+                    if (flat.idEmpresa != null)
+                    {
+                        var empresa = empresaRepositorio.Recuperar(e => e.id == flat.idEmpresa);
+                        if (empresa != null)
+                        {
+                            txtempresaAss.Text = empresa.Descricao; // Define a descrição da empresa no TextBox
+                        }
+                        else
+                        {
+                        }
+                    }
+                    else
+                    {
+                        txtempresaAss.Text = "Sem empresa associada"; // Caso o flat não tenha empresa associada
+                    }
                     pdados.Enabled = false;
                     btnnovo.Enabled = false;
                     btnlocalizar.Enabled = false;
@@ -184,6 +200,7 @@ namespace SistemaFL
             txtbairro.Text = "";
             txtcidade.Text = "";
             txtestado.Text = "";
+            txtempresaAss.Text = "";
         }
         public Flat carregaPropriedades()
         {
@@ -243,7 +260,5 @@ namespace SistemaFL
             flat.idEmpresa = null;
             return flat;
         }
-
-        
     }
 }

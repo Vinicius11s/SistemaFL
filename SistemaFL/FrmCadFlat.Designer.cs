@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             pdados = new Panel();
+            txtempresaAss = new TextBox();
+            labelempresaAss = new Label();
             txtbairro = new TextBox();
             txtcidade = new TextBox();
             txtestado = new TextBox();
@@ -65,6 +67,8 @@
             // 
             // pdados
             // 
+            pdados.Controls.Add(txtempresaAss);
+            pdados.Controls.Add(labelempresaAss);
             pdados.Controls.Add(txtbairro);
             pdados.Controls.Add(txtcidade);
             pdados.Controls.Add(txtestado);
@@ -94,6 +98,26 @@
             pdados.Size = new Size(875, 325);
             pdados.TabIndex = 0;
             // 
+            // txtempresaAss
+            // 
+            txtempresaAss.Enabled = false;
+            txtempresaAss.Location = new Point(494, 290);
+            txtempresaAss.Margin = new Padding(3, 4, 3, 4);
+            txtempresaAss.MaxLength = 150;
+            txtempresaAss.Name = "txtempresaAss";
+            txtempresaAss.Size = new Size(206, 27);
+            txtempresaAss.TabIndex = 47;
+            // 
+            // labelempresaAss
+            // 
+            labelempresaAss.AutoSize = true;
+            labelempresaAss.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelempresaAss.Location = new Point(494, 266);
+            labelempresaAss.Name = "labelempresaAss";
+            labelempresaAss.Size = new Size(137, 20);
+            labelempresaAss.TabIndex = 46;
+            labelempresaAss.Text = "Empresa Associada";
+            // 
             // txtbairro
             // 
             txtbairro.Location = new Point(443, 220);
@@ -109,16 +133,16 @@
             txtcidade.Margin = new Padding(3, 4, 3, 4);
             txtcidade.MaxLength = 150;
             txtcidade.Name = "txtcidade";
-            txtcidade.Size = new Size(234, 27);
+            txtcidade.Size = new Size(197, 27);
             txtcidade.TabIndex = 44;
             // 
             // txtestado
             // 
-            txtestado.Location = new Point(294, 290);
+            txtestado.Location = new Point(244, 290);
             txtestado.Margin = new Padding(3, 4, 3, 4);
             txtestado.MaxLength = 150;
             txtestado.Name = "txtestado";
-            txtestado.Size = new Size(209, 27);
+            txtestado.Size = new Size(182, 27);
             txtestado.TabIndex = 43;
             // 
             // txtunidade
@@ -136,14 +160,14 @@
             txtrua.Margin = new Padding(3, 4, 3, 4);
             txtrua.MaxLength = 150;
             txtrua.Name = "txtrua";
-            txtrua.Size = new Size(399, 27);
+            txtrua.Size = new Size(384, 27);
             txtrua.TabIndex = 40;
             // 
             // label11
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label11.Location = new Point(294, 266);
+            label11.Location = new Point(244, 266);
             label11.Name = "label11";
             label11.Size = new Size(54, 20);
             label11.TabIndex = 38;
@@ -437,5 +461,7 @@
         private Button btnsalvar;
         private Button btnalterar;
         private Button btnnovo;
+        private TextBox txtempresaAss;
+        private Label labelempresaAss;
     }
 }

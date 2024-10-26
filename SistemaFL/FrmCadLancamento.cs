@@ -89,11 +89,48 @@ namespace SistemaFL
         }
         private void btnsalvar_Click(object sender, EventArgs e)
         {
-            if (cbbtipoPagamento.SelectedItem != null)
+
+            try
             {
-                carregaPropriedades();
+                if(cbbtipoPagamento.SelectedItem != null)
+                {
+                    Lancamento lancamento = carregaPropriedades();
+
+                    if(lancamento.id == 0)
+                    {
+                        repositorio.Inserir(lancamento);
+                    }
+                    else
+                    {
+                        repositorio.Alterar(lancamento);
+                    }
+                    Program.serviceProvider.GetRequiredService<ContextoSistema>().SaveChanges();
+                    MessageBox.Show("Lançamento Salvo com sucesso!");
+                    limpar();
+                    btnnovo.Enabled = true;
+                    btnalterar.Enabled = false;
+                    btncancelar.Enabled = false;
+                    btnsalvar.Enabled = false;
+                    btnexcluir.Enabled = false;
+                    btnlocalizar.Enabled = true;
+                    btnLocFlatLancamento.Enabled = false;
+
+                    dtdataLancamento.Enabled = false;
+                    cbbtipoPagamento.Enabled = false;
+                    labelValorAlguel.Visible = false;
+                    txtvaloraluguel.Visible = false;
+                    labelValorDiv.Visible = false;
+                    txtValorDiv.Visible = false;
+                    labelFundoRes.Visible = false;
+                    txtValorFunReserva.Visible = false;
+
+                }
             }
-            else MessageBox.Show("Informe um tipo de Pagamento");
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao salvar lançamento tente novamente." + ex);
+                throw;
+            }
         }
         private void btncancelar_Click(object sender, EventArgs e)
         {
@@ -159,6 +196,7 @@ namespace SistemaFL
             if (!string.IsNullOrWhiteSpace(txtid.Text) && int.TryParse(txtid.Text, out int id))
             {
                 lancamento = repositorio.Recuperar(c => c.id == id) ?? new Lancamento();
+                lancamento.id = id; // Só atribui se o id foi analisado corretamente
             }
             else
             {
@@ -166,14 +204,12 @@ namespace SistemaFL
             }
 
             // Atribui as propriedades ao lançamento
-            lancamento.id = int.Parse(txtid.Text); // Pode ser 0 ou o valor recuperado
             lancamento.DataPagamento = dtdataLancamento.Value;
 
             // Atribui o tipo de pagamento usando o valor selecionado
-            if(cbbtipoPagamento.SelectedItem != null)
+            if (cbbtipoPagamento.SelectedItem != null)
             {
                 lancamento.TipoPagamento = cbbtipoPagamento.SelectedItem.ToString();
-
             }
 
             // Lógica para definir valores com base no tipo de pagamento
@@ -195,8 +231,9 @@ namespace SistemaFL
             return lancamento;
         }
 
+
         private void btnlocalizar_Click(object sender, EventArgs e)
-        {       
+        {
             var form2 = Program.serviceProvider.GetRequiredService<FrmConsultaLancamento>();
             form2.ShowDialog();
 
@@ -306,7 +343,7 @@ namespace SistemaFL
 
         private void cbbtipoPagamento_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cbbtipoPagamento.SelectedItem != null)
+            if (cbbtipoPagamento.SelectedItem != null)
             {
                 verificaComboBox(cbbtipoPagamento.SelectedItem);
 

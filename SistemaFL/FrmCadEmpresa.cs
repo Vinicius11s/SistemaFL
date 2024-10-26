@@ -18,17 +18,18 @@ namespace SistemaFL
     public partial class FrmCadEmpresa : Form
     {
         private IEmpresaRepositorio repositorio;
-        public FrmCadEmpresa(IEmpresaRepositorio repositorio)
+        private IFlatRepositorio flatRepositorio;
+        public FrmCadEmpresa(IEmpresaRepositorio repositorio, IFlatRepositorio flatRepositorio)
         {
             InitializeComponent();
             this.repositorio = repositorio;
+            this.flatRepositorio = flatRepositorio;
         }
 
         private void FrmCadEmpresa_Load(object sender, EventArgs e)
         {
             limpar();
             dgAssociarFlat.Enabled = false;
-            btnassociar.Enabled = false;
             pdados.Enabled = false;
             btnnovo.Enabled = true;
             btnlocalizar.Enabled = true;
@@ -37,6 +38,7 @@ namespace SistemaFL
             btnexcluir.Enabled = false;
             btnsalvar.Enabled = false;
             btnassociar.Enabled = false;
+            btndesassociar.Enabled = false;
         }
         private void btnnovo_Click(object sender, EventArgs e)
         {
@@ -49,6 +51,7 @@ namespace SistemaFL
             btncancelar.Enabled = true;
             btnexcluir.Enabled = false;
             btnsalvar.Enabled = true;
+            btndesassociar.Enabled = false;
             cbbflatsassociados.Enabled = false;
             limpar();
             txtdescricao.Focus();
@@ -67,6 +70,7 @@ namespace SistemaFL
             txtestado.Text = "";
             txtcep.Text = "";
             cbbflatsassociados.Items.Clear();
+            cbbflatsassociados.Text = string.Empty;
             if (dgAssociarFlat.Rows.Count > 0)
             {
                 dgAssociarFlat.Rows.Clear(); // Limpa o DataGridView
@@ -91,6 +95,12 @@ namespace SistemaFL
                 txtdescricao.Focus();
             }
             else MessageBox.Show("Localize a Empresa");
+
+            if (cbbflatsassociados.Items.Count > 0)
+            {
+                btndesassociar.Enabled = true;
+            }
+            else btndesassociar.Enabled = false;
         }
         public Empresa carregaPropriedades()
         {
@@ -248,42 +258,105 @@ namespace SistemaFL
         }
         private void CarregarFlats()
         {
-            dgAssociarFlat.Enabled = true;
-            using (var contexto = new ContextoSistema())
+            if (dgAssociarFlat.Columns.Count == 0)
             {
-                var flatsDisponiveis = contexto.Flats
-                    .Where(Flat => Flat.idEmpresa == null)
-                    .ToList();
-
-                dgAssociarFlat.DataSource = flatsDisponiveis;
+                dgAssociarFlat.Columns.Add("id", "ID");
+                dgAssociarFlat.Columns.Add("descricao", "Descrição");
+                dgAssociarFlat.Columns.Add("status", "Status");
+                dgAssociarFlat.Columns.Add("valorInvestimento", "Valor do Investimento");
+                dgAssociarFlat.Columns.Add("tipoInvestimento", "Tipo de Investimento");
+                dgAssociarFlat.Columns.Add("dataAquisicao", "Data de Aquisição");
+            }
+            try
+            {
+                dgAssociarFlat.Rows.Clear();
+                var flatsSemEmpresa = flatRepositorio.Listar(f => f.idEmpresa == null);
+                foreach (var flat in flatsSemEmpresa)
+                {
+                    dgAssociarFlat.Rows.Add(flat.id, flat.Descricao, flat.Status ? "Ativo" : "Inativo", flat.ValorInvestimento, flat.TipoInvestimento, flat.DataAquisicao);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao carregar flats: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void btnassociar_Click(object sender, EventArgs e)
+
+
+        private void AtualizarComboBoxFlatsAssociados()
+        {
+            cbbflatsassociados.Items.Clear();
+            cbbflatsassociados.Text = string.Empty;// Limpa os itens atuais do ComboBox
+
+            var flatsAssociados = flatRepositorio.Listar(f => f.idEmpresa == int.Parse(txtid.Text));
+            foreach (var flat in flatsAssociados)
+            {
+                cbbflatsassociados.Items.Add(flat.Descricao);
+            }
+        }
+
+        private void btndesassociar_Click(object sender, EventArgs e)
+        {
+            if (cbbflatsassociados.SelectedItem != null)
+            {
+                // Obtém a descrição do flat selecionado
+                string descricaoSelecionada = cbbflatsassociados.SelectedItem.ToString();
+
+                // Recupera o flat pelo repositório com base na descrição
+                var flat = flatRepositorio.Recuperar(f => f.Descricao == descricaoSelecionada && f.idEmpresa == int.Parse(txtid.Text));
+
+                if (flat != null)
+                {
+                    // Desassocia o flat da empresa
+                    flat.idEmpresa = null;
+
+                    // Atualiza o flat no banco de dados
+                    flatRepositorio.Alterar(flat);
+                    Program.serviceProvider.
+                        GetRequiredService<ContextoSistema>().SaveChanges();
+
+                    // Atualiza o ComboBox e o DataGridView
+                    cbbflatsassociados.Items.Clear();
+                    AtualizarComboBoxFlatsAssociados();
+                    CarregarFlats();
+
+                    MessageBox.Show("Flat desassociado com sucesso.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+                else
+                {
+                    MessageBox.Show("Flat não encontrado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selecione um flat para desassociar.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnassociar_Click_1(object sender, EventArgs e)
         {
             try
             {
                 if (dgAssociarFlat.CurrentRow != null)
                 {
-                    // Obtém o ID do flat selecionado no DataGrid
                     int flatId = (int)dgAssociarFlat.CurrentRow.Cells["id"].Value;
+                    var flat = flatRepositorio.Recuperar(f => f.id == flatId);
 
-                    // Recupera o flat diretamente usando o contexto
-                    var contexto = Program.serviceProvider.GetRequiredService<ContextoSistema>();
-                    var flat = contexto.Flats.SingleOrDefault(f => f.id == flatId);
-
-                    // Verifica se o flat foi encontrado e não está associado a nenhuma empresa
                     if (flat != null && flat.idEmpresa == null)
                     {
-                        // Atribui o ID da empresa ao flat
+                        // Associa o flat à empresa
                         flat.idEmpresa = int.Parse(txtid.Text);
+                        flatRepositorio.Alterar(flat);
+                        Program.serviceProvider.
+                        GetRequiredService<ContextoSistema>().SaveChanges();
 
-                        // Atualiza o flat no banco de dados
-                        contexto.SaveChanges();
-
-                        // Adiciona a descrição do flat no ComboBox
+                        // Atualiza o ComboBox com a descrição do flat associado
                         cbbflatsassociados.Items.Add(flat.Descricao);
+                        cbbflatsassociados.SelectedIndex = cbbflatsassociados.Items.Count - 1; // Seleciona o último item adicionado
 
-                        AtualizarComboBoxFlatsAssociados();
+                        // Atualiza o DataGridView para refletir a alteração
+                        CarregarFlats();
 
                         MessageBox.Show("Flat associado com sucesso!");
                     }
@@ -298,63 +371,6 @@ namespace SistemaFL
                 MessageBox.Show("Ocorreu um erro ao associar o flat: " + ex.Message);
             }
         }
-        private void AtualizarComboBoxFlatsAssociados()
-        {
-            cbbflatsassociados.Items.Clear(); // Limpa os itens atuais do ComboBox
-
-            using (var contexto = new ContextoSistema())
-            {
-                var flatsAssociados = contexto.Flats
-                    .Where(f => f.idEmpresa == int.Parse(txtid.Text)) // Filtra os flats pela empresa atual
-                    .ToList();
-
-                foreach (var flat in flatsAssociados)
-                {
-                    cbbflatsassociados.Items.Add(flat.Descricao); // Adiciona as descrições dos flats associados ao ComboBox
-                }
-            }
-        }
-
-        private void btndesassociar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (dgAssociarFlat.CurrentRow != null)
-                {
-                    // Obtém o ID do flat selecionado no DataGrid
-                    int flatId = (int)dgAssociarFlat.CurrentRow.Cells["id"].Value;
-
-                    // Recupera o flat diretamente usando o contexto
-                    var contexto = Program.serviceProvider.GetRequiredService<ContextoSistema>();
-                    var flat = contexto.Flats.SingleOrDefault(f => f.id == flatId);
-
-                    // Verifica se o flat foi encontrado e está associado a uma empresa
-                    if (flat != null && flat.idEmpresa != null)
-                    {
-                        // Remove a associação do flat com a empresa
-                        flat.idEmpresa = null;
-
-                        // Atualiza o flat no banco de dados
-                        contexto.SaveChanges();
-
-                        // Remove a descrição do flat do ComboBox
-                        cbbflatsassociados.Items.Remove(flat.Descricao);
-                        AtualizarComboBoxFlatsAssociados();
-
-                        MessageBox.Show("Flat desassociado com sucesso!");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Flat não está disponível para desassociação ou já não está associado a uma empresa.");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ocorreu um erro: " + ex.Message);
-            }
-
-
-        }
     }
 }
+
