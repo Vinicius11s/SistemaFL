@@ -11,7 +11,6 @@ namespace Entidades
         public Flat()
         {
             this.Lancamentos = new HashSet<Lancamento>();
-            this.Ocorrencias = new HashSet<Ocorrencia>();
         }
 
         public int id { get; set; }
@@ -29,7 +28,6 @@ namespace Entidades
         public int? idEmpresa { get; set; }
         public virtual Empresa? Empresa { get; set; }
         public virtual ICollection<Lancamento> Lancamentos { get; set; }
-        public virtual ICollection<Ocorrencia> Ocorrencias { get; set; } 
 
     }
 }

@@ -13,12 +13,10 @@ namespace Entidades
         public String Login { get; set; } = String.Empty;
         public String Senha { get; set; } = String.Empty;
         public DateTime DataCriacao { get; set; }
-
-        public virtual ICollection<Ocorrencia> Ocorrencias { get; set; }
-
+        public virtual ICollection<Lancamento> Lancamentos { get; set; }
         public Usuario()
         {
-            this.Ocorrencias = new HashSet<Ocorrencia>();
+            this.Lancamentos = new HashSet<Lancamento>();
         }
     }
 }

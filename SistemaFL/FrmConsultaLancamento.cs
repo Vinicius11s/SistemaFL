@@ -24,21 +24,35 @@ namespace SistemaFL
 
         private void btnlocalizar_Click(object sender, EventArgs e)
         {
-            int mes = int.Parse(txtdescricao.Text);
-            if (mes > 0 && mes < 12)
-            {
-                var lista = repositorio.Listar(l => l.DataPagamento.Month == mes);
-                dgdadoslancamento.DataSource = lista;
-                if (lista.Count > 0)
-                {
-                    dgdadoslancamento.Columns["DataPagamento"].HeaderText = "Data Pagamento";
-                    dgdadoslancamento.Columns["ValorPagamento"].HeaderText = "Valor Pagamento";
-                    dgdadoslancamento.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
 
+            if (txtdescricao.Text == "")
+            {
+                var lista = repositorio.Listar(e => true);
+                dgdadoslancamento.DataSource = lista;
+            }
+            else
+            {
+                int mes = int.Parse(txtdescricao.Text);
+                if (mes > 0 && mes < 12)
+                {
+                    var lista = repositorio.Listar(l => l.DataPagamento.Month == mes);
+                    dgdadoslancamento.DataSource = lista;
+
+                    if (lista.Count > 0)
+                    {
+                        dgdadoslancamento.Columns["DataPagamento"].HeaderText = "Data Pagamento";
+                        dgdadoslancamento.Columns["ValorPagamento"].HeaderText = "Valor Pagamento";
+                        dgdadoslancamento.Columns["ValorFundoReserva"].DefaultCellStyle.Format = "C2";
+                        dgdadoslancamento.Columns["ValorFundoReserva"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("pt-BR");
+
+                        dgdadoslancamento.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
+
+                    }
+                    else MessageBox.Show("Digite um mês válido.");
                 }
             }
-            else MessageBox.Show("Digite um mês válido.");
-        }        
+        }
         private void dgdadoslancamento_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)

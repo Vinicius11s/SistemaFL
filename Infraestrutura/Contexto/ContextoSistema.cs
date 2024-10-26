@@ -88,26 +88,27 @@ namespace Infraestrutura.Contexto
             modelBuilder.Entity<Ocorrencia>(o =>
             {
                 o.Property(o => o.valorAntigo).HasColumnType("decimal(18,2)").IsRequired();
-                o.Property(o => o.valorNovo).HasColumnType("decimal(18,2)").IsRequired(); 
+                o.Property(o => o.valorAlteracao).HasColumnType("decimal(18,2)").IsRequired();
                 o.Property(o => o.DataAlteracao).IsRequired();
 
-                o.HasOne(f => f.Flat)
+                o.HasOne(l => l.lancamento) // Uma Ocorrência pertence a um Lançamento
                     .WithMany(o => o.Ocorrencias)
-                    .HasForeignKey(o => o.idFlat)
-                    .OnDelete(DeleteBehavior.NoAction);
-
-                o.HasOne(u => u.Usuario)
-                    .WithMany(o => o.Ocorrencias)
-                    .HasForeignKey(o => o.idUsuario)
+                    .HasForeignKey(o => o.idLancamento)
                     .OnDelete(DeleteBehavior.NoAction);
             });
 
             modelBuilder.Entity<Usuario>(u =>
             {
                 u.Property(u => u.Nome).IsRequired().HasMaxLength(100);
-                u.Property(u => u.Login).IsRequired() .HasMaxLength(50); 
+                u.Property(u => u.Login).IsRequired().HasMaxLength(50);
                 u.Property(u => u.Senha).IsRequired().HasMaxLength(100);
-                u.Property(u => u.DataCriacao).IsRequired();  
+                u.Property(u => u.DataCriacao).IsRequired();
+
+                // Relacionamento com Lançamento
+                u.HasMany(l => l.Lancamentos) // Um Usuário pode ter muitos Lançamentos
+                    .WithOne(u => u.Usuario) // Um Lançamento pertence a um Usuário
+                    .HasForeignKey(u => u.idUsuario) // Aqui, adicione o campo idUsuario em Lançamento
+                    .OnDelete(DeleteBehavior.NoAction);
             });
         }
     }

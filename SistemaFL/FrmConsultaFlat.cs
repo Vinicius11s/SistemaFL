@@ -23,10 +23,10 @@ namespace SistemaFL
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //No clique do botão localizar, vamos fazer um select
+            //No clique do botão localizar, vamos fazer um select            
             var lista = repositorio.Listar(e => e.Descricao.Contains(txtdescricao.Text));
 
-           
+
             dgdadosFlats.DataSource = lista;
 
             if (lista.Count > 0)
@@ -35,7 +35,11 @@ namespace SistemaFL
                 dgdadosFlats.Columns["descricao"].HeaderText = "Descrição";
                 dgdadosFlats.Columns["DataAquisicao"].HeaderText = "Data Aquisição";
                 dgdadosFlats.Columns["TipoInvestimento"].HeaderText = "Tipo Investimento";
-                dgdadosFlats.Columns["ValorInvestimento"].HeaderText = "Valor Investimento";
+
+                //configuração para mostrar coluna em reais
+                dgdadosFlats.Columns["ValorAluguel"].DefaultCellStyle.Format = "C2";
+                dgdadosFlats.Columns["ValorAluguel"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("pt-BR");
+
                 dgdadosFlats.Columns["Empresa"].HeaderText = "Descrição";
 
                 dgdadosFlats.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
@@ -52,5 +56,10 @@ namespace SistemaFL
             };
         }
 
+        private void FrmConsultaFlat_Load(object sender, EventArgs e)
+        {
+            txtdescricao.Text = "Digite aqui o número do mês";
+            txtdescricao.ForeColor = Color.Gray;
+        }
     }
 } 

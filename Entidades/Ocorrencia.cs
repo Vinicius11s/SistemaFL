@@ -9,21 +9,18 @@ namespace Entidades
 {
     public class Ocorrencia
     {
-        public Ocorrencia()
-        {
-            Flat = new Flat();
-            Usuario = new Usuario();
-        }
+        
         public int id { get; set; }
-
         public Decimal valorAntigo { get; set; }
-        public Decimal valorNovo { get; set; }
+        public Decimal valorAlteracao { get; set; }
         public int DataAlteracao { get; set; }
 
-        public int idFlat { get; set; }
-        public int idUsuario { get; set; }
-        public virtual Flat Flat { get; set; }
-        public virtual Usuario Usuario { get; set; } 
+        public int idLancamento { get; set; }
+        public Lancamento lancamento { get; set; }
 
+        public Ocorrencia()
+        {
+            lancamento = new Lancamento();
+        }
     }
 }
