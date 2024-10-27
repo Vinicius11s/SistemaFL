@@ -18,14 +18,12 @@ namespace Entidades
 
         public int idFlat { get; set; }
         public Flat Flat { get; set; }
-        public int idUsuario { get; set; }
-        public Usuario Usuario { get; set; }       
+        public int? idUsuario { get; set; }
+        public Usuario? Usuario { get; set; }       
         public virtual ICollection<Ocorrencia> Ocorrencias { get; set; }
 
 
         public Lancamento() {   
-            Flat = new Flat();
-            Usuario = new Usuario();
             this.Ocorrencias = new  HashSet<Ocorrencia>();
         }
     }

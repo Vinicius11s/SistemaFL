@@ -95,6 +95,7 @@
             Controls.Add(dgdadoslancamento);
             Name = "FrmConsultaLancamento";
             Text = "FrmConsultaLancamento";
+            Load += FrmConsultaLancamento_Load;
             ((System.ComponentModel.ISupportInitialize)dgdadoslancamento).EndInit();
             ResumeLayout(false);
             PerformLayout();

@@ -132,10 +132,23 @@ namespace SistemaFL
             }
         }
         private void btnlocalizar_Click(object sender, EventArgs e)
-        {   
-            
+        {
+            var form2 = Program.serviceProvider.GetRequiredService<FrmConsultaUsuario>();
+            form2.ShowDialog();
 
-            pdados.Enabled = false;
+            if(form2.id > 0) {
+                var usuario = repositorio.Recuperar(u => u.id == form2.id);
+                if(usuario != null)
+                {
+
+                    txtid.Text = usuario.id.ToString();
+                    txtnome.Text = usuario.Nome;
+                    txtlogin.Text = usuario.Login;
+                    txtsenha.Text = usuario.Senha;
+                }        
+            }
+
+            pdados.Enabled = true;
             btnnovo.Enabled = false;
             btnlocalizar.Enabled = false;
             btnalterar.Enabled = true;

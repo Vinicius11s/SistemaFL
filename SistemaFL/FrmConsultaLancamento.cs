@@ -61,5 +61,11 @@ namespace SistemaFL
                 this.Close();
             }
         }
+
+        private void FrmConsultaLancamento_Load(object sender, EventArgs e)
+        {
+            txtdescricao.Text = "Digite aqui o número do mês que deseja consultar";
+            txtdescricao.ForeColor = Color.Gray;
+        }
     }
 }

@@ -16,14 +16,14 @@ namespace Infraestrutura.Contexto
         }
 
         //entidades que serão mapeadas pelo DbSet como tabelas no meu bd; (ADC TODAS)
-        public DbSet<Empresa> Empresas { get; set; }
-        public DbSet<Flat> Flats { get; set; }
-        public DbSet<Lancamento> Lancamentos { get; set; }
-        public DbSet<Ocorrencia> Ocorrencias { get; set; }
-        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Empresa> empresa { get; set; }
+        public DbSet<Flat> flat { get; set; }
+        public DbSet<Lancamento> lancamento { get; set; }
+        public DbSet<Ocorrencia> ocorrencia { get; set; }
+        public DbSet<Usuario> usuario { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var stringConexao = @"Server=PCVINICIUS;Database=dbSistemaFLATS;Integrated Security=True;TrustServerCertificate=True;";
+            var stringConexao = @"Server=PCVINICIUS;Database=SistemaFLATs;Integrated Security=True;TrustServerCertificate=True;";
 
 
             if (!optionsBuilder.IsConfigured)
@@ -93,6 +93,11 @@ namespace Infraestrutura.Contexto
 
                 o.HasOne(l => l.lancamento) // Uma Ocorrência pertence a um Lançamento
                     .WithMany(o => o.Ocorrencias)
+                    .HasForeignKey(o => o.idLancamento)
+                    .OnDelete(DeleteBehavior.NoAction);
+
+                o.HasOne(l => l.flat) // Uma Ocorrência pertence a um Flat
+                    .WithMany(o => o.Ocorrencias) //Um flat pode estar em varias ocorrencias
                     .HasForeignKey(o => o.idLancamento)
                     .OnDelete(DeleteBehavior.NoAction);
             });

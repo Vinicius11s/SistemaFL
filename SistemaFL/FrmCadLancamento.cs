@@ -227,11 +227,9 @@ namespace SistemaFL
             {
                 lancamento.ValorFundoReserva = valorFunReserva;
             }
-
+            
             return lancamento;
         }
-
-
         private void btnlocalizar_Click(object sender, EventArgs e)
         {
             var form2 = Program.serviceProvider.GetRequiredService<FrmConsultaLancamento>();
@@ -340,7 +338,6 @@ namespace SistemaFL
             }
             else MessageBox.Show("Informe um Tipo de Pagamento");*/
         }
-
         private void cbbtipoPagamento_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbbtipoPagamento.SelectedItem != null)

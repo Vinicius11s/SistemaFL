@@ -35,14 +35,13 @@ namespace SistemaFL
                 dgdadosFlats.Columns["descricao"].HeaderText = "Descrição";
                 dgdadosFlats.Columns["DataAquisicao"].HeaderText = "Data Aquisição";
                 dgdadosFlats.Columns["TipoInvestimento"].HeaderText = "Tipo Investimento";
-
+                dgdadosFlats.Columns["Empresa"].Visible = false;
+                dgdadosFlats.Columns["Lancamentos"].Visible = false;
                 //configuração para mostrar coluna em reais
-                dgdadosFlats.Columns["ValorAluguel"].DefaultCellStyle.Format = "C2";
-                dgdadosFlats.Columns["ValorAluguel"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("pt-BR");
-
-                dgdadosFlats.Columns["Empresa"].HeaderText = "Descrição";
-
+                dgdadosFlats.Columns["ValorInvestimento"].DefaultCellStyle.Format = "C2";
+                dgdadosFlats.Columns["ValorInvestimento"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("pt-BR");
                 dgdadosFlats.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
             }
         }
         private void dgdadosFlats_CellDoubleClic(object sender, DataGridViewCellEventArgs e)
@@ -58,7 +57,7 @@ namespace SistemaFL
 
         private void FrmConsultaFlat_Load(object sender, EventArgs e)
         {
-            txtdescricao.Text = "Digite aqui o número do mês";
+            txtdescricao.Text = "Digite aqui a descrição do Flat";
             txtdescricao.ForeColor = Color.Gray;
         }
     }

@@ -23,7 +23,7 @@ namespace SistemaFL
 
         private void btnlocalizar_Click(object sender, EventArgs e)
         {
-            var lista = repositorio.Listar(u => u.id == id);
+            var lista = repositorio.Listar(u => u.Nome.Contains(txtdescricao.Text));
             dgdadosusuario.DataSource = lista;
 
             if (lista.Count > 0)

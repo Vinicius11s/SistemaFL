@@ -33,12 +33,15 @@
             empresaToolStripMenuItem = new ToolStripMenuItem();
             flatToolStripMenuItem = new ToolStripMenuItem();
             lançamentoToolStripMenuItem = new ToolStripMenuItem();
+            usuárioToolStripMenuItem = new ToolStripMenuItem();
+            consultasToolStripMenuItem = new ToolStripMenuItem();
+            ocorrênciasToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { cadastrosToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { cadastrosToolStripMenuItem, consultasToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(782, 24);
@@ -47,7 +50,7 @@
             // 
             // cadastrosToolStripMenuItem
             // 
-            cadastrosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { empresaToolStripMenuItem, flatToolStripMenuItem, lançamentoToolStripMenuItem });
+            cadastrosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { empresaToolStripMenuItem, flatToolStripMenuItem, lançamentoToolStripMenuItem, usuárioToolStripMenuItem });
             cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
             cadastrosToolStripMenuItem.Size = new Size(71, 20);
             cadastrosToolStripMenuItem.Text = "Cadastros";
@@ -73,6 +76,27 @@
             lançamentoToolStripMenuItem.Text = "Lançamento";
             lançamentoToolStripMenuItem.Click += lançamentoToolStripMenuItem_Click;
             // 
+            // usuárioToolStripMenuItem
+            // 
+            usuárioToolStripMenuItem.Name = "usuárioToolStripMenuItem";
+            usuárioToolStripMenuItem.Size = new Size(180, 22);
+            usuárioToolStripMenuItem.Text = "Usuário";
+            usuárioToolStripMenuItem.Click += usuárioToolStripMenuItem_Click;
+            // 
+            // consultasToolStripMenuItem
+            // 
+            consultasToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ocorrênciasToolStripMenuItem });
+            consultasToolStripMenuItem.Name = "consultasToolStripMenuItem";
+            consultasToolStripMenuItem.Size = new Size(71, 20);
+            consultasToolStripMenuItem.Text = "Consultas";
+            // 
+            // ocorrênciasToolStripMenuItem
+            // 
+            ocorrênciasToolStripMenuItem.Name = "ocorrênciasToolStripMenuItem";
+            ocorrênciasToolStripMenuItem.Size = new Size(180, 22);
+            ocorrênciasToolStripMenuItem.Text = "Ocorrências";
+            ocorrênciasToolStripMenuItem.Click += ocorrênciasToolStripMenuItem_Click;
+            // 
             // FrmPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -95,5 +119,8 @@
         private ToolStripMenuItem empresaToolStripMenuItem;
         private ToolStripMenuItem flatToolStripMenuItem;
         private ToolStripMenuItem lançamentoToolStripMenuItem;
+        private ToolStripMenuItem usuárioToolStripMenuItem;
+        private ToolStripMenuItem consultasToolStripMenuItem;
+        private ToolStripMenuItem ocorrênciasToolStripMenuItem;
     }
 }

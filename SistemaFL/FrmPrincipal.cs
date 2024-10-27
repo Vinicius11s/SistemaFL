@@ -35,5 +35,17 @@ namespace SistemaFL
             var form4 = Program.serviceProvider.GetRequiredService<FrmCadLancamento>();
             form4.ShowDialog();
         }
+
+        private void usuárioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form5 = Program.serviceProvider.GetRequiredService<FrmCadUsuario>();
+            form5.ShowDialog();
+        }
+
+        private void ocorrênciasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form6 = Program.serviceProvider.GetRequiredService<FrmConsultaOcorrencia>();
+            form6.ShowDialog();
+        }
     }
 }

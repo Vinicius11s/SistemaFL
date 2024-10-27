@@ -36,6 +36,9 @@ namespace SistemaFL
                 dgdados.Columns["RazaoSocial"].HeaderText = "Razão Social";
                 dgdados.Columns["InscricaoEstadual"].HeaderText = "Inscrição Estadual";
                 dgdados.Columns["Numero"].HeaderText = "Nº";
+                // Supondo que seu DataGridView seja chamado "dataGridViewEmpresas"
+                dgdados.Columns["Flats"].Visible = false;
+
                 dgdados.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             }
         }

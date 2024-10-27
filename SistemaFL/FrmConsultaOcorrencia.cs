@@ -14,16 +14,18 @@ namespace SistemaFL
     public partial class FrmConsultaOcorrencia : Form
     {
         private IOcorrenciaRepositorio repositorio;
+        private ILancamentoRepositorio lancamentoRepositorio;
         public int id;
-        public FrmConsultaOcorrencia(IOcorrenciaRepositorio repositorio)
+        public FrmConsultaOcorrencia(IOcorrenciaRepositorio repositorio, ILancamentoRepositorio lancamentoRepositorio)
         {
             InitializeComponent();
             this.repositorio = repositorio;
+            this.lancamentoRepositorio = lancamentoRepositorio;
         }
 
         private void btnlocalizar_Click(object sender, EventArgs e)
         {
-            var lista = repositorio.Listar(e => e.idFlat == id);
+            var lista = repositorio.Listar(e => e.idLancamento == id);
         }
     }
 }
