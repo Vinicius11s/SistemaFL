@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
+using SistemaFL.Funcionalidades;
 
 namespace SistemaFL
 {
@@ -46,6 +47,12 @@ namespace SistemaFL
         {
             var form6 = Program.serviceProvider.GetRequiredService<FrmConsultaOcorrencia>();
             form6.ShowDialog();
+        }
+
+        private void registrosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form7 = Program.serviceProvider.GetRequiredService<FrmFuncionalidadeRegisto>();
+            form7.ShowDialog();
         }
     }
 }

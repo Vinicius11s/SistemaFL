@@ -7,11 +7,38 @@ using Entidades;
 using Infraestrutura.Contexto;
 using InfraEstrutura.Repositorio;
 using Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infraestrutura.Repositorio
 {
     public class FlatRepositorio : BaseRepositorio<Flat>, IFlatRepositorio
     {
-        public FlatRepositorio(ContextoSistema contexto) : base(contexto) { }
+        private readonly ContextoSistema _context;
+        public FlatRepositorio(ContextoSistema contexto) : base(contexto) {
+            _context = contexto;
+        }
+        public IEnumerable<dynamic> ObterDadosInvestimento()
+        {
+            // Usando Include para carregar os dados relacionados
+            var dadosInvestimento = _context.flat
+                .Include(f => f.Empresa)
+                .Select(flat => new
+                {
+                    idFlat = flat.id,
+                    CnpjRecebimento = flat.Empresa.Cnpj,
+                    Empresa = flat.Empresa.Descricao,
+                    DtAquisicao = flat.DataAquisicao,
+                    Flat = flat.Descricao,
+                    Unid = flat.Unidade,
+                    TipoInvestimento = flat.TipoInvestimento,
+                    Cidade = flat.Cidade,
+                    Endereco = $"{flat.Rua}, {flat.Bairro}",
+                    Investimento = flat.ValorInvestimento,
+                    Status = flat.Status
+                })
+                .ToList<dynamic>();
+
+            return dadosInvestimento;
+        }
     }
 }

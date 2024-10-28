@@ -5,6 +5,7 @@ using Interfaces;
 using System;
 using Infraestrutura.Repositorio;
 using Entidades;
+using SistemaFL.Funcionalidades;
 
 namespace SistemaFL
 {
@@ -31,6 +32,8 @@ namespace SistemaFL
             private static void ConfigureServices(ServiceCollection services)
             {
             services.AddDbContext<ContextoSistema>();
+
+             services.AddScoped<FrmFuncionalidadeRegisto>();
 
             services.AddScoped<Form1>();
             services.AddScoped<FrmCadEmpresa>();
