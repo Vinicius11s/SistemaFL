@@ -196,12 +196,11 @@ namespace SistemaFL
             if (!string.IsNullOrWhiteSpace(txtid.Text) && int.TryParse(txtid.Text, out int id))
             {
                 lancamento = repositorio.Recuperar(c => c.id == id) ?? new Lancamento();
-                lancamento.id = id; // Só atribui se o id foi analisado corretamente
             }
-            else
-            {
-                lancamento = new Lancamento();
-            }
+            else lancamento = new Lancamento();
+
+            lancamento.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
+
 
             // Atribui as propriedades ao lançamento
             lancamento.DataPagamento = dtdataLancamento.Value;
@@ -227,6 +226,13 @@ namespace SistemaFL
             {
                 lancamento.ValorFundoReserva = valorFunReserva;
             }
+
+            //validação txtIdFlat
+            if (int.TryParse(txtidFlat.Text, out int idFlat))
+            {
+                lancamento.idFlat = idFlat;
+            }
+            else MessageBox.Show("Não foi possível localizar o Flat.");
             
             return lancamento;
         }

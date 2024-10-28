@@ -13,5 +13,7 @@ namespace Infraestrutura.Repositorio
     public class LancamentoRepositorio : BaseRepositorio<Lancamento>, ILancamentoRepositorio
     {
         public LancamentoRepositorio(ContextoSistema contexto) : base(contexto) { }
+
+
     }
 }

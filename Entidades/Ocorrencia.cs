@@ -11,7 +11,7 @@ namespace Entidades
     {
         
         public int id { get; set; }
-        public Decimal valorAntigo { get; set; }
+        public Decimal? valorAntigo { get; set; }
         public Decimal valorAlteracao { get; set; }
         public DateTime DataAlteracao { get; set; }
 

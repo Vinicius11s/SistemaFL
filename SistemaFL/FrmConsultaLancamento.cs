@@ -32,25 +32,27 @@ namespace SistemaFL
             }
             else
             {
-                int mes = int.Parse(txtdescricao.Text);
-                if (mes > 0 && mes < 12)
+                if(int.TryParse(txtdescricao.Text, out int mes))    
                 {
-                    var lista = repositorio.Listar(l => l.DataPagamento.Month == mes);
-                    dgdadoslancamento.DataSource = lista;
-
-                    if (lista.Count > 0)
+                    mes = int.Parse(txtdescricao.Text);
+                    if (mes > 0 && mes < 12)
                     {
-                        dgdadoslancamento.Columns["DataPagamento"].HeaderText = "Data Pagamento";
-                        dgdadoslancamento.Columns["ValorPagamento"].HeaderText = "Valor Pagamento";
-                        dgdadoslancamento.Columns["ValorFundoReserva"].DefaultCellStyle.Format = "C2";
-                        dgdadoslancamento.Columns["ValorFundoReserva"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("pt-BR");
+                        var lista = repositorio.Listar(l => l.DataPagamento.Month == mes);
+                        dgdadoslancamento.DataSource = lista;
 
-                        dgdadoslancamento.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                        if (lista.Count > 0)
+                        {
+                            dgdadoslancamento.Columns["DataPagamento"].HeaderText = "Data Pagamento";
+                            dgdadoslancamento.Columns["ValorFundoReserva"].DefaultCellStyle.Format = "C2";
+                            dgdadoslancamento.Columns["ValorFundoReserva"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("pt-BR");
+
+                            dgdadoslancamento.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
 
 
+                        }
                     }
                     else MessageBox.Show("Digite um mês válido.");
-                }
+                }else MessageBox.Show("Digite apenas numeros.");
             }
         }
         private void dgdadoslancamento_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
