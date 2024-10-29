@@ -26,7 +26,7 @@ namespace Infraestrutura.Repositorio
                 {
                     idFlat = flat.id,
                     CnpjRecebimento = flat.Empresa.Cnpj,
-                    Empresa = flat.Empresa.Descricao,
+                    Empresa = flat.Empresa.RazaoSocial,
                     DtAquisicao = flat.DataAquisicao,
                     Flat = flat.Descricao,
                     Unid = flat.Unidade,
@@ -39,6 +39,13 @@ namespace Infraestrutura.Repositorio
                 .ToList<dynamic>();
 
             return dadosInvestimento;
+        }
+        public decimal CalcularTotalValorInvestimento()
+        {
+            // Recupera todos os flats
+            var flats = _contexto.Set<Flat>().ToList();
+            // Soma os valores de investimento
+            return flats.Sum(flat => flat.ValorInvestimento);
         }
     }
 }

@@ -28,6 +28,10 @@ namespace SistemaFL.Funcionalidades
             var dados = flatRepositorio.ObterDadosInvestimento();
             dgdadosFunRegistro.DataSource = dados;
 
+            var totalInvestimento = flatRepositorio.CalcularTotalValorInvestimento();
+            txtTotalInvestimento.Text = totalInvestimento.ToString("C");
+            
+
         }
     }
 }

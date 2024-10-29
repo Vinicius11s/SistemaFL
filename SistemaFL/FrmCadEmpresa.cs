@@ -56,28 +56,6 @@ namespace SistemaFL
             limpar();
             txtdescricao.Focus();
         }
-        void limpar()
-        {
-            txtid.Text = "";
-            txtdescricao.Text = "";
-            txtcnpj.Text = "";
-            txtinscricaoestadual.Text = "";
-            txtrazaosocial.Text = "";
-            txtrua.Text = "";
-            txtnumero.Text = "";
-            txtbairro.Text = "";
-            txtcidade.Text = "";
-            txtestado.Text = "";
-            txtcep.Text = "";
-            cbbflatsassociados.Items.Clear();
-            cbbflatsassociados.Text = string.Empty;
-            if (dgAssociarFlat.Rows.Count > 0)
-            {
-                dgAssociarFlat.Rows.Clear(); // Limpa o DataGridView
-            }
-
-
-        }
         private void btnalterar_Click(object sender, EventArgs e)
         {
             if (txtid.Text != "")
@@ -101,37 +79,7 @@ namespace SistemaFL
                 btndesassociar.Enabled = true;
             }
             else btndesassociar.Enabled = false;
-        }
-        public Empresa carregaPropriedades()
-        {
-            Empresa empresa;
-            if (txtid.Text != "")
-            {
-                empresa = repositorio.Recuperar(c => c.id == int.Parse(txtid.Text));
-            }
-            else empresa = new Empresa(); //inserir
-
-            empresa.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
-            empresa.Descricao = txtdescricao.Text;
-            empresa.Cnpj = txtcnpj.Text;
-            empresa.RazaoSocial = txtrazaosocial.Text;
-            empresa.InscricaoEstadual = txtinscricaoestadual.Text;
-            empresa.Cep = txtcep.Text;
-            empresa.Rua = txtrua.Text;
-            empresa.Numero = txtnumero.Text;
-            empresa.Cidade = txtcidade.Text;
-            empresa.Estado = txtestado.Text;
-            empresa.Bairro = txtbairro.Text;
-            foreach (var item in cbbflatsassociados.Items)
-            {
-                if (item is Flat flatSelecionado)
-                {
-                    empresa.Flats.Add(flatSelecionado); // Adiciona o flat à coleção                                   
-                }
-            }
-
-            return empresa;
-        }
+        }  
         private void btncancelar_Click(object sender, EventArgs e)
         {
             limpar();
@@ -281,8 +229,6 @@ namespace SistemaFL
                 MessageBox.Show("Erro ao carregar flats: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
         private void AtualizarComboBoxFlatsAssociados()
         {
             cbbflatsassociados.Items.Clear();
@@ -294,7 +240,6 @@ namespace SistemaFL
                 cbbflatsassociados.Items.Add(flat.Descricao);
             }
         }
-
         private void btndesassociar_Click(object sender, EventArgs e)
         {
             if (cbbflatsassociados.SelectedItem != null)
@@ -333,7 +278,6 @@ namespace SistemaFL
                 MessageBox.Show("Selecione um flat para desassociar.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
         private void btnassociar_Click_1(object sender, EventArgs e)
         {
             try
@@ -370,6 +314,58 @@ namespace SistemaFL
             {
                 MessageBox.Show("Ocorreu um erro ao associar o flat: " + ex.Message);
             }
+        }
+        public Empresa carregaPropriedades()
+        {
+            Empresa empresa;
+            if (txtid.Text != "")
+            {
+                empresa = repositorio.Recuperar(c => c.id == int.Parse(txtid.Text));
+            }
+            else empresa = new Empresa(); //inserir
+
+            empresa.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
+            empresa.Descricao = txtdescricao.Text;
+            empresa.Cnpj = txtcnpj.Text;
+            empresa.RazaoSocial = txtrazaosocial.Text;
+            empresa.InscricaoEstadual = txtinscricaoestadual.Text;
+            empresa.Cep = txtcep.Text;
+            empresa.Rua = txtrua.Text;
+            empresa.Numero = txtnumero.Text;
+            empresa.Cidade = txtcidade.Text;
+            empresa.Estado = txtestado.Text;
+            empresa.Bairro = txtbairro.Text;
+            foreach (var item in cbbflatsassociados.Items)
+            {
+                if (item is Flat flatSelecionado)
+                {
+                    empresa.Flats.Add(flatSelecionado); // Adiciona o flat à coleção                                   
+                }
+            }
+
+            return empresa;
+        }
+        void limpar()
+        {
+            txtid.Text = "";
+            txtdescricao.Text = "";
+            txtcnpj.Text = "";
+            txtinscricaoestadual.Text = "";
+            txtrazaosocial.Text = "";
+            txtrua.Text = "";
+            txtnumero.Text = "";
+            txtbairro.Text = "";
+            txtcidade.Text = "";
+            txtestado.Text = "";
+            txtcep.Text = "";
+            cbbflatsassociados.Items.Clear();
+            cbbflatsassociados.Text = string.Empty;
+            if (dgAssociarFlat.Rows.Count > 0)
+            {
+                dgAssociarFlat.Rows.Clear(); // Limpa o DataGridView
+            }
+
+
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using SistemaFL.Funcionalidades;
 
@@ -14,9 +15,11 @@ namespace SistemaFL
 {
     public partial class FrmPrincipal : Form
     {
-        public FrmPrincipal()
+        private IUsuarioRepositorio repositorioFunc;
+        public FrmPrincipal(IUsuarioRepositorio repositorioFunc)
         {
             InitializeComponent();
+            this.repositorioFunc = repositorioFunc;
         }
 
         private void empresaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -53,6 +56,19 @@ namespace SistemaFL
         {
             var form7 = Program.serviceProvider.GetRequiredService<FrmFuncionalidadeRegisto>();
             form7.ShowDialog();
+        }
+
+        private void FrmPrincipal_Load(object sender, EventArgs e)
+        {
+            var form8 = Program.serviceProvider.GetRequiredService<FrmFuncionalidadeLogin>();
+            form8.ShowDialog();
+
+            if (form8.idUsuario > 0){
+                var usuario = repositorioFunc.Recuperar(u => u.id == form8.idUsuario);
+                lbllogin.Text = "Bem-Vindo " + usuario.Nome;
+
+            }
+            else this.Close();
         }
     }
 }

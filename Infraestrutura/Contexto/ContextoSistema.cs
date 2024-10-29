@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 using Entidades;
@@ -23,7 +24,7 @@ namespace Infraestrutura.Contexto
         public DbSet<Usuario> usuario { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var stringConexao = @"Server=PCVINICIUS;Database=SistemaFLATs;Integrated Security=True;TrustServerCertificate=True;";
+            var stringConexao = @"Server=LAB11-09;Database=SistemaFLATs;Integrated Security=True;TrustServerCertificate=True;";
 
 
             if (!optionsBuilder.IsConfigured)
@@ -91,8 +92,8 @@ namespace Infraestrutura.Contexto
                 o.Property(o => o.valorAlteracao).HasColumnType("decimal(18,2)").IsRequired();
                 o.Property(o => o.DataAlteracao).IsRequired();
 
-                o.HasOne(l => l.lancamento) // Uma Ocorrência pertence a um Lançamento
-                    .WithMany(o => o.Ocorrencias)
+                o.HasOne(l => l.lancamento) // um lançamento pode estar em várias ocorrencias
+                    .WithMany(o => o.Ocorrencias) // Uma Ocorrência pertence a um Lançamento
                     .HasForeignKey(o => o.idLancamento)
                     .OnDelete(DeleteBehavior.NoAction);
 

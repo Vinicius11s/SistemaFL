@@ -25,7 +25,7 @@ namespace SistemaFL
                 var mainForm = serviceProvider.GetRequiredService
                                                 <FrmPrincipal>();
 
-                Application.Run(new FrmPrincipal());
+                Application.Run(mainForm);
             }
         }
 
@@ -33,7 +33,8 @@ namespace SistemaFL
             {
             services.AddDbContext<ContextoSistema>();
 
-             services.AddScoped<FrmFuncionalidadeRegisto>();
+            services.AddScoped<FrmFuncionalidadeLogin>();
+            services.AddScoped<FrmFuncionalidadeRegisto>();
 
             services.AddScoped<Form1>();
             services.AddScoped<FrmCadEmpresa>();

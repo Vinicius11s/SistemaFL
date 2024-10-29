@@ -14,7 +14,7 @@ namespace Entidades
         public String Senha { get; set; } = String.Empty;
         public DateTime DataCriacao { get; set; }
 
-        public virtual ICollection<Lancamento> Lancamentos { get; set; }
+        public ICollection<Lancamento> Lancamentos { get; set; }
         public Usuario()
         {
             this.Lancamentos = new HashSet<Lancamento>();

@@ -38,6 +38,7 @@
             ocorrênciasToolStripMenuItem = new ToolStripMenuItem();
             funcionalidadesToolStripMenuItem = new ToolStripMenuItem();
             registrosToolStripMenuItem = new ToolStripMenuItem();
+            lbllogin = new Label();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -95,7 +96,7 @@
             // ocorrênciasToolStripMenuItem
             // 
             ocorrênciasToolStripMenuItem.Name = "ocorrênciasToolStripMenuItem";
-            ocorrênciasToolStripMenuItem.Size = new Size(180, 22);
+            ocorrênciasToolStripMenuItem.Size = new Size(137, 22);
             ocorrênciasToolStripMenuItem.Text = "Ocorrências";
             ocorrênciasToolStripMenuItem.Click += ocorrênciasToolStripMenuItem_Click;
             // 
@@ -109,19 +110,30 @@
             // registrosToolStripMenuItem
             // 
             registrosToolStripMenuItem.Name = "registrosToolStripMenuItem";
-            registrosToolStripMenuItem.Size = new Size(180, 22);
+            registrosToolStripMenuItem.Size = new Size(122, 22);
             registrosToolStripMenuItem.Text = "Registros";
             registrosToolStripMenuItem.Click += registrosToolStripMenuItem_Click;
+            // 
+            // lbllogin
+            // 
+            lbllogin.AutoSize = true;
+            lbllogin.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbllogin.Location = new Point(210, 152);
+            lbllogin.Name = "lbllogin";
+            lbllogin.Size = new Size(0, 37);
+            lbllogin.TabIndex = 16;
             // 
             // FrmPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(782, 428);
+            Controls.Add(lbllogin);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "FrmPrincipal";
             Text = "Sistema Gerenciamento FL";
+            Load += FrmPrincipal_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
@@ -140,5 +152,6 @@
         private ToolStripMenuItem ocorrênciasToolStripMenuItem;
         private ToolStripMenuItem funcionalidadesToolStripMenuItem;
         private ToolStripMenuItem registrosToolStripMenuItem;
+        private Label lbllogin;
     }
 }
