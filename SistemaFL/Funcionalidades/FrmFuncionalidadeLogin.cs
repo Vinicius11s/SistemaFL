@@ -26,7 +26,8 @@ namespace SistemaFL.Funcionalidades
 
         private void btnentrar_Click(object sender, EventArgs e)
         {
-            if (txtlogin.Text != "" && txtsenha.Text != ""){
+            if (txtlogin.Text != "" && txtsenha.Text != "")
+            {
                 var usuario = repositorio.Recuperar(u => u.Login == txtlogin.Text &&
                                                             u.Senha == txtsenha.Text);
 
@@ -38,6 +39,11 @@ namespace SistemaFL.Funcionalidades
                 else MessageBox.Show("Dados Incorretos.");
             }
             else MessageBox.Show("Por favor informar Login e Senha.");
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
