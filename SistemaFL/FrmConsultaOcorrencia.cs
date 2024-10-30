@@ -23,9 +23,10 @@ namespace SistemaFL
             this.lancamentoRepositorio = lancamentoRepositorio;
         }
 
-        private void btnlocalizar_Click(object sender, EventArgs e)
+        private void FrmConsultaOcorrencia_Load(object sender, EventArgs e)
         {
-            var lista = repositorio.Listar(e => e.idLancamento == id);
+            var lista = repositorio.Listar(e => true);
+            dgdadosocorrencias.DataSource = lista.ToList();
         }
     }
 }

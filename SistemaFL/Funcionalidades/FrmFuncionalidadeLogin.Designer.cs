@@ -33,12 +33,12 @@
             txtsenha = new TextBox();
             btnentrar = new Button();
             panel1 = new Panel();
+            label5 = new Label();
+            label3 = new Label();
+            pictureBox2 = new PictureBox();
             label4 = new Label();
             label2 = new Label();
             label1 = new Label();
-            pictureBox2 = new PictureBox();
-            label3 = new Label();
-            label5 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
@@ -48,6 +48,7 @@
             txtlogin.BackColor = Color.Black;
             txtlogin.BorderStyle = BorderStyle.FixedSingle;
             txtlogin.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtlogin.ForeColor = SystemColors.ControlLightLight;
             txtlogin.Location = new Point(349, 106);
             txtlogin.Margin = new Padding(3, 4, 3, 4);
             txtlogin.MaxLength = 150;
@@ -60,6 +61,7 @@
             txtsenha.BackColor = Color.Black;
             txtsenha.BorderStyle = BorderStyle.FixedSingle;
             txtsenha.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtsenha.ForeColor = SystemColors.ControlLightLight;
             txtsenha.Location = new Point(349, 170);
             txtsenha.Margin = new Padding(3, 4, 3, 4);
             txtsenha.MaxLength = 150;
@@ -92,6 +94,38 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(250, 330);
             panel1.TabIndex = 14;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Modern No. 20", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.Black;
+            label5.Location = new Point(56, 181);
+            label5.Name = "label5";
+            label5.Size = new Size(143, 18);
+            label5.TabIndex = 18;
+            label5.Text = "de Empreendimentos";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Modern No. 20", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.Black;
+            label3.Location = new Point(44, 160);
+            label3.Name = "label3";
+            label3.Size = new Size(169, 21);
+            label3.TabIndex = 17;
+            label3.Text = "Sistema Gerenciador";
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(77, 63);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(97, 83);
+            pictureBox2.TabIndex = 0;
+            pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
             // 
             // label4
             // 
@@ -126,38 +160,6 @@
             label1.TabIndex = 16;
             label1.Text = "Login";
             // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(77, 63);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(97, 83);
-            pictureBox2.TabIndex = 0;
-            pictureBox2.TabStop = false;
-            pictureBox2.Click += pictureBox2_Click;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Modern No. 20", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.Black;
-            label3.Location = new Point(44, 160);
-            label3.Name = "label3";
-            label3.Size = new Size(169, 21);
-            label3.TabIndex = 17;
-            label3.Text = "Sistema Gerenciador";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Modern No. 20", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.Black;
-            label5.Location = new Point(56, 181);
-            label5.Name = "label5";
-            label5.Size = new Size(143, 18);
-            label5.TabIndex = 18;
-            label5.Text = "de Empreendimentos";
-            // 
             // FrmFuncionalidadeLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -173,7 +175,7 @@
             Controls.Add(txtlogin);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FrmFuncionalidadeLogin";
-            Opacity = 0.9D;
+            Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmFuncionalidadeLogin";
             panel1.ResumeLayout(false);

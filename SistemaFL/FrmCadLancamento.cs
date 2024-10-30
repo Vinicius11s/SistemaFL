@@ -1,6 +1,8 @@
 ﻿using Entidades;
 using Infraestrutura.Contexto;
 using Interfaces;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -20,11 +22,14 @@ namespace SistemaFL
     {
         private ILancamentoRepositorio repositorio;
         private IFlatRepositorio flatRepositorio;
-        public FrmCadLancamento(ILancamentoRepositorio repositorio, IFlatRepositorio flatRepositorio)
+        private ContextoSistema _context;
+
+        public FrmCadLancamento(ILancamentoRepositorio repositorio, IFlatRepositorio flatRepositorio, ContextoSistema context)
         {
             InitializeComponent();
             this.repositorio = repositorio;
             this.flatRepositorio = flatRepositorio;
+            this._context = context;
         }
         private void FrmCadLancamento_Load(object sender, EventArgs e)
         {
@@ -92,19 +97,44 @@ namespace SistemaFL
 
             try
             {
-                if(cbbtipoPagamento.SelectedItem != null)
+                if (cbbtipoPagamento.SelectedItem != null)
                 {
-                    Lancamento lancamento = carregaPropriedades();
-
-                    if(lancamento.id == 0)
+                    // Crie uma nova instância de Lancamento e defina as propriedades
+                    Lancamento lancamento = new Lancamento
                     {
-                        repositorio.Inserir(lancamento);
+                        DataPagamento = dtdataLancamento.Value,
+                        TipoPagamento = cbbtipoPagamento.SelectedItem.ToString(),
+                        ValorAluguel = decimal.TryParse(txtvaloraluguel.Text, out var valorAluguel) ? valorAluguel : 0,
+                        ValorDividendos = decimal.TryParse(txtValorDiv.Text, out var valorDividendos) ? valorDividendos : 0,
+                        ValorFundoReserva = decimal.TryParse(txtValorFunReserva.Text, out var valorFundoReserva) ? valorFundoReserva : 0,
+                        idFlat = int.Parse(txtidFlat.Text),
+                        idUsuario = null // defina o valor de idUsuario aqui, se necessário
+                    };
+
+                    // Verifique se o id é zero (novo lançamento)
+                    if (lancamento.id == 0)
+                    {
+                        _context.Database.ExecuteSqlRaw(
+                            "INSERT INTO lancamento " +
+                            "(DataPagamento, TipoPagamento, ValorAluguel, ValorDividendos, ValorFundoReserva, idFlat, idUsuario) " +
+                            "VALUES (@dataPagamento, @tipoPagamento, @valorAluguel, @valorDividendos, @valorFundoReserva, @idFlat, @idUsuario)",
+                            new SqlParameter("@dataPagamento", lancamento.DataPagamento),
+                            new SqlParameter("@tipoPagamento", lancamento.TipoPagamento),
+                            new SqlParameter("@valorAluguel", lancamento.ValorAluguel),
+                            new SqlParameter("@valorDividendos", lancamento.ValorDividendos),
+                            new SqlParameter("@valorFundoReserva", lancamento.ValorFundoReserva),
+                            new SqlParameter("@idFlat", lancamento.idFlat),
+                            new SqlParameter("@idUsuario", DBNull.Value)
+                        );
+
+                        MessageBox.Show("Lançamento inserido com sucesso!");
                     }
                     else
                     {
+                        // Atualização do lançamento caso o id já exista
                         repositorio.Alterar(lancamento);
                     }
-                    Program.serviceProvider.GetRequiredService<ContextoSistema>().SaveChanges();
+                    _context.SaveChanges();
                     MessageBox.Show("Lançamento Salvo com sucesso!");
                     limpar();
                     btnnovo.Enabled = true;
@@ -124,6 +154,10 @@ namespace SistemaFL
                     labelFundoRes.Visible = false;
                     txtValorFunReserva.Visible = false;
 
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, selecione um tipo de pagamento.");
                 }
             }
             catch (Exception ex)

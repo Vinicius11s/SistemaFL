@@ -12,6 +12,6 @@ namespace Infraestrutura.Repositorio
 {
     public class OcorrenciaRepositorio : BaseRepositorio<Ocorrencia>, IOcorrenciaRepositorio
     {
-        OcorrenciaRepositorio(ContextoSistema contexto) : base(contexto) { }
+        public OcorrenciaRepositorio(ContextoSistema contexto) : base(contexto) { }
     }
 }

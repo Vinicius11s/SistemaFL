@@ -9,7 +9,9 @@ namespace Entidades
 {
     public class Ocorrencia
     {
-        
+        public Ocorrencia()
+        {}
+
         public int id { get; set; }
         public Decimal? valorAntigo { get; set; }
         public Decimal valorAlteracao { get; set; }
@@ -21,10 +23,6 @@ namespace Entidades
         public Flat flat { get; set; }
 
 
-        public Ocorrencia()
-        {
-            lancamento = new Lancamento();
-            flat = new Flat();
-        }
+ 
     }
 }

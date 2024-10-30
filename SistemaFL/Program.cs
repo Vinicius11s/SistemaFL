@@ -52,6 +52,7 @@ namespace SistemaFL
             services.AddScoped<IFlatRepositorio, FlatRepositorio>();
             services.AddScoped<ILancamentoRepositorio, LancamentoRepositorio>();
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddScoped<IOcorrenciaRepositorio, OcorrenciaRepositorio>();
 
         }
     }
