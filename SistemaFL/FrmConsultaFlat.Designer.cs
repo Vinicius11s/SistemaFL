@@ -95,6 +95,7 @@
             Controls.Add(dgdadosFlats);
             Name = "FrmConsultaFlat";
             Text = "FrmConsultaFlat";
+            Load += FrmConsultaFlat_Load_1;
             ((System.ComponentModel.ISupportInitialize)dgdadosFlats).EndInit();
             ResumeLayout(false);
             PerformLayout();

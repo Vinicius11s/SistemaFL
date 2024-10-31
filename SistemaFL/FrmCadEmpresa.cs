@@ -73,13 +73,12 @@ namespace SistemaFL
                 txtdescricao.Focus();
             }
             else MessageBox.Show("Localize a Empresa");
-
             if (cbbflatsassociados.Items.Count > 0)
-            {
                 btndesassociar.Enabled = true;
-            }
             else btndesassociar.Enabled = false;
-        }  
+
+
+        }
         private void btncancelar_Click(object sender, EventArgs e)
         {
             limpar();
@@ -206,29 +205,34 @@ namespace SistemaFL
         }
         private void CarregarFlats()
         {
-            if (dgAssociarFlat.Columns.Count == 0)
+            dgAssociarFlat.Rows.Clear();
+            dgAssociarFlat.Columns.Clear(); // Limpa as colunas previamente adicionadas
+            dgAssociarFlat.AllowUserToAddRows = false; // Desabilita a adição de linhas por padrão
+
+            var flatsSemEmpresa = flatRepositorio.Listar(f => f.idEmpresa == null);
+
+            // Verifica se há flats sem empresa
+            if (flatsSemEmpresa != null && flatsSemEmpresa.Any())
             {
-                dgAssociarFlat.Columns.Add("id", "ID");
+                // Adiciona as colunas ao DataGridView apenas se houver dados
+                dgAssociarFlat.Columns.Add("id", "Código");
                 dgAssociarFlat.Columns.Add("descricao", "Descrição");
                 dgAssociarFlat.Columns.Add("status", "Status");
                 dgAssociarFlat.Columns.Add("valorInvestimento", "Valor do Investimento");
                 dgAssociarFlat.Columns.Add("tipoInvestimento", "Tipo de Investimento");
                 dgAssociarFlat.Columns.Add("dataAquisicao", "Data de Aquisição");
-            }
-            try
-            {
-                dgAssociarFlat.Rows.Clear();
-                var flatsSemEmpresa = flatRepositorio.Listar(f => f.idEmpresa == null);
+
+                // Popula o DataGridView com os dados dos flats
                 foreach (var flat in flatsSemEmpresa)
                 {
                     dgAssociarFlat.Rows.Add(flat.id, flat.Descricao, flat.Status ? "Ativo" : "Inativo", flat.ValorInvestimento, flat.TipoInvestimento, flat.DataAquisicao);
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro ao carregar flats: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // Permite adicionar linhas se houver flats (caso seja necessário)
+                dgAssociarFlat.AllowUserToAddRows = true;
             }
         }
+
         private void AtualizarComboBoxFlatsAssociados()
         {
             cbbflatsassociados.Items.Clear();
@@ -367,6 +371,8 @@ namespace SistemaFL
 
 
         }
+
+ 
     }
 }
 
