@@ -10,7 +10,8 @@ namespace Entidades
     {
         public Flat()
         {
-            this.Lancamentos = new HashSet<Lancamento>();
+            Lancamentos = new HashSet<Lancamento>();
+            Ocorrencias = new HashSet<Ocorrencia>();
         }
 
         public int id { get; set; }

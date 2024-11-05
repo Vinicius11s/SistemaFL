@@ -114,20 +114,8 @@ namespace SistemaFL
                     // Verifique se o id é zero (novo lançamento)
                     if (lancamento.id == 0)
                     {
-                        _context.Database.ExecuteSqlRaw(
-                            "INSERT INTO lancamento " +
-                            "(DataPagamento, TipoPagamento, ValorAluguel, ValorDividendos, ValorFundoReserva, idFlat, idUsuario) " +
-                            "VALUES (@dataPagamento, @tipoPagamento, @valorAluguel, @valorDividendos, @valorFundoReserva, @idFlat, @idUsuario)",
-                            new SqlParameter("@dataPagamento", lancamento.DataPagamento),
-                            new SqlParameter("@tipoPagamento", lancamento.TipoPagamento),
-                            new SqlParameter("@valorAluguel", lancamento.ValorAluguel),
-                            new SqlParameter("@valorDividendos", lancamento.ValorDividendos),
-                            new SqlParameter("@valorFundoReserva", lancamento.ValorFundoReserva),
-                            new SqlParameter("@idFlat", lancamento.idFlat),
-                            new SqlParameter("@idUsuario", DBNull.Value)
-                        );
 
-                        MessageBox.Show("Lançamento inserido com sucesso!");
+                        repositorio.Inserir(lancamento);
                     }
                     else
                     {

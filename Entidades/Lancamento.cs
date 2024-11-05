@@ -9,6 +9,11 @@ namespace Entidades
 {
     public class Lancamento
     {
+        public Lancamento()
+        {
+            Ocorrencias = new HashSet<Ocorrencia>();
+        }
+
         public int id { get; set; }
         public DateTime DataPagamento { get; set; }
         public String TipoPagamento { get; set; } = String.Empty;
@@ -17,17 +22,12 @@ namespace Entidades
         public Decimal?  ValorFundoReserva { get; set; }
 
         public int idFlat { get; set; }
-        public Flat Flat { get; set; }
+        public Flat? Flat { get; set; }
 
         public int? idUsuario { get; set; }
         public Usuario? Usuario { get; set; }       
 
 
-        public virtual ICollection<Ocorrencia> Ocorrencias { get; set; }
-
-
-        public Lancamento() {   
-            this.Ocorrencias = new  HashSet<Ocorrencia>();
-        }
+        public virtual ICollection<Ocorrencia> Ocorrencias { get; set; }     
     }
 }

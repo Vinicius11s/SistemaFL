@@ -13,14 +13,16 @@ namespace Entidades
         {}
 
         public int id { get; set; }
-        public Decimal? valorAntigo { get; set; }
-        public Decimal valorAlteracao { get; set; }
-        public DateTime DataAlteracao { get; set; }
+        public Decimal? oco_valorAntigo { get; set; }
+        public Decimal oco_valorAlteracao { get; set; }
+        public DateTime oco_DataAlteracao { get; set; }
+        public String? oco_Tabela { get; set; }
+        public String? oco_Descricao { get; set; }
 
         public int idLancamento { get; set; }
-        public Lancamento lancamento { get; set; }
+        public Lancamento? Lancamento { get; set; }
         public int idFlat { get; set; }
-        public Flat flat { get; set; }
+        public Flat? Flat { get; set; }
 
 
  

@@ -17,14 +17,15 @@ namespace Infraestrutura.Contexto
         }
 
         //entidades que serão mapeadas pelo DbSet como tabelas no meu bd; (ADC TODAS)
-        public DbSet<Empresa> empresa { get; set; }
-        public DbSet<Flat> flat { get; set; }
-        public DbSet<Lancamento> lancamento { get; set; }
-        public DbSet<Ocorrencia> ocorrencia { get; set; }
-        public DbSet<Usuario> usuario { get; set; }
+        public DbSet<Empresa> Empresa { get; set; }
+        public DbSet<Flat> Flat { get; set; }
+        public DbSet<Lancamento> Lancamento { get; set; }
+        public DbSet<Ocorrencia> Ocorrencia { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var stringConexao = @"Server=LAB11-09;Database=SistemaFLATs;Integrated Security=True;TrustServerCertificate=True;";
+            var stringConexao = @"Server=LAB11-09;Database=dbSistemaFLATSS;Integrated Security=True;TrustServerCertificate=True;";
 
 
             if (!optionsBuilder.IsConfigured)
@@ -74,6 +75,10 @@ namespace Infraestrutura.Contexto
 
             modelBuilder.Entity<Lancamento>(l =>
             {
+                l.ToTable("lancamento", tb =>
+                {
+                    tb.HasTrigger("trg_InsertedNewLancamento");
+                });
                 l.Property(l => l.DataPagamento).IsRequired();
                 l.Property(l => l.TipoPagamento).HasMaxLength(50).IsRequired();
                 l.Property(l => l.ValorAluguel).HasColumnType("decimal(18,2)");
@@ -88,20 +93,23 @@ namespace Infraestrutura.Contexto
 
             modelBuilder.Entity<Ocorrencia>(o =>
             {
-                o.Property(o => o.valorAntigo).HasColumnType("decimal(18,2)").IsRequired();
-                o.Property(o => o.valorAlteracao).HasColumnType("decimal(18,2)").IsRequired();
-                o.Property(o => o.DataAlteracao).IsRequired();
+                o.Property(o => o.oco_valorAntigo).HasColumnType("decimal(18,2)").IsRequired();
+                o.Property(o => o.oco_valorAlteracao).HasColumnType("decimal(18,2)").IsRequired();
+                o.Property(o => o.oco_DataAlteracao).IsRequired();
 
-                o.HasOne(l => l.lancamento) // um lançamento pode estar em várias ocorrencias
-                    .WithMany(o => o.Ocorrencias) // Uma Ocorrência pertence a um Lançamento
+                // Relacionamento com Lancamento
+                o.HasOne(o => o.Lancamento)
+                    .WithMany(l => l.Ocorrencias)
                     .HasForeignKey(o => o.idLancamento)
                     .OnDelete(DeleteBehavior.NoAction);
 
-                o.HasOne(l => l.flat) // Uma Ocorrência pertence a um Flat
-                    .WithMany(o => o.Ocorrencias) //Um flat pode estar em varias ocorrencias
-                    .HasForeignKey(o => o.idLancamento)
+                // Relacionamento com Flat
+                o.HasOne(o => o.Flat)
+                    .WithMany(f => f.Ocorrencias)
+                    .HasForeignKey(o => o.idFlat)
                     .OnDelete(DeleteBehavior.NoAction);
             });
+
 
             modelBuilder.Entity<Usuario>(u =>
             {

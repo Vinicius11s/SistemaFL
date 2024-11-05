@@ -20,7 +20,7 @@ namespace Infraestrutura.Repositorio
         public IEnumerable<dynamic> ObterDadosInvestimento()
         {
             // Usando Include para carregar os dados relacionados
-            var dadosInvestimento = _context.flat
+            var dadosInvestimento = _context.Flat
                 .Include(f => f.Empresa)
                 .Select(flat => new
                 {

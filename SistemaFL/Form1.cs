@@ -16,10 +16,13 @@ namespace SistemaFL
         {
             using (var contexto = new ContextoSistema())
             {
-                EmpresaRepositorio emp = new EmpresaRepositorio(contexto);
-                emp.Inserir(new Empresa()
+                UsuarioRepositorio usu = new UsuarioRepositorio(contexto);
+                usu.Inserir(new Usuario()
                 {
-                    Descricao = "Lua Nova",
+                    Nome = "ADMIN",
+                    Login = "ADMIN",
+                    Senha = "123456789",
+                    DataCriacao = DateTime.Now
                 });
                 contexto.SaveChanges();
             }
