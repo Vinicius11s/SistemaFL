@@ -92,7 +92,7 @@
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(250, 330);
+            panel1.Size = new Size(250, 344);
             panel1.TabIndex = 14;
             // 
             // label5
@@ -125,7 +125,6 @@
             pictureBox2.Size = new Size(97, 83);
             pictureBox2.TabIndex = 0;
             pictureBox2.TabStop = false;
-            pictureBox2.Click += pictureBox2_Click;
             // 
             // label4
             // 
@@ -165,7 +164,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(15, 15, 15);
-            ClientSize = new Size(780, 330);
+            ClientSize = new Size(885, 344);
             Controls.Add(label1);
             Controls.Add(label2);
             Controls.Add(panel1);
@@ -178,6 +177,7 @@
             Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmFuncionalidadeLogin";
+            Load += FrmFuncionalidadeLogin_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();

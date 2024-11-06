@@ -133,23 +133,23 @@
             // 
             // txtValorFunReserva
             // 
-            txtValorFunReserva.Location = new Point(310, 187);
+            txtValorFunReserva.Location = new Point(603, 118);
             txtValorFunReserva.Name = "txtValorFunReserva";
-            txtValorFunReserva.Size = new Size(143, 23);
+            txtValorFunReserva.Size = new Size(79, 23);
             txtValorFunReserva.TabIndex = 49;
             // 
             // txtValorDiv
             // 
-            txtValorDiv.Location = new Point(503, 118);
+            txtValorDiv.Location = new Point(454, 118);
             txtValorDiv.Name = "txtValorDiv";
-            txtValorDiv.Size = new Size(145, 23);
+            txtValorDiv.Size = new Size(89, 23);
             txtValorDiv.TabIndex = 48;
             // 
             // labelValorDiv
             // 
             labelValorDiv.AutoSize = true;
             labelValorDiv.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelValorDiv.Location = new Point(503, 95);
+            labelValorDiv.Location = new Point(454, 92);
             labelValorDiv.Name = "labelValorDiv";
             labelValorDiv.Size = new Size(122, 20);
             labelValorDiv.TabIndex = 47;
@@ -159,7 +159,7 @@
             // 
             labelFundoRes.AutoSize = true;
             labelFundoRes.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelFundoRes.Location = new Point(310, 161);
+            labelFundoRes.Location = new Point(603, 92);
             labelFundoRes.Name = "labelFundoRes";
             labelFundoRes.Size = new Size(143, 20);
             labelFundoRes.TabIndex = 46;
@@ -218,7 +218,7 @@
             // 
             txtvaloraluguel.Location = new Point(310, 118);
             txtvaloraluguel.Name = "txtvaloraluguel";
-            txtvaloraluguel.Size = new Size(143, 23);
+            txtvaloraluguel.Size = new Size(98, 23);
             txtvaloraluguel.TabIndex = 41;
             // 
             // labelValorAlguel

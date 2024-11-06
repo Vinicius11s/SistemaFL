@@ -16,7 +16,7 @@ namespace SistemaFL
         {
             using (var contexto = new ContextoSistema())
             {
-                UsuarioRepositorio usu = new UsuarioRepositorio(contexto);
+               /* UsuarioRepositorio usu = new UsuarioRepositorio(contexto);
                 usu.Inserir(new Usuario()
                 {
                     Nome = "ADMIN",
@@ -24,7 +24,7 @@ namespace SistemaFL
                     Senha = "123456789",
                     DataCriacao = DateTime.Now
                 });
-                contexto.SaveChanges();
+                contexto.SaveChanges();*/
             }
         }
     }

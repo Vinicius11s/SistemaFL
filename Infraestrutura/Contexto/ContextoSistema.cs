@@ -14,7 +14,9 @@ namespace Infraestrutura.Contexto
         public ContextoSistema()
         {
             this.Database.EnsureCreated();//comando para criar o bd;
+            CriarTriggers();
         }
+        
 
         //entidades que serão mapeadas pelo DbSet como tabelas no meu bd; (ADC TODAS)
         public DbSet<Empresa> Empresa { get; set; }
@@ -23,9 +25,40 @@ namespace Infraestrutura.Contexto
         public DbSet<Ocorrencia> Ocorrencia { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
 
+        private void CriarTriggers()
+        {
+            // Defina o nome da trigger
+            string nomeTrigger = "trg_InsertedNewLancamento";
+
+            // Consulta SQL para verificar se a trigger já existe
+            string verificaTriggerSql = $@"
+            IF NOT EXISTS (SELECT 1 FROM sys.triggers WHERE name = '{nomeTrigger}' AND parent_id = OBJECT_ID('dbo.Lancamento'))
+            BEGIN
+                CREATE TRIGGER {nomeTrigger}
+                ON dbo.Lancamento
+                AFTER INSERT
+                AS
+                BEGIN
+                    -- Sua lógica da trigger vai aqui
+                    PRINT 'Novo lançamento inserido!';
+                    -- Lógica de trigger adicional...
+                END;
+            END;";
+
+            // Executar a consulta SQL para verificar e criar a trigger
+            try
+            {
+                this.Database.ExecuteSqlRaw(verificaTriggerSql);
+            }
+            catch (Exception ex)
+            {
+                // Log ou tratamento de erro
+                Console.WriteLine($"Erro ao criar a trigger: {ex.Message}");
+            }
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var stringConexao = @"Server=LAB11-09;Database=dbSistemaFLATSS;Integrated Security=True;TrustServerCertificate=True;";
+            var stringConexao = @"Server=DESKTOP-6RMV3GQ;Database=dbSistemaFLATSS;Integrated Security=True;TrustServerCertificate=True;";
 
 
             if (!optionsBuilder.IsConfigured)

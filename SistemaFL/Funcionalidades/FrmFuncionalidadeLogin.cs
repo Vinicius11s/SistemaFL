@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using InfraEstrutura;
 using Entidades;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Infraestrutura.Contexto;
+using Infraestrutura.Repositorio;
 
 namespace SistemaFL.Funcionalidades
 {
@@ -23,7 +25,6 @@ namespace SistemaFL.Funcionalidades
             InitializeComponent();
             this.repositorio = repositorio;
         }
-
         private void btnentrar_Click(object sender, EventArgs e)
         {
             if (txtlogin.Text != "" && txtsenha.Text != "")
@@ -41,9 +42,32 @@ namespace SistemaFL.Funcionalidades
             else MessageBox.Show("Por favor informar Login e Senha.");
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void FrmFuncionalidadeLogin_Load(object sender, EventArgs e)
         {
+            var admin = repositorio.Recuperar(u => u.id == 1);
 
+            if (admin == null) // Se não encontrar um usuário com id 1
+            {
+                // Criar o usuário ADMIN
+                CriarUsuarioAdmin();
+            }
+        }
+        private void CriarUsuarioAdmin()
+        {
+            // Cria um novo objeto de usuário ADMIN
+            var usuarioAdmin = new Usuario()
+            {
+                Nome = "ADMIN",
+                Login = "ADMIN",
+                Senha = "123456789",  // Considerar usar uma senha criptografada!
+                DataCriacao = DateTime.Now
+            };
+
+            // Inserir o ADMIN no banco de dados
+            repositorio.Inserir(usuarioAdmin);  // Aqui você deve ter o método Inserir no seu repositório.
+
+            // Mensagem de confirmação
+            MessageBox.Show("Usuário ADMIN criado com sucesso.");
         }
     }
 }
