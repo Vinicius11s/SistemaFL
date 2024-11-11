@@ -41,7 +41,6 @@
             label9 = new Label();
             label8 = new Label();
             label7 = new Label();
-            label13 = new Label();
             label5 = new Label();
             cbbStatus = new ComboBox();
             label4 = new Label();
@@ -79,7 +78,6 @@
             pdados.Controls.Add(label9);
             pdados.Controls.Add(label8);
             pdados.Controls.Add(label7);
-            pdados.Controls.Add(label13);
             pdados.Controls.Add(label5);
             pdados.Controls.Add(cbbStatus);
             pdados.Controls.Add(label4);
@@ -95,13 +93,13 @@
             pdados.Dock = DockStyle.Top;
             pdados.Location = new Point(0, 0);
             pdados.Name = "pdados";
-            pdados.Size = new Size(875, 325);
+            pdados.Size = new Size(875, 268);
             pdados.TabIndex = 0;
             // 
             // txtempresaAss
             // 
             txtempresaAss.Enabled = false;
-            txtempresaAss.Location = new Point(494, 290);
+            txtempresaAss.Location = new Point(619, 165);
             txtempresaAss.Margin = new Padding(3, 4, 3, 4);
             txtempresaAss.MaxLength = 150;
             txtempresaAss.Name = "txtempresaAss";
@@ -112,7 +110,7 @@
             // 
             labelempresaAss.AutoSize = true;
             labelempresaAss.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelempresaAss.Location = new Point(494, 266);
+            labelempresaAss.Location = new Point(619, 141);
             labelempresaAss.Name = "labelempresaAss";
             labelempresaAss.Size = new Size(137, 20);
             labelempresaAss.TabIndex = 46;
@@ -120,16 +118,16 @@
             // 
             // txtbairro
             // 
-            txtbairro.Location = new Point(443, 220);
+            txtbairro.Location = new Point(315, 165);
             txtbairro.Margin = new Padding(3, 4, 3, 4);
             txtbairro.MaxLength = 150;
             txtbairro.Name = "txtbairro";
-            txtbairro.Size = new Size(207, 27);
+            txtbairro.Size = new Size(153, 27);
             txtbairro.TabIndex = 45;
             // 
             // txtcidade
             // 
-            txtcidade.Location = new Point(19, 290);
+            txtcidade.Location = new Point(101, 225);
             txtcidade.Margin = new Padding(3, 4, 3, 4);
             txtcidade.MaxLength = 150;
             txtcidade.Name = "txtcidade";
@@ -138,16 +136,16 @@
             // 
             // txtestado
             // 
-            txtestado.Location = new Point(244, 290);
+            txtestado.Location = new Point(19, 225);
             txtestado.Margin = new Padding(3, 4, 3, 4);
             txtestado.MaxLength = 150;
             txtestado.Name = "txtestado";
-            txtestado.Size = new Size(182, 27);
+            txtestado.Size = new Size(58, 27);
             txtestado.TabIndex = 43;
             // 
             // txtunidade
             // 
-            txtunidade.Location = new Point(685, 220);
+            txtunidade.Location = new Point(494, 165);
             txtunidade.Margin = new Padding(3, 4, 3, 4);
             txtunidade.MaxLength = 150;
             txtunidade.Name = "txtunidade";
@@ -156,18 +154,18 @@
             // 
             // txtrua
             // 
-            txtrua.Location = new Point(19, 220);
+            txtrua.Location = new Point(19, 165);
             txtrua.Margin = new Padding(3, 4, 3, 4);
             txtrua.MaxLength = 150;
             txtrua.Name = "txtrua";
-            txtrua.Size = new Size(384, 27);
+            txtrua.Size = new Size(279, 27);
             txtrua.TabIndex = 40;
             // 
             // label11
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label11.Location = new Point(244, 266);
+            label11.Location = new Point(19, 201);
             label11.Name = "label11";
             label11.Size = new Size(54, 20);
             label11.TabIndex = 38;
@@ -177,7 +175,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label10.Location = new Point(19, 266);
+            label10.Location = new Point(101, 201);
             label10.Name = "label10";
             label10.Size = new Size(56, 20);
             label10.TabIndex = 37;
@@ -187,7 +185,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label9.Location = new Point(443, 199);
+            label9.Location = new Point(315, 144);
             label9.Name = "label9";
             label9.Size = new Size(49, 20);
             label9.TabIndex = 36;
@@ -197,7 +195,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(685, 196);
+            label8.Location = new Point(494, 141);
             label8.Name = "label8";
             label8.Size = new Size(65, 20);
             label8.TabIndex = 35;
@@ -207,37 +205,27 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label7.Location = new Point(19, 199);
+            label7.Location = new Point(19, 144);
             label7.Name = "label7";
             label7.Size = new Size(34, 20);
             label7.TabIndex = 34;
             label7.Text = "Rua";
             // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label13.Location = new Point(316, 169);
-            label13.Name = "label13";
-            label13.Size = new Size(95, 25);
-            label13.TabIndex = 33;
-            label13.Text = "Endereço";
-            // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(388, 91);
+            label5.Location = new Point(144, 83);
             label5.Name = "label5";
-            label5.Size = new Size(132, 20);
+            label5.Size = new Size(153, 20);
             label5.TabIndex = 32;
-            label5.Text = "Valor Investimento";
+            label5.Text = "Valor Investimento R$";
             // 
             // cbbStatus
             // 
             cbbStatus.FormattingEnabled = true;
             cbbStatus.Items.AddRange(new object[] { "Ativo", "Em Construção", "Em Reforma", "Vendido" });
-            cbbStatus.Location = new Point(19, 114);
+            cbbStatus.Location = new Point(19, 106);
             cbbStatus.Name = "cbbStatus";
             cbbStatus.Size = new Size(99, 28);
             cbbStatus.TabIndex = 31;
@@ -246,7 +234,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(19, 91);
+            label4.Location = new Point(19, 83);
             label4.Name = "label4";
             label4.Size = new Size(49, 20);
             label4.TabIndex = 30;
@@ -254,18 +242,18 @@
             // 
             // txtValorInvestimento
             // 
-            txtValorInvestimento.Location = new Point(388, 115);
+            txtValorInvestimento.Location = new Point(144, 107);
             txtValorInvestimento.Margin = new Padding(3, 4, 3, 4);
             txtValorInvestimento.MaxLength = 150;
             txtValorInvestimento.Name = "txtValorInvestimento";
-            txtValorInvestimento.Size = new Size(141, 27);
+            txtValorInvestimento.Size = new Size(153, 27);
             txtValorInvestimento.TabIndex = 29;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(142, 91);
+            label3.Location = new Point(494, 21);
             label3.Name = "label3";
             label3.Size = new Size(128, 20);
             label3.TabIndex = 28;
@@ -275,16 +263,16 @@
             // 
             cbbTipoInvestimento.FormattingEnabled = true;
             cbbTipoInvestimento.Items.AddRange(new object[] { "Aluguel Fixo", "Dividendos", "Aluguel Fixo + Dividendos", "Indefinido" });
-            cbbTipoInvestimento.Location = new Point(142, 114);
+            cbbTipoInvestimento.Location = new Point(494, 44);
             cbbTipoInvestimento.Name = "cbbTipoInvestimento";
-            cbbTipoInvestimento.Size = new Size(226, 28);
+            cbbTipoInvestimento.Size = new Size(190, 28);
             cbbTipoInvestimento.TabIndex = 27;
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(679, 22);
+            label6.Location = new Point(703, 21);
             label6.Name = "label6";
             label6.Size = new Size(110, 20);
             label6.TabIndex = 26;
@@ -293,7 +281,7 @@
             // dtdataaquisicao
             // 
             dtdataaquisicao.Format = DateTimePickerFormat.Short;
-            dtdataaquisicao.Location = new Point(679, 46);
+            dtdataaquisicao.Location = new Point(703, 45);
             dtdataaquisicao.Name = "dtdataaquisicao";
             dtdataaquisicao.Size = new Size(122, 27);
             dtdataaquisicao.TabIndex = 25;
@@ -302,7 +290,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(142, 22);
+            label2.Location = new Point(98, 21);
             label2.Name = "label2";
             label2.Size = new Size(74, 20);
             label2.TabIndex = 18;
@@ -310,11 +298,11 @@
             // 
             // txtdescricao
             // 
-            txtdescricao.Location = new Point(142, 46);
+            txtdescricao.Location = new Point(98, 45);
             txtdescricao.Margin = new Padding(3, 4, 3, 4);
             txtdescricao.MaxLength = 150;
             txtdescricao.Name = "txtdescricao";
-            txtdescricao.Size = new Size(508, 27);
+            txtdescricao.Size = new Size(370, 27);
             txtdescricao.TabIndex = 17;
             // 
             // txtid
@@ -323,7 +311,7 @@
             txtid.Margin = new Padding(3, 4, 3, 4);
             txtid.Name = "txtid";
             txtid.ReadOnly = true;
-            txtid.Size = new Size(99, 27);
+            txtid.Size = new Size(58, 27);
             txtid.TabIndex = 16;
             // 
             // label1
@@ -454,7 +442,6 @@
         private Label label9;
         private Label label8;
         private Label label7;
-        private Label label13;
         private Button btnlocalizar;
         private Button btnexcluir;
         private Button btncancelar;
