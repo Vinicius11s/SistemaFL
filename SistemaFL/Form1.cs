@@ -14,8 +14,8 @@ namespace SistemaFL
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (var contexto = new ContextoSistema())
-            {
+            using (var contexto = new ContextoSistema()) { }
+            
                /* UsuarioRepositorio usu = new UsuarioRepositorio(contexto);
                 usu.Inserir(new Usuario()
                 {
@@ -25,7 +25,7 @@ namespace SistemaFL
                     DataCriacao = DateTime.Now
                 });
                 contexto.SaveChanges();*/
-            }
+            
         }
     }
 }

@@ -13,6 +13,7 @@ using Entidades;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Infraestrutura.Contexto;
 using Infraestrutura.Repositorio;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace SistemaFL.Funcionalidades
 {
@@ -68,6 +69,8 @@ namespace SistemaFL.Funcionalidades
 
             // Mensagem de confirmação
             MessageBox.Show("Usuário ADMIN criado com sucesso.");
+            Program.serviceProvider.
+                        GetRequiredService<ContextoSistema>().SaveChanges();
         }
     }
 }

@@ -1,0 +1,278 @@
+USE [master]
+GO
+/****** Object:  Database [dbSisFLATSS]    Script Date: 11/11/2024 22:12:27 ******/
+CREATE DATABASE [dbSisFLATSS]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'dbSisFLATSS', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\dbSisFLATSS.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'dbSisFLATSS_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\dbSisFLATSS_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
+GO
+ALTER DATABASE [dbSisFLATSS] SET COMPATIBILITY_LEVEL = 160
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [dbSisFLATSS].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [dbSisFLATSS] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [dbSisFLATSS] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [dbSisFLATSS] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [dbSisFLATSS] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [dbSisFLATSS] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [dbSisFLATSS] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [dbSisFLATSS] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [dbSisFLATSS] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [dbSisFLATSS] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [dbSisFLATSS] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [dbSisFLATSS] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [dbSisFLATSS] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [dbSisFLATSS] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [dbSisFLATSS] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [dbSisFLATSS] SET  ENABLE_BROKER 
+GO
+ALTER DATABASE [dbSisFLATSS] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [dbSisFLATSS] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [dbSisFLATSS] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [dbSisFLATSS] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [dbSisFLATSS] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [dbSisFLATSS] SET READ_COMMITTED_SNAPSHOT ON 
+GO
+ALTER DATABASE [dbSisFLATSS] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [dbSisFLATSS] SET RECOVERY FULL 
+GO
+ALTER DATABASE [dbSisFLATSS] SET  MULTI_USER 
+GO
+ALTER DATABASE [dbSisFLATSS] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [dbSisFLATSS] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [dbSisFLATSS] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [dbSisFLATSS] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [dbSisFLATSS] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [dbSisFLATSS] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+ALTER DATABASE [dbSisFLATSS] SET QUERY_STORE = ON
+GO
+ALTER DATABASE [dbSisFLATSS] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30), DATA_FLUSH_INTERVAL_SECONDS = 900, INTERVAL_LENGTH_MINUTES = 60, MAX_STORAGE_SIZE_MB = 1000, QUERY_CAPTURE_MODE = AUTO, SIZE_BASED_CLEANUP_MODE = AUTO, MAX_PLANS_PER_QUERY = 200, WAIT_STATS_CAPTURE_MODE = ON)
+GO
+USE [dbSisFLATSS]
+GO
+/****** Object:  Table [dbo].[Empresa]    Script Date: 11/11/2024 22:12:27 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Empresa](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Descricao] [nvarchar](150) NOT NULL,
+	[Cnpj] [nvarchar](14) NOT NULL,
+	[RazaoSocial] [nvarchar](150) NOT NULL,
+	[InscricaoEstadual] [nvarchar](20) NOT NULL,
+	[Rua] [nvarchar](100) NOT NULL,
+	[Numero] [nvarchar](10) NOT NULL,
+	[Bairro] [nvarchar](50) NOT NULL,
+	[Cidade] [nvarchar](50) NOT NULL,
+	[Estado] [nvarchar](2) NOT NULL,
+	[Cep] [nvarchar](9) NOT NULL,
+ CONSTRAINT [PK_Empresa] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Flat]    Script Date: 11/11/2024 22:12:27 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Flat](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Descricao] [nvarchar](200) NOT NULL,
+	[DataAquisicao] [datetime2](7) NOT NULL,
+	[Status] [bit] NOT NULL,
+	[TipoInvestimento] [nvarchar](100) NULL,
+	[ValorInvestimento] [decimal](18, 2) NOT NULL,
+	[Rua] [nvarchar](100) NULL,
+	[Unidade] [int] NOT NULL,
+	[Bairro] [nvarchar](50) NULL,
+	[Cidade] [nvarchar](50) NULL,
+	[Estado] [nvarchar](max) NOT NULL,
+	[idEmpresa] [int] NULL,
+ CONSTRAINT [PK_Flat] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[lancamento]    Script Date: 11/11/2024 22:12:27 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[lancamento](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[DataPagamento] [datetime2](7) NOT NULL,
+	[TipoPagamento] [nvarchar](50) NOT NULL,
+	[ValorAluguel] [decimal](18, 2) NULL,
+	[ValorDividendos] [decimal](18, 2) NULL,
+	[ValorFundoReserva] [decimal](18, 2) NULL,
+	[idFlat] [int] NOT NULL,
+	[idUsuario] [int] NULL,
+ CONSTRAINT [PK_lancamento] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Ocorrencia]    Script Date: 11/11/2024 22:12:27 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Ocorrencia](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[oco_valorAntigo] [decimal](18, 2) NOT NULL,
+	[oco_valorAlteracao] [decimal](18, 2) NOT NULL,
+	[oco_DataAlteracao] [datetime2](7) NOT NULL,
+	[oco_Tabela] [nvarchar](max) NULL,
+	[oco_Descricao] [nvarchar](max) NULL,
+	[idLancamento] [int] NOT NULL,
+	[idFlat] [int] NOT NULL,
+ CONSTRAINT [PK_Ocorrencia] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Usuario]    Script Date: 11/11/2024 22:12:27 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Usuario](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Nome] [nvarchar](100) NOT NULL,
+	[Login] [nvarchar](50) NOT NULL,
+	[Senha] [nvarchar](100) NOT NULL,
+	[DataCriacao] [datetime2](7) NOT NULL,
+ CONSTRAINT [PK_Usuario] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[Empresa] ON 
+GO
+INSERT [dbo].[Empresa] ([id], [Descricao], [Cnpj], [RazaoSocial], [InscricaoEstadual], [Rua], [Numero], [Bairro], [Cidade], [Estado], [Cep]) VALUES (1, N'PS6 EMPREENDIMENTOS ', N'46134160865', N'PS6 EMPREENDIMENTOS ', N'123456789101', N'MANUEL GOULART', N'44', N'CENTRO', N'PRES PRUDENTE', N'SP', N'19406228')
+GO
+SET IDENTITY_INSERT [dbo].[Empresa] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Flat] ON 
+GO
+INSERT [dbo].[Flat] ([id], [Descricao], [DataAquisicao], [Status], [TipoInvestimento], [ValorInvestimento], [Rua], [Unidade], [Bairro], [Cidade], [Estado], [idEmpresa]) VALUES (1, N'IBIS HOTEL - 13', CAST(N'2024-11-11T19:21:14.7220609' AS DateTime2), 1, N'Aluguel Fixo', CAST(350000.00 AS Decimal(18, 2)), N'WHASHINGTON LUIZ', 13, N'CENTRO', N'PRES PRUDENTE', N'SP', 1)
+GO
+SET IDENTITY_INSERT [dbo].[Flat] OFF
+GO
+SET IDENTITY_INSERT [dbo].[lancamento] ON 
+GO
+INSERT [dbo].[lancamento] ([id], [DataPagamento], [TipoPagamento], [ValorAluguel], [ValorDividendos], [ValorFundoReserva], [idFlat], [idUsuario]) VALUES (2, CAST(N'2024-11-11T22:08:01.9952791' AS DateTime2), N'Aluguel Fixo', CAST(45234.00 AS Decimal(18, 2)), CAST(0.00 AS Decimal(18, 2)), CAST(0.00 AS Decimal(18, 2)), 1, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[lancamento] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Ocorrencia] ON 
+GO
+INSERT [dbo].[Ocorrencia] ([id], [oco_valorAntigo], [oco_valorAlteracao], [oco_DataAlteracao], [oco_Tabela], [oco_Descricao], [idLancamento], [idFlat]) VALUES (1, CAST(0.00 AS Decimal(18, 2)), CAST(45234.00 AS Decimal(18, 2)), CAST(N'2024-11-11T22:08:11.0033333' AS DateTime2), N'Lancamento', N'Inserção', 2, 1)
+GO
+SET IDENTITY_INSERT [dbo].[Ocorrencia] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Usuario] ON 
+GO
+INSERT [dbo].[Usuario] ([id], [Nome], [Login], [Senha], [DataCriacao]) VALUES (1, N'ADMIN', N'ADMIN', N'123', CAST(N'2024-11-11T19:18:31.9766667' AS DateTime2))
+GO
+SET IDENTITY_INSERT [dbo].[Usuario] OFF
+GO
+/****** Object:  Index [IX_Flat_idEmpresa]    Script Date: 11/11/2024 22:12:28 ******/
+CREATE NONCLUSTERED INDEX [IX_Flat_idEmpresa] ON [dbo].[Flat]
+(
+	[idEmpresa] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_lancamento_idFlat]    Script Date: 11/11/2024 22:12:28 ******/
+CREATE NONCLUSTERED INDEX [IX_lancamento_idFlat] ON [dbo].[lancamento]
+(
+	[idFlat] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_lancamento_idUsuario]    Script Date: 11/11/2024 22:12:28 ******/
+CREATE NONCLUSTERED INDEX [IX_lancamento_idUsuario] ON [dbo].[lancamento]
+(
+	[idUsuario] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Ocorrencia_idFlat]    Script Date: 11/11/2024 22:12:28 ******/
+CREATE NONCLUSTERED INDEX [IX_Ocorrencia_idFlat] ON [dbo].[Ocorrencia]
+(
+	[idFlat] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Ocorrencia_idLancamento]    Script Date: 11/11/2024 22:12:28 ******/
+CREATE NONCLUSTERED INDEX [IX_Ocorrencia_idLancamento] ON [dbo].[Ocorrencia]
+(
+	[idLancamento] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Flat]  WITH CHECK ADD  CONSTRAINT [FK_Flat_Empresa_idEmpresa] FOREIGN KEY([idEmpresa])
+REFERENCES [dbo].[Empresa] ([id])
+ON DELETE SET NULL
+GO
+ALTER TABLE [dbo].[Flat] CHECK CONSTRAINT [FK_Flat_Empresa_idEmpresa]
+GO
+ALTER TABLE [dbo].[lancamento]  WITH CHECK ADD  CONSTRAINT [FK_lancamento_Flat_idFlat] FOREIGN KEY([idFlat])
+REFERENCES [dbo].[Flat] ([id])
+GO
+ALTER TABLE [dbo].[lancamento] CHECK CONSTRAINT [FK_lancamento_Flat_idFlat]
+GO
+ALTER TABLE [dbo].[lancamento]  WITH CHECK ADD  CONSTRAINT [FK_lancamento_Usuario_idUsuario] FOREIGN KEY([idUsuario])
+REFERENCES [dbo].[Usuario] ([id])
+GO
+ALTER TABLE [dbo].[lancamento] CHECK CONSTRAINT [FK_lancamento_Usuario_idUsuario]
+GO
+ALTER TABLE [dbo].[Ocorrencia]  WITH CHECK ADD  CONSTRAINT [FK_Ocorrencia_Flat_idFlat] FOREIGN KEY([idFlat])
+REFERENCES [dbo].[Flat] ([id])
+GO
+ALTER TABLE [dbo].[Ocorrencia] CHECK CONSTRAINT [FK_Ocorrencia_Flat_idFlat]
+GO
+ALTER TABLE [dbo].[Ocorrencia]  WITH CHECK ADD  CONSTRAINT [FK_Ocorrencia_lancamento_idLancamento] FOREIGN KEY([idLancamento])
+REFERENCES [dbo].[lancamento] ([id])
+GO
+ALTER TABLE [dbo].[Ocorrencia] CHECK CONSTRAINT [FK_Ocorrencia_lancamento_idLancamento]
+GO
+USE [master]
+GO
+ALTER DATABASE [dbSisFLATSS] SET  READ_WRITE 
+GO
