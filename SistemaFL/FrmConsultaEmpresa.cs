@@ -36,9 +36,7 @@ namespace SistemaFL
                 dgdados.Columns["RazaoSocial"].HeaderText = "Razão Social";
                 dgdados.Columns["InscricaoEstadual"].HeaderText = "Inscrição Estadual";
                 dgdados.Columns["Numero"].HeaderText = "Nº";
-                // Supondo que seu DataGridView seja chamado "dataGridViewEmpresas"
                 dgdados.Columns["Flats"].Visible = false;
-
                 dgdados.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             }
         }
@@ -49,6 +47,12 @@ namespace SistemaFL
                 id = (int)dgdados.Rows[e.RowIndex].Cells[0].Value; // Armazena o ID
                 this.Close(); // Fecha o formulário
             }
+        }
+
+        private void FrmConsultaEmpresa_Load(object sender, EventArgs e)
+        {
+            dgdados.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
         }
     }
 }

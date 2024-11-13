@@ -97,6 +97,7 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "FrmConsultaEmpresa";
             Text = "Consulta de Empresa";
+            Load += FrmConsultaEmpresa_Load;
             ((System.ComponentModel.ISupportInitialize)dgdados).EndInit();
             ResumeLayout(false);
             PerformLayout();

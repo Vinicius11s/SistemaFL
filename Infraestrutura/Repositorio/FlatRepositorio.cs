@@ -44,7 +44,6 @@ namespace Infraestrutura.Repositorio
         {
             // Recupera todos os flats
             var flats = _contexto.Set<Flat>().ToList();
-            // Soma os valores de investimento
             return flats.Sum(flat => flat.ValorInvestimento);
         }
     }

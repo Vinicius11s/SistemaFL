@@ -222,39 +222,29 @@ namespace SistemaFL
             //flat.Status
             if (cbbStatus != null && cbbStatus.SelectedItem != null)
             {
-                if (cbbStatus.SelectedItem.ToString() == "Vendido")
-                {
-                    flat.Status = false;
+                if (cbbStatus.SelectedItem.ToString() == "Vendido") { 
+                    flat.Status = false;                   
                 }
-                else
+                else flat.Status = true;
+
+                decimal valorInvestimento;
+                if (decimal.TryParse(txtValorInvestimento.Text, out valorInvestimento))
                 {
-                    flat.Status = true;
+                    flat.ValorInvestimento = valorInvestimento;
+                    int Unidade;
+                    if (int.TryParse(txtunidade.Text, out Unidade))
+                    {
+                        flat.Unidade = Unidade;
+                    }
+                    else MessageBox.Show("Unidade do Flat inválida, Por favor, insira um número válido");
                 }
-            }
-            else
-            {
-                MessageBox.Show("Informe um status para Flat");
-            }
-            //flat.TipoInvestimento
-            flat.TipoInvestimento = cbbTipoInvestimento.SelectedItem?.ToString() ?? "Indefinido";
+                else MessageBox.Show("Valor de investimento inválido. Por favor, insira um número válido.");
 
-            decimal valorInvestimento;
-            if (decimal.TryParse(txtValorInvestimento.Text, out valorInvestimento))
-            {
-                flat.ValorInvestimento = valorInvestimento;
-            } //out (se a conversão for bem sucedida armazenar na variável)
-            else MessageBox.Show("Valor de investimento inválido. Por favor, insira um número válido.");
+            }           
 
+            flat.TipoInvestimento = cbbTipoInvestimento.SelectedItem?.ToString() ?? "Indefinido";                     
             flat.Rua = txtrua.Text;
             flat.Bairro = txtbairro.Text;
-
-            int Unidade;
-            if (int.TryParse(txtunidade.Text, out Unidade))
-            {
-                flat.Unidade = Unidade;
-            }
-            else MessageBox.Show("Unidade do Flat inválida, Por favor, insira um número válido");
-
             flat.Cidade = txtcidade.Text;
             flat.Estado = txtestado.Text;
             flat.idEmpresa = null;

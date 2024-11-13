@@ -15,8 +15,8 @@ namespace Infraestrutura.Contexto
         {
             this.Database.EnsureCreated();//comando para criar o bd;
         }
-        
 
+       
         //entidades que serão mapeadas pelo DbSet como tabelas no meu bd; (ADC TODAS)
         public DbSet<Empresa> Empresa { get; set; }
         public DbSet<Flat> Flat { get; set; }
@@ -26,7 +26,7 @@ namespace Infraestrutura.Contexto
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var stringConexao = @"Server=LAB11-09;Database=dbSisFLATSS;Integrated Security=True;TrustServerCertificate=True;";
+            var stringConexao = @"Server =DESKTOP-6RMV3GQ;Database=dbSisFLATSS;Integrated Security=True;TrustServerCertificate=True;";
 
 
             if (!optionsBuilder.IsConfigured)

@@ -55,20 +55,17 @@ namespace SistemaFL.Funcionalidades
         }
         private void CriarUsuarioAdmin()
         {
-            // Cria um novo objeto de usuário ADMIN
             var usuarioAdmin = new Usuario()
             {
                 Nome = "ADMIN",
                 Login = "ADMIN",
-                Senha = "123456789",  // Considerar usar uma senha criptografada!
+                Senha = "123456789",
                 DataCriacao = DateTime.Now
             };
 
-            // Inserir o ADMIN no banco de dados
-            repositorio.Inserir(usuarioAdmin);  // Aqui você deve ter o método Inserir no seu repositório.
+            var contexto = Program.serviceProvider.GetRequiredService<ContextoSistema>();
+            contexto.Usuario.Add(usuarioAdmin); // Aqui você adiciona o novo usuário
 
-            // Mensagem de confirmação
-            MessageBox.Show("Usuário ADMIN criado com sucesso.");
             Program.serviceProvider.
                         GetRequiredService<ContextoSistema>().SaveChanges();
         }
