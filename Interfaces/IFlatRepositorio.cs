@@ -10,6 +10,7 @@ namespace Interfaces
 {
     public interface IFlatRepositorio : IBaseRepositorio<Flat>
     {
+        IEnumerable<dynamic> ObterDadosAluguelDividendos();
         IEnumerable<dynamic> ObterDadosInvestimento();
         decimal CalcularTotalValorInvestimento();
 

@@ -17,6 +17,24 @@ namespace Infraestrutura.Repositorio
         public FlatRepositorio(ContextoSistema contexto) : base(contexto) {
             _context = contexto;
         }
+
+        public IEnumerable<dynamic> ObterDadosAluguelDividendos()
+        {
+            var dadosAluguelDiv = _context.Flat
+                .Include(l => l.Lancamentos)
+                .Select(flat => new
+                {
+                    
+                    Descricao = flat.Descricao,
+                    CodFlat = flat.id,
+                    ValorImovel = flat.ValorInvestimento,
+                });
+
+
+
+            return dadosAluguelDiv;
+
+        }
         public IEnumerable<dynamic> ObterDadosInvestimento()
         {
             // Usando Include para carregar os dados relacionados
