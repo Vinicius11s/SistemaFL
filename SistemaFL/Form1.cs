@@ -16,16 +16,6 @@ namespace SistemaFL
         {
             using (var contexto = new ContextoSistema()) { }
             
-               /* UsuarioRepositorio usu = new UsuarioRepositorio(contexto);
-                usu.Inserir(new Usuario()
-                {
-                    Nome = "ADMIN",
-                    Login = "ADMIN",
-                    Senha = "123456789",
-                    DataCriacao = DateTime.Now
-                });
-                contexto.SaveChanges();*/
-            
         }
     }
 }

@@ -39,8 +39,6 @@
             txtValorDiv = new TextBox();
             labelValorDiv = new Label();
             labelFundoRes = new Label();
-            label7 = new Label();
-            cbbtipoPagamento = new ComboBox();
             txtid = new TextBox();
             label6 = new Label();
             btnLocFlatLancamento = new Button();
@@ -133,14 +131,14 @@
             // 
             // txtValorFunReserva
             // 
-            txtValorFunReserva.Location = new Point(507, 150);
+            txtValorFunReserva.Location = new Point(228, 170);
             txtValorFunReserva.Name = "txtValorFunReserva";
             txtValorFunReserva.Size = new Size(143, 23);
             txtValorFunReserva.TabIndex = 49;
             // 
             // txtValorDiv
             // 
-            txtValorDiv.Location = new Point(358, 150);
+            txtValorDiv.Location = new Point(352, 106);
             txtValorDiv.Name = "txtValorDiv";
             txtValorDiv.Size = new Size(122, 23);
             txtValorDiv.TabIndex = 48;
@@ -149,7 +147,7 @@
             // 
             labelValorDiv.AutoSize = true;
             labelValorDiv.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelValorDiv.Location = new Point(358, 124);
+            labelValorDiv.Location = new Point(352, 80);
             labelValorDiv.Name = "labelValorDiv";
             labelValorDiv.Size = new Size(122, 20);
             labelValorDiv.TabIndex = 47;
@@ -159,31 +157,11 @@
             // 
             labelFundoRes.AutoSize = true;
             labelFundoRes.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelFundoRes.Location = new Point(507, 124);
+            labelFundoRes.Location = new Point(228, 147);
             labelFundoRes.Name = "labelFundoRes";
             labelFundoRes.Size = new Size(143, 20);
             labelFundoRes.TabIndex = 46;
             labelFundoRes.Text = "Valor Fundo Reserva";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label7.Location = new Point(233, 75);
-            label7.Name = "label7";
-            label7.Size = new Size(118, 20);
-            label7.TabIndex = 45;
-            label7.Text = "Tipo Pagamento";
-            // 
-            // cbbtipoPagamento
-            // 
-            cbbtipoPagamento.FormattingEnabled = true;
-            cbbtipoPagamento.Items.AddRange(new object[] { "Aluguel Fixo", "Dividendos", "Aluguel Fixo + Dividendos", "Fundo de Reserva" });
-            cbbtipoPagamento.Location = new Point(234, 98);
-            cbbtipoPagamento.Name = "cbbtipoPagamento";
-            cbbtipoPagamento.Size = new Size(191, 23);
-            cbbtipoPagamento.TabIndex = 44;
-            cbbtipoPagamento.SelectedIndexChanged += cbbtipoPagamento_SelectedIndexChanged;
             // 
             // txtid
             // 
@@ -216,7 +194,7 @@
             // 
             // txtvaloraluguel
             // 
-            txtvaloraluguel.Location = new Point(234, 150);
+            txtvaloraluguel.Location = new Point(228, 106);
             txtvaloraluguel.Name = "txtvaloraluguel";
             txtvaloraluguel.Size = new Size(98, 23);
             txtvaloraluguel.TabIndex = 41;
@@ -225,7 +203,7 @@
             // 
             labelValorAlguel.AutoSize = true;
             labelValorAlguel.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelValorAlguel.Location = new Point(234, 127);
+            labelValorAlguel.Location = new Point(228, 83);
             labelValorAlguel.Name = "labelValorAlguel";
             labelValorAlguel.Size = new Size(98, 20);
             labelValorAlguel.TabIndex = 40;
@@ -251,7 +229,6 @@
             // 
             // txttipoInvestimento
             // 
-            txttipoInvestimento.BorderStyle = BorderStyle.FixedSingle;
             txttipoInvestimento.Enabled = false;
             txttipoInvestimento.Location = new Point(12, 132);
             txttipoInvestimento.Name = "txttipoInvestimento";
@@ -316,8 +293,6 @@
             Controls.Add(txtValorDiv);
             Controls.Add(labelValorDiv);
             Controls.Add(labelFundoRes);
-            Controls.Add(label7);
-            Controls.Add(cbbtipoPagamento);
             Controls.Add(txtid);
             Controls.Add(label6);
             Controls.Add(btnLocFlatLancamento);
@@ -352,8 +327,6 @@
         private TextBox txtValorDiv;
         private Label labelValorDiv;
         private Label labelFundoRes;
-        private Label label7;
-        private ComboBox cbbtipoPagamento;
         private TextBox txtid;
         private Label label6;
         private Button btnLocFlatLancamento;

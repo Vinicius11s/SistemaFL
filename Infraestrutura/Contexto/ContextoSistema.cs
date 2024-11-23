@@ -26,7 +26,7 @@ namespace Infraestrutura.Contexto
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var stringConexao = @"Server =DESKTOP-6RMV3GQ;Database=dbSisFLATSS;Integrated Security=True;TrustServerCertificate=True;";
+            var stringConexao = @"Server =DESKTOP-6RMV3GQ;Database=dbSistemaFlats2;Integrated Security=True;TrustServerCertificate=True;";
 
 
             if (!optionsBuilder.IsConfigured)
@@ -128,4 +128,56 @@ namespace Infraestrutura.Contexto
         }
     }
 }
+/*CREATE TRIGGER trg_InsertedNewLancamento
+ON Lancamento
+AFTER INSERT 
+AS
+BEGIN
+    DECLARE @dataAtual DATETIME = GETDATE();
 
+    INSERT INTO ocorrencia (oco_ValorAntigo, oco_ValorAlteracao, oco_DataAlteracao, idLancamento, idFlat, oco_Tabela, oco_Descricao)
+    SELECT 
+        CASE 
+            WHEN i.TipoPagamento = 'Aluguel Fixo' THEN 
+                ISNULL((SELECT TOP 1 ValorAluguel 
+                        FROM lancamento 
+                        WHERE idFlat = i.idFlat 
+                        AND id < i.id 
+                        ORDER BY DataPagamento DESC), 0)
+            WHEN i.TipoPagamento = 'Dividendos' THEN 
+                ISNULL((SELECT TOP 1 ValorDividendos 
+                        FROM lancamento 
+                        WHERE idFlat = i.idFlat 
+                        AND id < i.id 
+                        ORDER BY DataPagamento DESC), 0)
+            WHEN i.TipoPagamento = 'Aluguel Fixo + Dividendos' THEN 
+                ISNULL((SELECT TOP 1 (ValorAluguel + ValorDividendos) 
+                        FROM lancamento 
+                        WHERE idFlat = i.idFlat 
+                        AND id < i.id 
+                        ORDER BY DataPagamento DESC), 0)
+            WHEN i.TipoPagamento = 'Fundo de Reserva' THEN 
+                ISNULL((SELECT TOP 1 ValorFundoReserva 
+                        FROM lancamento 
+                        WHERE idFlat = i.idFlat 
+                        AND id < i.id 
+                        ORDER BY DataPagamento DESC), 0)
+            ELSE 0
+        END AS ValorAntigo,
+
+        CASE 
+            WHEN i.TipoPagamento = 'Aluguel Fixo' THEN i.ValorAluguel
+            WHEN i.TipoPagamento = 'Dividendos' THEN i.ValorDividendos
+            WHEN i.TipoPagamento = 'Aluguel Fixo + Dividendos' THEN i.ValorAluguel + i.ValorDividendos
+            WHEN i.TipoPagamento = 'Fundo de Reserva' THEN i.ValorFundoReserva
+            ELSE 0
+        END AS ValorAlteracao,
+
+        @dataAtual,
+        i.id,       -- id do lançamento recém-inserido
+        i.idFlat, -- id do flat associado
+		'Lancamento',
+		'Inserção'
+    FROM INSERTED i
+    WHERE EXISTS (SELECT 1 FROM lancamento WHERE id = i.id);
+END;*/

@@ -93,7 +93,7 @@
             pdados.Dock = DockStyle.Top;
             pdados.Location = new Point(0, 0);
             pdados.Name = "pdados";
-            pdados.Size = new Size(875, 268);
+            pdados.Size = new Size(875, 325);
             pdados.TabIndex = 0;
             // 
             // txtempresaAss

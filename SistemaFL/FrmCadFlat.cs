@@ -187,21 +187,6 @@ namespace SistemaFL
                 }
             }
         }
-        void limpar()
-        {
-            txtid.Text = "";
-            txtdescricao.Text = "";
-            dtdataaquisicao.Value = DateTime.Now;
-            cbbStatus.Text = "";
-            cbbTipoInvestimento.Text = "";
-            txtValorInvestimento.Text = "";
-            txtrua.Text = "";
-            txtunidade.Text = "";
-            txtbairro.Text = "";
-            txtcidade.Text = "";
-            txtestado.Text = "";
-            txtempresaAss.Text = "";
-        }
         public Flat carregaPropriedades()
         {
             Flat flat;
@@ -236,7 +221,7 @@ namespace SistemaFL
                     {
                         flat.Unidade = Unidade;
                     }
-                    else MessageBox.Show("Unidade do Flat inválida, Por favor, insira um número válido");
+                    else { }
                 }
                 else MessageBox.Show("Valor de investimento inválido. Por favor, insira um número válido.");
 
@@ -249,6 +234,21 @@ namespace SistemaFL
             flat.Estado = txtestado.Text;
             flat.idEmpresa = null;
             return flat;
+        }
+        void limpar()
+        {
+            txtid.Text = "";
+            txtdescricao.Text = "";
+            dtdataaquisicao.Value = DateTime.Now;
+            cbbStatus.Text = "";
+            cbbTipoInvestimento.Text = "";
+            txtValorInvestimento.Text = "";
+            txtrua.Text = "";
+            txtunidade.Text = "";
+            txtbairro.Text = "";
+            txtcidade.Text = "";
+            txtestado.Text = "";
+            txtempresaAss.Text = "";
         }
     }
 }

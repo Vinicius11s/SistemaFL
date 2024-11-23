@@ -42,7 +42,6 @@ namespace SistemaFL
             btnLocFlatLancamento.Enabled = false;
 
             dtdataLancamento.Enabled = false;
-            cbbtipoPagamento.Enabled = false;
             labelValorAlguel.Visible = false;
             txtvaloraluguel.Visible = false;
             labelValorDiv.Visible = false;
@@ -81,76 +80,42 @@ namespace SistemaFL
                 btnlocalizar.Enabled = false;
                 btnLocFlatLancamento.Enabled = true;
 
-                /*
-                labelValorPag.Visible = false;
-                txtvalorPagamento.Visible = false;
-                labelValorDiv.Visible = false;
-                txtValorDiv.Visible = false;
-                labelFundoRes.Visible = false;
-                txtValorFunReserva.Visible = false;
-                txtvalorPagamento.Focus();*/
             }
             else MessageBox.Show("Localize o Lançamento");
         }
         private void btnsalvar_Click(object sender, EventArgs e)
         {
-
             try
             {
-                if (cbbtipoPagamento.SelectedItem != null)
+                if (txttipoInvestimento.Text != String.Empty)
                 {
-                    // Crie uma nova instância de Lancamento e defina as propriedades
-                    Lancamento lancamento = new Lancamento
-                    {
-                        DataPagamento = dtdataLancamento.Value,
-                        TipoPagamento = cbbtipoPagamento.SelectedItem.ToString(),
-                        ValorAluguel = decimal.TryParse(txtvaloraluguel.Text, out var valorAluguel) ? valorAluguel : 0,
-                        ValorDividendos = decimal.TryParse(txtValorDiv.Text, out var valorDividendos) ? valorDividendos : 0,
-                        ValorFundoReserva = decimal.TryParse(txtValorFunReserva.Text, out var valorFundoReserva) ? valorFundoReserva : 0,
-                        idFlat = int.Parse(txtidFlat.Text),
-                        idUsuario = null // defina o valor de idUsuario aqui, se necessário
-                    };
+                    Lancamento lancamento = carregaPropriedades();
 
-                    // Verifique se o id é zero (novo lançamento)
                     if (lancamento.id == 0)
                     {
-
                         repositorio.Inserir(lancamento);
                     }
                     else
                     {
-                        // Atualização do lançamento caso o id já exista
                         repositorio.Alterar(lancamento);
                     }
-                    _context.SaveChanges();
-                    MessageBox.Show("Lançamento Salvo com sucesso!");
+                    Program.serviceProvider.
+                        GetRequiredService<ContextoSistema>().SaveChanges();
+                    MessageBox.Show("Salvo com sucesso");
+
                     limpar();
                     btnnovo.Enabled = true;
+                    btnlocalizar.Enabled = true;
                     btnalterar.Enabled = false;
                     btncancelar.Enabled = false;
-                    btnsalvar.Enabled = false;
                     btnexcluir.Enabled = false;
-                    btnlocalizar.Enabled = true;
-                    btnLocFlatLancamento.Enabled = false;
-
-                    dtdataLancamento.Enabled = false;
-                    cbbtipoPagamento.Enabled = false;
-                    labelValorAlguel.Visible = false;
-                    txtvaloraluguel.Visible = false;
-                    labelValorDiv.Visible = false;
-                    txtValorDiv.Visible = false;
-                    labelFundoRes.Visible = false;
-                    txtValorFunReserva.Visible = false;
-
-                }
-                else
-                {
-                    MessageBox.Show("Por favor, selecione um tipo de pagamento.");
+                    btnsalvar.Enabled = false;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao salvar lançamento tente novamente." + ex);
+                MessageBox.Show("Erro ao salvar" + ex.Message);
+
                 throw;
             }
         }
@@ -199,17 +164,6 @@ namespace SistemaFL
                 txtValorFunReserva.Visible = false;
             }
         }
-        void limpar()
-        {
-            txtidFlat.Text = "";
-            txtDescricaoFlat.Text = "";
-            txttipoInvestimento.Text = "";
-            txtid.Text = "";
-            dtdataLancamento.Value = DateTime.Now;
-            txtvaloraluguel.Text = "";
-            cbbtipoPagamento.Text = "";
-
-        }
         public Lancamento carregaPropriedades()
         {
             Lancamento lancamento;
@@ -218,6 +172,7 @@ namespace SistemaFL
             if (!string.IsNullOrWhiteSpace(txtid.Text) && int.TryParse(txtid.Text, out int id))
             {
                 lancamento = repositorio.Recuperar(c => c.id == id) ?? new Lancamento();
+
             }
             else lancamento = new Lancamento();
 
@@ -225,13 +180,7 @@ namespace SistemaFL
 
 
             // Atribui as propriedades ao lançamento
-            lancamento.DataPagamento = dtdataLancamento.Value;
-
-            // Atribui o tipo de pagamento usando o valor selecionado
-            if (cbbtipoPagamento.SelectedItem != null)
-            {
-                lancamento.TipoPagamento = cbbtipoPagamento.SelectedItem.ToString();
-            }
+            lancamento.DataPagamento = dtdataLancamento.Value;           
 
             // Lógica para definir valores com base no tipo de pagamento
             if (decimal.TryParse(txtvaloraluguel.Text, out decimal valorAluguel))
@@ -252,7 +201,11 @@ namespace SistemaFL
             //validação txtIdFlat
             if (int.TryParse(txtidFlat.Text, out int idFlat))
             {
+                Flat flat;
+                flat = flatRepositorio.Recuperar(e => e.id == idFlat);
                 lancamento.idFlat = idFlat;
+                lancamento.TipoPagamento = flat.TipoInvestimento;
+                lancamento.DescricaoFlat = txtDescricaoFlat.Text;
             }
             else MessageBox.Show("Não foi possível localizar o Flat.");
             
@@ -265,19 +218,7 @@ namespace SistemaFL
 
             if (form2.id > 0)
             {
-                var lancamento = repositorio.Recuperar(l => l.id == form2.id);
-                if (lancamento != null)
-                {
-                    txtid.Text = lancamento.id.ToString();
-                    dtdataLancamento.Value = lancamento.DataPagamento;
-                    txtvaloraluguel.Text = lancamento.ValorAluguel.ToString();
-                    txtValorDiv.Text = lancamento.ValorDividendos.ToString();
-                    txtValorFunReserva.Text = lancamento.ValorFundoReserva.ToString();
-                }
-                else
-                {
-                    MessageBox.Show("Lançamento não encontrado.");
-                }
+                CarregarLancamento(form2.id);
             }
         }
         private void CarregarLancamento(int idLancamento)
@@ -289,12 +230,15 @@ namespace SistemaFL
                 txtid.Text = lancamento.id.ToString();
                 dtdataLancamento.Value = lancamento.DataPagamento;
                 txtvaloraluguel.Text = lancamento.ValorAluguel.ToString();
+                txtValorDiv.Text = lancamento.ValorDividendos.ToString();
+                txtValorFunReserva.Text = lancamento.ValorFundoReserva.ToString();
 
                 // Acessa o flat associado ao lançamento
-                if (lancamento.Flat != null)
+                if (lancamento.idFlat != null)
                 {
-                    txtidFlat.Text = lancamento.Flat.id.ToString();
+                    txtidFlat.Text = lancamento.idFlat.ToString();
                     txtDescricaoFlat.Text = lancamento.Flat.Descricao;
+                    //lancamento.DescricaoFlat = txtDescricaoFlat.Text;
                 }
             }
         }
@@ -324,82 +268,45 @@ namespace SistemaFL
                 txtDescricaoFlat.Text = flat.Descricao;
                 txttipoInvestimento.Text = flat.TipoInvestimento;
                 MessageBox.Show("Flat selecionado com sucesso!");
-
                 dtdataLancamento.Enabled = true;
-                cbbtipoPagamento.Enabled = true;
+                if (txttipoInvestimento.Text != "")
+                {
+                    verificaInvestimento(txttipoInvestimento.Text);
+
+                }
             }
             else MessageBox.Show("Flat não encontrado.");
 
-
-            /*
-            if (cbbtipoPagamento.SelectedItem != null) // Verifica a opção desejada do ComboBox
-            {
-                switch (cbbtipoPagamento.SelectedItem.ToString())
-                {
-                    case "Aluguel Fixo":
-                        labelValorPag.Visible = true;
-                        txtvaloraluguel.Visible = true;
-                        break;
-                    case "Dividendos":
-                        labelValorDiv.Visible = true;
-                        txtValorDiv.Visible = true;
-                        break;
-                    case "Aluguel Fixo + Dividendos":
-                        labelValorPag.Visible = true;
-                        txtvaloraluguel.Visible = true;
-                        labelValorDiv.Visible = true;
-                        txtValorDiv.Visible = true;
-                        break;
-                    case "Fundo de Reserva":
-                        labelFundoRes.Visible = true;
-                        txtValorFunReserva.Visible = true;
-                        break;
-                    default:
-                        labelValorPag.Visible = false;
-                        txtvaloraluguel.Visible = false;
-                        labelValorDiv.Visible = false;
-                        txtValorDiv.Visible = false;
-                        labelFundoRes.Visible = false;
-                        txtValorFunReserva.Visible = false;
-                        break;
-                }
-            }
-            else MessageBox.Show("Informe um Tipo de Pagamento");*/
         }
-        private void cbbtipoPagamento_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbbtipoPagamento.SelectedItem != null)
-            {
-                verificaComboBox(cbbtipoPagamento.SelectedItem);
-
-            }
-        }
-        private void verificaComboBox(object selectedItem)
+        private void verificaInvestimento(string TipoInvestimento)
         {
 
-            if (selectedItem != null)
+            if (!string.IsNullOrEmpty(TipoInvestimento))
             {
-                switch (selectedItem.ToString())
+                switch (TipoInvestimento)
                 {
                     case "Aluguel Fixo":
                         labelValorAlguel.Visible = true;
                         txtvaloraluguel.Visible = true;
+                        labelFundoRes.Visible = true;
+                        txtValorFunReserva.Visible = true;
                         break;
                     case "Dividendos":
                         labelValorDiv.Visible = true;
                         txtValorDiv.Visible = true;
+                        labelFundoRes.Visible = true;
+                        txtValorFunReserva.Visible = true;
                         break;
                     case "Aluguel Fixo + Dividendos":
                         labelValorAlguel.Visible = true;
                         txtvaloraluguel.Visible = true;
                         labelValorDiv.Visible = true;
                         txtValorDiv.Visible = true;
-                        break;
-                    case "Fundo de Reserva":
                         labelFundoRes.Visible = true;
                         txtValorFunReserva.Visible = true;
                         break;
                 }
+                
             }
             else
             {
@@ -410,6 +317,18 @@ namespace SistemaFL
                 labelFundoRes.Visible = false;
                 txtValorFunReserva.Visible = false;
             }
+        }
+        void limpar()
+        {
+            dtdataLancamento.Value = DateTime.Now;
+            txtidFlat.Text = "";
+            txtDescricaoFlat.Text = "";
+            txttipoInvestimento.Text = "";
+            txtid.Text = "";
+            txtvaloraluguel.Text = "";
+            txtValorDiv.Text = "";
+            txtValorFunReserva.Text = "";
+
         }
     }
 }

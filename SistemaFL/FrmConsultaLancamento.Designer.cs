@@ -40,7 +40,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(332, 98);
+            label2.Location = new Point(315, 109);
             label2.Name = "label2";
             label2.Size = new Size(94, 25);
             label2.TabIndex = 11;
@@ -48,9 +48,9 @@
             // 
             // btnlocalizar
             // 
-            btnlocalizar.Location = new Point(674, 49);
+            btnlocalizar.Location = new Point(509, 62);
             btnlocalizar.Name = "btnlocalizar";
-            btnlocalizar.Size = new Size(92, 38);
+            btnlocalizar.Size = new Size(85, 28);
             btnlocalizar.TabIndex = 10;
             btnlocalizar.Text = "Localizar";
             btnlocalizar.UseVisualStyleBackColor = true;
@@ -58,20 +58,20 @@
             // 
             // txtdescricao
             // 
-            txtdescricao.Location = new Point(147, 54);
+            txtdescricao.Location = new Point(253, 67);
             txtdescricao.Name = "txtdescricao";
-            txtdescricao.Size = new Size(504, 23);
+            txtdescricao.Size = new Size(223, 23);
             txtdescricao.TabIndex = 9;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(53, 57);
+            label1.Location = new Point(208, 66);
             label1.Name = "label1";
-            label1.Size = new Size(74, 20);
+            label1.Size = new Size(39, 20);
             label1.TabIndex = 8;
-            label1.Text = "Descrição";
+            label1.Text = "Mês:";
             // 
             // dgdadoslancamento
             // 

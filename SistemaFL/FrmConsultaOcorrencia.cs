@@ -27,6 +27,11 @@ namespace SistemaFL
         {
             var lista = repositorio.Listar(e => true);
             dgdadosocorrencias.DataSource = lista.ToList();
+
+            dgdadosocorrencias.Columns["Lancamento"].Visible = false;
+            dgdadosocorrencias.Columns["idFlat"].Visible = false;
+
+
         }
     }
 }
