@@ -63,12 +63,37 @@ namespace SistemaFL
             var form8 = Program.serviceProvider.GetRequiredService<FrmFuncionalidadeLogin>();
             form8.ShowDialog();
 
-            if (form8.idUsuario > 0){
+            if (form8.idUsuario > 0)
+            {
                 var usuario = repositorioFunc.Recuperar(u => u.id == form8.idUsuario);
                 lbllogin.Text = "Bem-Vindo " + usuario.Nome;
 
             }
             else this.Close();
+        }
+
+        private void aluguelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form9 = Program.serviceProvider.GetRequiredService<FrmFuncAluguelDividendo>();
+            form9.ShowDialog();
+        }
+
+        private void dividendosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form10 = Program.serviceProvider.GetRequiredService<FrmFuncDividendos>();
+            form10.ShowDialog();
+        }
+
+        private void fundoDeReservaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form11 = Program.serviceProvider.GetRequiredService<FrmFuncFundoReserva>();
+            form11.ShowDialog();
+        }
+
+        private void rendimentosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form12 = Program.serviceProvider.GetRequiredService<FrmFuncRendimentos>();
+            form12.ShowDialog();
         }
     }
 }

@@ -13,6 +13,9 @@ namespace Interfaces
         IEnumerable<dynamic> ObterDadosAluguelDividendos();
         IEnumerable<dynamic> ObterDadosInvestimento();
         decimal CalcularTotalValorInvestimento();
+        IEnumerable<dynamic> ObterDadosDividendos();
+        IEnumerable<dynamic> ObterDadosFunReserva();
+        IEnumerable<dynamic> ObterDadosRendimentos();
 
     }
 }

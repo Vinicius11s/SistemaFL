@@ -38,7 +38,11 @@
             ocorrênciasToolStripMenuItem = new ToolStripMenuItem();
             funcionalidadesToolStripMenuItem = new ToolStripMenuItem();
             registrosToolStripMenuItem = new ToolStripMenuItem();
+            aluguelToolStripMenuItem = new ToolStripMenuItem();
+            dividendosToolStripMenuItem = new ToolStripMenuItem();
+            fundoDeReservaToolStripMenuItem = new ToolStripMenuItem();
             lbllogin = new Label();
+            rendimentosToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -63,28 +67,28 @@
             // empresaToolStripMenuItem
             // 
             empresaToolStripMenuItem.Name = "empresaToolStripMenuItem";
-            empresaToolStripMenuItem.Size = new Size(180, 26);
+            empresaToolStripMenuItem.Size = new Size(163, 26);
             empresaToolStripMenuItem.Text = "Empresa";
             empresaToolStripMenuItem.Click += empresaToolStripMenuItem_Click;
             // 
             // flatToolStripMenuItem
             // 
             flatToolStripMenuItem.Name = "flatToolStripMenuItem";
-            flatToolStripMenuItem.Size = new Size(180, 26);
+            flatToolStripMenuItem.Size = new Size(163, 26);
             flatToolStripMenuItem.Text = "Flat";
             flatToolStripMenuItem.Click += flatToolStripMenuItem_Click;
             // 
             // lançamentoToolStripMenuItem
             // 
             lançamentoToolStripMenuItem.Name = "lançamentoToolStripMenuItem";
-            lançamentoToolStripMenuItem.Size = new Size(180, 26);
+            lançamentoToolStripMenuItem.Size = new Size(163, 26);
             lançamentoToolStripMenuItem.Text = "Lançamento";
             lançamentoToolStripMenuItem.Click += lançamentoToolStripMenuItem_Click;
             // 
             // usuárioToolStripMenuItem
             // 
             usuárioToolStripMenuItem.Name = "usuárioToolStripMenuItem";
-            usuárioToolStripMenuItem.Size = new Size(180, 26);
+            usuárioToolStripMenuItem.Size = new Size(163, 26);
             usuárioToolStripMenuItem.Text = "Usuário";
             usuárioToolStripMenuItem.Click += usuárioToolStripMenuItem_Click;
             // 
@@ -104,7 +108,7 @@
             // 
             // funcionalidadesToolStripMenuItem
             // 
-            funcionalidadesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { registrosToolStripMenuItem });
+            funcionalidadesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { registrosToolStripMenuItem, aluguelToolStripMenuItem, dividendosToolStripMenuItem, fundoDeReservaToolStripMenuItem, rendimentosToolStripMenuItem });
             funcionalidadesToolStripMenuItem.Name = "funcionalidadesToolStripMenuItem";
             funcionalidadesToolStripMenuItem.Size = new Size(129, 25);
             funcionalidadesToolStripMenuItem.Text = "Funcionalidades";
@@ -112,9 +116,30 @@
             // registrosToolStripMenuItem
             // 
             registrosToolStripMenuItem.Name = "registrosToolStripMenuItem";
-            registrosToolStripMenuItem.Size = new Size(140, 26);
+            registrosToolStripMenuItem.Size = new Size(223, 26);
             registrosToolStripMenuItem.Text = "Registros";
             registrosToolStripMenuItem.Click += registrosToolStripMenuItem_Click;
+            // 
+            // aluguelToolStripMenuItem
+            // 
+            aluguelToolStripMenuItem.Name = "aluguelToolStripMenuItem";
+            aluguelToolStripMenuItem.Size = new Size(223, 26);
+            aluguelToolStripMenuItem.Text = "Aluguel + Dividendos";
+            aluguelToolStripMenuItem.Click += aluguelToolStripMenuItem_Click;
+            // 
+            // dividendosToolStripMenuItem
+            // 
+            dividendosToolStripMenuItem.Name = "dividendosToolStripMenuItem";
+            dividendosToolStripMenuItem.Size = new Size(223, 26);
+            dividendosToolStripMenuItem.Text = "Dividendos";
+            dividendosToolStripMenuItem.Click += dividendosToolStripMenuItem_Click;
+            // 
+            // fundoDeReservaToolStripMenuItem
+            // 
+            fundoDeReservaToolStripMenuItem.Name = "fundoDeReservaToolStripMenuItem";
+            fundoDeReservaToolStripMenuItem.Size = new Size(223, 26);
+            fundoDeReservaToolStripMenuItem.Text = "Fundo de Reserva";
+            fundoDeReservaToolStripMenuItem.Click += fundoDeReservaToolStripMenuItem_Click;
             // 
             // lbllogin
             // 
@@ -126,6 +151,13 @@
             lbllogin.Name = "lbllogin";
             lbllogin.Size = new Size(0, 37);
             lbllogin.TabIndex = 16;
+            // 
+            // rendimentosToolStripMenuItem
+            // 
+            rendimentosToolStripMenuItem.Name = "rendimentosToolStripMenuItem";
+            rendimentosToolStripMenuItem.Size = new Size(223, 26);
+            rendimentosToolStripMenuItem.Text = "Rendimentos";
+            rendimentosToolStripMenuItem.Click += rendimentosToolStripMenuItem_Click;
             // 
             // FrmPrincipal
             // 
@@ -161,5 +193,9 @@
         private ToolStripMenuItem funcionalidadesToolStripMenuItem;
         private ToolStripMenuItem registrosToolStripMenuItem;
         private Label lbllogin;
+        private ToolStripMenuItem aluguelToolStripMenuItem;
+        private ToolStripMenuItem dividendosToolStripMenuItem;
+        private ToolStripMenuItem fundoDeReservaToolStripMenuItem;
+        private ToolStripMenuItem rendimentosToolStripMenuItem;
     }
 }

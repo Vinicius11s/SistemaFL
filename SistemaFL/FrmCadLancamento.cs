@@ -114,7 +114,7 @@ namespace SistemaFL
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao salvar" + ex.Message);
+                MessageBox.Show("Erro ao salvar, Flat do Tipo Aluguel + Dividendos, Informe valores aos campos" + ex.Message);
 
                 throw;
             }

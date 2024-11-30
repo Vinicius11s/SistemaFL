@@ -14,7 +14,7 @@ namespace Entidades
 
         public int id { get; set; }
         public Decimal? oco_valorAntigo { get; set; }
-        public Decimal oco_valorAlteracao { get; set; }
+        public Decimal? oco_valorAlteracao { get; set; }
         public DateTime oco_DataAlteracao { get; set; }
         public String? oco_Tabela { get; set; }
         public String? oco_Descricao { get; set; }

@@ -33,8 +33,13 @@ namespace SistemaFL
             {
             services.AddDbContext<ContextoSistema>();
 
+            services.AddScoped<FrmFuncAluguelDividendo>();
+            services.AddScoped<FrmFuncDividendos>();
+            services.AddScoped<FrmFuncFundoReserva>();
             services.AddScoped<FrmFuncionalidadeLogin>();
             services.AddScoped<FrmFuncionalidadeRegisto>();
+            services.AddScoped<FrmFuncRendimentos>();
+
 
             services.AddScoped<Form1>();
             services.AddScoped<FrmCadEmpresa>();
@@ -47,6 +52,7 @@ namespace SistemaFL
             services.AddScoped<FrmConsultaOcorrencia>();
             services.AddScoped<FrmConsultaUsuario>();
             services.AddScoped<FrmPrincipal>();
+
             
             services.AddScoped<IEmpresaRepositorio, EmpresaRepositorio>();
             services.AddScoped<IFlatRepositorio, FlatRepositorio>();

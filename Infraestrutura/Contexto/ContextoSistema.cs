@@ -26,7 +26,7 @@ namespace Infraestrutura.Contexto
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var stringConexao = @"Server =DESKTOP-6RMV3GQ;Database=dbSistemaFlats2;Integrated Security=True;TrustServerCertificate=True;";
+            var stringConexao = @"Server =DESKTOP-6RMV3GQ;Database=dbSistemaFlxats2;Integrated Security=True;TrustServerCertificate=True;";
 
 
             if (!optionsBuilder.IsConfigured)
