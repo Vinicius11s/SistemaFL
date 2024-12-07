@@ -39,6 +39,7 @@
             label4 = new Label();
             label2 = new Label();
             label1 = new Label();
+            fechar = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
@@ -159,12 +160,23 @@
             label1.TabIndex = 16;
             label1.Text = "Login";
             // 
+            // fechar
+            // 
+            fechar.Location = new Point(864, 0);
+            fechar.Name = "fechar";
+            fechar.Size = new Size(20, 23);
+            fechar.TabIndex = 18;
+            fechar.Text = "X";
+            fechar.UseVisualStyleBackColor = true;
+            fechar.Click += fechar_Click;
+            // 
             // FrmFuncionalidadeLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(15, 15, 15);
             ClientSize = new Size(885, 344);
+            Controls.Add(fechar);
             Controls.Add(label1);
             Controls.Add(label2);
             Controls.Add(panel1);
@@ -196,5 +208,6 @@
         private Label label5;
         private Label label3;
         private PictureBox pictureBox2;
+        private Button fechar;
     }
 }

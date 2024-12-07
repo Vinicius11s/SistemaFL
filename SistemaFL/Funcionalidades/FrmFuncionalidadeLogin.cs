@@ -69,5 +69,10 @@ namespace SistemaFL.Funcionalidades
             Program.serviceProvider.
                         GetRequiredService<ContextoSistema>().SaveChanges();
         }
+
+        private void fechar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -10,6 +10,7 @@ using Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using System.Reflection.Metadata.Ecma335;
+using Azure.Core;
 
 namespace Infraestrutura.Repositorio
 {
@@ -24,7 +25,7 @@ namespace Infraestrutura.Repositorio
         {
 
             var dadosAluguelDiv = _context.Flat
-            .Include(flat => flat.Lancamentos) // In
+            .Include(flat => flat.Lancamentos) 
             .Include(flat => flat.Empresa)    // Inclui dados da empresclui lançamentos relacionadosa
             .Where(flat => flat.TipoInvestimento == "Aluguel Fixo + Dividendos")
             .Select(flat => new
@@ -275,163 +276,66 @@ namespace Infraestrutura.Repositorio
                 Empreendimento = flat.Descricao,
                 CodFlat = flat.id,
                 ValorImovel = flat.ValorInvestimento,
-                RendimentoJan = flat.Lancamentos
-                    .Where(r => r.DataPagamento.Month == 1)
-                    .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                              (decimal?)r.ValorDividendos ?? 0.00M +
-                              (decimal?)r.ValorFundoReserva) ?? 0.00M,
-                PorcentagemJan = flat.ValorInvestimento != 0
-                    ? (flat.Lancamentos
-                        .Where(r => r.DataPagamento.Month == 1)
-                        .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                                  (decimal?)r.ValorDividendos ?? 0.00M +
-                                  (decimal?)r.ValorFundoReserva) ?? 0.00M) / flat.ValorInvestimento * 100 : 0.00M,
 
+                // Usando o método para calcular os rendimentos mensais
+                RendimentoJan = CalcularRendimentoPorMes(flat.Lancamentos, 1),
+                PorcentagemJan = CalcularPorcentagemPorMes(flat.Lancamentos, 1, flat.ValorInvestimento),
 
-                RendimentoFev = flat.Lancamentos
-                    .Where(r => r.DataPagamento.Month == 2)
-                    .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                              (decimal?)r.ValorDividendos ?? 0.00M +
-                              (decimal?)r.ValorFundoReserva) ?? 0.00M,
-                PorcentagemFev = flat.ValorInvestimento != 0
-                    ? (flat.Lancamentos
-                        .Where(r => r.DataPagamento.Month == 2)
-                        .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                                  (decimal?)r.ValorDividendos ?? 0.00M +
-                                  (decimal?)r.ValorFundoReserva) ?? 0.00M) / flat.ValorInvestimento * 100 : 0.00M,
+                RendimentoFev = CalcularRendimentoPorMes(flat.Lancamentos, 2),
+                PorcentagemFev = CalcularPorcentagemPorMes(flat.Lancamentos, 2, flat.ValorInvestimento),
 
+                RendimentoMar = CalcularRendimentoPorMes(flat.Lancamentos, 3),
+                PorcentagemMar = CalcularPorcentagemPorMes(flat.Lancamentos, 3, flat.ValorInvestimento),
 
-                RendimentoMar = flat.Lancamentos
-                    .Where(r => r.DataPagamento.Month == 3)
-                    .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                              (decimal?)r.ValorDividendos ?? 0.00M +
-                              (decimal?)r.ValorFundoReserva) ?? 0.00M,
-                PorcentagemMar = flat.ValorInvestimento != 0
-                    ? (flat.Lancamentos
-                        .Where(r => r.DataPagamento.Month == 3)
-                        .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                                  (decimal?)r.ValorDividendos ?? 0.00M +
-                                  (decimal?)r.ValorFundoReserva) ?? 0.00M) / flat.ValorInvestimento * 100 : 0.00M,
+                RendimentoAbr = CalcularRendimentoPorMes(flat.Lancamentos, 4),
+                PorcentagemAbr = CalcularPorcentagemPorMes(flat.Lancamentos, 4, flat.ValorInvestimento),
 
+                RendimentoMai = CalcularRendimentoPorMes(flat.Lancamentos, 5),
+                PorcentagemMai = CalcularPorcentagemPorMes(flat.Lancamentos, 5, flat.ValorInvestimento),
 
-                RendimentoAbr = flat.Lancamentos
-                    .Where(r => r.DataPagamento.Month == 4)
-                    .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                              (decimal?)r.ValorDividendos ?? 0.00M +
-                              (decimal?)r.ValorFundoReserva) ?? 0.00M,
-                PorcentagemAbr = flat.ValorInvestimento != 0
-                    ? (flat.Lancamentos
-                        .Where(r => r.DataPagamento.Month == 4)
-                        .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                                  (decimal?)r.ValorDividendos ?? 0.00M +
-                                  (decimal?)r.ValorFundoReserva) ?? 0.00M) / flat.ValorInvestimento * 100 : 0.00M,
+                RendimentoJun = CalcularRendimentoPorMes(flat.Lancamentos, 6),
+                PorcentagemJun = CalcularPorcentagemPorMes(flat.Lancamentos, 6, flat.ValorInvestimento),
 
+                RendimentoJul = CalcularRendimentoPorMes(flat.Lancamentos, 7),
+                PorcentagemJul = CalcularPorcentagemPorMes(flat.Lancamentos, 7, flat.ValorInvestimento),
 
-                RendimentoMai = flat.Lancamentos
-                    .Where(r => r.DataPagamento.Month == 5)
-                    .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                              (decimal?)r.ValorDividendos ?? 0.00M +
-                              (decimal?)r.ValorFundoReserva) ?? 0.00M,
-                PorcentagemMai = flat.ValorInvestimento != 0
-                    ? (flat.Lancamentos
-                        .Where(r => r.DataPagamento.Month == 5)
-                        .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                                  (decimal?)r.ValorDividendos ?? 0.00M +
-                                  (decimal?)r.ValorFundoReserva) ?? 0.00M) / flat.ValorInvestimento * 100 : 0.00M,
+                RendimentoAgo = CalcularRendimentoPorMes(flat.Lancamentos, 8),
+                PorcentagemAgo = CalcularPorcentagemPorMes(flat.Lancamentos, 8, flat.ValorInvestimento),
 
+                RendimentoSet = CalcularRendimentoPorMes(flat.Lancamentos, 9),
+                PorcentagemSet = CalcularPorcentagemPorMes(flat.Lancamentos, 9, flat.ValorInvestimento),
 
-                RendimentoJun = flat.Lancamentos
-                    .Where(r => r.DataPagamento.Month == 6)
-                    .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                              (decimal?)r.ValorDividendos ?? 0.00M +
-                              (decimal?)r.ValorFundoReserva) ?? 0.00M,
-                PorcentagemJun = flat.ValorInvestimento != 0
-                    ? (flat.Lancamentos
-                        .Where(r => r.DataPagamento.Month == 6)
-                        .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                                  (decimal?)r.ValorDividendos ?? 0.00M +
-                                  (decimal?)r.ValorFundoReserva) ?? 0.00M) / flat.ValorInvestimento * 100 : 0.00M,
+                RendimentoOut = CalcularRendimentoPorMes(flat.Lancamentos, 10),
+                PorcentagemOut = CalcularPorcentagemPorMes(flat.Lancamentos, 10, flat.ValorInvestimento),
 
+                RendimentoNov = CalcularRendimentoPorMes(flat.Lancamentos, 11),
+                PorcentagemNov = CalcularPorcentagemPorMes(flat.Lancamentos, 11, flat.ValorInvestimento),
 
-                RendimentoJul = flat.Lancamentos
-                    .Where(r => r.DataPagamento.Month == 7)
-                    .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                              (decimal?)r.ValorDividendos ?? 0.00M +
-                              (decimal?)r.ValorFundoReserva) ?? 0.00M,
-                PorcentagemJul = flat.ValorInvestimento != 0
-                    ? (flat.Lancamentos
-                        .Where(r => r.DataPagamento.Month == 7)
-                        .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                                  (decimal?)r.ValorDividendos ?? 0.00M +
-                                  (decimal?)r.ValorFundoReserva) ?? 0.00M) / flat.ValorInvestimento * 100 : 0.00M,
-
-
-                RendimentoAgo = flat.Lancamentos
-                    .Where(r => r.DataPagamento.Month == 8)
-                    .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                              (decimal?)r.ValorDividendos ?? 0.00M +
-                              (decimal?)r.ValorFundoReserva) ?? 0.00M,
-                PorcentagemAgo = flat.ValorInvestimento != 0
-                    ? (flat.Lancamentos
-                        .Where(r => r.DataPagamento.Month == 8)
-                        .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                                  (decimal?)r.ValorDividendos ?? 0.00M +
-                                  (decimal?)r.ValorFundoReserva) ?? 0.00M) / flat.ValorInvestimento * 100 : 0.00M,
-
-
-                RendimentoSet = flat.Lancamentos
-                    .Where(r => r.DataPagamento.Month == 9)
-                    .Sum(r => (decimal?)r.ValorAluguel +
-                              (decimal?)r.ValorDividendos +
-                              (decimal?)r.ValorFundoReserva) ?? 0.00M,
-                PorcentagemSet = flat.ValorInvestimento != 0
-                    ? (flat.Lancamentos
-                        .Where(r => r.DataPagamento.Month == 9)
-                        .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                                  (decimal?)r.ValorDividendos ?? 0.00M +
-                                  (decimal?)r.ValorFundoReserva) ?? 0.00M) / flat.ValorInvestimento * 100 : 0.00M,
-
-
-                RendimentoOut = flat.Lancamentos
-                    .Where(r => r.DataPagamento.Month == 10)
-                    .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                              (decimal?)r.ValorDividendos ?? 0.00M +
-                              (decimal?)r.ValorFundoReserva) ?? 0.00M,
-                PorcentagemOut = flat.ValorInvestimento != 0
-                    ? (flat.Lancamentos
-                        .Where(r => r.DataPagamento.Month == 10)
-                        .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                                  (decimal?)r.ValorDividendos ?? 0.00M +
-                                  (decimal?)r.ValorFundoReserva) ?? 0.00M) / flat.ValorInvestimento * 100 : 0.00M,
-
-
-                RendimentoNov = flat.Lancamentos
-                    .Where(r => r.DataPagamento.Month == 11)
-                    .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                              (decimal?)r.ValorDividendos ?? 0.00M +
-                              (decimal?)r.ValorFundoReserva) ?? 0.00M,
-                PorcentagemNov = flat.ValorInvestimento != 0
-                    ? (flat.Lancamentos
-                        .Where(r => r.DataPagamento.Month == 11)
-                        .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                                  (decimal?)r.ValorDividendos ?? 0.00M +
-                                  (decimal?)r.ValorFundoReserva) ?? 0.00M) / flat.ValorInvestimento * 100 : 0.00M,
-
-
-                RendimentoDez = flat.Lancamentos
-                    .Where(r => r.DataPagamento.Month == 12)
-                    .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                              (decimal?)r.ValorDividendos ?? 0.00M +
-                              (decimal?)r.ValorFundoReserva) ?? 0.00M,
-                PorcentagemDez = flat.ValorInvestimento != 0
-                    ? (flat.Lancamentos
-                        .Where(r => r.DataPagamento.Month == 12)
-                        .Sum(r => (decimal?)r.ValorAluguel ?? 0.00M +
-                                  (decimal?)r.ValorDividendos ?? 0.00M +
-                                  (decimal?)r.ValorFundoReserva) ?? 0.00M) / flat.ValorInvestimento * 100 : 0.00M
-            }).ToList();
+                RendimentoDez = CalcularRendimentoPorMes(flat.Lancamentos, 12),
+                PorcentagemDez = CalcularPorcentagemPorMes(flat.Lancamentos, 12, flat.ValorInvestimento)
+            })
+            .ToList();
 
             return dadosRendimentos;
+        }
+        public static decimal CalcularRendimentoPorMes(IEnumerable<Lancamento> lancamentos, int mes)
+        {
+            return lancamentos
+                .Where(l => l.DataPagamento.Month == mes)
+                .Sum(l => (l.ValorAluguel ?? 0.00M) +
+                          (l.ValorDividendos ?? 0.00M) +
+                          (l.ValorFundoReserva ?? 0.00M));
+        }
+
+        public static decimal CalcularPorcentagemPorMes(IEnumerable<Lancamento> lancamentos, int mes, decimal valorImovel)
+        {
+            decimal rendimentoMes = lancamentos
+                .Where(l => l.DataPagamento.Month == mes)
+                .Sum(l => (l.ValorAluguel ?? 0.00M) +
+                          (l.ValorDividendos ?? 0.00M) +
+                          (l.ValorFundoReserva ?? 0.00M));
+
+            return valorImovel > 0 ? (rendimentoMes / valorImovel) * 100 : 0.00M;
         }
 
     }

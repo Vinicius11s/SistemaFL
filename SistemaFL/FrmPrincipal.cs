@@ -92,7 +92,7 @@ namespace SistemaFL
 
         private void rendimentosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form12 = Program.serviceProvider.GetRequiredService<FrmFuncRendimentos>();
+            var form12 = Program.serviceProvider.GetRequiredService<FrmFuncRendimentoscs>();
             form12.ShowDialog();
         }
     }
