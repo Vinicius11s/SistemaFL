@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,33 @@ namespace SistemaFL.Funcionalidades
         {
             var dadosRendimentos = repositorio.ObterDadosRendimentos();
             dgdadosRendimentos.DataSource = dadosRendimentos;
+
+            AjustarFormatacaoGrid(dgdadosRendimentos);
+
+            var dadosTotais = repositorio.ObterDadosTotais();
+            dgdadosTotais.DataSource = dadosTotais;
+
+            AjustarFormatacaoGrid(dgdadosTotais);
+        }
+
+        private void AjustarFormatacaoGrid(DataGridView grid)
+        {
+            grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
+            foreach (var coluna in grid.Columns.Cast<DataGridViewColumn>())
+            {
+                if (coluna.Name.StartsWith("Porcentagem"))
+                {
+                    coluna.DefaultCellStyle.Format = "N2";
+                    coluna.Width = 50;
+                    coluna.HeaderText = "%";
+                }
+            }
+
+            // Ajustes adicionais para outras colunas (como rendimento anual)
+            dgdadosRendimentos.Columns["RendimentoAnual"].HeaderText = "Rendimento Anual";
+            dgdadosRendimentos.Columns["PorcentagemAnual"].HeaderText = "Média(%) Anual";
+            dgdadosRendimentos.Columns["PorcentagemAnual"].DefaultCellStyle.Format = "N2";
         }
     }
 }

@@ -13,11 +13,9 @@ namespace Infraestrutura.Contexto
     {
         public ContextoSistema()
         {
-            this.Database.EnsureCreated();//comando para criar o bd;
-        }
+            this.Database.EnsureCreated();
+        }       
 
-       
-        //entidades que serão mapeadas pelo DbSet como tabelas no meu bd; (ADC TODAS)
         public DbSet<Empresa> Empresa { get; set; }
         public DbSet<Flat> Flat { get; set; }
         public DbSet<Lancamento> Lancamento { get; set; }
@@ -26,9 +24,7 @@ namespace Infraestrutura.Contexto
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var stringConexao = @"Server =DESKTOP-6RMV3GQ;Database=dbSistemaFlxats2;Integrated Security=True;TrustServerCertificate=True;";
-
-
+            var stringConexao = @"Server=DESKTOP-I32AP0S;Database=SistemaFl;Integrated Security=True;TrustServerCertificate=True;";
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(stringConexao);

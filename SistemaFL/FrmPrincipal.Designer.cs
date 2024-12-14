@@ -41,8 +41,9 @@
             aluguelToolStripMenuItem = new ToolStripMenuItem();
             dividendosToolStripMenuItem = new ToolStripMenuItem();
             fundoDeReservaToolStripMenuItem = new ToolStripMenuItem();
-            lbllogin = new Label();
             rendimentosToolStripMenuItem = new ToolStripMenuItem();
+            lbllogin = new Label();
+            pISECONFINSToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -108,7 +109,7 @@
             // 
             // funcionalidadesToolStripMenuItem
             // 
-            funcionalidadesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { registrosToolStripMenuItem, aluguelToolStripMenuItem, dividendosToolStripMenuItem, fundoDeReservaToolStripMenuItem, rendimentosToolStripMenuItem });
+            funcionalidadesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { registrosToolStripMenuItem, aluguelToolStripMenuItem, dividendosToolStripMenuItem, fundoDeReservaToolStripMenuItem, rendimentosToolStripMenuItem, pISECONFINSToolStripMenuItem });
             funcionalidadesToolStripMenuItem.Name = "funcionalidadesToolStripMenuItem";
             funcionalidadesToolStripMenuItem.Size = new Size(129, 25);
             funcionalidadesToolStripMenuItem.Text = "Funcionalidades";
@@ -141,6 +142,13 @@
             fundoDeReservaToolStripMenuItem.Text = "Fundo de Reserva";
             fundoDeReservaToolStripMenuItem.Click += fundoDeReservaToolStripMenuItem_Click;
             // 
+            // rendimentosToolStripMenuItem
+            // 
+            rendimentosToolStripMenuItem.Name = "rendimentosToolStripMenuItem";
+            rendimentosToolStripMenuItem.Size = new Size(223, 26);
+            rendimentosToolStripMenuItem.Text = "Rendimentos";
+            rendimentosToolStripMenuItem.Click += rendimentosToolStripMenuItem_Click;
+            // 
             // lbllogin
             // 
             lbllogin.AutoSize = true;
@@ -152,12 +160,12 @@
             lbllogin.Size = new Size(0, 37);
             lbllogin.TabIndex = 16;
             // 
-            // rendimentosToolStripMenuItem
+            // pISECONFINSToolStripMenuItem
             // 
-            rendimentosToolStripMenuItem.Name = "rendimentosToolStripMenuItem";
-            rendimentosToolStripMenuItem.Size = new Size(223, 26);
-            rendimentosToolStripMenuItem.Text = "Rendimentos";
-            rendimentosToolStripMenuItem.Click += rendimentosToolStripMenuItem_Click;
+            pISECONFINSToolStripMenuItem.Name = "pISECONFINSToolStripMenuItem";
+            pISECONFINSToolStripMenuItem.Size = new Size(223, 26);
+            pISECONFINSToolStripMenuItem.Text = "PIS e CONFINS";
+            pISECONFINSToolStripMenuItem.Click += pISECONFINSToolStripMenuItem_Click;
             // 
             // FrmPrincipal
             // 
@@ -197,5 +205,6 @@
         private ToolStripMenuItem dividendosToolStripMenuItem;
         private ToolStripMenuItem fundoDeReservaToolStripMenuItem;
         private ToolStripMenuItem rendimentosToolStripMenuItem;
+        private ToolStripMenuItem pISECONFINSToolStripMenuItem;
     }
 }

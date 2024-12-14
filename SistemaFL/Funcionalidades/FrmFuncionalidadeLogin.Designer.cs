@@ -99,22 +99,22 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Modern No. 20", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.Font = new Font("Microsoft Sans Serif", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.Black;
             label5.Location = new Point(56, 181);
             label5.Name = "label5";
-            label5.Size = new Size(143, 18);
+            label5.Size = new Size(161, 20);
             label5.TabIndex = 18;
             label5.Text = "de Empreendimentos";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Modern No. 20", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Black;
             label3.Location = new Point(44, 160);
             label3.Name = "label3";
-            label3.Size = new Size(169, 21);
+            label3.Size = new Size(186, 24);
             label3.TabIndex = 17;
             label3.Text = "Sistema Gerenciador";
             // 
@@ -186,7 +186,6 @@
             Controls.Add(txtlogin);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FrmFuncionalidadeLogin";
-            Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmFuncionalidadeLogin";
             Load += FrmFuncionalidadeLogin_Load;

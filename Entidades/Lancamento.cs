@@ -16,7 +16,7 @@ namespace Entidades
 
         public int id { get; set; }
         public DateTime DataPagamento { get; set; }
-        public String? TipoPagamento { get; set; } = String.Empty;
+        public String? TipoPagamento { get; set; }
         public Decimal? ValorAluguel { get; set; }
         public Decimal? ValorDividendos { get; set; }
         public Decimal?  ValorFundoReserva { get; set; }
@@ -24,7 +24,7 @@ namespace Entidades
 
 
         public int idFlat { get; set; }
-        public string DescricaoFlat { get; set; }
+        public string? DescricaoFlat { get; set; }
         public Flat? Flat { get; set; }
 
         public int? idUsuario { get; set; }

@@ -95,5 +95,11 @@ namespace SistemaFL
             var form12 = Program.serviceProvider.GetRequiredService<FrmFuncRendimentoscs>();
             form12.ShowDialog();
         }
+
+        private void pISECONFINSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form13 = Program.serviceProvider.GetRequiredService<FrmFuncPISeCOFINS>();
+            form13.ShowDialog();
+        }
     }
 }

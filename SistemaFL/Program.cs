@@ -38,6 +38,7 @@ namespace SistemaFL
             services.AddScoped<FrmFuncFundoReserva>();
             services.AddScoped<FrmFuncionalidadeLogin>();
             services.AddScoped<FrmFuncionalidadeRegisto>();
+            services.AddScoped<FrmFuncPISeCOFINS>();
             services.AddScoped<FrmFuncRendimentoscs>();
 
 
