@@ -13,19 +13,23 @@ namespace SistemaFL.Funcionalidades
 {
     public partial class FrmFuncPISeCOFINS : Form
     {
-        private ILancamentoRepositorio repositorio;
-        public FrmFuncPISeCOFINS()
+        private IFlatRepositorio repositorio;
+        private ILancamentoRepositorio lancamentoRepositorio;
+        public FrmFuncPISeCOFINS(IFlatRepositorio repositorio, ILancamentoRepositorio lancamentoRepositorio)
         {
             InitializeComponent();
-            this.repositorio = repositorio
+            this.repositorio = repositorio;
+            this.lancamentoRepositorio = lancamentoRepositorio;
         }
 
         private void FrmFuncPISeCOFINS_Load(object sender, EventArgs e)
         {
-            var dados = repositorio = ObterDadosPisCofins();
+            var dados = repositorio.ObterDadosAluguelVenceslau();
             dgdadosPIS.DataSource = dados;
 
-            
+            dgdadosPIS.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
+
         }
     }
 }

@@ -50,8 +50,6 @@ namespace SistemaFL.Funcionalidades
                     coluna.HeaderText = "%";
                 }
             }
-
-            // Ajustes adicionais para outras colunas (como rendimento anual)
             dgdadosRendimentos.Columns["RendimentoAnual"].HeaderText = "Rendimento Anual";
             dgdadosRendimentos.Columns["PorcentagemAnual"].HeaderText = "Média(%) Anual";
             dgdadosRendimentos.Columns["PorcentagemAnual"].DefaultCellStyle.Format = "N2";

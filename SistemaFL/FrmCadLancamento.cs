@@ -198,6 +198,11 @@ namespace SistemaFL
                 lancamento.ValorFundoReserva = valorFunReserva;
             }
 
+            if (decimal.TryParse(txtvaloraluguel.Text, out decimal valorAluguelVenceslau))
+            {
+                lancamento.AluguelVenceslau = valorAluguelVenceslau;
+            }
+
             //validação txtIdFlat
             if (int.TryParse(txtidFlat.Text, out int idFlat))
             {
@@ -304,6 +309,14 @@ namespace SistemaFL
                         txtValorDiv.Visible = true;
                         labelFundoRes.Visible = true;
                         txtValorFunReserva.Visible = true;
+                        break;
+                    case "Aluguel Venceslau":
+                        labelValorAlguel.Visible = true;
+                        txtvaloraluguel.Visible = true;
+                        labelValorDiv.Visible = false;
+                        txtValorDiv.Visible = false;
+                        labelFundoRes.Visible = false;
+                        txtValorFunReserva.Visible = false;
                         break;
                 }
                 

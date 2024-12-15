@@ -26,8 +26,8 @@ namespace Infraestrutura.Repositorio
         {
 
             var dadosAluguelDiv = _context.Flat
-            .Include(flat => flat.Lancamentos) 
-            .Include(flat => flat.Empresa)    // Inclui dados da empresclui lançamentos relacionadosa
+            .Include(flat => flat.Lancamentos)
+            .Include(flat => flat.Empresa)
             .Where(flat => flat.TipoInvestimento == "Aluguel Fixo + Dividendos")
             .Select(flat => new
             {
@@ -37,10 +37,10 @@ namespace Infraestrutura.Repositorio
                 ValorImovel = flat.ValorInvestimento,
                 AluguelJan = flat.Lancamentos
                     .Where(l => l.DataPagamento.Month == 1 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorAluguel), // Soma o valor do aluguel de janeiro
+                    .Sum(l => l.ValorAluguel),
                 DividendosJan = flat.Lancamentos
                     .Where(l => l.DataPagamento.Month == 1 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorDividendos), // Soma o valor dos dividendos de janeiro
+                    .Sum(l => l.ValorDividendos),
 
                 AluguelFev = flat.Lancamentos
                     .Where(l => l.DataPagamento.Month == 2 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
@@ -158,7 +158,7 @@ namespace Infraestrutura.Repositorio
                 Empreendimento = flat.Descricao,
                 CodFlat = flat.id,
                 ValorImovel = flat.ValorInvestimento,
-                 DividendosJan = flat.Lancamentos
+                DividendosJan = flat.Lancamentos
                     .Where(l => l.DataPagamento.Month == 1 && l.TipoPagamento == "Dividendos")
                     .Sum(l => l.ValorDividendos),
 
@@ -206,7 +206,7 @@ namespace Infraestrutura.Repositorio
                     .Where(l => l.DataPagamento.Month == 12 && l.TipoPagamento == "Dividendos")
                     .Sum(l => l.ValorDividendos),
 
-                 Acumulado = flat.Lancamentos
+                Acumulado = flat.Lancamentos
                 .Where(l => l.TipoPagamento == "Dividendos")
                 .Sum(l => (l.ValorAluguel ?? 0) + (l.ValorDividendos ?? 0))
 
@@ -223,40 +223,40 @@ namespace Infraestrutura.Repositorio
                 {
                     Empreendimento = flat.Descricao,
                     CodFlat = flat.id,
-                        JANEIRO = flat.Lancamentos
+                    JANEIRO = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 1)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                        FEVEREIRO = flat.Lancamentos
+                    FEVEREIRO = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 2)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                        MARÇO = flat.Lancamentos
+                    MARÇO = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 3)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                        ABRIL = flat.Lancamentos
+                    ABRIL = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 4)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                        MAIO = flat.Lancamentos
+                    MAIO = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 5)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                        JUNHO = flat.Lancamentos
+                    JUNHO = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 6)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                        JULHO = flat.Lancamentos
+                    JULHO = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 7)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                        AGOSTO = flat.Lancamentos
+                    AGOSTO = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 8)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                        SETEMBRO = flat.Lancamentos
+                    SETEMBRO = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 9)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                        OUTUBRO = flat.Lancamentos
+                    OUTUBRO = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 10)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                        NOVEMBRO = flat.Lancamentos
+                    NOVEMBRO = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 11)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                        DEZEMBRO = flat.Lancamentos
+                    DEZEMBRO = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 12)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M
 
@@ -268,7 +268,7 @@ namespace Infraestrutura.Repositorio
         {
             var flats = _context.Flat
                 .Include(flat => flat.Lancamentos)
-                .ToList(); 
+                .ToList();
 
             var dadosRendimentos = flats.Select(flat => new
             {
@@ -323,42 +323,43 @@ namespace Infraestrutura.Repositorio
         }
         public IEnumerable<object> ObterDadosTotais()
         {
+            
             var totalInv = CalcularTotalValorInvestimento();
 
-            var totalJan = CalculaLancamentosPorMes(1, false);
+            VariaveisGlobais.totalJan = CalculaLancamentosPorMes(1, false);
             var PorcJan = CalculaLancamentosPorMes(1, true);
 
-            var totalFev = CalculaLancamentosPorMes(2, false);
+            VariaveisGlobais.totalFev = CalculaLancamentosPorMes(2, false);
             var PorcFev = CalculaLancamentosPorMes(2, true);
 
-            var totalMar = CalculaLancamentosPorMes(3, false);
+            VariaveisGlobais.totalMar = CalculaLancamentosPorMes(3, false);
             var PorcMar = CalculaLancamentosPorMes(3, true);
 
-            var totalAbr = CalculaLancamentosPorMes(4, false);
+            VariaveisGlobais.totalAbr = CalculaLancamentosPorMes(4, false);
             var PorcAbr = CalculaLancamentosPorMes(4, true);
 
-            var totalMai = CalculaLancamentosPorMes(5, false);
+            VariaveisGlobais.totalMai = CalculaLancamentosPorMes(5, false);
             var PorcMai = CalculaLancamentosPorMes(5, true);
 
-            var totalJun = CalculaLancamentosPorMes(6, false);
+            VariaveisGlobais.totalJun = CalculaLancamentosPorMes(6, false);
             var PorcJun = CalculaLancamentosPorMes(6, true);
 
-            var totalJul = CalculaLancamentosPorMes(7, false);
+            VariaveisGlobais.totalJul = CalculaLancamentosPorMes(7, false);
             var PorcJul = CalculaLancamentosPorMes(7, true);
 
-            var totalAgo = CalculaLancamentosPorMes(8, false);
+            VariaveisGlobais.totalAgo = CalculaLancamentosPorMes(8, false);
             var PorcAgo = CalculaLancamentosPorMes(8, true);
 
-            var totalSet = CalculaLancamentosPorMes(9, false);
+            VariaveisGlobais.totalSet = CalculaLancamentosPorMes(9, false);
             var PorcSet = CalculaLancamentosPorMes(9, true);
 
-            var totalOut = CalculaLancamentosPorMes(10, false);
+            VariaveisGlobais.totalOut = CalculaLancamentosPorMes(10, false);
             var PorcOut = CalculaLancamentosPorMes(10, true);
 
-            var totalNov = CalculaLancamentosPorMes(11, false);
+            VariaveisGlobais.totalNov = CalculaLancamentosPorMes(11, false);
             var PorcNov = CalculaLancamentosPorMes(11, true);
 
-            var totalDez = CalculaLancamentosPorMes(12, false);
+            VariaveisGlobais.totalDez = CalculaLancamentosPorMes(12, false);
             var PorcDez = CalculaLancamentosPorMes(12, true);
 
 
@@ -368,40 +369,40 @@ namespace Infraestrutura.Repositorio
         {
             TOTAL = totalInv,
 
-            JANEIRO = totalJan,
+            JANEIRO = VariaveisGlobais.totalJan,
             PorcentagemJan = PorcJan,
 
-            FEVEREIRO = totalFev,
+            FEVEREIRO = VariaveisGlobais.totalFev,
             PorcentagemFev = PorcFev,
 
-            MARCO = totalMar,
+            MARCO = VariaveisGlobais.totalMar,
             PorcentagemMar = PorcMar,
 
-            ABRIL = totalAbr,
+            ABRIL = VariaveisGlobais.totalAbr,
             PorcentagemAbr = PorcAbr,
 
-            MAIO = totalMai,
+            MAIO = VariaveisGlobais.totalMai,
             PorcentagemMai = PorcMai,
 
-            JUNHO = totalJun,
+            JUNHO = VariaveisGlobais.totalJun,
             PorcentagemJun = PorcJun,
 
-            JULHO = totalJul,
+            JULHO = VariaveisGlobais.totalJul,
             PorcentagemJul = PorcJul,
 
-            AGOSTO = totalAgo,
+            AGOSTO = VariaveisGlobais.totalAgo,
             PorcentagemAgo = PorcAgo,
 
-            SETEMBRO = totalSet,
+            SETEMBRO = VariaveisGlobais.totalSet,
             PorcentagemSet = PorcSet,
 
-            OUTUBRO = totalOut,
+            OUTUBRO = VariaveisGlobais.totalOut,
             PorcentagemOut = PorcOut,
 
-            NOVEMBRO = totalNov,
+            NOVEMBRO = VariaveisGlobais.totalNov,
             PorcentagemNov = PorcNov,
 
-            DEZEMBRO = totalDez,
+            DEZEMBRO = VariaveisGlobais.totalDez,
             PorcentagemDez = PorcDez
 
 
@@ -410,7 +411,60 @@ namespace Infraestrutura.Repositorio
 
             return dadosTotais;
         }
-        public IEnumerable<>
+        public IEnumerable<object> ObterDadosAluguelVenceslau()
+        {
+
+            var totalJan = CalculaAluguelVenceslau(1);
+            var totalFev = CalculaAluguelVenceslau(2);
+            var totalMar = CalculaAluguelVenceslau(3);
+            var totalAbr = CalculaAluguelVenceslau(4);
+            var totalMai = CalculaAluguelVenceslau(5);
+            var totalJun = CalculaAluguelVenceslau(6);
+            var totalJul = CalculaAluguelVenceslau(7);
+            var totalAgo = CalculaAluguelVenceslau(8);
+            var totalSet = CalculaAluguelVenceslau(9);
+            var totalOut = CalculaAluguelVenceslau(10);
+            var totalNov = CalculaAluguelVenceslau(11);
+            var totalDez = CalculaAluguelVenceslau(12);
+
+            var dadosTotais = new List<object>
+            {
+                new
+                {
+                    Descricao = "Aluguel Venceslau",
+                    JANEIRO = totalJan,
+                    FEVEREIRO = totalFev,
+                    MARÇO = totalMar,
+                    ABRIL = totalAbr,
+                    MAIO = totalMai,
+                    JUNHO = totalJun,
+                    JULHO = totalJul,
+                    AGOSTO = totalAgo,
+                    SETEMBRO = totalSet,
+                    OUTUBRO = totalOut,
+                    NOVEMBRO = totalNov,
+                    DEZEMBRO = totalDez
+                },
+                new
+                {
+                    Descricao = "Aluguel Flats",
+                    JANEIRO = VariaveisGlobais.totalJan,
+                    FEVEREIRO = VariaveisGlobais.totalFev,
+                    MARÇO = VariaveisGlobais.totalMar,
+                    ABRIL = VariaveisGlobais.totalAbr,
+                    MAIO = VariaveisGlobais.totalMai,
+                    JUNHO = VariaveisGlobais.totalJun,
+                    JULHO = VariaveisGlobais.totalJul,
+                    AGOSTO = VariaveisGlobais.totalAgo,
+                    SETEMBRO = VariaveisGlobais.totalSet,
+                    OUTUBRO = VariaveisGlobais.totalOut,
+                    NOVEMBRO = VariaveisGlobais.totalNov,
+                    DEZEMBRO = VariaveisGlobais.totalDez
+                }
+             };
+            return dadosTotais;
+        }
+
 
         public decimal CalculaLancamentosPorMes(int mes, bool porcentagem)
         {
@@ -419,7 +473,7 @@ namespace Infraestrutura.Repositorio
                 .Where(l => l.DataPagamento.Month == mes && l.TipoPagamento != "Aluguel Vencelau")
                 .Sum(l => (l.ValorAluguel ?? 0) + (l.ValorDividendos ?? 0) + (l.ValorFundoReserva ?? 0));
 
-            if(porcentagem == false)
+            if (porcentagem == false)
             {
                 return total;
 
@@ -437,7 +491,7 @@ namespace Infraestrutura.Repositorio
         {
             return _context.Flat.Sum(flat => flat.ValorInvestimento);
         }
-        public static decimal CalcularRendimentoPorMes(IEnumerable<Lancamento>? lancamentos, int mes)
+        public static decimal CalcularRendimentoPorMes(IEnumerable<Lancamento>? lancamentos, int mes) 
         {
             if (lancamentos == null) return 0.00M;
 
@@ -486,7 +540,13 @@ namespace Infraestrutura.Repositorio
 
 
         }
-
-            
+        public decimal CalculaAluguelVenceslau(int mes)
+        {
+            var total = _context.Lancamento
+                .Where(l => l.DataPagamento.Month == mes && l.TipoPagamento == "Aluguel Venceslau")
+                .Sum(l => l.ValorAluguel ?? 0);
+            return total;
+        
+        }
     }
 }

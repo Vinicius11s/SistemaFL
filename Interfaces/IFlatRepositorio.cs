@@ -17,7 +17,8 @@ namespace Interfaces
         IEnumerable<dynamic> ObterDadosFunReserva();
         IEnumerable<dynamic> ObterDadosRendimentos();
         IEnumerable<dynamic> ObterDadosTotais();
-        IEnumerable<dynamic> ObterDadosPisCofins();
+        IEnumerable<object> ObterDadosAluguelVenceslau();
+
 
 
     }

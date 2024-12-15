@@ -235,6 +235,7 @@
             txttipoInvestimento.ReadOnly = true;
             txttipoInvestimento.Size = new Size(130, 23);
             txttipoInvestimento.TabIndex = 36;
+            txttipoInvestimento.Text = "9";
             // 
             // label3
             // 

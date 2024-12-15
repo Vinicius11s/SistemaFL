@@ -262,7 +262,7 @@
             // cbbTipoInvestimento
             // 
             cbbTipoInvestimento.FormattingEnabled = true;
-            cbbTipoInvestimento.Items.AddRange(new object[] { "Aluguel Fixo", "Dividendos", "Aluguel Fixo + Dividendos", "Indefinido" });
+            cbbTipoInvestimento.Items.AddRange(new object[] { "Aluguel Fixo", "Dividendos", "Aluguel Fixo + Dividendos", "Indefinido", "Aluguel Venceslau" });
             cbbTipoInvestimento.Location = new Point(494, 44);
             cbbTipoInvestimento.Name = "cbbTipoInvestimento";
             cbbTipoInvestimento.Size = new Size(190, 28);

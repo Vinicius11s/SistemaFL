@@ -20,7 +20,8 @@ namespace Entidades
         public Decimal? ValorAluguel { get; set; }
         public Decimal? ValorDividendos { get; set; }
         public Decimal?  ValorFundoReserva { get; set; }
-        
+        public Decimal? AluguelVenceslau { get; set; }
+
 
 
         public int idFlat { get; set; }
