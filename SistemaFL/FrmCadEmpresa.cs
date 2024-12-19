@@ -29,15 +29,15 @@ namespace SistemaFL
         private void FrmCadEmpresa_Load(object sender, EventArgs e)
         {
             limpar();
-            dgAssociarFlat.Enabled = false;
+            //dgAssociarFlat.Enabled = false;
             btnnovo.Enabled = true;
             btnlocalizar.Enabled = true;
             btnalterar.Enabled = false;
             btncancelar.Enabled = false;
             btnexcluir.Enabled = false;
             btnsalvar.Enabled = false;
-            btnassociar.Enabled = false;
-            btndesassociar.Enabled = false;
+            //btnassociar.Enabled = false;
+            //btndesassociar.Enabled = false;
         }
         private void btnnovo_Click(object sender, EventArgs e)
         {
@@ -56,9 +56,9 @@ namespace SistemaFL
         {
             if (txtid.Text != "")
             {
-                CarregarFlats();
-                dgAssociarFlat.Enabled = true;
-                btnassociar.Enabled = true;
+                //CarregarFlats();
+               // dgAssociarFlat.Enabled = true;
+                //btnassociar.Enabled = true;
                 btnnovo.Enabled = false;
                 btnlocalizar.Enabled = false;
                 btnalterar.Enabled = false;
@@ -68,16 +68,16 @@ namespace SistemaFL
                 txtdescricao.Focus();
             }
             else MessageBox.Show("Localize a Empresa");
-            if (cbbflatsassociados.Items.Count > 0)
-                btndesassociar.Enabled = true;
-            else btndesassociar.Enabled = false;
+            //if (cbbflatsassociados.Items.Count > 0)
+                //btndesassociar.Enabled = true;
+            //else btndesassociar.Enabled = false;
 
 
         }
         private void btncancelar_Click(object sender, EventArgs e)
         {
             limpar();
-            dgAssociarFlat.Enabled = false;
+            //dgAssociarFlat.Enabled = false;
             btnnovo.Enabled = true;
             btnlocalizar.Enabled = true;
             btnalterar.Enabled = false;
@@ -106,9 +106,7 @@ namespace SistemaFL
                         GetRequiredService<ContextoSistema>().SaveChanges();
                     MessageBox.Show("Salvo com sucesso");
 
-                    limpar();
-                    dgAssociarFlat.Enabled = false;
-                    btnassociar.Enabled = false;
+                    limpar();           
                     btnnovo.Enabled = true;
                     btnlocalizar.Enabled = true;
                     btnalterar.Enabled = false;
@@ -135,7 +133,6 @@ namespace SistemaFL
 
                 MessageBox.Show("Registro excluído com sucesso!");
                 limpar();
-                dgAssociarFlat.Enabled = false;
                 btnnovo.Enabled = true;
                 btnlocalizar.Enabled = true;
                 btnalterar.Enabled = false;
@@ -171,9 +168,9 @@ namespace SistemaFL
                     txtestado.Text = empresa.Estado;
                     txtcep.Text = empresa.Cep;
 
-                    AtualizarComboBoxFlatsAssociados();
+                    //AtualizarComboBoxFlatsAssociados();
 
-                    if (cbbflatsassociados.Items.Count > 0)
+                    /*if (cbbflatsassociados.Items.Count > 0)
                     {
                         cbbflatsassociados.SelectedIndex = 0; // Seleciona o primeiro item
                     }
@@ -191,10 +188,10 @@ namespace SistemaFL
                 else
                 {
                     MessageBox.Show("Empresa não encontrada.");
-                }
+                }*/
             }
         }
-        private void CarregarFlats()
+       /* private void CarregarFlats()
         {
             dgAssociarFlat.Rows.Clear();
             dgAssociarFlat.Columns.Clear(); // Limpa as colunas previamente adicionadas
@@ -222,9 +219,9 @@ namespace SistemaFL
                 // Permite adicionar linhas se houver flats (caso seja necessário)
                 dgAssociarFlat.AllowUserToAddRows = true;
             }
-        }
+        }*/
 
-        private void AtualizarComboBoxFlatsAssociados()
+       /* private void AtualizarComboBoxFlatsAssociados()
         {
             cbbflatsassociados.Items.Clear();
             cbbflatsassociados.Text = string.Empty;// Limpa os itens atuais do ComboBox
@@ -308,8 +305,9 @@ namespace SistemaFL
             catch (Exception ex)
             {
                 MessageBox.Show("Ocorreu um erro ao associar o flat: " + ex.Message);
-            }
+            }*/
         }
+
         public Empresa carregaPropriedades()
         {
             Empresa empresa;
@@ -330,12 +328,12 @@ namespace SistemaFL
             empresa.Cidade = txtcidade.Text;
             empresa.Estado = txtestado.Text;
             empresa.Bairro = txtbairro.Text;
-            foreach (var item in cbbflatsassociados.Items)
+            //foreach (var item in cbbflatsassociados.Items)
             {
-                if (item is Flat flatSelecionado)
+                /*if (item is Flat flatSelecionado)
                 {
                     empresa.Flats.Add(flatSelecionado); // Adiciona o flat à coleção                                   
-                }
+                }*/
             }
 
             return empresa;
@@ -353,15 +351,13 @@ namespace SistemaFL
             txtcidade.Text = "";
             txtestado.Text = "";
             txtcep.Text = "";
-            cbbflatsassociados.Items.Clear();
-            cbbflatsassociados.Text = string.Empty;
-            if (dgAssociarFlat.Rows.Count > 0)
-            {
-                dgAssociarFlat.Rows.Clear(); // Limpa o DataGridView
-            }
-
-
-        }
+            //cbbflatsassociados.Items.Clear();
+            //cbbflatsassociados.Text = string.Empty;
+            //if (dgAssociarFlat.Rows.Count > 0)
+            
+                //dgAssociarFlat.Rows.Clear(); // Limpa o DataGridView
+         }
+        
     }
 }
 

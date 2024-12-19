@@ -582,7 +582,6 @@ namespace Infraestrutura.Repositorio
             var total = _context.Lancamento
                 .Where(l => l.DataPagamento.Month == mes && l.TipoPagamento != "Aluguel Vencelau")
                 .Sum(l => (l.ValorAluguel ?? 0) + (l.ValorDividendos ?? 0) + (l.ValorFundoReserva ?? 0));
-
             if (porcentagem == false)
             {
                 return total;
@@ -591,11 +590,18 @@ namespace Infraestrutura.Repositorio
             else
             {
                 decimal totalInvestimento = CalcularTotalValorInvestimento();
-                total = total / totalInvestimento;
-                return total;
-
+                try
+                {
+                    total = total / totalInvestimento;
+                    return total;
+                }
+                catch (Exception ex)
+                {
+                    
+                    throw;
+                }
+                
             }
-
         }
         public decimal CalcularTotalValorInvestimento()
         {

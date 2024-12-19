@@ -21,6 +21,7 @@ namespace SistemaFL
             InitializeComponent();
             this.repositorioFunc = repositorioFunc;
         }
+        //TRANSIÇÃO
         bool menuExpand = false;
         bool sidebarExpand = true;
         bool funcExpand = false;
@@ -99,6 +100,8 @@ namespace SistemaFL
                 }
             }
         }
+        //TRANSIÇÃO
+
         private void btnregistros_Click(object sender, EventArgs e)
         {
             var form = Program.serviceProvider.GetRequiredService<FrmFuncionalidadeRegisto>();
@@ -131,7 +134,7 @@ namespace SistemaFL
         }
         private void btnempresas_Click(object sender, EventArgs e)
         {
-            var form = Program.serviceProvider.GetRequiredService<FrmCadEmpresa>();
+            var form = Program.serviceProvider.GetRequiredService<FrmCadEmpresaFF>();
             form.ShowDialog();
         }
         private void btnflats_Click(object sender, EventArgs e)
