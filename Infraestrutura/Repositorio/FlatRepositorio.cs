@@ -323,45 +323,43 @@ namespace Infraestrutura.Repositorio
         }
         public IEnumerable<object> ObterDadosTotais()
         {
-            
             var totalInv = CalcularTotalValorInvestimento();
 
-            VariaveisGlobais.totalJan = CalculaLancamentosPorMes(1, false);
+            var totalJan = CalculaLancamentosPorMes(1, false);
             var PorcJan = CalculaLancamentosPorMes(1, true);
 
-            VariaveisGlobais.totalFev = CalculaLancamentosPorMes(2, false);
+            var totalFev = CalculaLancamentosPorMes(2, false);
             var PorcFev = CalculaLancamentosPorMes(2, true);
 
-            VariaveisGlobais.totalMar = CalculaLancamentosPorMes(3, false);
+            var totalMar = CalculaLancamentosPorMes(3, false);
             var PorcMar = CalculaLancamentosPorMes(3, true);
 
-            VariaveisGlobais.totalAbr = CalculaLancamentosPorMes(4, false);
+            var totalAbr = CalculaLancamentosPorMes(4, false);
             var PorcAbr = CalculaLancamentosPorMes(4, true);
 
-            VariaveisGlobais.totalMai = CalculaLancamentosPorMes(5, false);
+            var totalMai = CalculaLancamentosPorMes(5, false);
             var PorcMai = CalculaLancamentosPorMes(5, true);
 
-            VariaveisGlobais.totalJun = CalculaLancamentosPorMes(6, false);
+            var totalJun = CalculaLancamentosPorMes(6, false);
             var PorcJun = CalculaLancamentosPorMes(6, true);
 
-            VariaveisGlobais.totalJul = CalculaLancamentosPorMes(7, false);
+            var totalJul = CalculaLancamentosPorMes(7, false);
             var PorcJul = CalculaLancamentosPorMes(7, true);
 
-            VariaveisGlobais.totalAgo = CalculaLancamentosPorMes(8, false);
+            var totalAgo = CalculaLancamentosPorMes(8, false);
             var PorcAgo = CalculaLancamentosPorMes(8, true);
 
-            VariaveisGlobais.totalSet = CalculaLancamentosPorMes(9, false);
+            var totalSet = CalculaLancamentosPorMes(9, false);
             var PorcSet = CalculaLancamentosPorMes(9, true);
 
-            VariaveisGlobais.totalOut = CalculaLancamentosPorMes(10, false);
+            var totalOut = CalculaLancamentosPorMes(10, false);
             var PorcOut = CalculaLancamentosPorMes(10, true);
 
-            VariaveisGlobais.totalNov = CalculaLancamentosPorMes(11, false);
+            var totalNov = CalculaLancamentosPorMes(11, false);
             var PorcNov = CalculaLancamentosPorMes(11, true);
 
-            VariaveisGlobais.totalDez = CalculaLancamentosPorMes(12, false);
+            var totalDez = CalculaLancamentosPorMes(12, false);
             var PorcDez = CalculaLancamentosPorMes(12, true);
-
 
             var dadosTotais = new List<object>
     {
@@ -369,98 +367,210 @@ namespace Infraestrutura.Repositorio
         {
             TOTAL = totalInv,
 
-            JANEIRO = VariaveisGlobais.totalJan,
+            JANEIRO = totalJan,
             PorcentagemJan = PorcJan,
 
-            FEVEREIRO = VariaveisGlobais.totalFev,
+            FEVEREIRO = totalFev,
             PorcentagemFev = PorcFev,
 
-            MARCO = VariaveisGlobais.totalMar,
+            MARCO = totalMar,
             PorcentagemMar = PorcMar,
 
-            ABRIL = VariaveisGlobais.totalAbr,
+            ABRIL = totalAbr,
             PorcentagemAbr = PorcAbr,
 
-            MAIO = VariaveisGlobais.totalMai,
+            MAIO = totalMai,
             PorcentagemMai = PorcMai,
 
-            JUNHO = VariaveisGlobais.totalJun,
+            JUNHO = totalJun,
             PorcentagemJun = PorcJun,
 
-            JULHO = VariaveisGlobais.totalJul,
+            JULHO = totalJul,
             PorcentagemJul = PorcJul,
 
-            AGOSTO = VariaveisGlobais.totalAgo,
+            AGOSTO = totalAgo,
             PorcentagemAgo = PorcAgo,
 
-            SETEMBRO = VariaveisGlobais.totalSet,
+            SETEMBRO = totalSet,
             PorcentagemSet = PorcSet,
 
-            OUTUBRO = VariaveisGlobais.totalOut,
+            OUTUBRO = totalOut,
             PorcentagemOut = PorcOut,
 
-            NOVEMBRO = VariaveisGlobais.totalNov,
+            NOVEMBRO = totalNov,
             PorcentagemNov = PorcNov,
 
-            DEZEMBRO = VariaveisGlobais.totalDez,
+            DEZEMBRO = totalDez,
             PorcentagemDez = PorcDez
-
-
         }
     };
-
             return dadosTotais;
         }
         public IEnumerable<object> ObterDadosAluguelVenceslau()
         {
+            var totalJanAV = CalculaAluguelVenceslau(1);
+            var totalFevAV = CalculaAluguelVenceslau(2);
+            var totalMarAV = CalculaAluguelVenceslau(3);
+            var totalAbrAV = CalculaAluguelVenceslau(4);
+            var totalMaiAV = CalculaAluguelVenceslau(5);
+            var totalJunAV = CalculaAluguelVenceslau(6);
+            var totalJulAV = CalculaAluguelVenceslau(7);
+            var totalAgoAV = CalculaAluguelVenceslau(8);
+            var totalSetAV = CalculaAluguelVenceslau(9);
+            var totalOutAV = CalculaAluguelVenceslau(10);
+            var totalNovAV = CalculaAluguelVenceslau(11);
+            var totalDezAV = CalculaAluguelVenceslau(12);
 
-            var totalJan = CalculaAluguelVenceslau(1);
-            var totalFev = CalculaAluguelVenceslau(2);
-            var totalMar = CalculaAluguelVenceslau(3);
-            var totalAbr = CalculaAluguelVenceslau(4);
-            var totalMai = CalculaAluguelVenceslau(5);
-            var totalJun = CalculaAluguelVenceslau(6);
-            var totalJul = CalculaAluguelVenceslau(7);
-            var totalAgo = CalculaAluguelVenceslau(8);
-            var totalSet = CalculaAluguelVenceslau(9);
-            var totalOut = CalculaAluguelVenceslau(10);
-            var totalNov = CalculaAluguelVenceslau(11);
-            var totalDez = CalculaAluguelVenceslau(12);
+            var totalJanAF = CalculaAlugueleDividendosFlats(1);
+            var totalFevAF = CalculaAlugueleDividendosFlats(2);
+            var totalMarAF = CalculaAlugueleDividendosFlats(3);
+            var totalAbrAF = CalculaAlugueleDividendosFlats(4);
+            var totalMaiAF = CalculaAlugueleDividendosFlats(5);
+            var totalJunAF = CalculaAlugueleDividendosFlats(6);
+            var totalJulAF = CalculaAlugueleDividendosFlats(7);
+            var totalAgoAF = CalculaAlugueleDividendosFlats(8);
+            var totalSetAF = CalculaAlugueleDividendosFlats(9);
+            var totalOutAF = CalculaAlugueleDividendosFlats(10);
+            var totalNovAF = CalculaAlugueleDividendosFlats(11);
+            var totalDezAF = CalculaAlugueleDividendosFlats(12);
+
+            var totalJanFR = CalculaFundoReservaFlats(1);
+            var totalFevFR = CalculaFundoReservaFlats(2);
+            var totalMarFR = CalculaFundoReservaFlats(3);
+            var totalAbrFR = CalculaFundoReservaFlats(4);
+            var totalMaiFR = CalculaFundoReservaFlats(5);
+            var totalJunFR = CalculaFundoReservaFlats(6);
+            var totalJulFR = CalculaFundoReservaFlats(7);
+            var totalAgoFR = CalculaFundoReservaFlats(8);
+            var totalSetFR = CalculaFundoReservaFlats(9);
+            var totalOutFR = CalculaFundoReservaFlats(10);
+            var totalNovFR = CalculaFundoReservaFlats(11);
+            var totalDezFR = CalculaFundoReservaFlats(12);
+
+            var JanPIS = CalcularPIS(totalJanAV, totalJanAF, totalJanFR);
+            var FevPIS = CalcularPIS(totalFevAV, totalFevAF, totalFevFR);
+            var MarPIS = CalcularPIS(totalMarAV, totalMarAF, totalMarFR);
+            var AbrPIS = CalcularPIS(totalAbrAV, totalAbrAF, totalAbrFR);
+            var MaiPIS = CalcularPIS(totalMaiAV, totalMaiAF, totalMaiFR);
+            var JunPIS = CalcularPIS(totalJunAV, totalJunAF, totalJunFR);
+            var JulPIS = CalcularPIS(totalJulAV, totalJulAF, totalJulFR);
+            var AgoPIS = CalcularPIS(totalAgoAV, totalAgoAF, totalAgoFR);
+            var SetPIS = CalcularPIS(totalSetAV, totalSetAF, totalSetFR);
+            var OutPIS = CalcularPIS(totalOutAV, totalOutAF, totalOutFR);
+            var NovPIS = CalcularPIS(totalNovAV, totalNovAF, totalNovFR);
+            var DezPIS = CalcularPIS(totalDezAV, totalDezAF, totalDezFR);
+
+            var JanCOF = CalculaCOFINS(totalJanAV, totalJanAF, totalJanFR);
+            var FevCOF = CalculaCOFINS(totalFevAV, totalFevAF, totalFevFR);
+            var MarCOF = CalculaCOFINS(totalMarAV, totalMarAF, totalMarFR);
+            var AbrCOF = CalculaCOFINS(totalAbrAV, totalAbrAF, totalAbrFR);
+            var MaiCOF = CalculaCOFINS(totalMaiAV, totalMaiAF, totalMaiFR);
+            var JunCOF = CalculaCOFINS(totalJunAV, totalJunAF, totalJunFR);
+            var JulCOF = CalculaCOFINS(totalJulAV, totalJulAF, totalJulFR);
+            var AgoCOF = CalculaCOFINS(totalAgoAV, totalAgoAF, totalAgoFR);
+            var SetCOF = CalculaCOFINS(totalSetAV, totalSetAF, totalSetFR);
+            var OutCOF = CalculaCOFINS(totalOutAV, totalOutAF, totalOutFR);
+            var NovCOF = CalculaCOFINS(totalNovAV, totalNovAF, totalNovFR);
+            var DezCOF = CalculaCOFINS(totalDezAV, totalDezAF, totalDezFR);
 
             var dadosTotais = new List<object>
             {
                 new
                 {
                     Descricao = "Aluguel Venceslau",
-                    JANEIRO = totalJan,
-                    FEVEREIRO = totalFev,
-                    MARÇO = totalMar,
-                    ABRIL = totalAbr,
-                    MAIO = totalMai,
-                    JUNHO = totalJun,
-                    JULHO = totalJul,
-                    AGOSTO = totalAgo,
-                    SETEMBRO = totalSet,
-                    OUTUBRO = totalOut,
-                    NOVEMBRO = totalNov,
-                    DEZEMBRO = totalDez
+                    JANEIRO = totalJanAV,
+                    FEVEREIRO = totalFevAV,
+                    MARÇO = totalMarAV,
+                    ABRIL = totalAbrAV,
+                    MAIO = totalMaiAV,
+                    JUNHO = totalJunAV,
+                    JULHO = totalJulAV,
+                    AGOSTO = totalAgoAV,
+                    SETEMBRO = totalSetAV,
+                    OUTUBRO = totalOutAV,
+                    NOVEMBRO = totalNovAV,
+                    DEZEMBRO = totalDezAV
                 },
                 new
                 {
                     Descricao = "Aluguel Flats",
-                    JANEIRO = VariaveisGlobais.totalJan,
-                    FEVEREIRO = VariaveisGlobais.totalFev,
-                    MARÇO = VariaveisGlobais.totalMar,
-                    ABRIL = VariaveisGlobais.totalAbr,
-                    MAIO = VariaveisGlobais.totalMai,
-                    JUNHO = VariaveisGlobais.totalJun,
-                    JULHO = VariaveisGlobais.totalJul,
-                    AGOSTO = VariaveisGlobais.totalAgo,
-                    SETEMBRO = VariaveisGlobais.totalSet,
-                    OUTUBRO = VariaveisGlobais.totalOut,
-                    NOVEMBRO = VariaveisGlobais.totalNov,
-                    DEZEMBRO = VariaveisGlobais.totalDez
-                }
+                    JANEIRO = totalJanAF,
+                    FEVEREIRO = totalFevAF,
+                    MARÇO = totalMarAF,
+                    ABRIL = totalAbrAF,
+                    MAIO = totalMaiAF,
+                    JUNHO = totalJunAF,
+                    JULHO = totalJulAF,
+                    AGOSTO = totalAgoAF,
+                    SETEMBRO = totalSetAF,
+                    OUTUBRO = totalOutAF,
+                    NOVEMBRO = totalNovAF,
+                    DEZEMBRO = totalDezAF
+                },
+                 new
+                {
+                    Descricao = "Fundo de Reserva Flats",
+                    JANEIRO = totalJanFR,
+                    FEVEREIRO = totalFevFR,
+                    MARÇO = totalMarFR,
+                    ABRIL = totalAbrFR,
+                    MAIO = totalMaiFR,
+                    JUNHO = totalJunFR,
+                    JULHO = totalJulFR,
+                    AGOSTO = totalAgoFR,
+                    SETEMBRO = totalSetFR,
+                    OUTUBRO = totalOutFR,
+                    NOVEMBRO = totalNovFR,
+                    DEZEMBRO = totalDezFR
+                },
+                 new
+                {
+                    Descricao = "Base de Cálculo (PIS/COFINS)",
+                    JANEIRO = totalJanAV + totalJanAF + totalJanFR,
+                    FEVEREIRO = totalFevAV + totalFevAF + totalFevFR,
+                    MARÇO = totalMarAV + totalMarAF + totalMarFR,
+                    ABRIL = totalAbrAV + totalAbrAF + totalAbrFR,
+                    MAIO = totalMaiAV + totalMaiAF + totalMaiFR,
+                    JUNHO = totalJunAV + totalJunAF + totalJunFR,
+                    JULHO = totalJulAV + totalJulAF + totalJulFR,
+                    AGOSTO = totalAgoAV + totalAgoAF + totalAgoFR,
+                    SETEMBRO = totalSetAV + totalSetAF + totalSetFR,
+                    OUTUBRO = totalOutAV + totalOutAF + totalOutFR,
+                    NOVEMBRO = totalNovAV + totalNovAF + totalNovFR,
+                    DEZEMBRO = totalDezAV + totalDezAF + totalDezFR
+                },
+                   new
+                {
+                    Descricao = "PIS",
+                    JANEIRO = JanPIS,
+                    FEVEREIRO = FevPIS,
+                    MARÇO = MarPIS,
+                    ABRIL = AbrPIS,
+                    MAIO = MaiPIS,
+                    JUNHO = JunPIS,
+                    JULHO = JulPIS,
+                    AGOSTO = AgoPIS,
+                    SETEMBRO = SetPIS,
+                    OUTUBRO = OutPIS,
+                    NOVEMBRO = NovPIS,
+                    DEZEMBRO = DezPIS
+                },
+                   new
+                {
+                    Descricao = "COFINS",
+                    JANEIRO = JanCOF,
+                    FEVEREIRO = FevCOF,
+                    MARÇO = MarCOF,
+                    ABRIL = AbrCOF,
+                    MAIO = MaiCOF,
+                    JUNHO = JunCOF,
+                    JULHO = JulCOF,
+                    AGOSTO = AgoCOF,
+                    SETEMBRO = SetCOF,
+                    OUTUBRO = OutCOF,
+                    NOVEMBRO = NovCOF,
+                    DEZEMBRO = DezCOF
+                },
              };
             return dadosTotais;
         }
@@ -491,7 +601,7 @@ namespace Infraestrutura.Repositorio
         {
             return _context.Flat.Sum(flat => flat.ValorInvestimento);
         }
-        public static decimal CalcularRendimentoPorMes(IEnumerable<Lancamento>? lancamentos, int mes) 
+        public static decimal CalcularRendimentoPorMes(IEnumerable<Lancamento>? lancamentos, int mes)
         {
             if (lancamentos == null) return 0.00M;
 
@@ -540,13 +650,51 @@ namespace Infraestrutura.Repositorio
 
 
         }
+
+        //PIS E COFINS
         public decimal CalculaAluguelVenceslau(int mes)
         {
             var total = _context.Lancamento
                 .Where(l => l.DataPagamento.Month == mes && l.TipoPagamento == "Aluguel Venceslau")
-                .Sum(l => l.ValorAluguel ?? 0);
+                .Sum(l => l.AluguelVenceslau ?? 0);
             return total;
-        
+
+        }
+        public decimal CalculaAlugueleDividendosFlats(int mes)
+        {
+            decimal total = _context.Lancamento
+                .Where(l => l.DataPagamento.Month == mes)
+                .Sum(l => (l.ValorAluguel ?? 0.00M) +
+                          (l.ValorDividendos ?? 0.00M));
+            return total;
+
+        }
+        public decimal CalculaFundoReservaFlats(int mes)
+        {
+            decimal total = _context.Lancamento
+                .Where(l => l.DataPagamento.Month == mes)
+                .Sum(l => (l.ValorFundoReserva ?? 0.00M));
+            return total;
+        }
+        public decimal CalcularPIS(decimal totalAV, decimal totalAF, decimal totalFR)
+        {
+            if (totalAV == 0.00M || totalAF == 0.00M || totalFR == 0.00M)
+            {
+                return 0.00M;
+            }
+
+            decimal resultado = (totalAV + totalAF + totalFR) * 0.0065M;
+            return Math.Round(resultado, 2);
+        }
+        public decimal CalculaCOFINS(decimal totalAV, decimal totalAF, decimal totalFR)
+        {
+            if (totalAV == 0.00M || totalAF == 0.00M || totalFR == 0.00M)
+            {
+                return 0.00M;
+            }
+
+            decimal resultado = (totalAV + totalAF + totalFR) * 0.03M;
+            return Math.Round(resultado, 2);
         }
     }
 }

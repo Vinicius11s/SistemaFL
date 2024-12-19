@@ -30,7 +30,6 @@ namespace SistemaFL
         {
             limpar();
             dgAssociarFlat.Enabled = false;
-            pdados.Enabled = false;
             btnnovo.Enabled = true;
             btnlocalizar.Enabled = true;
             btnalterar.Enabled = false;
@@ -42,8 +41,6 @@ namespace SistemaFL
         }
         private void btnnovo_Click(object sender, EventArgs e)
         {
-            dgAssociarFlat.Enabled = false;
-            btnassociar.Enabled = false;
             pdados.Enabled = true;
             btnnovo.Enabled = false;
             btnlocalizar.Enabled = false;
@@ -51,10 +48,9 @@ namespace SistemaFL
             btncancelar.Enabled = true;
             btnexcluir.Enabled = false;
             btnsalvar.Enabled = true;
-            btndesassociar.Enabled = false;
-            cbbflatsassociados.Enabled = false;
             limpar();
             txtdescricao.Focus();
+
         }
         private void btnalterar_Click(object sender, EventArgs e)
         {
@@ -63,7 +59,6 @@ namespace SistemaFL
                 CarregarFlats();
                 dgAssociarFlat.Enabled = true;
                 btnassociar.Enabled = true;
-                pdados.Enabled = true;
                 btnnovo.Enabled = false;
                 btnlocalizar.Enabled = false;
                 btnalterar.Enabled = false;
@@ -83,7 +78,6 @@ namespace SistemaFL
         {
             limpar();
             dgAssociarFlat.Enabled = false;
-            pdados.Enabled = false;
             btnnovo.Enabled = true;
             btnlocalizar.Enabled = true;
             btnalterar.Enabled = false;
@@ -115,7 +109,6 @@ namespace SistemaFL
                     limpar();
                     dgAssociarFlat.Enabled = false;
                     btnassociar.Enabled = false;
-                    pdados.Enabled = false;
                     btnnovo.Enabled = true;
                     btnlocalizar.Enabled = true;
                     btnalterar.Enabled = false;
@@ -143,7 +136,6 @@ namespace SistemaFL
                 MessageBox.Show("Registro excluído com sucesso!");
                 limpar();
                 dgAssociarFlat.Enabled = false;
-                pdados.Enabled = false;
                 btnnovo.Enabled = true;
                 btnlocalizar.Enabled = true;
                 btnalterar.Enabled = false;
@@ -189,7 +181,6 @@ namespace SistemaFL
                     {
                         cbbflatsassociados.Items.Add("Não há nenhum Flat associado e esta empresa.");
                     }
-                    pdados.Enabled = false;
                     btnnovo.Enabled = false;
                     btnlocalizar.Enabled = false;
                     btnalterar.Enabled = true;

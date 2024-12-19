@@ -70,7 +70,7 @@ namespace SistemaFL.Funcionalidades
                         GetRequiredService<ContextoSistema>().SaveChanges();
         }
 
-        private void fechar_Click(object sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
             this.Close();
         }

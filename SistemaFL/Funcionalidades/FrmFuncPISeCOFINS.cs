@@ -28,7 +28,21 @@ namespace SistemaFL.Funcionalidades
             dgdadosPIS.DataSource = dados;
 
             dgdadosPIS.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+        }
+        private void dgdadosPIS_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Verifica se a célula contém um valor numérico
+            if (e.Value != null && e.Value is decimal or double or int)
+            {
+                // Formata o valor para incluir separador de milhar e duas casas decimais
+                e.Value = string.Format("{0:N2}", e.Value);
+                e.FormattingApplied = true;
+            }
+        }
 
+        private void dgdadosPIS_CellFormatting_1(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            dgdadosPIS.CellFormatting += dgdadosPIS_CellFormatting;
 
         }
     }

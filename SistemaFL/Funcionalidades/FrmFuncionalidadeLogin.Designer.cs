@@ -39,9 +39,10 @@
             label4 = new Label();
             label2 = new Label();
             label1 = new Label();
-            fechar = new Button();
+            pictureBox1 = new PictureBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // txtlogin
@@ -50,7 +51,7 @@
             txtlogin.BorderStyle = BorderStyle.FixedSingle;
             txtlogin.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtlogin.ForeColor = SystemColors.ControlLightLight;
-            txtlogin.Location = new Point(349, 106);
+            txtlogin.Location = new Point(272, 120);
             txtlogin.Margin = new Padding(3, 4, 3, 4);
             txtlogin.MaxLength = 150;
             txtlogin.Name = "txtlogin";
@@ -63,7 +64,7 @@
             txtsenha.BorderStyle = BorderStyle.FixedSingle;
             txtsenha.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtsenha.ForeColor = SystemColors.ControlLightLight;
-            txtsenha.Location = new Point(349, 170);
+            txtsenha.Location = new Point(272, 184);
             txtsenha.Margin = new Padding(3, 4, 3, 4);
             txtsenha.MaxLength = 150;
             txtsenha.Name = "txtsenha";
@@ -76,7 +77,7 @@
             btnentrar.FlatStyle = FlatStyle.Flat;
             btnentrar.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnentrar.ForeColor = SystemColors.ButtonShadow;
-            btnentrar.Location = new Point(349, 239);
+            btnentrar.Location = new Point(272, 253);
             btnentrar.Name = "btnentrar";
             btnentrar.Size = new Size(325, 37);
             btnentrar.TabIndex = 13;
@@ -121,7 +122,7 @@
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(77, 63);
+            pictureBox2.Location = new Point(78, 66);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(97, 83);
             pictureBox2.TabIndex = 0;
@@ -132,7 +133,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.Gray;
-            label4.Location = new Point(349, 82);
+            label4.Location = new Point(272, 96);
             label4.Name = "label4";
             label4.Size = new Size(46, 20);
             label4.TabIndex = 10;
@@ -143,7 +144,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.Gray;
-            label2.Location = new Point(349, 146);
+            label2.Location = new Point(272, 160);
             label2.Name = "label2";
             label2.Size = new Size(49, 20);
             label2.TabIndex = 15;
@@ -154,29 +155,31 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Historic", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.WhiteSmoke;
-            label1.Location = new Point(453, 21);
+            label1.Location = new Point(376, 35);
             label1.Name = "label1";
             label1.Size = new Size(106, 47);
             label1.TabIndex = 16;
             label1.Text = "Login";
             // 
-            // fechar
+            // pictureBox1
             // 
-            fechar.Location = new Point(864, 0);
-            fechar.Name = "fechar";
-            fechar.Size = new Size(20, 23);
-            fechar.TabIndex = 18;
-            fechar.Text = "X";
-            fechar.UseVisualStyleBackColor = true;
-            fechar.Click += fechar_Click;
+            pictureBox1.BackColor = Color.FromArgb(23, 24, 29);
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(591, 3);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(36, 30);
+            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox1.TabIndex = 17;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // FrmFuncionalidadeLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(15, 15, 15);
-            ClientSize = new Size(885, 344);
-            Controls.Add(fechar);
+            BackColor = Color.FromArgb(23, 24, 29);
+            ClientSize = new Size(629, 344);
+            Controls.Add(pictureBox1);
             Controls.Add(label1);
             Controls.Add(label2);
             Controls.Add(panel1);
@@ -192,6 +195,7 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -207,6 +211,6 @@
         private Label label5;
         private Label label3;
         private PictureBox pictureBox2;
-        private Button fechar;
+        private PictureBox pictureBox1;
     }
 }

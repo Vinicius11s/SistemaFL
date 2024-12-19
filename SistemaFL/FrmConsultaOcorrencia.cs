@@ -28,10 +28,26 @@ namespace SistemaFL
             var lista = repositorio.Listar(e => true);
             dgdadosocorrencias.DataSource = lista.ToList();
 
+            dgdadosocorrencias.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             dgdadosocorrencias.Columns["Lancamento"].Visible = false;
             dgdadosocorrencias.Columns["idFlat"].Visible = false;
 
+            dgdadosocorrencias.Columns["id"].HeaderText = "Cód.";
+            dgdadosocorrencias.Columns["oco_valorAntigo"].HeaderText = "Valor Antigo";
+            dgdadosocorrencias.Columns["oco_valorAlteracao"].HeaderText = "Valor Alteração";
+            dgdadosocorrencias.Columns["oco_dataAlteracao"].HeaderText = "Data Alteração";
+            dgdadosocorrencias.Columns["oco_Tabela"].HeaderText = "Entidade";
+            dgdadosocorrencias.Columns["oco_Descricao"].HeaderText = "Descrição";
+            dgdadosocorrencias.Columns["idLancamento"].Visible = false;          
+        }
 
+        private void fecharjanela_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void minimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

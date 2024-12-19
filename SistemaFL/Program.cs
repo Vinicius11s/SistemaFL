@@ -23,7 +23,7 @@ namespace SistemaFL
             using (serviceProvider = services.BuildServiceProvider())
             {
                 var mainForm = serviceProvider.GetRequiredService
-                                                <FrmPrincipal>();
+                                                <FrmPrincipalFF>();
 
                 Application.Run(mainForm);
             }
@@ -52,9 +52,9 @@ namespace SistemaFL
             services.AddScoped<FrmConsultaLancamento>();
             services.AddScoped<FrmConsultaOcorrencia>();
             services.AddScoped<FrmConsultaUsuario>();
-            services.AddScoped<FrmPrincipal>();
+            services.AddScoped<FrmPrincipalFF>();
 
-            
+
             services.AddScoped<IEmpresaRepositorio, EmpresaRepositorio>();
             services.AddScoped<IFlatRepositorio, FlatRepositorio>();
             services.AddScoped<ILancamentoRepositorio, LancamentoRepositorio>();

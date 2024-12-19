@@ -65,6 +65,7 @@
             // 
             // dgdados
             // 
+            dgdados.BackgroundColor = Color.FromArgb(23, 24, 29);
             dgdados.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdados.Dock = DockStyle.Bottom;
             dgdados.Location = new Point(0, 163);
@@ -87,6 +88,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(831, 438);
             Controls.Add(label2);
             Controls.Add(dgdados);
@@ -94,6 +96,7 @@
             Controls.Add(txtdescricao);
             Controls.Add(label1);
             Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Margin = new Padding(3, 4, 3, 4);
             Name = "FrmConsultaEmpresa";
             Text = "Consulta de Empresa";

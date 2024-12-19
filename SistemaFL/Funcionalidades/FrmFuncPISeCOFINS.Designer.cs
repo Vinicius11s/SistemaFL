@@ -37,40 +37,47 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(361, 44);
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            label1.ForeColor = SystemColors.Info;
+            label1.Location = new Point(388, 43);
             label1.Name = "label1";
-            label1.Size = new Size(79, 21);
+            label1.Size = new Size(83, 21);
             label1.TabIndex = 0;
             label1.Text = "PIS 0,65%";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(469, 44);
+            label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            label2.ForeColor = SystemColors.Info;
+            label2.Location = new Point(496, 43);
             label2.Name = "label2";
-            label2.Size = new Size(91, 21);
+            label2.Size = new Size(94, 21);
             label2.TabIndex = 1;
             label2.Text = "COFINS 3%";
             // 
             // dgdadosPIS
             // 
-            dgdadosPIS.BackgroundColor = SystemColors.ControlLightLight;
+            dgdadosPIS.BackgroundColor = SystemColors.ActiveBorder;
             dgdadosPIS.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosPIS.Location = new Point(12, 93);
+            dgdadosPIS.Dock = DockStyle.Bottom;
+            dgdadosPIS.Location = new Point(0, 117);
             dgdadosPIS.Name = "dgdadosPIS";
-            dgdadosPIS.Size = new Size(944, 226);
+            dgdadosPIS.Size = new Size(985, 280);
             dgdadosPIS.TabIndex = 2;
+            dgdadosPIS.CellFormatting += dgdadosPIS_CellFormatting_1;
             // 
             // FrmFuncPISeCOFINS
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLightLight;
-            ClientSize = new Size(985, 348);
+            BackColor = SystemColors.ActiveCaptionText;
+            ClientSize = new Size(985, 397);
             Controls.Add(dgdadosPIS);
             Controls.Add(label2);
             Controls.Add(label1);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ForeColor = SystemColors.InfoText;
             Margin = new Padding(4);
             Name = "FrmFuncPISeCOFINS";
             Text = "Previsão Pis e Cofins";

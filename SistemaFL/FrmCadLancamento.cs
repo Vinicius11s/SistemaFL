@@ -180,28 +180,40 @@ namespace SistemaFL
 
 
             // Atribui as propriedades ao lançamento
-            lancamento.DataPagamento = dtdataLancamento.Value;           
+            lancamento.DataPagamento = dtdataLancamento.Value;
 
             // Lógica para definir valores com base no tipo de pagamento
-            if (decimal.TryParse(txtvaloraluguel.Text, out decimal valorAluguel))
+            /*if (txttipoInvestimento.Text == "Aluguel Venceslau")
             {
-                lancamento.ValorAluguel = valorAluguel;
-            }
+                if (decimal.TryParse(txtvaloraluguel.Text, out decimal valorAluguelVenceslau)
+                {
+                    lancamento.AluguelVenceslau = valorAluguelVenceslau;
+                }
+            }*/
 
-            if (decimal.TryParse(txtValorDiv.Text, out decimal valorDividendos))
+            if(txttipoInvestimento.Text == "Aluguel Venceslau")
             {
-                lancamento.ValorDividendos = valorDividendos;
+                if (decimal.TryParse(txtvaloraluguel.Text, out decimal valorAluguelVenceslau))
+                {
+                    lancamento.AluguelVenceslau = valorAluguelVenceslau;
+                }
             }
-
-            if (decimal.TryParse(txtValorFunReserva.Text, out decimal valorFunReserva))
+            else
             {
-                lancamento.ValorFundoReserva = valorFunReserva;
+                if (decimal.TryParse(txtvaloraluguel.Text, out decimal ValorAluguelFlat))
+                {
+                    lancamento.ValorAluguel = ValorAluguelFlat;
+                }
+                if (decimal.TryParse(txtValorDiv.Text, out decimal ValorDividendos))
+                {
+                    lancamento.ValorDividendos = ValorDividendos;
+                }
+                if (decimal.TryParse(txtValorFunReserva.Text, out decimal ValorFunReserva))
+                {
+                    lancamento.ValorFundoReserva = ValorFunReserva;
+                }
             }
-
-            if (decimal.TryParse(txtvaloraluguel.Text, out decimal valorAluguelVenceslau))
-            {
-                lancamento.AluguelVenceslau = valorAluguelVenceslau;
-            }
+            
 
             //validação txtIdFlat
             if (int.TryParse(txtidFlat.Text, out int idFlat))
