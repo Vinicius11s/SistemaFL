@@ -50,6 +50,7 @@
             // 
             // dgdadosocorrencias
             // 
+            dgdadosocorrencias.BackgroundColor = Color.FromArgb(23, 24, 29);
             dgdadosocorrencias.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdadosocorrencias.Dock = DockStyle.Bottom;
             dgdadosocorrencias.Location = new Point(0, 58);

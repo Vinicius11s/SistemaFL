@@ -33,16 +33,14 @@
             txtsenha = new TextBox();
             btnentrar = new Button();
             panel1 = new Panel();
-            label5 = new Label();
-            label3 = new Label();
-            pictureBox2 = new PictureBox();
             label4 = new Label();
             label2 = new Label();
             label1 = new Label();
             pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // txtlogin
@@ -84,49 +82,17 @@
             btnentrar.Text = "Entrar";
             btnentrar.UseVisualStyleBackColor = true;
             btnentrar.Click += btnentrar_Click;
+            btnentrar.KeyDown += btnentrar_KeyDown;
             // 
             // panel1
             // 
-            panel1.BackColor = Color.Gray;
-            panel1.Controls.Add(label5);
-            panel1.Controls.Add(label3);
+            panel1.BackColor = Color.FromArgb(23, 24, 29);
             panel1.Controls.Add(pictureBox2);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(250, 344);
             panel1.TabIndex = 14;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Microsoft Sans Serif", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.Black;
-            label5.Location = new Point(56, 181);
-            label5.Name = "label5";
-            label5.Size = new Size(161, 20);
-            label5.TabIndex = 18;
-            label5.Text = "de Empreendimentos";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.Black;
-            label3.Location = new Point(44, 160);
-            label3.Name = "label3";
-            label3.Size = new Size(186, 24);
-            label3.TabIndex = 17;
-            label3.Text = "Sistema Gerenciador";
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(78, 66);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(97, 83);
-            pictureBox2.TabIndex = 0;
-            pictureBox2.TabStop = false;
             // 
             // label4
             // 
@@ -154,7 +120,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Historic", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.WhiteSmoke;
+            label1.ForeColor = Color.Silver;
             label1.Location = new Point(376, 35);
             label1.Name = "label1";
             label1.Size = new Size(106, 47);
@@ -172,6 +138,16 @@
             pictureBox1.TabIndex = 17;
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(12, 59);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(225, 231);
+            pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox2.TabIndex = 0;
+            pictureBox2.TabStop = false;
             // 
             // FrmFuncionalidadeLogin
             // 
@@ -193,9 +169,8 @@
             Text = "FrmFuncionalidadeLogin";
             Load += FrmFuncionalidadeLogin_Load;
             panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -208,9 +183,7 @@
         private Label label4;
         private Label label2;
         private Label label1;
-        private Label label5;
-        private Label label3;
-        private PictureBox pictureBox2;
         private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
     }
 }

@@ -24,6 +24,7 @@ namespace SistemaFL.Funcionalidades
         public FrmFuncionalidadeLogin(IUsuarioRepositorio repositorio)
         {
             InitializeComponent();
+            this.AcceptButton = btnentrar;
             this.repositorio = repositorio;
         }
         private void btnentrar_Click(object sender, EventArgs e)
@@ -73,6 +74,15 @@ namespace SistemaFL.Funcionalidades
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnentrar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true; // Evita que o Enter ative o botão
+                e.SuppressKeyPress = true;
+            }   
         }
     }
 }

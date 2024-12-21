@@ -136,7 +136,7 @@ namespace SistemaFL
             var form2 = Program.serviceProvider.GetRequiredService<FrmConsultaUsuario>();
             form2.ShowDialog();
 
-            if(form2.id > 0) {
+            if(form2.id >= 0) {
                 var usuario = repositorio.Recuperar(u => u.id == form2.id);
                 if(usuario != null)
                 {
@@ -145,16 +145,27 @@ namespace SistemaFL
                     txtnome.Text = usuario.Nome;
                     txtlogin.Text = usuario.Login;
                     txtsenha.Text = usuario.Senha;
+
+                    pdados.Enabled = true;
+                    btnnovo.Enabled = false;
+                    btnlocalizar.Enabled = false;
+                    btnalterar.Enabled = true;
+                    btncancelar.Enabled = true;
+                    btnexcluir.Enabled = true;
+                    btnsalvar.Enabled = false;
                 }        
             }
-
-            pdados.Enabled = true;
-            btnnovo.Enabled = false;
-            btnlocalizar.Enabled = false;
-            btnalterar.Enabled = true;
-            btncancelar.Enabled = true;
-            btnexcluir.Enabled = true;
-            btnsalvar.Enabled = false;
+            else
+            {
+                pdados.Enabled = false;
+                btnnovo.Enabled = true;
+                btnlocalizar.Enabled = true;
+                btnalterar.Enabled = false;
+                btncancelar.Enabled = false;
+                btnexcluir.Enabled = false;
+                btnsalvar.Enabled = false;
+            }
+            
         }
         public Usuario carregaPropriedades()
         {

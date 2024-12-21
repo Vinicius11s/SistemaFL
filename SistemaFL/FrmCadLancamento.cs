@@ -269,22 +269,29 @@ namespace SistemaFL
 
             var flat = flatRepositorio.Recuperar(f => f.id == form2.id); // Aqui o repositório está usando a entidade Flat
             int flatId = form2.id;
-
             if (flatId >= 0)
             {
-                btncancelar.Enabled = true; 
-                txtidFlat.Text = flatId.ToString();
-                txtDescricaoFlat.Text = flat.Descricao;
-                txttipoInvestimento.Text = flat.TipoInvestimento;
-                MessageBox.Show("Flat selecionado com sucesso!");
-                dtdataLancamento.Enabled = true;
-                if (txttipoInvestimento.Text != "")
+                if (flat != null)
                 {
-                    verificaInvestimento(txttipoInvestimento.Text);
-
+                    btncancelar.Enabled = true;
+                    txtidFlat.Text = flatId.ToString();
+                    txtDescricaoFlat.Text = flat.Descricao;
+                    txttipoInvestimento.Text = flat.TipoInvestimento;
+                    MessageBox.Show("Flat selecionado com sucesso!");
+                    dtdataLancamento.Enabled = true;
+                    if (txttipoInvestimento.Text != "")
+                    {
+                        verificaInvestimento(txttipoInvestimento.Text);
+                    }
+                }
+                else
+                {
+                    plancamento.Enabled = false;
+                    plancamento.Enabled = false;
                 }
             }
             else MessageBox.Show("Flat não encontrado.");
+
 
         }
         private void verificaInvestimento(string TipoInvestimento)

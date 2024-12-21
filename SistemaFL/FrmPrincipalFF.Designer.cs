@@ -157,7 +157,7 @@
             sidebar.Location = new Point(0, 41);
             sidebar.Name = "sidebar";
             sidebar.Padding = new Padding(0, 30, 0, 0);
-            sidebar.Size = new Size(245, 554);
+            sidebar.Size = new Size(205, 554);
             sidebar.TabIndex = 1;
             // 
             // panel2

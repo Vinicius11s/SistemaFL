@@ -85,7 +85,7 @@
             Controls.Add(dgdadosFlats);
             Name = "FrmConsultaFlat";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "FrmConsultaFlat";
+            Text = "Consulta Flats";
             Load += FrmConsultaFlat_Load_1;
             ((System.ComponentModel.ISupportInitialize)dgdadosFlats).EndInit();
             ResumeLayout(false);

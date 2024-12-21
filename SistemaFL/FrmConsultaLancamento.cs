@@ -59,11 +59,6 @@ namespace SistemaFL
                 this.Close();
             }
         }
-        private void FrmConsultaLancamento_Load(object sender, EventArgs e)
-        {
-            txtdescricao.Text = "Digite o número do mês";
-            txtdescricao.ForeColor = Color.Gray;
-        }
 
         public void AjustaColunas()
         {

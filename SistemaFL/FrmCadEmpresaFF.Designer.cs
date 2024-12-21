@@ -95,49 +95,49 @@
             pdados.Controls.Add(label2);
             pdados.Controls.Add(txtid);
             pdados.Controls.Add(label1);
-            pdados.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            pdados.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             pdados.Location = new Point(36, 12);
             pdados.Name = "pdados";
-            pdados.Size = new Size(371, 345);
+            pdados.Size = new Size(378, 319);
             pdados.TabIndex = 0;
             // 
             // txtcidade
             // 
-            txtcidade.Location = new Point(163, 265);
+            txtcidade.Location = new Point(229, 270);
             txtcidade.Name = "txtcidade";
-            txtcidade.Size = new Size(100, 25);
+            txtcidade.Size = new Size(114, 27);
             txtcidade.TabIndex = 21;
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(163, 247);
+            label11.Location = new Point(229, 252);
             label11.Name = "label11";
-            label11.Size = new Size(49, 17);
+            label11.Size = new Size(55, 20);
             label11.TabIndex = 20;
             label11.Text = "Cidade";
             // 
             // txtestado
             // 
-            txtestado.Location = new Point(106, 265);
+            txtestado.Location = new Point(172, 270);
             txtestado.Name = "txtestado";
-            txtestado.Size = new Size(42, 25);
+            txtestado.Size = new Size(42, 27);
             txtestado.TabIndex = 19;
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(106, 247);
+            label10.Location = new Point(169, 250);
             label10.Name = "label10";
-            label10.Size = new Size(49, 17);
+            label10.Size = new Size(54, 20);
             label10.TabIndex = 18;
             label10.Text = "Estado";
             // 
             // txtbairro
             // 
-            txtbairro.Location = new Point(12, 265);
+            txtbairro.Location = new Point(12, 270);
             txtbairro.Name = "txtbairro";
-            txtbairro.Size = new Size(88, 25);
+            txtbairro.Size = new Size(136, 27);
             txtbairro.TabIndex = 17;
             // 
             // label9
@@ -145,23 +145,23 @@
             label9.AutoSize = true;
             label9.Location = new Point(12, 247);
             label9.Name = "label9";
-            label9.Size = new Size(44, 17);
+            label9.Size = new Size(47, 20);
             label9.TabIndex = 16;
             label9.Text = "Bairro";
             // 
             // txtnumero
             // 
-            txtnumero.Location = new Point(242, 215);
+            txtnumero.Location = new Point(322, 215);
             txtnumero.Name = "txtnumero";
-            txtnumero.Size = new Size(21, 25);
+            txtnumero.Size = new Size(21, 27);
             txtnumero.TabIndex = 15;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(242, 197);
+            label8.Location = new Point(322, 197);
             label8.Name = "label8";
-            label8.Size = new Size(23, 17);
+            label8.Size = new Size(26, 20);
             label8.TabIndex = 14;
             label8.Text = "N°";
             // 
@@ -169,7 +169,7 @@
             // 
             txtrua.Location = new Point(73, 215);
             txtrua.Name = "txtrua";
-            txtrua.Size = new Size(163, 25);
+            txtrua.Size = new Size(228, 27);
             txtrua.TabIndex = 13;
             // 
             // label7
@@ -177,7 +177,7 @@
             label7.AutoSize = true;
             label7.Location = new Point(73, 197);
             label7.Name = "label7";
-            label7.Size = new Size(31, 17);
+            label7.Size = new Size(34, 20);
             label7.TabIndex = 12;
             label7.Text = "Rua";
             // 
@@ -185,7 +185,7 @@
             // 
             txtcep.Location = new Point(12, 215);
             txtcep.Name = "txtcep";
-            txtcep.Size = new Size(55, 25);
+            txtcep.Size = new Size(55, 27);
             txtcep.TabIndex = 11;
             // 
             // label6
@@ -193,7 +193,7 @@
             label6.AutoSize = true;
             label6.Location = new Point(12, 197);
             label6.Name = "label6";
-            label6.Size = new Size(31, 17);
+            label6.Size = new Size(34, 20);
             label6.TabIndex = 10;
             label6.Text = "CEP";
             // 
@@ -201,7 +201,7 @@
             // 
             txtrazaosocial.Location = new Point(21, 124);
             txtrazaosocial.Name = "txtrazaosocial";
-            txtrazaosocial.Size = new Size(198, 25);
+            txtrazaosocial.Size = new Size(152, 27);
             txtrazaosocial.TabIndex = 9;
             // 
             // label5
@@ -209,23 +209,23 @@
             label5.AutoSize = true;
             label5.Location = new Point(21, 106);
             label5.Name = "label5";
-            label5.Size = new Size(82, 17);
+            label5.Size = new Size(92, 20);
             label5.TabIndex = 8;
             label5.Text = "Razão Social";
             // 
             // txtcnpj
             // 
-            txtcnpj.Location = new Point(173, 75);
+            txtcnpj.Location = new Point(191, 75);
             txtcnpj.Name = "txtcnpj";
-            txtcnpj.Size = new Size(151, 25);
+            txtcnpj.Size = new Size(152, 27);
             txtcnpj.TabIndex = 7;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(173, 57);
+            label4.Location = new Point(191, 57);
             label4.Name = "label4";
-            label4.Size = new Size(38, 17);
+            label4.Size = new Size(41, 20);
             label4.TabIndex = 6;
             label4.Text = "CNPJ";
             // 
@@ -233,7 +233,7 @@
             // 
             txtinscricaoestadual.Location = new Point(21, 75);
             txtinscricaoestadual.Name = "txtinscricaoestadual";
-            txtinscricaoestadual.Size = new Size(127, 25);
+            txtinscricaoestadual.Size = new Size(152, 27);
             txtinscricaoestadual.TabIndex = 5;
             // 
             // label3
@@ -241,7 +241,7 @@
             label3.AutoSize = true;
             label3.Location = new Point(21, 57);
             label3.Name = "label3";
-            label3.Size = new Size(116, 17);
+            label3.Size = new Size(125, 20);
             label3.TabIndex = 4;
             label3.Text = "Inscrição Estadual";
             // 
@@ -249,7 +249,7 @@
             // 
             txtdescricao.Location = new Point(90, 26);
             txtdescricao.Name = "txtdescricao";
-            txtdescricao.Size = new Size(234, 25);
+            txtdescricao.Size = new Size(253, 27);
             txtdescricao.TabIndex = 3;
             // 
             // label2
@@ -257,7 +257,7 @@
             label2.AutoSize = true;
             label2.Location = new Point(90, 8);
             label2.Name = "label2";
-            label2.Size = new Size(65, 17);
+            label2.Size = new Size(72, 20);
             label2.TabIndex = 2;
             label2.Text = "Descrição";
             // 
@@ -266,7 +266,7 @@
             txtid.Location = new Point(21, 26);
             txtid.Name = "txtid";
             txtid.ReadOnly = true;
-            txtid.Size = new Size(46, 25);
+            txtid.Size = new Size(46, 27);
             txtid.TabIndex = 1;
             // 
             // label1
@@ -274,29 +274,32 @@
             label1.AutoSize = true;
             label1.Location = new Point(21, 8);
             label1.Name = "label1";
-            label1.Size = new Size(51, 17);
+            label1.Size = new Size(57, 20);
             label1.TabIndex = 0;
             label1.Text = "Código";
             // 
             // cbbflatsassociados
             // 
+            cbbflatsassociados.Font = new Font("Segoe UI Semilight", 11.25F);
             cbbflatsassociados.FormattingEnabled = true;
-            cbbflatsassociados.Location = new Point(121, 299);
+            cbbflatsassociados.Location = new Point(28, 302);
             cbbflatsassociados.Name = "cbbflatsassociados";
-            cbbflatsassociados.Size = new Size(146, 25);
+            cbbflatsassociados.Size = new Size(146, 28);
             cbbflatsassociados.TabIndex = 22;
             // 
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(10, 302);
+            label13.Font = new Font("Segoe UI Semilight", 11.25F);
+            label13.Location = new Point(28, 282);
             label13.Name = "label13";
-            label13.Size = new Size(103, 17);
+            label13.Size = new Size(113, 20);
             label13.TabIndex = 8;
             label13.Text = "Flats associados";
             // 
             // panel2
             // 
+            panel2.BackColor = Color.White;
             panel2.Controls.Add(btnlocalizar);
             panel2.Controls.Add(btnexcluir);
             panel2.Controls.Add(btncancelar);
@@ -304,76 +307,94 @@
             panel2.Controls.Add(btnalterar);
             panel2.Controls.Add(btnnovo);
             panel2.Dock = DockStyle.Bottom;
-            panel2.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            panel2.Location = new Point(0, 378);
+            panel2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            panel2.Location = new Point(0, 353);
             panel2.Name = "panel2";
-            panel2.Size = new Size(807, 72);
+            panel2.Size = new Size(807, 97);
             panel2.TabIndex = 1;
             // 
             // btnlocalizar
             // 
-            btnlocalizar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            btnlocalizar.Location = new Point(629, 15);
+            btnlocalizar.BackColor = Color.FromArgb(23, 24, 29);
+            btnlocalizar.FlatAppearance.BorderSize = 2;
+            btnlocalizar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnlocalizar.ForeColor = Color.White;
+            btnlocalizar.Location = new Point(680, 26);
             btnlocalizar.Name = "btnlocalizar";
-            btnlocalizar.Size = new Size(85, 45);
+            btnlocalizar.Size = new Size(103, 52);
             btnlocalizar.TabIndex = 5;
             btnlocalizar.Text = "Localizar";
-            btnlocalizar.UseVisualStyleBackColor = true;
+            btnlocalizar.UseVisualStyleBackColor = false;
             btnlocalizar.Click += btnlocalizar_Click;
             // 
             // btnexcluir
             // 
-            btnexcluir.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            btnexcluir.Location = new Point(521, 15);
+            btnexcluir.BackColor = Color.FromArgb(23, 24, 29);
+            btnexcluir.FlatAppearance.BorderSize = 2;
+            btnexcluir.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnexcluir.ForeColor = Color.White;
+            btnexcluir.Location = new Point(558, 26);
             btnexcluir.Name = "btnexcluir";
-            btnexcluir.Size = new Size(85, 45);
+            btnexcluir.Size = new Size(103, 52);
             btnexcluir.TabIndex = 4;
             btnexcluir.Text = "Excluir";
-            btnexcluir.UseVisualStyleBackColor = true;
+            btnexcluir.UseVisualStyleBackColor = false;
             btnexcluir.Click += btnexcluir_Click;
             // 
             // btncancelar
             // 
-            btncancelar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            btncancelar.Location = new Point(415, 15);
+            btncancelar.BackColor = Color.FromArgb(23, 24, 29);
+            btncancelar.FlatAppearance.BorderSize = 2;
+            btncancelar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btncancelar.ForeColor = Color.White;
+            btncancelar.Location = new Point(427, 26);
             btncancelar.Name = "btncancelar";
-            btncancelar.Size = new Size(85, 45);
+            btncancelar.Size = new Size(103, 52);
             btncancelar.TabIndex = 3;
             btncancelar.Text = "Cancelar";
-            btncancelar.UseVisualStyleBackColor = true;
+            btncancelar.UseVisualStyleBackColor = false;
             btncancelar.Click += btncancelar_Click;
             // 
             // btnsalvar
             // 
-            btnsalvar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            btnsalvar.Location = new Point(305, 15);
+            btnsalvar.BackColor = Color.FromArgb(23, 24, 29);
+            btnsalvar.FlatAppearance.BorderSize = 2;
+            btnsalvar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnsalvar.ForeColor = Color.White;
+            btnsalvar.Location = new Point(295, 26);
             btnsalvar.Name = "btnsalvar";
-            btnsalvar.Size = new Size(85, 45);
+            btnsalvar.Size = new Size(103, 52);
             btnsalvar.TabIndex = 2;
             btnsalvar.Text = "Salvar";
-            btnsalvar.UseVisualStyleBackColor = true;
+            btnsalvar.UseVisualStyleBackColor = false;
             btnsalvar.Click += btnsalvar_Click;
             // 
             // btnalterar
             // 
-            btnalterar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            btnalterar.Location = new Point(199, 15);
+            btnalterar.BackColor = Color.FromArgb(23, 24, 29);
+            btnalterar.FlatAppearance.BorderSize = 2;
+            btnalterar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnalterar.ForeColor = Color.White;
+            btnalterar.Location = new Point(158, 26);
             btnalterar.Name = "btnalterar";
-            btnalterar.Size = new Size(85, 45);
+            btnalterar.Size = new Size(103, 52);
             btnalterar.TabIndex = 1;
             btnalterar.Text = "Alterar";
-            btnalterar.UseVisualStyleBackColor = true;
+            btnalterar.UseVisualStyleBackColor = false;
             btnalterar.Click += btnalterar_Click;
             // 
             // btnnovo
             // 
-            btnnovo.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            btnnovo.Location = new Point(99, 15);
+            btnnovo.BackColor = Color.FromArgb(23, 24, 29);
+            btnnovo.FlatAppearance.BorderSize = 2;
+            btnnovo.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnnovo.ForeColor = Color.White;
+            btnnovo.Location = new Point(27, 26);
             btnnovo.Name = "btnnovo";
-            btnnovo.Size = new Size(85, 45);
+            btnnovo.Size = new Size(103, 52);
             btnnovo.TabIndex = 0;
             btnnovo.Text = "Novo";
-            btnnovo.UseVisualStyleBackColor = true;
+            btnnovo.UseVisualStyleBackColor = false;
             btnnovo.Click += btnnovo_Click;
             // 
             // passociar
@@ -385,16 +406,19 @@
             passociar.Controls.Add(dgAssociarFlat);
             passociar.Controls.Add(label12);
             passociar.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            passociar.Location = new Point(438, 12);
+            passociar.Location = new Point(438, 0);
             passociar.Name = "passociar";
-            passociar.Size = new Size(357, 345);
+            passociar.Size = new Size(357, 347);
             passociar.TabIndex = 2;
             // 
             // btnremover
             // 
-            btnremover.Location = new Point(273, 295);
+            btnremover.FlatAppearance.BorderSize = 2;
+            btnremover.FlatStyle = FlatStyle.Flat;
+            btnremover.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnremover.Location = new Point(181, 298);
             btnremover.Name = "btnremover";
-            btnremover.Size = new Size(81, 30);
+            btnremover.Size = new Size(74, 33);
             btnremover.TabIndex = 7;
             btnremover.Text = "Remover";
             btnremover.UseVisualStyleBackColor = true;
@@ -402,6 +426,9 @@
             // 
             // btnassociar
             // 
+            btnassociar.FlatAppearance.BorderSize = 2;
+            btnassociar.FlatStyle = FlatStyle.Flat;
+            btnassociar.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnassociar.Location = new Point(141, 215);
             btnassociar.Name = "btnassociar";
             btnassociar.Size = new Size(80, 37);
@@ -422,9 +449,10 @@
             // label12
             // 
             label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label12.Location = new Point(131, 11);
             label12.Name = "label12";
-            label12.Size = new Size(87, 17);
+            label12.Size = new Size(103, 21);
             label12.TabIndex = 0;
             label12.Text = "Associar Flats";
             // 
@@ -440,7 +468,7 @@
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "FrmCadEmpresaFF";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "FrmCadEmpresaFF";
+            Text = "Cadastro Empresa";
             Load += FrmCadEmpresaFF_Load;
             pdados.ResumeLayout(false);
             pdados.PerformLayout();

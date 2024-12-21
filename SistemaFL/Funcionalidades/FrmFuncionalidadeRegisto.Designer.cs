@@ -36,6 +36,7 @@
             // 
             // dgdadosFunRegistro
             // 
+            dgdadosFunRegistro.BackgroundColor = Color.FromArgb(23, 24, 29);
             dgdadosFunRegistro.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdadosFunRegistro.Dock = DockStyle.Bottom;
             dgdadosFunRegistro.Location = new Point(0, 107);
@@ -66,13 +67,15 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(800, 450);
             Controls.Add(txtTotalInvestimento);
             Controls.Add(label1);
             Controls.Add(dgdadosFunRegistro);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "FrmFuncionalidadeRegisto";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "FrmFuncionalidadeRegisto";
+            Text = "Registro";
             Load += FrmFuncionalidadeRegisto_Load;
             ((System.ComponentModel.ISupportInitialize)dgdadosFunRegistro).EndInit();
             ResumeLayout(false);

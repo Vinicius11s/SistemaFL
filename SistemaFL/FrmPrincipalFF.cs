@@ -30,7 +30,7 @@ namespace SistemaFL
             if (!menuExpand)
             {
                 menuContainer.Height += 10;
-                if (menuContainer.Height >= 275)
+                if (menuContainer.Height >= 265)
                 {
                     menuTransition.Stop();
                     menuExpand = true;
@@ -68,7 +68,7 @@ namespace SistemaFL
             else
             {
                 sidebar.Width += 10;
-                if (sidebar.Width >= 245)
+                if (sidebar.Width >= 205)
                 {
                     sidebarTransition.Stop();
                     sidebarExpand = true; // Atualiza corretamente o estado para "expandido"
@@ -84,7 +84,7 @@ namespace SistemaFL
             if (!funcExpand)
             {
                 funcContainer.Height += 10;
-                if (funcContainer.Height >= 413)
+                if (funcContainer.Height >= 403)
                 {
                     funcTransition.Stop();
                     funcExpand = true;
