@@ -245,6 +245,7 @@
             Controls.Add(pbotoes);
             Controls.Add(pdados);
             Name = "FrmCadUsuario";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmCadUsuario";
             Load += FrmCadUsuario_Load;
             pdados.ResumeLayout(false);

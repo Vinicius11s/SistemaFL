@@ -71,6 +71,7 @@
             Controls.Add(label1);
             Controls.Add(dgdadosFunRegistro);
             Name = "FrmFuncionalidadeRegisto";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmFuncionalidadeRegisto";
             Load += FrmFuncionalidadeRegisto_Load;
             ((System.ComponentModel.ISupportInitialize)dgdadosFunRegistro).EndInit();

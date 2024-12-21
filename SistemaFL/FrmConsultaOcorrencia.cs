@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using Entidades;
+using Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,20 +26,22 @@ namespace SistemaFL
 
         private void FrmConsultaOcorrencia_Load(object sender, EventArgs e)
         {
-            var lista = repositorio.Listar(e => true);
-            dgdadosocorrencias.DataSource = lista.ToList();
+            var lista = repositorio.Listar(e => true).ToList();
+            dgdadosocorrencias.DataSource = lista;
 
             dgdadosocorrencias.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-            dgdadosocorrencias.Columns["Lancamento"].Visible = false;
-            dgdadosocorrencias.Columns["idFlat"].Visible = false;
 
             dgdadosocorrencias.Columns["id"].HeaderText = "Cód.";
-            dgdadosocorrencias.Columns["oco_valorAntigo"].HeaderText = "Valor Antigo";
+            dgdadosocorrencias.Columns["oco_valorAntigo"].HeaderText = "Valor Ant";
             dgdadosocorrencias.Columns["oco_valorAlteracao"].HeaderText = "Valor Alteração";
             dgdadosocorrencias.Columns["oco_dataAlteracao"].HeaderText = "Data Alteração";
             dgdadosocorrencias.Columns["oco_Tabela"].HeaderText = "Entidade";
             dgdadosocorrencias.Columns["oco_Descricao"].HeaderText = "Descrição";
-            dgdadosocorrencias.Columns["idLancamento"].Visible = false;          
+            dgdadosocorrencias.Columns["idLancamento"].Visible = false;
+            dgdadosocorrencias.Columns["Lancamento"].Visible = false;
+
+            //lancamento.DescricaoFlat = txtDescricaoFlat.Text;
+
         }
 
         private void fecharjanela_Click(object sender, EventArgs e)

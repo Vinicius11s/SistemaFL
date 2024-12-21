@@ -96,6 +96,7 @@
             Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(3, 4, 3, 4);
             Name = "FrmFuncDividendos";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Dividendos";
             Load += FrmFuncDividendos_Load;
             ((System.ComponentModel.ISupportInitialize)dgdadosDiv).EndInit();

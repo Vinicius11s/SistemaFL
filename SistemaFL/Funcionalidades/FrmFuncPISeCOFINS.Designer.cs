@@ -80,6 +80,7 @@
             ForeColor = SystemColors.InfoText;
             Margin = new Padding(4);
             Name = "FrmFuncPISeCOFINS";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Previsão Pis e Cofins";
             Load += FrmFuncPISeCOFINS_Load;
             ((System.ComponentModel.ISupportInitialize)dgdadosPIS).EndInit();

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,7 @@ namespace SistemaFL
 
         private void FrmCadEmpresaFF_Load(object sender, EventArgs e)
         {
+            limpar();
             pdados.Enabled = false;
             passociar.Enabled = false;
             btnnovo.Enabled = true;
@@ -46,6 +48,7 @@ namespace SistemaFL
             btncancelar.Enabled = true;
             btnexcluir.Enabled = false;
             btnlocalizar.Enabled = false;
+
         }
         private void btnsalvar_Click(object sender, EventArgs e)
         {
@@ -75,6 +78,8 @@ namespace SistemaFL
                     btncancelar.Enabled = false;
                     btnexcluir.Enabled = false;
                     btnsalvar.Enabled = false;
+                    pdados.Enabled = false;
+                    passociar.Enabled = false;
                 }
             }
             catch (Exception ex)
@@ -88,6 +93,7 @@ namespace SistemaFL
         {
             limpar();
             pdados.Enabled = false;
+            passociar.Enabled = false;
             btnnovo.Enabled = true;
             btnalterar.Enabled = false;
             btnsalvar.Enabled = false;
@@ -99,17 +105,37 @@ namespace SistemaFL
         {
             if (txtid.Text != "")
             {
-                CarregarFlats();
-                passociar.Enabled = true;
-                pdados.Enabled = true;
-                btnnovo.Enabled = false;
-                btnalterar.Enabled = false;
-                btnsalvar.Enabled = true;
-                btncancelar.Enabled = true;
-                btnexcluir.Enabled = true;
-                btnlocalizar.Enabled = false;
+                var empresa = repositorio.Recuperar(e => e.id == int.Parse(txtid.Text));
+
+                if (empresa != null)
+                {
+                    txtdescricao.Text = empresa.Descricao;
+                    txtrazaosocial.Text = empresa.RazaoSocial;
+                    txtinscricaoestadual.Text = empresa.InscricaoEstadual;
+                    txtcnpj.Text = empresa.Cnpj;
+                    txtrua.Text = empresa.Rua;
+                    txtnumero.Text = empresa.Numero;
+                    txtbairro.Text = empresa.Bairro;
+                    txtcidade.Text = empresa.Cidade;
+                    txtestado.Text = empresa.Estado;
+                    txtcep.Text = empresa.Cep;
+
+                    AtualizarDataGridFlatsNaoAssociados();
+                    CarregarFlats(); // Carrega os flats associados ao ComboBox
+                    passociar.Enabled = true;
+                    pdados.Enabled = true;
+                    btnnovo.Enabled = false;
+                    btnalterar.Enabled = false;
+                    btnsalvar.Enabled = true;
+                    btncancelar.Enabled = true;
+                    btnexcluir.Enabled = true;
+                    btnlocalizar.Enabled = false;
+                }
             }
-            else MessageBox.Show("Localize a Empresa");
+            else
+            {
+                MessageBox.Show("Localize a Empresa");
+            }
         }
         private void btnexcluir_Click(object sender, EventArgs e)
         {
@@ -141,6 +167,13 @@ namespace SistemaFL
 
             if (form2.id > 0)
             {
+                btnnovo.Enabled = false;
+                btnalterar.Enabled = true;
+                btnsalvar.Enabled = false;
+                btncancelar.Enabled = true;
+                btnexcluir.Enabled = true;
+                btnlocalizar.Enabled = false;
+
                 var empresa = repositorio.Recuperar(e => e.id == form2.id);
                 if (empresa != null)
                 {
@@ -155,36 +188,42 @@ namespace SistemaFL
                     txtcidade.Text = empresa.Cidade;
                     txtestado.Text = empresa.Estado;
                     txtcep.Text = empresa.Cep;
+
+                    // Carregar os flats associados à empresa
+                    CarregarFlats(); // Carrega os flats da empresa no ComboBox
                 }
             }
-            btnnovo.Enabled = false;
-            btnalterar.Enabled = true;
-            btnsalvar.Enabled = false;
-            btncancelar.Enabled = true;
-            btnexcluir.Enabled = true;
-            btnlocalizar.Enabled = false;
+            else
+            {
+                btnnovo.Enabled = true;
+                btnalterar.Enabled = false;
+                btnsalvar.Enabled = false;
+                btncancelar.Enabled = false;
+                btnexcluir.Enabled = false;
+                btnlocalizar.Enabled = true;
+            }
+
         }
+
         private void CarregarFlats()
         {
-            dgAssociarFlat.Rows.Clear();
-            var flatsSemEmpresa = flatRepositorio.Listar(f => f.idEmpresa == null);
+            // Carregar os flats associados à empresa
+            var flatsAssociados = flatRepositorio.Listar(f => f.idEmpresa == int.Parse(txtid.Text));
+            cbbflatsassociados.DataSource = flatsAssociados;
+            cbbflatsassociados.DisplayMember = "Descricao"; // Exibe a descrição do flat
+            cbbflatsassociados.ValueMember = "id"; // Usado para o valor do item
 
-            if (flatsSemEmpresa != null && flatsSemEmpresa.Any())
+            // Se houver pelo menos um flat associado, seleciona o primeiro
+            if (cbbflatsassociados.Items.Count > 0)
             {
-                dgAssociarFlat.Columns.Add("id", "Código");
-                dgAssociarFlat.Columns["id"].Visible = false;
-                dgAssociarFlat.Columns.Add("descricao", "Descrição");
-                dgAssociarFlat.Columns.Add("status", "Status");
-                dgAssociarFlat.Columns.Add("valorInvestimento", "Valor do Investimento");
-                dgAssociarFlat.Columns.Add("tipoInvestimento", "Tipo de Investimento");
-                dgAssociarFlat.Columns.Add("dataAquisicao", "Data de Aquisição");
-
-                foreach (var flat in flatsSemEmpresa)
-                {
-                    dgAssociarFlat.Rows.Add(flat.id, flat.Descricao, flat.Status ? "Ativo" : "Inativo", flat.ValorInvestimento, flat.TipoInvestimento, flat.DataAquisicao);
-                }
+                cbbflatsassociados.SelectedIndex = 0; // Seleciona o primeiro flat
+            }
+            else
+            {
+                cbbflatsassociados.SelectedIndex = -1; // Nenhum item será selecionado
             }
         }
+
         public Empresa carregaPropriedades()
         {
             Empresa empresa;
@@ -209,6 +248,21 @@ namespace SistemaFL
         }
         void limpar()
         {
+            if (cbbflatsassociados.Items.Count > 0)
+            {
+                // Remover o DataSource antes de manipular os itens
+                cbbflatsassociados.DataSource = null;
+                cbbflatsassociados.Items.Clear();
+            }
+            else
+
+
+            dgAssociarFlat.Columns.Clear();  // Remove as colunas
+            if(dgAssociarFlat.Rows.Count > 0)
+            {
+                dgAssociarFlat.Rows.Clear();
+
+            }
             txtid.Text = "";
             txtdescricao.Text = "";
             txtcnpj.Text = "";
@@ -221,5 +275,107 @@ namespace SistemaFL
             txtestado.Text = "";
             txtcep.Text = "";
         }
+
+        private void btnassociar_Click(object sender, EventArgs e)
+        {
+            if (dgAssociarFlat.SelectedRows.Count > 0)
+            {
+                var selectedRow = dgAssociarFlat.SelectedRows[0];
+                var flatId = (int)selectedRow.Cells["id"].Value;  // Supondo que a coluna do Id seja chamada "id"
+
+                var flat = flatRepositorio.Recuperar(f => f.id == flatId);
+
+                if (flat != null)
+                {
+                    flat.idEmpresa = int.Parse(txtid.Text);  // O id da empresa atual do formulário
+
+                    flatRepositorio.Alterar(flat);
+                    Program.serviceProvider.GetRequiredService<ContextoSistema>().SaveChanges();
+
+                    MessageBox.Show("Flat associado à empresa com sucesso!");
+
+                    AtualizarDataGridFlatsNaoAssociados();
+                    CarregarFlats(); // Recarrega os flats no ComboBox
+                }
+                else
+                {
+                    MessageBox.Show("Flat não encontrado.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selecione um flat para associar.");
+            }
+        }
+
+        private void btnremover_Click(object sender, EventArgs e)
+        {
+            // Verifica se há algum flat selecionado no ComboBox
+            if (cbbflatsassociados.SelectedItem != null)
+            {
+                // Obtém o flat selecionado
+                var flatId = (int)cbbflatsassociados.SelectedValue; // Usa o ValueMember para obter o ID
+                var flat = flatRepositorio.Recuperar(f => f.id == flatId);
+
+                if (flat != null)
+                {
+                    // Remove a associação com a empresa
+                    flat.idEmpresa = null; // Remove a associação com a empresa
+                    flatRepositorio.Alterar(flat);
+                    Program.serviceProvider.GetRequiredService<ContextoSistema>().SaveChanges();
+
+                    MessageBox.Show("Flat desassociado com sucesso!");
+
+                    AtualizarDataGridFlatsNaoAssociados();
+                    CarregarFlats();
+                    AvancarParaProximoItem();// Recarrega os flats no ComboBox
+
+                }
+                else
+                {
+                    MessageBox.Show("Flat não encontrado.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selecione um flat para remover.");
+            }
+        }
+        private void AtualizarDataGridFlatsNaoAssociados()
+        {
+            // Recupera os flats que não têm empresa associada
+            var flatsNaoAssociados = flatRepositorio.Listar(f => f.idEmpresa == null).ToList();
+
+            // Atualiza o DataGridView com esses flats
+            dgAssociarFlat.DataSource = flatsNaoAssociados;
+
+            // Se necessário, configurar as colunas do DataGridView para exibir apenas as informações desejadas
+            dgAssociarFlat.Columns["id"].Visible = false; // Ocultar a coluna id, caso não queira exibi-la
+            dgAssociarFlat.Columns["Descricao"].HeaderText = "Descrição do Flat"; // Ajustar o nome da coluna
+        }
+        private void AvancarParaProximoItem()
+        {
+            if (cbbflatsassociados.Items.Count > 0)
+            {
+                // Verifica se há um próximo item
+                if (cbbflatsassociados.SelectedIndex < cbbflatsassociados.Items.Count - 1)
+                {
+                    // Avança para o próximo item
+                    cbbflatsassociados.SelectedIndex++;
+                }
+                else
+                {
+                    // Se não houver próximo item, limpa o texto do ComboBox
+                    cbbflatsassociados.SelectedIndex = -1; // Isso remove a seleção atual
+                    cbbflatsassociados.Text = ""; // Limpa o texto
+                }
+            }
+            else
+            {
+                // Se não houver itens, limpa o texto
+                cbbflatsassociados.Text = "";
+            }
+        }
+
     }
 }

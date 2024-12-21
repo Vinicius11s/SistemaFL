@@ -40,7 +40,7 @@
             dgdadosRendimentos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdadosRendimentos.Dock = DockStyle.Top;
             dgdadosRendimentos.Location = new Point(0, 0);
-            dgdadosRendimentos.Margin = new Padding(4, 4, 4, 4);
+            dgdadosRendimentos.Margin = new Padding(4);
             dgdadosRendimentos.Name = "dgdadosRendimentos";
             dgdadosRendimentos.Size = new Size(1004, 423);
             dgdadosRendimentos.TabIndex = 0;
@@ -49,7 +49,7 @@
             // 
             dgdadosTotais.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdadosTotais.Location = new Point(291, 469);
-            dgdadosTotais.Margin = new Padding(4, 4, 4, 4);
+            dgdadosTotais.Margin = new Padding(4);
             dgdadosTotais.Name = "dgdadosTotais";
             dgdadosTotais.Size = new Size(1252, 97);
             dgdadosTotais.TabIndex = 1;
@@ -74,8 +74,9 @@
             Controls.Add(dgdadosTotais);
             Controls.Add(dgdadosRendimentos);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "FrmFuncRendimentoscs";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Rendimentos";
             Load += FrmFuncRendimentoscs_Load;
             ((System.ComponentModel.ISupportInitialize)dgdadosRendimentos).EndInit();

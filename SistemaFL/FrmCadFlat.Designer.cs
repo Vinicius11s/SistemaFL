@@ -408,6 +408,7 @@
             Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(3, 4, 3, 4);
             Name = "FrmCadFlat";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmCadFlat";
             Load += FrmCadFlat_Load;
             pdados.ResumeLayout(false);

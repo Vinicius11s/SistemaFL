@@ -33,6 +33,7 @@ namespace SistemaFL
         }
         private void FrmCadLancamento_Load(object sender, EventArgs e)
         {
+            limpar();
             btnnovo.Enabled = true;
             btnalterar.Enabled = false;
             btncancelar.Enabled = false;
@@ -177,19 +178,9 @@ namespace SistemaFL
             else lancamento = new Lancamento();
 
             lancamento.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
-
-
-            // Atribui as propriedades ao lançamento
             lancamento.DataPagamento = dtdataLancamento.Value;
 
-            // Lógica para definir valores com base no tipo de pagamento
-            /*if (txttipoInvestimento.Text == "Aluguel Venceslau")
-            {
-                if (decimal.TryParse(txtvaloraluguel.Text, out decimal valorAluguelVenceslau)
-                {
-                    lancamento.AluguelVenceslau = valorAluguelVenceslau;
-                }
-            }*/
+          
 
             if(txttipoInvestimento.Text == "Aluguel Venceslau")
             {
@@ -281,6 +272,7 @@ namespace SistemaFL
 
             if (flatId >= 0)
             {
+                btncancelar.Enabled = true; 
                 txtidFlat.Text = flatId.ToString();
                 txtDescricaoFlat.Text = flat.Descricao;
                 txttipoInvestimento.Text = flat.TipoInvestimento;

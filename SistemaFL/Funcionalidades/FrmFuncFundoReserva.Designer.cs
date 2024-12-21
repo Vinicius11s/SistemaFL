@@ -106,6 +106,7 @@
             Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(3, 4, 3, 4);
             Name = "FrmFuncFundoReserva";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Fundo de Reserva";
             Load += FrmFuncFundoReserva_Load;
             ((System.ComponentModel.ISupportInitialize)dgdadosFunRes).EndInit();

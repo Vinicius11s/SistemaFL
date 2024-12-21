@@ -590,17 +590,14 @@ namespace Infraestrutura.Repositorio
             else
             {
                 decimal totalInvestimento = CalcularTotalValorInvestimento();
-                try
+                if (totalInvestimento != 0)
                 {
                     total = total / totalInvestimento;
                     return total;
                 }
-                catch (Exception ex)
-                {
-                    
-                    throw;
-                }
-                
+                else return 0;
+
+
             }
         }
         public decimal CalcularTotalValorInvestimento()

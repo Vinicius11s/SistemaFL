@@ -94,6 +94,7 @@
             Controls.Add(label1);
             Controls.Add(dgdadosusuario);
             Name = "FrmConsultaUsuario";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmConsultaUsuario";
             ((System.ComponentModel.ISupportInitialize)dgdadosusuario).EndInit();
             ResumeLayout(false);

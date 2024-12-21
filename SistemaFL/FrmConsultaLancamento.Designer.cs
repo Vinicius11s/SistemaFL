@@ -94,6 +94,7 @@
             Controls.Add(label1);
             Controls.Add(dgdadoslancamento);
             Name = "FrmConsultaLancamento";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmConsultaLancamento";
             Load += FrmConsultaLancamento_Load;
             ((System.ComponentModel.ISupportInitialize)dgdadoslancamento).EndInit();
