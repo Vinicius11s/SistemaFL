@@ -10,23 +10,27 @@ namespace Interfaces
 {
     public interface IFlatRepositorio : IBaseRepositorio<Flat>
     {
-        //form aluguel + dividendos
+        //Formulário Aluguel + Dividendos
         IEnumerable<dynamic> ObterDadosAluguelDividendos();
         IEnumerable<dynamic> ObterDadosTotaisALDIV(int retorno);
-
-        
-        //form aluguel + dividendos
-
-        IEnumerable<dynamic> ObterDadosInvestimento();
-        decimal CalcularTotalValorInvestimento();
+        //
+        //Formulário Dividendos
         IEnumerable<dynamic> ObterDadosDividendos();
+        IEnumerable<dynamic> ObterDadosTotaisDividendos();
+        //
+        //Formulário Fundo de Reserva
         IEnumerable<dynamic> ObterDadosFunReserva();
+        IEnumerable<dynamic> ObterDadosTotaisFundoReserva();
+        //
+
         IEnumerable<dynamic> ObterDadosRendimentos();
         IEnumerable<dynamic> ObterDadosTotais();
 
         //Form PIS E COFINS
         IEnumerable<object> ObterDadosPISeCOFINS();
-        
+        //
+        IEnumerable<dynamic> ObterDadosInvestimento();
+        decimal CalcularTotalValorInvestimento();
 
     }
 }

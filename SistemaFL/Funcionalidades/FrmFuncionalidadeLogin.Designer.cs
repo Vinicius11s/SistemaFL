@@ -33,14 +33,14 @@
             txtsenha = new TextBox();
             btnentrar = new Button();
             panel1 = new Panel();
+            pictureBox2 = new PictureBox();
             label4 = new Label();
             label2 = new Label();
             label1 = new Label();
             pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // txtlogin
@@ -94,6 +94,16 @@
             panel1.Size = new Size(250, 344);
             panel1.TabIndex = 14;
             // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(12, 59);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(225, 231);
+            pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox2.TabIndex = 0;
+            pictureBox2.TabStop = false;
+            // 
             // label4
             // 
             label4.AutoSize = true;
@@ -129,7 +139,7 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.BackColor = Color.FromArgb(23, 24, 29);
+            pictureBox1.BackColor = Color.Transparent;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(591, 3);
             pictureBox1.Name = "pictureBox1";
@@ -138,16 +148,6 @@
             pictureBox1.TabIndex = 17;
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(12, 59);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(225, 231);
-            pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
-            pictureBox2.TabIndex = 0;
-            pictureBox2.TabStop = false;
             // 
             // FrmFuncionalidadeLogin
             // 
@@ -169,8 +169,8 @@
             Text = "FrmFuncionalidadeLogin";
             Load += FrmFuncionalidadeLogin_Load;
             panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }

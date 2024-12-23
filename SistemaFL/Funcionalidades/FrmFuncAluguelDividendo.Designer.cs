@@ -44,26 +44,25 @@
             dgdadosAlugDiv.Location = new Point(0, 0);
             dgdadosAlugDiv.Margin = new Padding(3, 4, 3, 4);
             dgdadosAlugDiv.Name = "dgdadosAlugDiv";
-            dgdadosAlugDiv.Size = new Size(914, 396);
+            dgdadosAlugDiv.Size = new Size(1015, 396);
             dgdadosAlugDiv.TabIndex = 0;
             // 
             // dgtotaisindividual
             // 
             dgtotaisindividual.BackgroundColor = Color.FromArgb(23, 24, 29);
             dgtotaisindividual.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgtotaisindividual.Location = new Point(0, 434);
+            dgtotaisindividual.Location = new Point(0, 403);
             dgtotaisindividual.Name = "dgtotaisindividual";
-            dgtotaisindividual.Size = new Size(914, 71);
+            dgtotaisindividual.Size = new Size(1741, 78);
             dgtotaisindividual.TabIndex = 1;
             // 
             // dgtotalmes
             // 
             dgtotalmes.BackgroundColor = Color.FromArgb(23, 24, 29);
             dgtotalmes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgtotalmes.Dock = DockStyle.Bottom;
-            dgtotalmes.Location = new Point(0, 538);
+            dgtotalmes.Location = new Point(0, 501);
             dgtotalmes.Name = "dgtotalmes";
-            dgtotalmes.Size = new Size(914, 62);
+            dgtotalmes.Size = new Size(1465, 77);
             dgtotalmes.TabIndex = 2;
             // 
             // FrmFuncAluguelDividendo
@@ -71,7 +70,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(914, 600);
+            ClientSize = new Size(1015, 600);
             Controls.Add(dgtotalmes);
             Controls.Add(dgtotaisindividual);
             Controls.Add(dgdadosAlugDiv);
@@ -81,6 +80,7 @@
             Name = "FrmFuncAluguelDividendo";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Aluguel + Dividendos";
+            WindowState = FormWindowState.Maximized;
             Load += FrmFuncAluguelDividendo_Load;
             ((System.ComponentModel.ISupportInitialize)dgdadosAlugDiv).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgtotaisindividual).EndInit();

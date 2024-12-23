@@ -1,5 +1,6 @@
 ﻿using Infraestrutura.Repositorio;
 using Interfaces;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,36 +16,44 @@ namespace SistemaFL.Funcionalidades
 {
     public partial class FrmFuncAluguelDividendo : Form
     {
-        private IFlatRepositorio flatRepositorio;
-        private ILancamentoRepositorio lancamentoRepositorio;
+        private IFlatRepositorio flatRepositório;
+        private ILancamentoRepositorio lançamentoRepositório;
         public FrmFuncAluguelDividendo(IFlatRepositorio flatRepositorio, ILancamentoRepositorio lancamentoRepositorio)
         {
             InitializeComponent();
-            this.flatRepositorio = flatRepositorio;
-            this.lancamentoRepositorio = lancamentoRepositorio;
+            this.flatRepositório = flatRepositorio;
+            this.lançamentoRepositório = lancamentoRepositorio;
         }
 
         private void FrmFuncAluguelDividendo_Load(object sender, EventArgs e)
         {
-            var dados = flatRepositorio.ObterDadosAluguelDividendos();
+            var dados = flatRepositório.ObterDadosAluguelDividendos();
             dgdadosAlugDiv.DataSource = dados;
+            AjustarFormataçãoGridDados(dgdadosAlugDiv);
 
-            AjustarFormatacaoGrid(dgdadosAlugDiv);
-
-            var dadosTotaisInd = flatRepositorio.ObterDadosTotaisALDIV(1);
+            var dadosTotaisInd = flatRepositório.ObterDadosTotaisALDIV(1);
             dgtotaisindividual.DataSource = dadosTotaisInd;
+            AjustarFormataçãoGridIndividual(dgtotaisindividual);
 
-            var dadosTotais = flatRepositorio.ObterDadosTotaisALDIV(2);
+            var dadosTotais = flatRepositório.ObterDadosTotaisALDIV(2);
             dgtotalmes.DataSource = dadosTotais;
+            AjustarFormataçãoGridTotal(dgtotalmes);
         }
 
-        private void AjustarFormatacaoGrid(DataGridView grid)
+        private void AjustarFormataçãoGridDados(DataGridView grid)
         {
-            grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-
-            dgdadosAlugDiv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             dgdadosAlugDiv.Columns["ValorImovel"].DefaultCellStyle.Format = "C2";
-            dgdadosAlugDiv.Columns["ValorImovel"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("pt-BR"); dgdadosAlugDiv.Columns["AluguelJan"].HeaderText = "Aluguel JAN";
+            grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            dgdadosAlugDiv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
+            foreach (DataGridViewColumn coluna in dgdadosAlugDiv.Columns)
+            {
+                if (coluna.Name.StartsWith("Aluguel") || coluna.Name.StartsWith("Dividendos"))
+                {
+                    coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
+                    coluna.Width = 144;
+                }
+            }
 
             dgdadosAlugDiv.Columns["AluguelJan"].HeaderText = "Aluguel JAN";
             dgdadosAlugDiv.Columns["DividendosJan"].HeaderText = "Dividendos JAN";
@@ -81,7 +90,33 @@ namespace SistemaFL.Funcionalidades
 
             dgdadosAlugDiv.Columns["AluguelDez"].HeaderText = "Aluguel DEZ";
             dgdadosAlugDiv.Columns["DividendosDez"].HeaderText = "Dividendos DEZ";
+        }
+        private void AjustarFormataçãoGridIndividual(DataGridView grid)
+        {
+            foreach (DataGridViewColumn coluna in dgtotaisindividual.Columns)
+            {
+                coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
+                coluna.Width = 144;
+            }
 
+        }
+        private void AjustarFormataçãoGridTotal(DataGridView grid)
+        {
+            dgtotalmes.Columns["Descricao"].HeaderText = "Descrição";
+            grid.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            foreach (DataGridViewColumn coluna in dgtotalmes.Columns)
+            {
+                if (coluna.Name != "Descricao")
+                {
+                    coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
+                    coluna.Width = 288;
+                    coluna.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+                }
+
+            }
         }
     }
 }
+

@@ -28,86 +28,56 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Button btncalcular;
-            Label label1;
             dgdadosDiv = new DataGridView();
-            cbbmesDiv = new ComboBox();
-            txtTotalmes = new TextBox();
-            btncalcular = new Button();
-            label1 = new Label();
+            dgtotais = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dgdadosDiv).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgtotais).BeginInit();
             SuspendLayout();
-            // 
-            // btncalcular
-            // 
-            btncalcular.Location = new Point(21, 90);
-            btncalcular.Margin = new Padding(3, 4, 3, 4);
-            btncalcular.Name = "btncalcular";
-            btncalcular.Size = new Size(167, 30);
-            btncalcular.TabIndex = 7;
-            btncalcular.Text = "Calcular";
-            btncalcular.UseVisualStyleBackColor = true;
-            btncalcular.Click += btncalcular_Click;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(14, 32);
-            label1.Name = "label1";
-            label1.Size = new Size(128, 20);
-            label1.TabIndex = 6;
-            label1.Text = "Calcular total mês";
             // 
             // dgdadosDiv
             // 
+            dgdadosDiv.BackgroundColor = Color.FromArgb(23, 24, 29);
             dgdadosDiv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosDiv.Dock = DockStyle.Bottom;
-            dgdadosDiv.Location = new Point(0, 183);
+            dgdadosDiv.Dock = DockStyle.Top;
+            dgdadosDiv.Location = new Point(0, 0);
             dgdadosDiv.Margin = new Padding(3, 4, 3, 4);
             dgdadosDiv.Name = "dgdadosDiv";
-            dgdadosDiv.Size = new Size(914, 417);
+            dgdadosDiv.Size = new Size(814, 453);
             dgdadosDiv.TabIndex = 0;
             // 
-            // cbbmesDiv
+            // dgtotais
             // 
-            cbbmesDiv.FormattingEnabled = true;
-            cbbmesDiv.Location = new Point(21, 55);
-            cbbmesDiv.Name = "cbbmesDiv";
-            cbbmesDiv.Size = new Size(167, 28);
-            cbbmesDiv.TabIndex = 9;
-            // 
-            // txtTotalmes
-            // 
-            txtTotalmes.Location = new Point(204, 58);
-            txtTotalmes.Name = "txtTotalmes";
-            txtTotalmes.Size = new Size(100, 27);
-            txtTotalmes.TabIndex = 10;
+            dgtotais.BackgroundColor = Color.FromArgb(23, 24, 29);
+            dgtotais.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgtotais.Dock = DockStyle.Bottom;
+            dgtotais.Location = new Point(0, 491);
+            dgtotais.Name = "dgtotais";
+            dgtotais.Size = new Size(814, 109);
+            dgtotais.TabIndex = 1;
             // 
             // FrmFuncDividendos
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 600);
-            Controls.Add(txtTotalmes);
-            Controls.Add(cbbmesDiv);
-            Controls.Add(btncalcular);
-            Controls.Add(label1);
+            BackColor = Color.White;
+            ClientSize = new Size(814, 600);
+            Controls.Add(dgtotais);
             Controls.Add(dgdadosDiv);
             Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Margin = new Padding(3, 4, 3, 4);
             Name = "FrmFuncDividendos";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Dividendos";
             Load += FrmFuncDividendos_Load;
             ((System.ComponentModel.ISupportInitialize)dgdadosDiv).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgtotais).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private DataGridView dgdadosDiv;
-        private ComboBox cbbmesDiv;
-        private TextBox txtTotalmes;
+        private DataGridView dgtotais;
     }
 }

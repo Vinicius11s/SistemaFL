@@ -26,49 +26,14 @@ namespace SistemaFL.Funcionalidades
         {
             var dados = flatRepositorio.ObterDadosFunReserva();
             dgdadosFunRes.DataSource = dados;
-
             dgdadosFunRes.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
 
-            cbbMesFunRes.Items.Clear();
-            cbbMesFunRes.Items.AddRange(new string[]{
-                "Janeiro",
-                "Fevereiro",
-                "Março",
-                "Abril",
-                "Maio",
-                "Junho",
-                "Julho",
-                "Agosto",
-                "Setembro",
-                "Outubro",
-                "Novembro",
-                "Dezembro",
-                "Todos"
-            });
+            var totais = flatRepositorio.ObterDadosTotaisFundoReserva();
+            dgtotais.DataSource = totais;
+            dgtotais.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
 
-        }
 
-        private void btncalcular_Click(object sender, EventArgs e)
-        {
-            if (cbbMesFunRes.SelectedIndex > 0)
-            {
-                decimal SomaFundos = 0;
 
-                if (cbbMesFunRes.SelectedIndex < 12)
-                {
-                    int mesEscolhido = cbbMesFunRes.SelectedIndex + 1;
-                    var lancamentos = lancamentoRepositorio.Listar(r => r.DataPagamento.Month == mesEscolhido);
-
-                    SomaFundos = lancamentos.Sum(r => r.ValorFundoReserva ?? 0);
-                }
-                else if (cbbMesFunRes.SelectedIndex == 12)
-                {
-                    var lancamentoTodos = lancamentoRepositorio.Listar(r => true);
-                    SomaFundos = lancamentoTodos.Sum(l => l.ValorFundoReserva ?? 0);
-                }
-                txttotalFunRes.Text = SomaFundos.ToString();
-            }
-            else txttotalFunRes.Text = String.Empty;
         }
     }
 }

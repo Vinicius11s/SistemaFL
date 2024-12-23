@@ -22,7 +22,7 @@ namespace Infraestrutura.Repositorio
         {
             _context = contexto;
         }
-        //Form Registros
+        //Formulário Registros
         public IEnumerable<dynamic> ObterDadosInvestimento()
         {
             var dadosInvestimento = _context.Flat
@@ -49,7 +49,7 @@ namespace Infraestrutura.Repositorio
             return _context.Flat.Sum(flat => flat.ValorInvestimento);
         }
         //
-        //form Aluguel + Dividendos
+        //Formulário Aluguel + Dividendos
         public IEnumerable<dynamic> ObterDadosAluguelDividendos()
         {
 
@@ -210,7 +210,6 @@ namespace Infraestrutura.Repositorio
                 {
                     new
                     {
-                        Descricao = "Total Individual",
                         AlugueisJan = totalAJ,
                         DividendosJan = totalDJ,
 
@@ -256,51 +255,27 @@ namespace Infraestrutura.Repositorio
                 {
                     new
                     {
-                        Descricao = "Total Individual",
-                        AlugueisJan = totalAJ,
-                        DividendosJan = totalDJ,
-
-                        AlugueisFev = totalAF,
-                        DividendosFev = totalDF,
-
-                        AlugueisMar = totalAM,
-                        DividendosMar = totalDM,
-
-                        AlugueisAbr = totalAA,
-                        DividendosAbr = totalDA,
-
-                        AlugueisMai = totalAMai,
-                        DividendosMai = totalDMai,
-
-                        AlugueisJun = totalAJun,
-                        DividendosJun = totalDJun,
-
-                        AlugueisJul = totalAJul,
-                        DividendosJul = totalDJul,
-
-                        AlugueisAgo = totalAago,
-                        DividendosAgo = totalDago,
-
-                        AlugueisSet = totalAset,
-                        DividendosSet = totalDset,
-
-                        AlugueisOut = totalAout,
-                        DividendosOut = totalDout,
-
-                        AlugueisNov = totalAnov,
-                        DividendosNov = totalDnov,
-
-                        AlugueisDez = totalAdez,
-                        DividendosDez = totalDez,
+                        Descricao = "Total Mês",
+                        Janeiro = totalMesJan,
+                        Fevereiro = totalMesFev,
+                        Marco = totalMesMar,
+                        Abril = totalMesAbr,
+                        Maio = totalMesMai,
+                        Junho = totalMesJun,
+                        Julho = totalMesJul,
+                        Agosto = totalMesAgo,
+                        Setembro = totalMesSet,
+                        Outubro = totalMesOut,
+                        Novembro = totalMesNov,
+                        Dezembro = totalMesDez
                     }
                 };
                 return dadosTotaisMes;
             }
         }
-
         public decimal CalculaTotaisPorMes(int mes, bool dividendos)
         {
-            if(dividendos == false)
+            if (dividendos == false)
             {
                 var totalAluguel = _context.Lancamento
                 .Where(l => (l.DataPagamento.Month == mes && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
@@ -315,10 +290,10 @@ namespace Infraestrutura.Repositorio
                .Sum(l => (l.ValorDividendos ?? 0));
 
                 return totalDividendos;
-            }          
-       }
+            }
+        }
         //
-
+        //Formulário Dividendos
         public IEnumerable<dynamic> ObterDadosDividendos()
         {
             var dadosDividendos = _context.Flat
@@ -387,6 +362,44 @@ namespace Infraestrutura.Repositorio
 
             return dadosDividendos;
         }
+        public IEnumerable<dynamic> ObterDadosTotaisDividendos()
+        {
+            var TTJan = CalculaTotaisPorMes(1, true);
+            var TTFev = CalculaTotaisPorMes(2, true);
+            var TTMar = CalculaTotaisPorMes(3, true);
+            var TTAbr = CalculaTotaisPorMes(4, true);
+            var TTMai = CalculaTotaisPorMes(5, true);
+            var TTJun = CalculaTotaisPorMes(6, true);
+            var TTJul = CalculaTotaisPorMes(7, true);
+            var TTAgo = CalculaTotaisPorMes(8, true);
+            var TTSet = CalculaTotaisPorMes(9, true);
+            var TTOut = CalculaTotaisPorMes(10, true);
+            var TTNov = CalculaTotaisPorMes(11, true);
+            var TTDez = CalculaTotaisPorMes(12, true);
+
+            var totalDiv = new List<object>
+                {
+                    new
+                    {
+                        Descricao = "Total do Mês",
+                        Janeiro = TTJan,
+                        Fevereiro = TTFev,
+                        Marco = TTMar,
+                        Abril = TTAbr,
+                        Maio = TTMai,
+                        Junho = TTJun,
+                        Julho = TTJul,
+                        Agosto = TTAgo,
+                        Setembro = TTSet,
+                        Outubro = TTOut,
+                        Novembro = TTNov,
+                        Dezembro = TTDez
+                    }
+                };
+            return totalDiv;
+        }
+        //
+        //Formulário Fundo de Reserva
         public IEnumerable<dynamic> ObterDadosFunReserva()
         {
             var dadosFunReserva = _context.Flat
@@ -432,11 +445,39 @@ namespace Infraestrutura.Repositorio
                     DEZEMBRO = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 12)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M
-
-
                 }).ToList();
             return dadosFunReserva;
         }
+        public IEnumerable<dynamic> ObterDadosTotaisFundoReserva()
+        {
+            var totaisFR = _context.Lancamento
+               .Where(l => l.ValorFundoReserva > 0)  // Filtra apenas os lançamentos com valor maior que 0
+               .GroupBy(l => l.DataPagamento.Month)  // Agrupa por mês
+               .Select(g => new
+               {
+                   Mes = g.Key,  // Mês do agrupamento
+                   Total = g.Sum(l => l.ValorFundoReserva)  // Soma os valores do fundo de reserva
+               })
+               .ToList();
+            var resultado = new
+            {
+                Descricao = "TOTAL",
+                Janeiro = totaisFR.FirstOrDefault(x => x.Mes == 1)?.Total ?? 0.00M,
+                Fevereiro = totaisFR.FirstOrDefault(x => x.Mes == 2)?.Total ?? 0.00M,
+                Março = totaisFR.FirstOrDefault(x => x.Mes == 3)?.Total ?? 0.00M,
+                Abril = totaisFR.FirstOrDefault(x => x.Mes == 4)?.Total ?? 0.00M,
+                Maio = totaisFR.FirstOrDefault(x => x.Mes == 5)?.Total ?? 0.00M,
+                Junho = totaisFR.FirstOrDefault(x => x.Mes == 6)?.Total ?? 0.00M,
+                Julho = totaisFR.FirstOrDefault(x => x.Mes == 7)?.Total ?? 0.00M,
+                Agosto = totaisFR.FirstOrDefault(x => x.Mes == 8)?.Total ?? 0.00M,
+                Setembro = totaisFR.FirstOrDefault(x => x.Mes == 9)?.Total ?? 0.00M,
+                Outubro = totaisFR.FirstOrDefault(x => x.Mes == 10)?.Total ?? 0.00M,
+                Novembro = totaisFR.FirstOrDefault(x => x.Mes == 11)?.Total ?? 0.00M,
+                Dezembro = totaisFR.FirstOrDefault(x => x.Mes == 12)?.Total ?? 0.00M
+            };
+            return new List<dynamic> { resultado };
+        }
+        //
         public IEnumerable<dynamic> ObterDadosRendimentos()
         {
             var flats = _context.Flat

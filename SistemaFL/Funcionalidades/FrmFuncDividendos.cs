@@ -22,34 +22,18 @@ namespace SistemaFL.Funcionalidades
             this.flatRepositorio = flatRepositorio;
             this.lancamentoRepositorio = lancamentoRepositorio;
         }
-        private void btncalcular_Click(object sender, EventArgs e)
-        {
-            if (cbbmesDiv.SelectedIndex >= 0)
-            {
-                decimal somaDividendos = 0;
-
-                if (cbbmesDiv.SelectedIndex < 12) // Um mês específico foi selecionado
-                {
-                    int numeroMes = cbbmesDiv.SelectedIndex + 1;
-                    var lancamentoMes = lancamentoRepositorio.Listar(e => e.DataPagamento.Month == numeroMes);
-
-                    somaDividendos = lancamentoMes.Sum(l => l.ValorDividendos ?? 0);
-                }
-                else if (cbbmesDiv.SelectedIndex == 12) // "Todos" foi selecionado
-                {
-                    var lancamentoTodos = lancamentoRepositorio.Listar(e => true);
-                    somaDividendos = lancamentoTodos.Sum(l => l.ValorDividendos ?? 0);
-                }               
-                txtTotalmes.Text = somaDividendos.ToString();
-            }
-            else txtTotalmes.Text = string.Empty;
-        }
 
         private void FrmFuncDividendos_Load(object sender, EventArgs e)
         {
             var dados = flatRepositorio.ObterDadosDividendos();
             dgdadosDiv.DataSource = dados;
+            AjustarFormataçãoGridDados(dgdadosDiv);
 
+            var totais = flatRepositorio.ObterDadosTotaisDividendos();
+            dgtotais.DataSource = totais;
+        }
+        private void AjustarFormataçãoGridDados(DataGridView grid)
+        {
             dgdadosDiv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             dgdadosDiv.Columns["ValorImovel"].DefaultCellStyle.Format = "C2";
             dgdadosDiv.Columns["ValorImovel"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("pt-BR"); dgdadosDiv.Columns["DividendosJan"].HeaderText = "Dividendos JAN";
@@ -66,25 +50,6 @@ namespace SistemaFL.Funcionalidades
             dgdadosDiv.Columns["DividendosOut"].HeaderText = "Dividendos OUT";
             dgdadosDiv.Columns["DividendosNov"].HeaderText = "Dividendos NOV";
             dgdadosDiv.Columns["DividendosDez"].HeaderText = "Dividendos DEZ";
-
-
-            cbbmesDiv.Items.Clear();
-            cbbmesDiv.Items.AddRange(new string[]
-            {
-                "Janeiro",
-                "Fevereiro",
-                "Março",
-                "Abril",
-                "Maio",
-                "Junho",
-                "Julho",
-                "Agosto",
-                "Setembro",
-                "Outubro",
-                "Novembro",
-                "Dezembro",
-                "Todos"
-            });
         }
     }
 }
