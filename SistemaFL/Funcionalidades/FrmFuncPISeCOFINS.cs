@@ -24,14 +24,13 @@ namespace SistemaFL.Funcionalidades
 
         private void FrmFuncPISeCOFINS_Load(object sender, EventArgs e)
         {
-            var dados = repositorio.ObterDadosAluguelVenceslau();
+            var dados = repositorio.ObterDadosPISeCOFINS();
             dgdadosPIS.DataSource = dados;
 
             dgdadosPIS.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
         private void dgdadosPIS_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            // Verifica se a célula contém um valor numérico
             if (e.Value != null && e.Value is decimal or double or int)
             {
                 // Formata o valor para incluir separador de milhar e duas casas decimais
@@ -43,7 +42,28 @@ namespace SistemaFL.Funcionalidades
         private void dgdadosPIS_CellFormatting_1(object sender, DataGridViewCellFormattingEventArgs e)
         {
             dgdadosPIS.CellFormatting += dgdadosPIS_CellFormatting;
+            if ((dgdadosPIS.Rows[e.RowIndex].Cells["Descricao"].Value != null &&
+                     dgdadosPIS.Rows[e.RowIndex].Cells["Descricao"].Value.ToString() == "Aluguel Venceslau") ||
+                    (dgdadosPIS.Rows[e.RowIndex].Cells["Descricao"].Value != null &&
+                     dgdadosPIS.Rows[e.RowIndex].Cells["Descricao"].Value.ToString() == "Aluguel Flats") ||
+                    (dgdadosPIS.Rows[e.RowIndex].Cells["Descricao"].Value != null &&
+                     dgdadosPIS.Rows[e.RowIndex].Cells["Descricao"].Value.ToString() == "Fundo de Reserva Flats") ||
+                    (dgdadosPIS.Rows[e.RowIndex].Cells["Descricao"].Value != null &&
+                     dgdadosPIS.Rows[e.RowIndex].Cells["Descricao"].Value.ToString() == "Base de Cálculo (PIS/COFINS)"))
+            {
+                // Defina a cor do texto para verde para essa linha
+                e.CellStyle.ForeColor = Color.Green;
+            }
 
+            if ((dgdadosPIS.Rows[e.RowIndex].Cells["Descricao"].Value != null &&
+                     dgdadosPIS.Rows[e.RowIndex].Cells["Descricao"].Value.ToString() == "PIS") ||
+                    (dgdadosPIS.Rows[e.RowIndex].Cells["Descricao"].Value != null &&
+                     dgdadosPIS.Rows[e.RowIndex].Cells["Descricao"].Value.ToString() == "COFINS"))
+            {
+                // Defina a cor do texto para verde para essa linha
+                e.CellStyle.ForeColor = Color.Red;
+            }
         }
+
     }
 }

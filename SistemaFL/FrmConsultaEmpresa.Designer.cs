@@ -74,6 +74,7 @@
             dgdados.Size = new Size(807, 313);
             dgdados.TabIndex = 3;
             dgdados.CellDoubleClick += dgdados_CellDoubleClick;
+            dgdados.CellFormatting += dgdados_CellFormatting;
             // 
             // FrmConsultaEmpresa
             // 

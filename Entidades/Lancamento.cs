@@ -22,8 +22,6 @@ namespace Entidades
         public Decimal?  ValorFundoReserva { get; set; }
         public Decimal? AluguelVenceslau { get; set; }
 
-
-
         public int idFlat { get; set; }
         public string? DescricaoFlat { get; set; }
         public Flat? Flat { get; set; }
@@ -31,10 +29,6 @@ namespace Entidades
         public int? idUsuario { get; set; }
         public Usuario? Usuario { get; set; }       
 
-
-        public virtual ICollection<Ocorrencia> Ocorrencias { get; set; }
-
-
-        
+        public virtual ICollection<Ocorrencia> Ocorrencias { get; set; }       
     }
 }

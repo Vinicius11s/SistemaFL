@@ -50,9 +50,11 @@ namespace SistemaFL.Funcionalidades
                     coluna.HeaderText = "%";
                 }
             }
+
             dgdadosRendimentos.Columns["RendimentoAnual"].HeaderText = "Rendimento Anual";
-            dgdadosRendimentos.Columns["PorcentagemAnual"].HeaderText = "Média(%) Anual";
-            dgdadosRendimentos.Columns["PorcentagemAnual"].DefaultCellStyle.Format = "N2";
+            dgdadosRendimentos.Columns["PorceAnual"].HeaderText = "Média(%) Anual";
+            dgdadosRendimentos.Columns["PorceAnual"].DefaultCellStyle.Format = "N2";
+            dgdadosRendimentos.Columns["PorceAnual"].Width = 150;
         }
     }
 }

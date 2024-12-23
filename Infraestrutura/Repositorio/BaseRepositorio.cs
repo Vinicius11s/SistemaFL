@@ -72,6 +72,11 @@ namespace InfraEstrutura.Repositorio
                 .SingleOrDefault();
 
         }
-
+        public virtual IQueryable<T> ListarQuery(Expression<Func<T, bool>> expressao)
+        {
+            return this._tabela
+                .Where(expressao)
+                .AsQueryable();
+        }
     }
 }

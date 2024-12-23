@@ -54,5 +54,32 @@ namespace SistemaFL
             dgdados.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
 
         }
+
+        private void dgdados_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Verifica se estamos formatando a coluna CnpjRecebimento
+            if (dgdados.Columns[e.ColumnIndex].Name == "Cnpj")
+            {
+                // Verifica se a célula contém um valor válido
+                if (e.Value != null && e.Value is string cnpj)
+                {
+                    // Aplica a máscara de CNPJ ao valor
+                    e.Value = FormatCnpj(cnpj);
+                }
+            }
+        }
+        private string FormatCnpj(string cnpj)
+        {
+            // Remove quaisquer caracteres não numéricos
+            cnpj = new string(cnpj.Where(char.IsDigit).ToArray());
+
+            // Verifica se o CNPJ tem o tamanho correto
+            if (cnpj.Length == 14)
+            {
+                return string.Format("{0:00\\.000\\.000\\/0000\\-00}", double.Parse(cnpj));
+            }
+
+            return cnpj; // Retorna o valor original caso não seja um CNPJ válido
+        }
     }
 }

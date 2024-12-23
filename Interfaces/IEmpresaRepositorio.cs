@@ -9,5 +9,6 @@ namespace Interfaces
 {
     public interface IEmpresaRepositorio : IBaseRepositorio<Empresa>
     {
+        Empresa BuscarPorId(int id);
     }
 }

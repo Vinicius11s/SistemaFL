@@ -29,6 +29,19 @@ namespace SistemaFL.Funcionalidades
             var dados = flatRepositorio.ObterDadosAluguelDividendos();
             dgdadosAlugDiv.DataSource = dados;
 
+            AjustarFormatacaoGrid(dgdadosAlugDiv);
+
+            var dadosTotaisInd = flatRepositorio.ObterDadosTotaisALDIV(1);
+            dgtotaisindividual.DataSource = dadosTotaisInd;
+
+            var dadosTotais = flatRepositorio.ObterDadosTotaisALDIV(2);
+            dgtotalmes.DataSource = dadosTotais;
+        }
+
+        private void AjustarFormatacaoGrid(DataGridView grid)
+        {
+            grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
             dgdadosAlugDiv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             dgdadosAlugDiv.Columns["ValorImovel"].DefaultCellStyle.Format = "C2";
             dgdadosAlugDiv.Columns["ValorImovel"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("pt-BR"); dgdadosAlugDiv.Columns["AluguelJan"].HeaderText = "Aluguel JAN";
@@ -69,53 +82,6 @@ namespace SistemaFL.Funcionalidades
             dgdadosAlugDiv.Columns["AluguelDez"].HeaderText = "Aluguel DEZ";
             dgdadosAlugDiv.Columns["DividendosDez"].HeaderText = "Dividendos DEZ";
 
-            cbbmeses.Items.Clear();
-            cbbmeses.Items.AddRange(new string[]
-            {
-                "Janeiro",
-                "Fevereiro",
-                "Março",
-                "Abril",
-                "Maio",
-                "Junho",
-                "Julho",
-                "Agosto",
-                "Setembro",
-                "Outubro",
-                "Novembro",
-                "Dezembro",
-                "Todos"
-            });
-        }
-        private void btncalcular_Click(object sender, EventArgs e)
-        {
-            if (cbbmeses.SelectedIndex >= 0)
-            {
-                decimal somaAluguel = 0;
-                decimal somaDividendos = 0;
-
-                if (cbbmeses.SelectedIndex < 12) // Um mês específico foi selecionado
-                {
-                    int numeroMes = cbbmeses.SelectedIndex + 1;
-                    var lancamentoMes = lancamentoRepositorio.Listar(e => e.DataPagamento.Month == numeroMes);
-
-                    somaAluguel = lancamentoMes.Sum(l => l.ValorAluguel ?? 0);
-                    somaDividendos = lancamentoMes.Sum(l => l.ValorDividendos ?? 0);
-                }
-                else if (cbbmeses.SelectedIndex == 12) // "Todos" foi selecionado
-                {
-                    var lancamentoTodos = lancamentoRepositorio.Listar(e => true);
-                    somaAluguel = lancamentoTodos.Sum(l => l.ValorAluguel ?? 0);
-                    somaDividendos = lancamentoTodos.Sum(l => l.ValorDividendos ?? 0);
-                }
-
-                decimal somaTotal = somaAluguel + somaDividendos;
-                txtTotalmes.Text = somaTotal.ToString();
-            }
-            else
-            {
-                txtTotalmes.Text = string.Empty;
-            }
         }
     }
 }

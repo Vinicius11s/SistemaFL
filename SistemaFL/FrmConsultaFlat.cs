@@ -14,41 +14,56 @@ namespace SistemaFL
     public partial class FrmConsultaFlat : Form
     {
         private IFlatRepositorio repositorio;
+        private IEmpresaRepositorio empresaRepositorio;
         public int id;
-        public FrmConsultaFlat(IFlatRepositorio repositorio)
+        public FrmConsultaFlat(IFlatRepositorio repositorio, IEmpresaRepositorio empresaRepositorio)
         {
             InitializeComponent();
             this.repositorio = repositorio;
+            this.empresaRepositorio = empresaRepositorio;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //No clique do botão localizar, vamos fazer um select
-            if(txtdescricao.Text == "Digite aqui a descrição do Flat")
+            if (txtdescricao.Text == "Digite aqui a descrição do Flat")
             {
                 txtdescricao.Text = "";
             }
-            
-            
-            var lista = repositorio.Listar(e => e.Descricao.Contains(txtdescricao.Text));
-            dgdadosFlats.DataSource = lista;
-            
-            
 
-            if (lista.Count > 0)
+            var listaFlats = repositorio.Listar(f => f.Descricao.Contains(txtdescricao.Text)).Select(f => new
+            {
+                f.id,
+                f.Descricao,
+                f.DataAquisicao,
+                f.Status,
+                f.TipoInvestimento,
+                f.ValorInvestimento,
+                f.Rua,
+                f.Unidade,
+                f.Bairro,
+                f.Cidade,
+                f.Estado,
+                Empresa = f.idEmpresa.HasValue
+                          ? empresaRepositorio.BuscarPorId(f.idEmpresa.Value)?.Descricao
+                          : "Não Associada" // Verificando se o idEmpresa é válido
+            }).ToList();
+
+            dgdadosFlats.DataSource = listaFlats;
+
+            if (listaFlats.Count > 0)
             {
                 dgdadosFlats.Columns["id"].HeaderText = "Código";
-                dgdadosFlats.Columns["descricao"].HeaderText = "Descrição";
+                dgdadosFlats.Columns["Descricao"].HeaderText = "Descrição";
                 dgdadosFlats.Columns["DataAquisicao"].HeaderText = "Data Aquisição";
                 dgdadosFlats.Columns["TipoInvestimento"].HeaderText = "Tipo Investimento";
-                dgdadosFlats.Columns["Empresa"].Visible = false;
-                dgdadosFlats.Columns["Lancamentos"].Visible = false;
-                dgdadosFlats.Columns["Ocorrencias"].Visible = false;
-                //configuração para mostrar coluna em reais
+                dgdadosFlats.Columns["Empresa"].HeaderText = "Empresa";  // Nome da empresa
+                dgdadosFlats.Columns["ValorInvestimento"].HeaderText = "Valor Investimento";
+
+                // Configuração para mostrar coluna em reais
                 dgdadosFlats.Columns["ValorInvestimento"].DefaultCellStyle.Format = "C2";
                 dgdadosFlats.Columns["ValorInvestimento"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("pt-BR");
-                dgdadosFlats.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
 
+                dgdadosFlats.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             }
         }
         private void dgdadosFlats_CellDoubleClic(object sender, DataGridViewCellEventArgs e)

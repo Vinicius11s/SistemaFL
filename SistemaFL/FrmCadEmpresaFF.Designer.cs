@@ -317,7 +317,7 @@
             // 
             btnlocalizar.BackColor = Color.FromArgb(23, 24, 29);
             btnlocalizar.FlatAppearance.BorderSize = 2;
-            btnlocalizar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnlocalizar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btnlocalizar.ForeColor = Color.White;
             btnlocalizar.Location = new Point(680, 26);
             btnlocalizar.Name = "btnlocalizar";
@@ -331,7 +331,7 @@
             // 
             btnexcluir.BackColor = Color.FromArgb(23, 24, 29);
             btnexcluir.FlatAppearance.BorderSize = 2;
-            btnexcluir.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnexcluir.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btnexcluir.ForeColor = Color.White;
             btnexcluir.Location = new Point(558, 26);
             btnexcluir.Name = "btnexcluir";
@@ -345,7 +345,7 @@
             // 
             btncancelar.BackColor = Color.FromArgb(23, 24, 29);
             btncancelar.FlatAppearance.BorderSize = 2;
-            btncancelar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btncancelar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btncancelar.ForeColor = Color.White;
             btncancelar.Location = new Point(427, 26);
             btncancelar.Name = "btncancelar";
@@ -359,7 +359,7 @@
             // 
             btnsalvar.BackColor = Color.FromArgb(23, 24, 29);
             btnsalvar.FlatAppearance.BorderSize = 2;
-            btnsalvar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnsalvar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btnsalvar.ForeColor = Color.White;
             btnsalvar.Location = new Point(295, 26);
             btnsalvar.Name = "btnsalvar";
@@ -373,7 +373,7 @@
             // 
             btnalterar.BackColor = Color.FromArgb(23, 24, 29);
             btnalterar.FlatAppearance.BorderSize = 2;
-            btnalterar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnalterar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btnalterar.ForeColor = Color.White;
             btnalterar.Location = new Point(158, 26);
             btnalterar.Name = "btnalterar";
@@ -387,7 +387,7 @@
             // 
             btnnovo.BackColor = Color.FromArgb(23, 24, 29);
             btnnovo.FlatAppearance.BorderSize = 2;
-            btnnovo.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnnovo.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btnnovo.ForeColor = Color.White;
             btnnovo.Location = new Point(27, 26);
             btnnovo.Name = "btnnovo";
@@ -416,9 +416,9 @@
             btnremover.FlatAppearance.BorderSize = 2;
             btnremover.FlatStyle = FlatStyle.Flat;
             btnremover.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnremover.Location = new Point(181, 298);
+            btnremover.Location = new Point(180, 301);
             btnremover.Name = "btnremover";
-            btnremover.Size = new Size(74, 33);
+            btnremover.Size = new Size(74, 29);
             btnremover.TabIndex = 7;
             btnremover.Text = "Remover";
             btnremover.UseVisualStyleBackColor = true;
@@ -428,10 +428,10 @@
             // 
             btnassociar.FlatAppearance.BorderSize = 2;
             btnassociar.FlatStyle = FlatStyle.Flat;
-            btnassociar.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnassociar.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnassociar.Location = new Point(141, 215);
             btnassociar.Name = "btnassociar";
-            btnassociar.Size = new Size(80, 37);
+            btnassociar.Size = new Size(82, 39);
             btnassociar.TabIndex = 6;
             btnassociar.Text = "Associar";
             btnassociar.UseVisualStyleBackColor = true;
@@ -439,7 +439,8 @@
             // 
             // dgAssociarFlat
             // 
-            dgAssociarFlat.BackgroundColor = Color.FromArgb(23, 24, 29);
+            dgAssociarFlat.BackgroundColor = Color.WhiteSmoke;
+            dgAssociarFlat.BorderStyle = BorderStyle.None;
             dgAssociarFlat.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgAssociarFlat.Location = new Point(28, 40);
             dgAssociarFlat.Name = "dgAssociarFlat";

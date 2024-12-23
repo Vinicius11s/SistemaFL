@@ -43,6 +43,7 @@
             dgdadosFunRegistro.Name = "dgdadosFunRegistro";
             dgdadosFunRegistro.Size = new Size(800, 343);
             dgdadosFunRegistro.TabIndex = 0;
+            dgdadosFunRegistro.CellFormatting += dgdadosFunRegistro_CellFormatting;
             // 
             // txtTotalInvestimento
             // 

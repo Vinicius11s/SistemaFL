@@ -22,109 +22,7 @@ namespace Infraestrutura.Repositorio
         {
             _context = contexto;
         }
-        public IEnumerable<dynamic> ObterDadosAluguelDividendos()
-        {
-
-            var dadosAluguelDiv = _context.Flat
-            .Include(flat => flat.Lancamentos)
-            .Include(flat => flat.Empresa)
-            .Where(flat => flat.TipoInvestimento == "Aluguel Fixo + Dividendos")
-            .Select(flat => new
-            {
-                Bandeira = flat.Empresa.Descricao,
-                Empreendimento = flat.Descricao,
-                CodFlat = flat.id,
-                ValorImovel = flat.ValorInvestimento,
-                AluguelJan = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 1 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorAluguel),
-                DividendosJan = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 1 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                AluguelFev = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 2 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorAluguel),
-                DividendosFev = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 2 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                AluguelMar = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 3 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorAluguel),
-                DividendosMAR = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 3 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                AluguelABR = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 4 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorAluguel),
-                DividendosABR = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 4 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                AluguelMAI = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 5 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorAluguel),
-                DividendosMAI = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 5 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                AluguelJUN = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 6 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorAluguel),
-                DividendosJUN = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 6 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                AluguelJUL = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 7 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorAluguel),
-                DividendosJUL = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 7 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                AluguelAGO = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 8 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorAluguel),
-                DividendosAGO = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 8 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                AluguelSET = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 9 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorAluguel),
-                DividendosSET = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 9 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                AluguelOUT = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 10 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorAluguel),
-                DividendosOUT = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 10 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                AluguelNOV = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 11 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorAluguel),
-                DividendosNOV = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 11 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                AluguelDEZ = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 12 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorAluguel),
-                DividendosDEZ = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 12 && l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                Acumulado = flat.Lancamentos
-                .Where(l => l.TipoPagamento == "Aluguel Fixo + Dividendos")
-                .Sum(l => (l.ValorAluguel ?? 0) + (l.ValorDividendos ?? 0))
-            }).ToList();
-            return dadosAluguelDiv;
-        }
+        //Form Registros
         public IEnumerable<dynamic> ObterDadosInvestimento()
         {
             var dadosInvestimento = _context.Flat
@@ -132,8 +30,8 @@ namespace Infraestrutura.Repositorio
                 .Select(flat => new
                 {
                     idFlat = flat.id,
-                    CnpjRecebimento = flat.Empresa.Cnpj,
-                    Empresa = flat.Empresa.RazaoSocial,
+                    CnpjRecebimento = flat.Empresa != null ? flat.Empresa.Cnpj : null,
+                    Empresa = flat.Empresa != null ? flat.Empresa.RazaoSocial : null,
                     DtAquisicao = flat.DataAquisicao,
                     Flat = flat.Descricao,
                     Unid = flat.Unidade,
@@ -146,6 +44,281 @@ namespace Infraestrutura.Repositorio
 
             return dadosInvestimento;
         }
+        public decimal CalcularTotalValorInvestimento()
+        {
+            return _context.Flat.Sum(flat => flat.ValorInvestimento);
+        }
+        //
+        //form Aluguel + Dividendos
+        public IEnumerable<dynamic> ObterDadosAluguelDividendos()
+        {
+
+            var dadosAluguelDiv = _context.Flat
+            .Include(flat => flat.Lancamentos)
+            .Include(flat => flat.Empresa)
+            .Where(flat => flat.TipoInvestimento == "Aluguel Fixo + Dividendos" ||
+              flat.TipoInvestimento == "Aluguel Fixo" ||
+              flat.TipoInvestimento == "Dividendos")
+            .Select(flat => new
+            {
+                Bandeira = flat.Empresa != null ? flat.Empresa.Descricao : null,
+                Empreendimento = flat.Descricao,
+                CodFlat = flat.id,
+                ValorImovel = flat.ValorInvestimento,
+                AluguelJan = flat.Lancamentos
+                    .Where(l => (l.DataPagamento.Month == 1 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
+                    .Sum(l => l.ValorAluguel),
+                DividendosJan = flat.Lancamentos
+                   .Where(l => l.DataPagamento.Month == 1 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
+                    .Sum(l => l.ValorDividendos),
+
+                AluguelFev = flat.Lancamentos
+                    .Where(l => (l.DataPagamento.Month == 2 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
+                    .Sum(l => l.ValorAluguel),
+                DividendosFev = flat.Lancamentos
+                   .Where(l => l.DataPagamento.Month == 2 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos")).Sum(l => l.ValorDividendos),
+
+                AluguelMar = flat.Lancamentos
+                    .Where(l => (l.DataPagamento.Month == 3 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
+                    .Sum(l => l.ValorAluguel),
+                DividendosMAR = flat.Lancamentos
+                   .Where(l => l.DataPagamento.Month == 3 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos")).Sum(l => l.ValorDividendos),
+
+                AluguelABR = flat.Lancamentos
+                    .Where(l => (l.DataPagamento.Month == 4 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
+                    .Sum(l => l.ValorAluguel),
+                DividendosABR = flat.Lancamentos
+                   .Where(l => l.DataPagamento.Month == 4 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos")).Sum(l => l.ValorDividendos),
+
+                AluguelMAI = flat.Lancamentos
+                    .Where(l => (l.DataPagamento.Month == 5 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
+                    .Sum(l => l.ValorAluguel),
+                DividendosMAI = flat.Lancamentos
+                   .Where(l => l.DataPagamento.Month == 5 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
+                   .Sum(l => l.ValorDividendos),
+
+                AluguelJUN = flat.Lancamentos
+                    .Where(l => (l.DataPagamento.Month == 6 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
+                    .Sum(l => l.ValorAluguel),
+                DividendosJUN = flat.Lancamentos
+                   .Where(l => l.DataPagamento.Month == 6 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
+                   .Sum(l => l.ValorDividendos),
+
+                AluguelJUL = flat.Lancamentos
+                    .Where(l => (l.DataPagamento.Month == 7 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
+                    .Sum(l => l.ValorAluguel),
+                DividendosJUL = flat.Lancamentos
+                   .Where(l => l.DataPagamento.Month == 7 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
+                   .Sum(l => l.ValorDividendos),
+
+                AluguelAGO = flat.Lancamentos
+                    .Where(l => (l.DataPagamento.Month == 8 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
+                    .Sum(l => l.ValorAluguel),
+                DividendosAGO = flat.Lancamentos
+                   .Where(l => l.DataPagamento.Month == 8 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
+                   .Sum(l => l.ValorDividendos),
+
+                AluguelSET = flat.Lancamentos
+                    .Where(l => (l.DataPagamento.Month == 9 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
+                    .Sum(l => l.ValorAluguel),
+                DividendosSET = flat.Lancamentos
+                   .Where(l => l.DataPagamento.Month == 9 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
+                   .Sum(l => l.ValorDividendos),
+
+                AluguelOUT = flat.Lancamentos
+                    .Where(l => (l.DataPagamento.Month == 10 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
+                    .Sum(l => l.ValorAluguel),
+                DividendosOUT = flat.Lancamentos
+                   .Where(l => l.DataPagamento.Month == 10 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
+                   .Sum(l => l.ValorDividendos),
+
+                AluguelNOV = flat.Lancamentos
+                    .Where(l => (l.DataPagamento.Month == 11 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
+                    .Sum(l => l.ValorAluguel),
+                DividendosNOV = flat.Lancamentos
+                   .Where(l => l.DataPagamento.Month == 11 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
+                   .Sum(l => l.ValorDividendos),
+
+                AluguelDEZ = flat.Lancamentos
+                    .Where(l => (l.DataPagamento.Month == 12 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
+                    .Sum(l => l.ValorAluguel),
+                DividendosDEZ = flat.Lancamentos
+                   .Where(l => l.DataPagamento.Month == 12 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
+                   .Sum(l => l.ValorDividendos),
+
+                Acumulado = flat.Lancamentos
+                .Where(l => l.TipoPagamento == "Aluguel Fixo + Dividendos" ||
+                            l.TipoPagamento == "Aluguel Fixo" ||
+                            l.TipoPagamento == "Dividendos")
+                .Sum(l => (l.ValorAluguel ?? 0) + (l.ValorDividendos ?? 0))
+                }).ToList();
+            return dadosAluguelDiv;
+        }
+        public IEnumerable<object> ObterDadosTotaisALDIV(int retorno)
+        {
+            var totalAJ = CalculaTotaisPorMes(1, false);
+            var totalDJ = CalculaTotaisPorMes(1, true);
+            var totalMesJan = totalAJ + totalDJ;
+
+            var totalAF = CalculaTotaisPorMes(2, false);
+            var totalDF = CalculaTotaisPorMes(2, true);
+            var totalMesFev = totalAF + totalDF;
+
+            var totalAM = CalculaTotaisPorMes(3, false);
+            var totalDM = CalculaTotaisPorMes(3, true);
+            var totalMesMar = totalAM + totalDM;
+
+            var totalAA = CalculaTotaisPorMes(4, false);
+            var totalDA = CalculaTotaisPorMes(4, true);
+            var totalMesAbr = totalAA + totalDA;
+
+            var totalAMai = CalculaTotaisPorMes(5, false);
+            var totalDMai = CalculaTotaisPorMes(5, true);
+            var totalMesMai = totalAMai + totalDMai;
+
+            var totalAJun = CalculaTotaisPorMes(6, false);
+            var totalDJun = CalculaTotaisPorMes(6, true);
+            var totalMesJun = totalAJun + totalDJun;
+
+            var totalAJul = CalculaTotaisPorMes(7, false);
+            var totalDJul = CalculaTotaisPorMes(7, true);
+            var totalMesJul = totalAJul + totalDJul;
+
+            var totalAago = CalculaTotaisPorMes(8, false);
+            var totalDago = CalculaTotaisPorMes(8, true);
+            var totalMesAgo = totalAago + totalDago;
+
+            var totalAset = CalculaTotaisPorMes(9, false);
+            var totalDset = CalculaTotaisPorMes(9, true);
+            var totalMesSet = totalAset + totalDset;
+
+            var totalAout = CalculaTotaisPorMes(10, false);
+            var totalDout = CalculaTotaisPorMes(10, true);
+            var totalMesOut = totalAout + totalDout;
+
+            var totalAnov = CalculaTotaisPorMes(11, false);
+            var totalDnov = CalculaTotaisPorMes(11, true);
+            var totalMesNov = totalAnov + totalDnov;
+
+            var totalAdez = CalculaTotaisPorMes(12, false);
+            var totalDez = CalculaTotaisPorMes(12, true);
+            var totalMesDez = totalAdez + totalDez;
+
+            if (retorno == 1)
+            {
+                var dadosTotaisInd = new List<object>
+                {
+                    new
+                    {
+                        Descricao = "Total Individual",
+                        AlugueisJan = totalAJ,
+                        DividendosJan = totalDJ,
+
+                        AlugueisFev = totalAF,
+                        DividendosFev = totalDF,
+
+                        AlugueisMar = totalAM,
+                        DividendosMar = totalDM,
+
+                        AlugueisAbr = totalAA,
+                        DividendosAbr = totalDA,
+
+                        AlugueisMai = totalAMai,
+                        DividendosMai = totalDMai,
+
+                        AlugueisJun = totalAJun,
+                        DividendosJun = totalDJun,
+
+                        AlugueisJul = totalAJul,
+                        DividendosJul = totalDJul,
+
+                        AlugueisAgo = totalAago,
+                        DividendosAgo = totalDago,
+
+                        AlugueisSet = totalAset,
+                        DividendosSet = totalDset,
+
+                        AlugueisOut = totalAout,
+                        DividendosOut = totalDout,
+
+                        AlugueisNov = totalAnov,
+                        DividendosNov = totalDnov,
+
+                        AlugueisDez = totalAdez,
+                        DividendosDez = totalDez,
+                    }
+                };
+                return dadosTotaisInd;
+            }
+            else
+            {
+                var dadosTotaisMes = new List<object>
+                {
+                    new
+                    {
+                        Descricao = "Total Individual",
+                        AlugueisJan = totalAJ,
+                        DividendosJan = totalDJ,
+
+                        AlugueisFev = totalAF,
+                        DividendosFev = totalDF,
+
+                        AlugueisMar = totalAM,
+                        DividendosMar = totalDM,
+
+                        AlugueisAbr = totalAA,
+                        DividendosAbr = totalDA,
+
+                        AlugueisMai = totalAMai,
+                        DividendosMai = totalDMai,
+
+                        AlugueisJun = totalAJun,
+                        DividendosJun = totalDJun,
+
+                        AlugueisJul = totalAJul,
+                        DividendosJul = totalDJul,
+
+                        AlugueisAgo = totalAago,
+                        DividendosAgo = totalDago,
+
+                        AlugueisSet = totalAset,
+                        DividendosSet = totalDset,
+
+                        AlugueisOut = totalAout,
+                        DividendosOut = totalDout,
+
+                        AlugueisNov = totalAnov,
+                        DividendosNov = totalDnov,
+
+                        AlugueisDez = totalAdez,
+                        DividendosDez = totalDez,
+                    }
+                };
+                return dadosTotaisMes;
+            }
+        }
+
+        public decimal CalculaTotaisPorMes(int mes, bool dividendos)
+        {
+            if(dividendos == false)
+            {
+                var totalAluguel = _context.Lancamento
+                .Where(l => (l.DataPagamento.Month == mes && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
+                .Sum(l => (l.ValorAluguel ?? 0));
+
+                return totalAluguel;
+            }
+            else
+            {
+                var totalDividendos = _context.Lancamento
+               .Where(l => l.DataPagamento.Month == mes && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
+               .Sum(l => (l.ValorDividendos ?? 0));
+
+                return totalDividendos;
+            }          
+       }
+        //
+
         public IEnumerable<dynamic> ObterDadosDividendos()
         {
             var dadosDividendos = _context.Flat
@@ -154,7 +327,7 @@ namespace Infraestrutura.Repositorio
             .Where(flat => flat.TipoInvestimento == "Dividendos")
             .Select(flat => new
             {
-                Bandeira = flat.Empresa.Descricao,
+                Bandeira = flat.Empresa != null ? flat.Empresa.Descricao : null,
                 Empreendimento = flat.Descricao,
                 CodFlat = flat.id,
                 ValorImovel = flat.ValorInvestimento,
@@ -314,7 +487,7 @@ namespace Infraestrutura.Repositorio
                 PorcentagemDez = CalcularPorcentagemPorMes(flat.Lancamentos, 12, flat.ValorInvestimento),
 
                 RendimentoAnual = CalculaRendimentoAnualPorFlat(flat.Lancamentos),
-                PorcentagemAnual = CalculaPorcentagemAnualPorFlat(flat.Lancamentos, flat.ValorInvestimento)
+                PorceAnual = CalculaPorcentagemAnualPorFlat(flat.Lancamentos, flat.ValorInvestimento)
             })
             .ToList();
 
@@ -406,8 +579,87 @@ namespace Infraestrutura.Repositorio
     };
             return dadosTotais;
         }
-        public IEnumerable<object> ObterDadosAluguelVenceslau()
+        
+        public decimal CalculaLancamentosPorMes(int mes, bool porcentagem)
         {
+            // Filtra os lançamentos no mês especificado e exclui o tipo "Aluguel Vencelau"
+            var total = _context.Lancamento
+                .Where(l => l.DataPagamento.Month == mes && l.TipoPagamento != "Aluguel Vencelau")
+                .Sum(l => (l.ValorAluguel ?? 0) + (l.ValorDividendos ?? 0) + (l.ValorFundoReserva ?? 0));
+            if (porcentagem == false)
+            {
+                return total;
+
+            }
+            else
+            {
+                decimal totalInvestimento = CalcularTotalValorInvestimento();
+                if (totalInvestimento != 0)
+                {
+                    total = total / totalInvestimento;
+                    return total;
+                }
+                else return 0;
+
+
+            }
+        }
+        public static decimal CalcularRendimentoPorMes(IEnumerable<Lancamento>? lancamentos, int mes)
+        {
+            if (lancamentos == null || mes < 1 || mes > 12)
+                return 0.00M;
+
+            return lancamentos
+                .Where(l => l.DataPagamento.Month == mes)
+                .Sum(l => (l.ValorDividendos ?? 0.00M) +
+                          (l.ValorAluguel ?? 0.00M) +
+                          (l.ValorFundoReserva ?? 0.00M));
+        }
+        public static decimal CalcularPorcentagemPorMes(IEnumerable<Lancamento>? lancamentos, int mes, decimal valorImovel)
+        {
+            if (lancamentos == null || valorImovel <= 0 || mes < 1 || mes > 12)
+                return 0.00M;
+
+            decimal rendimentoMes = lancamentos
+                .Where(l => l.DataPagamento.Month == mes)
+                .Sum(l => (l.ValorAluguel ?? 0.00M) +
+                          (l.ValorDividendos ?? 0.00M) +
+                          (l.ValorFundoReserva ?? 0.00M));
+
+            return (rendimentoMes / valorImovel) * 100;
+        }
+        public static decimal CalculaRendimentoAnualPorFlat(IEnumerable<Lancamento>? lancamentos)
+        {
+            if (lancamentos == null)
+                return 0.00M;
+
+            decimal rendimentoAno = lancamentos
+                .Where(l => l.DataPagamento.Year == DateTime.Now.Year)
+                .Sum(l => (l.ValorAluguel ?? 0.00M) +
+                          (l.ValorDividendos ?? 0.00M) +
+                          (l.ValorFundoReserva ?? 0.00M));
+
+            return rendimentoAno;
+        }
+        public static decimal CalculaPorcentagemAnualPorFlat(IEnumerable<Lancamento> lancamentos, decimal valorImovel)
+        {
+            if (lancamentos == null || valorImovel <= 0)
+                return 0.00M;
+
+            decimal rendimentoAno = lancamentos
+                .Where(l => l.DataPagamento.Year == DateTime.Now.Year)
+                .Sum(l => (l.ValorAluguel ?? 0.00M) +
+                          (l.ValorDividendos ?? 0.00M) +
+                          (l.ValorFundoReserva ?? 0.00M));
+
+            return (rendimentoAno / valorImovel) * 100;
+        }
+
+
+        //PIS E COFINS
+        public IEnumerable<object> ObterDadosPISeCOFINS()
+        {
+            //DADOS ALUGUEL VENCESLAU
             var totalJanAV = CalculaAluguelVenceslau(1);
             var totalFevAV = CalculaAluguelVenceslau(2);
             var totalMarAV = CalculaAluguelVenceslau(3);
@@ -421,6 +673,7 @@ namespace Infraestrutura.Repositorio
             var totalNovAV = CalculaAluguelVenceslau(11);
             var totalDezAV = CalculaAluguelVenceslau(12);
 
+            //DADOS ALUGUEL FLATS
             var totalJanAF = CalculaAlugueleDividendosFlats(1);
             var totalFevAF = CalculaAlugueleDividendosFlats(2);
             var totalMarAF = CalculaAlugueleDividendosFlats(3);
@@ -434,6 +687,7 @@ namespace Infraestrutura.Repositorio
             var totalNovAF = CalculaAlugueleDividendosFlats(11);
             var totalDezAF = CalculaAlugueleDividendosFlats(12);
 
+            //DADOS FUNDO DE RESERVA
             var totalJanFR = CalculaFundoReservaFlats(1);
             var totalFevFR = CalculaFundoReservaFlats(2);
             var totalMarFR = CalculaFundoReservaFlats(3);
@@ -447,31 +701,47 @@ namespace Infraestrutura.Repositorio
             var totalNovFR = CalculaFundoReservaFlats(11);
             var totalDezFR = CalculaFundoReservaFlats(12);
 
-            var JanPIS = CalcularPIS(totalJanAV, totalJanAF, totalJanFR);
-            var FevPIS = CalcularPIS(totalFevAV, totalFevAF, totalFevFR);
-            var MarPIS = CalcularPIS(totalMarAV, totalMarAF, totalMarFR);
-            var AbrPIS = CalcularPIS(totalAbrAV, totalAbrAF, totalAbrFR);
-            var MaiPIS = CalcularPIS(totalMaiAV, totalMaiAF, totalMaiFR);
-            var JunPIS = CalcularPIS(totalJunAV, totalJunAF, totalJunFR);
-            var JulPIS = CalcularPIS(totalJulAV, totalJulAF, totalJulFR);
-            var AgoPIS = CalcularPIS(totalAgoAV, totalAgoAF, totalAgoFR);
-            var SetPIS = CalcularPIS(totalSetAV, totalSetAF, totalSetFR);
-            var OutPIS = CalcularPIS(totalOutAV, totalOutAF, totalOutFR);
-            var NovPIS = CalcularPIS(totalNovAV, totalNovAF, totalNovFR);
-            var DezPIS = CalcularPIS(totalDezAV, totalDezAF, totalDezFR);
+            //DADOS BASE DE CALCULO
+            var BCJan = totalJanAV + totalJanAF + totalJanFR;
+            var BCFeb = totalFevAV + totalFevAF + totalFevFR;
+            var BCMar = totalMarAV + totalMarAF + totalMarFR;
+            var BCAbr = totalAbrAV + totalAbrAF + totalAbrFR;
+            var BCMai = totalMaiAV + totalMaiAF + totalMaiFR;
+            var BCJun = totalJunAV + totalJunAF + totalJunFR;
+            var BCJul = totalJulAV + totalJulAF + totalJulFR;
+            var BCAgo = totalAgoAV + totalAgoAF + totalAgoFR;
+            var BCSet = totalSetAV + totalSetAF + totalSetFR;
+            var BCOut = totalOutAV + totalOutAF + totalOutFR;
+            var BCNov = totalNovAV + totalNovAF + totalNovFR;
+            var BCDez = totalDezAV + totalDezAF + totalDezFR;
 
-            var JanCOF = CalculaCOFINS(totalJanAV, totalJanAF, totalJanFR);
-            var FevCOF = CalculaCOFINS(totalFevAV, totalFevAF, totalFevFR);
-            var MarCOF = CalculaCOFINS(totalMarAV, totalMarAF, totalMarFR);
-            var AbrCOF = CalculaCOFINS(totalAbrAV, totalAbrAF, totalAbrFR);
-            var MaiCOF = CalculaCOFINS(totalMaiAV, totalMaiAF, totalMaiFR);
-            var JunCOF = CalculaCOFINS(totalJunAV, totalJunAF, totalJunFR);
-            var JulCOF = CalculaCOFINS(totalJulAV, totalJulAF, totalJulFR);
-            var AgoCOF = CalculaCOFINS(totalAgoAV, totalAgoAF, totalAgoFR);
-            var SetCOF = CalculaCOFINS(totalSetAV, totalSetAF, totalSetFR);
-            var OutCOF = CalculaCOFINS(totalOutAV, totalOutAF, totalOutFR);
-            var NovCOF = CalculaCOFINS(totalNovAV, totalNovAF, totalNovFR);
-            var DezCOF = CalculaCOFINS(totalDezAV, totalDezAF, totalDezFR);
+
+            var JanPIS = CalcularPIS(BCJan);
+            var FevPIS = CalcularPIS(BCFeb);
+            var MarPIS = CalcularPIS(BCMar);
+            var AbrPIS = CalcularPIS(BCAbr);
+            var MaiPIS = CalcularPIS(BCMai);
+            var JunPIS = CalcularPIS(BCJun);
+            var JulPIS = CalcularPIS(BCJul);
+            var AgoPIS = CalcularPIS(BCAgo);
+            var SetPIS = CalcularPIS(BCSet);
+            var OutPIS = CalcularPIS(BCOut);
+            var NovPIS = CalcularPIS(BCNov);
+            var DezPIS = CalcularPIS(BCDez);
+
+
+            var JanCOF = CalculaCOFINS(BCJan);
+            var FevCOF = CalculaCOFINS(BCFeb);
+            var MarCOF = CalculaCOFINS(BCMar);
+            var AbrCOF = CalculaCOFINS(BCAbr);
+            var MaiCOF = CalculaCOFINS(BCMai);
+            var JunCOF = CalculaCOFINS(BCJun);
+            var JulCOF = CalculaCOFINS(BCJul);
+            var AgoCOF = CalculaCOFINS(BCAgo);
+            var SetCOF = CalculaCOFINS(BCSet);
+            var OutCOF = CalculaCOFINS(BCOut);
+            var NovCOF = CalculaCOFINS(BCNov);
+            var DezCOF = CalculaCOFINS(BCDez);
 
             var dadosTotais = new List<object>
             {
@@ -574,87 +844,6 @@ namespace Infraestrutura.Repositorio
              };
             return dadosTotais;
         }
-
-
-        public decimal CalculaLancamentosPorMes(int mes, bool porcentagem)
-        {
-            // Filtra os lançamentos no mês especificado e exclui o tipo "Aluguel Vencelau"
-            var total = _context.Lancamento
-                .Where(l => l.DataPagamento.Month == mes && l.TipoPagamento != "Aluguel Vencelau")
-                .Sum(l => (l.ValorAluguel ?? 0) + (l.ValorDividendos ?? 0) + (l.ValorFundoReserva ?? 0));
-            if (porcentagem == false)
-            {
-                return total;
-
-            }
-            else
-            {
-                decimal totalInvestimento = CalcularTotalValorInvestimento();
-                if (totalInvestimento != 0)
-                {
-                    total = total / totalInvestimento;
-                    return total;
-                }
-                else return 0;
-
-
-            }
-        }
-        public decimal CalcularTotalValorInvestimento()
-        {
-            return _context.Flat.Sum(flat => flat.ValorInvestimento);
-        }
-        public static decimal CalcularRendimentoPorMes(IEnumerable<Lancamento>? lancamentos, int mes)
-        {
-            if (lancamentos == null) return 0.00M;
-
-            return lancamentos
-                .Where(l => l.DataPagamento.Month == mes)
-                .Sum(l => (l.ValorDividendos ?? 0.00M) +
-                          (l.ValorAluguel ?? 0.00M) +
-                          (l.ValorFundoReserva ?? 0.00M));
-        }
-        public static decimal CalcularPorcentagemPorMes(IEnumerable<Lancamento>? lancamentos, int mes, decimal valorImovel)
-        {
-            if (lancamentos == null || valorImovel <= 0) return 0.00M;
-
-            decimal rendimentoMes = lancamentos
-                .Where(l => l.DataPagamento.Month == mes)
-                .Sum(l => (l.ValorAluguel ?? 0.00M) +
-                          (l.ValorDividendos ?? 0.00M) +
-                          (l.ValorFundoReserva ?? 0.00M));
-
-            return (rendimentoMes / valorImovel) * 100;
-        }
-        public static decimal CalculaRendimentoAnualPorFlat(IEnumerable<Lancamento>? lancamentos)
-        {
-
-            if (lancamentos == null) return 0.00M;
-
-            decimal rendimentoAno = lancamentos
-                .Where(l => l.DataPagamento.Year == DateTime.Now.Year)
-                .Sum(l => (l.ValorAluguel ?? 0.00M) +
-                          (l.ValorDividendos ?? 0.00M) +
-                          (l.ValorFundoReserva ?? 0.00M));
-
-            return rendimentoAno;
-        }
-        public static decimal CalculaPorcentagemAnualPorFlat(IEnumerable<Lancamento> lancamentos, decimal valorImovel)
-        {
-            if (lancamentos == null) return 0.00M;
-
-            decimal porcentagemAno = lancamentos
-                .Where(l => l.DataPagamento.Year == DateTime.Now.Year)
-                .Sum(l => (l.ValorAluguel ?? 0.00M) +
-                          (l.ValorDividendos ?? 0.00M) +
-                          (l.ValorFundoReserva ?? 0.00M));
-
-            return porcentagemAno / valorImovel;
-
-
-        }
-
-        //PIS E COFINS
         public decimal CalculaAluguelVenceslau(int mes)
         {
             var total = _context.Lancamento
@@ -679,25 +868,23 @@ namespace Infraestrutura.Repositorio
                 .Sum(l => (l.ValorFundoReserva ?? 0.00M));
             return total;
         }
-        public decimal CalcularPIS(decimal totalAV, decimal totalAF, decimal totalFR)
+        public decimal CalcularPIS(decimal BC)
         {
-            if (totalAV == 0.00M || totalAF == 0.00M || totalFR == 0.00M)
+            if (BC != 0)
             {
-                return 0.00M;
+                decimal resultado = BC * 0.0065M;
+                return Math.Round(resultado, 2);
             }
-
-            decimal resultado = (totalAV + totalAF + totalFR) * 0.0065M;
-            return Math.Round(resultado, 2);
+            else return 0;             
         }
-        public decimal CalculaCOFINS(decimal totalAV, decimal totalAF, decimal totalFR)
+        public decimal CalculaCOFINS(decimal BC)
         {
-            if (totalAV == 0.00M || totalAF == 0.00M || totalFR == 0.00M)
+            if (BC != 0)
             {
-                return 0.00M;
+                decimal resultado = BC * 0.03M;
+                return Math.Round(resultado, 2);
             }
-
-            decimal resultado = (totalAV + totalAF + totalFR) * 0.03M;
-            return Math.Round(resultado, 2);
+            else return 0;
         }
     }
 }

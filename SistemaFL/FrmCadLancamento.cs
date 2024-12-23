@@ -1,5 +1,6 @@
 ﻿using Entidades;
 using Infraestrutura.Contexto;
+using Infraestrutura.Repositorio;
 using Interfaces;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -143,28 +144,40 @@ namespace SistemaFL
             if (txtid.Text != "")
             {
                 var lancamento = carregaPropriedades();
-                repositorio.Excluir(lancamento);
-                Program.serviceProvider.
-                  GetRequiredService<ContextoSistema>().SaveChanges();
+                var contexto = Program.serviceProvider.GetRequiredService<ContextoSistema>();
 
-                MessageBox.Show("Registro excluído com sucesso!");
-                limpar();
-                btnnovo.Enabled = true;
-                btnalterar.Enabled = false;
-                btncancelar.Enabled = false;
-                btnsalvar.Enabled = false;
-                btnexcluir.Enabled = false;
-                btnlocalizar.Enabled = true;
-                btnLocFlatLancamento.Enabled = false;
+                // Verifica se existem ocorrências relacionadas ao lançamento
+                var temOcorrencias = contexto.Ocorrencia.Any(o => o.idLancamento == lancamento.id);
 
-                labelValorAlguel.Visible = false;
-                txtvaloraluguel.Visible = false;
-                labelValorDiv.Visible = false;
-                txtValorDiv.Visible = false;
-                labelFundoRes.Visible = false;
-                txtValorFunReserva.Visible = false;
+                if (temOcorrencias)
+                {
+                    MessageBox.Show("Não é possível excluir o lançamento. Existem ocorrências associadas.");
+                }
+                else
+                {
+                    repositorio.Excluir(lancamento);
+                    contexto.SaveChanges();
+
+                    MessageBox.Show("Registro excluído com sucesso!");
+                    limpar();
+                    btnnovo.Enabled = true;
+                    btnalterar.Enabled = false;
+                    btncancelar.Enabled = false;
+                    btnsalvar.Enabled = false;
+                    btnexcluir.Enabled = false;
+                    btnlocalizar.Enabled = true;
+                    btnLocFlatLancamento.Enabled = false;
+
+                    labelValorAlguel.Visible = false;
+                    txtvaloraluguel.Visible = false;
+                    labelValorDiv.Visible = false;
+                    txtValorDiv.Visible = false;
+                    labelFundoRes.Visible = false;
+                    txtValorFunReserva.Visible = false;
+                }
             }
         }
+        
         public Lancamento carregaPropriedades()
         {
             Lancamento lancamento;
@@ -180,9 +193,9 @@ namespace SistemaFL
             lancamento.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
             lancamento.DataPagamento = dtdataLancamento.Value;
 
-          
 
-            if(txttipoInvestimento.Text == "Aluguel Venceslau")
+
+            if (txttipoInvestimento.Text == "Aluguel Venceslau")
             {
                 if (decimal.TryParse(txtvaloraluguel.Text, out decimal valorAluguelVenceslau))
                 {
@@ -204,7 +217,7 @@ namespace SistemaFL
                     lancamento.ValorFundoReserva = ValorFunReserva;
                 }
             }
-            
+
 
             //validação txtIdFlat
             if (int.TryParse(txtidFlat.Text, out int idFlat))
@@ -216,39 +229,8 @@ namespace SistemaFL
                 lancamento.DescricaoFlat = txtDescricaoFlat.Text;
             }
             else MessageBox.Show("Não foi possível localizar o Flat.");
-            
+
             return lancamento;
-        }
-        private void btnlocalizar_Click(object sender, EventArgs e)
-        {
-            var form2 = Program.serviceProvider.GetRequiredService<FrmConsultaLancamento>();
-            form2.ShowDialog();
-
-            if (form2.id > 0)
-            {
-                CarregarLancamento(form2.id);
-            }
-        }
-        private void CarregarLancamento(int idLancamento)
-        {
-            var lancamento = repositorio.Recuperar(l => l.id == idLancamento);
-
-            if (lancamento != null)
-            {
-                txtid.Text = lancamento.id.ToString();
-                dtdataLancamento.Value = lancamento.DataPagamento;
-                txtvaloraluguel.Text = lancamento.ValorAluguel.ToString();
-                txtValorDiv.Text = lancamento.ValorDividendos.ToString();
-                txtValorFunReserva.Text = lancamento.ValorFundoReserva.ToString();
-
-                // Acessa o flat associado ao lançamento
-                if (lancamento.idFlat != null)
-                {
-                    txtidFlat.Text = lancamento.idFlat.ToString();
-                    txtDescricaoFlat.Text = lancamento.Flat.Descricao;
-                    //lancamento.DescricaoFlat = txtDescricaoFlat.Text;
-                }
-            }
         }
         private bool TryParseDecimal(System.Windows.Forms.TextBox textBox, out decimal result)
         {
@@ -330,7 +312,7 @@ namespace SistemaFL
                         txtValorFunReserva.Visible = false;
                         break;
                 }
-                
+
             }
             else
             {
@@ -353,6 +335,56 @@ namespace SistemaFL
             txtValorDiv.Text = "";
             txtValorFunReserva.Text = "";
 
+        }
+
+        private void btnlocalizar_Click(object sender, EventArgs e)
+        {
+            var form2 = Program.serviceProvider.GetRequiredService<FrmConsultaLancamento>();
+            form2.ShowDialog();
+
+            if (form2.id > 0)
+            {
+                //no clique do botão localizar vamos fazer um select * from empresa where id
+                var lancamento = repositorio.Recuperar(e => e.id == form2.id);
+                if (lancamento != null)
+                {
+                    txtid.Text = lancamento.id.ToString();
+                    dtdataLancamento.Value = lancamento.DataPagamento;
+                    txtvaloraluguel.Text = lancamento.ValorAluguel.ToString();
+                    txtValorDiv.Text = lancamento.ValorDividendos.ToString();
+                    txtValorFunReserva.Text = lancamento.ValorFundoReserva.ToString();
+
+                    if (lancamento.idFlat >= 0)
+                    {
+                        var flat = flatRepositorio.Recuperar(e => e.id == lancamento.idFlat);
+                        if (flat != null)
+                        {
+                            txtidFlat.Text = lancamento.idFlat.ToString();
+                            txtDescricaoFlat.Text = lancamento.DescricaoFlat;
+                            txttipoInvestimento.Text = lancamento.TipoPagamento;
+
+                            labelValorAlguel.Visible = true;
+                            txtvaloraluguel.Visible = true;
+                            labelValorDiv.Visible = true;
+                            txtValorDiv.Visible = true;
+                            labelFundoRes.Visible = true;
+                            txtValorFunReserva.Visible = true;
+                        }
+                        else MessageBox.Show("Flat nao localizado");
+                    }
+                    else
+                    btnnovo.Enabled = false;
+                    btnlocalizar.Enabled = false;
+                    btnalterar.Enabled = true;
+                    btncancelar.Enabled = true;
+                    btnexcluir.Enabled = true;
+                    btnsalvar.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Lancamento não encontrado.");
+                }
+            }
         }
     }
 }

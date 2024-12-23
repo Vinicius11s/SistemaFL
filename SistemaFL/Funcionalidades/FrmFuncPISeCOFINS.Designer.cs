@@ -31,34 +31,35 @@
             label1 = new Label();
             label2 = new Label();
             dgdadosPIS = new DataGridView();
+            sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
             ((System.ComponentModel.ISupportInitialize)dgdadosPIS).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label1.ForeColor = SystemColors.Info;
-            label1.Location = new Point(388, 43);
+            label1.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold);
+            label1.ForeColor = Color.Black;
+            label1.Location = new Point(335, 40);
             label1.Name = "label1";
-            label1.Size = new Size(83, 21);
+            label1.Size = new Size(107, 30);
             label1.TabIndex = 0;
             label1.Text = "PIS 0,65%";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label2.ForeColor = SystemColors.Info;
-            label2.Location = new Point(496, 43);
+            label2.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold);
+            label2.ForeColor = Color.Black;
+            label2.Location = new Point(493, 40);
             label2.Name = "label2";
-            label2.Size = new Size(94, 21);
+            label2.Size = new Size(122, 30);
             label2.TabIndex = 1;
             label2.Text = "COFINS 3%";
             // 
             // dgdadosPIS
             // 
-            dgdadosPIS.BackgroundColor = SystemColors.ActiveBorder;
+            dgdadosPIS.BackgroundColor = Color.FromArgb(23, 24, 29);
             dgdadosPIS.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdadosPIS.Dock = DockStyle.Bottom;
             dgdadosPIS.Location = new Point(0, 117);
@@ -67,17 +68,23 @@
             dgdadosPIS.TabIndex = 2;
             dgdadosPIS.CellFormatting += dgdadosPIS_CellFormatting_1;
             // 
+            // sqlCommand1
+            // 
+            sqlCommand1.CommandTimeout = 30;
+            sqlCommand1.EnableOptimizedParameterBinding = false;
+            // 
             // FrmFuncPISeCOFINS
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ActiveCaptionText;
+            BackColor = Color.White;
             ClientSize = new Size(985, 397);
             Controls.Add(dgdadosPIS);
             Controls.Add(label2);
             Controls.Add(label1);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ForeColor = SystemColors.InfoText;
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Margin = new Padding(4);
             Name = "FrmFuncPISeCOFINS";
             StartPosition = FormStartPosition.CenterScreen;
@@ -93,5 +100,6 @@
         private Label label1;
         private Label label2;
         private DataGridView dgdadosPIS;
+        private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
     }
 }

@@ -30,59 +30,51 @@
         {
             dgdadosRendimentos = new DataGridView();
             dgdadosTotais = new DataGridView();
-            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgdadosRendimentos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgdadosTotais).BeginInit();
             SuspendLayout();
             // 
             // dgdadosRendimentos
             // 
+            dgdadosRendimentos.BackgroundColor = Color.FromArgb(23, 24, 29);
             dgdadosRendimentos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdadosRendimentos.Dock = DockStyle.Top;
             dgdadosRendimentos.Location = new Point(0, 0);
             dgdadosRendimentos.Margin = new Padding(4);
             dgdadosRendimentos.Name = "dgdadosRendimentos";
-            dgdadosRendimentos.Size = new Size(1004, 423);
+            dgdadosRendimentos.Size = new Size(1004, 392);
             dgdadosRendimentos.TabIndex = 0;
             // 
             // dgdadosTotais
             // 
+            dgdadosTotais.BackgroundColor = Color.FromArgb(23, 24, 29);
             dgdadosTotais.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosTotais.Location = new Point(291, 469);
+            dgdadosTotais.Dock = DockStyle.Bottom;
+            dgdadosTotais.Location = new Point(0, 416);
             dgdadosTotais.Margin = new Padding(4);
             dgdadosTotais.Name = "dgdadosTotais";
-            dgdadosTotais.Size = new Size(1252, 97);
+            dgdadosTotais.Size = new Size(1004, 150);
             dgdadosTotais.TabIndex = 1;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(221, 498);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(48, 21);
-            label1.TabIndex = 2;
-            label1.Text = "Total";
             // 
             // FrmFuncRendimentoscs
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(1004, 566);
-            Controls.Add(label1);
             Controls.Add(dgdadosTotais);
             Controls.Add(dgdadosRendimentos);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Margin = new Padding(4);
             Name = "FrmFuncRendimentoscs";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Rendimentos";
+            WindowState = FormWindowState.Maximized;
             Load += FrmFuncRendimentoscs_Load;
             ((System.ComponentModel.ISupportInitialize)dgdadosRendimentos).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgdadosTotais).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion

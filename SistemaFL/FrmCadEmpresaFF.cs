@@ -48,6 +48,7 @@ namespace SistemaFL
             btncancelar.Enabled = true;
             btnexcluir.Enabled = false;
             btnlocalizar.Enabled = false;
+            txtdescricao.Focus();
 
         }
         private void btnsalvar_Click(object sender, EventArgs e)
@@ -257,12 +258,13 @@ namespace SistemaFL
             else
 
 
-            dgAssociarFlat.Columns.Clear();  // Remove as colunas
-            if(dgAssociarFlat.Rows.Count > 0)
+                dgAssociarFlat.DataSource = null; // Desvincula a fonte de dados
+            dgAssociarFlat.Columns.Clear();   // Remove as colunas
+            if (dgAssociarFlat.Rows.Count > 0)
             {
-                dgAssociarFlat.Rows.Clear();
-
+                dgAssociarFlat.Rows.Clear();  // Limpa as linhas
             }
+
             txtid.Text = "";
             txtdescricao.Text = "";
             txtcnpj.Text = "";
