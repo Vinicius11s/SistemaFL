@@ -27,12 +27,37 @@ namespace SistemaFL.Funcionalidades
 
         private void FrmFuncAluguelDividendo_Load(object sender, EventArgs e)
         {
+            AjustarPosicaoPictureBox();
+            this.Resize += FrmFuncAluguelDividendo_Resize;
+
             var dados = flatRepositório.ObterDadosAluguelDividendos();
             dgdadosAlugDiv.DataSource = dados;
             AjustarFormataçãoGridDados(dgdadosAlugDiv);
 
             var dadosTotaisInd = flatRepositório.ObterDadosTotaisALDIV(1);
             dgtotaisindividual.DataSource = dadosTotaisInd;
+            //tamanho do grid
+            dgtotaisindividual.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgtotaisindividual.Left = 390;  // Margem fixa à esquerda
+            dgtotaisindividual.Width = this.ClientSize.Width - dgtotaisindividual.Left - 20;  // Cresce para a direita
+            dgtotaisindividual.Height = 129;  // Altura fixa no rodapé
+            dgtotaisindividual.Top = this.ClientSize.Height - dgtotaisindividual.Height - 20;  // Fica no rodapé
+            int margemDireita = 0;
+            int margemInferior = 0;
+
+            // Verifica se há uma borda no formulário
+            if (this.FormBorderStyle != FormBorderStyle.None)
+            {
+                margemDireita = SystemInformation.VerticalResizeBorderThickness;
+                margemInferior = SystemInformation.HorizontalResizeBorderThickness;
+            }
+
+            // Ajusta a largura e a posição do grid
+            dgtotaisindividual.Width = this.ClientSize.Width - dgtotaisindividual.Left - margemDireita;
+            dgtotaisindividual.Top = this.ClientSize.Height - dgtotaisindividual.Height - margemInferior;
+
+
+
             AjustarFormataçãoGridIndividual(dgtotaisindividual);
 
             var dadosTotais = flatRepositório.ObterDadosTotaisALDIV(2);
@@ -116,6 +141,50 @@ namespace SistemaFL.Funcionalidades
                 }
 
             }
+        }
+
+        private void FrmFuncAluguelDividendo_Resize(object sender, EventArgs e)
+        {
+            AjustarPosicaoPictureBox();
+            int margemDireita = SystemInformation.VerticalResizeBorderThickness;
+            int margemInferior = SystemInformation.HorizontalResizeBorderThickness;
+
+            dgtotaisindividual.Width = this.ClientSize.Width - dgtotaisindividual.Left - margemDireita;
+            dgtotaisindividual.Top = this.ClientSize.Height - dgtotaisindividual.Height - margemInferior;
+        }
+
+        private void AjustarPosicaoPictureBox()
+        {
+            int margem = 10;
+
+            // Posição do PictureBox1 (no canto superior direito)
+            int x1 = this.ClientSize.Width - pictureBox1.Width - margem;
+            int y1 = margem;
+
+            pictureBox2.Location = new Point(x1, y1);
+
+            // Posição do PictureBox2 (ao lado esquerdo de PictureBox1)
+            int x2 = x1 - pictureBox2.Width - margem;
+            int y2 = margem;
+
+            pictureBox1.Location = new Point(x2, y2);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

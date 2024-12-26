@@ -17,11 +17,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace SistemaFL.Funcionalidades
 {
-    public partial class FrmFuncionalidadeLogin : Form
+    public partial class FrmFuncLogin : Form
     {
         private IUsuarioRepositorio repositorio;
         public int idUsuario = 0;
-        public FrmFuncionalidadeLogin(IUsuarioRepositorio repositorio)
+        public FrmFuncLogin(IUsuarioRepositorio repositorio)
         {
             InitializeComponent();
             this.AcceptButton = btnentrar;
@@ -69,11 +69,6 @@ namespace SistemaFL.Funcionalidades
 
             Program.serviceProvider.
                         GetRequiredService<ContextoSistema>().SaveChanges();
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void btnentrar_KeyDown(object sender, KeyEventArgs e)

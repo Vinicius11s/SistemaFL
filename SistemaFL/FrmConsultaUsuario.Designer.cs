@@ -75,6 +75,7 @@
             dgdadosusuario.Size = new Size(875, 320);
             dgdadosusuario.TabIndex = 12;
             dgdadosusuario.CellDoubleClick += dgdadosusuario_CellDoubleClick;
+            dgdadosusuario.CellFormatting += dgdadosusuario_CellFormatting;
             // 
             // FrmConsultaUsuario
             // 

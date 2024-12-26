@@ -40,7 +40,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(335, 40);
+            label1.Location = new Point(270, 41);
             label1.Name = "label1";
             label1.Size = new Size(107, 30);
             label1.TabIndex = 0;
@@ -51,7 +51,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(493, 40);
+            label2.Location = new Point(428, 41);
             label2.Name = "label2";
             label2.Size = new Size(122, 30);
             label2.TabIndex = 1;
@@ -64,7 +64,7 @@
             dgdadosPIS.Dock = DockStyle.Bottom;
             dgdadosPIS.Location = new Point(0, 117);
             dgdadosPIS.Name = "dgdadosPIS";
-            dgdadosPIS.Size = new Size(985, 280);
+            dgdadosPIS.Size = new Size(844, 280);
             dgdadosPIS.TabIndex = 2;
             dgdadosPIS.CellFormatting += dgdadosPIS_CellFormatting_1;
             // 
@@ -78,7 +78,7 @@
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(985, 397);
+            ClientSize = new Size(844, 397);
             Controls.Add(dgdadosPIS);
             Controls.Add(label2);
             Controls.Add(label1);

@@ -560,6 +560,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(224, 224, 224);
             ClientSize = new Size(869, 595);
             Controls.Add(sidebar);
             Controls.Add(panel1);

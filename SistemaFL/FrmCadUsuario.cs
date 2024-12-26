@@ -25,6 +25,8 @@ namespace SistemaFL
 
         private void FrmCadUsuario_Load(object sender, EventArgs e)
         {
+            txtsenha.PasswordChar = '*';
+            txtnome.Focus();
             pdados.Enabled = false;
             btnnovo.Enabled = true;
             btnlocalizar.Enabled = true;

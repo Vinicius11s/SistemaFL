@@ -25,6 +25,9 @@ namespace SistemaFL.Funcionalidades
 
         private void FrmFuncionalidadeRegisto_Load(object sender, EventArgs e)
         {
+            AjustarPosicaoPictureBox();
+            this.Resize += FrmFuncionalidadeRegisto_Resize;
+
             var dados = flatRepositorio.ObterDadosInvestimento();
             dgdadosFunRegistro.DataSource = dados;
 
@@ -40,7 +43,7 @@ namespace SistemaFL.Funcionalidades
 
         private void dgdadosFunRegistro_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-        
+
             // Verifica se estamos formatando a coluna CnpjRecebimento
             if (dgdadosFunRegistro.Columns[e.ColumnIndex].Name == "CnpjRecebimento")
             {
@@ -66,6 +69,42 @@ namespace SistemaFL.Funcionalidades
             return cnpj; // Retorna o valor original caso não seja um CNPJ válido
         }
 
-    }
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void AjustarPosicaoPictureBox()
+        {
+            int margem = 10;
 
+            // Posição do PictureBox1 (no canto superior direito)
+            int x1 = this.ClientSize.Width - pictureBox1.Width - margem;
+            int y1 = margem;
+
+            pictureBox2.Location = new Point(x1, y1);
+
+            // Posição do PictureBox2 (ao lado esquerdo de PictureBox1)
+            int x2 = x1 - pictureBox2.Width - margem;
+            int y2 = margem;
+
+            pictureBox1.Location = new Point(x2, y2);
+        }
+
+        private void FrmFuncionalidadeRegisto_Resize(object sender, EventArgs e)
+        {
+            AjustarPosicaoPictureBox();
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+    }
 }

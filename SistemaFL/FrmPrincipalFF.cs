@@ -167,7 +167,7 @@ namespace SistemaFL
         }
         private void FrmPrincipalFF_Load(object sender, EventArgs e)
         {
-            /*var form8 = Program.serviceProvider.GetRequiredService<FrmFuncionalidadeLogin>();
+            /*var form8 = Program.serviceProvider.GetRequiredService<FrmFuncLogin>();
             form8.ShowDialog();
 
             if (form8.idUsuario > 0)

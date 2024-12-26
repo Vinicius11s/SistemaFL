@@ -1,6 +1,6 @@
 ﻿namespace SistemaFL.Funcionalidades
 {
-    partial class FrmFuncionalidadeLogin
+    partial class FrmFuncLogin
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFuncionalidadeLogin));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFuncLogin));
             txtlogin = new TextBox();
             txtsenha = new TextBox();
             btnentrar = new Button();
@@ -139,17 +139,15 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.BackColor = Color.Transparent;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(591, 3);
+            pictureBox1.Location = new Point(602, 1);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(36, 30);
+            pictureBox1.Size = new Size(27, 20);
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 17;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
             // 
-            // FrmFuncionalidadeLogin
+            // FrmFuncLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -164,7 +162,7 @@
             Controls.Add(label4);
             Controls.Add(txtlogin);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "FrmFuncionalidadeLogin";
+            Name = "FrmFuncLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmFuncionalidadeLogin";
             Load += FrmFuncionalidadeLogin_Load;
@@ -183,7 +181,7 @@
         private Label label4;
         private Label label2;
         private Label label1;
-        private PictureBox pictureBox1;
         private PictureBox pictureBox2;
+        private PictureBox pictureBox1;
     }
 }

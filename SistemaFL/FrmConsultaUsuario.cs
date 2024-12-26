@@ -42,5 +42,16 @@ namespace SistemaFL
                 this.Close();
             }
         }
+
+        private void dgdadosusuario_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+
+            if (dgdadosusuario.Columns[e.ColumnIndex].Name == "Senha" && e.Value != null)
+            {
+                e.Value = new string('*', e.Value.ToString().Length);
+                e.FormattingApplied = true;
+            }
+
+        }
     }
 }
