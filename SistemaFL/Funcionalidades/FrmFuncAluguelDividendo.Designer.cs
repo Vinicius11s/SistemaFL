@@ -34,22 +34,25 @@
             dgtotalmes = new DataGridView();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
+            dataGridView1 = new DataGridView();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgdadosAlugDiv).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgtotaisindividual).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgtotalmes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // dgdadosAlugDiv
             // 
+            dgdadosAlugDiv.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgdadosAlugDiv.BackgroundColor = Color.FromArgb(23, 24, 29);
             dgdadosAlugDiv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosAlugDiv.Dock = DockStyle.Top;
-            dgdadosAlugDiv.Location = new Point(0, 0);
-            dgdadosAlugDiv.Margin = new Padding(3, 4, 3, 4);
+            dgdadosAlugDiv.Location = new Point(0, 62);
+            dgdadosAlugDiv.Margin = new Padding(3, 10, 3, 4);
             dgdadosAlugDiv.Name = "dgdadosAlugDiv";
-            dgdadosAlugDiv.Size = new Size(827, 333);
+            dgdadosAlugDiv.Size = new Size(1020, 389);
             dgdadosAlugDiv.TabIndex = 0;
             // 
             // dgtotaisindividual
@@ -57,9 +60,9 @@
             dgtotaisindividual.BackgroundColor = Color.FromArgb(23, 24, 29);
             dgtotaisindividual.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgtotaisindividual.Dock = DockStyle.Bottom;
-            dgtotaisindividual.Location = new Point(0, 410);
+            dgtotaisindividual.Location = new Point(0, 527);
             dgtotaisindividual.Name = "dgtotaisindividual";
-            dgtotaisindividual.Size = new Size(827, 78);
+            dgtotaisindividual.Size = new Size(1020, 78);
             dgtotaisindividual.TabIndex = 1;
             // 
             // dgtotalmes
@@ -67,9 +70,9 @@
             dgtotalmes.BackgroundColor = Color.FromArgb(23, 24, 29);
             dgtotalmes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgtotalmes.Dock = DockStyle.Bottom;
-            dgtotalmes.Location = new Point(0, 333);
+            dgtotalmes.Location = new Point(0, 450);
             dgtotalmes.Name = "dgtotalmes";
-            dgtotalmes.Size = new Size(827, 77);
+            dgtotalmes.Size = new Size(1020, 77);
             dgtotalmes.TabIndex = 2;
             // 
             // pictureBox2
@@ -94,12 +97,32 @@
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(0, 26);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(21, 10);
+            dataGridView1.TabIndex = 12;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(11, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(148, 20);
+            label1.TabIndex = 15;
+            label1.Text = "Aluguel + Dividendos";
+            // 
             // FrmFuncAluguelDividendo
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(827, 488);
+            ClientSize = new Size(1020, 605);
+            Controls.Add(label1);
+            Controls.Add(dataGridView1);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(dgtotalmes);
@@ -118,7 +141,9 @@
             ((System.ComponentModel.ISupportInitialize)dgtotalmes).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -128,5 +153,7 @@
         private DataGridView dgtotalmes;
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
+        private DataGridView dataGridView1;
+        private Label label1;
     }
 }

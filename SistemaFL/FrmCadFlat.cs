@@ -149,7 +149,7 @@ namespace SistemaFL
                 {
                     txtid.Text = flat.id.ToString();
                     txtdescricao.Text = flat.Descricao;
-                    cbbStatus.Text = flat.Status ? "Ativo" : "Inativo";
+                    cbbStatus.Text = flat.Ativo ? "Ativo" : "Inativo";
                     txtValorInvestimento.Text = flat.ValorInvestimento.ToString();
                     cbbTipoInvestimento.Text = flat.TipoInvestimento;
                     dtdataaquisicao.Value = flat.DataAquisicao;
@@ -207,12 +207,17 @@ namespace SistemaFL
             //flat.Status
             if (cbbStatus != null && cbbStatus.SelectedItem != null)
             {
-                if (cbbStatus.SelectedItem.ToString() == "Vendido") { 
-                    flat.Status = false;                   
+                if(cbbStatus.Text != "Vendido")
+                {
+                    flat.Status = cbbStatus.Text;
+                    flat.Ativo = true;
                 }
-                else flat.Status = true;
-
-                decimal valorInvestimento;
+                else 
+                {
+                    flat.Status = cbbStatus.Text;
+                    flat.Ativo = false;
+                }                   
+                    decimal valorInvestimento;
                 if (decimal.TryParse(txtValorInvestimento.Text, out valorInvestimento))
                 {
                     flat.ValorInvestimento = valorInvestimento;

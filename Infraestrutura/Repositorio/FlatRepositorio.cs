@@ -37,9 +37,11 @@ namespace Infraestrutura.Repositorio
                     Unid = flat.Unidade,
                     TipoInvestimento = flat.TipoInvestimento,
                     Cidade = flat.Cidade,
-                    Endereco = $"{flat.Rua ?? ""}, {flat.Bairro ?? ""}",
+                    Endereco = flat.Bairro != null && flat.Bairro != ""
+                    ? $"{flat.Rua ?? ""}, {flat.Bairro}"
+                    : $"{flat.Rua ?? ""}",
                     Investimento = flat.ValorInvestimento,
-                    Status = flat.Status
+                    Status = flat.Status.ToString()
                 }).ToList();
 
             return dadosInvestimento;
@@ -409,40 +411,40 @@ namespace Infraestrutura.Repositorio
                 {
                     Empreendimento = flat.Descricao,
                     CodFlat = flat.id,
-                    JANEIRO = flat.Lancamentos
+                    Janeiro = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 1)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    FEVEREIRO = flat.Lancamentos
+                    Fevereiro = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 2)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    MARÇO = flat.Lancamentos
+                    Março = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 3)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    ABRIL = flat.Lancamentos
+                    Abril = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 4)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    MAIO = flat.Lancamentos
+                    Maio = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 5)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    JUNHO = flat.Lancamentos
+                    Junho = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 6)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    JULHO = flat.Lancamentos
+                    Julho = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 7)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    AGOSTO = flat.Lancamentos
+                    Agosto = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 8)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    SETEMBRO = flat.Lancamentos
+                    Setembro = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 9)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    OUTUBRO = flat.Lancamentos
+                    Outubro = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 10)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    NOVEMBRO = flat.Lancamentos
+                    Novembro = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 11)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    DEZEMBRO = flat.Lancamentos
+                    Dezembro = flat.Lancamentos
                     .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 12)
                     .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M
                 }).ToList();
@@ -478,6 +480,7 @@ namespace Infraestrutura.Repositorio
             return new List<dynamic> { resultado };
         }
         //
+        //Formulário Rendimentos
         public IEnumerable<dynamic> ObterDadosRendimentos()
         {
             var flats = _context.Flat
@@ -581,46 +584,45 @@ namespace Infraestrutura.Repositorio
         {
             TOTAL = totalInv,
 
-            JANEIRO = totalJan,
+            Janeiro = totalJan,
             PorcentagemJan = PorcJan,
 
-            FEVEREIRO = totalFev,
+            Fevereiro = totalFev,
             PorcentagemFev = PorcFev,
 
-            MARCO = totalMar,
+            Março = totalMar,
             PorcentagemMar = PorcMar,
 
-            ABRIL = totalAbr,
+            Abril = totalAbr,
             PorcentagemAbr = PorcAbr,
 
-            MAIO = totalMai,
+            Maio = totalMai,
             PorcentagemMai = PorcMai,
 
-            JUNHO = totalJun,
+            Junho = totalJun,
             PorcentagemJun = PorcJun,
 
-            JULHO = totalJul,
+            Julho = totalJul,
             PorcentagemJul = PorcJul,
 
-            AGOSTO = totalAgo,
+            Agosto = totalAgo,
             PorcentagemAgo = PorcAgo,
 
-            SETEMBRO = totalSet,
+            Setembro = totalSet,
             PorcentagemSet = PorcSet,
 
-            OUTUBRO = totalOut,
+            Outubro = totalOut,
             PorcentagemOut = PorcOut,
 
-            NOVEMBRO = totalNov,
+            Novembro = totalNov,
             PorcentagemNov = PorcNov,
 
-            DEZEMBRO = totalDez,
+            Dezembro = totalDez,
             PorcentagemDez = PorcDez
         }
     };
             return dadosTotais;
         }
-        
         public decimal CalculaLancamentosPorMes(int mes, bool porcentagem)
         {
             // Filtra os lançamentos no mês especificado e exclui o tipo "Aluguel Vencelau"
@@ -695,8 +697,7 @@ namespace Infraestrutura.Repositorio
 
             return (rendimentoAno / valorImovel) * 100;
         }
-
-
+        //
         //PIS E COFINS
         public IEnumerable<object> ObterDadosPISeCOFINS()
         {

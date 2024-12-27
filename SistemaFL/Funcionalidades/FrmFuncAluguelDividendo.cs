@@ -27,6 +27,7 @@ namespace SistemaFL.Funcionalidades
 
         private void FrmFuncAluguelDividendo_Load(object sender, EventArgs e)
         {
+            dataGridView1.Visible = false;
             AjustarPosicaoPictureBox();
             this.Resize += FrmFuncAluguelDividendo_Resize;
 
@@ -142,7 +143,6 @@ namespace SistemaFL.Funcionalidades
 
             }
         }
-
         private void FrmFuncAluguelDividendo_Resize(object sender, EventArgs e)
         {
             AjustarPosicaoPictureBox();

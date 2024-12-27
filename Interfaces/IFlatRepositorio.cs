@@ -10,6 +10,10 @@ namespace Interfaces
 {
     public interface IFlatRepositorio : IBaseRepositorio<Flat>
     {
+        //Formulário Registros
+        IEnumerable<dynamic> ObterDadosInvestimento();
+        decimal CalcularTotalValorInvestimento();
+        //
         //Formulário Aluguel + Dividendos
         IEnumerable<dynamic> ObterDadosAluguelDividendos();
         IEnumerable<dynamic> ObterDadosTotaisALDIV(int retorno);
@@ -22,15 +26,13 @@ namespace Interfaces
         IEnumerable<dynamic> ObterDadosFunReserva();
         IEnumerable<dynamic> ObterDadosTotaisFundoReserva();
         //
-
         IEnumerable<dynamic> ObterDadosRendimentos();
         IEnumerable<dynamic> ObterDadosTotais();
 
         //Form PIS E COFINS
         IEnumerable<object> ObterDadosPISeCOFINS();
         //
-        IEnumerable<dynamic> ObterDadosInvestimento();
-        decimal CalcularTotalValorInvestimento();
+       
 
     }
 }

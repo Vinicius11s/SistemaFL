@@ -42,7 +42,6 @@ namespace SistemaFL
             services.AddScoped<FrmFuncRendimentoscs>();
 
 
-            services.AddScoped<Form1>();
             services.AddScoped<FrmCadEmpresaFF>();
             services.AddScoped<FrmCadFlat>();
             services.AddScoped<FrmCadLancamento>();

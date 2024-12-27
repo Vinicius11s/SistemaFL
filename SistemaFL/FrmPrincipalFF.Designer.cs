@@ -67,6 +67,7 @@
             menuTransition = new System.Windows.Forms.Timer(components);
             sidebarTransition = new System.Windows.Forms.Timer(components);
             funcTransition = new System.Windows.Forms.Timer(components);
+            pictureBox1 = new PictureBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)minimizar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)fecharjanela).BeginInit();
@@ -87,6 +88,7 @@
             panel12.SuspendLayout();
             panel13.SuspendLayout();
             panel14.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -556,12 +558,24 @@
             funcTransition.Interval = 10;
             funcTransition.Tick += funcTransition_Tick_1;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(200, 41);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(669, 554);
+            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox1.TabIndex = 2;
+            pictureBox1.TabStop = false;
+            // 
             // FrmPrincipalFF
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(224, 224, 224);
             ClientSize = new Size(869, 595);
+            Controls.Add(pictureBox1);
             Controls.Add(sidebar);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
@@ -591,6 +605,7 @@
             panel12.ResumeLayout(false);
             panel13.ResumeLayout(false);
             panel14.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -633,5 +648,6 @@
         private Button btnpiscofins;
         private PictureBox fecharjanela;
         private PictureBox minimizar;
+        private PictureBox pictureBox1;
     }
 }

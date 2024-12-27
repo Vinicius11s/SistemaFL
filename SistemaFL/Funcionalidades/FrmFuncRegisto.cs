@@ -40,7 +40,6 @@ namespace SistemaFL.Funcionalidades
             dgdadosFunRegistro.CellFormatting += dgdadosFunRegistro_CellFormatting;
 
         }
-
         private void dgdadosFunRegistro_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
 
@@ -67,18 +66,10 @@ namespace SistemaFL.Funcionalidades
             }
 
             return cnpj; // Retorna o valor original caso não seja um CNPJ válido
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
+        }     
+        private void FrmFuncionalidadeRegisto_Resize(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Maximized)
-            {
-                this.WindowState = FormWindowState.Normal;
-            }
-            else
-            {
-                this.WindowState = FormWindowState.Maximized;
-            }
+            AjustarPosicaoPictureBox();
         }
         private void AjustarPosicaoPictureBox()
         {
@@ -96,15 +87,20 @@ namespace SistemaFL.Funcionalidades
 
             pictureBox1.Location = new Point(x2, y2);
         }
-
-        private void FrmFuncionalidadeRegisto_Resize(object sender, EventArgs e)
-        {
-            AjustarPosicaoPictureBox();
-        }
-
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
         }
     }
 }

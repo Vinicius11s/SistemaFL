@@ -77,7 +77,12 @@ namespace SistemaFL.Funcionalidades
             {
                 e.Handled = true; // Evita que o Enter ative o botão
                 e.SuppressKeyPress = true;
-            }   
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

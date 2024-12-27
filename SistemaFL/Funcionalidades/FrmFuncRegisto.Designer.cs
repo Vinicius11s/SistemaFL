@@ -34,6 +34,7 @@
             label1 = new Label();
             pictureBox1 = new PictureBox();
             pictureBox2 = new PictureBox();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgdadosFunRegistro).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -45,15 +46,15 @@
             dgdadosFunRegistro.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdadosFunRegistro.Dock = DockStyle.Bottom;
             dgdadosFunRegistro.GridColor = Color.FromArgb(23, 24, 29);
-            dgdadosFunRegistro.Location = new Point(0, 93);
+            dgdadosFunRegistro.Location = new Point(0, 121);
             dgdadosFunRegistro.Name = "dgdadosFunRegistro";
-            dgdadosFunRegistro.Size = new Size(827, 395);
+            dgdadosFunRegistro.Size = new Size(1020, 484);
             dgdadosFunRegistro.TabIndex = 0;
             dgdadosFunRegistro.CellFormatting += dgdadosFunRegistro_CellFormatting;
             // 
             // txtTotalInvestimento
             // 
-            txtTotalInvestimento.Location = new Point(24, 44);
+            txtTotalInvestimento.Location = new Point(469, 60);
             txtTotalInvestimento.Margin = new Padding(3, 5, 3, 5);
             txtTotalInvestimento.Name = "txtTotalInvestimento";
             txtTotalInvestimento.ReadOnly = true;
@@ -64,7 +65,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(24, 19);
+            label1.Location = new Point(332, 61);
             label1.Name = "label1";
             label1.Size = new Size(131, 20);
             label1.TabIndex = 6;
@@ -92,12 +93,23 @@
             pictureBox2.TabStop = false;
             pictureBox2.Click += pictureBox2_Click;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(11, 9);
+            label2.Name = "label2";
+            label2.Size = new Size(69, 20);
+            label2.TabIndex = 15;
+            label2.Text = "Registros";
+            // 
             // FrmFuncionalidadeRegisto
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(827, 488);
+            ClientSize = new Size(1020, 605);
+            Controls.Add(label2);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(txtTotalInvestimento);
@@ -124,5 +136,6 @@
         private Label label1;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
+        private Label label2;
     }
 }
