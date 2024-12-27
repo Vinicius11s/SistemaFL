@@ -27,21 +27,40 @@ namespace SistemaFL.Funcionalidades
 
         private void FrmFuncRendimentoscs_Load(object sender, EventArgs e)
         {
+            dgdadosRendimentos.RowTemplate.Height = 35;  // Define a altura de todas as linhas
+
+            foreach (DataGridViewColumn col in dgdadosRendimentos.Columns)
+            {
+                col.DefaultCellStyle.Padding = new Padding(5, 10, 5, 10);  // Espaçamento interno
+            }
             AjustarPosicaoPictureBox();
             this.Resize += FrmFuncRendimentoscs_Resize;
 
             var dadosRendimentos = repositorio.ObterDadosRendimentos();
             dgdadosRendimentos.DataSource = dadosRendimentos;
 
-            AjustarFormatacaoGrid(dgdadosRendimentos);
+            AjustarFormatacaoGridDados(dgdadosRendimentos);
 
             var dadosTotais = repositorio.ObterDadosTotais();
             dgdadosTotais.DataSource = dadosTotais;
 
             AjustarFormatacaoGrid(dgdadosTotais);
+            
         }
-
         private void AjustarFormatacaoGrid(DataGridView grid)
+        {
+
+            foreach (var coluna in grid.Columns.Cast<DataGridViewColumn>())
+            {
+                if (coluna.Name.StartsWith("Porcentagem"))
+                {
+                    coluna.DefaultCellStyle.Format = "N2";
+                    coluna.Width = 50;
+                    coluna.HeaderText = "%";
+                }
+            }
+        }
+        private void AjustarFormatacaoGridDados(DataGridView grid)
         {
 
             foreach (var coluna in grid.Columns.Cast<DataGridViewColumn>())
@@ -79,7 +98,6 @@ namespace SistemaFL.Funcionalidades
             dgdadosRendimentos.Columns["PorceAnual"].DefaultCellStyle.Format = "N2";
             dgdadosRendimentos.Columns["PorceAnual"].Width = 150;
         }
-
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -114,6 +132,36 @@ namespace SistemaFL.Funcionalidades
             int y2 = margem;
 
             pictureBox1.Location = new Point(x2, y2);
+        }
+        private void dgdadosRendimentos_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (e.RowIndex % 2 == 0)
+            {
+                dgdadosRendimentos.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+            }
+            else
+            {
+                dgdadosRendimentos.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Gainsboro;
+
+            }
+        }
+        private void dgdadosRendimentos_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            // Coluna que permite ordenação (por exemplo, coluna 1)
+            if (e.ColumnIndex == 1)
+            {
+                // Pega a direção atual de ordenação
+                ListSortDirection direction = ListSortDirection.Ascending;
+
+                // Se já estiver ordenado, inverte a direção
+                if (dgdadosRendimentos.SortOrder == SortOrder.Ascending)
+                {
+                    direction = ListSortDirection.Descending;
+                }
+
+                // Ordena pela coluna clicada
+                dgdadosRendimentos.Sort(dgdadosRendimentos.Columns[e.ColumnIndex], direction);
+            }
         }
     }
 }

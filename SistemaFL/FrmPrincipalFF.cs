@@ -167,14 +167,14 @@ namespace SistemaFL
         }
         private void FrmPrincipalFF_Load(object sender, EventArgs e)
         {
-            var form8 = Program.serviceProvider.GetRequiredService<FrmFuncLogin>();
+            /*var form8 = Program.serviceProvider.GetRequiredService<FrmFuncLogin>();
             form8.ShowDialog();
 
             if (form8.idUsuario > 0)
             {
                 var usuario = repositorioFunc.Recuperar(u => u.id == form8.idUsuario);
             }
-            else this.Close();
+            else this.Close();*/
         }
     }
 }

@@ -48,11 +48,11 @@ namespace SistemaFL
             dgdadosocorrencias.Columns.Add("NomeFlat", "Nome do Flat");
 
             // Preencher a nova coluna com o nome do Flat
-            foreach (DataGridViewRow row in dgdadosocorrencias.Rows)
+            /*foreach (DataGridViewRow row in dgdadosocorrencias.Rows)
             {
                 var ocorrencia = (Ocorrencia)row.DataBoundItem;
                 row.Cells["NomeFlat"].Value = ocorrencia.Flat?.Descricao;  // Exibe o nome do Flat
-            }
+            }*/
 
         }
 

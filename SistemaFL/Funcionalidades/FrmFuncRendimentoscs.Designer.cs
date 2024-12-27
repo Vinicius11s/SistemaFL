@@ -44,30 +44,34 @@
             // 
             dgdadosRendimentos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgdadosRendimentos.BackgroundColor = Color.FromArgb(23, 24, 29);
+            dgdadosRendimentos.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dgdadosRendimentos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosRendimentos.Location = new Point(0, 73);
-            dgdadosRendimentos.Margin = new Padding(4);
+            dgdadosRendimentos.Location = new Point(0, 75);
+            dgdadosRendimentos.Margin = new Padding(5);
             dgdadosRendimentos.Name = "dgdadosRendimentos";
-            dgdadosRendimentos.Size = new Size(1004, 384);
+            dgdadosRendimentos.Size = new Size(900, 335);
             dgdadosRendimentos.TabIndex = 0;
+            dgdadosRendimentos.ColumnHeaderMouseClick += dgdadosRendimentos_ColumnHeaderMouseClick;
+            dgdadosRendimentos.RowPrePaint += dgdadosRendimentos_RowPrePaint;
             // 
             // dgdadosTotais
             // 
             dgdadosTotais.BackgroundColor = Color.FromArgb(23, 24, 29);
             dgdadosTotais.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdadosTotais.Dock = DockStyle.Bottom;
-            dgdadosTotais.Location = new Point(0, 488);
-            dgdadosTotais.Margin = new Padding(4);
+            dgdadosTotais.Location = new Point(0, 398);
+            dgdadosTotais.Margin = new Padding(5);
             dgdadosTotais.Name = "dgdadosTotais";
-            dgdadosTotais.Size = new Size(1004, 78);
+            dgdadosTotais.Size = new Size(900, 92);
             dgdadosTotais.TabIndex = 1;
             // 
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(862, 12);
+            pictureBox2.Location = new Point(958, 14);
+            pictureBox2.Margin = new Padding(4, 3, 4, 3);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(27, 20);
+            pictureBox2.Size = new Size(30, 24);
             pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox2.TabIndex = 11;
             pictureBox2.TabStop = false;
@@ -76,9 +80,10 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(829, 12);
+            pictureBox1.Location = new Point(921, 14);
+            pictureBox1.Margin = new Padding(4, 3, 4, 3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(27, 20);
+            pictureBox1.Size = new Size(30, 24);
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 10;
             pictureBox1.TabStop = false;
@@ -88,7 +93,8 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(11, 9);
+            label2.Location = new Point(12, 11);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(95, 20);
             label2.TabIndex = 16;
@@ -96,18 +102,18 @@
             // 
             // FrmFuncRendimentoscs
             // 
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1004, 566);
+            ClientSize = new Size(900, 490);
             Controls.Add(label2);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(dgdadosTotais);
             Controls.Add(dgdadosRendimentos);
-            Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Font = new Font("Segoe UI Semilight", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(4);
+            Margin = new Padding(5);
             Name = "FrmFuncRendimentoscs";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Rendimentos";

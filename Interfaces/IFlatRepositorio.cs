@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Entidades;
 
 
+
 namespace Interfaces
 {
     public interface IFlatRepositorio : IBaseRepositorio<Flat>
