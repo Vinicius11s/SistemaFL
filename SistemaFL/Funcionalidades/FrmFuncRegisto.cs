@@ -39,6 +39,14 @@ namespace SistemaFL.Funcionalidades
             dgdadosFunRegistro.CellFormatting += dgdadosFunRegistro_CellFormatting;
 
         }
+        private void CarregarDadosGrid()
+        {
+            var dados = flatRepositorio.ObterDadosInvestimento();
+            dgdadosFunRegistro.DataSource = dados;
+            AjustarNomesDoCabecalhoDoGrid();
+        }
+        //
+        //Formatações do grid
         private void dgdadosFunRegistro_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (dgdadosFunRegistro.Columns[e.ColumnIndex].Name == "CnpjRecebimento")
@@ -46,7 +54,7 @@ namespace SistemaFL.Funcionalidades
                 if (e.Value != null && e.Value is string cnpj)
                 {
                     // Aplica a máscara de CNPJ ao valor
-                    e.Value = FormatCnpj(cnpj);
+                    e.Value = FormatarCnpj(cnpj);
                 }
             }
             if (dgdadosFunRegistro.Columns[e.ColumnIndex].Name == "Status")
@@ -63,7 +71,7 @@ namespace SistemaFL.Funcionalidades
                 }
             }
         }
-        private string FormatCnpj(string cnpj)
+        private string FormatarCnpj(string cnpj)
         {
             // Remove quaisquer caracteres não numéricos
             cnpj = new string(cnpj.Where(char.IsDigit).ToArray());
@@ -76,6 +84,69 @@ namespace SistemaFL.Funcionalidades
 
             return cnpj; // Retorna o valor original caso não seja um CNPJ válido
         }
+        private void AlterarCorFundoETextoCabecalho()
+        {
+            dgdadosFunRegistro.RowTemplate.Height = 29;  // Define a altura de todas as linhas
+
+            foreach (DataGridViewColumn col in dgdadosFunRegistro.Columns)
+            {
+                col.DefaultCellStyle.Padding = new Padding(5, 10, 5, 10);  // Espaçamento interno
+            }
+            // Desativa o estilo visual para permitir personalização
+            dgdadosFunRegistro.EnableHeadersVisualStyles = false;
+
+            // Define a cor de fundo do cabeçalho
+            dgdadosFunRegistro.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
+
+            // Define a cor do texto do cabeçalho
+            dgdadosFunRegistro.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+
+            // Deixa o texto do cabeçalho em negrito
+            dgdadosFunRegistro.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+        }
+        private void AjustarNomesDoCabecalhoDoGrid()
+        {
+            dgdadosFunRegistro.Columns["IdFlat"].HeaderText = "CODFLAT";
+            dgdadosFunRegistro.Columns["CnpjRecebimento"].HeaderText = "CNPJ(RECEBIMENTO)";
+            dgdadosFunRegistro.Columns["Empresa"].HeaderText = "EMPRESA";
+
+            dgdadosFunRegistro.Columns["DtAquisicao"].HeaderText = "DT AQUISIÇÃO";
+            dgdadosFunRegistro.Columns["DtAquisicao"].DefaultCellStyle.Format = "d";
+
+            dgdadosFunRegistro.Columns["Flat"].HeaderText = "FLAT";
+
+            dgdadosFunRegistro.Columns["Unid"].HeaderText = "UNID";
+            dgdadosFunRegistro.Columns["Unid"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dgdadosFunRegistro.Columns["TipoInvestimento"].HeaderText = "TIPO INVESTIMENTO";
+            dgdadosFunRegistro.Columns["Cidade"].HeaderText = "CIDADE";
+            dgdadosFunRegistro.Columns["Endereco"].HeaderText = "ENDEREÇO";
+
+            dgdadosFunRegistro.Columns["Investimento"].HeaderText = "INVESTIMENTO";
+            dgdadosFunRegistro.Columns["Investimento"].DefaultCellStyle.Format = "C2";
+
+            dgdadosFunRegistro.Columns["Status"].HeaderText = "STATUS";
+        }
+        private void dgdadosFunRegistro_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            // Alternar cor de fundo: linhas ímpares em cinza claro, linhas pares em branco
+            if (e.RowIndex % 2 == 0)
+            {
+                dgdadosFunRegistro.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+            }
+            else
+            {
+                dgdadosFunRegistro.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Gainsboro;
+            }
+        }
+        private void FrmFuncionalidadeRegisto_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            dgdadosFunRegistro.DataSource = null;
+            dgdadosFunRegistro.Rows.Clear();
+        }
+        //
+        //Ajustar botões fechar e maximizar
         private void FrmFuncionalidadeRegisto_Resize(object sender, EventArgs e)
         {
             AjustarPosicaoPictureBox();
@@ -111,66 +182,6 @@ namespace SistemaFL.Funcionalidades
                 this.WindowState = FormWindowState.Maximized;
             }
         }
-        private void AlterarCorFundoETextoCabecalho()
-        {
-            dgdadosFunRegistro.RowTemplate.Height = 29;  // Define a altura de todas as linhas
-
-            foreach (DataGridViewColumn col in dgdadosFunRegistro.Columns)
-            {
-                col.DefaultCellStyle.Padding = new Padding(5, 10, 5, 10);  // Espaçamento interno
-            }
-            // Desativa o estilo visual para permitir personalização
-            dgdadosFunRegistro.EnableHeadersVisualStyles = false;
-
-            // Define a cor de fundo do cabeçalho
-            dgdadosFunRegistro.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
-
-            // Define a cor do texto do cabeçalho
-            dgdadosFunRegistro.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-
-            // Deixa o texto do cabeçalho em negrito
-            dgdadosFunRegistro.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-
-        }
-        private void AjustarGridDadods()
-        {
-            dgdadosFunRegistro.Columns["IdFlat"].HeaderText = "CODFLAT";
-            dgdadosFunRegistro.Columns["CnpjRecebimento"].HeaderText = "CNPJ(RECEBIMENTO)";
-            dgdadosFunRegistro.Columns["Empresa"].HeaderText = "EMPRESA";
-            dgdadosFunRegistro.Columns["DtAquisicao"].HeaderText = "DT AQUISIÇÃO";
-            dgdadosFunRegistro.Columns["Flat"].HeaderText = "FLAT";
-            dgdadosFunRegistro.Columns["Unid"].HeaderText = "UNID";
-            dgdadosFunRegistro.Columns["TipoInvestimento"].HeaderText = "TIPO INVESTIMENTO";
-            dgdadosFunRegistro.Columns["Cidade"].HeaderText = "CIDADE";
-            dgdadosFunRegistro.Columns["Endereco"].HeaderText = "ENDEREÇO";
-
-            dgdadosFunRegistro.Columns["Investimento"].HeaderText = "INVESTIMENTO";
-            dgdadosFunRegistro.Columns["Investimento"].DefaultCellStyle.Format = "C2";
-
-            dgdadosFunRegistro.Columns["Status"].HeaderText = "STATUS";
-        }
-        private void dgdadosFunRegistro_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
-        {
-            // Alternar cor de fundo: linhas ímpares em cinza claro, linhas pares em branco
-            if (e.RowIndex % 2 == 0)
-            {
-                dgdadosFunRegistro.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
-            }
-            else
-            {
-                dgdadosFunRegistro.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Gainsboro;
-            }
-        }
-        private void FrmFuncionalidadeRegisto_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            dgdadosFunRegistro.DataSource = null;
-            dgdadosFunRegistro.Rows.Clear();
-        }
-        private void CarregarDadosGrid()
-        {
-            var dados = flatRepositorio.ObterDadosInvestimento();
-            dgdadosFunRegistro.DataSource = dados;
-            AjustarGridDadods();
-        }
+        //      
     }
 }

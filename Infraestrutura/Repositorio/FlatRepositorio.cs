@@ -42,7 +42,9 @@ namespace Infraestrutura.Repositorio
                     : $"{flat.Rua ?? ""}",
                     Investimento = flat.ValorInvestimento,
                     Status = flat.Status.ToString()
-                }).ToList();
+                })
+                .OrderBy(flat => flat.Flat)
+                .ToList();
 
             return dadosInvestimento;
         }

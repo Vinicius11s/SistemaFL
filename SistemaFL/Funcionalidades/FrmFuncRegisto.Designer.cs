@@ -42,21 +42,21 @@
             // 
             // dgdadosFunRegistro
             // 
+            dgdadosFunRegistro.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgdadosFunRegistro.BackgroundColor = Color.White;
             dgdadosFunRegistro.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosFunRegistro.Dock = DockStyle.Bottom;
             dgdadosFunRegistro.GridColor = Color.FromArgb(23, 24, 29);
-            dgdadosFunRegistro.Location = new Point(0, 106);
+            dgdadosFunRegistro.Location = new Point(0, 127);
             dgdadosFunRegistro.Margin = new Padding(4);
             dgdadosFunRegistro.Name = "dgdadosFunRegistro";
-            dgdadosFunRegistro.Size = new Size(900, 314);
+            dgdadosFunRegistro.Size = new Size(900, 293);
             dgdadosFunRegistro.TabIndex = 0;
             dgdadosFunRegistro.CellFormatting += dgdadosFunRegistro_CellFormatting;
             dgdadosFunRegistro.RowPrePaint += dgdadosFunRegistro_RowPrePaint;
             // 
             // txtTotalInvestimento
             // 
-            txtTotalInvestimento.Location = new Point(14, 67);
+            txtTotalInvestimento.Location = new Point(13, 88);
             txtTotalInvestimento.Margin = new Padding(4, 6, 4, 6);
             txtTotalInvestimento.Name = "txtTotalInvestimento";
             txtTotalInvestimento.ReadOnly = true;
@@ -67,7 +67,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(14, 41);
+            label1.Location = new Point(13, 62);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(131, 20);
