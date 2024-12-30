@@ -65,9 +65,9 @@ namespace Infraestrutura.Repositorio
               flat.TipoInvestimento == "Dividendos")
             .Select(flat => new
             {
-                Bandeira = flat.Empresa != null ? flat.Empresa.Descricao : null,
-                Empreendimento = flat.Descricao,
-                CodFlat = flat.id,
+                BANDEIRA = flat.Empresa != null ? flat.Empresa.Descricao : null,
+                EMPREENDIMENTO = flat.Descricao,
+                CODFLAT = flat.id,
                 ValorImovel = flat.ValorInvestimento,
                 AluguelJan = flat.Lancamentos
                     .Where(l => (l.DataPagamento.Month == 1 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
@@ -150,12 +150,15 @@ namespace Infraestrutura.Repositorio
                    .Where(l => l.DataPagamento.Month == 12 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
                    .Sum(l => l.ValorDividendos),
 
-                Acumulado = flat.Lancamentos
+                ACUMULADO = flat.Lancamentos
                 .Where(l => l.TipoPagamento == "Aluguel Fixo + Dividendos" ||
                             l.TipoPagamento == "Aluguel Fixo" ||
                             l.TipoPagamento == "Dividendos")
                 .Sum(l => (l.ValorAluguel ?? 0) + (l.ValorDividendos ?? 0))
-                }).ToList();
+
+                })
+                .OrderBy(flat => flat.EMPREENDIMENTO)
+                .ToList();
             return dadosAluguelDiv;
         }
         public IEnumerable<object> ObterDadosTotaisALDIV(int retorno)

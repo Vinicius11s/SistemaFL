@@ -43,7 +43,20 @@ namespace SistemaFL.Funcionalidades
         {
             var dados = flatRepositorio.ObterDadosInvestimento();
             dgdadosFunRegistro.DataSource = dados;
+
             AjustarNomesDoCabecalhoDoGrid();
+
+            dgdadosFunRegistro.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            // Realiza um redimensionamento adicional após o carregamento dos dados
+            dgdadosFunRegistro.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            dgdadosFunRegistro.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
+
+
+            foreach (DataGridViewRow row in dgdadosFunRegistro.Rows)
+            {
+                AplicarFormatacaoLinha(row);
+            }
         }
         //
         //Formatações do grid
@@ -68,6 +81,11 @@ namespace SistemaFL.Funcionalidades
                 else
                 {
                     dgdadosFunRegistro.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
+                }
+                // Verifica se o status é "Vendido" e pinta a linha de verde
+                if (statusValue == "Vendido")
+                {
+                    dgdadosFunRegistro.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(171, 201, 251);
                 }
             }
         }
@@ -95,13 +113,8 @@ namespace SistemaFL.Funcionalidades
             // Desativa o estilo visual para permitir personalização
             dgdadosFunRegistro.EnableHeadersVisualStyles = false;
 
-            // Define a cor de fundo do cabeçalho
             dgdadosFunRegistro.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
-
-            // Define a cor do texto do cabeçalho
             dgdadosFunRegistro.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-
-            // Deixa o texto do cabeçalho em negrito
             dgdadosFunRegistro.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
 
         }
@@ -130,14 +143,32 @@ namespace SistemaFL.Funcionalidades
         }
         private void dgdadosFunRegistro_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
-            // Alternar cor de fundo: linhas ímpares em cinza claro, linhas pares em branco
-            if (e.RowIndex % 2 == 0)
+            if (e.RowIndex >= 0)
             {
-                dgdadosFunRegistro.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+
+                AplicarFormatacaoLinha(dgdadosFunRegistro.Rows[e.RowIndex]);
+            }
+        }
+        private void AplicarFormatacaoLinha(DataGridViewRow row)
+        {
+            var statusValue = row.Cells["Status"].Value?.ToString();
+
+            if (statusValue == "Em Construção" || statusValue == "Em Reforma")
+            {
+                row.DefaultCellStyle.ForeColor = Color.Red;
             }
             else
             {
-                dgdadosFunRegistro.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Gainsboro;
+                row.DefaultCellStyle.ForeColor = Color.Black;
+            }
+
+            if (statusValue == "Vendido")
+            {
+                row.DefaultCellStyle.BackColor = Color.FromArgb(171, 201, 251);
+            }
+            else
+            {
+                row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
             }
         }
         private void FrmFuncionalidadeRegisto_FormClosing(object sender, FormClosingEventArgs e)

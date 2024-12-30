@@ -29,15 +29,109 @@ namespace SistemaFL.Funcionalidades
         {
             dataGridView1.Visible = false;
             AjustarPosicaoPictureBox();
+            AlterarCorFundoETextoCabecalho();
             this.Resize += FrmFuncAluguelDividendo_Resize;
 
-            var dados = flatRepositório.ObterDadosAluguelDividendos();
-            dgdadosAlugDiv.DataSource = dados;
-            AjustarFormataçãoGridDados(dgdadosAlugDiv);
-
+            //Grid Aluguel + Dividendos
+            CarregarGridDados();
+            //
+            //Grid Totais 1
             var dadosTotaisInd = flatRepositório.ObterDadosTotaisALDIV(1);
             dgtotaisindividual.DataSource = dadosTotaisInd;
-            //tamanho do grid
+            AjustaTamanhodosGrids();
+            AjustarFormataçãoGridIndividual(dgtotaisindividual);
+
+            //Grid Totais 2
+            var dadosTotais = flatRepositório.ObterDadosTotaisALDIV(2);
+            dgtotalmes.DataSource = dadosTotais;
+            AjustarFormataçãoGridTotal(dgtotalmes);
+        }
+
+        private void CarregarGridDados()
+        {
+            var dados = flatRepositório.ObterDadosAluguelDividendos();
+            dgdadosAlugDiv.DataSource = dados;
+
+            AjustarNomesDoCabecalhoDoGrid(dgdadosAlugDiv);
+            dgdadosAlugDiv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            dgdadosAlugDiv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            dgdadosAlugDiv.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
+
+        }
+        private void AlterarCorFundoETextoCabecalho()
+        {
+            dgdadosAlugDiv.RowTemplate.Height = 29;  // Define a altura de todas as linhas
+
+            foreach (DataGridViewColumn col in dgdadosAlugDiv.Columns)
+            {
+                col.DefaultCellStyle.Padding = new Padding(5, 10, 5, 10);  // Espaçamento interno
+            }
+            // Desativa o estilo visual para permitir personalização
+            dgdadosAlugDiv.EnableHeadersVisualStyles = false;
+
+            dgdadosAlugDiv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
+            dgdadosAlugDiv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgdadosAlugDiv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+        }
+        //
+        //Formatação dos grids
+        private void AjustarNomesDoCabecalhoDoGrid(DataGridView grid)
+        {
+            grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            dgdadosAlugDiv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
+            foreach (DataGridViewColumn coluna in dgdadosAlugDiv.Columns)
+            {
+                if (coluna.Name.StartsWith("Aluguel") || coluna.Name.StartsWith("Dividendos"))
+                {
+                    coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
+                    coluna.Width = 144;
+                }
+            }
+
+            dgdadosAlugDiv.Columns["ValorImovel"].HeaderText = "VALOR DO IMÓVEL";
+            dgdadosAlugDiv.Columns["ValorImovel"].DefaultCellStyle.Format = "C2";
+
+            dgdadosAlugDiv.Columns["AluguelJan"].HeaderText = "ALUGUEL JAN";
+            dgdadosAlugDiv.Columns["DividendosJan"].HeaderText = "DIVIDENDOS JAN";
+
+            dgdadosAlugDiv.Columns["AluguelFev"].HeaderText = "ALUGUEL FEV";
+            dgdadosAlugDiv.Columns["DividendosFev"].HeaderText = "DIVIDENDOS FEV";
+
+            dgdadosAlugDiv.Columns["AluguelMar"].HeaderText = "ALUGUEL MAR";
+            dgdadosAlugDiv.Columns["DividendosMar"].HeaderText = "DIVIDENDOS MAR";
+
+            /*dgdadosAlugDiv.Columns["AluguelAbr"].HeaderText = "ALUGUEL ABR";
+            dgdadosAlugDiv.Columns["DividendosAbr"].HeaderText = "DIVIDENDOS ABR";
+
+            dgdadosAlugDiv.Columns["AluguelMai"].HeaderText = "ALUGUEL MAI";
+            dgdadosAlugDiv.Columns["DividendosMai"].HeaderText = "DIVIDENDOS MAI";
+
+            dgdadosAlugDiv.Columns["AluguelJun"].HeaderText = "ALUGUEL JUN";
+            dgdadosAlugDiv.Columns["DividendosJun"].HeaderText = "DIVIDENDOS JUN";
+
+            dgdadosAlugDiv.Columns["AluguelJul"].HeaderText = "ALUGUEL JUL";
+            dgdadosAlugDiv.Columns["DividendosJul"].HeaderText = "DIVIDENDOS JUL";
+
+            dgdadosAlugDiv.Columns["AluguelAgo"].HeaderText = "ALUGUEL AGO";
+            dgdadosAlugDiv.Columns["DividendosAgo"].HeaderText = "DIVIDENDOS AGO";
+
+            dgdadosAlugDiv.Columns["AluguelSet"].HeaderText = "ALUGUEL SET";
+            dgdadosAlugDiv.Columns["DividendosSet"].HeaderText = "DIVIDENDOS SET";
+
+            dgdadosAlugDiv.Columns["AluguelOut"].HeaderText = "ALUGUEL OUT";
+            dgdadosAlugDiv.Columns["DividendosOut"].HeaderText = "DIVIDENDOS OUT";
+
+            dgdadosAlugDiv.Columns["AluguelNov"].HeaderText = "ALUGUEL NOV";
+            dgdadosAlugDiv.Columns["DividendosNov"].HeaderText = "DIVIDENDOS NOV";
+
+            dgdadosAlugDiv.Columns["AluguelDez"].HeaderText = "ALUGUEL DEZ";
+            dgdadosAlugDiv.Columns["DividendosDez"].HeaderText = "DIVIDENDOS DEZ";*/
+        }
+        private void AjustaTamanhodosGrids()
+        {
             dgtotaisindividual.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgtotaisindividual.Left = 390;  // Margem fixa à esquerda
             dgtotaisindividual.Width = this.ClientSize.Width - dgtotaisindividual.Left - 20;  // Cresce para a direita
@@ -57,65 +151,6 @@ namespace SistemaFL.Funcionalidades
             dgtotaisindividual.Width = this.ClientSize.Width - dgtotaisindividual.Left - margemDireita;
             dgtotaisindividual.Top = this.ClientSize.Height - dgtotaisindividual.Height - margemInferior;
 
-
-
-            AjustarFormataçãoGridIndividual(dgtotaisindividual);
-
-            var dadosTotais = flatRepositório.ObterDadosTotaisALDIV(2);
-            dgtotalmes.DataSource = dadosTotais;
-            AjustarFormataçãoGridTotal(dgtotalmes);
-        }
-
-        private void AjustarFormataçãoGridDados(DataGridView grid)
-        {
-            dgdadosAlugDiv.Columns["ValorImovel"].DefaultCellStyle.Format = "C2";
-            grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-            dgdadosAlugDiv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-
-            foreach (DataGridViewColumn coluna in dgdadosAlugDiv.Columns)
-            {
-                if (coluna.Name.StartsWith("Aluguel") || coluna.Name.StartsWith("Dividendos"))
-                {
-                    coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
-                    coluna.Width = 144;
-                }
-            }
-
-            dgdadosAlugDiv.Columns["AluguelJan"].HeaderText = "Aluguel JAN";
-            dgdadosAlugDiv.Columns["DividendosJan"].HeaderText = "Dividendos JAN";
-
-            dgdadosAlugDiv.Columns["AluguelFev"].HeaderText = "Aluguel FEV";
-            dgdadosAlugDiv.Columns["DividendosFev"].HeaderText = "Dividendos FEV";
-
-            dgdadosAlugDiv.Columns["AluguelMar"].HeaderText = "Aluguel MAR";
-            dgdadosAlugDiv.Columns["DividendosMar"].HeaderText = "Dividendos MAR";
-
-            dgdadosAlugDiv.Columns["AluguelAbr"].HeaderText = "Aluguel ABR";
-            dgdadosAlugDiv.Columns["DividendosAbr"].HeaderText = "Dividendos ABR";
-
-            dgdadosAlugDiv.Columns["AluguelMai"].HeaderText = "Aluguel MAI";
-            dgdadosAlugDiv.Columns["DividendosMai"].HeaderText = "Dividendos MAI";
-
-            dgdadosAlugDiv.Columns["AluguelJun"].HeaderText = "Aluguel JUN";
-            dgdadosAlugDiv.Columns["DividendosJun"].HeaderText = "Dividendos JUN";
-
-            dgdadosAlugDiv.Columns["AluguelJul"].HeaderText = "Aluguel JUL";
-            dgdadosAlugDiv.Columns["DividendosJul"].HeaderText = "Dividendos JUL";
-
-            dgdadosAlugDiv.Columns["AluguelAgo"].HeaderText = "Aluguel AGO";
-            dgdadosAlugDiv.Columns["DividendosAgo"].HeaderText = "Dividendos AGO";
-
-            dgdadosAlugDiv.Columns["AluguelSet"].HeaderText = "Aluguel SET";
-            dgdadosAlugDiv.Columns["DividendosSet"].HeaderText = "Dividendos SET";
-
-            dgdadosAlugDiv.Columns["AluguelOut"].HeaderText = "Aluguel OUT";
-            dgdadosAlugDiv.Columns["DividendosOut"].HeaderText = "Dividendos OUT";
-
-            dgdadosAlugDiv.Columns["AluguelNov"].HeaderText = "Aluguel NOV";
-            dgdadosAlugDiv.Columns["DividendosNov"].HeaderText = "Dividendos NOV";
-
-            dgdadosAlugDiv.Columns["AluguelDez"].HeaderText = "Aluguel DEZ";
-            dgdadosAlugDiv.Columns["DividendosDez"].HeaderText = "Dividendos DEZ";
         }
         private void AjustarFormataçãoGridIndividual(DataGridView grid)
         {
@@ -143,6 +178,8 @@ namespace SistemaFL.Funcionalidades
 
             }
         }
+        //
+        //Ajuste dos botões fechar e maximizar
         private void FrmFuncAluguelDividendo_Resize(object sender, EventArgs e)
         {
             AjustarPosicaoPictureBox();
@@ -152,7 +189,6 @@ namespace SistemaFL.Funcionalidades
             dgtotaisindividual.Width = this.ClientSize.Width - dgtotaisindividual.Left - margemDireita;
             dgtotaisindividual.Top = this.ClientSize.Height - dgtotaisindividual.Height - margemInferior;
         }
-
         private void AjustarPosicaoPictureBox()
         {
             int margem = 10;
@@ -169,7 +205,6 @@ namespace SistemaFL.Funcionalidades
 
             pictureBox1.Location = new Point(x2, y2);
         }
-
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Maximized)
@@ -181,7 +216,6 @@ namespace SistemaFL.Funcionalidades
                 this.WindowState = FormWindowState.Maximized;
             }
         }
-
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             this.Close();

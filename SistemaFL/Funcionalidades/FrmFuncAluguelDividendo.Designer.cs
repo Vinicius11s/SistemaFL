@@ -47,12 +47,12 @@
             // dgdadosAlugDiv
             // 
             dgdadosAlugDiv.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgdadosAlugDiv.BackgroundColor = Color.FromArgb(23, 24, 29);
+            dgdadosAlugDiv.BackgroundColor = Color.White;
             dgdadosAlugDiv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosAlugDiv.Location = new Point(0, 62);
+            dgdadosAlugDiv.Location = new Point(0, 50);
             dgdadosAlugDiv.Margin = new Padding(3, 10, 3, 4);
             dgdadosAlugDiv.Name = "dgdadosAlugDiv";
-            dgdadosAlugDiv.Size = new Size(1020, 389);
+            dgdadosAlugDiv.Size = new Size(900, 216);
             dgdadosAlugDiv.TabIndex = 0;
             // 
             // dgtotaisindividual
@@ -60,9 +60,9 @@
             dgtotaisindividual.BackgroundColor = Color.FromArgb(23, 24, 29);
             dgtotaisindividual.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgtotaisindividual.Dock = DockStyle.Bottom;
-            dgtotaisindividual.Location = new Point(0, 527);
+            dgtotaisindividual.Location = new Point(0, 352);
             dgtotaisindividual.Name = "dgtotaisindividual";
-            dgtotaisindividual.Size = new Size(1020, 78);
+            dgtotaisindividual.Size = new Size(900, 69);
             dgtotaisindividual.TabIndex = 1;
             // 
             // dgtotalmes
@@ -70,17 +70,17 @@
             dgtotalmes.BackgroundColor = Color.FromArgb(23, 24, 29);
             dgtotalmes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgtotalmes.Dock = DockStyle.Bottom;
-            dgtotalmes.Location = new Point(0, 450);
+            dgtotalmes.Location = new Point(0, 283);
             dgtotalmes.Name = "dgtotalmes";
-            dgtotalmes.Size = new Size(1020, 77);
+            dgtotalmes.Size = new Size(900, 69);
             dgtotalmes.TabIndex = 2;
             // 
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(774, 6);
+            pictureBox2.Location = new Point(871, 6);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(27, 20);
+            pictureBox2.Size = new Size(30, 21);
             pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox2.TabIndex = 11;
             pictureBox2.TabStop = false;
@@ -89,9 +89,9 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(741, 6);
+            pictureBox1.Location = new Point(834, 6);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(27, 20);
+            pictureBox1.Size = new Size(30, 21);
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 10;
             pictureBox1.TabStop = false;
@@ -100,16 +100,16 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(0, 26);
+            dataGridView1.Location = new Point(0, 27);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(21, 10);
+            dataGridView1.Size = new Size(24, 10);
             dataGridView1.TabIndex = 12;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(11, 9);
+            label1.Location = new Point(12, 9);
             label1.Name = "label1";
             label1.Size = new Size(148, 20);
             label1.TabIndex = 15;
@@ -117,10 +117,10 @@
             // 
             // FrmFuncAluguelDividendo
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1020, 605);
+            ClientSize = new Size(900, 421);
             Controls.Add(label1);
             Controls.Add(dataGridView1);
             Controls.Add(pictureBox2);
@@ -128,7 +128,7 @@
             Controls.Add(dgtotalmes);
             Controls.Add(dgtotaisindividual);
             Controls.Add(dgdadosAlugDiv);
-            Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "FrmFuncAluguelDividendo";

@@ -237,7 +237,7 @@ namespace SistemaFL
             flat.Bairro = txtbairro.Text;
             flat.Cidade = txtcidade.Text;
             flat.Estado = txtestado.Text;
-            flat.idEmpresa = null;
+            flat.idEmpresa = flat.idEmpresa;
             return flat;
         }
         void limpar()
