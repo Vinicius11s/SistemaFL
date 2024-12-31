@@ -16,7 +16,7 @@ namespace Interfaces
         decimal CalcularTotalValorInvestimento();
         //
         //Formulário Aluguel + Dividendos
-        public List<object> ObterDadosAluguelDividendos();
+        public IEnumerable<dynamic> ObterDadosAluguelDividendos();
         IEnumerable<dynamic> ObterDadosTotaisALDIV(int retorno);
         //
         //Formulário Dividendos

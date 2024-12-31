@@ -30,18 +30,14 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFuncAluguelDividendo));
             dgdadosAlugDiv = new DataGridView();
-            dgtotaisindividual = new DataGridView();
             dgtotalmes = new DataGridView();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
-            dataGridView1 = new DataGridView();
             label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgdadosAlugDiv).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dgtotaisindividual).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgtotalmes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // dgdadosAlugDiv
@@ -52,28 +48,18 @@
             dgdadosAlugDiv.Location = new Point(0, 50);
             dgdadosAlugDiv.Margin = new Padding(3, 10, 3, 4);
             dgdadosAlugDiv.Name = "dgdadosAlugDiv";
-            dgdadosAlugDiv.Size = new Size(900, 216);
+            dgdadosAlugDiv.Size = new Size(900, 293);
             dgdadosAlugDiv.TabIndex = 0;
-            // 
-            // dgtotaisindividual
-            // 
-            dgtotaisindividual.BackgroundColor = Color.FromArgb(23, 24, 29);
-            dgtotaisindividual.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgtotaisindividual.Dock = DockStyle.Bottom;
-            dgtotaisindividual.Location = new Point(0, 352);
-            dgtotaisindividual.Name = "dgtotaisindividual";
-            dgtotaisindividual.Size = new Size(900, 69);
-            dgtotaisindividual.TabIndex = 1;
             // 
             // dgtotalmes
             // 
             dgtotalmes.BackgroundColor = Color.FromArgb(23, 24, 29);
             dgtotalmes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgtotalmes.Dock = DockStyle.Bottom;
-            dgtotalmes.Location = new Point(0, 283);
+            dgtotalmes.Location = new Point(0, 344);
             dgtotalmes.Name = "dgtotalmes";
-            dgtotalmes.Size = new Size(900, 69);
-            dgtotalmes.TabIndex = 2;
+            dgtotalmes.Size = new Size(900, 77);
+            dgtotalmes.TabIndex = 1;
             // 
             // pictureBox2
             // 
@@ -97,14 +83,6 @@
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(0, 27);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(24, 10);
-            dataGridView1.TabIndex = 12;
-            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -122,11 +100,9 @@
             BackColor = Color.White;
             ClientSize = new Size(900, 421);
             Controls.Add(label1);
-            Controls.Add(dataGridView1);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(dgtotalmes);
-            Controls.Add(dgtotaisindividual);
             Controls.Add(dgdadosAlugDiv);
             Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
@@ -137,11 +113,9 @@
             Load += FrmFuncAluguelDividendo_Load;
             Resize += FrmFuncAluguelDividendo_Resize;
             ((System.ComponentModel.ISupportInitialize)dgdadosAlugDiv).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dgtotaisindividual).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgtotalmes).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -149,11 +123,9 @@
         #endregion
 
         private DataGridView dgdadosAlugDiv;
-        private DataGridView dgtotaisindividual;
         private DataGridView dgtotalmes;
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
-        private DataGridView dataGridView1;
         private Label label1;
     }
 }

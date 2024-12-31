@@ -58,18 +58,17 @@ namespace Infraestrutura.Repositorio
         {
 
             var dadosAluguelDiv = _context.Flat
-            .Include(flat => flat.Lancamentos)
-            .Include(flat => flat.Empresa)
-            .Where(flat => flat.TipoInvestimento == "Aluguel Fixo + Dividendos" ||
-              flat.TipoInvestimento == "Aluguel Fixo" ||
-              flat.TipoInvestimento == "Dividendos")
-            .Select(flat => new
-            {
-                BANDEIRA = flat.Empresa != null ? flat.Empresa.Descricao : null,
-                EMPREENDIMENTO = flat.Descricao,
-                CODFLAT = flat.id,
-                ValorImovel = flat.ValorInvestimento,
-                AluguelJan = flat.Lancamentos
+             .AsNoTracking()
+             .Where(flat => flat.TipoInvestimento == "Aluguel Fixo + Dividendos" ||
+                            flat.TipoInvestimento == "Aluguel Fixo" ||
+                            flat.TipoInvestimento == "Dividendos")
+             .Select(flat => new
+             {
+                 BANDEIRA = flat.Empresa != null ? flat.Empresa.Descricao : null,
+                 EMPREENDIMENTO = flat.Descricao,
+                 CODFLAT = flat.id,
+                 ValorImovel = flat.ValorInvestimento,
+                 AluguelJan = flat.Lancamentos
                     .Where(l => (l.DataPagamento.Month == 1 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
                     .Sum(l => l.ValorAluguel),
                 DividendosJan = flat.Lancamentos

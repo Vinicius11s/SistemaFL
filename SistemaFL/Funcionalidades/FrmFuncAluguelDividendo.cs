@@ -27,45 +27,50 @@ namespace SistemaFL.Funcionalidades
 
         private void FrmFuncAluguelDividendo_Load(object sender, EventArgs e)
         {
-            dataGridView1.Visible = false;
             AjustarPosicaoPictureBox();
-            AlterarCorFundoETextoCabecalho();
             this.Resize += FrmFuncAluguelDividendo_Resize;
 
-            //Grid Aluguel + Dividendos
             CarregarGridDados();
-            //
-            //Grid Totais 1
-            var dadosTotaisInd = flatRepositório.ObterDadosTotaisALDIV(1);
-            dgtotaisindividual.DataSource = dadosTotaisInd;
-            AjustaTamanhodosGrids();
-            AjustarFormataçãoGridIndividual(dgtotaisindividual);
+            AdicionarLinhaTotal();
+
+            
 
             //Grid Totais 2
             var dadosTotais = flatRepositório.ObterDadosTotaisALDIV(2);
             dgtotalmes.DataSource = dadosTotais;
             AjustarFormataçãoGridTotal(dgtotalmes);
         }
-
+        //Datagrid Dados
         private void CarregarGridDados()
         {
-            var dados = flatRepositório.ObterDadosAluguelDividendos();
-            dgdadosAlugDiv.DataSource = dados;
 
+            var dados = flatRepositório.ObterDadosAluguelDividendos();
+            DataTable dt = ConverterDynamicParaDataTable(dados);
+            dgdadosAlugDiv.DataSource = dt;
+
+
+
+            AlterarCorFundoETextoCabecalho();
             AjustarNomesDoCabecalhoDoGrid(dgdadosAlugDiv);
             dgdadosAlugDiv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
+            // Realiza um redimensionamento adicional após o carregamento dos dados
             dgdadosAlugDiv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             dgdadosAlugDiv.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
+
+
+            foreach (DataGridViewRow row in dgdadosAlugDiv.Rows)
+            {
+                AplicarFormatacaoLinha(row);
+            }
+
 
         }
         private void AlterarCorFundoETextoCabecalho()
         {
-            dgdadosAlugDiv.RowTemplate.Height = 29;  // Define a altura de todas as linhas
-
             foreach (DataGridViewColumn col in dgdadosAlugDiv.Columns)
             {
-                col.DefaultCellStyle.Padding = new Padding(5, 10, 5, 10);  // Espaçamento interno
+                col.DefaultCellStyle.Padding = new Padding(5, 2, 5, 2);  // Espaçamento interno
             }
             // Desativa o estilo visual para permitir personalização
             dgdadosAlugDiv.EnableHeadersVisualStyles = false;
@@ -75,8 +80,6 @@ namespace SistemaFL.Funcionalidades
             dgdadosAlugDiv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
 
         }
-        //
-        //Formatação dos grids
         private void AjustarNomesDoCabecalhoDoGrid(DataGridView grid)
         {
             grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
@@ -103,7 +106,7 @@ namespace SistemaFL.Funcionalidades
             dgdadosAlugDiv.Columns["AluguelMar"].HeaderText = "ALUGUEL MAR";
             dgdadosAlugDiv.Columns["DividendosMar"].HeaderText = "DIVIDENDOS MAR";
 
-            /*dgdadosAlugDiv.Columns["AluguelAbr"].HeaderText = "ALUGUEL ABR";
+            dgdadosAlugDiv.Columns["AluguelAbr"].HeaderText = "ALUGUEL ABR";
             dgdadosAlugDiv.Columns["DividendosAbr"].HeaderText = "DIVIDENDOS ABR";
 
             dgdadosAlugDiv.Columns["AluguelMai"].HeaderText = "ALUGUEL MAI";
@@ -128,15 +131,114 @@ namespace SistemaFL.Funcionalidades
             dgdadosAlugDiv.Columns["DividendosNov"].HeaderText = "DIVIDENDOS NOV";
 
             dgdadosAlugDiv.Columns["AluguelDez"].HeaderText = "ALUGUEL DEZ";
-            dgdadosAlugDiv.Columns["DividendosDez"].HeaderText = "DIVIDENDOS DEZ";*/
+            dgdadosAlugDiv.Columns["DividendosDez"].HeaderText = "DIVIDENDOS DEZ";
         }
+        private void AdicionarLinhaTotal()
+        {
+            DataTable dt = (DataTable)dgdadosAlugDiv.DataSource;
+
+            if (dt == null || dt.Rows.Count == 0) return;
+
+            // Listando os nomes das colunas de meses
+            var colunasMeses = new List<string>
+            {
+                "AluguelJan", "AluguelFev", "AluguelMar", "AluguelAbr", "AluguelMai",
+                "AluguelJun", "AluguelJul", "AluguelAgo", "AluguelSet", "AluguelOut",
+                "AluguelNov", "AluguelDez",
+                "DividendosJan", "DividendosFev", "DividendosMar", "DividendosAbr", "DividendosMai",
+                "DividendosJun", "DividendosJul", "DividendosAgo", "DividendosSet", "DividendosOut",
+                "DividendosNov", "DividendosDez"
+            };
+
+            // Criando uma nova linha para os totais
+            DataRow novaLinha = dt.NewRow();
+
+            // Iterando sobre todas as colunas de meses e somando os valores
+            foreach (var coluna in colunasMeses)
+            {
+                decimal somaMes = dt.AsEnumerable().Sum(row =>
+                    row.Field<decimal?>(coluna) ?? 0);
+
+                // Se a soma for diferente de zero, exibe o valor; caso contrário, deixa a célula vazia
+                novaLinha[coluna] = somaMes != 0 ? somaMes : DBNull.Value;
+            }
+
+            // Adicionando a nova linha de totais
+            dt.Rows.Add(novaLinha);
+
+            // Acessando a última linha da tabela (total)
+            int lastRowIndex = dt.Rows.Count - 1;
+
+            // Definindo o texto "TOTAL" na coluna Bandeira
+            dgdadosAlugDiv.Rows[lastRowIndex].Cells["Bandeira"].Value = "TOTAL";
+            dgdadosAlugDiv.Rows[lastRowIndex].Cells["Bandeira"].Style.Font = new Font(dgdadosAlugDiv.Font, FontStyle.Bold);
+
+            // Definindo os valores das células em negrito, se houver valor
+            foreach (var coluna in colunasMeses)
+            {
+                if (novaLinha[coluna] != DBNull.Value)
+                {
+                    dgdadosAlugDiv.Rows[lastRowIndex].Cells[coluna].Style.Font = new Font(dgdadosAlugDiv.Font, FontStyle.Bold);
+                }
+            }
+
+            // Evitando que o usuário adicione novas linhas
+            dgdadosAlugDiv.AllowUserToAddRows = false;
+
+            // Opcional: Atualizar o DataGridView
+            dgdadosAlugDiv.Refresh();
+        }
+        public DataTable ConverterDynamicParaDataTable(IEnumerable<dynamic> lista)
+        {
+            DataTable tabela = new DataTable();
+
+            if (lista == null || !lista.Any())
+                return tabela;
+
+            var primeiroItem = lista.First();
+            var propriedades = primeiroItem.GetType().GetProperties();
+
+            foreach (var propriedade in propriedades)
+            {
+                Type tipo = Nullable.GetUnderlyingType(propriedade.PropertyType) ?? propriedade.PropertyType;
+                tabela.Columns.Add(propriedade.Name, tipo);
+            }
+
+            foreach (var item in lista)
+            {
+                DataRow novaLinha = tabela.NewRow();
+
+                foreach (var propriedade in propriedades)
+                {
+                    var valor = propriedade.GetValue(item);
+                    novaLinha[propriedade.Name] = valor ?? DBNull.Value;
+                }
+
+                tabela.Rows.Add(novaLinha);
+            }
+
+            return tabela;
+        }
+        //
+        //Datagrid Totais Individual
+        private void AjustarFormataçãoGridIndividual(DataGridView grid)
+        {
+            foreach (DataGridViewColumn coluna in dgtotalmes.Columns)
+            {
+                coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
+                coluna.Width = 144;
+            }
+
+        }
+        //
+        //Formatação e tamanho dos grids
         private void AjustaTamanhodosGrids()
         {
-            dgtotaisindividual.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgtotaisindividual.Left = 390;  // Margem fixa à esquerda
-            dgtotaisindividual.Width = this.ClientSize.Width - dgtotaisindividual.Left - 20;  // Cresce para a direita
-            dgtotaisindividual.Height = 129;  // Altura fixa no rodapé
-            dgtotaisindividual.Top = this.ClientSize.Height - dgtotaisindividual.Height - 20;  // Fica no rodapé
+            dgtotalmes.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgtotalmes.Left = 390;  // Margem fixa à esquerda
+            dgtotalmes.Width = this.ClientSize.Width - dgtotalmes.Left - 20;  // Cresce para a direita
+            dgtotalmes.Height = 129;  // Altura fixa no rodapé
+            dgtotalmes.Top = this.ClientSize.Height - dgtotalmes.Height - 20;  // Fica no rodapé
             int margemDireita = 0;
             int margemInferior = 0;
 
@@ -148,18 +250,13 @@ namespace SistemaFL.Funcionalidades
             }
 
             // Ajusta a largura e a posição do grid
-            dgtotaisindividual.Width = this.ClientSize.Width - dgtotaisindividual.Left - margemDireita;
-            dgtotaisindividual.Top = this.ClientSize.Height - dgtotaisindividual.Height - margemInferior;
+            dgtotalmes.Width = this.ClientSize.Width - dgtotalmes.Left - margemDireita;
+            dgtotalmes.Top = this.ClientSize.Height - dgtotalmes.Height - margemInferior;
 
         }
-        private void AjustarFormataçãoGridIndividual(DataGridView grid)
-        {
-            foreach (DataGridViewColumn coluna in dgtotaisindividual.Columns)
-            {
-                coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
-                coluna.Width = 144;
-            }
-
+        private void AplicarFormatacaoLinha(DataGridViewRow row)
+        {           
+            row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;           
         }
         private void AjustarFormataçãoGridTotal(DataGridView grid)
         {
@@ -186,8 +283,8 @@ namespace SistemaFL.Funcionalidades
             int margemDireita = SystemInformation.VerticalResizeBorderThickness;
             int margemInferior = SystemInformation.HorizontalResizeBorderThickness;
 
-            dgtotaisindividual.Width = this.ClientSize.Width - dgtotaisindividual.Left - margemDireita;
-            dgtotaisindividual.Top = this.ClientSize.Height - dgtotaisindividual.Height - margemInferior;
+            dgtotalmes.Width = this.ClientSize.Width - dgtotalmes.Left - margemDireita;
+            dgtotalmes.Top = this.ClientSize.Height - dgtotalmes.Height - margemInferior;
         }
         private void AjustarPosicaoPictureBox()
         {
