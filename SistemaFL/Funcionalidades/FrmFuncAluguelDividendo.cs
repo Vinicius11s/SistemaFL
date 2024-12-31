@@ -31,14 +31,10 @@ namespace SistemaFL.Funcionalidades
             this.Resize += FrmFuncAluguelDividendo_Resize;
 
             CarregarGridDados();
-            AdicionarLinhaTotal();
+            AdicionarLinhaTotalALDIV();
 
-            
+            CarregarGridDadosTotais();
 
-            //Grid Totais 2
-            var dadosTotais = flatRepositório.ObterDadosTotaisALDIV(2);
-            dgtotalmes.DataSource = dadosTotais;
-            AjustarFormataçãoGridTotal(dgtotalmes);
         }
         //Datagrid Dados
         private void CarregarGridDados()
@@ -133,7 +129,7 @@ namespace SistemaFL.Funcionalidades
             dgdadosAlugDiv.Columns["AluguelDez"].HeaderText = "ALUGUEL DEZ";
             dgdadosAlugDiv.Columns["DividendosDez"].HeaderText = "DIVIDENDOS DEZ";
         }
-        private void AdicionarLinhaTotal()
+        private void AdicionarLinhaTotalALDIV()
         {
             DataTable dt = (DataTable)dgdadosAlugDiv.DataSource;
 
@@ -220,15 +216,31 @@ namespace SistemaFL.Funcionalidades
             return tabela;
         }
         //
-        //Datagrid Totais Individual
-        private void AjustarFormataçãoGridIndividual(DataGridView grid)
+        //Datagrid Totais 
+        private void CarregarGridDadosTotais()
         {
+            var dadosTotais = flatRepositório.ObterDadosTotaisALDIV();
+            dgtotalmes.DataSource = dadosTotais;
+            AjustarFormataçãoGridTotal(dgtotalmes);
+        }
+        private void AjustarFormataçãoGridTotal(DataGridView grid)
+        {
+            dgtotalmes.Columns["Descricao"].HeaderText = "Descrição";
+            dgtotalmes.Columns["Descricao"].DefaultCellStyle.Font = new Font(grid.Font, FontStyle.Bold);
+            grid.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
             foreach (DataGridViewColumn coluna in dgtotalmes.Columns)
             {
-                coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
-                coluna.Width = 144;
-            }
+                coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                if (coluna.Name != "Descricao")
+                {
+                    coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
+                    coluna.Width = 288;
+                    coluna.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
+                }
+
+            }
         }
         //
         //Formatação e tamanho dos grids
@@ -258,23 +270,7 @@ namespace SistemaFL.Funcionalidades
         {           
             row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;           
         }
-        private void AjustarFormataçãoGridTotal(DataGridView grid)
-        {
-            dgtotalmes.Columns["Descricao"].HeaderText = "Descrição";
-            grid.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            foreach (DataGridViewColumn coluna in dgtotalmes.Columns)
-            {
-                if (coluna.Name != "Descricao")
-                {
-                    coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
-                    coluna.Width = 288;
-                    coluna.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-                }
-
-            }
-        }
+        
         //
         //Ajuste dos botões fechar e maximizar
         private void FrmFuncAluguelDividendo_Resize(object sender, EventArgs e)

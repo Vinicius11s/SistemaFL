@@ -17,7 +17,7 @@ namespace Interfaces
         //
         //Formulário Aluguel + Dividendos
         public IEnumerable<dynamic> ObterDadosAluguelDividendos();
-        IEnumerable<dynamic> ObterDadosTotaisALDIV(int retorno);
+        IEnumerable<dynamic> ObterDadosTotaisALDIV();
         //
         //Formulário Dividendos
         IEnumerable<dynamic> ObterDadosDividendos();

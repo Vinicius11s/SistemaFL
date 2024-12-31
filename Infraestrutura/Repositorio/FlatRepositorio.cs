@@ -69,7 +69,7 @@ namespace Infraestrutura.Repositorio
                  CODFLAT = flat.id,
                  ValorImovel = flat.ValorInvestimento,
                  AluguelJan = flat.Lancamentos
-                    .Where(l => (l.DataPagamento.Month == 1 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
+                    .Where(l => l.DataPagamento.Month == 1)
                     .Sum(l => l.ValorAluguel),
                 DividendosJan = flat.Lancamentos
                    .Where(l => l.DataPagamento.Month == 1 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
@@ -143,7 +143,7 @@ namespace Infraestrutura.Repositorio
                    .Sum(l => l.ValorDividendos),
 
                 AluguelDEZ = flat.Lancamentos
-                    .Where(l => (l.DataPagamento.Month == 12 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
+                    .Where(l => l.DataPagamento.Month == 12)
                     .Sum(l => l.ValorAluguel),
                 DividendosDEZ = flat.Lancamentos
                    .Where(l => l.DataPagamento.Month == 12 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
@@ -160,143 +160,56 @@ namespace Infraestrutura.Repositorio
                 .ToList();
             return dadosAluguelDiv;
         }
-        public IEnumerable<object> ObterDadosTotaisALDIV(int retorno)
+        public IEnumerable<object> ObterDadosTotaisALDIV()
         {
-            var totalAJ = CalculaTotaisPorMes(1, false);
-            var totalDJ = CalculaTotaisPorMes(1, true);
-            var totalMesJan = totalAJ + totalDJ;
+            var totalMesJan = CalculaTotaisPorMes(1);
+            var totalMesFev = CalculaTotaisPorMes(2);
+            var totalMesMar = CalculaTotaisPorMes(3);
+            var totalMesAbr = CalculaTotaisPorMes(4);
+            var totalMesMai = CalculaTotaisPorMes(5);
+            var totalMesJun = CalculaTotaisPorMes(6);
+            var totalMesJul = CalculaTotaisPorMes(7);
+            var totalMesAgo = CalculaTotaisPorMes(8);
+            var totalMesSet = CalculaTotaisPorMes(9);
+            var totalMesOut = CalculaTotaisPorMes(10);
+            var totalMesNov = CalculaTotaisPorMes(11);
+            var totalMesDez = CalculaTotaisPorMes(12);
 
-            var totalAF = CalculaTotaisPorMes(2, false);
-            var totalDF = CalculaTotaisPorMes(2, true);
-            var totalMesFev = totalAF + totalDF;
 
-            var totalAM = CalculaTotaisPorMes(3, false);
-            var totalDM = CalculaTotaisPorMes(3, true);
-            var totalMesMar = totalAM + totalDM;
-
-            var totalAA = CalculaTotaisPorMes(4, false);
-            var totalDA = CalculaTotaisPorMes(4, true);
-            var totalMesAbr = totalAA + totalDA;
-
-            var totalAMai = CalculaTotaisPorMes(5, false);
-            var totalDMai = CalculaTotaisPorMes(5, true);
-            var totalMesMai = totalAMai + totalDMai;
-
-            var totalAJun = CalculaTotaisPorMes(6, false);
-            var totalDJun = CalculaTotaisPorMes(6, true);
-            var totalMesJun = totalAJun + totalDJun;
-
-            var totalAJul = CalculaTotaisPorMes(7, false);
-            var totalDJul = CalculaTotaisPorMes(7, true);
-            var totalMesJul = totalAJul + totalDJul;
-
-            var totalAago = CalculaTotaisPorMes(8, false);
-            var totalDago = CalculaTotaisPorMes(8, true);
-            var totalMesAgo = totalAago + totalDago;
-
-            var totalAset = CalculaTotaisPorMes(9, false);
-            var totalDset = CalculaTotaisPorMes(9, true);
-            var totalMesSet = totalAset + totalDset;
-
-            var totalAout = CalculaTotaisPorMes(10, false);
-            var totalDout = CalculaTotaisPorMes(10, true);
-            var totalMesOut = totalAout + totalDout;
-
-            var totalAnov = CalculaTotaisPorMes(11, false);
-            var totalDnov = CalculaTotaisPorMes(11, true);
-            var totalMesNov = totalAnov + totalDnov;
-
-            var totalAdez = CalculaTotaisPorMes(12, false);
-            var totalDez = CalculaTotaisPorMes(12, true);
-            var totalMesDez = totalAdez + totalDez;
-
-            if (retorno == 1)
+            var dadosTotaisMes = new List<object>
+           {
+            new
             {
-                var dadosTotaisInd = new List<object>
-                {
-                    new
-                    {
-                        AlugueisJan = totalAJ,
-                        DividendosJan = totalDJ,
-
-                        AlugueisFev = totalAF,
-                        DividendosFev = totalDF,
-
-                        AlugueisMar = totalAM,
-                        DividendosMar = totalDM,
-
-                        AlugueisAbr = totalAA,
-                        DividendosAbr = totalDA,
-
-                        AlugueisMai = totalAMai,
-                        DividendosMai = totalDMai,
-
-                        AlugueisJun = totalAJun,
-                        DividendosJun = totalDJun,
-
-                        AlugueisJul = totalAJul,
-                        DividendosJul = totalDJul,
-
-                        AlugueisAgo = totalAago,
-                        DividendosAgo = totalDago,
-
-                        AlugueisSet = totalAset,
-                        DividendosSet = totalDset,
-
-                        AlugueisOut = totalAout,
-                        DividendosOut = totalDout,
-
-                        AlugueisNov = totalAnov,
-                        DividendosNov = totalDnov,
-
-                        AlugueisDez = totalAdez,
-                        DividendosDez = totalDez,
-                    }
-                };
-                return dadosTotaisInd;
-            }
-            else
-            {
-                var dadosTotaisMes = new List<object>
-                {
-                    new
-                    {
-                        Descricao = "Total Mês",
-                        Janeiro = totalMesJan,
-                        Fevereiro = totalMesFev,
-                        Marco = totalMesMar,
-                        Abril = totalMesAbr,
-                        Maio = totalMesMai,
-                        Junho = totalMesJun,
-                        Julho = totalMesJul,
-                        Agosto = totalMesAgo,
-                        Setembro = totalMesSet,
-                        Outubro = totalMesOut,
-                        Novembro = totalMesNov,
-                        Dezembro = totalMesDez
-                    }
-                };
+                Descricao = "TOTAL DO MÊS",
+                JANEIRO = totalMesJan,
+                FEVEREIRO = totalMesFev,
+                MARÇO = totalMesMar,
+                ABRIL = totalMesAbr,
+                MAIO = totalMesMai,
+                JUNHO = totalMesJun,
+                JULHO = totalMesJul,
+                AGOSTO = totalMesAgo,
+                SETEMBRO = totalMesSet,
+                OUTUBRO = totalMesOut,
+                NOVEMBRO = totalMesNov,
+                DEZEMBRO = totalMesDez
+                }
+            };
                 return dadosTotaisMes;
-            }
+            
         }
-        public decimal CalculaTotaisPorMes(int mes, bool dividendos)
-        {
-            if (dividendos == false)
-            {
-                var totalAluguel = _context.Lancamento
-                .Where(l => (l.DataPagamento.Month == mes && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
-                .Sum(l => (l.ValorAluguel ?? 0));
+        public decimal CalculaTotaisPorMes(int mes)
+        {          
+            var totalAluguel = _context.Lancamento
+            .Where(l => (l.DataPagamento.Month == mes && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
+            .Sum(l => (l.ValorAluguel ?? 0));
+                               
+            var totalDividendos = _context.Lancamento
+            .Where(l => l.DataPagamento.Month == mes && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
+            .Sum(l => (l.ValorDividendos ?? 0));
 
-                return totalAluguel;
-            }
-            else
-            {
-                var totalDividendos = _context.Lancamento
-               .Where(l => l.DataPagamento.Month == mes && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
-               .Sum(l => (l.ValorDividendos ?? 0));
-
-                return totalDividendos;
-            }
+            return totalAluguel + totalDividendos;
+            
         }
         //
         //Formulário Dividendos
@@ -370,18 +283,18 @@ namespace Infraestrutura.Repositorio
         }
         public IEnumerable<dynamic> ObterDadosTotaisDividendos()
         {
-            var TTJan = CalculaTotaisPorMes(1, true);
-            var TTFev = CalculaTotaisPorMes(2, true);
-            var TTMar = CalculaTotaisPorMes(3, true);
-            var TTAbr = CalculaTotaisPorMes(4, true);
-            var TTMai = CalculaTotaisPorMes(5, true);
-            var TTJun = CalculaTotaisPorMes(6, true);
-            var TTJul = CalculaTotaisPorMes(7, true);
-            var TTAgo = CalculaTotaisPorMes(8, true);
-            var TTSet = CalculaTotaisPorMes(9, true);
-            var TTOut = CalculaTotaisPorMes(10, true);
-            var TTNov = CalculaTotaisPorMes(11, true);
-            var TTDez = CalculaTotaisPorMes(12, true);
+            var TTJan = CalculaDividendosPorMes(1);
+            var TTFev = CalculaDividendosPorMes(2);
+            var TTMar = CalculaDividendosPorMes(3);
+            var TTAbr = CalculaDividendosPorMes(4);
+            var TTMai = CalculaDividendosPorMes(5);
+            var TTJun = CalculaDividendosPorMes(6);
+            var TTJul = CalculaDividendosPorMes(7);
+            var TTAgo = CalculaDividendosPorMes(8);
+            var TTSet = CalculaDividendosPorMes(9);
+            var TTOut = CalculaDividendosPorMes(10);
+            var TTNov = CalculaDividendosPorMes(11);
+            var TTDez = CalculaDividendosPorMes(12);
 
             var totalDiv = new List<object>
                 {
@@ -403,6 +316,15 @@ namespace Infraestrutura.Repositorio
                     }
                 };
             return totalDiv;
+        }
+        public decimal CalculaDividendosPorMes(int mes)
+        {
+            var totalDividendos = _context.Lancamento
+            .Where(l => l.DataPagamento.Month == mes && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
+            .Sum(l => (l.ValorDividendos ?? 0));
+
+            return totalDividendos;
+
         }
         //
         //Formulário Fundo de Reserva
