@@ -24,7 +24,6 @@ namespace SistemaFL.Funcionalidades
 
         private void FrmFuncFundoReserva_Load(object sender, EventArgs e)
         {
-            dataGridView1.Visible = false;
             AjustarPosicaoPictureBox();
             this.Resize += FrmFuncFundoReserva_Resize;
 

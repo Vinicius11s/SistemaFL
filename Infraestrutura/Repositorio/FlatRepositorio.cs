@@ -57,107 +57,67 @@ namespace Infraestrutura.Repositorio
         public IEnumerable<dynamic> ObterDadosAluguelDividendos()
         {
 
-            var dadosAluguelDiv = _context.Flat
-             .AsNoTracking()
-             .Where(flat => flat.TipoInvestimento == "Aluguel Fixo + Dividendos" ||
-                            flat.TipoInvestimento == "Aluguel Fixo" ||
-                            flat.TipoInvestimento == "Dividendos")
-             .Select(flat => new
-             {
-                 BANDEIRA = flat.Empresa != null ? flat.Empresa.Descricao : null,
-                 EMPREENDIMENTO = flat.Descricao,
-                 CODFLAT = flat.id,
-                 ValorImovel = flat.ValorInvestimento,
-                 AluguelJan = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 1)
-                    .Sum(l => l.ValorAluguel),
-                DividendosJan = flat.Lancamentos
-                   .Where(l => l.DataPagamento.Month == 1 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
-                    .Sum(l => l.ValorDividendos),
+            var flats = _context.Flat
+                .Include(flat => flat.Empresa)
+              .AsNoTracking()
+              .Where(flat => flat.TipoInvestimento == "Aluguel Fixo + Dividendos" ||
+                             flat.TipoInvestimento == "Aluguel Fixo" ||
+                             flat.TipoInvestimento == "Dividendos")
+              .Include(flat => flat.Lancamentos)  // Carrega os lançamentos relacionados
+              .ToList();  // Executa a query e traz os dados para memória
 
-                AluguelFev = flat.Lancamentos
-                    .Where(l => (l.DataPagamento.Month == 2 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
-                    .Sum(l => l.ValorAluguel),
-                DividendosFev = flat.Lancamentos
-                   .Where(l => l.DataPagamento.Month == 2 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos")).Sum(l => l.ValorDividendos),
+            var dadosAluguelDiv = flats.Select(flat => new
+            {
+                BANDEIRA = flat.Empresa != null ? flat.Empresa.Descricao : "",
+                EMPREENDIMENTO = flat.Descricao,
+                CODFLAT = flat.id,
+                ValorImovel = flat.ValorInvestimento,
 
-                AluguelMar = flat.Lancamentos
-                    .Where(l => (l.DataPagamento.Month == 3 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
-                    .Sum(l => l.ValorAluguel),
-                DividendosMAR = flat.Lancamentos
-                   .Where(l => l.DataPagamento.Month == 3 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos")).Sum(l => l.ValorDividendos),
+                AluguelJan = CalculaAlugueisFlatsPorMes(flat.Lancamentos, 1),
+                DividendosJan = CalculaDividendosFlatsPorMes(flat.Lancamentos, 1),
 
-                AluguelABR = flat.Lancamentos
-                    .Where(l => (l.DataPagamento.Month == 4 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
-                    .Sum(l => l.ValorAluguel),
-                DividendosABR = flat.Lancamentos
-                   .Where(l => l.DataPagamento.Month == 4 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos")).Sum(l => l.ValorDividendos),
+                AluguelFev = CalculaAlugueisFlatsPorMes(flat.Lancamentos, 2),
+                DividendosFev = CalculaDividendosFlatsPorMes(flat.Lancamentos, 2),
 
-                AluguelMAI = flat.Lancamentos
-                    .Where(l => (l.DataPagamento.Month == 5 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
-                    .Sum(l => l.ValorAluguel),
-                DividendosMAI = flat.Lancamentos
-                   .Where(l => l.DataPagamento.Month == 5 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
-                   .Sum(l => l.ValorDividendos),
+                AluguelMar = CalculaAlugueisFlatsPorMes(flat.Lancamentos, 3),
+                DividendosMAR = CalculaDividendosFlatsPorMes(flat.Lancamentos, 3),
 
-                AluguelJUN = flat.Lancamentos
-                    .Where(l => (l.DataPagamento.Month == 6 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
-                    .Sum(l => l.ValorAluguel),
-                DividendosJUN = flat.Lancamentos
-                   .Where(l => l.DataPagamento.Month == 6 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
-                   .Sum(l => l.ValorDividendos),
+                AluguelABR = CalculaAlugueisFlatsPorMes(flat.Lancamentos, 4),
+                DividendosABR = CalculaDividendosFlatsPorMes(flat.Lancamentos, 4),
 
-                AluguelJUL = flat.Lancamentos
-                    .Where(l => (l.DataPagamento.Month == 7 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
-                    .Sum(l => l.ValorAluguel),
-                DividendosJUL = flat.Lancamentos
-                   .Where(l => l.DataPagamento.Month == 7 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
-                   .Sum(l => l.ValorDividendos),
+                AluguelMAI = CalculaAlugueisFlatsPorMes(flat.Lancamentos, 5),
+                DividendosMAI = CalculaDividendosFlatsPorMes(flat.Lancamentos, 5),  
 
-                AluguelAGO = flat.Lancamentos
-                    .Where(l => (l.DataPagamento.Month == 8 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
-                    .Sum(l => l.ValorAluguel),
-                DividendosAGO = flat.Lancamentos
-                   .Where(l => l.DataPagamento.Month == 8 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
-                   .Sum(l => l.ValorDividendos),
+                AluguelJUN = CalculaAlugueisFlatsPorMes(flat.Lancamentos, 6),
+                DividendosJUN = CalculaDividendosFlatsPorMes(flat.Lancamentos, 6),
 
-                AluguelSET = flat.Lancamentos
-                    .Where(l => (l.DataPagamento.Month == 9 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
-                    .Sum(l => l.ValorAluguel),
-                DividendosSET = flat.Lancamentos
-                   .Where(l => l.DataPagamento.Month == 9 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
-                   .Sum(l => l.ValorDividendos),
+                AluguelJUL = CalculaAlugueisFlatsPorMes(flat.Lancamentos, 7),
+                DividendosJUL = CalculaDividendosFlatsPorMes(flat.Lancamentos, 7),
 
-                AluguelOUT = flat.Lancamentos
-                    .Where(l => (l.DataPagamento.Month == 10 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
-                    .Sum(l => l.ValorAluguel),
-                DividendosOUT = flat.Lancamentos
-                   .Where(l => l.DataPagamento.Month == 10 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
-                   .Sum(l => l.ValorDividendos),
+                AluguelAGO = CalculaAlugueisFlatsPorMes(flat.Lancamentos, 8),
+                DividendosAGO = CalculaDividendosFlatsPorMes(flat.Lancamentos, 8),
 
-                AluguelNOV = flat.Lancamentos
-                    .Where(l => (l.DataPagamento.Month == 11 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
-                    .Sum(l => l.ValorAluguel),
-                DividendosNOV = flat.Lancamentos
-                   .Where(l => l.DataPagamento.Month == 11 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
-                   .Sum(l => l.ValorDividendos),
+                AluguelSET = CalculaAlugueisFlatsPorMes(flat.Lancamentos, 9),
+                DividendosSET = CalculaDividendosFlatsPorMes(flat.Lancamentos, 9),
 
-                AluguelDEZ = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 12)
-                    .Sum(l => l.ValorAluguel),
-                DividendosDEZ = flat.Lancamentos
-                   .Where(l => l.DataPagamento.Month == 12 && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
-                   .Sum(l => l.ValorDividendos),
+                AluguelOUT = CalculaAlugueisFlatsPorMes(flat.Lancamentos, 10),
+                DividendosOUT = CalculaDividendosFlatsPorMes(flat.Lancamentos, 10),
+
+                AluguelNOV = CalculaAlugueisFlatsPorMes(flat.Lancamentos, 11),
+                DividendosNOV = CalculaDividendosFlatsPorMes(flat.Lancamentos, 11),
+
+                AluguelDEZ = CalculaAlugueisFlatsPorMes(flat.Lancamentos, 12),
+                DividendosDEZ = CalculaDividendosFlatsPorMes(flat.Lancamentos, 12),
 
                 ACUMULADO = flat.Lancamentos
-                .Where(l => l.TipoPagamento == "Aluguel Fixo + Dividendos" ||
-                            l.TipoPagamento == "Aluguel Fixo" ||
-                            l.TipoPagamento == "Dividendos")
-                .Sum(l => (l.ValorAluguel ?? 0) + (l.ValorDividendos ?? 0))
+                   .Where(l => l.TipoPagamento == "Aluguel Fixo + Dividendos" ||
+                               l.TipoPagamento == "Aluguel Fixo" ||
+                               l.TipoPagamento == "Dividendos")
+                   .Sum(l => (l.ValorAluguel ?? 0) + (l.ValorDividendos ?? 0))
+            })
+            .OrderBy(flat => flat.EMPREENDIMENTO)
+            .ToList();
 
-                })
-                .OrderBy(flat => flat.EMPREENDIMENTO)
-                .ToList();
             return dadosAluguelDiv;
         }
         public IEnumerable<object> ObterDadosTotaisALDIV()
@@ -199,18 +159,33 @@ namespace Infraestrutura.Repositorio
             
         }
         public decimal CalculaTotaisPorMes(int mes)
-        {          
+        {
+            int anoAtual = DateTime.Now.Year;
+
             var totalAluguel = _context.Lancamento
-            .Where(l => (l.DataPagamento.Month == mes && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Aluguel Fixo")))
+            .Where(l => (l.DataPagamento.Month == mes && l.DataPagamento.Year == anoAtual))
             .Sum(l => (l.ValorAluguel ?? 0));
                                
             var totalDividendos = _context.Lancamento
-            .Where(l => l.DataPagamento.Month == mes && (l.TipoPagamento == "Aluguel Fixo + Dividendos" || l.TipoPagamento == "Dividendos"))
+            .Where(l => (l.DataPagamento.Month == mes && l.DataPagamento.Year == anoAtual))
             .Sum(l => (l.ValorDividendos ?? 0));
 
             return totalAluguel + totalDividendos;
             
         }
+        public decimal CalculaAlugueisFlatsPorMes(IEnumerable<Lancamento> lancamentos, int mes)
+        {
+            return lancamentos
+                .Where(l => l.DataPagamento.Month == mes)
+                .Sum(l => (l.ValorAluguel ?? 0));
+        }
+        public decimal CalculaDividendosFlatsPorMes(IEnumerable<Lancamento> lancamentos, int mes)
+        {
+            return lancamentos
+                .Where(l => l.DataPagamento.Month == mes)
+                .Sum(l => (l.ValorDividendos ?? 0));
+        }
+
         //
         //Formulário Dividendos
         public IEnumerable<dynamic> ObterDadosDividendos()

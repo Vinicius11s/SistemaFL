@@ -48,12 +48,12 @@
             dgdadosAlugDiv.Location = new Point(0, 50);
             dgdadosAlugDiv.Margin = new Padding(3, 10, 3, 4);
             dgdadosAlugDiv.Name = "dgdadosAlugDiv";
-            dgdadosAlugDiv.Size = new Size(900, 293);
+            dgdadosAlugDiv.Size = new Size(900, 302);
             dgdadosAlugDiv.TabIndex = 0;
             // 
             // dgtotalmes
             // 
-            dgtotalmes.BackgroundColor = Color.FromArgb(23, 24, 29);
+            dgtotalmes.BackgroundColor = Color.White;
             dgtotalmes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgtotalmes.Dock = DockStyle.Bottom;
             dgtotalmes.Location = new Point(0, 344);

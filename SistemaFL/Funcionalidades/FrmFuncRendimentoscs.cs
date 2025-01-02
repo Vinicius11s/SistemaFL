@@ -143,25 +143,7 @@ namespace SistemaFL.Funcionalidades
             {
                 dgdadosRendimentos.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Gainsboro;
 
-            }
-        }
-        private void dgdadosRendimentos_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            // Coluna que permite ordenação (por exemplo, coluna 1)
-            if (e.ColumnIndex == 1)
-            {
-                // Pega a direção atual de ordenação
-                ListSortDirection direction = ListSortDirection.Ascending;
-
-                // Se já estiver ordenado, inverte a direção
-                if (dgdadosRendimentos.SortOrder == SortOrder.Ascending)
-                {
-                    direction = ListSortDirection.Descending;
-                }
-
-                // Ordena pela coluna clicada
-                dgdadosRendimentos.Sort(dgdadosRendimentos.Columns[e.ColumnIndex], direction);
-            }
+            }       
         }
     }
 }

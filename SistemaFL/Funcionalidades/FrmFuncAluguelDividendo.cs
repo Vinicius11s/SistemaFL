@@ -34,7 +34,7 @@ namespace SistemaFL.Funcionalidades
             AdicionarLinhaTotalALDIV();
 
             CarregarGridDadosTotais();
-
+            FormatarUltimaLinhaEmNegrito(dgdadosAlugDiv);
         }
         //Datagrid Dados
         private void CarregarGridDados()
@@ -62,6 +62,23 @@ namespace SistemaFL.Funcionalidades
 
 
         }
+        private void FormatarUltimaLinhaEmNegrito(DataGridView grid)
+        {
+            int lastRowIndex = grid.Rows.Count - 1;
+
+            // Verifica se há pelo menos uma linha
+            if (lastRowIndex >= 0)
+            {
+                DataGridViewRow ultimaLinha = grid.Rows[lastRowIndex];
+
+                // Aplica negrito a todas as células da última linha
+                foreach (DataGridViewCell cell in ultimaLinha.Cells)
+                {
+                    cell.Style.Font = new Font(grid.Font, FontStyle.Bold);
+                }
+            }
+        }
+
         private void AlterarCorFundoETextoCabecalho()
         {
             foreach (DataGridViewColumn col in dgdadosAlugDiv.Columns)
@@ -70,10 +87,14 @@ namespace SistemaFL.Funcionalidades
             }
             // Desativa o estilo visual para permitir personalização
             dgdadosAlugDiv.EnableHeadersVisualStyles = false;
-
             dgdadosAlugDiv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
             dgdadosAlugDiv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgdadosAlugDiv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+            dgtotalmes.EnableHeadersVisualStyles = false;
+            dgtotalmes.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
+            dgtotalmes.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgtotalmes.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
 
         }
         private void AjustarNomesDoCabecalhoDoGrid(DataGridView grid)
@@ -128,6 +149,8 @@ namespace SistemaFL.Funcionalidades
 
             dgdadosAlugDiv.Columns["AluguelDez"].HeaderText = "ALUGUEL DEZ";
             dgdadosAlugDiv.Columns["DividendosDez"].HeaderText = "DIVIDENDOS DEZ";
+
+
         }
         private void AdicionarLinhaTotalALDIV()
         {
@@ -178,12 +201,10 @@ namespace SistemaFL.Funcionalidades
                 }
             }
 
-            // Evitando que o usuário adicione novas linhas
             dgdadosAlugDiv.AllowUserToAddRows = false;
-
-            // Opcional: Atualizar o DataGridView
             dgdadosAlugDiv.Refresh();
         }
+
         public DataTable ConverterDynamicParaDataTable(IEnumerable<dynamic> lista)
         {
             DataTable tabela = new DataTable();
@@ -221,6 +242,7 @@ namespace SistemaFL.Funcionalidades
         {
             var dadosTotais = flatRepositório.ObterDadosTotaisALDIV();
             dgtotalmes.DataSource = dadosTotais;
+            AlterarCorFundoETextoCabecalho();
             AjustarFormataçãoGridTotal(dgtotalmes);
         }
         private void AjustarFormataçãoGridTotal(DataGridView grid)
@@ -267,10 +289,10 @@ namespace SistemaFL.Funcionalidades
 
         }
         private void AplicarFormatacaoLinha(DataGridViewRow row)
-        {           
-            row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;           
+        {
+            row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
         }
-        
+
         //
         //Ajuste dos botões fechar e maximizar
         private void FrmFuncAluguelDividendo_Resize(object sender, EventArgs e)
@@ -313,6 +335,7 @@ namespace SistemaFL.Funcionalidades
         {
             this.Close();
         }
+        
     }
 }
 

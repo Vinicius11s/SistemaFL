@@ -51,7 +51,6 @@
             dgdadosRendimentos.Name = "dgdadosRendimentos";
             dgdadosRendimentos.Size = new Size(900, 335);
             dgdadosRendimentos.TabIndex = 0;
-            dgdadosRendimentos.ColumnHeaderMouseClick += dgdadosRendimentos_ColumnHeaderMouseClick;
             dgdadosRendimentos.RowPrePaint += dgdadosRendimentos_RowPrePaint;
             // 
             // dgdadosTotais

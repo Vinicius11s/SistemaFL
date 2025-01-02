@@ -33,13 +33,11 @@
             dgtotais = new DataGridView();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
-            dataGridView1 = new DataGridView();
             label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgdadosFunRes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgtotais).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // dgdadosFunRes
@@ -85,14 +83,6 @@
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(0, 32);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(240, 10);
-            dataGridView1.TabIndex = 12;
-            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -110,7 +100,6 @@
             BackColor = Color.White;
             ClientSize = new Size(1020, 605);
             Controls.Add(label2);
-            Controls.Add(dataGridView1);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(dgtotais);
@@ -127,7 +116,6 @@
             ((System.ComponentModel.ISupportInitialize)dgtotais).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -138,7 +126,6 @@
         private DataGridView dgtotais;
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
-        private DataGridView dataGridView1;
         private Label label2;
     }
 }
