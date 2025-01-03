@@ -185,68 +185,37 @@ namespace Infraestrutura.Repositorio
                 .Where(l => l.DataPagamento.Month == mes)
                 .Sum(l => (l.ValorDividendos ?? 0));
         }
-
         //
         //Formulário Dividendos
         public IEnumerable<dynamic> ObterDadosDividendos()
         {
-            var dadosDividendos = _context.Flat
-            .Include(flat => flat.Lancamentos)
-            .Include(flat => flat.Empresa)
-            .Where(flat => flat.TipoInvestimento == "Dividendos")
-            .Select(flat => new
+
+            var flats = _context.Flat
+                .Include(flat => flat.Empresa)
+              .AsNoTracking()
+              .Where(flat => flat.TipoInvestimento == "Aluguel Fixo + Dividendos" ||                           
+                             flat.TipoInvestimento == "Dividendos")
+              .Include(flat => flat.Lancamentos)  // Carrega os lançamentos relacionados
+              .ToList();  // Executa a query e traz os dados para memória
+
+            var dadosDividendos = flats.Select(flat => new
             {
-                Bandeira = flat.Empresa != null ? flat.Empresa.Descricao : null,
-                Empreendimento = flat.Descricao,
-                CodFlat = flat.id,
+                BANDEIRA = flat.idEmpresa != null ? flat.Empresa.Descricao : null,
+                EMPREENDIMENTO = flat.Descricao,
+                CODFLAT = flat.id,
                 ValorImovel = flat.ValorInvestimento,
-                DividendosJan = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 1 && l.TipoPagamento == "Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                DividendosFev = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 2 && l.TipoPagamento == "Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                DividendosMar = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 3 && l.TipoPagamento == "Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                DividendosAbr = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 4 && l.TipoPagamento == "Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                DividendosMai = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 5 && l.TipoPagamento == "Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                DividendosJun = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 6 && l.TipoPagamento == "Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                DividendosJul = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 7 && l.TipoPagamento == "Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                DividendosAgo = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 8 && l.TipoPagamento == "Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                DividendosSet = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 9 && l.TipoPagamento == "Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                DividendosOut = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 10 && l.TipoPagamento == "Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                DividendosNov = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 11 && l.TipoPagamento == "Dividendos")
-                    .Sum(l => l.ValorDividendos),
-
-                DividendosDez = flat.Lancamentos
-                    .Where(l => l.DataPagamento.Month == 12 && l.TipoPagamento == "Dividendos")
-                    .Sum(l => l.ValorDividendos),
+                DividendosJan = CalculaDividendosFlatsPorMes(flat.Lancamentos, 1),
+                DividendosFev = CalculaDividendosFlatsPorMes(flat.Lancamentos, 2),
+                DividendosMar = CalculaDividendosFlatsPorMes(flat.Lancamentos, 3),
+                DividendosAbr = CalculaDividendosFlatsPorMes(flat.Lancamentos, 4),
+                DividendosMai = CalculaDividendosFlatsPorMes(flat.Lancamentos, 5),
+                DividendosJun = CalculaDividendosFlatsPorMes(flat.Lancamentos, 6),
+                DividendosJul = CalculaDividendosFlatsPorMes(flat.Lancamentos, 7),
+                DividendosAgo = CalculaDividendosFlatsPorMes(flat.Lancamentos, 8),
+                DividendosSet = CalculaDividendosFlatsPorMes(flat.Lancamentos, 9),
+                DividendosOut = CalculaDividendosFlatsPorMes(flat.Lancamentos, 10),
+                DividendosNov = CalculaDividendosFlatsPorMes(flat.Lancamentos, 11),
+                DividendosDez = CalculaDividendosFlatsPorMes(flat.Lancamentos, 12),
 
                 Acumulado = flat.Lancamentos
                 .Where(l => l.TipoPagamento == "Dividendos")
@@ -255,42 +224,6 @@ namespace Infraestrutura.Repositorio
             }).ToList();
 
             return dadosDividendos;
-        }
-        public IEnumerable<dynamic> ObterDadosTotaisDividendos()
-        {
-            var TTJan = CalculaDividendosPorMes(1);
-            var TTFev = CalculaDividendosPorMes(2);
-            var TTMar = CalculaDividendosPorMes(3);
-            var TTAbr = CalculaDividendosPorMes(4);
-            var TTMai = CalculaDividendosPorMes(5);
-            var TTJun = CalculaDividendosPorMes(6);
-            var TTJul = CalculaDividendosPorMes(7);
-            var TTAgo = CalculaDividendosPorMes(8);
-            var TTSet = CalculaDividendosPorMes(9);
-            var TTOut = CalculaDividendosPorMes(10);
-            var TTNov = CalculaDividendosPorMes(11);
-            var TTDez = CalculaDividendosPorMes(12);
-
-            var totalDiv = new List<object>
-                {
-                    new
-                    {
-                        Descricao = "Total do Mês",
-                        Janeiro = TTJan,
-                        Fevereiro = TTFev,
-                        Marco = TTMar,
-                        Abril = TTAbr,
-                        Maio = TTMai,
-                        Junho = TTJun,
-                        Julho = TTJul,
-                        Agosto = TTAgo,
-                        Setembro = TTSet,
-                        Outubro = TTOut,
-                        Novembro = TTNov,
-                        Dezembro = TTDez
-                    }
-                };
-            return totalDiv;
         }
         public decimal CalculaDividendosPorMes(int mes)
         {

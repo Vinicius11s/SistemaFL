@@ -44,8 +44,6 @@ namespace SistemaFL.Funcionalidades
             DataTable dt = ConverterDynamicParaDataTable(dados);
             dgdadosAlugDiv.DataSource = dt;
 
-
-
             AlterarCorFundoETextoCabecalho();
             AjustarNomesDoCabecalhoDoGrid(dgdadosAlugDiv);
             dgdadosAlugDiv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -204,7 +202,6 @@ namespace SistemaFL.Funcionalidades
             dgdadosAlugDiv.AllowUserToAddRows = false;
             dgdadosAlugDiv.Refresh();
         }
-
         public DataTable ConverterDynamicParaDataTable(IEnumerable<dynamic> lista)
         {
             DataTable tabela = new DataTable();

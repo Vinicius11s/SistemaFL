@@ -21,7 +21,6 @@ namespace Interfaces
         //
         //Formulário Dividendos
         IEnumerable<dynamic> ObterDadosDividendos();
-        IEnumerable<dynamic> ObterDadosTotaisDividendos();
         //
         //Formulário Fundo de Reserva
         IEnumerable<dynamic> ObterDadosFunReserva();
