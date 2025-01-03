@@ -56,6 +56,7 @@ namespace Infraestrutura.Repositorio
         //Formulário Aluguel + Dividendos
         public IEnumerable<dynamic> ObterDadosAluguelDividendos()
         {
+            int anoAtual = DateTime.Now.Year;
 
             var flats = _context.Flat
                 .Include(flat => flat.Empresa)
@@ -63,7 +64,8 @@ namespace Infraestrutura.Repositorio
               .Where(flat => flat.TipoInvestimento == "Aluguel Fixo + Dividendos" ||
                              flat.TipoInvestimento == "Aluguel Fixo" ||
                              flat.TipoInvestimento == "Dividendos")
-              .Include(flat => flat.Lancamentos)  // Carrega os lançamentos relacionados
+              .Include(flat => flat.Lancamentos  // Carrega os lançamentos relacionados
+              .Where(l => l.DataPagamento.Year == anoAtual))
               .ToList();  // Executa a query e traz os dados para memória
 
             var dadosAluguelDiv = flats.Select(flat => new
@@ -152,7 +154,7 @@ namespace Infraestrutura.Repositorio
                 SETEMBRO = totalMesSet,
                 OUTUBRO = totalMesOut,
                 NOVEMBRO = totalMesNov,
-                DEZEMBRO = totalMesDez
+                DEZEMBRO = totalMesDez,
                 }
             };
                 return dadosTotaisMes;
@@ -217,7 +219,7 @@ namespace Infraestrutura.Repositorio
                 DividendosNov = CalculaDividendosFlatsPorMes(flat.Lancamentos, 11),
                 DividendosDez = CalculaDividendosFlatsPorMes(flat.Lancamentos, 12),
 
-                Acumulado = flat.Lancamentos
+                ACUMULADO = flat.Lancamentos
                 .Where(l => l.TipoPagamento == "Dividendos")
                 .Sum(l => (l.ValorAluguel ?? 0) + (l.ValorDividendos ?? 0))
 

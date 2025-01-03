@@ -32,8 +32,15 @@ namespace SistemaFL.Funcionalidades
             dgdadosDiv.DataSource = dt;
 
             AlterarCorFundoETextoCabecalho();
+
             AjustarFormataçãoGridDados(dgdadosDiv);         
-            AdicionarLinhaTotalDiv();            
+
+            AdicionarLinhaTotalDiv();
+
+            foreach (DataGridViewRow row in dgdadosDiv.Rows)
+            {
+                AplicarFormatacaoLinha(row);
+            }
         }
         private void AlterarCorFundoETextoCabecalho()
         {
@@ -132,6 +139,10 @@ namespace SistemaFL.Funcionalidades
             dgdadosDiv.AllowUserToAddRows = false;
             dgdadosDiv.Refresh();
         }
+        private void AplicarFormatacaoLinha(DataGridViewRow row)
+        {
+            row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
+        }
         public DataTable ConverterDynamicParaDataTable(IEnumerable<dynamic> lista)
         {
             DataTable tabela = new DataTable();
@@ -163,6 +174,7 @@ namespace SistemaFL.Funcionalidades
 
             return tabela;
         }
+        //
         //Botões Maximizar e fechar
         private void AjustarPosicaoPictureBox()
         {

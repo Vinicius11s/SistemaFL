@@ -44,6 +44,8 @@ namespace SistemaFL.Funcionalidades
             DataTable dt = ConverterDynamicParaDataTable(dados);
             dgdadosAlugDiv.DataSource = dt;
 
+
+
             AlterarCorFundoETextoCabecalho();
             AjustarNomesDoCabecalhoDoGrid(dgdadosAlugDiv);
             dgdadosAlugDiv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -76,7 +78,6 @@ namespace SistemaFL.Funcionalidades
                 }
             }
         }
-
         private void AlterarCorFundoETextoCabecalho()
         {
             foreach (DataGridViewColumn col in dgdadosAlugDiv.Columns)
@@ -102,10 +103,9 @@ namespace SistemaFL.Funcionalidades
 
             foreach (DataGridViewColumn coluna in dgdadosAlugDiv.Columns)
             {
-                if (coluna.Name.StartsWith("Aluguel") || coluna.Name.StartsWith("Dividendos"))
+                if (coluna.Name != "CODFLAT")
                 {
                     coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
-                    coluna.Width = 144;
                 }
             }
 
@@ -202,6 +202,7 @@ namespace SistemaFL.Funcionalidades
             dgdadosAlugDiv.AllowUserToAddRows = false;
             dgdadosAlugDiv.Refresh();
         }
+
         public DataTable ConverterDynamicParaDataTable(IEnumerable<dynamic> lista)
         {
             DataTable tabela = new DataTable();
