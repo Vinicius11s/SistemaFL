@@ -30,32 +30,32 @@ namespace SistemaFL
 
         private void FrmConsultaOcorrencia_Load(object sender, EventArgs e)
         {
-            var lista = repositorio.ListarComFlat(e => true).ToList();  // Executa a consulta e converte para lista
+            dgdadosocorrencias.ReadOnly = true;
 
+            var lista = repositorio.ListarComFlat(e => true)
+                .AsNoTracking()
+                .ToList();  // Executa a consulta e converte para lista
             dgdadosocorrencias.DataSource = lista;
+
             dgdadosocorrencias.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-            dgdadosocorrencias.Columns["id"].HeaderText = "Cód.";
-            dgdadosocorrencias.Columns["oco_valorAntigo"].HeaderText = "Valor Ant";
-            dgdadosocorrencias.Columns["oco_valorAlteracao"].HeaderText = "Valor Alteração";
-            dgdadosocorrencias.Columns["oco_dataAlteracao"].HeaderText = "Data Alteração";
-            dgdadosocorrencias.Columns["oco_Tabela"].HeaderText = "Entidade";
-            dgdadosocorrencias.Columns["oco_Descricao"].HeaderText = "Descrição";
-            dgdadosocorrencias.Columns["idLancamento"].Visible = false;
-            dgdadosocorrencias.Columns["Lancamento"].Visible = false;
-            dgdadosocorrencias.Columns["Flat"].Visible = false;
 
-            // Adicionando uma coluna extra para o nome do Flat
-            dgdadosocorrencias.Columns.Add("NomeFlat", "Nome do Flat");
-
-            // Preencher a nova coluna com o nome do Flat
-            /*foreach (DataGridViewRow row in dgdadosocorrencias.Rows)
+            if (dgdadosocorrencias.Rows.Count > 0)
             {
-                var ocorrencia = (Ocorrencia)row.DataBoundItem;
-                row.Cells["NomeFlat"].Value = ocorrencia.Flat?.Descricao;  // Exibe o nome do Flat
-            }*/
+                dgdadosocorrencias.Columns["id"].HeaderText = "Cód.";
+                dgdadosocorrencias.Columns["oco_valorAntigo"].HeaderText = "Valor Ant";
+                dgdadosocorrencias.Columns["oco_valorAlteracao"].HeaderText = "Valor Alteração";
+                dgdadosocorrencias.Columns["oco_dataAlteracao"].HeaderText = "Data Alteração";
+                dgdadosocorrencias.Columns["oco_Tabela"].HeaderText = "Entidade";
+                dgdadosocorrencias.Columns["oco_Descricao"].Visible = false;
+                dgdadosocorrencias.Columns["idLancamento"].Visible = false;
+                dgdadosocorrencias.Columns["Lancamento"].Visible = false;
+                dgdadosocorrencias.Columns["Flat"].Visible = false;
+                dgdadosocorrencias.Columns["IdUsuario"].Visible = false;
+                dgdadosocorrencias.Columns["Usuario"].Visible = false;
+                dgdadosocorrencias.Columns["DescricaoUsuario"].HeaderText = "Usuário";
 
+            }
         }
-
         private void fecharjanela_Click(object sender, EventArgs e)
         {
             this.Close();

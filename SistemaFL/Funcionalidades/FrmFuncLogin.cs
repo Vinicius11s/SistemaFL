@@ -1,4 +1,5 @@
 ﻿using Interfaces;
+using Infraestrutura.Seguranca;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,30 +28,12 @@ namespace SistemaFL.Funcionalidades
             this.AcceptButton = btnentrar;
             this.repositorio = repositorio;
         }
-        private void btnentrar_Click(object sender, EventArgs e)
-        {
-            if (txtlogin.Text != "" && txtsenha.Text != "")
-            {
-                var usuario = repositorio.Recuperar(u => u.Login == txtlogin.Text &&
-                                                            u.Senha == txtsenha.Text);
-
-                if (usuario != null)
-                {
-                    idUsuario = usuario.id;
-                    this.Close();
-                }
-                else MessageBox.Show("Dados Incorretos.");
-            }
-            else MessageBox.Show("Por favor informar Login e Senha.");
-        }
-
         private void FrmFuncionalidadeLogin_Load(object sender, EventArgs e)
         {
             var admin = repositorio.Recuperar(u => u.id == 1);
 
             if (admin == null) // Se não encontrar um usuário com id 1
             {
-                // Criar o usuário ADMIN
                 CriarUsuarioAdmin();
             }
         }
@@ -70,7 +53,6 @@ namespace SistemaFL.Funcionalidades
             Program.serviceProvider.
                         GetRequiredService<ContextoSistema>().SaveChanges();
         }
-
         private void btnentrar_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -79,10 +61,26 @@ namespace SistemaFL.Funcionalidades
                 e.SuppressKeyPress = true;
             }
         }
-
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void btnentrar_Click(object sender, EventArgs e)
+        {
+            if (txtlogin.Text != "" && txtsenha.Text != "")
+            {
+                var usuario = repositorio.Recuperar(u => u.Login == txtlogin.Text &&
+                                                            u.Senha == txtsenha.Text);
+
+                if (usuario != null)
+                {
+                    Sessao.idUsuarioLogado = usuario.id;
+                    Sessao.nomeUsuarioLogado = usuario.Login;
+                    this.Close();
+                }
+                else MessageBox.Show("Dados Incorretos.");
+            }
+            else MessageBox.Show("Por favor informar Login e Senha.");
         }
     }
 }

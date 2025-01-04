@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using Infraestrutura.Seguranca;
 using Infraestrutura.Contexto;
 using Infraestrutura.Repositorio;
 using Interfaces;
@@ -190,10 +191,9 @@ namespace SistemaFL
             }
             else lancamento = new Lancamento();
 
+            lancamento.idUsuario = Sessao.idUsuarioLogado;
             lancamento.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
             lancamento.DataPagamento = dtdataLancamento.Value;
-
-
 
             if (txttipoInvestimento.Text == "Aluguel Venceslau")
             {

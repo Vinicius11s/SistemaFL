@@ -30,7 +30,7 @@ namespace Infraestrutura.Repositorio
                 .Select(flat => new
                 {
                     idFlat = flat.id,
-                    CnpjRecebimento = flat.Empresa != null ? flat.Empresa.Cnpj : null,
+                    CnpjRecebimento = flat.idEmpresa != null ? flat.Empresa.Cnpj : null,
                     Empresa = flat.Empresa != null ? flat.Empresa.RazaoSocial : null,
                     DtAquisicao = flat.DataAquisicao,
                     Flat = flat.Descricao,
@@ -223,8 +223,10 @@ namespace Infraestrutura.Repositorio
                 .Where(l => l.TipoPagamento == "Dividendos")
                 .Sum(l => (l.ValorAluguel ?? 0) + (l.ValorDividendos ?? 0))
 
-            }).ToList();
-
+            })
+                .OrderBy(flat => flat.EMPREENDIMENTO)
+                .ToList();
+                
             return dadosDividendos;
         }
         public decimal CalculaDividendosPorMes(int mes)
@@ -245,45 +247,47 @@ namespace Infraestrutura.Repositorio
                 .Where(flat => flat.Lancamentos.Any(l => l.ValorFundoReserva > 0))
                 .Select(flat => new
                 {
-                    Empreendimento = flat.Descricao,
-                    CodFlat = flat.id,
-                    Janeiro = flat.Lancamentos
-                    .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 1)
-                    .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    Fevereiro = flat.Lancamentos
-                    .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 2)
-                    .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    Março = flat.Lancamentos
-                    .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 3)
-                    .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    Abril = flat.Lancamentos
-                    .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 4)
-                    .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    Maio = flat.Lancamentos
-                    .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 5)
-                    .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    Junho = flat.Lancamentos
-                    .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 6)
-                    .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    Julho = flat.Lancamentos
-                    .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 7)
-                    .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    Agosto = flat.Lancamentos
-                    .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 8)
-                    .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    Setembro = flat.Lancamentos
-                    .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 9)
-                    .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    Outubro = flat.Lancamentos
-                    .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 10)
-                    .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    Novembro = flat.Lancamentos
-                    .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 11)
-                    .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    Dezembro = flat.Lancamentos
-                    .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 12)
-                    .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M
-                }).ToList();
+                    EMPREENDIMENTO = flat.Descricao,
+                    CODFLAT = flat.id,
+                    JANEIRO = flat.Lancamentos
+                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 1)
+                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
+                    FEVEREIRO = flat.Lancamentos
+                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 2)
+                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
+                    MARÇO = flat.Lancamentos
+                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 3)
+                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
+                    ABRIL = flat.Lancamentos
+                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 4)
+                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
+                    MAIO = flat.Lancamentos
+                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 5)
+                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
+                    JUNHO = flat.Lancamentos
+                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 6)
+                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
+                    JULHO = flat.Lancamentos
+                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 7)
+                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
+                    AGOSTO = flat.Lancamentos
+                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 8)
+                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
+                    SETEMBRO = flat.Lancamentos
+                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 9)
+                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
+                    OUTUBRO = flat.Lancamentos
+                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 10)
+                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
+                    NOVEMBRO = flat.Lancamentos
+                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 11)
+                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
+                    DEZEMBRO = flat.Lancamentos
+                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 12)
+                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M
+                })
+                .OrderBy(flat => flat.EMPREENDIMENTO)
+                .ToList();
             return dadosFunReserva;
         }
         public IEnumerable<dynamic> ObterDadosTotaisFundoReserva()
@@ -325,8 +329,8 @@ namespace Infraestrutura.Repositorio
 
             var dadosRendimentos = flats.Select(flat => new
             {
-                Empreendimento = flat.Descricao,
-                CodFlat = flat.id,
+                EMPREENDIMENTO = flat.Descricao,
+                CODFLAT = flat.id,
                 ValorImovel = flat.ValorInvestimento,
 
                 // Calcular os rendimentos e porcentagens para cada mês
@@ -369,6 +373,7 @@ namespace Infraestrutura.Repositorio
                 RendimentoAnual = CalculaRendimentoAnualPorFlat(flat.Lancamentos),
                 PorceAnual = CalculaPorcentagemAnualPorFlat(flat.Lancamentos, flat.ValorInvestimento)
             })
+            .OrderBy(flat => flat.EMPREENDIMENTO)
             .ToList();
 
 
@@ -764,5 +769,8 @@ namespace Infraestrutura.Repositorio
             }
             else return 0;
         }
+        //
+       
+
     }
 }

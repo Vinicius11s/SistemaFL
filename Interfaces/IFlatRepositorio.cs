@@ -32,7 +32,5 @@ namespace Interfaces
         //Form PIS E COFINS
         IEnumerable<object> ObterDadosPISeCOFINS();
         //
-       
-
     }
 }

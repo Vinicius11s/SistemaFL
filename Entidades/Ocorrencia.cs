@@ -21,10 +21,16 @@ namespace Entidades
 
         public int idLancamento { get; set; }
         public Lancamento? Lancamento { get; set; }
+
         public int idFlat { get; set; }
         public Flat? Flat { get; set; }
+        public string? DescricaoFlat { get; set; }
+
+        public int? idUsuario { get; set; }
+        public Usuario? Usuario{ get; set; }
+        public string? DescricaoUsuario{ get; set; }
 
 
- 
+
     }
 }

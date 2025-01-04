@@ -58,6 +58,12 @@ namespace SistemaFL
                 if (txtdescricao.Text != String.Empty)
                 {
                     Empresa empresa = carregaPropriedades();
+                    var empresaExistente = repositorio.RecuperarPorCnpj(empresa.Cnpj);
+                    if(empresaExistente != null && empresaExistente.id != empresa.id)
+                    {
+                        MessageBox.Show("Este CNPJ já está cadastrado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return; // Impede o salvamento
+                    }
 
                     if (empresa.id == 0)
                     {
@@ -86,7 +92,6 @@ namespace SistemaFL
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao salvar" + ex.Message);
-
                 throw;
             }
         }
@@ -224,7 +229,6 @@ namespace SistemaFL
                 cbbflatsassociados.SelectedIndex = -1; // Nenhum item será selecionado
             }
         }
-
         public Empresa carregaPropriedades()
         {
             Empresa empresa;
@@ -236,7 +240,7 @@ namespace SistemaFL
 
             empresa.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
             empresa.Descricao = txtdescricao.Text;
-            empresa.Cnpj = txtcnpj.Text;
+            ValidarCnpj(empresa);
             empresa.RazaoSocial = txtrazaosocial.Text;
             empresa.InscricaoEstadual = txtinscricaoestadual.Text;
             empresa.Cep = txtcep.Text;
@@ -277,7 +281,6 @@ namespace SistemaFL
             txtestado.Text = "";
             txtcep.Text = "";
         }
-
         private void btnassociar_Click(object sender, EventArgs e)
         {
             if (dgAssociarFlat.SelectedRows.Count > 0)
@@ -309,7 +312,6 @@ namespace SistemaFL
                 MessageBox.Show("Selecione um flat para associar.");
             }
         }
-
         private void btnremover_Click(object sender, EventArgs e)
         {
             // Verifica se há algum flat selecionado no ComboBox
@@ -378,6 +380,20 @@ namespace SistemaFL
                 cbbflatsassociados.Text = "";
             }
         }
+        private void ValidarCnpj(Empresa empresa)
+        {
+            string cnpj = txtcnpj.Text;
 
+            // Remove quaisquer caracteres não numéricos, como pontuação (ponto, barra, etc.)
+            cnpj = new string(cnpj.Where(char.IsDigit).ToArray());
+
+            // Verifica se o CNPJ tem 13 dígitos
+            if (cnpj.Length != 14)
+            {
+                MessageBox.Show("O CNPJ digitado não contém 14 dígitos.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            empresa.Cnpj = cnpj;
+        }
     }
 }

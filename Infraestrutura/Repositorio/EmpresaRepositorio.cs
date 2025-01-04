@@ -19,5 +19,11 @@ namespace Infraestrutura.Repositorio
         {
             return _contexto.Empresa.FirstOrDefault(e => e.id == id);
         }
+
+        public Empresa RecuperarPorCnpj(string cnpj)
+        {
+            return this.Recuperar(e => e.Cnpj == cnpj);
+        }
+
     }
 }

@@ -45,7 +45,6 @@ namespace SistemaFL.Funcionalidades
             dgdadosFunRegistro.DataSource = dados;
 
             AjustarNomesDoCabecalhoDoGrid();
-
             dgdadosFunRegistro.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             // Realiza um redimensionamento adicional após o carregamento dos dados
