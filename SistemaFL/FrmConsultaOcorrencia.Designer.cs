@@ -42,7 +42,8 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semilight", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(276, 9);
+            label2.Location = new Point(285, 9);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(211, 37);
             label2.TabIndex = 16;
@@ -51,9 +52,11 @@
             // dgdadosocorrencias
             // 
             dgdadosocorrencias.BackgroundColor = Color.FromArgb(23, 24, 29);
+            dgdadosocorrencias.BorderStyle = BorderStyle.None;
             dgdadosocorrencias.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdadosocorrencias.Dock = DockStyle.Bottom;
             dgdadosocorrencias.Location = new Point(0, 58);
+            dgdadosocorrencias.Margin = new Padding(4);
             dgdadosocorrencias.Name = "dgdadosocorrencias";
             dgdadosocorrencias.Size = new Size(800, 392);
             dgdadosocorrencias.TabIndex = 12;
@@ -62,9 +65,10 @@
             // 
             fecharjanela.Dock = DockStyle.Right;
             fecharjanela.Image = (Image)resources.GetObject("fecharjanela.Image");
-            fecharjanela.Location = new Point(776, 0);
+            fecharjanela.Location = new Point(769, 0);
+            fecharjanela.Margin = new Padding(4);
             fecharjanela.Name = "fecharjanela";
-            fecharjanela.Size = new Size(24, 58);
+            fecharjanela.Size = new Size(31, 58);
             fecharjanela.SizeMode = PictureBoxSizeMode.CenterImage;
             fecharjanela.TabIndex = 17;
             fecharjanela.TabStop = false;
@@ -74,9 +78,10 @@
             // 
             minimizar.Dock = DockStyle.Right;
             minimizar.Image = (Image)resources.GetObject("minimizar.Image");
-            minimizar.Location = new Point(752, 0);
+            minimizar.Location = new Point(738, 0);
+            minimizar.Margin = new Padding(4);
             minimizar.Name = "minimizar";
-            minimizar.Size = new Size(24, 58);
+            minimizar.Size = new Size(31, 58);
             minimizar.SizeMode = PictureBoxSizeMode.CenterImage;
             minimizar.TabIndex = 18;
             minimizar.TabStop = false;
@@ -84,7 +89,7 @@
             // 
             // FrmConsultaOcorrencia
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(800, 450);
@@ -92,7 +97,9 @@
             Controls.Add(fecharjanela);
             Controls.Add(label2);
             Controls.Add(dgdadosocorrencias);
+            Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(4);
             Name = "FrmConsultaOcorrencia";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmConsultaOcorrencia";

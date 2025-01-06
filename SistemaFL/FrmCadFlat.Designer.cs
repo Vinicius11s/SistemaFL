@@ -290,11 +290,11 @@
             // 
             // dtdataaquisicao
             // 
-            dtdataaquisicao.Font = new Font("Segoe UI Semilight", 12F);
+            dtdataaquisicao.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dtdataaquisicao.Format = DateTimePickerFormat.Short;
             dtdataaquisicao.Location = new Point(507, 46);
             dtdataaquisicao.Name = "dtdataaquisicao";
-            dtdataaquisicao.Size = new Size(122, 29);
+            dtdataaquisicao.Size = new Size(125, 25);
             dtdataaquisicao.TabIndex = 25;
             // 
             // label2

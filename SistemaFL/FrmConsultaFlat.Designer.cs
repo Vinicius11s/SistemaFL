@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             dgdadosFlats = new DataGridView();
-            button1 = new Button();
+            btnlocalizar = new Button();
             txtdescricao = new TextBox();
             label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgdadosFlats).BeginInit();
@@ -37,40 +37,41 @@
             // 
             // dgdadosFlats
             // 
-            dgdadosFlats.BackgroundColor = Color.FromArgb(23, 24, 29);
+            dgdadosFlats.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgdadosFlats.BackgroundColor = Color.White;
+            dgdadosFlats.BorderStyle = BorderStyle.None;
             dgdadosFlats.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosFlats.Dock = DockStyle.Bottom;
-            dgdadosFlats.Location = new Point(0, 108);
+            dgdadosFlats.Location = new Point(0, 87);
             dgdadosFlats.Margin = new Padding(3, 4, 3, 4);
             dgdadosFlats.Name = "dgdadosFlats";
-            dgdadosFlats.Size = new Size(875, 321);
+            dgdadosFlats.Size = new Size(875, 342);
             dgdadosFlats.TabIndex = 0;
             dgdadosFlats.CellDoubleClick += dgdadosFlats_CellDoubleClic;
             // 
-            // button1
+            // btnlocalizar
             // 
-            button1.Location = new Point(607, 39);
-            button1.Margin = new Padding(3, 4, 3, 4);
-            button1.Name = "button1";
-            button1.Size = new Size(93, 39);
-            button1.TabIndex = 5;
-            button1.Text = "Localizar";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnlocalizar.Location = new Point(650, 37);
+            btnlocalizar.Margin = new Padding(3, 4, 3, 4);
+            btnlocalizar.Name = "btnlocalizar";
+            btnlocalizar.Size = new Size(105, 31);
+            btnlocalizar.TabIndex = 5;
+            btnlocalizar.Text = "Localizar";
+            btnlocalizar.UseVisualStyleBackColor = true;
+            btnlocalizar.Click += button1_Click;
             // 
             // txtdescricao
             // 
-            txtdescricao.Location = new Point(242, 45);
+            txtdescricao.Location = new Point(233, 37);
             txtdescricao.Margin = new Padding(3, 4, 3, 4);
             txtdescricao.Name = "txtdescricao";
-            txtdescricao.Size = new Size(347, 27);
+            txtdescricao.Size = new Size(390, 29);
             txtdescricao.TabIndex = 4;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(242, 21);
+            label1.Location = new Point(117, 41);
             label1.Name = "label1";
             label1.Size = new Size(110, 20);
             label1.TabIndex = 3;
@@ -78,15 +79,15 @@
             // 
             // FrmConsultaFlat
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(875, 429);
-            Controls.Add(button1);
+            Controls.Add(btnlocalizar);
             Controls.Add(txtdescricao);
             Controls.Add(label1);
             Controls.Add(dgdadosFlats);
-            Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(3, 4, 3, 4);
             Name = "FrmConsultaFlat";
             StartPosition = FormStartPosition.CenterScreen;
@@ -100,7 +101,7 @@
         #endregion
 
         private DataGridView dgdadosFlats;
-        private Button button1;
+        private Button btnlocalizar;
         private TextBox txtdescricao;
         private Label label1;
     }
