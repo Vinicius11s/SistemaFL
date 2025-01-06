@@ -227,11 +227,8 @@ namespace SistemaFL
                         flat.Unidade = Unidade;
                     }
                     else { }
-                }
-                else MessageBox.Show("Valor de investimento inválido. Por favor, insira um número válido.");
-
+                }             
             }           
-
             flat.TipoInvestimento = cbbTipoInvestimento.SelectedItem?.ToString() ?? "Indefinido";                     
             flat.Rua = txtrua.Text;
             flat.Bairro = txtbairro.Text;

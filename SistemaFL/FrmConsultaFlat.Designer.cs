@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmConsultaFlat));
             dgdadosFlats = new DataGridView();
             btnlocalizar = new Button();
             txtdescricao = new TextBox();
@@ -50,12 +51,14 @@
             // 
             // btnlocalizar
             // 
-            btnlocalizar.Location = new Point(650, 37);
+            btnlocalizar.FlatAppearance.BorderSize = 0;
+            btnlocalizar.FlatStyle = FlatStyle.Flat;
+            btnlocalizar.Image = (Image)resources.GetObject("btnlocalizar.Image");
+            btnlocalizar.Location = new Point(629, 35);
             btnlocalizar.Margin = new Padding(3, 4, 3, 4);
             btnlocalizar.Name = "btnlocalizar";
-            btnlocalizar.Size = new Size(105, 31);
+            btnlocalizar.Size = new Size(36, 31);
             btnlocalizar.TabIndex = 5;
-            btnlocalizar.Text = "Localizar";
             btnlocalizar.UseVisualStyleBackColor = true;
             btnlocalizar.Click += button1_Click;
             // 

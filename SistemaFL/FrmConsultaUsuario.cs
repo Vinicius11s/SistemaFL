@@ -23,15 +23,15 @@ namespace SistemaFL
 
         private void btnlocalizar_Click(object sender, EventArgs e)
         {
-            var lista = repositorio.Listar(u => u.Nome.Contains(txtdescricao.Text));
+            var lista = repositorio.Listar(u => u.Login.Contains(txtdescricao.Text));
             dgdadosusuario.DataSource = lista;
 
-            if (lista.Count > 0)
-            {
-                dgdadosusuario.Columns["id"].HeaderText = "Código";
-                dgdadosusuario.Columns["DataCriacao"].HeaderText = "Data Alteração";
-            }
-            else MessageBox.Show("Nenhum usuário foi encontrado.");
+            
+            dgdadosusuario.Columns["id"].HeaderText = "CÓD";
+            dgdadosusuario.Columns["DataCriacao"].HeaderText = "DATA ALTERAÇÃO";
+            dgdadosusuario.Columns["DataCriacao"].HeaderText = "DATA ALTERAÇÃO";
+            dgdadosusuario.Columns["DataCriacao"].HeaderText = "DATA ALTERAÇÃO";
+
         }
 
         private void dgdadosusuario_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -42,7 +42,6 @@ namespace SistemaFL
                 this.Close();
             }
         }
-
         private void dgdadosusuario_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
 

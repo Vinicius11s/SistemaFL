@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmConsultaEmpresa));
             label1 = new Label();
             txtdescricao = new TextBox();
             btnlocalizar = new Button();
@@ -55,21 +56,23 @@
             // 
             // btnlocalizar
             // 
+            btnlocalizar.FlatAppearance.BorderSize = 0;
+            btnlocalizar.FlatStyle = FlatStyle.Flat;
             btnlocalizar.Font = new Font("Segoe UI Semilight", 11.25F);
-            btnlocalizar.Location = new Point(603, 47);
+            btnlocalizar.Image = (Image)resources.GetObject("btnlocalizar.Image");
+            btnlocalizar.Location = new Point(594, 45);
             btnlocalizar.Name = "btnlocalizar";
-            btnlocalizar.Size = new Size(104, 32);
+            btnlocalizar.Size = new Size(40, 32);
             btnlocalizar.TabIndex = 2;
-            btnlocalizar.Text = "Localizar";
             btnlocalizar.UseVisualStyleBackColor = true;
             btnlocalizar.Click += button1_Click;
             // 
             // dgdados
             // 
+            dgdados.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgdados.BackgroundColor = Color.White;
             dgdados.BorderStyle = BorderStyle.None;
             dgdados.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdados.Dock = DockStyle.Bottom;
             dgdados.Location = new Point(0, 121);
             dgdados.Name = "dgdados";
             dgdados.Size = new Size(807, 329);
@@ -88,7 +91,6 @@
             Controls.Add(txtdescricao);
             Controls.Add(label1);
             Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Margin = new Padding(3, 4, 3, 4);
             Name = "FrmConsultaEmpresa";
             StartPosition = FormStartPosition.CenterScreen;

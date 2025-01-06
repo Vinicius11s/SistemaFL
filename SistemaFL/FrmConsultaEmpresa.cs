@@ -24,56 +24,60 @@ namespace SistemaFL
         }
         private void FrmConsultaEmpresa_Load(object sender, EventArgs e)
         {
-            dgdados.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-
+            dgdados.DataSource = null;
+            dgdados.Rows.Clear();
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            //No clique do botão localizar
+            AlterarCorFundoETextoCabecalho();
+
             var lista = repositorio.Listar(e => e.Descricao.Contains(txtdescricao.Text))
                         .OrderBy(e => e.Descricao) // Ordena alfabeticamente pela Descricao
-                        .ToList(); // Converte para lista
+                        .ToList();
 
             dgdados.DataSource = lista;
 
 
-            AlterarFormatacaoGrid(dgdados);
-            AlterarCorFundoETextoCabecalho();      
+            AjustarNomesCabecalho(dgdados);
+            dgdados.RowTemplate.Height = 28;  // Define a altura fixa desejada (ajuste conforme necessário)
 
-        }
-        private void AlterarFormatacaoGrid(DataGridView grid)
-        {        
-            dgdados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
-            dgdados.Columns["id"].HeaderText = "CÓD";
-            dgdados.Columns["Cnpj"].HeaderText = "CNPJ";
-            dgdados.Columns["descricao"].HeaderText = "DESCRIÇÃO";
-            dgdados.Columns["RazaoSocial"].HeaderText = "RAZÃO SOCIAL";
-            dgdados.Columns["InscricaoEstadual"].HeaderText = "INSC. ESTADUAL";
-            dgdados.Columns["Numero"].HeaderText = "Nº";
-            dgdados.Columns["Cidade"].HeaderText = "CIDADE";
-            dgdados.Columns["Bairro"].HeaderText = "BAIRRO";
-            dgdados.Columns["Flats"].Visible = false;
-            
-        }
-        private void AlterarCorFundoETextoCabecalho()
-        {
-            foreach (DataGridViewColumn col in dgdados.Columns)
-            {
-                col.DefaultCellStyle.Padding = new Padding(5, 2, 5, 2);  // Espaçamento interno
-            }
-            // Desativa o estilo visual para permitir personalização
-            dgdados.EnableHeadersVisualStyles = false;
-            dgdados.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
-            dgdados.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgdados.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
 
             foreach (DataGridViewRow row in dgdados.Rows)
             {
                 AplicarFormatacaoLinha(row);
             }
 
+
+        }
+        private void AjustarNomesCabecalho(DataGridView grid)
+        {
+            dgdados.Columns["id"].HeaderText = "CÓD";
+            dgdados.Columns["Cnpj"].HeaderText = "CNPJ";
+            dgdados.Columns["descricao"].HeaderText = "DESCRIÇÃO";
+            dgdados.Columns["RazaoSocial"].HeaderText = "RAZÃO SOCIAL";
+            dgdados.Columns["InscricaoEstadual"].HeaderText = "INSC. ESTADUAL";
+            dgdados.Columns["Rua"].HeaderText = "RUA";
+            dgdados.Columns["Cidade"].HeaderText = "CIDADE";
+            dgdados.Columns["Cep"].HeaderText = "CEP";
+            dgdados.Columns["Bairro"].HeaderText = "BAIRRO";
+            dgdados.Columns["Flats"].Visible = false;
+
+            dgdados.Columns["Numero"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgdados.Columns["Numero"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgdados.Columns["Numero"].HeaderText = "Nº";
+
+            dgdados.Columns["Estado"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgdados.Columns["Estado"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgdados.Columns["Estado"].HeaderText = "ESTADO";
+
+        }
+        private void AlterarCorFundoETextoCabecalho()
+        {
+            dgdados.EnableHeadersVisualStyles = false;
+            dgdados.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
+            dgdados.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            dgdados.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgdados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
         }
         private void AplicarFormatacaoLinha(DataGridViewRow row)
@@ -87,7 +91,7 @@ namespace SistemaFL
                 id = (int)dgdados.Rows[e.RowIndex].Cells[0].Value; // Armazena o ID
                 this.Close(); // Fecha o formulário
             }
-        }      
+        }
         private void dgdados_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (dgdados.Columns[e.ColumnIndex].Name == "Cnpj")
@@ -136,7 +140,7 @@ namespace SistemaFL
                 return string.Format("{0:000\\.000\\.000\\.000}", double.Parse(ie));
             }
 
-            return ie; 
+            return ie;
         }
         private string FormatCep(string cep)
         {
@@ -147,8 +151,7 @@ namespace SistemaFL
                 return string.Format("{0:00000\\-000}", double.Parse(cep));
             }
 
-            return cep; 
-        }
-
+            return cep;
+        }      
     }
 }

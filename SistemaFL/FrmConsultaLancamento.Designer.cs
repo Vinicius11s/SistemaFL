@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmConsultaLancamento));
             btnlocalizar = new Button();
             txtdescricao = new TextBox();
             label1 = new Label();
@@ -38,22 +39,23 @@
             // btnlocalizar
             // 
             btnlocalizar.BackColor = Color.White;
+            btnlocalizar.FlatAppearance.BorderSize = 0;
             btnlocalizar.FlatStyle = FlatStyle.Flat;
             btnlocalizar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnlocalizar.ForeColor = Color.FromArgb(23, 24, 29);
-            btnlocalizar.Location = new Point(201, 29);
+            btnlocalizar.Image = (Image)resources.GetObject("btnlocalizar.Image");
+            btnlocalizar.Location = new Point(191, 31);
             btnlocalizar.Margin = new Padding(4);
             btnlocalizar.Name = "btnlocalizar";
-            btnlocalizar.Size = new Size(71, 26);
+            btnlocalizar.Size = new Size(36, 26);
             btnlocalizar.TabIndex = 10;
-            btnlocalizar.Text = "Localizar";
             btnlocalizar.UseVisualStyleBackColor = false;
             btnlocalizar.Click += btnlocalizar_Click;
             // 
             // txtdescricao
             // 
             txtdescricao.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtdescricao.Location = new Point(105, 29);
+            txtdescricao.Location = new Point(95, 30);
             txtdescricao.Margin = new Padding(4);
             txtdescricao.Name = "txtdescricao";
             txtdescricao.Size = new Size(88, 27);
@@ -95,7 +97,6 @@
             Controls.Add(label1);
             Controls.Add(dgdadoslancamento);
             Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Margin = new Padding(4);
             Name = "FrmConsultaLancamento";
             RightToLeft = RightToLeft.No;

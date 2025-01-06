@@ -43,13 +43,13 @@
             // dgdadosRendimentos
             // 
             dgdadosRendimentos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgdadosRendimentos.BackgroundColor = Color.FromArgb(23, 24, 29);
+            dgdadosRendimentos.BackgroundColor = Color.White;
             dgdadosRendimentos.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dgdadosRendimentos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdadosRendimentos.Location = new Point(0, 75);
             dgdadosRendimentos.Margin = new Padding(5);
             dgdadosRendimentos.Name = "dgdadosRendimentos";
-            dgdadosRendimentos.Size = new Size(900, 335);
+            dgdadosRendimentos.Size = new Size(900, 313);
             dgdadosRendimentos.TabIndex = 0;
             dgdadosRendimentos.RowPrePaint += dgdadosRendimentos_RowPrePaint;
             // 

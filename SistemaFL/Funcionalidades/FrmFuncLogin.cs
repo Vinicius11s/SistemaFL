@@ -41,7 +41,6 @@ namespace SistemaFL.Funcionalidades
         {
             var usuarioAdmin = new Usuario()
             {
-                Nome = "ADMIN",
                 Login = "ADMIN",
                 Senha = "123456789",
                 DataCriacao = DateTime.Now

@@ -159,7 +159,7 @@
             sidebar.Location = new Point(0, 41);
             sidebar.Name = "sidebar";
             sidebar.Padding = new Padding(0, 30, 0, 0);
-            sidebar.Size = new Size(205, 554);
+            sidebar.Size = new Size(205, 481);
             sidebar.TabIndex = 1;
             // 
             // panel2
@@ -562,9 +562,9 @@
             // 
             pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(200, 41);
+            pictureBox1.Location = new Point(45, 41);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(669, 554);
+            pictureBox1.Size = new Size(824, 481);
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
@@ -574,7 +574,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(224, 224, 224);
-            ClientSize = new Size(869, 595);
+            ClientSize = new Size(869, 522);
             Controls.Add(pictureBox1);
             Controls.Add(sidebar);
             Controls.Add(panel1);

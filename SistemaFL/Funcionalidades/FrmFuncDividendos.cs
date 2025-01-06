@@ -67,19 +67,22 @@ namespace SistemaFL.Funcionalidades
                     coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
                 }
             }
-            dgdadosDiv.Columns["ValorImovel"].HeaderText = "VALOR DO IMÓVEL";
-            dgdadosDiv.Columns["DividendosJan"].HeaderText = "JANEIRO DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosFev"].HeaderText = "FEVEREIRO DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosMar"].HeaderText = "MARÇO DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosAbr"].HeaderText = "ABRIL DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosMai"].HeaderText = "MAIO DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosJun"].HeaderText = "JUNHO DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosJul"].HeaderText = "JULHO DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosAgo"].HeaderText = "AGOSTO DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosSet"].HeaderText = "SETEMBRO DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosOut"].HeaderText = "OUTUBRO DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosNov"].HeaderText = "NOVEMBRO DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosDez"].HeaderText = "DEZEMBRO DIVIDENDOS";
+            if (dgdadosDiv.Rows.Count > 0)
+            {
+                dgdadosDiv.Columns["ValorImovel"].HeaderText = "VALOR DO IMÓVEL";
+                dgdadosDiv.Columns["DividendosJan"].HeaderText = "JANEIRO DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosFev"].HeaderText = "FEVEREIRO DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosMar"].HeaderText = "MARÇO DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosAbr"].HeaderText = "ABRIL DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosMai"].HeaderText = "MAIO DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosJun"].HeaderText = "JUNHO DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosJul"].HeaderText = "JULHO DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosAgo"].HeaderText = "AGOSTO DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosSet"].HeaderText = "SETEMBRO DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosOut"].HeaderText = "OUTUBRO DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosNov"].HeaderText = "NOVEMBRO DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosDez"].HeaderText = "DEZEMBRO DIVIDENDOS";
+            }
         }
         private void FrmFuncDividendos_Resize(object sender, EventArgs e)
         {

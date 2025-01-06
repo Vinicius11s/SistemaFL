@@ -166,6 +166,8 @@ namespace SistemaFL
         }
         private void FrmPrincipalFF_Load(object sender, EventArgs e)
         {
+            sidebar.BringToFront();
+
             var form8 = Program.serviceProvider.GetRequiredService<FrmFuncLogin>();
             form8.ShowDialog();
 

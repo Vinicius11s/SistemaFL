@@ -41,13 +41,13 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semilight", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(285, 9);
+            label2.Font = new Font("Segoe UI Semilight", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(303, 13);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(211, 37);
+            label2.Size = new Size(212, 30);
             label2.TabIndex = 16;
-            label2.Text = "Registros de Log";
+            label2.Text = "Últimos Lançamentos";
             // 
             // dgdadosocorrencias
             // 

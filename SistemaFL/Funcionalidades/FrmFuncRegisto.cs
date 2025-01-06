@@ -144,7 +144,6 @@ namespace SistemaFL.Funcionalidades
         {
             if (e.RowIndex >= 0)
             {
-
                 AplicarFormatacaoLinha(dgdadosFunRegistro.Rows[e.RowIndex]);
             }
         }

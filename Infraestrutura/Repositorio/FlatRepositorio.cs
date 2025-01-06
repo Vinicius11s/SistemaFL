@@ -27,6 +27,7 @@ namespace Infraestrutura.Repositorio
         {
             var dadosInvestimento = _context.Flat
                 .Include(f => f.Empresa)
+                .Where(f => f.TipoInvestimento != "Aluguel Venceslau")
                 .Select(flat => new
                 {
                     idFlat = flat.id,

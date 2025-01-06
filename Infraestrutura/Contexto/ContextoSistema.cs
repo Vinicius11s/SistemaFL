@@ -26,7 +26,7 @@ namespace Infraestrutura.Contexto
         {
             //Server Master = DESKTOP-6RMV3GQ
             //Server Local = DESKTOP-I32AP0S
-            var stringConexao = @"Server=DESKTOP-I32AP0S;Database=SistemaFlATS01;Integrated Security=True;TrustServerCertificate=True;";
+            var stringConexao = @"Server=DESKTOP-6RMV3GQ;Database=SistemaFlATS02;Integrated Security=True;TrustServerCertificate=True;";
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(stringConexao);
@@ -112,7 +112,6 @@ namespace Infraestrutura.Contexto
 
             modelBuilder.Entity<Usuario>(u =>
             {
-                u.Property(u => u.Nome).IsRequired().HasMaxLength(100);
                 u.Property(u => u.Login).IsRequired().HasMaxLength(50);
                 u.Property(u => u.Senha).IsRequired().HasMaxLength(100);
                 u.Property(u => u.DataCriacao).IsRequired();

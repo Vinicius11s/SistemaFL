@@ -26,30 +26,23 @@ namespace SistemaFL.Funcionalidades
         }
 
         private void FrmFuncRendimentoscs_Load(object sender, EventArgs e)
-        {
-            dgdadosRendimentos.RowTemplate.Height = 35;  // Define a altura de todas as linhas
-
-            foreach (DataGridViewColumn col in dgdadosRendimentos.Columns)
-            {
-                col.DefaultCellStyle.Padding = new Padding(5, 10, 5, 10);  // Espaçamento interno
-            }
+        {          
             AjustarPosicaoPictureBox();
             this.Resize += FrmFuncRendimentoscs_Resize;
 
             var dadosRendimentos = repositorio.ObterDadosRendimentos();
             dgdadosRendimentos.DataSource = dadosRendimentos;
 
-            AjustarFormatacaoGridDados(dgdadosRendimentos);
+            AjustarNomesCabecalhoGridDados(dgdadosRendimentos);
+            AlterarCorFundoETextoCabecalho();
 
             var dadosTotais = repositorio.ObterDadosTotais();
             dgdadosTotais.DataSource = dadosTotais;
-
-            AjustarFormatacaoGrid(dgdadosTotais);
+            AjustarColunasPorcGridTotais(dgdadosTotais);
             
         }
-        private void AjustarFormatacaoGrid(DataGridView grid)
+        private void AjustarColunasPorcGridTotais(DataGridView grid)
         {
-
             foreach (var coluna in grid.Columns.Cast<DataGridViewColumn>())
             {
                 if (coluna.Name.StartsWith("Porcentagem"))
@@ -60,19 +53,20 @@ namespace SistemaFL.Funcionalidades
                 }
             }
         }
-        private void AjustarFormatacaoGridDados(DataGridView grid)
+        private void AjustarNomesCabecalhoGridDados(DataGridView grid)
         {
+            dgdadosRendimentos.Columns["RendimentoAnual"].HeaderText = "Rendimento Anual";
+            dgdadosRendimentos.Columns["PorceAnual"].HeaderText = "Média(%) Anual";
+            dgdadosRendimentos.Columns["PorceAnual"].DefaultCellStyle.Format = "N2";
 
             foreach (var coluna in grid.Columns.Cast<DataGridViewColumn>())
             {
                 if (coluna.Name.StartsWith("Porcentagem"))
                 {
                     coluna.DefaultCellStyle.Format = "N2";
-                    coluna.Width = 50;
                     coluna.HeaderText = "%";
                 }
             }
-
             dgdadosRendimentos.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             foreach (DataGridViewColumn coluna in dgdadosRendimentos.Columns)
             {
@@ -81,7 +75,6 @@ namespace SistemaFL.Funcionalidades
                     coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
                 }
             }
-
             foreach (DataGridViewColumn coluna in dgdadosTotais.Columns)
             {
                 coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -91,13 +84,37 @@ namespace SistemaFL.Funcionalidades
                     coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
                 }
             }
-
-
-            dgdadosRendimentos.Columns["RendimentoAnual"].HeaderText = "Rendimento Anual";
-            dgdadosRendimentos.Columns["PorceAnual"].HeaderText = "Média(%) Anual";
-            dgdadosRendimentos.Columns["PorceAnual"].DefaultCellStyle.Format = "N2";
-            dgdadosRendimentos.Columns["PorceAnual"].Width = 150;
         }
+        private void AlterarCorFundoETextoCabecalho()
+        {
+            dgdadosRendimentos.RowTemplate.Height = 29;  // Define a altura de todas as linhas
+
+            foreach (DataGridViewColumn col in dgdadosRendimentos.Columns)
+            {
+                col.DefaultCellStyle.Padding = new Padding(5, 10, 5, 10);  // Espaçamento interno
+            }
+            // Desativa o estilo visual para permitir personalização
+            dgdadosRendimentos.EnableHeadersVisualStyles = false;
+
+            dgdadosRendimentos.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
+            dgdadosRendimentos.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgdadosRendimentos.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+        }
+        private void dgdadosRendimentos_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (e.RowIndex % 2 == 0)
+            {
+                dgdadosRendimentos.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+            }
+            else
+            {
+                dgdadosRendimentos.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Gainsboro;
+
+            }
+        }
+        //
+        //Botões fechar e maximizar
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -133,17 +150,6 @@ namespace SistemaFL.Funcionalidades
 
             pictureBox1.Location = new Point(x2, y2);
         }
-        private void dgdadosRendimentos_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
-        {
-            if (e.RowIndex % 2 == 0)
-            {
-                dgdadosRendimentos.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
-            }
-            else
-            {
-                dgdadosRendimentos.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Gainsboro;
-
-            }       
-        }
+       
     }
 }

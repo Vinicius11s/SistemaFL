@@ -26,47 +26,21 @@ namespace SistemaFL
         private void FrmCadUsuario_Load(object sender, EventArgs e)
         {
             txtsenha.PasswordChar = '*';
-            txtnome.Focus();
-            pdados.Enabled = false;
+            txtlogin.Focus();
             btnnovo.Enabled = true;
             btnlocalizar.Enabled = true;
             btnalterar.Enabled = false;
             btncancelar.Enabled = false;
             btnexcluir.Enabled = false;
             btnsalvar.Enabled = false;
-        }
-        private void btnnovo_Click(object sender, EventArgs e)
-        {
-            pdados.Enabled = true;
-            btnnovo.Enabled = false;
-            btnlocalizar.Enabled = false;
-            btnalterar.Enabled = false;
-            btncancelar.Enabled = true;
-            btnexcluir.Enabled = false;
-            btnsalvar.Enabled = true;
-            limpar();
-            txtnome.Focus();
-        }
-        private void btnalterar_Click(object sender, EventArgs e)
-        {
-            if (txtnome.Text != "")
-            {
-                pdados.Enabled = true;
-                btnnovo.Enabled = false;
-                btnlocalizar.Enabled = false;
-                btnalterar.Enabled = false;
-                btncancelar.Enabled = true;
-                btnexcluir.Enabled = false;
-                btnsalvar.Enabled = true;
-                txtnome.Focus();
-            }
-            else MessageBox.Show("Localize o Usuário");
+            txtlogin.Enabled = false;
+            txtsenha.Enabled = false;
         }
         private void btnsalvar_Click(object sender, EventArgs e)
         {
             try
             {
-                if (txtnome.Text != String.Empty)
+                if (txtlogin.Text != String.Empty)
                 {
                     Usuario usuario = carregaPropriedades();
 
@@ -83,13 +57,14 @@ namespace SistemaFL
                     MessageBox.Show("Salvo com sucesso");
 
                     limpar();
-                    pdados.Enabled = false;
                     btnnovo.Enabled = true;
                     btnlocalizar.Enabled = true;
                     btnalterar.Enabled = false;
                     btncancelar.Enabled = false;
                     btnexcluir.Enabled = false;
                     btnsalvar.Enabled = false;
+                    txtlogin.Enabled = false;
+                    txtsenha.Enabled = false;
                 }
             }
             catch (Exception ex)
@@ -101,74 +76,17 @@ namespace SistemaFL
         private void btncancelar_Click(object sender, EventArgs e)
         {
             limpar();
-            pdados.Enabled = false;
             btnnovo.Enabled = true;
             btnlocalizar.Enabled = true;
             btnalterar.Enabled = false;
             btncancelar.Enabled = false;
             btnexcluir.Enabled = false;
             btnsalvar.Enabled = false;
+            txtlogin.Enabled = false;
+            txtsenha.Enabled = false;
         }
-        private void btnexcluir_Click(object sender, EventArgs e)
-        {
-            if (txtid.Text != "")
-            {
-                var empresa = carregaPropriedades();
-                repositorio.Excluir(empresa);
-                Program.serviceProvider.
-                    GetRequiredService<ContextoSistema>().SaveChanges();
 
-                MessageBox.Show("Usuário excluído com sucesso");
-                limpar();
-                pdados.Enabled = false;
-                btnnovo.Enabled = true;
-                btnlocalizar.Enabled = true;
-                btnalterar.Enabled = false;
-                btncancelar.Enabled = false;
-                btnexcluir.Enabled = false;
-                btnsalvar.Enabled = false;
-            }
-            else
-            {
-                MessageBox.Show("Localize o Usuário");
-            }
-        }
-        private void btnlocalizar_Click(object sender, EventArgs e)
-        {
-            var form2 = Program.serviceProvider.GetRequiredService<FrmConsultaUsuario>();
-            form2.ShowDialog();
 
-            if(form2.id >= 0) {
-                var usuario = repositorio.Recuperar(u => u.id == form2.id);
-                if(usuario != null)
-                {
-
-                    txtid.Text = usuario.id.ToString();
-                    txtnome.Text = usuario.Nome;
-                    txtlogin.Text = usuario.Login;
-                    txtsenha.Text = usuario.Senha;
-
-                    pdados.Enabled = true;
-                    btnnovo.Enabled = false;
-                    btnlocalizar.Enabled = false;
-                    btnalterar.Enabled = true;
-                    btncancelar.Enabled = true;
-                    btnexcluir.Enabled = true;
-                    btnsalvar.Enabled = false;
-                }        
-            }
-            else
-            {
-                pdados.Enabled = false;
-                btnnovo.Enabled = true;
-                btnlocalizar.Enabled = true;
-                btnalterar.Enabled = false;
-                btncancelar.Enabled = false;
-                btnexcluir.Enabled = false;
-                btnsalvar.Enabled = false;
-            }
-            
-        }
         public Usuario carregaPropriedades()
         {
             Usuario usuario;
@@ -179,7 +97,6 @@ namespace SistemaFL
             else usuario = new Usuario(); //inserir
 
             usuario.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
-            usuario.Nome = txtnome.Text;
             usuario.Login = txtlogin.Text;
             usuario.Senha = txtsenha.Text;
             usuario.DataCriacao = dtDataCriacao.Value;
@@ -189,10 +106,103 @@ namespace SistemaFL
         void limpar()
         {
             txtid.Text = "";
-            txtnome.Text = "";
             txtlogin.Text = "";
             txtsenha.Text = "";
             dtDataCriacao.Value = DateTime.Now;
+        }
+
+        private void btnnovo_Click_1(object sender, EventArgs e)
+        {
+            btnnovo.Enabled = false;
+            btnlocalizar.Enabled = false;
+            btnalterar.Enabled = false;
+            btncancelar.Enabled = true;
+            btnexcluir.Enabled = false;
+            txtlogin.Enabled = true;
+            txtsenha.Enabled = true;
+            btnsalvar.Enabled = true;
+            limpar();
+            txtlogin.Focus();
+        }
+
+        private void btnexcluir_Click_1(object sender, EventArgs e)
+        {
+            if (txtid.Text != "")
+            {
+                var empresa = carregaPropriedades();
+                repositorio.Excluir(empresa);
+                Program.serviceProvider.
+                    GetRequiredService<ContextoSistema>().SaveChanges();
+
+                MessageBox.Show("Usuário excluído com sucesso");
+                limpar();
+                btnnovo.Enabled = true;
+                btnlocalizar.Enabled = true;
+                btnalterar.Enabled = false;
+                btncancelar.Enabled = false;
+                btnexcluir.Enabled = false;
+                btnsalvar.Enabled = false;
+                txtlogin.Enabled = false;
+                txtsenha.Enabled = false;
+            }
+            else
+            {
+                MessageBox.Show("Localize o Usuário");
+            }
+        }
+
+        private void btnalterar_Click_1(object sender, EventArgs e)
+        {
+            if (txtlogin.Text != "")
+            {
+                btnnovo.Enabled = false;
+                btnlocalizar.Enabled = false;
+                btnalterar.Enabled = false;
+                btncancelar.Enabled = true;
+                btnexcluir.Enabled = false;
+                btnsalvar.Enabled = true;
+                txtlogin.Enabled = true;
+                txtsenha.Enabled = true;
+
+
+                txtlogin.Focus();
+            }
+            else MessageBox.Show("Localize o Usuário");
+        }
+
+        private void btnlocalizar_Click_1(object sender, EventArgs e)
+        {
+            var form2 = Program.serviceProvider.GetRequiredService<FrmConsultaUsuario>();
+            form2.ShowDialog();
+
+            if (form2.id >= 0)
+            {
+                var usuario = repositorio.Recuperar(u => u.id == form2.id);
+                if (usuario != null)
+                {
+
+                    txtid.Text = usuario.id.ToString();
+                    txtlogin.Text = usuario.Login;
+                    txtsenha.Text = usuario.Senha;
+
+                    btnnovo.Enabled = false;
+                    btnlocalizar.Enabled = false;
+                    btnalterar.Enabled = true;
+                    btncancelar.Enabled = true;
+                    btnexcluir.Enabled = true;
+                    btnsalvar.Enabled = false;
+                }
+            }
+            else
+            {
+                pdados.Enabled = false;
+                btnnovo.Enabled = true;
+                btnlocalizar.Enabled = true;
+                btnalterar.Enabled = false;
+                btncancelar.Enabled = false;
+                btnexcluir.Enabled = false;
+                btnsalvar.Enabled = false;
+            }
         }
     }
 }

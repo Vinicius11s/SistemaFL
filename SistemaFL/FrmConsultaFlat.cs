@@ -26,15 +26,21 @@ namespace SistemaFL
         {
             txtdescricao.Text = "Digite aqui a descrição do Flat";
             txtdescricao.ForeColor = Color.Gray;
+
+            dgdadosFlats.DataSource = null;
+            dgdadosFlats.Rows.Clear();
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            AlterarCorFundoETextoCabecalho();
+
             if (txtdescricao.Text == "Digite aqui a descrição do Flat")
             {
                 txtdescricao.Text = "";
             }
 
-            var listaFlats = repositorio.Listar(f => f.Descricao.Contains(txtdescricao.Text)).Select(f => new
+            var listaFlats = repositorio.Listar(f => f.Descricao.Contains(txtdescricao.Text))
+                .Select(f => new
             {
                 f.id,
                 f.Descricao,
@@ -53,12 +59,16 @@ namespace SistemaFL
             })
                 .OrderBy(flat => flat.Descricao)
                 .ToList();
-
             dgdadosFlats.DataSource = listaFlats;
-            AlterarFormatacaoGrid(dgdadosFlats);
-            AlterarCorFundoETextoCabecalho();
 
-       
+
+            AjustarNomesCabecalho(dgdadosFlats);
+
+            foreach (DataGridViewRow row in dgdadosFlats.Rows)
+            {
+                AplicarFormatacaoLinha(row);
+            }
+     
         }
         private void dgdadosFlats_CellDoubleClic(object sender, DataGridViewCellEventArgs e)
         {
@@ -70,11 +80,9 @@ namespace SistemaFL
                 this.Close(); // Fecha o formulário
             };
         }       
-        private void AlterarFormatacaoGrid(DataGridView grid)
+        private void AjustarNomesCabecalho(DataGridView grid)
         {
             
-            dgdadosFlats.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
             dgdadosFlats.Columns["id"].HeaderText = "CÓD";
             dgdadosFlats.Columns["Descricao"].HeaderText = "DESCRIÇÃO";
 
@@ -84,6 +92,7 @@ namespace SistemaFL
             dgdadosFlats.Columns["DataAquisicao"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             dgdadosFlats.Columns["TipoInvestimento"].HeaderText = "TIPO INVESTIMENTO";
+            dgdadosFlats.Columns["Status"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgdadosFlats.Columns["Status"].HeaderText = "STATUS";
             dgdadosFlats.Columns["Status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
@@ -100,41 +109,38 @@ namespace SistemaFL
 
             dgdadosFlats.Columns["ValorInvestimento"].HeaderText = "VALOR INVESTIMENTO";
             dgdadosFlats.Columns["ValorInvestimento"].DefaultCellStyle.Format = "C2";
-            dgdadosFlats.Columns["ValorInvestimento"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("pt-BR");
-
-            foreach (DataGridViewRow row in dgdadosFlats.Rows)
-            {
-                AplicarFormatacaoLinha(row);
-            }
-            dgdadosFlats.RowTemplate.Height = 35;
-
-            foreach (DataGridViewRow row in dgdadosFlats.Rows)
-            {
-                row.Height = 35;
-            }
-
-            dgdadosFlats.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
-
-            
+            dgdadosFlats.Columns["ValorInvestimento"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("pt-BR");                                  
         }
         private void AlterarCorFundoETextoCabecalho()
         {
-            foreach (DataGridViewColumn col in dgdadosFlats.Columns)
-            {
-                col.DefaultCellStyle.Padding = new Padding(5, 2, 5, 2);  // Espaçamento interno
-            }
-            // Desativa o estilo visual para permitir personalização
             dgdadosFlats.EnableHeadersVisualStyles = false;
             dgdadosFlats.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
             dgdadosFlats.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgdadosFlats.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-
-
+            dgdadosFlats.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
         }
         private void AplicarFormatacaoLinha(DataGridViewRow row)
         {
-            row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
-        }
+            var statusValue = row.Cells["Status"].Value?.ToString();
+
+            if (statusValue == "Em Construção" || statusValue == "Em Reforma")
+            {
+                row.DefaultCellStyle.ForeColor = Color.Red;
+            }
+            else
+            {
+                row.DefaultCellStyle.ForeColor = Color.Black;
+            }
+
+            if (statusValue == "Vendido")
+            {
+                row.DefaultCellStyle.BackColor = Color.FromArgb(171, 201, 251);
+            }
+            else
+            {
+                row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
+            }
+        }      
     }
 } 
