@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCadEmpresaFF));
             pdados = new Panel();
             txtcidade = new TextBox();
             label11 = new Label();
@@ -65,10 +66,12 @@
             btnassociar = new Button();
             dgAssociarFlat = new DataGridView();
             label12 = new Label();
+            pictureBox2 = new PictureBox();
             pdados.SuspendLayout();
             panel2.SuspendLayout();
             passociar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgAssociarFlat).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // pdados
@@ -98,7 +101,7 @@
             pdados.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             pdados.Location = new Point(36, 12);
             pdados.Name = "pdados";
-            pdados.Size = new Size(396, 335);
+            pdados.Size = new Size(396, 328);
             pdados.TabIndex = 0;
             // 
             // txtcidade
@@ -299,7 +302,7 @@
             // 
             // panel2
             // 
-            panel2.BackColor = SystemColors.Control;
+            panel2.BackColor = Color.White;
             panel2.Controls.Add(btnlocalizar);
             panel2.Controls.Add(btnexcluir);
             panel2.Controls.Add(btncancelar);
@@ -308,9 +311,9 @@
             panel2.Controls.Add(btnnovo);
             panel2.Dock = DockStyle.Bottom;
             panel2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            panel2.Location = new Point(0, 367);
+            panel2.Location = new Point(0, 385);
             panel2.Name = "panel2";
-            panel2.Size = new Size(807, 83);
+            panel2.Size = new Size(891, 83);
             panel2.TabIndex = 1;
             // 
             // btnlocalizar
@@ -408,7 +411,7 @@
             passociar.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             passociar.Location = new Point(438, 12);
             passociar.Name = "passociar";
-            passociar.Size = new Size(369, 335);
+            passociar.Size = new Size(369, 328);
             passociar.TabIndex = 2;
             // 
             // btnremover
@@ -439,7 +442,7 @@
             // 
             // dgAssociarFlat
             // 
-            dgAssociarFlat.BackgroundColor = SystemColors.Control;
+            dgAssociarFlat.BackgroundColor = Color.White;
             dgAssociarFlat.BorderStyle = BorderStyle.None;
             dgAssociarFlat.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgAssociarFlat.Location = new Point(28, 40);
@@ -457,15 +460,28 @@
             label12.TabIndex = 0;
             label12.Text = "Associar Flats";
             // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(860, 3);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(30, 21);
+            pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox2.TabIndex = 49;
+            pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
+            // 
             // FrmCadEmpresaFF
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.Control;
-            ClientSize = new Size(807, 450);
+            BackColor = Color.White;
+            ClientSize = new Size(891, 468);
+            Controls.Add(pictureBox2);
             Controls.Add(passociar);
             Controls.Add(panel2);
             Controls.Add(pdados);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "FrmCadEmpresaFF";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cadastro Empresa";
@@ -476,6 +492,7 @@
             passociar.ResumeLayout(false);
             passociar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgAssociarFlat).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 
@@ -518,5 +535,6 @@
         private Button btnassociar;
         private DataGridView dgAssociarFlat;
         private Label label12;
+        private PictureBox pictureBox2;
     }
 }

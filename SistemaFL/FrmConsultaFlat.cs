@@ -41,22 +41,22 @@ namespace SistemaFL
 
             var listaFlats = repositorio.Listar(f => f.Descricao.Contains(txtdescricao.Text))
                 .Select(f => new
-            {
-                f.id,
-                f.Descricao,
-                f.DataAquisicao,
-                f.Status,
-                f.TipoInvestimento,
-                f.ValorInvestimento,
-                f.Rua,
-                f.Unidade,
-                f.Bairro,
-                f.Cidade,
-                f.Estado,
-                Empresa = f.idEmpresa.HasValue
+                {
+                    f.id,
+                    f.Descricao,
+                    f.DataAquisicao,
+                    f.Status,
+                    f.TipoInvestimento,
+                    f.ValorInvestimento,
+                    f.Rua,
+                    f.Unidade,
+                    f.Bairro,
+                    f.Cidade,
+                    f.Estado,
+                    Empresa = f.idEmpresa.HasValue
                           ? empresaRepositorio.BuscarPorId(f.idEmpresa.Value)?.Descricao
                           : "Não Associado" // Verificando se o idEmpresa é válido
-            })
+                })
                 .OrderBy(flat => flat.Descricao)
                 .ToList();
             dgdadosFlats.DataSource = listaFlats;
@@ -68,7 +68,7 @@ namespace SistemaFL
             {
                 AplicarFormatacaoLinha(row);
             }
-     
+
         }
         private void dgdadosFlats_CellDoubleClic(object sender, DataGridViewCellEventArgs e)
         {
@@ -79,10 +79,10 @@ namespace SistemaFL
                 id = (int)dgdadosFlats.Rows[e.RowIndex].Cells[0].Value; // Armazena o ID
                 this.Close(); // Fecha o formulário
             };
-        }       
+        }
         private void AjustarNomesCabecalho(DataGridView grid)
         {
-            
+
             dgdadosFlats.Columns["id"].HeaderText = "CÓD";
             dgdadosFlats.Columns["Descricao"].HeaderText = "DESCRIÇÃO";
 
@@ -109,7 +109,7 @@ namespace SistemaFL
 
             dgdadosFlats.Columns["ValorInvestimento"].HeaderText = "VALOR INVESTIMENTO";
             dgdadosFlats.Columns["ValorInvestimento"].DefaultCellStyle.Format = "C2";
-            dgdadosFlats.Columns["ValorInvestimento"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("pt-BR");                                  
+            dgdadosFlats.Columns["ValorInvestimento"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("pt-BR");
         }
         private void AlterarCorFundoETextoCabecalho()
         {
@@ -141,6 +141,43 @@ namespace SistemaFL
             {
                 row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
             }
-        }      
+        }
+
+        //BOTOES FECHAR E MAXIMIZAR
+        private void FrmConsultaFlat_Resize(object sender, EventArgs e)
+        {
+            AjustarPosicaoPictureBox();
+        }
+        private void AjustarPosicaoPictureBox()
+        {
+            int margem = 10;
+
+            // Posição do PictureBox1 (no canto superior direito)
+            int x1 = this.ClientSize.Width - pictureBox1.Width - margem;
+            int y1 = margem;
+
+            pictureBox2.Location = new Point(x1, y1);
+
+            // Posição do PictureBox2 (ao lado esquerdo de PictureBox1)
+            int x2 = x1 - pictureBox2.Width - margem;
+            int y2 = margem;
+
+            pictureBox1.Location = new Point(x2, y2);
+        }
+        private void pictureBox2_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+        }
     }
 } 

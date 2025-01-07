@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCadFlat));
             pdados = new Panel();
             txtempresaAss = new TextBox();
             labelempresaAss = new Label();
@@ -53,6 +54,7 @@
             txtdescricao = new TextBox();
             txtid = new TextBox();
             label1 = new Label();
+            pictureBox2 = new PictureBox();
             panel2 = new Panel();
             btnlocalizar = new Button();
             btnexcluir = new Button();
@@ -61,11 +63,13 @@
             btnalterar = new Button();
             btnnovo = new Button();
             pdados.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
             // pdados
             // 
+            pdados.BackColor = Color.White;
             pdados.Controls.Add(txtempresaAss);
             pdados.Controls.Add(labelempresaAss);
             pdados.Controls.Add(txtbairro);
@@ -90,18 +94,17 @@
             pdados.Controls.Add(txtdescricao);
             pdados.Controls.Add(txtid);
             pdados.Controls.Add(label1);
-            pdados.Dock = DockStyle.Top;
             pdados.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             pdados.Location = new Point(0, 0);
             pdados.Name = "pdados";
-            pdados.Size = new Size(875, 325);
+            pdados.Size = new Size(852, 373);
             pdados.TabIndex = 0;
             // 
             // txtempresaAss
             // 
             txtempresaAss.Enabled = false;
             txtempresaAss.Font = new Font("Segoe UI Semilight", 12F);
-            txtempresaAss.Location = new Point(491, 264);
+            txtempresaAss.Location = new Point(499, 289);
             txtempresaAss.Margin = new Padding(3, 4, 3, 4);
             txtempresaAss.MaxLength = 150;
             txtempresaAss.Name = "txtempresaAss";
@@ -112,7 +115,7 @@
             // 
             labelempresaAss.AutoSize = true;
             labelempresaAss.Font = new Font("Segoe UI Semilight", 12F);
-            labelempresaAss.Location = new Point(491, 240);
+            labelempresaAss.Location = new Point(499, 265);
             labelempresaAss.Name = "labelempresaAss";
             labelempresaAss.Size = new Size(141, 21);
             labelempresaAss.TabIndex = 46;
@@ -121,7 +124,7 @@
             // txtbairro
             // 
             txtbairro.Font = new Font("Segoe UI Semilight", 12F);
-            txtbairro.Location = new Point(491, 194);
+            txtbairro.Location = new Point(499, 219);
             txtbairro.Margin = new Padding(3, 4, 3, 4);
             txtbairro.MaxLength = 150;
             txtbairro.Name = "txtbairro";
@@ -131,7 +134,7 @@
             // txtcidade
             // 
             txtcidade.Font = new Font("Segoe UI Semilight", 12F);
-            txtcidade.Location = new Point(180, 264);
+            txtcidade.Location = new Point(188, 289);
             txtcidade.Margin = new Padding(3, 4, 3, 4);
             txtcidade.MaxLength = 150;
             txtcidade.Name = "txtcidade";
@@ -141,7 +144,7 @@
             // txtestado
             // 
             txtestado.Font = new Font("Segoe UI Semilight", 12F);
-            txtestado.Location = new Point(98, 264);
+            txtestado.Location = new Point(106, 289);
             txtestado.Margin = new Padding(3, 4, 3, 4);
             txtestado.MaxLength = 150;
             txtestado.Name = "txtestado";
@@ -151,7 +154,7 @@
             // txtunidade
             // 
             txtunidade.Font = new Font("Segoe UI Semilight", 12F);
-            txtunidade.Location = new Point(396, 194);
+            txtunidade.Location = new Point(404, 219);
             txtunidade.Margin = new Padding(3, 4, 3, 4);
             txtunidade.MaxLength = 150;
             txtunidade.Name = "txtunidade";
@@ -161,7 +164,7 @@
             // txtrua
             // 
             txtrua.Font = new Font("Segoe UI Semilight", 12F);
-            txtrua.Location = new Point(98, 194);
+            txtrua.Location = new Point(106, 219);
             txtrua.Margin = new Padding(3, 4, 3, 4);
             txtrua.MaxLength = 150;
             txtrua.Name = "txtrua";
@@ -172,7 +175,7 @@
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI Semilight", 12F);
-            label11.Location = new Point(98, 240);
+            label11.Location = new Point(106, 265);
             label11.Name = "label11";
             label11.Size = new Size(56, 21);
             label11.TabIndex = 38;
@@ -182,7 +185,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI Semilight", 12F);
-            label10.Location = new Point(180, 240);
+            label10.Location = new Point(188, 265);
             label10.Name = "label10";
             label10.Size = new Size(58, 21);
             label10.TabIndex = 37;
@@ -192,7 +195,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI Semilight", 12F);
-            label9.Location = new Point(491, 173);
+            label9.Location = new Point(499, 198);
             label9.Name = "label9";
             label9.Size = new Size(50, 21);
             label9.TabIndex = 36;
@@ -202,7 +205,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI Semilight", 12F);
-            label8.Location = new Point(396, 170);
+            label8.Location = new Point(404, 195);
             label8.Name = "label8";
             label8.Size = new Size(68, 21);
             label8.TabIndex = 35;
@@ -212,7 +215,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI Semilight", 12F);
-            label7.Location = new Point(98, 173);
+            label7.Location = new Point(106, 198);
             label7.Name = "label7";
             label7.Size = new Size(36, 21);
             label7.TabIndex = 34;
@@ -222,7 +225,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semilight", 12F);
-            label5.Location = new Point(507, 82);
+            label5.Location = new Point(515, 107);
             label5.Name = "label5";
             label5.Size = new Size(137, 21);
             label5.TabIndex = 32;
@@ -233,7 +236,7 @@
             cbbStatus.Font = new Font("Segoe UI Semilight", 12F);
             cbbStatus.FormattingEnabled = true;
             cbbStatus.Items.AddRange(new object[] { "Ativo", "Em Construção", "Em Reforma", "Vendido" });
-            cbbStatus.Location = new Point(98, 106);
+            cbbStatus.Location = new Point(106, 131);
             cbbStatus.Name = "cbbStatus";
             cbbStatus.Size = new Size(139, 29);
             cbbStatus.TabIndex = 31;
@@ -242,7 +245,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semilight", 12F);
-            label4.Location = new Point(98, 83);
+            label4.Location = new Point(106, 108);
             label4.Name = "label4";
             label4.Size = new Size(51, 21);
             label4.TabIndex = 30;
@@ -251,7 +254,7 @@
             // txtValorInvestimento
             // 
             txtValorInvestimento.Font = new Font("Segoe UI Semilight", 12F);
-            txtValorInvestimento.Location = new Point(507, 106);
+            txtValorInvestimento.Location = new Point(515, 131);
             txtValorInvestimento.Margin = new Padding(3, 4, 3, 4);
             txtValorInvestimento.MaxLength = 150;
             txtValorInvestimento.Name = "txtValorInvestimento";
@@ -262,7 +265,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semilight", 12F);
-            label3.Location = new Point(260, 83);
+            label3.Location = new Point(268, 108);
             label3.Name = "label3";
             label3.Size = new Size(132, 21);
             label3.TabIndex = 28;
@@ -273,7 +276,7 @@
             cbbTipoInvestimento.Font = new Font("Segoe UI Semilight", 12F);
             cbbTipoInvestimento.FormattingEnabled = true;
             cbbTipoInvestimento.Items.AddRange(new object[] { "Aluguel Fixo", "Dividendos", "Aluguel Fixo + Dividendos", "Indefinido", "Aluguel Venceslau" });
-            cbbTipoInvestimento.Location = new Point(260, 106);
+            cbbTipoInvestimento.Location = new Point(268, 131);
             cbbTipoInvestimento.Name = "cbbTipoInvestimento";
             cbbTipoInvestimento.Size = new Size(208, 29);
             cbbTipoInvestimento.TabIndex = 27;
@@ -282,7 +285,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI Semilight", 12F);
-            label6.Location = new Point(507, 22);
+            label6.Location = new Point(515, 47);
             label6.Name = "label6";
             label6.Size = new Size(113, 21);
             label6.TabIndex = 26;
@@ -292,7 +295,7 @@
             // 
             dtdataaquisicao.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dtdataaquisicao.Format = DateTimePickerFormat.Short;
-            dtdataaquisicao.Location = new Point(507, 46);
+            dtdataaquisicao.Location = new Point(515, 71);
             dtdataaquisicao.Name = "dtdataaquisicao";
             dtdataaquisicao.Size = new Size(125, 25);
             dtdataaquisicao.TabIndex = 25;
@@ -301,7 +304,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semilight", 12F);
-            label2.Location = new Point(98, 21);
+            label2.Location = new Point(106, 46);
             label2.Name = "label2";
             label2.Size = new Size(76, 21);
             label2.TabIndex = 18;
@@ -310,7 +313,7 @@
             // txtdescricao
             // 
             txtdescricao.Font = new Font("Segoe UI Semilight", 12F);
-            txtdescricao.Location = new Point(98, 45);
+            txtdescricao.Location = new Point(106, 70);
             txtdescricao.Margin = new Padding(3, 4, 3, 4);
             txtdescricao.MaxLength = 150;
             txtdescricao.Name = "txtdescricao";
@@ -320,7 +323,7 @@
             // txtid
             // 
             txtid.Font = new Font("Segoe UI Semilight", 12F);
-            txtid.Location = new Point(19, 46);
+            txtid.Location = new Point(27, 71);
             txtid.Margin = new Padding(3, 4, 3, 4);
             txtid.Name = "txtid";
             txtid.ReadOnly = true;
@@ -331,14 +334,26 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semilight", 12F);
-            label1.Location = new Point(19, 22);
+            label1.Location = new Point(27, 47);
             label1.Name = "label1";
             label1.Size = new Size(60, 21);
             label1.TabIndex = 15;
             label1.Text = "Código";
             // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(858, 12);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(30, 21);
+            pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox2.TabIndex = 48;
+            pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
+            // 
             // panel2
             // 
+            panel2.BackColor = Color.White;
             panel2.Controls.Add(btnlocalizar);
             panel2.Controls.Add(btnexcluir);
             panel2.Controls.Add(btncancelar);
@@ -346,9 +361,9 @@
             panel2.Controls.Add(btnalterar);
             panel2.Controls.Add(btnnovo);
             panel2.Dock = DockStyle.Bottom;
-            panel2.Location = new Point(0, 331);
+            panel2.Location = new Point(0, 370);
             panel2.Name = "panel2";
-            panel2.Size = new Size(875, 98);
+            panel2.Size = new Size(891, 98);
             panel2.TabIndex = 1;
             // 
             // btnlocalizar
@@ -433,10 +448,13 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(875, 429);
+            BackColor = Color.White;
+            ClientSize = new Size(891, 468);
+            Controls.Add(pictureBox2);
             Controls.Add(panel2);
             Controls.Add(pdados);
             Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "FrmCadFlat";
             StartPosition = FormStartPosition.CenterScreen;
@@ -444,6 +462,7 @@
             Load += FrmCadFlat_Load;
             pdados.ResumeLayout(false);
             pdados.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -482,5 +501,6 @@
         private Button btnnovo;
         private TextBox txtempresaAss;
         private Label labelempresaAss;
+        private PictureBox pictureBox2;
     }
 }

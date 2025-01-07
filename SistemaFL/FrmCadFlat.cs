@@ -207,17 +207,17 @@ namespace SistemaFL
             //flat.Status
             if (cbbStatus != null && cbbStatus.SelectedItem != null)
             {
-                if(cbbStatus.Text != "Vendido")
+                if (cbbStatus.Text != "Vendido")
                 {
                     flat.Status = cbbStatus.Text;
                     flat.Ativo = true;
                 }
-                else 
+                else
                 {
                     flat.Status = cbbStatus.Text;
                     flat.Ativo = false;
-                }                   
-                    decimal valorInvestimento;
+                }
+                decimal valorInvestimento;
                 if (decimal.TryParse(txtValorInvestimento.Text, out valorInvestimento))
                 {
                     flat.ValorInvestimento = valorInvestimento;
@@ -227,9 +227,9 @@ namespace SistemaFL
                         flat.Unidade = Unidade;
                     }
                     else { }
-                }             
-            }           
-            flat.TipoInvestimento = cbbTipoInvestimento.SelectedItem?.ToString() ?? "Indefinido";                     
+                }
+            }
+            flat.TipoInvestimento = cbbTipoInvestimento.SelectedItem?.ToString() ?? "Indefinido";
             flat.Rua = txtrua.Text;
             flat.Bairro = txtbairro.Text;
             flat.Cidade = txtcidade.Text;
@@ -251,6 +251,10 @@ namespace SistemaFL
             txtcidade.Text = "";
             txtestado.Text = "";
             txtempresaAss.Text = "";
+        }
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

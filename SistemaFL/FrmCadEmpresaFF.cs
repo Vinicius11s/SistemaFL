@@ -59,7 +59,7 @@ namespace SistemaFL
                 {
                     Empresa empresa = carregaPropriedades();
                     var empresaExistente = repositorio.RecuperarPorCnpj(empresa.Cnpj);
-                    if(empresaExistente != null && empresaExistente.id != empresa.id)
+                    if (empresaExistente != null && empresaExistente.id != empresa.id)
                     {
                         MessageBox.Show("Este CNPJ já está cadastrado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return; // Impede o salvamento
@@ -394,6 +394,11 @@ namespace SistemaFL
             }
 
             empresa.Cnpj = cnpj;
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

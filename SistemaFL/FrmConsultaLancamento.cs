@@ -93,7 +93,7 @@ namespace SistemaFL
             dgdadoslancamento.EnableHeadersVisualStyles = false;
             dgdadoslancamento.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
             dgdadoslancamento.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgdadoslancamento.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            dgdadoslancamento.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             dgdadoslancamento.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
         private void AplicarFormatacaoLinha(DataGridViewRow row)
