@@ -151,11 +151,11 @@
             // 
             // sidebar
             // 
+            sidebar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             sidebar.BackColor = Color.FromArgb(23, 24, 29);
             sidebar.Controls.Add(panel2);
             sidebar.Controls.Add(menuContainer);
             sidebar.Controls.Add(funcContainer);
-            sidebar.Dock = DockStyle.Left;
             sidebar.Location = new Point(0, 41);
             sidebar.Name = "sidebar";
             sidebar.Padding = new Padding(0, 30, 0, 0);
@@ -560,12 +560,12 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pictureBox1.Dock = DockStyle.Fill;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(45, 41);
+            pictureBox1.Location = new Point(0, 41);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(824, 481);
-            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox1.Size = new Size(869, 481);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
             // 
@@ -573,10 +573,10 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(224, 224, 224);
+            BackColor = Color.FromArgb(23, 24, 29);
             ClientSize = new Size(869, 522);
-            Controls.Add(pictureBox1);
             Controls.Add(sidebar);
+            Controls.Add(pictureBox1);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FrmPrincipalFF";

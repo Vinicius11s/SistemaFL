@@ -85,8 +85,6 @@ namespace SistemaFL
             txtlogin.Enabled = false;
             txtsenha.Enabled = false;
         }
-
-
         public Usuario carregaPropriedades()
         {
             Usuario usuario;
@@ -102,15 +100,7 @@ namespace SistemaFL
             usuario.DataCriacao = dtDataCriacao.Value;
 
             return usuario;
-        }
-        void limpar()
-        {
-            txtid.Text = "";
-            txtlogin.Text = "";
-            txtsenha.Text = "";
-            dtDataCriacao.Value = DateTime.Now;
-        }
-
+        }        
         private void btnnovo_Click_1(object sender, EventArgs e)
         {
             btnnovo.Enabled = false;
@@ -124,7 +114,6 @@ namespace SistemaFL
             limpar();
             txtlogin.Focus();
         }
-
         private void btnexcluir_Click_1(object sender, EventArgs e)
         {
             if (txtid.Text != "")
@@ -150,7 +139,6 @@ namespace SistemaFL
                 MessageBox.Show("Localize o Usuário");
             }
         }
-
         private void btnalterar_Click_1(object sender, EventArgs e)
         {
             if (txtlogin.Text != "")
@@ -169,7 +157,6 @@ namespace SistemaFL
             }
             else MessageBox.Show("Localize o Usuário");
         }
-
         private void btnlocalizar_Click_1(object sender, EventArgs e)
         {
             var form2 = Program.serviceProvider.GetRequiredService<FrmConsultaUsuario>();
@@ -203,6 +190,17 @@ namespace SistemaFL
                 btnexcluir.Enabled = false;
                 btnsalvar.Enabled = false;
             }
+        }
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        void limpar()
+        {
+            txtid.Text = "";
+            txtlogin.Text = "";
+            txtsenha.Text = "";
+            dtDataCriacao.Value = DateTime.Now;
         }
     }
 }

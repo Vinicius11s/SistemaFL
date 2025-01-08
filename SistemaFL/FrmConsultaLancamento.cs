@@ -40,7 +40,7 @@ namespace SistemaFL
                     {
                         var lista = repositorio.Listar(l => l.DataPagamento.Month == mes);
                         dgdadoslancamento.DataSource = lista;
-                     
+
                     }
                     else MessageBox.Show("Digite um mês válido.");
                 }
@@ -87,9 +87,9 @@ namespace SistemaFL
 
             dgdadoslancamento.Columns["idFlat"].HeaderText = "CÓDFLAT";
             dgdadoslancamento.Columns["idFlat"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-        }      
+        }
         private void AlterarCorFundoETextoCabecalho()
-        {         
+        {
             dgdadoslancamento.EnableHeadersVisualStyles = false;
             dgdadoslancamento.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
             dgdadoslancamento.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
@@ -116,8 +116,42 @@ namespace SistemaFL
                 else
                 {
                     e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                }             
+                }
             }
+        }
+        //
+        //Botões fechar e maximizar
+        private void AjustarPosicaoPictureBox()
+        {
+            int margem = 10;
+
+            // Posição do PictureBox1 (no canto superior direito)
+            int x1 = this.ClientSize.Width - pbmaximizar.Width - margem;
+            int y1 = margem;
+
+            pictureBox2.Location = new Point(x1, y1);
+
+            // Posição do PictureBox2 (ao lado esquerdo de PictureBox1)
+            int x2 = x1 - pictureBox2.Width - margem;
+            int y2 = margem;
+
+            pbmaximizar.Location = new Point(x2, y2);
+        }
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void pbmaximizar_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+            else this.WindowState = FormWindowState.Maximized;
+        } 
+        private void FrmConsultaLancamento_Resize(object sender, EventArgs e)
+        {
+            AjustarPosicaoPictureBox();
         }
     }
 }

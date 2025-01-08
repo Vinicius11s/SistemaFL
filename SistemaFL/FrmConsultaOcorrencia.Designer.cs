@@ -42,7 +42,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semilight", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(303, 13);
+            label2.Location = new Point(327, 13);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(212, 30);
@@ -58,14 +58,14 @@
             dgdadosocorrencias.Location = new Point(0, 58);
             dgdadosocorrencias.Margin = new Padding(4);
             dgdadosocorrencias.Name = "dgdadosocorrencias";
-            dgdadosocorrencias.Size = new Size(800, 392);
+            dgdadosocorrencias.Size = new Size(977, 392);
             dgdadosocorrencias.TabIndex = 12;
             // 
             // fecharjanela
             // 
             fecharjanela.Dock = DockStyle.Right;
             fecharjanela.Image = (Image)resources.GetObject("fecharjanela.Image");
-            fecharjanela.Location = new Point(769, 0);
+            fecharjanela.Location = new Point(946, 0);
             fecharjanela.Margin = new Padding(4);
             fecharjanela.Name = "fecharjanela";
             fecharjanela.Size = new Size(31, 58);
@@ -78,7 +78,7 @@
             // 
             minimizar.Dock = DockStyle.Right;
             minimizar.Image = (Image)resources.GetObject("minimizar.Image");
-            minimizar.Location = new Point(738, 0);
+            minimizar.Location = new Point(915, 0);
             minimizar.Margin = new Padding(4);
             minimizar.Name = "minimizar";
             minimizar.Size = new Size(31, 58);
@@ -92,7 +92,7 @@
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(977, 450);
             Controls.Add(minimizar);
             Controls.Add(fecharjanela);
             Controls.Add(label2);

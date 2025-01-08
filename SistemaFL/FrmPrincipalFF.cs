@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Infraestrutura.Seguranca;
 using Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using SistemaFL.Funcionalidades;
@@ -169,13 +170,17 @@ namespace SistemaFL
             sidebar.BringToFront();
 
             var form8 = Program.serviceProvider.GetRequiredService<FrmFuncLogin>();
-            form8.ShowDialog();
+            form8.ShowDialog();  // Aguarda o login ser fechado
 
-            if (form8.idUsuario > 0)
+            if (Sessao.idUsuarioLogado > 0)
             {
                 var usuario = repositorioFunc.Recuperar(u => u.id == form8.idUsuario);
             }
-            //else this.Close();
+            else
+            {
+                this.Close();
+            }
+
         }
     }
 }

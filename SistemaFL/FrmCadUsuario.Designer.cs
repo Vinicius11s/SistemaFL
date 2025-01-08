@@ -45,13 +45,16 @@
             txtlogin = new TextBox();
             txtid = new TextBox();
             label1 = new Label();
+            pictureBox2 = new PictureBox();
             pdados.SuspendLayout();
             sidebar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // pdados
             // 
             pdados.BackColor = Color.White;
+            pdados.Controls.Add(pictureBox2);
             pdados.Controls.Add(sidebar);
             pdados.Controls.Add(btncancelar);
             pdados.Controls.Add(btnsalvar);
@@ -67,7 +70,7 @@
             pdados.Location = new Point(0, 0);
             pdados.Margin = new Padding(3, 4, 3, 4);
             pdados.Name = "pdados";
-            pdados.Size = new Size(594, 413);
+            pdados.Size = new Size(610, 449);
             pdados.TabIndex = 0;
             // 
             // sidebar
@@ -81,7 +84,7 @@
             sidebar.Location = new Point(0, 0);
             sidebar.Name = "sidebar";
             sidebar.Padding = new Padding(0, 30, 0, 0);
-            sidebar.Size = new Size(168, 413);
+            sidebar.Size = new Size(168, 449);
             sidebar.TabIndex = 25;
             // 
             // btnnovo
@@ -267,14 +270,26 @@
             label1.TabIndex = 15;
             label1.Text = "Código";
             // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(580, 3);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(30, 21);
+            pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox2.TabIndex = 26;
+            pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
+            // 
             // FrmCadUsuario
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(594, 409);
+            ClientSize = new Size(610, 448);
             Controls.Add(pdados);
             Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "FrmCadUsuario";
             StartPosition = FormStartPosition.CenterScreen;
@@ -283,6 +298,7 @@
             pdados.ResumeLayout(false);
             pdados.PerformLayout();
             sidebar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 
@@ -304,5 +320,6 @@
         private Button btnexcluir;
         private Button btnalterar;
         private Button btnlocalizar;
+        private PictureBox pictureBox2;
     }
 }

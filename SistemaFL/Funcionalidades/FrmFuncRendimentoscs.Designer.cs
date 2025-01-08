@@ -29,48 +29,35 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFuncRendimentoscs));
-            dgdadosRendimentos = new DataGridView();
             dgdadosTotais = new DataGridView();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
             label2 = new Label();
-            ((System.ComponentModel.ISupportInitialize)dgdadosRendimentos).BeginInit();
+            dgdadosRendimentos = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dgdadosTotais).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgdadosRendimentos).BeginInit();
             SuspendLayout();
-            // 
-            // dgdadosRendimentos
-            // 
-            dgdadosRendimentos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgdadosRendimentos.BackgroundColor = Color.White;
-            dgdadosRendimentos.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            dgdadosRendimentos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosRendimentos.Location = new Point(0, 75);
-            dgdadosRendimentos.Margin = new Padding(5);
-            dgdadosRendimentos.Name = "dgdadosRendimentos";
-            dgdadosRendimentos.Size = new Size(900, 313);
-            dgdadosRendimentos.TabIndex = 0;
-            dgdadosRendimentos.RowPrePaint += dgdadosRendimentos_RowPrePaint;
             // 
             // dgdadosTotais
             // 
             dgdadosTotais.BackgroundColor = Color.FromArgb(23, 24, 29);
             dgdadosTotais.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdadosTotais.Dock = DockStyle.Bottom;
-            dgdadosTotais.Location = new Point(0, 398);
-            dgdadosTotais.Margin = new Padding(5);
+            dgdadosTotais.Location = new Point(0, 344);
+            dgdadosTotais.Margin = new Padding(4);
             dgdadosTotais.Name = "dgdadosTotais";
-            dgdadosTotais.Size = new Size(900, 92);
+            dgdadosTotais.Size = new Size(900, 77);
             dgdadosTotais.TabIndex = 1;
             // 
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(958, 14);
+            pictureBox2.Location = new Point(862, 12);
             pictureBox2.Margin = new Padding(4, 3, 4, 3);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(30, 24);
+            pictureBox2.Size = new Size(27, 20);
             pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox2.TabIndex = 11;
             pictureBox2.TabStop = false;
@@ -79,10 +66,10 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(921, 14);
+            pictureBox1.Location = new Point(829, 12);
             pictureBox1.Margin = new Padding(4, 3, 4, 3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(30, 24);
+            pictureBox1.Size = new Size(27, 20);
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 10;
             pictureBox1.TabStop = false;
@@ -92,46 +79,54 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(12, 11);
+            label2.Location = new Point(11, 9);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(95, 20);
             label2.TabIndex = 16;
             label2.Text = "Rendimentos";
             // 
+            // dgdadosRendimentos
+            // 
+            dgdadosRendimentos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgdadosRendimentos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgdadosRendimentos.Location = new Point(11, 60);
+            dgdadosRendimentos.Name = "dgdadosRendimentos";
+            dgdadosRendimentos.Size = new Size(877, 277);
+            dgdadosRendimentos.TabIndex = 17;
+            // 
             // FrmFuncRendimentoscs
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(900, 490);
+            ClientSize = new Size(900, 421);
+            Controls.Add(dgdadosRendimentos);
             Controls.Add(label2);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(dgdadosTotais);
-            Controls.Add(dgdadosRendimentos);
-            Font = new Font("Segoe UI Semilight", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(5);
+            Margin = new Padding(4);
             Name = "FrmFuncRendimentoscs";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Rendimentos";
             Load += FrmFuncRendimentoscs_Load;
             Resize += FrmFuncRendimentoscs_Resize;
-            ((System.ComponentModel.ISupportInitialize)dgdadosRendimentos).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgdadosTotais).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgdadosRendimentos).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private DataGridView dgdadosRendimentos;
         private DataGridView dgdadosTotais;
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
         private Label label2;
+        private DataGridView dgdadosRendimentos;
     }
 }

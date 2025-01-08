@@ -26,7 +26,7 @@ namespace SistemaFL
             var lista = repositorio.Listar(u => u.Login.Contains(txtdescricao.Text));
             dgdadosusuario.DataSource = lista;
 
-            
+
             dgdadosusuario.Columns["id"].HeaderText = "CÓD";
             dgdadosusuario.Columns["DataCriacao"].HeaderText = "DATA ALTERAÇÃO";
             dgdadosusuario.Columns["DataCriacao"].HeaderText = "DATA ALTERAÇÃO";
@@ -51,6 +51,11 @@ namespace SistemaFL
                 e.FormattingApplied = true;
             }
 
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

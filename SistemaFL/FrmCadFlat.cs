@@ -149,7 +149,7 @@ namespace SistemaFL
                 {
                     txtid.Text = flat.id.ToString();
                     txtdescricao.Text = flat.Descricao;
-                    cbbStatus.Text = flat.Ativo ? "Ativo" : "Inativo";
+                    cbbStatus.Text = flat.Status.ToString();
                     txtValorInvestimento.Text = flat.ValorInvestimento.ToString();
                     cbbTipoInvestimento.Text = flat.TipoInvestimento;
                     dtdataaquisicao.Value = flat.DataAquisicao;
@@ -203,19 +203,37 @@ namespace SistemaFL
             flat.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
             flat.Descricao = txtdescricao.Text;
             flat.DataAquisicao = dtdataaquisicao.Value;
-
             //flat.Status
             if (cbbStatus != null && cbbStatus.SelectedItem != null)
             {
-                if (cbbStatus.Text != "Vendido")
+                if (cbbStatus.Text == "Ativo")
                 {
                     flat.Status = cbbStatus.Text;
                     flat.Ativo = true;
                 }
                 else
                 {
-                    flat.Status = cbbStatus.Text;
-                    flat.Ativo = false;
+                    if (cbbStatus.Text == "Em Construção")
+                    {
+                        flat.Status = cbbStatus.Text;
+                        flat.Ativo = true;
+                    }
+                    else
+                    {
+                        if (cbbStatus.Text == "Em Reforma")
+                        {
+                            flat.Status = cbbStatus.Text;
+                            flat.Ativo = true;
+                        }
+                        else
+                        {
+                            if (cbbStatus.Text == "Vendido")
+                            {
+                                flat.Status = cbbStatus.Text;
+                                flat.Ativo = false;
+                            }
+                        }
+                    }
                 }
                 decimal valorInvestimento;
                 if (decimal.TryParse(txtValorInvestimento.Text, out valorInvestimento))

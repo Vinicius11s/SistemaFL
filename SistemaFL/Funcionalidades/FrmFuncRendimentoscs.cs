@@ -30,29 +30,36 @@ namespace SistemaFL.Funcionalidades
             AjustarPosicaoPictureBox();
             this.Resize += FrmFuncRendimentoscs_Resize;
 
+            CarregarGridDados();
+            var dadosTotais = repositorio.ObterDadosTotais();
+            dgdadosTotais.DataSource = dadosTotais;
+            AjustarColunasGridTotais(dgdadosTotais);
+            
+        }
+        private void CarregarGridDados()
+        {
+
             var dadosRendimentos = repositorio.ObterDadosRendimentos();
             dgdadosRendimentos.DataSource = dadosRendimentos;
 
-            AjustarNomesCabecalhoGridDados(dgdadosRendimentos);
-            AlterarCorFundoETextoCabecalho();
 
-            var dadosTotais = repositorio.ObterDadosTotais();
-            dgdadosTotais.DataSource = dadosTotais;
-            AjustarColunasPorcGridTotais(dgdadosTotais);
-            
-        }
-        private void AjustarColunasPorcGridTotais(DataGridView grid)
-        {
-            foreach (var coluna in grid.Columns.Cast<DataGridViewColumn>())
+
+            AlterarCorFundoETextoCabecalho();
+            AjustarNomesCabecalhoGridDados(dgdadosRendimentos);
+            dgdadosRendimentos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            dgdadosRendimentos.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            dgdadosRendimentos.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
+
+
+            foreach (DataGridViewRow row in dgdadosRendimentos.Rows)
             {
-                if (coluna.Name.StartsWith("Porcentagem"))
-                {
-                    coluna.DefaultCellStyle.Format = "N2";
-                    coluna.Width = 50;
-                    coluna.HeaderText = "%";
-                }
+                AplicarFormatacaoLinha(row);
             }
+
+
         }
+        
         private void AjustarNomesCabecalhoGridDados(DataGridView grid)
         {
             dgdadosRendimentos.Columns["RendimentoAnual"].HeaderText = "Rendimento Anual";
@@ -67,7 +74,6 @@ namespace SistemaFL.Funcionalidades
                     coluna.HeaderText = "%";
                 }
             }
-            dgdadosRendimentos.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             foreach (DataGridViewColumn coluna in dgdadosRendimentos.Columns)
             {
                 if (!coluna.Name.StartsWith("Porcentagem") && coluna.Name != "CodFlat")
@@ -75,15 +81,7 @@ namespace SistemaFL.Funcionalidades
                     coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
                 }
             }
-            foreach (DataGridViewColumn coluna in dgdadosTotais.Columns)
-            {
-                coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-
-                if (!coluna.Name.StartsWith("Porcentagem"))
-                {
-                    coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
-                }
-            }
+            
         }
         private void AlterarCorFundoETextoCabecalho()
         {
@@ -100,6 +98,34 @@ namespace SistemaFL.Funcionalidades
             dgdadosRendimentos.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgdadosRendimentos.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
 
+            dgdadosTotais.EnableHeadersVisualStyles = false;
+            dgdadosTotais.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
+            dgdadosTotais.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgdadosTotais.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+        }
+        private void AplicarFormatacaoLinha(DataGridViewRow row)
+        {
+            row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
+        }
+        private void AjustarColunasGridTotais(DataGridView grid)
+        {
+            foreach (var coluna in grid.Columns.Cast<DataGridViewColumn>())
+            {
+                if (coluna.Name.StartsWith("Porcentagem"))
+                {
+                    coluna.DefaultCellStyle.Format = "N2";
+                    coluna.HeaderText = "%";
+                }
+            }
+            foreach (DataGridViewColumn coluna in dgdadosTotais.Columns)
+            {
+
+                if (!coluna.Name.StartsWith("Porcentagem"))
+                {
+                    coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
+                }
+            }
         }
         private void dgdadosRendimentos_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
@@ -150,6 +176,8 @@ namespace SistemaFL.Funcionalidades
 
             pictureBox1.Location = new Point(x2, y2);
         }
+
+        /**/
        
     }
 }

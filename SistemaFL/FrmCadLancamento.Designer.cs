@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCadLancamento));
             pbotoes = new Panel();
             btnlocalizar = new Button();
             btnexcluir = new Button();
@@ -54,9 +55,11 @@
             label1 = new Label();
             plocalizar = new Panel();
             plancamento = new Panel();
+            pbfechar = new PictureBox();
             pbotoes.SuspendLayout();
             plocalizar.SuspendLayout();
             plancamento.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbfechar).BeginInit();
             SuspendLayout();
             // 
             // pbotoes
@@ -68,10 +71,10 @@
             pbotoes.Controls.Add(btnalterar);
             pbotoes.Controls.Add(btnnovo);
             pbotoes.Dock = DockStyle.Bottom;
-            pbotoes.Location = new Point(0, 342);
+            pbotoes.Location = new Point(0, 381);
             pbotoes.Margin = new Padding(3, 4, 3, 4);
             pbotoes.Name = "pbotoes";
-            pbotoes.Size = new Size(875, 87);
+            pbotoes.Size = new Size(891, 87);
             pbotoes.TabIndex = 1;
             // 
             // btnlocalizar
@@ -357,17 +360,29 @@
             plancamento.Size = new Size(433, 304);
             plancamento.TabIndex = 51;
             // 
+            // pbfechar
+            // 
+            pbfechar.Image = (Image)resources.GetObject("pbfechar.Image");
+            pbfechar.Location = new Point(860, 2);
+            pbfechar.Name = "pbfechar";
+            pbfechar.Size = new Size(30, 21);
+            pbfechar.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbfechar.TabIndex = 52;
+            pbfechar.TabStop = false;
+            pbfechar.Click += pbfechar_Click;
+            // 
             // FrmCadLancamento
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(875, 429);
+            ClientSize = new Size(891, 468);
+            Controls.Add(pbfechar);
             Controls.Add(plancamento);
             Controls.Add(plocalizar);
             Controls.Add(pbotoes);
             Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "FrmCadLancamento";
             StartPosition = FormStartPosition.CenterScreen;
@@ -378,6 +393,7 @@
             plocalizar.PerformLayout();
             plancamento.ResumeLayout(false);
             plancamento.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbfechar).EndInit();
             ResumeLayout(false);
         }
 
@@ -408,5 +424,6 @@
         private Label label1;
         private Panel plocalizar;
         private Panel plancamento;
+        private PictureBox pbfechar;
     }
 }

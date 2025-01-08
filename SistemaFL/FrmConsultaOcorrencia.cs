@@ -39,22 +39,21 @@ namespace SistemaFL
 
             dgdadosocorrencias.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
 
-            if (dgdadosocorrencias.Rows.Count > 0)
-            {
-                dgdadosocorrencias.Columns["id"].HeaderText = "Cód.";
-                dgdadosocorrencias.Columns["oco_valorAntigo"].HeaderText = "Valor Ant";
-                dgdadosocorrencias.Columns["oco_valorAlteracao"].HeaderText = "Valor Alteração";
-                dgdadosocorrencias.Columns["oco_dataAlteracao"].HeaderText = "Data Alteração";
-                dgdadosocorrencias.Columns["oco_Tabela"].HeaderText = "Entidade";
-                dgdadosocorrencias.Columns["oco_Descricao"].Visible = false;
-                dgdadosocorrencias.Columns["idLancamento"].Visible = false;
-                dgdadosocorrencias.Columns["Lancamento"].Visible = false;
-                dgdadosocorrencias.Columns["Flat"].Visible = false;
-                dgdadosocorrencias.Columns["IdUsuario"].Visible = false;
-                dgdadosocorrencias.Columns["Usuario"].Visible = false;
-                dgdadosocorrencias.Columns["DescricaoUsuario"].HeaderText = "Usuário";
+        
+            dgdadosocorrencias.Columns["id"].HeaderText = "Cód.";
+            dgdadosocorrencias.Columns["oco_valorAntigo"].HeaderText = "Valor Ant";
+            dgdadosocorrencias.Columns["oco_valorAlteracao"].HeaderText = "Valor Alteração";
+            dgdadosocorrencias.Columns["oco_dataAlteracao"].HeaderText = "Data Alteração";
+            dgdadosocorrencias.Columns["oco_Tabela"].HeaderText = "Entidade";
+            dgdadosocorrencias.Columns["oco_Descricao"].Visible = false;
+            dgdadosocorrencias.Columns["idLancamento"].Visible = false;
+            dgdadosocorrencias.Columns["Lancamento"].Visible = false;
+            dgdadosocorrencias.Columns["Flat"].Visible = false;
+            dgdadosocorrencias.Columns["IdUsuario"].Visible = false;
+            dgdadosocorrencias.Columns["Usuario"].Visible = false;
+            dgdadosocorrencias.Columns["DescricaoUsuario"].HeaderText = "Usuário";
 
-            }
+            
         }
         private void fecharjanela_Click(object sender, EventArgs e)
         {

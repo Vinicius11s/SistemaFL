@@ -178,7 +178,6 @@ namespace SistemaFL
                 }
             }
         }
-        
         public Lancamento carregaPropriedades()
         {
             Lancamento lancamento;
@@ -336,7 +335,6 @@ namespace SistemaFL
             txtValorFunReserva.Text = "";
 
         }
-
         private void btnlocalizar_Click(object sender, EventArgs e)
         {
             var form2 = Program.serviceProvider.GetRequiredService<FrmConsultaLancamento>();
@@ -373,7 +371,7 @@ namespace SistemaFL
                         else MessageBox.Show("Flat nao localizado");
                     }
                     else
-                    btnnovo.Enabled = false;
+                        btnnovo.Enabled = false;
                     btnlocalizar.Enabled = false;
                     btnalterar.Enabled = true;
                     btncancelar.Enabled = true;
@@ -385,6 +383,10 @@ namespace SistemaFL
                     MessageBox.Show("Lancamento não encontrado.");
                 }
             }
+        }
+        private void pbfechar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

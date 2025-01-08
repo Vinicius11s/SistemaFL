@@ -33,77 +33,75 @@
             txtdescricao = new TextBox();
             label1 = new Label();
             dgdadoslancamento = new DataGridView();
+            pictureBox2 = new PictureBox();
+            pbmaximizar = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgdadoslancamento).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbmaximizar).BeginInit();
             SuspendLayout();
             // 
             // btnlocalizar
             // 
             btnlocalizar.BackColor = Color.White;
             btnlocalizar.FlatAppearance.BorderSize = 0;
-            btnlocalizar.FlatStyle = FlatStyle.Flat;
-            btnlocalizar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            resources.ApplyResources(btnlocalizar, "btnlocalizar");
             btnlocalizar.ForeColor = Color.FromArgb(23, 24, 29);
-            btnlocalizar.Image = (Image)resources.GetObject("btnlocalizar.Image");
-            btnlocalizar.Location = new Point(191, 31);
-            btnlocalizar.Margin = new Padding(4);
             btnlocalizar.Name = "btnlocalizar";
-            btnlocalizar.Size = new Size(36, 26);
-            btnlocalizar.TabIndex = 10;
             btnlocalizar.UseVisualStyleBackColor = false;
             btnlocalizar.Click += btnlocalizar_Click;
             // 
             // txtdescricao
             // 
-            txtdescricao.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtdescricao.Location = new Point(95, 30);
-            txtdescricao.Margin = new Padding(4);
+            resources.ApplyResources(txtdescricao, "txtdescricao");
             txtdescricao.Name = "txtdescricao";
-            txtdescricao.Size = new Size(88, 27);
-            txtdescricao.TabIndex = 9;
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semilight", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(43, 25);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            resources.ApplyResources(label1, "label1");
             label1.Name = "label1";
-            label1.Size = new Size(56, 30);
-            label1.TabIndex = 8;
-            label1.Text = "Mês:";
             // 
             // dgdadoslancamento
             // 
             dgdadoslancamento.BackgroundColor = Color.White;
             dgdadoslancamento.BorderStyle = BorderStyle.None;
             dgdadoslancamento.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadoslancamento.Dock = DockStyle.Bottom;
-            dgdadoslancamento.Location = new Point(0, 79);
-            dgdadoslancamento.Margin = new Padding(4);
+            resources.ApplyResources(dgdadoslancamento, "dgdadoslancamento");
             dgdadoslancamento.Name = "dgdadoslancamento";
-            dgdadoslancamento.Size = new Size(875, 350);
-            dgdadoslancamento.TabIndex = 7;
             dgdadoslancamento.CellDoubleClick += dgdadoslancamento_CellDoubleClick;
             dgdadoslancamento.CellFormatting += dgdadoslancamento_CellFormatting;
             // 
+            // pictureBox2
+            // 
+            resources.ApplyResources(pictureBox2, "pictureBox2");
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
+            // 
+            // pbmaximizar
+            // 
+            resources.ApplyResources(pbmaximizar, "pbmaximizar");
+            pbmaximizar.Name = "pbmaximizar";
+            pbmaximizar.TabStop = false;
+            pbmaximizar.Click += pbmaximizar_Click;
+            // 
             // FrmConsultaLancamento
             // 
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(875, 429);
+            Controls.Add(pictureBox2);
+            Controls.Add(pbmaximizar);
             Controls.Add(btnlocalizar);
             Controls.Add(txtdescricao);
             Controls.Add(label1);
             Controls.Add(dgdadoslancamento);
-            Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Margin = new Padding(4);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "FrmConsultaLancamento";
-            RightToLeft = RightToLeft.No;
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Consulta Lançamento";
             Load += FrmConsultaLancamento_Load;
+            Resize += FrmConsultaLancamento_Resize;
             ((System.ComponentModel.ISupportInitialize)dgdadoslancamento).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbmaximizar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -113,5 +111,7 @@
         private TextBox txtdescricao;
         private Label label1;
         private DataGridView dgdadoslancamento;
+        private PictureBox pictureBox2;
+        private PictureBox pbmaximizar;
     }
 }

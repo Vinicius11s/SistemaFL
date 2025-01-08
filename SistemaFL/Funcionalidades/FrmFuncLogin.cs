@@ -54,10 +54,14 @@ namespace SistemaFL.Funcionalidades
         }
         private void btnentrar_KeyDown(object sender, KeyEventArgs e)
         {
+
             if (e.KeyCode == Keys.Enter)
             {
-                e.Handled = true; // Evita que o Enter ative o botão
+                e.Handled = true;  // Evita que o Enter ative o botão e feche o formulário de forma indesejada
                 e.SuppressKeyPress = true;
+
+                // Aqui, você chama a lógica de validação de login manualmente
+                btnentrar_Click(sender, e);
             }
         }
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -69,17 +73,23 @@ namespace SistemaFL.Funcionalidades
             if (txtlogin.Text != "" && txtsenha.Text != "")
             {
                 var usuario = repositorio.Recuperar(u => u.Login == txtlogin.Text &&
-                                                            u.Senha == txtsenha.Text);
+                                                         u.Senha == txtsenha.Text);
 
                 if (usuario != null)
                 {
                     Sessao.idUsuarioLogado = usuario.id;
                     Sessao.nomeUsuarioLogado = usuario.Login;
-                    this.Close();
+                    this.Close();  // Fecha o formulário apenas se o login for bem-sucedido
                 }
-                else MessageBox.Show("Dados Incorretos.");
+                else
+                {
+                    MessageBox.Show("Dados Incorretos.");
+                }
             }
-            else MessageBox.Show("Por favor informar Login e Senha.");
+            else
+            {
+                MessageBox.Show("Por favor informar Login e Senha.");
+            }
         }
     }
 }

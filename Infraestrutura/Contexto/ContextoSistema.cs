@@ -26,7 +26,7 @@ namespace Infraestrutura.Contexto
         {
             //Server Master = DESKTOP-6RMV3GQ
             //Server Local = DESKTOP-I32AP0S
-            var stringConexao = @"Server=DESKTOP-6RMV3GQ;Database=SistemaFlATS02;Integrated Security=True;TrustServerCertificate=True;";
+            var stringConexao = @"Server=DESKTOP-I32AP0S;Database=SistemaFlATS02;Integrated Security=True;TrustServerCertificate=True;";
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(stringConexao);
@@ -127,42 +127,56 @@ namespace Infraestrutura.Contexto
 }
 /*CREATE TRIGGER trg_InsertedNewLancamento
 ON Lancamento
-AFTER INSERT 
+AFTER INSERT
 AS
 BEGIN
     DECLARE @dataAtual DATETIME = GETDATE();
-    DECLARE @idUsuario INT;
-    DECLARE @nomeUsuario NVARCHAR(100);
 
-    -- Captura o ID do usuário logado do lançamento inserido
-    SELECT TOP 1 @idUsuario = idUsuario FROM INSERTED;
-
-    -- Busca o nome do usuário com base no ID
-    SELECT TOP 1 @nomeUsuario = Nome FROM Usuario WHERE id = @idUsuario;
-
-    INSERT INTO ocorrencia (oco_ValorAntigo, oco_ValorAlteracao, oco_DataAlteracao, 
-                            idLancamento, idFlat, oco_Tabela, oco_Descricao, DescricaoFlat, idUsuario, DescricaoUsuario)
+    INSERT INTO ocorrencia (
+        oco_ValorAntigo,
+        oco_ValorAlteracao,
+        oco_DataAlteracao,
+        idLancamento,
+        idFlat,
+        oco_Tabela,
+        oco_Descricao,
+        DescricaoFlat,
+        IdUsuario,
+        DescricaoUsuario
+    )
     SELECT 
+        ISNULL(ult.ValorAntigo, 0) AS ValorAntigo,
         CASE 
-            WHEN i.TipoPagamento = 'Aluguel Fixo' THEN 
-                ISNULL((SELECT TOP 1 ValorAluguel 
-                        FROM lancamento 
-                        WHERE idFlat = i.idFlat 
-                        AND id < i.id 
-                        ORDER BY DataPagamento DESC), 0)
+            WHEN i.TipoPagamento = 'Aluguel Fixo' THEN i.ValorAluguel
+            WHEN i.TipoPagamento = 'Dividendos' THEN i.ValorDividendos
+            WHEN i.TipoPagamento = 'Aluguel Fixo + Dividendos' THEN i.ValorAluguel + i.ValorDividendos
+            WHEN i.TipoPagamento = 'Fundo de Reserva' THEN i.ValorFundoReserva
             ELSE 0
-        END AS ValorAntigo,
-        i.ValorAluguel,
+        END AS ValorAlteracao,
         @dataAtual,
         i.id,
         i.idFlat,
         'Lancamento',
         'Inserção',
         f.Descricao AS DescricaoFlat,
-        @idUsuario,
-        @nomeUsuario  -- Salva o nome do usuário na coluna DescricaoUsuario
+        i.IdUsuario,
+        u.Nome AS DescricaoUsuario
     FROM INSERTED i
-    JOIN Flat f ON f.id = i.idFlat;
+    JOIN Flat f ON f.id = i.idFlat
+    LEFT JOIN Usuario u ON u.id = i.IdUsuario  -- Busca o nome do usuário
+    OUTER APPLY (
+        SELECT TOP 1
+            CASE 
+                WHEN i.TipoPagamento = 'Aluguel Fixo' THEN l.ValorAluguel
+                WHEN i.TipoPagamento = 'Dividendos' THEN l.ValorDividendos
+                WHEN i.TipoPagamento = 'Aluguel Fixo + Dividendos' THEN l.ValorAluguel + l.ValorDividendos
+                WHEN i.TipoPagamento = 'Fundo de Reserva' THEN l.ValorFundoReserva
+                ELSE 0
+            END AS ValorAntigo
+        FROM lancamento l
+        WHERE l.idFlat = i.idFlat
+          AND l.id < i.id
+        ORDER BY l.DataPagamento DESC
+    ) ult;
 END;
-
 */
