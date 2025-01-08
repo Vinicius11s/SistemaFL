@@ -217,6 +217,11 @@ namespace SistemaFL
                     {
                         flat.Status = cbbStatus.Text;
                         flat.Ativo = true;
+
+                        if (!flat.Descricao.EndsWith(" - EM CONSTRUÇÃO"))
+                        {
+                            flat.Descricao += " - EM CONSTRUÇÃO";
+                        }
                     }
                     else
                     {
@@ -231,6 +236,11 @@ namespace SistemaFL
                             {
                                 flat.Status = cbbStatus.Text;
                                 flat.Ativo = false;
+
+                                if (!flat.Descricao.EndsWith(" - VENDIDO"))
+                                {
+                                    flat.Descricao += " - VENDIDO";
+                                }
                             }
                         }
                     }

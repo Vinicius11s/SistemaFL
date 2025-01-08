@@ -89,10 +89,11 @@
             // dgdadosRendimentos
             // 
             dgdadosRendimentos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgdadosRendimentos.BackgroundColor = Color.White;
             dgdadosRendimentos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosRendimentos.Location = new Point(11, 60);
+            dgdadosRendimentos.Location = new Point(0, 60);
             dgdadosRendimentos.Name = "dgdadosRendimentos";
-            dgdadosRendimentos.Size = new Size(877, 277);
+            dgdadosRendimentos.Size = new Size(900, 286);
             dgdadosRendimentos.TabIndex = 17;
             // 
             // FrmFuncRendimentoscs

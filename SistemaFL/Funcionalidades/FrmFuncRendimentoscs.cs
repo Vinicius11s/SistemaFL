@@ -31,6 +31,9 @@ namespace SistemaFL.Funcionalidades
             this.Resize += FrmFuncRendimentoscs_Resize;
 
             CarregarGridDados();
+            AlterarCorFundoETextoCabecalho();
+
+
             var dadosTotais = repositorio.ObterDadosTotais();
             dgdadosTotais.DataSource = dadosTotais;
             AjustarColunasGridTotais(dgdadosTotais);
@@ -42,72 +45,108 @@ namespace SistemaFL.Funcionalidades
             var dadosRendimentos = repositorio.ObterDadosRendimentos();
             dgdadosRendimentos.DataSource = dadosRendimentos;
 
-
-
-            AlterarCorFundoETextoCabecalho();
             AjustarNomesCabecalhoGridDados(dgdadosRendimentos);
             dgdadosRendimentos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
-            dgdadosRendimentos.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-            dgdadosRendimentos.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
-
-
-            foreach (DataGridViewRow row in dgdadosRendimentos.Rows)
+             foreach (DataGridViewRow row in dgdadosRendimentos.Rows)
             {
                 AplicarFormatacaoLinha(row);
             }
-
 
         }
         
         private void AjustarNomesCabecalhoGridDados(DataGridView grid)
         {
-            dgdadosRendimentos.Columns["RendimentoAnual"].HeaderText = "Rendimento Anual";
-            dgdadosRendimentos.Columns["PorceAnual"].HeaderText = "Média(%) Anual";
-            dgdadosRendimentos.Columns["PorceAnual"].DefaultCellStyle.Format = "N2";
-
+            dgdadosRendimentos.Columns["ValorImovel"].HeaderText = "VALOR DO IMÓVEL";
+            dgdadosRendimentos.Columns["JANEIRO"].HeaderText = "RENDIMENTO JAN";
+            dgdadosRendimentos.Columns["FEVEREIRO"].HeaderText = "RENDIMENTO FEV";
+            dgdadosRendimentos.Columns["MARÇO"].HeaderText = "RENDIMENTO MAR";
+            dgdadosRendimentos.Columns["ABRIL"].HeaderText = "RENDIMENTO ABR";
+            dgdadosRendimentos.Columns["MAIO"].HeaderText = "RENDIMENTO MAI";
+            dgdadosRendimentos.Columns["JUNHO"].HeaderText = "RENDIMENTO JUN";
+            dgdadosRendimentos.Columns["JULHO"].HeaderText = "RENDIMENTO JUL";
+            dgdadosRendimentos.Columns["AGOSTO"].HeaderText = "RENDIMENTO AGO";
+            dgdadosRendimentos.Columns["SETEMBRO"].HeaderText = "RENDIMENTO SET";
+            dgdadosRendimentos.Columns["OUTUBRO"].HeaderText = "RENDIMENTO OUT";
+            dgdadosRendimentos.Columns["NOVEMBRO"].HeaderText = "RENDIMENTO NOV";
+            dgdadosRendimentos.Columns["DEZEMBRO"].HeaderText = "RENDIMENTO DEZ";
+           
             foreach (var coluna in grid.Columns.Cast<DataGridViewColumn>())
             {
                 if (coluna.Name.StartsWith("Porcentagem"))
                 {
-                    coluna.DefaultCellStyle.Format = "N2";
+                    coluna.DefaultCellStyle.Format = "N2";//DUAS CASAS
                     coluna.HeaderText = "%";
                 }
             }
+            dgdadosRendimentos.Columns["RendimentoAnual"].HeaderText = "RENDIMENTO ANUAL";
+            dgdadosRendimentos.Columns["PorceAnual"].HeaderText = "MÉDIA(%) ANUAL";
+            dgdadosRendimentos.Columns["PorceAnual"].DefaultCellStyle.Format = "N2";
+
             foreach (DataGridViewColumn coluna in dgdadosRendimentos.Columns)
             {
-                if (!coluna.Name.StartsWith("Porcentagem") && coluna.Name != "CodFlat")
+                if (!coluna.Name.StartsWith("Porcentagem") && coluna.Name != "CODFLAT" && coluna.Name != "MediaAnual")
                 {
                     coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
                 }
             }
-            
+
+
         }
         private void AlterarCorFundoETextoCabecalho()
         {
-            dgdadosRendimentos.RowTemplate.Height = 29;  // Define a altura de todas as linhas
-
             foreach (DataGridViewColumn col in dgdadosRendimentos.Columns)
             {
-                col.DefaultCellStyle.Padding = new Padding(5, 10, 5, 10);  // Espaçamento interno
+                col.DefaultCellStyle.Padding = new Padding(5, 2, 5, 2);  // Espaçamento interno
             }
             // Desativa o estilo visual para permitir personalização
             dgdadosRendimentos.EnableHeadersVisualStyles = false;
-
             dgdadosRendimentos.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
             dgdadosRendimentos.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgdadosRendimentos.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-
-            dgdadosTotais.EnableHeadersVisualStyles = false;
-            dgdadosTotais.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
-            dgdadosTotais.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgdadosTotais.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            dgdadosRendimentos.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
 
         }
         private void AplicarFormatacaoLinha(DataGridViewRow row)
         {
-            row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
+            string statusValue = string.Empty;
+
+            foreach (DataGridViewRow rows in dgdadosRendimentos.Rows)
+            {
+                if (rows.Cells["CODFLAT"].Value != null)
+                {
+                    int idFlat = Convert.ToInt32(row.Cells["CODFLAT"].Value);
+                    var flat = repositorio.Recuperar(f => f.id == idFlat);
+
+                    statusValue = flat.Status;
+                }
+
+                // Aplica a formatação apenas nas colunas desejadas
+                if (statusValue == "Em Construção" || statusValue == "Em Reforma")
+                {
+                    row.Cells["EMPREENDIMENTO"].Style.ForeColor = Color.Red;
+                    row.Cells["CODFLAT"].Style.ForeColor = Color.Red;
+                    row.Cells["ValorImovel"].Style.ForeColor = Color.Red;
+                }
+                else
+                {
+                    row.Cells["EMPREENDIMENTO"].Style.ForeColor = Color.Black;
+                    row.Cells["CODFLAT"].Style.ForeColor = Color.Black;
+                    row.Cells["ValorImovel"].Style.ForeColor = Color.Black;
+                }
+
+                if (statusValue == "Vendido")
+                {
+                    row.Cells["EMPREENDIMENTO"].Style.BackColor = Color.FromArgb(171, 201, 251);
+                    row.Cells["CODFLAT"].Style.BackColor = Color.FromArgb(171, 201, 251);
+                    row.Cells["ValorImovel"].Style.BackColor = Color.FromArgb(171, 201, 251);
+                }
+                else
+                {
+                    row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
+                }
+            }
         }
+
         private void AjustarColunasGridTotais(DataGridView grid)
         {
             foreach (var coluna in grid.Columns.Cast<DataGridViewColumn>())
@@ -129,14 +168,9 @@ namespace SistemaFL.Funcionalidades
         }
         private void dgdadosRendimentos_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
-            if (e.RowIndex % 2 == 0)
+            if (e.RowIndex >= 0)
             {
-                dgdadosRendimentos.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
-            }
-            else
-            {
-                dgdadosRendimentos.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Gainsboro;
-
+                AplicarFormatacaoLinha(dgdadosRendimentos.Rows[e.RowIndex]);
             }
         }
         //
