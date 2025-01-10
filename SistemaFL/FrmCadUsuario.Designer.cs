@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCadUsuario));
             pdados = new Panel();
+            pictureBox2 = new PictureBox();
             sidebar = new FlowLayoutPanel();
             btnnovo = new Button();
             btnexcluir = new Button();
@@ -45,10 +46,9 @@
             txtlogin = new TextBox();
             txtid = new TextBox();
             label1 = new Label();
-            pictureBox2 = new PictureBox();
             pdados.SuspendLayout();
-            sidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            sidebar.SuspendLayout();
             SuspendLayout();
             // 
             // pdados
@@ -73,6 +73,17 @@
             pdados.Size = new Size(610, 449);
             pdados.TabIndex = 0;
             // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(580, 3);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(30, 21);
+            pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox2.TabIndex = 26;
+            pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
+            // 
             // sidebar
             // 
             sidebar.BackColor = Color.FromArgb(23, 24, 29);
@@ -90,8 +101,9 @@
             // btnnovo
             // 
             btnnovo.BackColor = Color.FromArgb(23, 24, 29);
+            btnnovo.FlatAppearance.BorderSize = 2;
             btnnovo.FlatStyle = FlatStyle.Flat;
-            btnnovo.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnnovo.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnnovo.ForeColor = Color.White;
             btnnovo.Image = (Image)resources.GetObject("btnnovo.Image");
             btnnovo.ImageAlign = ContentAlignment.MiddleLeft;
@@ -100,7 +112,7 @@
             btnnovo.Padding = new Padding(25, 0, 0, 0);
             btnnovo.Size = new Size(163, 38);
             btnnovo.TabIndex = 26;
-            btnnovo.Text = "      Novo";
+            btnnovo.Text = "     Novo";
             btnnovo.TextAlign = ContentAlignment.MiddleLeft;
             btnnovo.UseVisualStyleBackColor = false;
             btnnovo.Click += btnnovo_Click_1;
@@ -108,8 +120,9 @@
             // btnexcluir
             // 
             btnexcluir.BackColor = Color.FromArgb(23, 24, 29);
+            btnexcluir.FlatAppearance.BorderSize = 2;
             btnexcluir.FlatStyle = FlatStyle.Flat;
-            btnexcluir.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnexcluir.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnexcluir.ForeColor = Color.White;
             btnexcluir.Image = (Image)resources.GetObject("btnexcluir.Image");
             btnexcluir.ImageAlign = ContentAlignment.MiddleLeft;
@@ -118,7 +131,7 @@
             btnexcluir.Padding = new Padding(25, 0, 0, 0);
             btnexcluir.Size = new Size(163, 38);
             btnexcluir.TabIndex = 27;
-            btnexcluir.Text = "      Excluir";
+            btnexcluir.Text = "     Excluir";
             btnexcluir.TextAlign = ContentAlignment.MiddleLeft;
             btnexcluir.UseVisualStyleBackColor = false;
             btnexcluir.Click += btnexcluir_Click_1;
@@ -126,8 +139,9 @@
             // btnalterar
             // 
             btnalterar.BackColor = Color.FromArgb(23, 24, 29);
+            btnalterar.FlatAppearance.BorderSize = 2;
             btnalterar.FlatStyle = FlatStyle.Flat;
-            btnalterar.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnalterar.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnalterar.ForeColor = Color.White;
             btnalterar.Image = (Image)resources.GetObject("btnalterar.Image");
             btnalterar.ImageAlign = ContentAlignment.MiddleLeft;
@@ -136,7 +150,7 @@
             btnalterar.Padding = new Padding(25, 0, 0, 0);
             btnalterar.Size = new Size(163, 38);
             btnalterar.TabIndex = 28;
-            btnalterar.Text = "      Alterar";
+            btnalterar.Text = "     Alterar";
             btnalterar.TextAlign = ContentAlignment.MiddleLeft;
             btnalterar.UseVisualStyleBackColor = false;
             btnalterar.Click += btnalterar_Click_1;
@@ -144,8 +158,9 @@
             // btnlocalizar
             // 
             btnlocalizar.BackColor = Color.FromArgb(23, 24, 29);
+            btnlocalizar.FlatAppearance.BorderSize = 2;
             btnlocalizar.FlatStyle = FlatStyle.Flat;
-            btnlocalizar.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            btnlocalizar.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnlocalizar.ForeColor = Color.White;
             btnlocalizar.Image = (Image)resources.GetObject("btnlocalizar.Image");
             btnlocalizar.ImageAlign = ContentAlignment.MiddleLeft;
@@ -154,7 +169,7 @@
             btnlocalizar.Padding = new Padding(25, 0, 0, 0);
             btnlocalizar.Size = new Size(163, 38);
             btnlocalizar.TabIndex = 29;
-            btnlocalizar.Text = "      Localizar";
+            btnlocalizar.Text = "    Localizar";
             btnlocalizar.TextAlign = ContentAlignment.MiddleLeft;
             btnlocalizar.UseVisualStyleBackColor = false;
             btnlocalizar.Click += btnlocalizar_Click_1;
@@ -270,17 +285,6 @@
             label1.TabIndex = 15;
             label1.Text = "Código";
             // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(580, 3);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(30, 21);
-            pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
-            pictureBox2.TabIndex = 26;
-            pictureBox2.TabStop = false;
-            pictureBox2.Click += pictureBox2_Click;
-            // 
             // FrmCadUsuario
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -297,8 +301,8 @@
             Load += FrmCadUsuario_Load;
             pdados.ResumeLayout(false);
             pdados.PerformLayout();
-            sidebar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            sidebar.ResumeLayout(false);
             ResumeLayout(false);
         }
 

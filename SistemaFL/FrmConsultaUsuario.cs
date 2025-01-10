@@ -31,6 +31,7 @@ namespace SistemaFL
             dgdadosusuario.Columns["DataCriacao"].HeaderText = "DATA ALTERAÇÃO";
             dgdadosusuario.Columns["DataCriacao"].HeaderText = "DATA ALTERAÇÃO";
             dgdadosusuario.Columns["DataCriacao"].HeaderText = "DATA ALTERAÇÃO";
+            dgdadosusuario.Columns["Lancamentos"].Visible = false;
 
         }
 

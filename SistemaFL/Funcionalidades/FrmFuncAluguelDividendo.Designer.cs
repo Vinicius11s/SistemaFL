@@ -56,9 +56,9 @@
             dgtotalmes.BackgroundColor = Color.White;
             dgtotalmes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgtotalmes.Dock = DockStyle.Bottom;
-            dgtotalmes.Location = new Point(0, 344);
+            dgtotalmes.Location = new Point(0, 359);
             dgtotalmes.Name = "dgtotalmes";
-            dgtotalmes.Size = new Size(900, 77);
+            dgtotalmes.Size = new Size(900, 62);
             dgtotalmes.TabIndex = 1;
             // 
             // pictureBox2
@@ -86,10 +86,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.Red;
             label1.Location = new Point(12, 9);
             label1.Name = "label1";
-            label1.Size = new Size(148, 20);
+            label1.Size = new Size(167, 21);
             label1.TabIndex = 15;
             label1.Text = "Aluguel + Dividendos";
             // 

@@ -190,7 +190,10 @@ namespace SistemaFL
             }
             else lancamento = new Lancamento();
 
-            lancamento.idUsuario = Sessao.idUsuarioLogado;
+            if(Sessao.idUsuarioLogado > 0)
+            {
+                lancamento.idUsuario = Sessao.idUsuarioLogado;
+            }
             lancamento.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
             lancamento.DataPagamento = dtdataLancamento.Value;
 

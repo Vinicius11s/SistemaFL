@@ -169,7 +169,7 @@ namespace SistemaFL
         {
             sidebar.BringToFront();
 
-            var form8 = Program.serviceProvider.GetRequiredService<FrmFuncLogin>();
+            /*var form8 = Program.serviceProvider.GetRequiredService<FrmFuncLogin>();
             form8.ShowDialog();  // Aguarda o login ser fechado
 
             if (Sessao.idUsuarioLogado > 0)
@@ -179,7 +179,7 @@ namespace SistemaFL
             else
             {
                 this.Close();
-            }
+            }*/
 
         }
     }
