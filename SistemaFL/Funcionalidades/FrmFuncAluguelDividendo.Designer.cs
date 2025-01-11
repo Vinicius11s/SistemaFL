@@ -44,22 +44,29 @@
             // 
             dgdadosAlugDiv.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgdadosAlugDiv.BackgroundColor = Color.White;
+            dgdadosAlugDiv.BorderStyle = BorderStyle.None;
             dgdadosAlugDiv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosAlugDiv.Location = new Point(0, 50);
+            dgdadosAlugDiv.Location = new Point(0, 40);
             dgdadosAlugDiv.Margin = new Padding(3, 10, 3, 4);
             dgdadosAlugDiv.Name = "dgdadosAlugDiv";
-            dgdadosAlugDiv.Size = new Size(900, 302);
+            dgdadosAlugDiv.ReadOnly = true;
+            dgdadosAlugDiv.Size = new Size(900, 316);
             dgdadosAlugDiv.TabIndex = 0;
+            dgdadosAlugDiv.ColumnHeaderMouseClick += dgdadosAlugDiv_ColumnHeaderMouseClick;
+            dgdadosAlugDiv.DataBindingComplete += dgdadosAlugDiv_DataBindingComplete;
             // 
             // dgtotalmes
             // 
             dgtotalmes.BackgroundColor = Color.White;
+            dgtotalmes.BorderStyle = BorderStyle.None;
             dgtotalmes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgtotalmes.Dock = DockStyle.Bottom;
-            dgtotalmes.Location = new Point(0, 359);
+            dgtotalmes.Location = new Point(0, 352);
             dgtotalmes.Name = "dgtotalmes";
-            dgtotalmes.Size = new Size(900, 62);
+            dgtotalmes.ReadOnly = true;
+            dgtotalmes.Size = new Size(900, 69);
             dgtotalmes.TabIndex = 1;
+            dgtotalmes.DataBindingComplete += dgtotalmes_DataBindingComplete;
             // 
             // pictureBox2
             // 

@@ -32,8 +32,7 @@ namespace SistemaFL.Funcionalidades
 
             CarregarGridDados();
             AdicionarLinhaTotalALDIV();
-            AplicarNegritoUltimaLinha();
-
+            dgdadosAlugDiv.DataBindingComplete += dgdadosAlugDiv_DataBindingComplete;
 
             CarregarGridDadosTotais();
         }
@@ -41,7 +40,6 @@ namespace SistemaFL.Funcionalidades
         //Datagrid Dados
         private void CarregarGridDados()
         {
-
             var dados = flatRepositório.ObterDadosAluguelDividendos();
             DataTable dt = ConverterDynamicParaDataTable(dados);
             dgdadosAlugDiv.DataSource = dt;
@@ -53,11 +51,6 @@ namespace SistemaFL.Funcionalidades
             {
                 column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
-            foreach (DataGridViewRow row in dgdadosAlugDiv.Rows)
-            {
-                AplicarFormatacaoLinha(row);
-            }
-
 
         }
         private void AlterarCorFundoETextoCabecalho()
@@ -217,14 +210,21 @@ namespace SistemaFL.Funcionalidades
         }
         private void AplicarNegritoUltimaLinha()
         {
-            if (dgdadosAlugDiv.Rows.Count > 0) // Verifica se há linhas no DataGridView
+            // Verifica se há linhas no DataGridView
+            if (dgdadosAlugDiv.Rows.Count > 0)
             {
                 int ultimaLinhaIndex = dgdadosAlugDiv.Rows.Count - 1;
 
-                // Verifica se a última linha é a "linha total" e não a linha vazia de edição
                 if (!dgdadosAlugDiv.Rows[ultimaLinhaIndex].IsNewRow)
                 {
                     dgdadosAlugDiv.Rows[ultimaLinhaIndex].DefaultCellStyle.Font = new Font(dgdadosAlugDiv.Font, FontStyle.Bold);
+                }
+
+                int penultimaLinhaIndex = ultimaLinhaIndex - 1;
+                if (penultimaLinhaIndex >= 0 && !dgdadosAlugDiv.Rows[penultimaLinhaIndex].IsNewRow)
+                {
+                    // Se a penúltima linha for formatada, remova o estilo de negrito
+                    dgdadosAlugDiv.Rows[penultimaLinhaIndex].DefaultCellStyle.Font = new Font(dgdadosAlugDiv.Font, FontStyle.Regular);
                 }
             }
         }
@@ -240,9 +240,9 @@ namespace SistemaFL.Funcionalidades
         private void AjustarFormataçãoGridTotal(DataGridView grid)
         {
             dgtotalmes.Columns["Descricao"].HeaderText = "DESCRIÇÃO";
-            dgtotalmes.Columns["Descricao"].DefaultCellStyle.Font = new Font(grid.Font, FontStyle.Bold);
+            dgtotalmes.Columns["Descricao"].HeaderCell.Style.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             grid.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
+            dgtotalmes.Columns["Descricao"].DefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);  // Altera a fonte da coluna "Descricao"
             foreach (DataGridViewColumn coluna in dgtotalmes.Columns)
             {
                 coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -280,7 +280,7 @@ namespace SistemaFL.Funcionalidades
 
         }
         private void AplicarFormatacaoLinha(DataGridViewRow row)
-        {           
+        {
             row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
         }
         //
@@ -325,7 +325,65 @@ namespace SistemaFL.Funcionalidades
         {
             this.Close();
         }
-        
+        private void dgdadosAlugDiv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow row in dgdadosAlugDiv.Rows)
+            {
+                AplicarFormatacaoLinha(row);
+            }
+            AplicarNegritoUltimaLinha();
+        }
+
+        private bool ordenacaoAscendente = true; // Variável para controlar a alternância da ordenação
+        private void dgdadosAlugDiv_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            // Obtendo o DataTable vinculado ao DataGridView
+            DataTable dados = (DataTable)dgdadosAlugDiv.DataSource;
+
+            // Verificar se há dados para manipular
+            if (dados.Rows.Count == 0) return;
+
+            // Obtendo o nome da coluna clicada
+            string nomeColuna = dgdadosAlugDiv.Columns[e.ColumnIndex].Name;
+
+            // Remover a última linha antes de ordenar
+            DataRow ultimaLinha = dados.Rows[dados.Rows.Count - 1];
+
+            // Criando uma nova DataTable sem a última linha
+            DataTable dadosSemUltimaLinha = dados.Clone(); // Clona a estrutura do DataTable
+
+            // Adicionar todas as linhas, exceto a última
+            foreach (DataRow row in dados.Rows.Cast<DataRow>().Take(dados.Rows.Count - 1))
+            {
+                dadosSemUltimaLinha.ImportRow(row);
+            }
+
+            // Criando um DataView a partir do DataTable sem a última linha
+            DataView dataView = dadosSemUltimaLinha.DefaultView;
+
+            // Alternando a ordenação
+            if (ordenacaoAscendente)
+            {
+                dataView.Sort = nomeColuna + " ASC"; // Ordena de forma crescente
+            }
+            else
+            {
+                dataView.Sort = nomeColuna + " DESC"; // Ordena de forma decrescente
+            }
+
+            // Atualizando a fonte de dados do DataGridView com os dados ordenados (sem a última linha)
+            dgdadosAlugDiv.DataSource = dataView.ToTable();  // Atualiza com os dados ordenados
+
+            dados = (DataTable)dgdadosAlugDiv.DataSource;  // Atualiza o DataTable do DataGridView
+            dados.ImportRow(ultimaLinha);  // Re-adicionar a última linha no final
+
+            ordenacaoAscendente = !ordenacaoAscendente;
+        }
+
+        private void dgtotalmes_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            AplicarNegritoUltimaLinha();
+        }
     }
 }
 
