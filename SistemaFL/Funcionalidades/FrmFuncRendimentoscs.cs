@@ -1,4 +1,5 @@
-﻿using Infraestrutura.Repositorio;
+﻿using Entidades;
+using Infraestrutura.Repositorio;
 using Interfaces;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
@@ -26,7 +27,7 @@ namespace SistemaFL.Funcionalidades
         }
 
         private void FrmFuncRendimentoscs_Load(object sender, EventArgs e)
-        {          
+        {
             AjustarPosicaoPictureBox();
             this.Resize += FrmFuncRendimentoscs_Resize;
 
@@ -37,7 +38,7 @@ namespace SistemaFL.Funcionalidades
             var dadosTotais = repositorio.ObterDadosTotais();
             dgdadosTotais.DataSource = dadosTotais;
             AjustarColunasGridTotais(dgdadosTotais);
-            
+
         }
         private void CarregarGridDados()
         {
@@ -48,13 +49,12 @@ namespace SistemaFL.Funcionalidades
             AjustarNomesCabecalhoGridDados(dgdadosRendimentos);
             dgdadosRendimentos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
-             foreach (DataGridViewRow row in dgdadosRendimentos.Rows)
+            foreach (DataGridViewRow row in dgdadosRendimentos.Rows)
             {
                 AplicarFormatacaoLinha(row);
             }
 
         }
-        
         private void AjustarNomesCabecalhoGridDados(DataGridView grid)
         {
             dgdadosRendimentos.Columns["ValorImovel"].HeaderText = "VALOR DO IMÓVEL";
@@ -70,7 +70,7 @@ namespace SistemaFL.Funcionalidades
             dgdadosRendimentos.Columns["OUTUBRO"].HeaderText = "RENDIMENTO OUT";
             dgdadosRendimentos.Columns["NOVEMBRO"].HeaderText = "RENDIMENTO NOV";
             dgdadosRendimentos.Columns["DEZEMBRO"].HeaderText = "RENDIMENTO DEZ";
-           
+
             foreach (var coluna in grid.Columns.Cast<DataGridViewColumn>())
             {
                 if (coluna.Name.StartsWith("Porcentagem"))
@@ -146,7 +146,6 @@ namespace SistemaFL.Funcionalidades
                 }
             }
         }
-
         private void AjustarColunasGridTotais(DataGridView grid)
         {
             foreach (var coluna in grid.Columns.Cast<DataGridViewColumn>())
@@ -210,8 +209,72 @@ namespace SistemaFL.Funcionalidades
 
             pictureBox1.Location = new Point(x2, y2);
         }
+        private void dgdadosRendimentos_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            // Verifica se o índice da coluna está dentro do intervalo válido
+            if (e.ColumnIndex >= 0 && e.ColumnIndex < dgdadosRendimentos.Columns.Count)
+            {
+                List<string> colunasRendimento = new List<string>
+                {
+                    "JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO", "JULHO", "AGOSTO",
+                    "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"
+                };
 
-        /**/
-       
+                if (colunasRendimento.Contains(dgdadosRendimentos.Columns[e.ColumnIndex].Name) && e.RowIndex >= 0)
+                {
+                    // Identificar a linha atual sendo processada
+                    int rowIndex = e.RowIndex;
+
+                    // Recuperar o valor de CODFLAT da célula correspondente na linha
+                    var codFlatValue = dgdadosRendimentos.Rows[rowIndex].Cells["CODFLAT"].Value;
+
+                    if (codFlatValue != null)
+                    {
+                        // Converter para o tipo apropriado (supondo que seja um inteiro)
+                        int codFlat = Convert.ToInt32(codFlatValue);
+
+                        // Usar o repositório para recuperar o objeto flat com base no CODFLAT
+                        var flat = repositorio.Recuperar(f => f.id == codFlat);
+
+                        // Calcular o valor estipulado, passando o objeto flat como parâmetro
+                        decimal valorEstipulado = flat.ValorInvestimento * 0.02m;
+
+                        // Pinte o fundo da célula primeiro (garante que a célula tem o fundo correto)
+                        e.Graphics.FillRectangle(new SolidBrush(e.CellStyle.BackColor), e.CellBounds);
+
+                        // Obtenha o valor da célula
+                        decimal valorColuna = Convert.ToDecimal(dgdadosRendimentos.Rows[rowIndex].Cells[e.ColumnIndex].Value);
+
+                        // Calcule a largura da barra com base no valor da célula
+                        float porcentagem = (float)(valorColuna / valorEstipulado);
+                        int larguraBarra = (int)(e.CellBounds.Width * porcentagem);
+
+                        // Se o valor for maior que zero, desenhe a barra
+                        if (valorColuna > 0)
+                        {
+                            using (SolidBrush brush = new SolidBrush(Color.LightGreen)) // Barra verde clara
+                            {
+                                // Desenha a barra na célula (sem modificar a largura da célula)
+                                e.Graphics.FillRectangle(brush, e.CellBounds.X, e.CellBounds.Y, larguraBarra, e.CellBounds.Height);
+                            }
+                        }
+
+                        // Desenha o texto sobre a barra (valor da coluna), ajustado para exibir no topo da célula
+                        using (SolidBrush brushText = new SolidBrush(Color.Black))
+                        {
+                            string texto = valorColuna.ToString("C"); // Formata como moeda
+                            e.Graphics.DrawString(texto, e.CellStyle.Font, brushText, e.CellBounds.X + 5, e.CellBounds.Y + 5);
+                        }
+
+                        // Desenha a borda ao redor da célula (somente borda, não sobrescreve o conteúdo)
+                        e.Paint(e.ClipBounds, DataGridViewPaintParts.Border);
+
+                        e.Handled = true;
+                    }               
+                }
+            }
+        }        
     }
 }
+
+

@@ -95,6 +95,7 @@
             dgdadosRendimentos.Name = "dgdadosRendimentos";
             dgdadosRendimentos.Size = new Size(900, 286);
             dgdadosRendimentos.TabIndex = 17;
+            dgdadosRendimentos.CellPainting += dgdadosRendimentos_CellPainting;
             // 
             // FrmFuncRendimentoscs
             // 

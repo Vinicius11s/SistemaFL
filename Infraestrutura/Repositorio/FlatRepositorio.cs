@@ -426,37 +426,37 @@ namespace Infraestrutura.Repositorio
         {
             TOTAL = totalInv,
 
-            Janeiro = totalJan,
+            JANEIRO = totalJan,
             PorcentagemJan = PorcJan,
 
-            Fevereiro = totalFev,
+            FEVEREIRO = totalFev,
             PorcentagemFev = PorcFev,
 
-            Março = totalMar,
+            MARÇO = totalMar,
             PorcentagemMar = PorcMar,
 
-            Abril = totalAbr,
+            ABRIL = totalAbr,
             PorcentagemAbr = PorcAbr,
 
-            Maio = totalMai,
+            MAIO = totalMai,
             PorcentagemMai = PorcMai,
 
-            Junho = totalJun,
+            JUNHO = totalJun,
             PorcentagemJun = PorcJun,
 
-            Julho = totalJul,
+            JULHO = totalJul,
             PorcentagemJul = PorcJul,
 
-            Agosto = totalAgo,
+            AGOSTO = totalAgo,
             PorcentagemAgo = PorcAgo,
 
-            Setembro = totalSet,
+            SETEMBRO = totalSet,
             PorcentagemSet = PorcSet,
 
-            Outubro = totalOut,
+            OUTUBRO = totalOut,
             PorcentagemOut = PorcOut,
 
-            Novembro = totalNov,
+            NOVEMBRO = totalNov,
             PorcentagemNov = PorcNov,
 
             Dezembro = totalDez,
