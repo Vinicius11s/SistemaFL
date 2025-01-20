@@ -21,7 +21,6 @@ namespace SistemaFL.Funcionalidades
             this.flatRepositorio = flatRepositorio;
             this.lancamentoRepositorio = lancamentoRepositorio;
         }
-
         private void FrmFuncFundoReserva_Load(object sender, EventArgs e)
         {
             AjustarPosicaoPictureBox();

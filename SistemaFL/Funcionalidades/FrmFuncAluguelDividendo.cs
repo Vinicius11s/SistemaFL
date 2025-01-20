@@ -24,64 +24,75 @@ namespace SistemaFL.Funcionalidades
             this.flatRepositório = flatRepositorio;
             this.lançamentoRepositório = lancamentoRepositorio;
         }
-
         private void FrmFuncAluguelDividendo_Load(object sender, EventArgs e)
         {
-            AjustarPosicaoPictureBox();
-            this.Resize += FrmFuncAluguelDividendo_Resize;
-
+            AjustarLayoutFormulario();
             CarregarGridDados();
-            AdicionarLinhaTotalALDIV();
+            AdicionarLinhaTotal();
             dgdadosAlugDiv.DataBindingComplete += dgdadosAlugDiv_DataBindingComplete;
 
-            CarregarGridDadosTotais();
+            CarregarGridTotais();
         }
         //
-        //Datagrid Dados
+        //Ajustar Layout do Formulário
+        private void AjustarLayoutFormulario()
+        {
+            AjustaPictureBox_MaxMinFechar();
+            AjustarTamanhoDataGridView();
+        }
+        private void AjustaPictureBox_MaxMinFechar()
+        {
+            int margem = 10;
+
+            // Posição do pbMaximizar (no canto superior direito)
+            int x1 = this.ClientSize.Width - pbFechar.Width - margem;
+            int y1 = margem;
+
+            pbFechar.Location = new Point(x1, y1);
+
+            // Posição do pbFechar (ao lado esquerdo de pbMaximizar)
+            int x2 = x1 - pbMaximizar.Width - margem;
+            int y2 = margem;
+
+            pbMaximizar.Location = new Point(x2, y2);
+
+            // Posição do pbMinimizar (ao lado esquerdo de pbFechar)
+            int x3 = x2 - pbMinimizar.Width - margem;
+            int y3 = margem;
+
+            pbMinimizar.Location = new Point(x3, y3);
+
+        }
+        private void AjustarTamanhoDataGridView()
+        {
+            int margemDireita = SystemInformation.VerticalResizeBorderThickness;
+            int margemInferior = SystemInformation.HorizontalResizeBorderThickness;
+
+            dgdadosAlugDiv.Width = this.ClientSize.Width - dgdadosAlugDiv.Left - margemDireita;
+            dgdadosAlugDiv.Top = this.ClientSize.Height - dgdadosAlugDiv.Height - margemInferior;
+        }
+        //
+        //DataGrid Dados
         private void CarregarGridDados()
         {
             var dados = flatRepositório.ObterDadosAluguelDividendos();
             DataTable dt = ConverterDynamicParaDataTable(dados);
             dgdadosAlugDiv.DataSource = dt;
-
-            AlterarCorFundoETextoCabecalho();
-            AjustarNomesDoCabecalhoDoGrid(dgdadosAlugDiv);
-
-            foreach (DataGridViewColumn column in dgdadosAlugDiv.Columns)
-            {
-                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            }
-
+            dgdadosAlugDiv.ScrollBars = ScrollBars.Vertical;
+            AplicarFormatacaoGridDados();
         }
-        private void AlterarCorFundoETextoCabecalho()
+        private void AplicarFormatacaoGridDados()
         {
-            foreach (DataGridViewColumn col in dgdadosAlugDiv.Columns)
-            {
-                col.DefaultCellStyle.Padding = new Padding(5, 2, 5, 2);  // Espaçamento interno
-            }
-            // Desativa o estilo visual para permitir personalização
+            AlterarEstilosCabecalho();
+            AlterarEstilosCelulas(dgdadosAlugDiv);
+        }
+        private void AlterarEstilosCabecalho()
+        {
+
             dgdadosAlugDiv.EnableHeadersVisualStyles = false;
             dgdadosAlugDiv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
             dgdadosAlugDiv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgdadosAlugDiv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-
-            dgtotalmes.EnableHeadersVisualStyles = false;
-            dgtotalmes.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
-            dgtotalmes.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-
-        }
-        private void AjustarNomesDoCabecalhoDoGrid(DataGridView grid)
-        {
-            grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-            dgdadosAlugDiv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-
-            foreach (DataGridViewColumn coluna in dgdadosAlugDiv.Columns)
-            {
-                if (coluna.Name != "CODFLAT")
-                {
-                    coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
-                }
-            }
 
             if (dgdadosAlugDiv.Rows.Count > 0)
             {
@@ -124,8 +135,32 @@ namespace SistemaFL.Funcionalidades
                 dgdadosAlugDiv.Columns["AluguelDez"].HeaderText = "ALUGUEL DEZ";
                 dgdadosAlugDiv.Columns["DividendosDez"].HeaderText = "DIVIDENDOS DEZ";
             }
+
         }
-        private void AdicionarLinhaTotalALDIV()
+        private void AlterarEstilosCelulas(DataGridView grid)
+        {
+            grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            dgdadosAlugDiv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
+            foreach (DataGridViewColumn col in dgdadosAlugDiv.Columns)
+            {
+                col.DefaultCellStyle.Padding = new Padding(5, 2, 5, 2);  // Espaçamento interno
+            }
+
+            foreach (DataGridViewColumn coluna in dgdadosAlugDiv.Columns)
+            {
+                if (coluna.Name != "CODFLAT")
+                {
+                    coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
+                }
+            }
+
+            foreach (DataGridViewColumn column in dgdadosAlugDiv.Columns)
+            {
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+        }
+        private void AdicionarLinhaTotal()
         {
             DataTable dt = (DataTable)dgdadosAlugDiv.DataSource;
 
@@ -163,50 +198,33 @@ namespace SistemaFL.Funcionalidades
 
             // Definindo o texto "TOTAL" na coluna Bandeira
             dgdadosAlugDiv.Rows[lastRowIndex].Cells["Bandeira"].Value = "TOTAL";
-            dgdadosAlugDiv.Rows[lastRowIndex].Cells["Bandeira"].Style.Font = new Font(dgdadosAlugDiv.Font, FontStyle.Bold);
+            dgdadosAlugDiv.Rows[lastRowIndex].Cells["Bandeira"].Style.Font = new Font("Segoe UI", 11, FontStyle.Bold);
 
             // Definindo os valores das células em negrito, se houver valor
             foreach (var coluna in colunasMeses)
             {
                 if (novaLinha[coluna] != DBNull.Value)
                 {
-                    dgdadosAlugDiv.Rows[lastRowIndex].Cells[coluna].Style.Font = new Font(dgdadosAlugDiv.Font, FontStyle.Bold);
+                    dgdadosAlugDiv.Rows[lastRowIndex].Cells[coluna].Style.Font = new Font("Segoe UI", 11, FontStyle.Bold);
                 }
             }
 
             dgdadosAlugDiv.AllowUserToAddRows = false;
             dgdadosAlugDiv.Refresh();
         }
-        public DataTable ConverterDynamicParaDataTable(IEnumerable<dynamic> lista)
+        //
+        //Após o carregamento do DataGrid
+        private void dgdadosAlugDiv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            DataTable tabela = new DataTable();
-
-            if (lista == null || !lista.Any())
-                return tabela;
-
-            var primeiroItem = lista.First();
-            var propriedades = primeiroItem.GetType().GetProperties();
-
-            foreach (var propriedade in propriedades)
+            foreach (DataGridViewRow row in dgdadosAlugDiv.Rows)
             {
-                Type tipo = Nullable.GetUnderlyingType(propriedade.PropertyType) ?? propriedade.PropertyType;
-                tabela.Columns.Add(propriedade.Name, tipo);
+                AplicarFormatacaoLinha(row);
             }
-
-            foreach (var item in lista)
-            {
-                DataRow novaLinha = tabela.NewRow();
-
-                foreach (var propriedade in propriedades)
-                {
-                    var valor = propriedade.GetValue(item);
-                    novaLinha[propriedade.Name] = valor ?? DBNull.Value;
-                }
-
-                tabela.Rows.Add(novaLinha);
-            }
-
-            return tabela;
+            AplicarNegritoUltimaLinha();
+        }
+        private void AplicarFormatacaoLinha(DataGridViewRow row)
+        {
+            row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
         }
         private void AplicarNegritoUltimaLinha()
         {
@@ -217,7 +235,7 @@ namespace SistemaFL.Funcionalidades
 
                 if (!dgdadosAlugDiv.Rows[ultimaLinhaIndex].IsNewRow)
                 {
-                    dgdadosAlugDiv.Rows[ultimaLinhaIndex].DefaultCellStyle.Font = new Font(dgdadosAlugDiv.Font, FontStyle.Bold);
+                    dgdadosAlugDiv.Rows[ultimaLinhaIndex].DefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
                 }
 
                 int penultimaLinhaIndex = ultimaLinhaIndex - 1;
@@ -228,21 +246,36 @@ namespace SistemaFL.Funcionalidades
                 }
             }
         }
-        //
-        //Datagrid Totais 
-        private void CarregarGridDadosTotais()
+        //DataGrid2
+        private void CarregarGridTotais()
         {
             var dadosTotais = flatRepositório.ObterDadosTotaisALDIV();
             dgtotalmes.DataSource = dadosTotais;
-            AlterarCorFundoETextoCabecalho();
-            AjustarFormataçãoGridTotal(dgtotalmes);
+
+            AplicarFormatacaoGridTotais();
         }
-        private void AjustarFormataçãoGridTotal(DataGridView grid)
+        private void AplicarFormatacaoGridTotais()
         {
+            AlterarEstilosCabecalhoGridTotais();
+            AlterarEstilosCelulasGridTotais(dgtotalmes);
+        }
+        private void AlterarEstilosCabecalhoGridTotais()
+        {
+            dgtotalmes.EnableHeadersVisualStyles = false;
+            dgtotalmes.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
+            dgtotalmes.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
             dgtotalmes.Columns["Descricao"].HeaderText = "DESCRIÇÃO";
             dgtotalmes.Columns["Descricao"].HeaderCell.Style.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+
+
+        }
+        private void AlterarEstilosCelulasGridTotais(DataGridView grid)
+        {
+            dgtotalmes.Columns["Descricao"].DefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
             grid.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgtotalmes.Columns["Descricao"].DefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);  // Altera a fonte da coluna "Descricao"
             foreach (DataGridViewColumn coluna in dgtotalmes.Columns)
             {
                 coluna.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -279,61 +312,9 @@ namespace SistemaFL.Funcionalidades
             dgtotalmes.Top = this.ClientSize.Height - dgtotalmes.Height - margemInferior;
 
         }
-        private void AplicarFormatacaoLinha(DataGridViewRow row)
-        {
-            row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
-        }
+
         //
-        //Ajuste dos botões fechar e maximizar
-        private void FrmFuncAluguelDividendo_Resize(object sender, EventArgs e)
-        {
-            AjustarPosicaoPictureBox();
-            int margemDireita = SystemInformation.VerticalResizeBorderThickness;
-            int margemInferior = SystemInformation.HorizontalResizeBorderThickness;
-
-            dgtotalmes.Width = this.ClientSize.Width - dgtotalmes.Left - margemDireita;
-            dgtotalmes.Top = this.ClientSize.Height - dgtotalmes.Height - margemInferior;
-        }
-        private void AjustarPosicaoPictureBox()
-        {
-            int margem = 10;
-
-            // Posição do PictureBox1 (no canto superior direito)
-            int x1 = this.ClientSize.Width - pictureBox1.Width - margem;
-            int y1 = margem;
-
-            pictureBox2.Location = new Point(x1, y1);
-
-            // Posição do PictureBox2 (ao lado esquerdo de PictureBox1)
-            int x2 = x1 - pictureBox2.Width - margem;
-            int y2 = margem;
-
-            pictureBox1.Location = new Point(x2, y2);
-        }
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            if (this.WindowState == FormWindowState.Maximized)
-            {
-                this.WindowState = FormWindowState.Normal;
-            }
-            else
-            {
-                this.WindowState = FormWindowState.Maximized;
-            }
-        }
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-        private void dgdadosAlugDiv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            foreach (DataGridViewRow row in dgdadosAlugDiv.Rows)
-            {
-                AplicarFormatacaoLinha(row);
-            }
-            AplicarNegritoUltimaLinha();
-        }
-
+        //Eventos
         private bool ordenacaoAscendente = true; // Variável para controlar a alternância da ordenação
         private void dgdadosAlugDiv_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -379,10 +360,61 @@ namespace SistemaFL.Funcionalidades
 
             ordenacaoAscendente = !ordenacaoAscendente;
         }
-
-        private void dgtotalmes_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        private void pbMaximizar_Click(object sender, EventArgs e)
         {
-            AplicarNegritoUltimaLinha();
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+        }
+        private void pbFechar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void pbMinimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+        //
+        //Conversão Dynamic para Table
+        public DataTable ConverterDynamicParaDataTable(IEnumerable<dynamic> lista)
+        {
+            DataTable tabela = new DataTable();
+
+            if (lista == null || !lista.Any())
+                return tabela;
+
+            var primeiroItem = lista.First();
+            var propriedades = primeiroItem.GetType().GetProperties();
+
+            foreach (var propriedade in propriedades)
+            {
+                Type tipo = Nullable.GetUnderlyingType(propriedade.PropertyType) ?? propriedade.PropertyType;
+                tabela.Columns.Add(propriedade.Name, tipo);
+            }
+
+            foreach (var item in lista)
+            {
+                DataRow novaLinha = tabela.NewRow();
+
+                foreach (var propriedade in propriedades)
+                {
+                    var valor = propriedade.GetValue(item);
+                    novaLinha[propriedade.Name] = valor ?? DBNull.Value;
+                }
+
+                tabela.Rows.Add(novaLinha);
+            }
+
+            return tabela;
+        }
+        private void dgdadosAlugDiv_Resize(object sender, EventArgs e)
+        {
+            AjustaPictureBox_MaxMinFechar();
         }
     }
 }
