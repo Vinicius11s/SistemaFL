@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFuncPISeCOFINS));
             label1 = new Label();
             label2 = new Label();
             dgdadosPIS = new DataGridView();
@@ -51,7 +52,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(428, 41);
+            label2.Location = new Point(391, 41);
             label2.Name = "label2";
             label2.Size = new Size(122, 30);
             label2.TabIndex = 1;
@@ -64,7 +65,7 @@
             dgdadosPIS.Dock = DockStyle.Bottom;
             dgdadosPIS.Location = new Point(0, 117);
             dgdadosPIS.Name = "dgdadosPIS";
-            dgdadosPIS.Size = new Size(844, 280);
+            dgdadosPIS.Size = new Size(789, 280);
             dgdadosPIS.TabIndex = 2;
             dgdadosPIS.CellFormatting += dgdadosPIS_CellFormatting_1;
             // 
@@ -78,13 +79,14 @@
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(844, 397);
+            ClientSize = new Size(789, 397);
             Controls.Add(dgdadosPIS);
             Controls.Add(label2);
             Controls.Add(label1);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ForeColor = SystemColors.InfoText;
-            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "FrmFuncPISeCOFINS";
             StartPosition = FormStartPosition.CenterScreen;

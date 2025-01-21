@@ -30,56 +30,72 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFuncFundoReserva));
             dgdadosFunRes = new DataGridView();
-            pictureBox2 = new PictureBox();
-            pictureBox1 = new PictureBox();
+            pbFechar = new PictureBox();
+            pbMaximizar = new PictureBox();
             label2 = new Label();
+            pbMinimizar = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgdadosFunRes).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbMaximizar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbMinimizar).BeginInit();
             SuspendLayout();
             // 
             // dgdadosFunRes
             // 
             dgdadosFunRes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgdadosFunRes.BackgroundColor = Color.White;
+            dgdadosFunRes.BorderStyle = BorderStyle.None;
             dgdadosFunRes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdadosFunRes.Location = new Point(0, 82);
             dgdadosFunRes.Margin = new Padding(3, 4, 3, 4);
             dgdadosFunRes.Name = "dgdadosFunRes";
             dgdadosFunRes.Size = new Size(900, 341);
             dgdadosFunRes.TabIndex = 0;
+            dgdadosFunRes.ColumnHeaderMouseClick += dgdadosFunRes_ColumnHeaderMouseClick;
+            dgdadosFunRes.DataBindingComplete += dgdadosFunRes_DataBindingComplete;
             // 
-            // pictureBox2
+            // pbFechar
             // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(861, 5);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(30, 21);
-            pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
-            pictureBox2.TabIndex = 11;
-            pictureBox2.TabStop = false;
-            pictureBox2.Click += pictureBox2_Click;
+            pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
+            pbFechar.Location = new Point(861, 5);
+            pbFechar.Name = "pbFechar";
+            pbFechar.Size = new Size(30, 21);
+            pbFechar.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbFechar.TabIndex = 11;
+            pbFechar.TabStop = false;
+            pbFechar.Click += pbFechar_Click;
             // 
-            // pictureBox1
+            // pbMaximizar
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(824, 5);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(30, 21);
-            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
-            pictureBox1.TabIndex = 10;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+            pbMaximizar.Image = (Image)resources.GetObject("pbMaximizar.Image");
+            pbMaximizar.Location = new Point(828, 5);
+            pbMaximizar.Name = "pbMaximizar";
+            pbMaximizar.Size = new Size(30, 21);
+            pbMaximizar.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbMaximizar.TabIndex = 10;
+            pbMaximizar.TabStop = false;
+            pbMaximizar.Click += pbMaximizar_Click;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(12, 9);
+            label2.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(20, 20);
             label2.Name = "label2";
-            label2.Size = new Size(127, 20);
+            label2.Size = new Size(167, 22);
             label2.TabIndex = 16;
             label2.Text = "Fundo de Reserva";
+            // 
+            // pbMinimizar
+            // 
+            pbMinimizar.Image = (Image)resources.GetObject("pbMinimizar.Image");
+            pbMinimizar.Location = new Point(794, 5);
+            pbMinimizar.Name = "pbMinimizar";
+            pbMinimizar.Size = new Size(30, 21);
+            pbMinimizar.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbMinimizar.TabIndex = 17;
+            pbMinimizar.TabStop = false;
+            pbMinimizar.Click += pbMinimizar_Click;
             // 
             // FrmFuncFundoReserva
             // 
@@ -87,12 +103,14 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(900, 421);
+            Controls.Add(pbMinimizar);
             Controls.Add(label2);
-            Controls.Add(pictureBox2);
-            Controls.Add(pictureBox1);
+            Controls.Add(pbFechar);
+            Controls.Add(pbMaximizar);
             Controls.Add(dgdadosFunRes);
             Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
             Name = "FrmFuncFundoReserva";
             StartPosition = FormStartPosition.CenterScreen;
@@ -100,8 +118,9 @@
             Load += FrmFuncFundoReserva_Load;
             Resize += FrmFuncFundoReserva_Resize;
             ((System.ComponentModel.ISupportInitialize)dgdadosFunRes).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbMaximizar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbMinimizar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -109,8 +128,9 @@
         #endregion
 
         private DataGridView dgdadosFunRes;
-        private PictureBox pictureBox2;
-        private PictureBox pictureBox1;
+        private PictureBox pbFechar;
+        private PictureBox pbMaximizar;
         private Label label2;
+        private PictureBox pbMinimizar;
     }
 }

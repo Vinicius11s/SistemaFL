@@ -482,6 +482,7 @@
             Controls.Add(panel2);
             Controls.Add(pdados);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FrmCadEmpresaFF";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cadastro Empresa";

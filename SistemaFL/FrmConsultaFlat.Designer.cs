@@ -120,6 +120,7 @@
             Controls.Add(dgdadosFlats);
             Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
             Name = "FrmConsultaFlat";
             StartPosition = FormStartPosition.CenterScreen;

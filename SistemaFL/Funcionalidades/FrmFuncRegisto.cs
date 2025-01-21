@@ -21,104 +21,76 @@ namespace SistemaFL.Funcionalidades
             InitializeComponent();
             this.repositorio = repositorio;
             this.flatRepositorio = flatRepositorio;
-        }
-
-        private void FrmFuncionalidadeRegisto_Load(object sender, EventArgs e)
-        {
-            AlterarCorFundoETextoCabecalho();
-            AjustarPosicaoPictureBox();
             this.Resize += FrmFuncionalidadeRegisto_Resize;
 
+        }
+        private void FrmFuncionalidadeRegisto_Load(object sender, EventArgs e)
+        {
+            AjustarLayoutFormulario();
+
             CarregarDadosGrid();
+            CarregarTotalInvestimento();
 
-            dgdadosFunRegistro.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-
-            var totalInvestimento = flatRepositorio.CalcularTotalValorInvestimento();
-            txtTotalInvestimento.Text = totalInvestimento.ToString("C");
-
+            dgdadosFunRegistro.DataBindingComplete += dgdadosFunRegistro_DataBindingComplete;
             dgdadosFunRegistro.CellFormatting += dgdadosFunRegistro_CellFormatting;
+            dgdadosFunRegistro.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+        }
+        private void AjustarLayoutFormulario()
+        {
+            AjustaPictureBox_MaxMinFechar();
+            AjustarTamanhoDataGridView();
+        }
+        private void AjustaPictureBox_MaxMinFechar()
+        {
+            int margem = 10;
+
+            // Posição do pbMaximizar (no canto superior direito)
+            int x1 = this.ClientSize.Width - pbFechar.Width - margem;
+            int y1 = margem;
+
+            pbFechar.Location = new Point(x1, y1);
+
+            // Posição do pbFechar (ao lado esquerdo de pbMaximizar)
+            int x2 = x1 - pbMaximizar.Width - margem;
+            int y2 = margem;
+
+            pbMaximizar.Location = new Point(x2, y2);
+
 
         }
+        private void AjustarTamanhoDataGridView()
+        {
+            int margemDireita = SystemInformation.VerticalResizeBorderThickness;
+            int margemInferior = SystemInformation.HorizontalResizeBorderThickness;
+
+            dgdadosFunRegistro.Width = this.ClientSize.Width - dgdadosFunRegistro.Left - margemDireita;
+            dgdadosFunRegistro.Top = this.ClientSize.Height - dgdadosFunRegistro.Height - margemInferior;
+        }
+        //
+        //DataGrid Dados
         private void CarregarDadosGrid()
         {
             var dados = flatRepositorio.ObterDadosInvestimento();
             dgdadosFunRegistro.DataSource = dados;
 
-            AjustarNomesDoCabecalhoDoGrid();
-            dgdadosFunRegistro.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
-            // Realiza um redimensionamento adicional após o carregamento dos dados
-            dgdadosFunRegistro.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-            dgdadosFunRegistro.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
+            AplicarFormatacaoGridDados();
 
 
-            foreach (DataGridViewRow row in dgdadosFunRegistro.Rows)
-            {
-                AplicarFormatacaoLinha(row);
-            }
+
         }
-        //
-        //Formatações do grid
-        private void dgdadosFunRegistro_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void AplicarFormatacaoGridDados()
         {
-            if (dgdadosFunRegistro.Columns[e.ColumnIndex].Name == "CnpjRecebimento")
-            {
-                if (e.Value != null && e.Value is string cnpj)
-                {
-                    // Aplica a máscara de CNPJ ao valor
-                    e.Value = FormatarCnpj(cnpj);
-                }
-            }
-            if (dgdadosFunRegistro.Columns[e.ColumnIndex].Name == "Status")
-            {
-                string statusValue = e.Value?.ToString();
-
-                if (statusValue == "Em Construção" || statusValue == "Em Reforma")
-                {
-                    dgdadosFunRegistro.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
-                }
-                else
-                {
-                    dgdadosFunRegistro.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
-                }
-                // Verifica se o status é "Vendido" e pinta a linha de verde
-                if (statusValue == "Vendido")
-                {
-                    dgdadosFunRegistro.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(171, 201, 251);
-                }
-            }
+            AlterarEstilosCabecalho();
+            AlterarEstilosCelulas();
         }
-        private string FormatarCnpj(string cnpj)
+        private void AlterarEstilosCabecalho()
         {
-            // Remove quaisquer caracteres não numéricos
-            cnpj = new string(cnpj.Where(char.IsDigit).ToArray());
 
-            // Verifica se o CNPJ tem o tamanho correto
-            if (cnpj.Length == 14)
-            {
-                return string.Format("{0:00\\.000\\.000\\/0000\\-00}", double.Parse(cnpj));
-            }
-
-            return cnpj; // Retorna o valor original caso não seja um CNPJ válido
-        }
-        private void AlterarCorFundoETextoCabecalho()
-        {
-            dgdadosFunRegistro.RowTemplate.Height = 29;  // Define a altura de todas as linhas
-
-            foreach (DataGridViewColumn col in dgdadosFunRegistro.Columns)
-            {
-                col.DefaultCellStyle.Padding = new Padding(5, 10, 5, 10);  // Espaçamento interno
-            }
-            // Desativa o estilo visual para permitir personalização
             dgdadosFunRegistro.EnableHeadersVisualStyles = false;
-
             dgdadosFunRegistro.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
             dgdadosFunRegistro.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgdadosFunRegistro.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            dgdadosFunRegistro.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular);
 
-        }
-        private void AjustarNomesDoCabecalhoDoGrid()
-        {
             dgdadosFunRegistro.Columns["IdFlat"].HeaderText = "CODFLAT";
             dgdadosFunRegistro.Columns["CnpjRecebimento"].HeaderText = "CNPJ(RECEBIMENTO)";
             dgdadosFunRegistro.Columns["Empresa"].HeaderText = "EMPRESA";
@@ -140,15 +112,57 @@ namespace SistemaFL.Funcionalidades
 
             dgdadosFunRegistro.Columns["Status"].HeaderText = "STATUS";
         }
-        private void dgdadosFunRegistro_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        private void AlterarEstilosCelulas()
         {
-            if (e.RowIndex >= 0)
+            foreach (DataGridViewColumn col in dgdadosFunRegistro.Columns)
             {
-                AplicarFormatacaoLinha(dgdadosFunRegistro.Rows[e.RowIndex]);
+                col.DefaultCellStyle.Padding = new Padding(5, 2, 5, 2);  // Espaçamento interno
+            }
+        }
+        private void CarregarTotalInvestimento()
+        {
+            var totalInvestimento = flatRepositorio.CalcularTotalValorInvestimento();
+            txtTotalInvestimento.Text = totalInvestimento.ToString("C");
+        }
+        //
+        //Formatações do grid
+        private void dgdadosFunRegistro_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgdadosFunRegistro.Columns[e.ColumnIndex].Name == "CnpjRecebimento")
+            {
+                if (e.Value != null && e.Value is string cnpj)
+                {
+                    // Aplica a máscara de CNPJ ao valor
+                    e.Value = FormatarCnpj(cnpj);
+                }                  
+            }
+        }
+        private string FormatarCnpj(string cnpj)
+        {
+            // Remove quaisquer caracteres não numéricos
+            cnpj = new string(cnpj.Where(char.IsDigit).ToArray());
+
+            // Verifica se o CNPJ tem o tamanho correto
+            if (cnpj.Length == 14)
+            {
+                return string.Format("{0:00\\.000\\.000\\/0000\\-00}", double.Parse(cnpj));
+            }
+
+            return cnpj; // Retorna o valor original caso não seja um CNPJ válido
+        }        
+        //
+        //Após o carregamento
+        private void dgdadosFunRegistro_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow row in dgdadosFunRegistro.Rows)
+            {
+                AplicarFormatacaoLinha(row);
+                dgdadosFunRegistro.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             }
         }
         private void AplicarFormatacaoLinha(DataGridViewRow row)
         {
+
             var statusValue = row.Cells["Status"].Value?.ToString();
 
             if (statusValue == "Em Construção" || statusValue == "Em Reforma")
@@ -169,38 +183,30 @@ namespace SistemaFL.Funcionalidades
                 row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
             }
         }
+        //
+        //Eventos
+        private void dgdadosFunRegistro_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                AplicarFormatacaoLinha(dgdadosFunRegistro.Rows[e.RowIndex]);
+            }
+        }
         private void FrmFuncionalidadeRegisto_FormClosing(object sender, FormClosingEventArgs e)
         {
             dgdadosFunRegistro.DataSource = null;
             dgdadosFunRegistro.Rows.Clear();
         }
-        //
-        //Ajustar botões fechar e maximizar
         private void FrmFuncionalidadeRegisto_Resize(object sender, EventArgs e)
         {
-            AjustarPosicaoPictureBox();
+            AjustarLayoutFormulario();
         }
-        private void AjustarPosicaoPictureBox()
-        {
-            int margem = 10;
-
-            // Posição do PictureBox1 (no canto superior direito)
-            int x1 = this.ClientSize.Width - pictureBox1.Width - margem;
-            int y1 = margem;
-
-            pictureBox2.Location = new Point(x1, y1);
-
-            // Posição do PictureBox2 (ao lado esquerdo de PictureBox1)
-            int x2 = x1 - pictureBox2.Width - margem;
-            int y2 = margem;
-
-            pictureBox1.Location = new Point(x2, y2);
-        }
-        private void pictureBox2_Click(object sender, EventArgs e)
+        //
+        private void pbFechar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void pbMaximizar_Click(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Maximized)
             {
@@ -211,6 +217,6 @@ namespace SistemaFL.Funcionalidades
                 this.WindowState = FormWindowState.Maximized;
             }
         }
-        //      
+        
     }
 }

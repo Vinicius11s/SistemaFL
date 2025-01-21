@@ -243,83 +243,68 @@ namespace Infraestrutura.Repositorio
         //Formulário Fundo de Reserva
         public IEnumerable<dynamic> ObterDadosFunReserva()
         {
-            var dadosFunReserva = _context.Flat
-                .Include(flat => flat.Lancamentos)
-                .Where(flat => flat.Lancamentos.Any(l => l.ValorFundoReserva > 0))
+            var dados = _context.Flat
+                .Where(flat => flat.Lancamentos.Any(l => l.ValorFundoReserva > 0)) // Filtra flats com lançamentos válidos.
+                .Select(flat => new
+                {
+                    flat.Descricao,
+                    flat.id,
+                    LancamentosPorMes = flat.Lancamentos
+                        .Where(l => l.ValorFundoReserva > 0) // Filtra lançamentos com valor positivo de fundo de reserva.
+                        .GroupBy(l => l.DataPagamento.Month) // Agrupa por mês.
+                        .Select(g => new { Mes = g.Key, Total = g.Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M }) // Soma os valores por mês.
+                        .ToList()
+                })
+                .AsEnumerable() // Finaliza a consulta para o banco de dados.
                 .Select(flat => new
                 {
                     EMPREENDIMENTO = flat.Descricao,
                     CODFLAT = flat.id,
-                    JANEIRO = flat.Lancamentos
-                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 1)
-                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    FEVEREIRO = flat.Lancamentos
-                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 2)
-                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    MARÇO = flat.Lancamentos
-                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 3)
-                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    ABRIL = flat.Lancamentos
-                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 4)
-                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    MAIO = flat.Lancamentos
-                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 5)
-                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    JUNHO = flat.Lancamentos
-                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 6)
-                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    JULHO = flat.Lancamentos
-                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 7)
-                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    AGOSTO = flat.Lancamentos
-                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 8)
-                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    SETEMBRO = flat.Lancamentos
-                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 9)
-                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    OUTUBRO = flat.Lancamentos
-                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 10)
-                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    NOVEMBRO = flat.Lancamentos
-                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 11)
-                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M,
-                    DEZEMBRO = flat.Lancamentos
-                        .Where(l => l.ValorFundoReserva > 0 && l.DataPagamento.Month == 12)
-                        .Sum(l => (decimal?)l.ValorFundoReserva) ?? 0.00M
+                    JANEIRO = flat.LancamentosPorMes.FirstOrDefault(l => l.Mes == 1)?.Total ?? 0.00M,
+                    FEVEREIRO = flat.LancamentosPorMes.FirstOrDefault(l => l.Mes == 2)?.Total ?? 0.00M,
+                    MARÇO = flat.LancamentosPorMes.FirstOrDefault(l => l.Mes == 3)?.Total ?? 0.00M,
+                    ABRIL = flat.LancamentosPorMes.FirstOrDefault(l => l.Mes == 4)?.Total ?? 0.00M,
+                    MAIO = flat.LancamentosPorMes.FirstOrDefault(l => l.Mes == 5)?.Total ?? 0.00M,
+                    JUNHO = flat.LancamentosPorMes.FirstOrDefault(l => l.Mes == 6)?.Total ?? 0.00M,
+                    JULHO = flat.LancamentosPorMes.FirstOrDefault(l => l.Mes == 7)?.Total ?? 0.00M,
+                    AGOSTO = flat.LancamentosPorMes.FirstOrDefault(l => l.Mes == 8)?.Total ?? 0.00M,
+                    SETEMBRO = flat.LancamentosPorMes.FirstOrDefault(l => l.Mes == 9)?.Total ?? 0.00M,
+                    OUTUBRO = flat.LancamentosPorMes.FirstOrDefault(l => l.Mes == 10)?.Total ?? 0.00M,
+                    NOVEMBRO = flat.LancamentosPorMes.FirstOrDefault(l => l.Mes == 11)?.Total ?? 0.00M,
+                    DEZEMBRO = flat.LancamentosPorMes.FirstOrDefault(l => l.Mes == 12)?.Total ?? 0.00M
                 })
-                .OrderBy(flat => flat.EMPREENDIMENTO)
+                .OrderBy(flat => flat.EMPREENDIMENTO) // Ordena os flats por descrição.
                 .ToList();
-            return dadosFunReserva;
+
+            return dados;
         }
         public IEnumerable<dynamic> ObterDadosTotaisFundoReserva()
         {
             var totaisFR = _context.Lancamento
-               .Where(l => l.ValorFundoReserva > 0)  // Filtra apenas os lançamentos com valor maior que 0
-               .GroupBy(l => l.DataPagamento.Month)  // Agrupa por mês
-               .Select(g => new
-               {
-                   Mes = g.Key,  // Mês do agrupamento
-                   Total = g.Sum(l => l.ValorFundoReserva)  // Soma os valores do fundo de reserva
-               })
-               .ToList();
+                .Where(l => l.ValorFundoReserva > 0)  // Filtra apenas os lançamentos com valor maior que 0
+                .GroupBy(l => l.DataPagamento.Month)  // Agrupa por mês
+                .ToDictionary(g => g.Key, g => g.Sum(l => l.ValorFundoReserva)); // Cria um dicionário com mês e soma do valor
+
             var resultado = new
             {
                 Descricao = "TOTAL",
-                Janeiro = totaisFR.FirstOrDefault(x => x.Mes == 1)?.Total ?? 0.00M,
-                Fevereiro = totaisFR.FirstOrDefault(x => x.Mes == 2)?.Total ?? 0.00M,
-                Março = totaisFR.FirstOrDefault(x => x.Mes == 3)?.Total ?? 0.00M,
-                Abril = totaisFR.FirstOrDefault(x => x.Mes == 4)?.Total ?? 0.00M,
-                Maio = totaisFR.FirstOrDefault(x => x.Mes == 5)?.Total ?? 0.00M,
-                Junho = totaisFR.FirstOrDefault(x => x.Mes == 6)?.Total ?? 0.00M,
-                Julho = totaisFR.FirstOrDefault(x => x.Mes == 7)?.Total ?? 0.00M,
-                Agosto = totaisFR.FirstOrDefault(x => x.Mes == 8)?.Total ?? 0.00M,
-                Setembro = totaisFR.FirstOrDefault(x => x.Mes == 9)?.Total ?? 0.00M,
-                Outubro = totaisFR.FirstOrDefault(x => x.Mes == 10)?.Total ?? 0.00M,
-                Novembro = totaisFR.FirstOrDefault(x => x.Mes == 11)?.Total ?? 0.00M,
-                Dezembro = totaisFR.FirstOrDefault(x => x.Mes == 12)?.Total ?? 0.00M
+                Janeiro = totaisFR.GetValueOrDefault(1, 0.00M),
+                Fevereiro = totaisFR.GetValueOrDefault(2, 0.00M),
+                Março = totaisFR.GetValueOrDefault(3, 0.00M),
+                Abril = totaisFR.GetValueOrDefault(4, 0.00M),
+                Maio = totaisFR.GetValueOrDefault(5, 0.00M),
+                Junho = totaisFR.GetValueOrDefault(6, 0.00M),
+                Julho = totaisFR.GetValueOrDefault(7, 0.00M),
+                Agosto = totaisFR.GetValueOrDefault(8, 0.00M),
+                Setembro = totaisFR.GetValueOrDefault(9, 0.00M),
+                Outubro = totaisFR.GetValueOrDefault(10, 0.00M),
+                Novembro = totaisFR.GetValueOrDefault(11, 0.00M),
+                Dezembro = totaisFR.GetValueOrDefault(12, 0.00M)
             };
+
             return new List<dynamic> { resultado };
         }
+
         //
         //Formulário Rendimentos
         public IEnumerable<dynamic> ObterDadosRendimentos()

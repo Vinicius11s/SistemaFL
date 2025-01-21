@@ -58,14 +58,14 @@
             dgdadosocorrencias.Location = new Point(0, 58);
             dgdadosocorrencias.Margin = new Padding(4);
             dgdadosocorrencias.Name = "dgdadosocorrencias";
-            dgdadosocorrencias.Size = new Size(977, 392);
+            dgdadosocorrencias.Size = new Size(839, 392);
             dgdadosocorrencias.TabIndex = 12;
             // 
             // fecharjanela
             // 
             fecharjanela.Dock = DockStyle.Right;
             fecharjanela.Image = (Image)resources.GetObject("fecharjanela.Image");
-            fecharjanela.Location = new Point(946, 0);
+            fecharjanela.Location = new Point(808, 0);
             fecharjanela.Margin = new Padding(4);
             fecharjanela.Name = "fecharjanela";
             fecharjanela.Size = new Size(31, 58);
@@ -78,7 +78,7 @@
             // 
             minimizar.Dock = DockStyle.Right;
             minimizar.Image = (Image)resources.GetObject("minimizar.Image");
-            minimizar.Location = new Point(915, 0);
+            minimizar.Location = new Point(777, 0);
             minimizar.Margin = new Padding(4);
             minimizar.Name = "minimizar";
             minimizar.Size = new Size(31, 58);
@@ -92,13 +92,14 @@
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(977, 450);
+            ClientSize = new Size(839, 450);
             Controls.Add(minimizar);
             Controls.Add(fecharjanela);
             Controls.Add(label2);
             Controls.Add(dgdadosocorrencias);
             Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "FrmConsultaOcorrencia";
             StartPosition = FormStartPosition.CenterScreen;

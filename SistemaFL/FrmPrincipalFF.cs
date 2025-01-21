@@ -22,39 +22,42 @@ namespace SistemaFL
             InitializeComponent();
             this.repositorioFunc = repositorioFunc;
         }
-        //TRANSIÇÃO
         bool menuExpand = false;
         bool sidebarExpand = true;
         bool funcExpand = false;
-        private void menuTransition_Tick(object sender, EventArgs e)
+        private void FrmPrincipalFF_Load(object sender, EventArgs e)
         {
-            if (!menuExpand)
+            AjustaPictureBox_MaxMinFechar();
+            sidebar.BringToFront();
+
+            /*var form8 = Program.serviceProvider.GetRequiredService<FrmFuncLogin>();
+            form8.ShowDialog();  // Aguarda o login ser fechado
+
+            if (Sessao.idUsuarioLogado > 0)
             {
-                menuContainer.Height += 10;
-                if (menuContainer.Height >= 265)
-                {
-                    menuTransition.Stop();
-                    menuExpand = true;
-                }
+                var usuario = repositorioFunc.Recuperar(u => u.id == form8.idUsuario);
             }
             else
             {
-                menuContainer.Height -= 10;
-                if (menuContainer.Height <= 50)
-                {
-                    menuTransition.Stop();
-                    menuExpand = false;
-                }
-            }
+                this.Close();
+            }*/
+
         }
-        private void cadastros_Click(object sender, EventArgs e)
+        private void AjustaPictureBox_MaxMinFechar()
         {
-            menuTransition.Start();
+            int margem = 10;
+
+            int x1 = this.ClientSize.Width - pbFechar.Width - margem;
+            int y1 = margem;
+            pbFechar.Location = new Point(x1, y1);
+
+            int x2 = x1 - pbMinimizar.Width - margem;
+            int y2 = margem;
+            pbMinimizar.Location = new Point(x2, y2);
+
         }
-        private void button3_Click(object sender, EventArgs e)
-        {
-            funcTransition.Start();
-        }
+        //
+        //Transições
         private void sidebarTransition_Tick(object sender, EventArgs e)
         {
             if (sidebarExpand)
@@ -76,9 +79,26 @@ namespace SistemaFL
                 }
             }
         }
-        private void btnHam_Click(object sender, EventArgs e)
+        private void menuTransition_Tick(object sender, EventArgs e)
         {
-            sidebarTransition.Start();
+            if (!menuExpand)
+            {
+                menuContainer.Height += 10;
+                if (menuContainer.Height >= 265)
+                {
+                    menuTransition.Stop();
+                    menuExpand = true;
+                }
+            }
+            else
+            {
+                menuContainer.Height -= 10;
+                if (menuContainer.Height <= 50)
+                {
+                    menuTransition.Stop();
+                    menuExpand = false;
+                }
+            }
         }
         private void funcTransition_Tick_1(object sender, EventArgs e)
         {
@@ -101,7 +121,50 @@ namespace SistemaFL
                 }
             }
         }
-        //TRANSIÇÃO
+        private void btnHam_Click_1(object sender, EventArgs e)
+        {
+            sidebarTransition.Start();
+
+        }
+        //
+        //Ocorrências
+        private void btnocorrencias_Click(object sender, EventArgs e)
+        {
+            var form = Program.serviceProvider.GetRequiredService<FrmConsultaOcorrencia>();
+            form.ShowDialog();
+        }
+        //
+        //Cadastros
+        private void cadastros_Click(object sender, EventArgs e)
+        {
+            menuTransition.Start();
+        }
+        private void btnempresas_Click(object sender, EventArgs e)
+        {
+            var form = Program.serviceProvider.GetRequiredService<FrmCadEmpresaFF>();
+            form.ShowDialog();
+        }
+        private void btnflats_Click(object sender, EventArgs e)
+        {
+            var form = Program.serviceProvider.GetRequiredService<FrmCadFlat>();
+            form.ShowDialog();
+        }
+        private void btnlancamentos_Click(object sender, EventArgs e)
+        {
+            var form = Program.serviceProvider.GetRequiredService<FrmCadLancamento>();
+            form.ShowDialog();
+        }
+        private void btnusuarios_Click(object sender, EventArgs e)
+        {
+            var form = Program.serviceProvider.GetRequiredService<FrmCadUsuario>();
+            form.ShowDialog();
+        }
+        //
+        //Funcionalidades
+        private void btnFuncionalidades_Click(object sender, EventArgs e)
+        {
+            funcTransition.Start();
+        }      
         private void btnregistros_Click(object sender, EventArgs e)
         {
             var form = Program.serviceProvider.GetRequiredService<FrmFuncionalidadeRegisto>();
@@ -132,56 +195,18 @@ namespace SistemaFL
             var form = Program.serviceProvider.GetRequiredService<FrmFuncPISeCOFINS>();
             form.ShowDialog();
         }
-        private void btnempresas_Click(object sender, EventArgs e)
-        {
-            var form = Program.serviceProvider.GetRequiredService<FrmCadEmpresaFF>();
-            form.ShowDialog();
-        }
-        private void btnflats_Click(object sender, EventArgs e)
-        {
-            var form = Program.serviceProvider.GetRequiredService<FrmCadFlat>();
-            form.ShowDialog();
-        }
-        private void btnlancamentos_Click(object sender, EventArgs e)
-        {
-            var form = Program.serviceProvider.GetRequiredService<FrmCadLancamento>();
-            form.ShowDialog();
-        }
-        private void btnusuarios_Click(object sender, EventArgs e)
-        {
-            var form = Program.serviceProvider.GetRequiredService<FrmCadUsuario>();
-            form.ShowDialog();
-        }
-        private void btnocorrencias_Click(object sender, EventArgs e)
-        {
-            var form = Program.serviceProvider.GetRequiredService<FrmConsultaOcorrencia>();
-            form.ShowDialog();
-        }
-        private void fecharjanela_Click(object sender, EventArgs e)
+        //
+        //
+        private void pbFechar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        private void minimizar_Click(object sender, EventArgs e)
+        private void pbMinimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
-        private void FrmPrincipalFF_Load(object sender, EventArgs e)
-        {
-            sidebar.BringToFront();
-
-            /*var form8 = Program.serviceProvider.GetRequiredService<FrmFuncLogin>();
-            form8.ShowDialog();  // Aguarda o login ser fechado
-
-            if (Sessao.idUsuarioLogado > 0)
-            {
-                var usuario = repositorioFunc.Recuperar(u => u.id == form8.idUsuario);
-            }
-            else
-            {
-                this.Close();
-            }*/
-
-        }
+        
+        
     }
 }
 

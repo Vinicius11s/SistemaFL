@@ -163,6 +163,7 @@
             Controls.Add(label4);
             Controls.Add(txtlogin);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FrmFuncLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmFuncionalidadeLogin";

@@ -57,7 +57,7 @@
             // pbFechar
             // 
             pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
-            pbFechar.Location = new Point(878, 5);
+            pbFechar.Location = new Point(863, 5);
             pbFechar.Name = "pbFechar";
             pbFechar.Size = new Size(30, 21);
             pbFechar.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -68,7 +68,7 @@
             // pbMaximizar
             // 
             pbMaximizar.Image = (Image)resources.GetObject("pbMaximizar.Image");
-            pbMaximizar.Location = new Point(846, 5);
+            pbMaximizar.Location = new Point(831, 5);
             pbMaximizar.Name = "pbMaximizar";
             pbMaximizar.Size = new Size(30, 21);
             pbMaximizar.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -79,18 +79,18 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.Red;
-            label1.Location = new Point(12, 9);
+            label1.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.Black;
+            label1.Location = new Point(14, 14);
             label1.Name = "label1";
-            label1.Size = new Size(92, 21);
+            label1.Size = new Size(105, 22);
             label1.TabIndex = 14;
             label1.Text = "Dividendos";
             // 
             // pbMinimizar
             // 
             pbMinimizar.Image = (Image)resources.GetObject("pbMinimizar.Image");
-            pbMinimizar.Location = new Point(814, 5);
+            pbMinimizar.Location = new Point(799, 5);
             pbMinimizar.Name = "pbMinimizar";
             pbMinimizar.Size = new Size(30, 21);
             pbMinimizar.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -111,6 +111,7 @@
             Controls.Add(dgdadosDiv);
             Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
             Name = "FrmFuncDividendos";
             StartPosition = FormStartPosition.CenterScreen;

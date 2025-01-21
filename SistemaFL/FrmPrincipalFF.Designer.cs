@@ -30,11 +30,6 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipalFF));
-            panel1 = new Panel();
-            minimizar = new PictureBox();
-            fecharjanela = new PictureBox();
-            label1 = new Label();
-            btnHam = new PictureBox();
             sidebar = new FlowLayoutPanel();
             panel2 = new Panel();
             btnocorrencias = new Button();
@@ -51,7 +46,7 @@
             btnusuarios = new Button();
             funcContainer = new FlowLayoutPanel();
             panel4 = new Panel();
-            funcionalidades = new Button();
+            btnFuncionalidades = new Button();
             panel9 = new Panel();
             btnregistros = new Button();
             panel10 = new Panel();
@@ -68,10 +63,11 @@
             sidebarTransition = new System.Windows.Forms.Timer(components);
             funcTransition = new System.Windows.Forms.Timer(components);
             pictureBox1 = new PictureBox();
-            panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)minimizar).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)fecharjanela).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)btnHam).BeginInit();
+            panel1 = new Panel();
+            pbMinimizar = new PictureBox();
+            pbFechar = new PictureBox();
+            label1 = new Label();
+            btnHam = new PictureBox();
             sidebar.SuspendLayout();
             panel2.SuspendLayout();
             menuContainer.SuspendLayout();
@@ -89,65 +85,11 @@
             panel13.SuspendLayout();
             panel14.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbMinimizar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btnHam).BeginInit();
             SuspendLayout();
-            // 
-            // panel1
-            // 
-            panel1.BackColor = Color.White;
-            panel1.Controls.Add(minimizar);
-            panel1.Controls.Add(fecharjanela);
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(btnHam);
-            panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(869, 41);
-            panel1.TabIndex = 0;
-            // 
-            // minimizar
-            // 
-            minimizar.Dock = DockStyle.Right;
-            minimizar.Image = (Image)resources.GetObject("minimizar.Image");
-            minimizar.Location = new Point(821, 0);
-            minimizar.Name = "minimizar";
-            minimizar.Size = new Size(24, 41);
-            minimizar.SizeMode = PictureBoxSizeMode.CenterImage;
-            minimizar.TabIndex = 3;
-            minimizar.TabStop = false;
-            minimizar.Click += minimizar_Click;
-            // 
-            // fecharjanela
-            // 
-            fecharjanela.Dock = DockStyle.Right;
-            fecharjanela.Image = (Image)resources.GetObject("fecharjanela.Image");
-            fecharjanela.Location = new Point(845, 0);
-            fecharjanela.Name = "fecharjanela";
-            fecharjanela.Size = new Size(24, 41);
-            fecharjanela.SizeMode = PictureBoxSizeMode.CenterImage;
-            fecharjanela.TabIndex = 2;
-            fecharjanela.TabStop = false;
-            fecharjanela.Click += fecharjanela_Click;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(53, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(239, 21);
-            label1.TabIndex = 1;
-            label1.Text = "MENU | SISTEMA GERENCIADOR";
-            // 
-            // btnHam
-            // 
-            btnHam.Image = (Image)resources.GetObject("btnHam.Image");
-            btnHam.Location = new Point(0, 3);
-            btnHam.Name = "btnHam";
-            btnHam.Size = new Size(47, 35);
-            btnHam.SizeMode = PictureBoxSizeMode.CenterImage;
-            btnHam.TabIndex = 1;
-            btnHam.TabStop = false;
-            btnHam.Click += btnHam_Click;
             // 
             // sidebar
             // 
@@ -357,29 +299,29 @@
             // panel4
             // 
             panel4.BackColor = Color.FromArgb(23, 24, 29);
-            panel4.Controls.Add(funcionalidades);
+            panel4.Controls.Add(btnFuncionalidades);
             panel4.Location = new Point(3, 3);
             panel4.Name = "panel4";
             panel4.Padding = new Padding(0, 30, 0, 0);
             panel4.Size = new Size(197, 50);
             panel4.TabIndex = 5;
             // 
-            // funcionalidades
+            // btnFuncionalidades
             // 
-            funcionalidades.BackColor = Color.FromArgb(23, 24, 29);
-            funcionalidades.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            funcionalidades.ForeColor = Color.White;
-            funcionalidades.Image = (Image)resources.GetObject("funcionalidades.Image");
-            funcionalidades.ImageAlign = ContentAlignment.MiddleLeft;
-            funcionalidades.Location = new Point(-19, -18);
-            funcionalidades.Name = "funcionalidades";
-            funcionalidades.Padding = new Padding(25, 0, 0, 0);
-            funcionalidades.Size = new Size(238, 79);
-            funcionalidades.TabIndex = 4;
-            funcionalidades.Text = "         Funcionalidades";
-            funcionalidades.TextAlign = ContentAlignment.MiddleLeft;
-            funcionalidades.UseVisualStyleBackColor = false;
-            funcionalidades.Click += button3_Click;
+            btnFuncionalidades.BackColor = Color.FromArgb(23, 24, 29);
+            btnFuncionalidades.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnFuncionalidades.ForeColor = Color.White;
+            btnFuncionalidades.Image = (Image)resources.GetObject("btnFuncionalidades.Image");
+            btnFuncionalidades.ImageAlign = ContentAlignment.MiddleLeft;
+            btnFuncionalidades.Location = new Point(-19, -18);
+            btnFuncionalidades.Name = "btnFuncionalidades";
+            btnFuncionalidades.Padding = new Padding(25, 0, 0, 0);
+            btnFuncionalidades.Size = new Size(238, 79);
+            btnFuncionalidades.TabIndex = 4;
+            btnFuncionalidades.Text = "         Funcionalidades";
+            btnFuncionalidades.TextAlign = ContentAlignment.MiddleLeft;
+            btnFuncionalidades.UseVisualStyleBackColor = false;
+            btnFuncionalidades.Click += btnFuncionalidades_Click;
             // 
             // panel9
             // 
@@ -562,12 +504,68 @@
             // 
             pictureBox1.Dock = DockStyle.Fill;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(0, 41);
+            pictureBox1.Location = new Point(0, 0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(869, 481);
+            pictureBox1.Size = new Size(869, 522);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.White;
+            panel1.Controls.Add(pbMinimizar);
+            panel1.Controls.Add(pbFechar);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(btnHam);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(869, 41);
+            panel1.TabIndex = 4;
+            // 
+            // pbMinimizar
+            // 
+            pbMinimizar.Image = (Image)resources.GetObject("pbMinimizar.Image");
+            pbMinimizar.Location = new Point(799, 7);
+            pbMinimizar.Name = "pbMinimizar";
+            pbMinimizar.Size = new Size(30, 21);
+            pbMinimizar.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbMinimizar.TabIndex = 15;
+            pbMinimizar.TabStop = false;
+            pbMinimizar.Click += pbMinimizar_Click;
+            // 
+            // pbFechar
+            // 
+            pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
+            pbFechar.Location = new Point(833, 6);
+            pbFechar.Name = "pbFechar";
+            pbFechar.Size = new Size(30, 21);
+            pbFechar.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbFechar.TabIndex = 14;
+            pbFechar.TabStop = false;
+            pbFechar.Click += pbFechar_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(53, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(239, 21);
+            label1.TabIndex = 1;
+            label1.Text = "MENU | SISTEMA GERENCIADOR";
+            // 
+            // btnHam
+            // 
+            btnHam.Image = (Image)resources.GetObject("btnHam.Image");
+            btnHam.Location = new Point(0, 3);
+            btnHam.Name = "btnHam";
+            btnHam.Size = new Size(47, 35);
+            btnHam.SizeMode = PictureBoxSizeMode.CenterImage;
+            btnHam.TabIndex = 1;
+            btnHam.TabStop = false;
+            btnHam.Click += btnHam_Click_1;
             // 
             // FrmPrincipalFF
             // 
@@ -575,20 +573,16 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(23, 24, 29);
             ClientSize = new Size(869, 522);
+            Controls.Add(panel1);
             Controls.Add(sidebar);
             Controls.Add(pictureBox1);
-            Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FrmPrincipalFF";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmPrincipalFF";
             WindowState = FormWindowState.Maximized;
             Load += FrmPrincipalFF_Load;
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)minimizar).EndInit();
-            ((System.ComponentModel.ISupportInitialize)fecharjanela).EndInit();
-            ((System.ComponentModel.ISupportInitialize)btnHam).EndInit();
             sidebar.ResumeLayout(false);
             panel2.ResumeLayout(false);
             menuContainer.ResumeLayout(false);
@@ -606,14 +600,15 @@
             panel13.ResumeLayout(false);
             panel14.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbMinimizar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btnHam).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Panel panel1;
-        private PictureBox btnHam;
-        private Label label1;
         private FlowLayoutPanel sidebar;
         private Panel panel2;
         private Button btnocorrencias;
@@ -630,7 +625,7 @@
         private Button btnusuarios;
         private FlowLayoutPanel funcContainer;
         private Panel panel4;
-        private Button funcionalidades;
+        private Button btnFuncionalidades;
         private Panel panel9;
         private Button btnregistros;
         private Panel panel10;
@@ -646,8 +641,11 @@
         private System.Windows.Forms.Timer funcTransition;
         private Panel panel14;
         private Button btnpiscofins;
-        private PictureBox fecharjanela;
-        private PictureBox minimizar;
         private PictureBox pictureBox1;
+        private Panel panel1;
+        private Label label1;
+        private PictureBox btnHam;
+        private PictureBox pbFechar;
+        private PictureBox pbMinimizar;
     }
 }

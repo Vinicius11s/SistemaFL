@@ -1,5 +1,6 @@
 ﻿using Infraestrutura.Repositorio;
 using Interfaces;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,15 +27,9 @@ namespace SistemaFL.Funcionalidades
         private void FrmFuncDividendos_Load(object sender, EventArgs e)
         {
             AjustarLayoutFormulario();
-
             CarregarDataGridDados();
             AdicionarLinhaTotal();
-
-            dgdadosDiv.DataBindingComplete += dgdadosDiv_DataBindingComplete;
-            foreach (DataGridViewColumn coll in dgdadosDiv.Columns)
-            {
-                dgdadosDiv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            }
+            dgdadosDiv.DataBindingComplete += dgdadosDiv_DataBindingComplete;            
         }
         //
         //Ajustar Layout do Formulário
@@ -95,20 +90,11 @@ namespace SistemaFL.Funcionalidades
             grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
             grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular);
-        }
-        private void AlterarEstilosCelulas(DataGridView grid)
-        {
-            foreach (DataGridViewColumn col in grid.Columns)
-            {
-                col.DefaultCellStyle.Padding = new Padding(5, 2, 5, 2);  // Espaçamento interno
-                if (col.Name != "CODFLAT")
-                {
-                    col.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
-                }
-            }
+
             if (dgdadosDiv.Rows.Count > 0)
             {
-                dgdadosDiv.Columns["ValorImovel"].HeaderText = "VALOR DO IMÓVEL";
+                dgdadosDiv.Columns["CODFLAT"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgdadosDiv.Columns["ValorImovel"].HeaderText = "VALOR IMÓVEL";
                 dgdadosDiv.Columns["DividendosJan"].HeaderText = "JANEIRO DIVIDENDOS";
                 dgdadosDiv.Columns["DividendosFev"].HeaderText = "FEVEREIRO DIVIDENDOS";
                 dgdadosDiv.Columns["DividendosMar"].HeaderText = "MARÇO DIVIDENDOS";
@@ -122,6 +108,22 @@ namespace SistemaFL.Funcionalidades
                 dgdadosDiv.Columns["DividendosNov"].HeaderText = "NOVEMBRO DIVIDENDOS";
                 dgdadosDiv.Columns["DividendosDez"].HeaderText = "DEZEMBRO DIVIDENDOS";
             }
+        }
+        private void AlterarEstilosCelulas(DataGridView grid)
+        {
+            grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            dgdadosDiv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
+            foreach (DataGridViewColumn col in grid.Columns)
+            {
+                col.DefaultCellStyle.Padding = new Padding(5, 2, 5, 2);  // Espaçamento interno
+                if (col.Name != "CODFLAT")
+                {
+                    col.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
+                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+                }
+            }                  
         }
         private void AdicionarLinhaTotal()
         {
@@ -211,6 +213,7 @@ namespace SistemaFL.Funcionalidades
         private bool ordenacaoAscendente = true; // Variável para controlar a alternância da ordenação
         private void dgdadosDiv_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+
             // Obtendo o DataTable vinculado ao DataGridView
             DataTable dados = (DataTable)dgdadosDiv.DataSource;
 

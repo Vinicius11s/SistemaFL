@@ -96,11 +96,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.Red;
-            label1.Location = new Point(12, 9);
+            label1.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.Black;
+            label1.Location = new Point(10, 9);
             label1.Name = "label1";
-            label1.Size = new Size(167, 21);
+            label1.Size = new Size(189, 22);
             label1.TabIndex = 15;
             label1.Text = "Aluguel + Dividendos";
             // 
@@ -129,6 +129,7 @@
             Controls.Add(dgdadosAlugDiv);
             Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
             Name = "FrmFuncAluguelDividendo";
             StartPosition = FormStartPosition.CenterScreen;

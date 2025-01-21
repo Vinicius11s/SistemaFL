@@ -30,7 +30,6 @@ namespace SistemaFL.Funcionalidades
             CarregarGridDados();
             AdicionarLinhaTotal();
             dgdadosAlugDiv.DataBindingComplete += dgdadosAlugDiv_DataBindingComplete;
-
             CarregarGridTotais();
         }
         //
@@ -78,7 +77,6 @@ namespace SistemaFL.Funcionalidades
             var dados = flatRepositório.ObterDadosAluguelDividendos();
             DataTable dt = ConverterDynamicParaDataTable(dados);
             dgdadosAlugDiv.DataSource = dt;
-            dgdadosAlugDiv.ScrollBars = ScrollBars.Vertical;
             AplicarFormatacaoGridDados();
         }
         private void AplicarFormatacaoGridDados()
@@ -92,10 +90,12 @@ namespace SistemaFL.Funcionalidades
             dgdadosAlugDiv.EnableHeadersVisualStyles = false;
             dgdadosAlugDiv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
             dgdadosAlugDiv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgdadosAlugDiv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            dgdadosAlugDiv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular);
 
             if (dgdadosAlugDiv.Rows.Count > 0)
             {
+                dgdadosAlugDiv.Columns["CODFLAT"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
                 dgdadosAlugDiv.Columns["ValorImovel"].HeaderText = "VALOR DO IMÓVEL";
                 dgdadosAlugDiv.Columns["ValorImovel"].DefaultCellStyle.Format = "C2";
 
@@ -140,25 +140,16 @@ namespace SistemaFL.Funcionalidades
         private void AlterarEstilosCelulas(DataGridView grid)
         {
             grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-            dgdadosAlugDiv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
 
             foreach (DataGridViewColumn col in dgdadosAlugDiv.Columns)
             {
+                col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 col.DefaultCellStyle.Padding = new Padding(5, 2, 5, 2);  // Espaçamento interno
-            }
-
-            foreach (DataGridViewColumn coluna in dgdadosAlugDiv.Columns)
-            {
-                if (coluna.Name != "CODFLAT")
+                if (col.Name != "CODFLAT")
                 {
-                    coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
+                    col.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
                 }
-            }
-
-            foreach (DataGridViewColumn column in dgdadosAlugDiv.Columns)
-            {
-                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            }
+            }          
         }
         private void AdicionarLinhaTotal()
         {
@@ -235,7 +226,7 @@ namespace SistemaFL.Funcionalidades
 
                 if (!dgdadosAlugDiv.Rows[ultimaLinhaIndex].IsNewRow)
                 {
-                    dgdadosAlugDiv.Rows[ultimaLinhaIndex].DefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                    dgdadosAlugDiv.Rows[ultimaLinhaIndex].DefaultCellStyle.Font = new Font("Segoe UI", 11, FontStyle.Bold);
                 }
 
                 int penultimaLinhaIndex = ultimaLinhaIndex - 1;
