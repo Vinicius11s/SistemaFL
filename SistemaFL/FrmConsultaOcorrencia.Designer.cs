@@ -103,7 +103,7 @@
             Margin = new Padding(4);
             Name = "FrmConsultaOcorrencia";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "FrmConsultaOcorrencia";
+            Text = "Últimos Lançamentos";
             Load += FrmConsultaOcorrencia_Load;
             ((System.ComponentModel.ISupportInitialize)dgdadosocorrencias).EndInit();
             ((System.ComponentModel.ISupportInitialize)fecharjanela).EndInit();

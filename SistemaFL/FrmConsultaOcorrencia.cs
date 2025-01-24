@@ -31,29 +31,64 @@ namespace SistemaFL
         private void FrmConsultaOcorrencia_Load(object sender, EventArgs e)
         {
             dgdadosocorrencias.ReadOnly = true;
+            CarregarDados();                        
+        }
 
+        private void CarregarDados()
+        {
             var lista = repositorio.ListarComFlat(e => true)
                 .AsNoTracking()
                 .ToList();  // Executa a consulta e converte para lista
             dgdadosocorrencias.DataSource = lista;
 
-            dgdadosocorrencias.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            AjustarFormatacaoDataGrid();
+        }
+        private void AjustarFormatacaoDataGrid()
+        {
+            AlterarEstilosCabecalho(dgdadosocorrencias);
+            AlterarEstilosCelulas(dgdadosocorrencias);
+            foreach (DataGridViewRow row in dgdadosocorrencias.Rows)
+            {
+                AplicarFormatacaoLinha(row);
+            }
+        }
+        private void AlterarEstilosCabecalho(DataGridView grid)
+        {
+            grid.EnableHeadersVisualStyles = false;
+            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular);
 
-        
-            dgdadosocorrencias.Columns["id"].HeaderText = "Cód.";
-            dgdadosocorrencias.Columns["oco_valorAntigo"].HeaderText = "Valor Ant";
-            dgdadosocorrencias.Columns["oco_valorAlteracao"].HeaderText = "Valor Alteração";
-            dgdadosocorrencias.Columns["oco_dataAlteracao"].HeaderText = "Data Alteração";
-            dgdadosocorrencias.Columns["oco_Tabela"].HeaderText = "Entidade";
-            dgdadosocorrencias.Columns["oco_Descricao"].Visible = false;
-            dgdadosocorrencias.Columns["idLancamento"].Visible = false;
-            dgdadosocorrencias.Columns["Lancamento"].Visible = false;
-            dgdadosocorrencias.Columns["Flat"].Visible = false;
-            dgdadosocorrencias.Columns["IdUsuario"].Visible = false;
-            dgdadosocorrencias.Columns["Usuario"].Visible = false;
-            dgdadosocorrencias.Columns["DescricaoUsuario"].HeaderText = "Usuário";
+            grid.Columns["id"].Visible = false;
+            grid.Columns["oco_valorAntigo"].HeaderText = "VALOR ANT.";
+            grid.Columns["oco_valorAlteracao"].HeaderText = "VALOR ALTERAÇÃO";
+            grid.Columns["oco_dataAlteracao"].HeaderText = "DATA ALTERAÇÃO";
+            grid.Columns["oco_Tabela"].HeaderText = "ENTIDADE";
+            grid.Columns["DescricaoFlat"].HeaderText = "DESCRIÇÃO FLAT";
+            grid.Columns["idFlat"].Visible = false;
+            grid.Columns["oco_Descricao"].Visible = false;
+            grid.Columns["idLancamento"].Visible = false;
+            grid.Columns["Lancamento"].Visible = false;
+            grid.Columns["Flat"].Visible = false;
+            grid.Columns["IdUsuario"].Visible = false;
+            grid.Columns["Usuario"].Visible = false;
+            grid.Columns["DescricaoUsuario"].HeaderText = "USUÁRIO";
+        }
+        private void AlterarEstilosCelulas(DataGridView grid)
+        {
+            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            
+            foreach (DataGridViewColumn col in grid.Columns)
+            {
+                if (col.Name == "oco_valorAntigo" || col.Name == "oco_valorAlteracao")
+                {
+                    col.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
+                }
+            }
+        }
+        private void AplicarFormatacaoLinha(DataGridViewRow row)
+        {           
+            row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;            
         }
         private void fecharjanela_Click(object sender, EventArgs e)
         {

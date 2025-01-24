@@ -28,48 +28,87 @@ namespace SistemaFL.Funcionalidades
 
         private void FrmFuncRendimentoscs_Load(object sender, EventArgs e)
         {
-            AjustarPosicaoPictureBox();
-            this.Resize += FrmFuncRendimentoscs_Resize;
-
+            AjustarLayoutFormulario();
             CarregarGridDados();
-            AlterarCorFundoETextoCabecalho();
+            CarregarGridTotais();
+        }
+        private void AjustarLayoutFormulario()
+        {
+            AjustaPictureBox_MaxMinFechar();
+            AjustarTamanhoDataGridView();
+        }
+        private void AjustaPictureBox_MaxMinFechar()
+        {
+            int margem = 10;
+
+            // Posição do pbMaximizar (no canto superior direito)
+            int x1 = this.ClientSize.Width - pbFechar.Width - margem;
+            int y1 = margem;
+
+            pbFechar.Location = new Point(x1, y1);
+
+            // Posição do pbFechar (ao lado esquerdo de pbMaximizar)
+            int x2 = x1 - pbMaximizar.Width - margem;
+            int y2 = margem;
+
+            pbMaximizar.Location = new Point(x2, y2);
 
 
-            var dadosTotais = repositorio.ObterDadosTotais();
-            dgdadosTotais.DataSource = dadosTotais;
-            AjustarColunasGridTotais(dgdadosTotais);
 
         }
+        private void AjustarTamanhoDataGridView()
+        {
+            int margemDireita = SystemInformation.VerticalResizeBorderThickness;
+            int margemInferior = SystemInformation.HorizontalResizeBorderThickness;
+
+
+
+            dgdadosRendimentos.Top = 50; // Exemplo de valor fixo ou calculado de acordo com o layout da interface
+        }
+
+        //
+        //DataGrid Dados (1)
         private void CarregarGridDados()
         {
-
             var dadosRendimentos = repositorio.ObterDadosRendimentos();
             dgdadosRendimentos.DataSource = dadosRendimentos;
-
-            AjustarNomesCabecalhoGridDados(dgdadosRendimentos);
+            AplicarFormatacaoGridDados();
             dgdadosRendimentos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
-            foreach (DataGridViewRow row in dgdadosRendimentos.Rows)
-            {
-                AplicarFormatacaoLinha(row);
-            }
-
         }
-        private void AjustarNomesCabecalhoGridDados(DataGridView grid)
+        private void AplicarFormatacaoGridDados()
         {
-            dgdadosRendimentos.Columns["ValorImovel"].HeaderText = "VALOR DO IMÓVEL";
-            dgdadosRendimentos.Columns["JANEIRO"].HeaderText = "RENDIMENTO JAN";
-            dgdadosRendimentos.Columns["FEVEREIRO"].HeaderText = "RENDIMENTO FEV";
-            dgdadosRendimentos.Columns["MARÇO"].HeaderText = "RENDIMENTO MAR";
-            dgdadosRendimentos.Columns["ABRIL"].HeaderText = "RENDIMENTO ABR";
-            dgdadosRendimentos.Columns["MAIO"].HeaderText = "RENDIMENTO MAI";
-            dgdadosRendimentos.Columns["JUNHO"].HeaderText = "RENDIMENTO JUN";
-            dgdadosRendimentos.Columns["JULHO"].HeaderText = "RENDIMENTO JUL";
-            dgdadosRendimentos.Columns["AGOSTO"].HeaderText = "RENDIMENTO AGO";
-            dgdadosRendimentos.Columns["SETEMBRO"].HeaderText = "RENDIMENTO SET";
-            dgdadosRendimentos.Columns["OUTUBRO"].HeaderText = "RENDIMENTO OUT";
-            dgdadosRendimentos.Columns["NOVEMBRO"].HeaderText = "RENDIMENTO NOV";
-            dgdadosRendimentos.Columns["DEZEMBRO"].HeaderText = "RENDIMENTO DEZ";
+            AlterarEstilosCabecalho(dgdadosRendimentos);
+            AlterarEstilosCelulasGridDados(dgdadosRendimentos);
+        }
+        private void AlterarEstilosCabecalho(DataGridView grid)
+        {
+
+            grid.EnableHeadersVisualStyles = false;
+            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular);
+
+            if (grid == dgdadosRendimentos)
+            {
+                dgdadosRendimentos.Columns["ValorImovel"].HeaderText = "VALOR DO IMÓVEL";
+                dgdadosRendimentos.Columns["JANEIRO"].HeaderText = "RENDIMENTO JAN";
+                dgdadosRendimentos.Columns["FEVEREIRO"].HeaderText = "RENDIMENTO FEV";
+                dgdadosRendimentos.Columns["MARÇO"].HeaderText = "RENDIMENTO MAR";
+                dgdadosRendimentos.Columns["ABRIL"].HeaderText = "RENDIMENTO ABR";
+                dgdadosRendimentos.Columns["MAIO"].HeaderText = "RENDIMENTO MAI";
+                dgdadosRendimentos.Columns["JUNHO"].HeaderText = "RENDIMENTO JUN";
+                dgdadosRendimentos.Columns["JULHO"].HeaderText = "RENDIMENTO JUL";
+                dgdadosRendimentos.Columns["AGOSTO"].HeaderText = "RENDIMENTO AGO";
+                dgdadosRendimentos.Columns["SETEMBRO"].HeaderText = "RENDIMENTO SET";
+                dgdadosRendimentos.Columns["OUTUBRO"].HeaderText = "RENDIMENTO OUT";
+                dgdadosRendimentos.Columns["NOVEMBRO"].HeaderText = "RENDIMENTO NOV";
+                dgdadosRendimentos.Columns["DEZEMBRO"].HeaderText = "RENDIMENTO DEZ";
+            }
+        }
+        private void AlterarEstilosCelulasGridDados(DataGridView grid)
+        {
+
 
             foreach (var coluna in grid.Columns.Cast<DataGridViewColumn>())
             {
@@ -80,8 +119,8 @@ namespace SistemaFL.Funcionalidades
                 }
             }
             dgdadosRendimentos.Columns["RendimentoAnual"].HeaderText = "RENDIMENTO ANUAL";
-            dgdadosRendimentos.Columns["PorceAnual"].HeaderText = "MÉDIA(%) ANUAL";
-            dgdadosRendimentos.Columns["PorceAnual"].DefaultCellStyle.Format = "N2";
+            dgdadosRendimentos.Columns["PorcentagemAnual"].HeaderText = "MÉDIA(%) ANUAL";
+            dgdadosRendimentos.Columns["PorcentagemAnual"].DefaultCellStyle.Format = "N2";
 
             foreach (DataGridViewColumn coluna in dgdadosRendimentos.Columns)
             {
@@ -93,18 +132,14 @@ namespace SistemaFL.Funcionalidades
 
 
         }
-        private void AlterarCorFundoETextoCabecalho()
+        //
+        //Após o carregamento do Grid 1
+        private void dgdadosRendimentos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            foreach (DataGridViewColumn col in dgdadosRendimentos.Columns)
+            foreach (DataGridViewRow row in dgdadosRendimentos.Rows)
             {
-                col.DefaultCellStyle.Padding = new Padding(5, 2, 5, 2);  // Espaçamento interno
+                AplicarFormatacaoLinha(row);
             }
-            // Desativa o estilo visual para permitir personalização
-            dgdadosRendimentos.EnableHeadersVisualStyles = false;
-            dgdadosRendimentos.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
-            dgdadosRendimentos.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgdadosRendimentos.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
-
         }
         private void AplicarFormatacaoLinha(DataGridViewRow row)
         {
@@ -146,7 +181,17 @@ namespace SistemaFL.Funcionalidades
                 }
             }
         }
-        private void AjustarColunasGridTotais(DataGridView grid)
+        //
+        //DataGrid Totais
+        private void CarregarGridTotais()
+        {
+            var dadosTotais = repositorio.ObterDadosTotais();
+            dgdadosTotais.DataSource = dadosTotais;
+
+            AlterarEstilosCabecalho(dgdadosTotais);
+            AlterarEstiloCelulasGridTotais(dgdadosTotais);
+        }
+        private void AlterarEstiloCelulasGridTotais(DataGridView grid)
         {
             foreach (var coluna in grid.Columns.Cast<DataGridViewColumn>())
             {
@@ -158,57 +203,14 @@ namespace SistemaFL.Funcionalidades
             }
             foreach (DataGridViewColumn coluna in dgdadosTotais.Columns)
             {
-
                 if (!coluna.Name.StartsWith("Porcentagem"))
                 {
                     coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
                 }
             }
         }
-        private void dgdadosRendimentos_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                AplicarFormatacaoLinha(dgdadosRendimentos.Rows[e.RowIndex]);
-            }
-        }
         //
-        //Botões fechar e maximizar
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            if (this.WindowState == FormWindowState.Maximized)
-            {
-                this.WindowState = FormWindowState.Normal;
-            }
-            else
-            {
-                this.WindowState = FormWindowState.Maximized;
-            }
-        }
-        private void FrmFuncRendimentoscs_Resize(object sender, EventArgs e)
-        {
-            AjustarPosicaoPictureBox();
-        }
-        private void AjustarPosicaoPictureBox()
-        {
-            int margem = 10;
-
-            // Posição do PictureBox1 (no canto superior direito)
-            int x1 = this.ClientSize.Width - pictureBox1.Width - margem;
-            int y1 = margem;
-
-            pictureBox2.Location = new Point(x1, y1);
-
-            // Posição do PictureBox2 (ao lado esquerdo de PictureBox1)
-            int x2 = x1 - pictureBox2.Width - margem;
-            int y2 = margem;
-
-            pictureBox1.Location = new Point(x2, y2);
-        }
+        //Eventos
         private void dgdadosRendimentos_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             // Verifica se o índice da coluna está dentro do intervalo válido
@@ -270,10 +272,30 @@ namespace SistemaFL.Funcionalidades
                         e.Paint(e.ClipBounds, DataGridViewPaintParts.Border);
 
                         e.Handled = true;
-                    }               
+                    }
                 }
             }
-        }        
+        }
+        private void pbFechar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void pbMaximizar_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+        }
+
+        private void FrmFuncRendimentoscs_Resize(object sender, EventArgs e)
+        {
+            AjustarTamanhoDataGridView();
+        }
     }
 }
 

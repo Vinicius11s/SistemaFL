@@ -65,7 +65,6 @@
             btnremover = new Button();
             btnassociar = new Button();
             dgAssociarFlat = new DataGridView();
-            label12 = new Label();
             pictureBox2 = new PictureBox();
             pdados.SuspendLayout();
             panel2.SuspendLayout();
@@ -76,6 +75,7 @@
             // 
             // pdados
             // 
+            pdados.BackColor = Color.FromArgb(23, 24, 29);
             pdados.Controls.Add(txtcidade);
             pdados.Controls.Add(label11);
             pdados.Controls.Add(txtestado);
@@ -98,8 +98,8 @@
             pdados.Controls.Add(label2);
             pdados.Controls.Add(txtid);
             pdados.Controls.Add(label1);
-            pdados.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            pdados.Location = new Point(36, 12);
+            pdados.Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            pdados.Location = new Point(39, 35);
             pdados.Name = "pdados";
             pdados.Size = new Size(396, 328);
             pdados.TabIndex = 0;
@@ -108,95 +108,101 @@
             // 
             txtcidade.Location = new Point(229, 270);
             txtcidade.Name = "txtcidade";
-            txtcidade.Size = new Size(146, 27);
+            txtcidade.Size = new Size(146, 29);
             txtcidade.TabIndex = 21;
             // 
             // label11
             // 
             label11.AutoSize = true;
+            label11.ForeColor = Color.FromArgb(224, 224, 224);
             label11.Location = new Point(229, 247);
             label11.Name = "label11";
-            label11.Size = new Size(55, 20);
+            label11.Size = new Size(58, 21);
             label11.TabIndex = 20;
             label11.Text = "Cidade";
             // 
             // txtestado
             // 
-            txtestado.Location = new Point(162, 270);
+            txtestado.Location = new Point(163, 270);
             txtestado.Name = "txtestado";
-            txtestado.Size = new Size(50, 27);
+            txtestado.Size = new Size(50, 29);
             txtestado.TabIndex = 19;
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(160, 247);
+            label10.ForeColor = Color.FromArgb(224, 224, 224);
+            label10.Location = new Point(161, 247);
             label10.Name = "label10";
-            label10.Size = new Size(54, 20);
+            label10.Size = new Size(29, 21);
             label10.TabIndex = 18;
-            label10.Text = "Estado";
+            label10.Text = "UF";
             // 
             // txtbairro
             // 
-            txtbairro.Location = new Point(12, 270);
+            txtbairro.Location = new Point(20, 270);
             txtbairro.Name = "txtbairro";
-            txtbairro.Size = new Size(134, 27);
+            txtbairro.Size = new Size(134, 29);
             txtbairro.TabIndex = 17;
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(12, 247);
+            label9.ForeColor = SystemColors.Control;
+            label9.Location = new Point(20, 247);
             label9.Name = "label9";
-            label9.Size = new Size(47, 20);
+            label9.Size = new Size(50, 21);
             label9.TabIndex = 16;
             label9.Text = "Bairro";
             // 
             // txtnumero
             // 
-            txtnumero.Location = new Point(332, 215);
+            txtnumero.Location = new Point(332, 214);
             txtnumero.Name = "txtnumero";
-            txtnumero.Size = new Size(43, 27);
+            txtnumero.Size = new Size(43, 29);
             txtnumero.TabIndex = 15;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(332, 195);
+            label8.ForeColor = Color.FromArgb(224, 224, 224);
+            label8.Location = new Point(300, 217);
             label8.Name = "label8";
-            label8.Size = new Size(26, 20);
+            label8.Size = new Size(28, 21);
             label8.TabIndex = 14;
             label8.Text = "N°";
             // 
             // txtrua
             // 
-            txtrua.Location = new Point(124, 215);
+            txtrua.Location = new Point(20, 214);
             txtrua.Name = "txtrua";
-            txtrua.Size = new Size(200, 27);
+            txtrua.Size = new Size(265, 29);
             txtrua.TabIndex = 13;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(124, 195);
+            label7.ForeColor = Color.FromArgb(224, 224, 224);
+            label7.Location = new Point(20, 194);
             label7.Name = "label7";
-            label7.Size = new Size(34, 20);
+            label7.Size = new Size(36, 21);
             label7.TabIndex = 12;
             label7.Text = "Rua";
             // 
             // txtcep
             // 
-            txtcep.Location = new Point(12, 215);
+            txtcep.Location = new Point(191, 144);
             txtcep.Name = "txtcep";
-            txtcep.Size = new Size(101, 27);
+            txtcep.Size = new Size(152, 29);
             txtcep.TabIndex = 11;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(12, 192);
+            label6.ForeColor = Color.FromArgb(224, 224, 224);
+            label6.Location = new Point(191, 121);
             label6.Name = "label6";
-            label6.Size = new Size(34, 20);
+            label6.Size = new Size(37, 21);
             label6.TabIndex = 10;
             label6.Text = "CEP";
             // 
@@ -204,47 +210,50 @@
             // 
             txtrazaosocial.Location = new Point(21, 144);
             txtrazaosocial.Name = "txtrazaosocial";
-            txtrazaosocial.Size = new Size(152, 27);
+            txtrazaosocial.Size = new Size(152, 29);
             txtrazaosocial.TabIndex = 9;
             // 
             // label5
             // 
             label5.AutoSize = true;
+            label5.ForeColor = Color.FromArgb(224, 224, 224);
             label5.Location = new Point(20, 121);
             label5.Name = "label5";
-            label5.Size = new Size(92, 20);
+            label5.Size = new Size(95, 21);
             label5.TabIndex = 8;
             label5.Text = "Razão Social";
             // 
             // txtcnpj
             // 
-            txtcnpj.Location = new Point(191, 80);
+            txtcnpj.Location = new Point(191, 83);
             txtcnpj.Name = "txtcnpj";
-            txtcnpj.Size = new Size(152, 27);
+            txtcnpj.Size = new Size(152, 29);
             txtcnpj.TabIndex = 7;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(188, 57);
+            label4.ForeColor = Color.FromArgb(224, 224, 224);
+            label4.Location = new Point(188, 60);
             label4.Name = "label4";
-            label4.Size = new Size(41, 20);
+            label4.Size = new Size(45, 21);
             label4.TabIndex = 6;
             label4.Text = "CNPJ";
             // 
             // txtinscricaoestadual
             // 
-            txtinscricaoestadual.Location = new Point(21, 80);
+            txtinscricaoestadual.Location = new Point(21, 85);
             txtinscricaoestadual.Name = "txtinscricaoestadual";
-            txtinscricaoestadual.Size = new Size(152, 27);
+            txtinscricaoestadual.Size = new Size(152, 29);
             txtinscricaoestadual.TabIndex = 5;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(21, 57);
+            label3.ForeColor = Color.FromArgb(224, 224, 224);
+            label3.Location = new Point(21, 62);
             label3.Name = "label3";
-            label3.Size = new Size(125, 20);
+            label3.Size = new Size(132, 21);
             label3.TabIndex = 4;
             label3.Text = "Inscrição Estadual";
             // 
@@ -252,15 +261,16 @@
             // 
             txtdescricao.Location = new Point(90, 28);
             txtdescricao.Name = "txtdescricao";
-            txtdescricao.Size = new Size(285, 27);
+            txtdescricao.Size = new Size(285, 29);
             txtdescricao.TabIndex = 3;
             // 
             // label2
             // 
             label2.AutoSize = true;
+            label2.ForeColor = Color.FromArgb(224, 224, 224);
             label2.Location = new Point(90, 7);
             label2.Name = "label2";
-            label2.Size = new Size(72, 20);
+            label2.Size = new Size(76, 21);
             label2.TabIndex = 2;
             label2.Text = "Descrição";
             // 
@@ -269,15 +279,16 @@
             txtid.Location = new Point(21, 28);
             txtid.Name = "txtid";
             txtid.ReadOnly = true;
-            txtid.Size = new Size(57, 27);
+            txtid.Size = new Size(57, 29);
             txtid.TabIndex = 1;
             // 
             // label1
             // 
             label1.AutoSize = true;
+            label1.ForeColor = Color.FromArgb(224, 224, 224);
             label1.Location = new Point(21, 7);
             label1.Name = "label1";
-            label1.Size = new Size(57, 20);
+            label1.Size = new Size(60, 21);
             label1.TabIndex = 0;
             label1.Text = "Código";
             // 
@@ -285,16 +296,17 @@
             // 
             cbbflatsassociados.Font = new Font("Segoe UI Semilight", 11.25F);
             cbbflatsassociados.FormattingEnabled = true;
-            cbbflatsassociados.Location = new Point(39, 291);
+            cbbflatsassociados.Location = new Point(39, 267);
             cbbflatsassociados.Name = "cbbflatsassociados";
-            cbbflatsassociados.Size = new Size(195, 28);
+            cbbflatsassociados.Size = new Size(200, 28);
             cbbflatsassociados.TabIndex = 22;
             // 
             // label13
             // 
             label13.AutoSize = true;
             label13.Font = new Font("Segoe UI Semilight", 11.25F);
-            label13.Location = new Point(39, 266);
+            label13.ForeColor = Color.FromArgb(224, 224, 224);
+            label13.Location = new Point(39, 242);
             label13.Name = "label13";
             label13.Size = new Size(113, 20);
             label13.TabIndex = 8;
@@ -322,7 +334,7 @@
             btnlocalizar.FlatAppearance.BorderSize = 2;
             btnlocalizar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btnlocalizar.ForeColor = Color.White;
-            btnlocalizar.Location = new Point(682, 19);
+            btnlocalizar.Location = new Point(703, 19);
             btnlocalizar.Name = "btnlocalizar";
             btnlocalizar.Size = new Size(103, 52);
             btnlocalizar.TabIndex = 5;
@@ -336,7 +348,7 @@
             btnexcluir.FlatAppearance.BorderSize = 2;
             btnexcluir.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btnexcluir.ForeColor = Color.White;
-            btnexcluir.Location = new Point(560, 19);
+            btnexcluir.Location = new Point(581, 19);
             btnexcluir.Name = "btnexcluir";
             btnexcluir.Size = new Size(103, 52);
             btnexcluir.TabIndex = 4;
@@ -350,7 +362,7 @@
             btncancelar.FlatAppearance.BorderSize = 2;
             btncancelar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btncancelar.ForeColor = Color.White;
-            btncancelar.Location = new Point(429, 19);
+            btncancelar.Location = new Point(450, 19);
             btncancelar.Name = "btncancelar";
             btncancelar.Size = new Size(103, 52);
             btncancelar.TabIndex = 3;
@@ -364,7 +376,7 @@
             btnsalvar.FlatAppearance.BorderSize = 2;
             btnsalvar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btnsalvar.ForeColor = Color.White;
-            btnsalvar.Location = new Point(297, 19);
+            btnsalvar.Location = new Point(318, 19);
             btnsalvar.Name = "btnsalvar";
             btnsalvar.Size = new Size(103, 52);
             btnsalvar.TabIndex = 2;
@@ -378,7 +390,7 @@
             btnalterar.FlatAppearance.BorderSize = 2;
             btnalterar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btnalterar.ForeColor = Color.White;
-            btnalterar.Location = new Point(160, 19);
+            btnalterar.Location = new Point(181, 19);
             btnalterar.Name = "btnalterar";
             btnalterar.Size = new Size(103, 52);
             btnalterar.TabIndex = 1;
@@ -392,7 +404,7 @@
             btnnovo.FlatAppearance.BorderSize = 2;
             btnnovo.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btnnovo.ForeColor = Color.White;
-            btnnovo.Location = new Point(29, 19);
+            btnnovo.Location = new Point(50, 19);
             btnnovo.Name = "btnnovo";
             btnnovo.Size = new Size(103, 52);
             btnnovo.TabIndex = 0;
@@ -402,28 +414,29 @@
             // 
             // passociar
             // 
+            passociar.BackColor = Color.FromArgb(23, 24, 29);
             passociar.Controls.Add(cbbflatsassociados);
             passociar.Controls.Add(label13);
             passociar.Controls.Add(btnremover);
             passociar.Controls.Add(btnassociar);
             passociar.Controls.Add(dgAssociarFlat);
-            passociar.Controls.Add(label12);
             passociar.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            passociar.Location = new Point(438, 12);
+            passociar.Location = new Point(435, 35);
             passociar.Name = "passociar";
-            passociar.Size = new Size(369, 328);
+            passociar.Size = new Size(377, 328);
             passociar.TabIndex = 2;
             // 
             // btnremover
             // 
-            btnremover.FlatAppearance.BorderSize = 2;
+            btnremover.FlatAppearance.BorderSize = 0;
             btnremover.FlatStyle = FlatStyle.Flat;
-            btnremover.Font = new Font("Segoe UI", 9.75F);
-            btnremover.Location = new Point(255, 291);
+            btnremover.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnremover.ForeColor = Color.FromArgb(224, 224, 224);
+            btnremover.Image = (Image)resources.GetObject("btnremover.Image");
+            btnremover.Location = new Point(245, 263);
             btnremover.Name = "btnremover";
-            btnremover.Size = new Size(74, 29);
+            btnremover.Size = new Size(35, 34);
             btnremover.TabIndex = 7;
-            btnremover.Text = "Remover";
             btnremover.UseVisualStyleBackColor = true;
             btnremover.Click += btnremover_Click;
             // 
@@ -431,39 +444,30 @@
             // 
             btnassociar.FlatAppearance.BorderSize = 2;
             btnassociar.FlatStyle = FlatStyle.Flat;
-            btnassociar.Font = new Font("Segoe UI", 9.75F);
-            btnassociar.Location = new Point(255, 215);
+            btnassociar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnassociar.ForeColor = Color.FromArgb(224, 224, 224);
+            btnassociar.Image = (Image)resources.GetObject("btnassociar.Image");
+            btnassociar.Location = new Point(317, 199);
             btnassociar.Name = "btnassociar";
-            btnassociar.Size = new Size(74, 29);
+            btnassociar.Size = new Size(37, 27);
             btnassociar.TabIndex = 6;
-            btnassociar.Text = "Associar";
             btnassociar.UseVisualStyleBackColor = true;
             btnassociar.Click += btnassociar_Click;
             // 
             // dgAssociarFlat
             // 
-            dgAssociarFlat.BackgroundColor = Color.White;
+            dgAssociarFlat.BackgroundColor = Color.FromArgb(23, 24, 29);
             dgAssociarFlat.BorderStyle = BorderStyle.None;
             dgAssociarFlat.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgAssociarFlat.Location = new Point(28, 40);
+            dgAssociarFlat.Location = new Point(23, 18);
             dgAssociarFlat.Name = "dgAssociarFlat";
-            dgAssociarFlat.Size = new Size(301, 165);
+            dgAssociarFlat.Size = new Size(331, 175);
             dgAssociarFlat.TabIndex = 1;
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label12.Location = new Point(131, 11);
-            label12.Name = "label12";
-            label12.Size = new Size(103, 21);
-            label12.TabIndex = 0;
-            label12.Text = "Associar Flats";
             // 
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(860, 3);
+            pictureBox2.Location = new Point(857, 5);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(30, 21);
             pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -535,7 +539,6 @@
         private Button btnremover;
         private Button btnassociar;
         private DataGridView dgAssociarFlat;
-        private Label label12;
         private PictureBox pictureBox2;
     }
 }

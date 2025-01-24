@@ -580,7 +580,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FrmPrincipalFF";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "FrmPrincipalFF";
+            Text = "Menu Principal";
             WindowState = FormWindowState.Maximized;
             Load += FrmPrincipalFF_Load;
             sidebar.ResumeLayout(false);

@@ -357,7 +357,7 @@ namespace Infraestrutura.Repositorio
                 PorcentagemDez = CalcularPorcentagemPorMes(flat.Lancamentos, 12, flat.ValorInvestimento),
 
                 RendimentoAnual = CalculaRendimentoAnualPorFlat(flat.Lancamentos),
-                PorceAnual = CalculaPorcentagemAnualPorFlat(flat.Lancamentos, flat.ValorInvestimento)
+                PorcentagemAnual = CalculaPorcentagemAnualPorFlat(flat.Lancamentos, flat.ValorInvestimento)
             })
             .OrderBy(flat => flat.EMPREENDIMENTO)
             .ToList();
