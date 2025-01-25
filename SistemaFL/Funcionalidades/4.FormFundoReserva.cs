@@ -98,8 +98,10 @@ namespace SistemaFL.Funcionalidades
             dgdadosFunRes.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
             dgdadosFunRes.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgdadosFunRes.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular);
-
-
+            dgdadosFunRes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            // Ajustar altura do cabeçalho
+            dgdadosFunRes.ColumnHeadersHeight = 35;  // Ajuste o valor conforme necessário
+            dgdadosFunRes.Columns["CODFLAT"].Visible = false;
         }
         private void AlterarEstilosCelulas(DataGridView grid)
         {

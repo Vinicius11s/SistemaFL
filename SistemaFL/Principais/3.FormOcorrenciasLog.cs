@@ -58,6 +58,11 @@ namespace SistemaFL
             dgdadosocorrencias.DataSource = lista;
 
             AjustarFormatacaoDataGrid();
+
+            if (dgdadosocorrencias.Columns.Contains("DescricaoFlat"))
+            {
+                dgdadosocorrencias.Columns["DescricaoFlat"].DisplayIndex = 0;
+            }
         }
         private void AjustarFormatacaoDataGrid()
         {
@@ -76,11 +81,6 @@ namespace SistemaFL
             grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular);
 
             grid.Columns["id"].Visible = false;
-            grid.Columns["oco_valorAntigo"].HeaderText = "VALOR ANT.";
-            grid.Columns["oco_valorAlteracao"].HeaderText = "VALOR ALTERAÇÃO";
-            grid.Columns["oco_dataAlteracao"].HeaderText = "DATA ALTERAÇÃO";
-            grid.Columns["oco_Tabela"].HeaderText = "ENTIDADE";
-            grid.Columns["DescricaoFlat"].HeaderText = "DESCRIÇÃO FLAT";
             grid.Columns["idFlat"].Visible = false;
             grid.Columns["oco_Descricao"].Visible = false;
             grid.Columns["idLancamento"].Visible = false;
@@ -88,6 +88,13 @@ namespace SistemaFL
             grid.Columns["Flat"].Visible = false;
             grid.Columns["IdUsuario"].Visible = false;
             grid.Columns["Usuario"].Visible = false;
+
+            grid.Columns["oco_valorAntigo"].HeaderText = "VALOR MÊS ANTERIOR";
+            //data anterior
+            grid.Columns["oco_valorAlteracao"].HeaderText = "VALOR MÊS VIGENTE";
+            grid.Columns["oco_dataAlteracao"].HeaderText = "DATA ALTERAÇÃO";
+            grid.Columns["oco_Tabela"].HeaderText = "ENTIDADE";
+            grid.Columns["DescricaoFlat"].HeaderText = "DESCRIÇÃO FLAT";           
             grid.Columns["DescricaoUsuario"].HeaderText = "USUÁRIO";
         }
         private void AlterarEstilosCelulas(DataGridView grid)

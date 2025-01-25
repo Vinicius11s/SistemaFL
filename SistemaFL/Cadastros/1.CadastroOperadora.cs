@@ -17,17 +17,26 @@ namespace SistemaFL
 {
     public partial class FrmCadEmpresaFF : Form
     {
+        private int incremento = 10;  // Incremento de expansão
+
         private IEmpresaRepositorio repositorio;
         private IFlatRepositorio flatRepositorio;
+
         public FrmCadEmpresaFF(IEmpresaRepositorio repositorio, IFlatRepositorio flatRepositorio)
         {
             InitializeComponent();
             this.repositorio = repositorio;
             this.flatRepositorio = flatRepositorio;
+
+            tTamanhotela.Interval = 50;  // Intervalo de 50ms entre as expansões
+            tTamanhotela.Tick += tTamanhotela_Tick;
+            tTamanhotela.Start();
         }
 
         private void FrmCadEmpresaFF_Load(object sender, EventArgs e)
         {
+            this.Location = new System.Drawing.Point(205, 41);
+
             limpar();
             pdados.Enabled = false;
             passociar.Enabled = false;
@@ -39,6 +48,8 @@ namespace SistemaFL
             btnlocalizar.Enabled = true;
 
         }
+        //
+        //CRUD
         private void btnnovo_Click(object sender, EventArgs e)
         {
             pdados.Enabled = true;
@@ -210,7 +221,8 @@ namespace SistemaFL
             }
 
         }
-
+        //
+        //DataGrid AssociarFlat
         private void CarregarFlats()
         {
             // Carregar os flats associados à empresa
@@ -218,7 +230,7 @@ namespace SistemaFL
             cbbflatsassociados.DataSource = flatsAssociados;
             cbbflatsassociados.DisplayMember = "Descricao"; // Exibe a descrição do flat
             cbbflatsassociados.ValueMember = "id"; // Usado para o valor do item
-
+            AlterarEstilosCabecalho(dgAssociarFlat);
             // Se houver pelo menos um flat associado, seleciona o primeiro
             if (cbbflatsassociados.Items.Count > 0)
             {
@@ -229,7 +241,15 @@ namespace SistemaFL
                 cbbflatsassociados.SelectedIndex = -1; // Nenhum item será selecionado
             }
         }
-        public Empresa carregaPropriedades()
+        private void AlterarEstilosCabecalho(DataGridView grid)
+        {
+            dgAssociarFlat.EnableHeadersVisualStyles = false;
+            dgAssociarFlat.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
+            dgAssociarFlat.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgAssociarFlat.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 9, FontStyle.Regular);
+        }
+
+         public Empresa carregaPropriedades()
         {
             Empresa empresa;
             if (txtid.Text != "")
@@ -251,36 +271,7 @@ namespace SistemaFL
             empresa.Bairro = txtbairro.Text;
             return empresa;
         }
-        void limpar()
-        {
-            if (cbbflatsassociados.Items.Count > 0)
-            {
-                // Remover o DataSource antes de manipular os itens
-                cbbflatsassociados.DataSource = null;
-                cbbflatsassociados.Items.Clear();
-            }
-            else
-
-
-                dgAssociarFlat.DataSource = null; // Desvincula a fonte de dados
-            dgAssociarFlat.Columns.Clear();   // Remove as colunas
-            if (dgAssociarFlat.Rows.Count > 0)
-            {
-                dgAssociarFlat.Rows.Clear();  // Limpa as linhas
-            }
-
-            txtid.Text = "";
-            txtdescricao.Text = "";
-            txtcnpj.Text = "";
-            txtinscricaoestadual.Text = "";
-            txtrazaosocial.Text = "";
-            txtrua.Text = "";
-            txtnumero.Text = "";
-            txtbairro.Text = "";
-            txtcidade.Text = "";
-            txtestado.Text = "";
-            txtcep.Text = "";
-        }
+        
         private void btnassociar_Click(object sender, EventArgs e)
         {
             if (dgAssociarFlat.SelectedRows.Count > 0)
@@ -403,6 +394,55 @@ namespace SistemaFL
         private void pbMinimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+        private void tTamanhotela_Tick(object sender, EventArgs e)
+        {
+            // Obtém o tamanho da tela
+            var screenWidth = Screen.PrimaryScreen.WorkingArea.Width;
+            var screenHeight = Screen.PrimaryScreen.WorkingArea.Height;
+
+            // Expande o formulário para a direita e para baixo
+            if (this.Width < screenWidth)
+                this.Width += incremento;
+
+            if (this.Height < screenHeight)
+                this.Height += incremento;
+
+            // Para o timer quando o formulário atingir o tamanho da tela
+            if (this.Width >= screenWidth && this.Height >= screenHeight)
+            {
+                tTamanhotela.Stop();
+            }
+        }
+        void limpar()
+        {
+            if (cbbflatsassociados.Items.Count > 0)
+            {
+                // Remover o DataSource antes de manipular os itens
+                cbbflatsassociados.DataSource = null;
+                cbbflatsassociados.Items.Clear();
+            }
+            else
+
+
+                dgAssociarFlat.DataSource = null; // Desvincula a fonte de dados
+            dgAssociarFlat.Columns.Clear();   // Remove as colunas
+            if (dgAssociarFlat.Rows.Count > 0)
+            {
+                dgAssociarFlat.Rows.Clear();  // Limpa as linhas
+            }
+
+            txtid.Text = "";
+            txtdescricao.Text = "";
+            txtcnpj.Text = "";
+            txtinscricaoestadual.Text = "";
+            txtrazaosocial.Text = "";
+            txtrua.Text = "";
+            txtnumero.Text = "";
+            txtbairro.Text = "";
+            txtcidade.Text = "";
+            txtestado.Text = "";
+            txtcep.Text = "";
         }
     }
 }

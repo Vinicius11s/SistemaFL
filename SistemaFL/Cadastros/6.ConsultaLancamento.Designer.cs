@@ -33,11 +33,11 @@
             txtdescricao = new TextBox();
             label1 = new Label();
             dgdadoslancamento = new DataGridView();
-            pictureBox2 = new PictureBox();
-            pbmaximizar = new PictureBox();
+            pbFechar = new PictureBox();
+            pbMaximizar = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgdadoslancamento).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbmaximizar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbMaximizar).BeginInit();
             SuspendLayout();
             // 
             // btnlocalizar
@@ -67,41 +67,40 @@
             dgdadoslancamento.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resources.ApplyResources(dgdadoslancamento, "dgdadoslancamento");
             dgdadoslancamento.Name = "dgdadoslancamento";
+            dgdadoslancamento.ReadOnly = true;
             dgdadoslancamento.CellDoubleClick += dgdadoslancamento_CellDoubleClick;
-            dgdadoslancamento.CellFormatting += dgdadoslancamento_CellFormatting;
             // 
-            // pictureBox2
+            // pbFechar
             // 
-            resources.ApplyResources(pictureBox2, "pictureBox2");
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.TabStop = false;
-            pictureBox2.Click += pictureBox2_Click;
+            resources.ApplyResources(pbFechar, "pbFechar");
+            pbFechar.Name = "pbFechar";
+            pbFechar.TabStop = false;
+            pbFechar.Click += pbFechar_Click;
             // 
-            // pbmaximizar
+            // pbMaximizar
             // 
-            resources.ApplyResources(pbmaximizar, "pbmaximizar");
-            pbmaximizar.Name = "pbmaximizar";
-            pbmaximizar.TabStop = false;
-            pbmaximizar.Click += pbmaximizar_Click;
+            resources.ApplyResources(pbMaximizar, "pbMaximizar");
+            pbMaximizar.Name = "pbMaximizar";
+            pbMaximizar.TabStop = false;
+            pbMaximizar.Click += pbMaximizar_Click;
             // 
             // FrmConsultaLancamento
             // 
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            Controls.Add(pictureBox2);
-            Controls.Add(pbmaximizar);
+            Controls.Add(pbFechar);
+            Controls.Add(pbMaximizar);
             Controls.Add(btnlocalizar);
             Controls.Add(txtdescricao);
             Controls.Add(label1);
             Controls.Add(dgdadoslancamento);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FrmConsultaLancamento";
-            Load += FrmConsultaLancamento_Load;
             Resize += FrmConsultaLancamento_Resize;
             ((System.ComponentModel.ISupportInitialize)dgdadoslancamento).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbmaximizar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbMaximizar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -111,7 +110,7 @@
         private TextBox txtdescricao;
         private Label label1;
         private DataGridView dgdadoslancamento;
-        private PictureBox pictureBox2;
-        private PictureBox pbmaximizar;
+        private PictureBox pbFechar;
+        private PictureBox pbMaximizar;
     }
 }

@@ -30,10 +30,20 @@ namespace SistemaFL
             dgdadosFlats.DataSource = null;
             dgdadosFlats.Rows.Clear();
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void btnlocalizar_Click(object sender, EventArgs e)
         {
-            AlterarCorFundoETextoCabecalho();
+            CarregarDadosDataGrid();
 
+            Estilos.AlterarEstilosCabecalho(dgdadosFlats);      
+            
+            foreach (DataGridViewRow row in dgdadosFlats.Rows)
+            {
+                AplicarFormatacaoLinha(row);
+                dgdadosFlats.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            }
+        }
+        private void CarregarDadosDataGrid()
+        {
             if (txtdescricao.Text == "Digite aqui a descrição do Flat")
             {
                 txtdescricao.Text = "";
@@ -60,66 +70,7 @@ namespace SistemaFL
                 .OrderBy(flat => flat.Descricao)
                 .ToList();
             dgdadosFlats.DataSource = listaFlats;
-
-
-            AjustarNomesCabecalho(dgdadosFlats);
-
-            foreach (DataGridViewRow row in dgdadosFlats.Rows)
-            {
-                AplicarFormatacaoLinha(row);
-            }
-
-        }
-        private void dgdadosFlats_CellDoubleClic(object sender, DataGridViewCellEventArgs e)
-        {
-            dgdadosFlats.Focus();
-
-            if (e.RowIndex >= 0)
-            {
-                id = (int)dgdadosFlats.Rows[e.RowIndex].Cells[0].Value; // Armazena o ID
-                this.Close(); // Fecha o formulário
-            };
-        }
-        private void AjustarNomesCabecalho(DataGridView grid)
-        {
-
-            dgdadosFlats.Columns["id"].HeaderText = "CÓD";
-            dgdadosFlats.Columns["Descricao"].HeaderText = "DESCRIÇÃO";
-
-            dgdadosFlats.Columns["DataAquisicao"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgdadosFlats.Columns["DataAquisicao"].HeaderText = "DATA AQUISIÇÃO";
-            dgdadosFlats.Columns["DataAquisicao"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dgdadosFlats.Columns["DataAquisicao"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            dgdadosFlats.Columns["TipoInvestimento"].HeaderText = "TIPO INVESTIMENTO";
-            dgdadosFlats.Columns["Status"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgdadosFlats.Columns["Status"].HeaderText = "STATUS";
-            dgdadosFlats.Columns["Status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            dgdadosFlats.Columns["Empresa"].HeaderText = "EMPRESA";
-            dgdadosFlats.Columns["Rua"].HeaderText = "RUA";
-            dgdadosFlats.Columns["Unidade"].HeaderText = "UN";
-            dgdadosFlats.Columns["Unidade"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            dgdadosFlats.Columns["Cidade"].HeaderText = "CIDADE";
-            dgdadosFlats.Columns["Estado"].HeaderText = "ESTADO";
-            dgdadosFlats.Columns["Estado"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            dgdadosFlats.Columns["Bairro"].HeaderText = "BAIRRO";
-
-            dgdadosFlats.Columns["ValorInvestimento"].HeaderText = "VALOR INVESTIMENTO";
-            dgdadosFlats.Columns["ValorInvestimento"].DefaultCellStyle.Format = "C2";
-            dgdadosFlats.Columns["ValorInvestimento"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("pt-BR");
-        }
-        private void AlterarCorFundoETextoCabecalho()
-        {
-            dgdadosFlats.EnableHeadersVisualStyles = false;
-            dgdadosFlats.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
-            dgdadosFlats.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgdadosFlats.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-            dgdadosFlats.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
-        }
+        }            
         private void AplicarFormatacaoLinha(DataGridViewRow row)
         {
             var statusValue = row.Cells["Status"].Value?.ToString();
@@ -142,33 +93,27 @@ namespace SistemaFL
                 row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
             }
         }
+        //
+        //Eventos
+        private void dgdadosFlats_CellDoubleClic(object sender, DataGridViewCellEventArgs e)
+        {
+            dgdadosFlats.Focus();
 
-        //BOTOES FECHAR E MAXIMIZAR
+            if (e.RowIndex >= 0)
+            {
+                id = (int)dgdadosFlats.Rows[e.RowIndex].Cells[0].Value; // Armazena o ID
+                this.Close(); // Fecha o formulário
+            };
+        }
         private void FrmConsultaFlat_Resize(object sender, EventArgs e)
         {
-            AjustarPosicaoPictureBox();
+            Estilos.AjustarPosicaopbMaximizarFechar(this, pbMaximizar, pbFechar );
         }
-        private void AjustarPosicaoPictureBox()
-        {
-            int margem = 10;
-
-            // Posição do PictureBox1 (no canto superior direito)
-            int x1 = this.ClientSize.Width - pictureBox1.Width - margem;
-            int y1 = margem;
-
-            pictureBox2.Location = new Point(x1, y1);
-
-            // Posição do PictureBox2 (ao lado esquerdo de PictureBox1)
-            int x2 = x1 - pictureBox2.Width - margem;
-            int y2 = margem;
-
-            pictureBox1.Location = new Point(x2, y2);
-        }
-        private void pictureBox2_Click_1(object sender, EventArgs e)
+        private void pbFechar_Click_1(object sender, EventArgs e)
         {
             this.Close();
         }
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void pbMaximizar_Click(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Maximized)
             {

@@ -94,7 +94,7 @@ namespace SistemaFL.Funcionalidades
 
             if (dgdadosAlugDiv.Rows.Count > 0)
             {
-                dgdadosAlugDiv.Columns["CODFLAT"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgdadosAlugDiv.Columns["CODFLAT"].Visible = false;
 
                 dgdadosAlugDiv.Columns["ValorImovel"].HeaderText = "VALOR DO IMÓVEL";
                 dgdadosAlugDiv.Columns["ValorImovel"].DefaultCellStyle.Format = "C2";
@@ -303,7 +303,6 @@ namespace SistemaFL.Funcionalidades
             dgtotalmes.Top = this.ClientSize.Height - dgtotalmes.Height - margemInferior;
 
         }
-
         //
         //Eventos
         private bool ordenacaoAscendente = true; // Variável para controlar a alternância da ordenação

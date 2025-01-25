@@ -33,11 +33,11 @@
             btnlocalizar = new Button();
             txtdescricao = new TextBox();
             label1 = new Label();
-            pictureBox2 = new PictureBox();
-            pictureBox1 = new PictureBox();
+            pbFechar = new PictureBox();
+            pbMaximizar = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgdadosFlats).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbMaximizar).BeginInit();
             SuspendLayout();
             // 
             // dgdadosFlats
@@ -49,7 +49,7 @@
             dgdadosFlats.Location = new Point(0, 87);
             dgdadosFlats.Margin = new Padding(3, 4, 3, 4);
             dgdadosFlats.Name = "dgdadosFlats";
-            dgdadosFlats.Size = new Size(891, 381);
+            dgdadosFlats.Size = new Size(824, 381);
             dgdadosFlats.TabIndex = 0;
             dgdadosFlats.CellDoubleClick += dgdadosFlats_CellDoubleClic;
             // 
@@ -64,7 +64,7 @@
             btnlocalizar.Size = new Size(36, 31);
             btnlocalizar.TabIndex = 5;
             btnlocalizar.UseVisualStyleBackColor = true;
-            btnlocalizar.Click += button1_Click;
+            btnlocalizar.Click += btnlocalizar_Click;
             // 
             // txtdescricao
             // 
@@ -78,42 +78,42 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(117, 41);
+            label1.Location = new Point(117, 38);
             label1.Name = "label1";
             label1.Size = new Size(123, 21);
             label1.TabIndex = 3;
             label1.Text = "Descrição Flat : ";
             // 
-            // pictureBox2
+            // pbFechar
             // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(845, 12);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(30, 21);
-            pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
-            pictureBox2.TabIndex = 13;
-            pictureBox2.TabStop = false;
-            pictureBox2.Click += pictureBox2_Click_1;
+            pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
+            pbFechar.Location = new Point(786, 8);
+            pbFechar.Name = "pbFechar";
+            pbFechar.Size = new Size(30, 21);
+            pbFechar.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbFechar.TabIndex = 13;
+            pbFechar.TabStop = false;
+            pbFechar.Click += pbFechar_Click_1;
             // 
-            // pictureBox1
+            // pbMaximizar
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(808, 12);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(30, 21);
-            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
-            pictureBox1.TabIndex = 12;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+            pbMaximizar.Image = (Image)resources.GetObject("pbMaximizar.Image");
+            pbMaximizar.Location = new Point(749, 8);
+            pbMaximizar.Name = "pbMaximizar";
+            pbMaximizar.Size = new Size(30, 21);
+            pbMaximizar.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbMaximizar.TabIndex = 12;
+            pbMaximizar.TabStop = false;
+            pbMaximizar.Click += pbMaximizar_Click;
             // 
             // FrmConsultaFlat
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(891, 468);
-            Controls.Add(pictureBox2);
-            Controls.Add(pictureBox1);
+            ClientSize = new Size(824, 468);
+            Controls.Add(pbFechar);
+            Controls.Add(pbMaximizar);
             Controls.Add(btnlocalizar);
             Controls.Add(txtdescricao);
             Controls.Add(label1);
@@ -128,8 +128,8 @@
             Load += FrmConsultaFlat_Load_1;
             Resize += FrmConsultaFlat_Resize;
             ((System.ComponentModel.ISupportInitialize)dgdadosFlats).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbMaximizar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -140,7 +140,7 @@
         private Button btnlocalizar;
         private TextBox txtdescricao;
         private Label label1;
-        private PictureBox pictureBox2;
-        private PictureBox pictureBox1;
+        private PictureBox pbFechar;
+        private PictureBox pbMaximizar;
     }
 }

@@ -30,6 +30,7 @@ namespace SistemaFL.Funcionalidades
 
             CarregarDadosGrid();
             CarregarTotalInvestimento();
+            CarregarTotalFlats();
 
             dgdadosFunRegistro.DataBindingComplete += dgdadosFunRegistro_DataBindingComplete;
             dgdadosFunRegistro.CellFormatting += dgdadosFunRegistro_CellFormatting;
@@ -47,16 +48,12 @@ namespace SistemaFL.Funcionalidades
             // Posição do pbMaximizar (no canto superior direito)
             int x1 = this.ClientSize.Width - pbFechar.Width - margem;
             int y1 = margem;
-
             pbFechar.Location = new Point(x1, y1);
 
             // Posição do pbFechar (ao lado esquerdo de pbMaximizar)
             int x2 = x1 - pbMaximizar.Width - margem;
             int y2 = margem;
-
             pbMaximizar.Location = new Point(x2, y2);
-
-
         }
         private void AjustarTamanhoDataGridView()
         {
@@ -72,11 +69,7 @@ namespace SistemaFL.Funcionalidades
         {
             var dados = flatRepositorio.ObterDadosInvestimento();
             dgdadosFunRegistro.DataSource = dados;
-
             AplicarFormatacaoGridDados();
-
-
-
         }
         private void AplicarFormatacaoGridDados()
         {
@@ -85,13 +78,12 @@ namespace SistemaFL.Funcionalidades
         }
         private void AlterarEstilosCabecalho()
         {
-
             dgdadosFunRegistro.EnableHeadersVisualStyles = false;
             dgdadosFunRegistro.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
             dgdadosFunRegistro.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgdadosFunRegistro.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular);
 
-            dgdadosFunRegistro.Columns["IdFlat"].HeaderText = "CODFLAT";
+            dgdadosFunRegistro.Columns["IdFlat"].Visible = false;
             dgdadosFunRegistro.Columns["CnpjRecebimento"].HeaderText = "CNPJ(RECEBIMENTO)";
             dgdadosFunRegistro.Columns["Empresa"].HeaderText = "EMPRESA";
 
@@ -122,7 +114,12 @@ namespace SistemaFL.Funcionalidades
         private void CarregarTotalInvestimento()
         {
             var totalInvestimento = flatRepositorio.CalcularTotalValorInvestimento();
-            txtTotalInvestimento.Text = totalInvestimento.ToString("C");
+            lblTotalInvestimento.Text = totalInvestimento.ToString("C");
+        }
+        private void CarregarTotalFlats()
+        {
+            var totalFlats = flatRepositorio.CalcularTotalFlats();
+            lblTotalFlats.Text = totalFlats.ToString();
         }
         //
         //Formatações do grid
@@ -134,7 +131,7 @@ namespace SistemaFL.Funcionalidades
                 {
                     // Aplica a máscara de CNPJ ao valor
                     e.Value = FormatarCnpj(cnpj);
-                }                  
+                }
             }
         }
         private string FormatarCnpj(string cnpj)
@@ -149,7 +146,7 @@ namespace SistemaFL.Funcionalidades
             }
 
             return cnpj; // Retorna o valor original caso não seja um CNPJ válido
-        }        
+        }
         //
         //Após o carregamento
         private void dgdadosFunRegistro_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -217,6 +214,9 @@ namespace SistemaFL.Funcionalidades
                 this.WindowState = FormWindowState.Maximized;
             }
         }
-        
+        private void pbMinimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
     }
 }

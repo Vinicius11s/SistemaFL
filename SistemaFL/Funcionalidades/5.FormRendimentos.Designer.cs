@@ -42,13 +42,14 @@
             // 
             // dgdadosTotais
             // 
-            dgdadosTotais.BackgroundColor = Color.FromArgb(23, 24, 29);
+            dgdadosTotais.BackgroundColor = Color.White;
+            dgdadosTotais.BorderStyle = BorderStyle.None;
             dgdadosTotais.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdadosTotais.Dock = DockStyle.Bottom;
-            dgdadosTotais.Location = new Point(0, 344);
+            dgdadosTotais.Location = new Point(0, 354);
             dgdadosTotais.Margin = new Padding(4);
             dgdadosTotais.Name = "dgdadosTotais";
-            dgdadosTotais.Size = new Size(900, 77);
+            dgdadosTotais.Size = new Size(900, 67);
             dgdadosTotais.TabIndex = 1;
             // 
             // pbFechar
@@ -90,10 +91,11 @@
             // 
             dgdadosRendimentos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgdadosRendimentos.BackgroundColor = Color.White;
+            dgdadosRendimentos.BorderStyle = BorderStyle.None;
             dgdadosRendimentos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosRendimentos.Location = new Point(0, 38);
+            dgdadosRendimentos.Location = new Point(0, 44);
             dgdadosRendimentos.Name = "dgdadosRendimentos";
-            dgdadosRendimentos.Size = new Size(900, 277);
+            dgdadosRendimentos.Size = new Size(900, 299);
             dgdadosRendimentos.TabIndex = 17;
             dgdadosRendimentos.CellPainting += dgdadosRendimentos_CellPainting;
             dgdadosRendimentos.DataBindingComplete += dgdadosRendimentos_DataBindingComplete;

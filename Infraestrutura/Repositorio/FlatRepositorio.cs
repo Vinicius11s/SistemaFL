@@ -53,6 +53,10 @@ namespace Infraestrutura.Repositorio
         {
             return _context.Flat.Sum(flat => flat.ValorInvestimento);
         }
+        public int CalcularTotalFlats()
+        {
+            return _context.Flat.Count();
+        }
         //
         //Formulário Aluguel + Dividendos
         public IEnumerable<dynamic> ObterDadosAluguelDividendos()

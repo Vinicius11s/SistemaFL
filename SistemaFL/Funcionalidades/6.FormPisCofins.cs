@@ -27,21 +27,33 @@ namespace SistemaFL.Funcionalidades
             var dados = repositorio.ObterDadosPISeCOFINS();
             dgdadosPIS.DataSource = dados;
 
+            AlterarEstilosCabecalho(dgdadosPIS);
             dgdadosPIS.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
+        }
+        private void AlterarEstilosCabecalho(DataGridView grid)
+        {
+
+            grid.EnableHeadersVisualStyles = false;
+            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular);
+
+            grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            grid.ColumnHeadersHeight = 35;  // Ajuste o valor conforme necessário
         }
         private void dgdadosPIS_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.Value != null && e.Value is decimal or double or int)
             {
-                // Formata o valor para incluir separador de milhar e duas casas decimais
                 e.Value = string.Format("{0:N2}", e.Value);
                 e.FormattingApplied = true;
             }
         }
-
         private void dgdadosPIS_CellFormatting_1(object sender, DataGridViewCellFormattingEventArgs e)
         {
             dgdadosPIS.CellFormatting += dgdadosPIS_CellFormatting;
+
             if ((dgdadosPIS.Rows[e.RowIndex].Cells["Descricao"].Value != null &&
                      dgdadosPIS.Rows[e.RowIndex].Cells["Descricao"].Value.ToString() == "Aluguel Venceslau") ||
                     (dgdadosPIS.Rows[e.RowIndex].Cells["Descricao"].Value != null &&
@@ -51,7 +63,6 @@ namespace SistemaFL.Funcionalidades
                     (dgdadosPIS.Rows[e.RowIndex].Cells["Descricao"].Value != null &&
                      dgdadosPIS.Rows[e.RowIndex].Cells["Descricao"].Value.ToString() == "Base de Cálculo (PIS/COFINS)"))
             {
-                // Defina a cor do texto para verde para essa linha
                 e.CellStyle.ForeColor = Color.Green;
             }
 
@@ -60,10 +71,12 @@ namespace SistemaFL.Funcionalidades
                     (dgdadosPIS.Rows[e.RowIndex].Cells["Descricao"].Value != null &&
                      dgdadosPIS.Rows[e.RowIndex].Cells["Descricao"].Value.ToString() == "COFINS"))
             {
-                // Defina a cor do texto para verde para essa linha
                 e.CellStyle.ForeColor = Color.Red;
             }
         }
-
+        private void pbFechar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

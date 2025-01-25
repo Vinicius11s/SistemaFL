@@ -44,10 +44,7 @@ namespace SistemaFL
             {
                 AplicarFormatacaoLinha(row);
                 dgdados.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-
             }
-
-
         }
         private void AlterarEstilosCabecalho(DataGridView grid)
         {

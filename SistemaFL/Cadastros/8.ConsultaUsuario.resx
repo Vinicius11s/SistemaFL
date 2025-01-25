@@ -117,10 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="sqlCommand1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnlocalizar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
+        qgAAAKoBBgpwTwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGESURBVEhL3ZVL
+        LgRBGIAnBAsJkVi5iJ21DeJ5CTa4AxlWHnEBjzgDkTiCnTcnEBIWVvi+1pXU9EzPdCqZBV/yJV1d1fX6
+        q/6u/Xv6cQlP8BY/cm/wGBexD5OYx0f87uADzqL04sTvYzk9uI1xJ85+F1dz9/AO4zZb6ErfsO2q4s7d
+        ikksYwpdQTyQlq7CbQmNLnAYOzGKLxgPsIlNDGDYc2depXM5xLhzvcImPC2hQbttKbKC5/iJ4fsvHMMG
+        TtFKA5rCIBqTA3zGGWzAjh1gJyt1gVd0gLWslMY4elCGslIBX1ppo1TW0Uk62a6wjw5wnZUiDMgTGiAD
+        ZcBSuEcHOMpKER4pj5aV6pE7w2WsihML38/5ooiXIzQIeomqMIIhZZijWuYir3fcudffNNAJO79Ev3EX
+        XElLTFDxAOqsSj8A6+Jkt4GluCxTrSm3jnFMDJ4nxFTtPfE57ti27oCpvi2uwp+GeLKKOb+VtpnGJFzV
+        Ahpsz/Z7rs++sy75l/kXqNV+AJG9jn9Chx7gAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="pbFechar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAAKtJREFUOE+Vk10KhiAQRV2EUvtfkZDQNpQCe5u4gzfIny+/8zKkcy6jklnXVY7j
+        kH9A/7IsYnLOYoyRGGPZ+g360K8eFs7znAqgyElVBl8BKaWXCB4ZjAJ6InjJoA4YiaCRAQO891rx3aMr
+        gxCCitu2lZWWrsxR933XOrrERuZzcNTRJYKXXItkFPDII5EwAEciKn+JpA4weL8ZkTBAq3NOrusqW3Pg
+        p7DWyg0B2yIDZs8q+QAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAkIMAAAEAIAAkMQEAFgAAACgAAACQAAAABgEAAAEAIAAAAAAAwCYBAAAAAAAAAAAAAAAAAAAA

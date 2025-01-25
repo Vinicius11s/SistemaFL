@@ -61,8 +61,6 @@ namespace SistemaFL.Funcionalidades
             int margemDireita = SystemInformation.VerticalResizeBorderThickness;
             int margemInferior = SystemInformation.HorizontalResizeBorderThickness;
 
-
-
             dgdadosRendimentos.Top = 50; // Exemplo de valor fixo ou calculado de acordo com o layout da interface
         }
 
@@ -89,8 +87,14 @@ namespace SistemaFL.Funcionalidades
             grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular);
 
+
+            grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            // Ajustar altura do cabeçalho
+            grid.ColumnHeadersHeight = 35;  // Ajuste o valor conforme necessário
+
             if (grid == dgdadosRendimentos)
             {
+                dgdadosRendimentos.Columns["CODFLAT"].Visible = false;
                 dgdadosRendimentos.Columns["ValorImovel"].HeaderText = "VALOR DO IMÓVEL";
                 dgdadosRendimentos.Columns["JANEIRO"].HeaderText = "RENDIMENTO JAN";
                 dgdadosRendimentos.Columns["FEVEREIRO"].HeaderText = "RENDIMENTO FEV";
@@ -108,6 +112,13 @@ namespace SistemaFL.Funcionalidades
         }
         private void AlterarEstilosCelulasGridDados(DataGridView grid)
         {
+            grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
+            foreach (DataGridViewColumn col in dgdadosRendimentos.Columns)
+            {
+                col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                col.DefaultCellStyle.Padding = new Padding(5, 2, 5, 2);  // Espaçamento interno
+            }
 
 
             foreach (var coluna in grid.Columns.Cast<DataGridViewColumn>())
@@ -124,7 +135,7 @@ namespace SistemaFL.Funcionalidades
 
             foreach (DataGridViewColumn coluna in dgdadosRendimentos.Columns)
             {
-                if (!coluna.Name.StartsWith("Porcentagem") && coluna.Name != "CODFLAT" && coluna.Name != "MediaAnual")
+                if (coluna.Name != "MediaAnual")
                 {
                     coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
                 }
@@ -188,8 +199,15 @@ namespace SistemaFL.Funcionalidades
             var dadosTotais = repositorio.ObterDadosTotais();
             dgdadosTotais.DataSource = dadosTotais;
 
-            AlterarEstilosCabecalho(dgdadosTotais);
+            AlterarEstilosCabecalhoGridTotais();
             AlterarEstiloCelulasGridTotais(dgdadosTotais);
+        }
+        private void AlterarEstilosCabecalhoGridTotais()
+        {
+            dgdadosTotais.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgdadosTotais.EnableHeadersVisualStyles = false;
+            dgdadosTotais.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
+            dgdadosTotais.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 11, FontStyle.Bold);
         }
         private void AlterarEstiloCelulasGridTotais(DataGridView grid)
         {
@@ -291,10 +309,9 @@ namespace SistemaFL.Funcionalidades
                 this.WindowState = FormWindowState.Maximized;
             }
         }
-
         private void FrmFuncRendimentoscs_Resize(object sender, EventArgs e)
         {
-            AjustarTamanhoDataGridView();
+            AjustaPictureBox_MaxMinFechar();
         }
     }
 }

@@ -20,21 +20,27 @@ namespace SistemaFL
             InitializeComponent();
             this.repositorio = repositorio;
         }
-
         private void btnlocalizar_Click(object sender, EventArgs e)
         {
             var lista = repositorio.Listar(u => u.Login.Contains(txtdescricao.Text));
             dgdadosusuario.DataSource = lista;
 
+            AlterarEstilosCabecalho(dgdadosusuario);
 
-            dgdadosusuario.Columns["id"].HeaderText = "CÓD";
-            dgdadosusuario.Columns["DataCriacao"].HeaderText = "DATA ALTERAÇÃO";
-            dgdadosusuario.Columns["DataCriacao"].HeaderText = "DATA ALTERAÇÃO";
+            dgdadosusuario.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgdadosusuario.Columns["id"].Visible = false;
             dgdadosusuario.Columns["DataCriacao"].HeaderText = "DATA ALTERAÇÃO";
             dgdadosusuario.Columns["Lancamentos"].Visible = false;
 
         }
+        private void AlterarEstilosCabecalho(DataGridView grid)
+        {
+            dgdadosusuario.EnableHeadersVisualStyles = false;
+            dgdadosusuario.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
+            dgdadosusuario.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgdadosusuario.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular);
 
+        }
         private void dgdadosusuario_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -45,16 +51,13 @@ namespace SistemaFL
         }
         private void dgdadosusuario_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-
             if (dgdadosusuario.Columns[e.ColumnIndex].Name == "Senha" && e.Value != null)
             {
                 e.Value = new string('*', e.Value.ToString().Length);
                 e.FormattingApplied = true;
             }
-
         }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void pbFechar_Click(object sender, EventArgs e)
         {
             this.Close();
         }

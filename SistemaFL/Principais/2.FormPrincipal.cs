@@ -125,7 +125,7 @@ namespace SistemaFL
         }
         private void btnEsconderPalavrasMenu_Click_1(object sender, EventArgs e)
         {
-            sidebarTransition.Start();
+            //sidebarTransition.Start();
 
         }
         //

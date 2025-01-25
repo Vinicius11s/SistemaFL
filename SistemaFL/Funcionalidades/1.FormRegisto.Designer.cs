@@ -30,11 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFuncionalidadeRegisto));
             dgdadosFunRegistro = new DataGridView();
-            txtTotalInvestimento = new TextBox();
             label1 = new Label();
             pbMaximizar = new PictureBox();
             pbFechar = new PictureBox();
             label2 = new Label();
+            lblTotalInvestimento = new Label();
+            label3 = new Label();
+            lblTotalFlats = new Label();
+            label5 = new Label();
+            label6 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgdadosFunRegistro).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbMaximizar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
@@ -56,21 +60,11 @@
             dgdadosFunRegistro.DataBindingComplete += dgdadosFunRegistro_DataBindingComplete;
             dgdadosFunRegistro.RowPrePaint += dgdadosFunRegistro_RowPrePaint;
             // 
-            // txtTotalInvestimento
-            // 
-            txtTotalInvestimento.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtTotalInvestimento.Location = new Point(161, 55);
-            txtTotalInvestimento.Margin = new Padding(4, 6, 4, 6);
-            txtTotalInvestimento.Name = "txtTotalInvestimento";
-            txtTotalInvestimento.ReadOnly = true;
-            txtTotalInvestimento.Size = new Size(177, 27);
-            txtTotalInvestimento.TabIndex = 7;
-            // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(18, 58);
+            label1.Location = new Point(18, 52);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(135, 20);
@@ -80,7 +74,7 @@
             // pbMaximizar
             // 
             pbMaximizar.Image = (Image)resources.GetObject("pbMaximizar.Image");
-            pbMaximizar.Location = new Point(790, 6);
+            pbMaximizar.Location = new Point(795, 6);
             pbMaximizar.Margin = new Padding(4);
             pbMaximizar.Name = "pbMaximizar";
             pbMaximizar.Size = new Size(35, 25);
@@ -112,17 +106,66 @@
             label2.TabIndex = 15;
             label2.Text = "Registros";
             // 
+            // lblTotalInvestimento
+            // 
+            lblTotalInvestimento.AutoSize = true;
+            lblTotalInvestimento.Location = new Point(156, 51);
+            lblTotalInvestimento.Name = "lblTotalInvestimento";
+            lblTotalInvestimento.Size = new Size(0, 21);
+            lblTotalInvestimento.TabIndex = 16;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(18, 58);
+            label3.Name = "label3";
+            label3.Size = new Size(269, 21);
+            label3.TabIndex = 17;
+            label3.Text = "_____________________________________";
+            // 
+            // lblTotalFlats
+            // 
+            lblTotalFlats.AutoSize = true;
+            lblTotalFlats.Location = new Point(401, 51);
+            lblTotalFlats.Name = "lblTotalFlats";
+            lblTotalFlats.Size = new Size(0, 21);
+            lblTotalFlats.TabIndex = 19;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.Location = new Point(322, 52);
+            label5.Margin = new Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(80, 20);
+            label5.TabIndex = 18;
+            label5.Text = "Total Flats :";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(322, 57);
+            label6.Name = "label6";
+            label6.Size = new Size(108, 21);
+            label6.TabIndex = 20;
+            label6.Text = "______________";
+            // 
             // FrmFuncionalidadeRegisto
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(870, 420);
+            Controls.Add(lblTotalFlats);
+            Controls.Add(label5);
+            Controls.Add(label6);
+            Controls.Add(lblTotalInvestimento);
+            Controls.Add(label1);
+            Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(pbFechar);
             Controls.Add(pbMaximizar);
-            Controls.Add(txtTotalInvestimento);
-            Controls.Add(label1);
             Controls.Add(dgdadosFunRegistro);
             Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
@@ -144,10 +187,14 @@
         #endregion
 
         private DataGridView dgdadosFunRegistro;
-        private TextBox txtTotalInvestimento;
         private Label label1;
         private PictureBox pbMaximizar;
         private PictureBox pbFechar;
         private Label label2;
+        private Label lblTotalInvestimento;
+        private Label label3;
+        private Label lblTotalFlats;
+        private Label label5;
+        private Label label6;
     }
 }

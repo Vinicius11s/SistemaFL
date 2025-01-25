@@ -29,7 +29,7 @@ namespace SistemaFL.Funcionalidades
             AjustarLayoutFormulario();
             CarregarDataGridDados();
             AdicionarLinhaTotal();
-            dgdadosDiv.DataBindingComplete += dgdadosDiv_DataBindingComplete;            
+            dgdadosDiv.DataBindingComplete += dgdadosDiv_DataBindingComplete;
         }
         //
         //Ajustar Layout do Formulário
@@ -93,7 +93,7 @@ namespace SistemaFL.Funcionalidades
 
             if (dgdadosDiv.Rows.Count > 0)
             {
-                dgdadosDiv.Columns["CODFLAT"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgdadosDiv.Columns["CODFLAT"].Visible = false;
                 dgdadosDiv.Columns["ValorImovel"].HeaderText = "VALOR IMÓVEL";
                 dgdadosDiv.Columns["DividendosJan"].HeaderText = "JANEIRO DIVIDENDOS";
                 dgdadosDiv.Columns["DividendosFev"].HeaderText = "FEVEREIRO DIVIDENDOS";
@@ -123,7 +123,7 @@ namespace SistemaFL.Funcionalidades
                     col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
                 }
-            }                  
+            }
         }
         private void AdicionarLinhaTotal()
         {
@@ -308,6 +308,9 @@ namespace SistemaFL.Funcionalidades
 
             return tabela;
         }
-
+        private void FrmFuncDividendos_Resize(object sender, EventArgs e)
+        {
+            AjustaPictureBox_MaxMinFechar();
+        }
     }
 }

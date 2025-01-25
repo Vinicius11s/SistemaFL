@@ -52,6 +52,8 @@ namespace SistemaFL
             labelFundoRes.Visible = false;
             txtValorFunReserva.Visible = false;
         }
+        //
+        //CRUD
         private void btnnovo_Click(object sender, EventArgs e)
         {
             limpar();
@@ -115,7 +117,7 @@ namespace SistemaFL
                     btnsalvar.Enabled = false;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Erro ao salvar, Flat do Tipo Aluguel + Dividendos, Informe valores aos campos");
 
@@ -139,6 +141,55 @@ namespace SistemaFL
             txtValorDiv.Visible = false;
             labelFundoRes.Visible = false;
             txtValorFunReserva.Visible = false;
+        }
+        private void btnlocalizar_Click(object sender, EventArgs e)
+        {
+            var form2 = Program.serviceProvider.GetRequiredService<FrmConsultaLancamento>();
+            form2.ShowDialog();
+
+            if (form2.id > 0)
+            {
+                //no clique do botão localizar vamos fazer um select * from empresa where id
+                var lancamento = repositorio.Recuperar(e => e.id == form2.id);
+                if (lancamento != null)
+                {
+                    txtid.Text = lancamento.id.ToString();
+                    dtdataLancamento.Value = lancamento.DataPagamento;
+                    txtvaloraluguel.Text = lancamento.ValorAluguel.ToString();
+                    txtValorDiv.Text = lancamento.ValorDividendos.ToString();
+                    txtValorFunReserva.Text = lancamento.ValorFundoReserva.ToString();
+
+                    if (lancamento.idFlat >= 0)
+                    {
+                        var flat = flatRepositorio.Recuperar(e => e.id == lancamento.idFlat);
+                        if (flat != null)
+                        {
+                            txtidFlat.Text = lancamento.idFlat.ToString();
+                            txtDescricaoFlat.Text = lancamento.DescricaoFlat;
+                            txttipoInvestimento.Text = lancamento.TipoPagamento;
+
+                            labelValorAlguel.Visible = true;
+                            txtvaloraluguel.Visible = true;
+                            labelValorDiv.Visible = true;
+                            txtValorDiv.Visible = true;
+                            labelFundoRes.Visible = true;
+                            txtValorFunReserva.Visible = true;
+                        }
+                        else MessageBox.Show("Flat nao localizado");
+                    }
+                    else
+                        btnnovo.Enabled = false;
+                    btnlocalizar.Enabled = false;
+                    btnalterar.Enabled = true;
+                    btncancelar.Enabled = true;
+                    btnexcluir.Enabled = true;
+                    btnsalvar.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Lancamento não encontrado.");
+                }
+            }
         }
         private void btnexcluir_Click(object sender, EventArgs e)
         {
@@ -178,6 +229,8 @@ namespace SistemaFL
                 }
             }
         }
+        //
+        //
         public Lancamento carregaPropriedades()
         {
             Lancamento lancamento;
@@ -190,7 +243,7 @@ namespace SistemaFL
             }
             else lancamento = new Lancamento();
 
-            if(Sessao.idUsuarioLogado > 0)
+            if (Sessao.idUsuarioLogado > 0)
             {
                 lancamento.idUsuario = Sessao.idUsuarioLogado;
             }
@@ -337,59 +390,10 @@ namespace SistemaFL
             txtValorDiv.Text = "";
             txtValorFunReserva.Text = "";
 
-        }
-        private void btnlocalizar_Click(object sender, EventArgs e)
-        {
-            var form2 = Program.serviceProvider.GetRequiredService<FrmConsultaLancamento>();
-            form2.ShowDialog();
-
-            if (form2.id > 0)
-            {
-                //no clique do botão localizar vamos fazer um select * from empresa where id
-                var lancamento = repositorio.Recuperar(e => e.id == form2.id);
-                if (lancamento != null)
-                {
-                    txtid.Text = lancamento.id.ToString();
-                    dtdataLancamento.Value = lancamento.DataPagamento;
-                    txtvaloraluguel.Text = lancamento.ValorAluguel.ToString();
-                    txtValorDiv.Text = lancamento.ValorDividendos.ToString();
-                    txtValorFunReserva.Text = lancamento.ValorFundoReserva.ToString();
-
-                    if (lancamento.idFlat >= 0)
-                    {
-                        var flat = flatRepositorio.Recuperar(e => e.id == lancamento.idFlat);
-                        if (flat != null)
-                        {
-                            txtidFlat.Text = lancamento.idFlat.ToString();
-                            txtDescricaoFlat.Text = lancamento.DescricaoFlat;
-                            txttipoInvestimento.Text = lancamento.TipoPagamento;
-
-                            labelValorAlguel.Visible = true;
-                            txtvaloraluguel.Visible = true;
-                            labelValorDiv.Visible = true;
-                            txtValorDiv.Visible = true;
-                            labelFundoRes.Visible = true;
-                            txtValorFunReserva.Visible = true;
-                        }
-                        else MessageBox.Show("Flat nao localizado");
-                    }
-                    else
-                        btnnovo.Enabled = false;
-                    btnlocalizar.Enabled = false;
-                    btnalterar.Enabled = true;
-                    btncancelar.Enabled = true;
-                    btnexcluir.Enabled = true;
-                    btnsalvar.Enabled = false;
-                }
-                else
-                {
-                    MessageBox.Show("Lancamento não encontrado.");
-                }
-            }
-        }
+        }        
         private void pbfechar_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
+        } 
     }
 }
