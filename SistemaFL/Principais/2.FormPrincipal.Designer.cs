@@ -30,7 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipalFF));
-            sidebar = new FlowLayoutPanel();
+            pMenuOpcoes = new FlowLayoutPanel();
             panel2 = new Panel();
             btnocorrencias = new Button();
             menuContainer = new FlowLayoutPanel();
@@ -67,8 +67,8 @@
             pbMinimizar = new PictureBox();
             pbFechar = new PictureBox();
             label1 = new Label();
-            btnHam = new PictureBox();
-            sidebar.SuspendLayout();
+            btnEsconderPalavrasMenu = new PictureBox();
+            pMenuOpcoes.SuspendLayout();
             panel2.SuspendLayout();
             menuContainer.SuspendLayout();
             panel3.SuspendLayout();
@@ -88,21 +88,21 @@
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbMinimizar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)btnHam).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btnEsconderPalavrasMenu).BeginInit();
             SuspendLayout();
             // 
-            // sidebar
+            // pMenuOpcoes
             // 
-            sidebar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            sidebar.BackColor = Color.FromArgb(23, 24, 29);
-            sidebar.Controls.Add(panel2);
-            sidebar.Controls.Add(menuContainer);
-            sidebar.Controls.Add(funcContainer);
-            sidebar.Location = new Point(0, 41);
-            sidebar.Name = "sidebar";
-            sidebar.Padding = new Padding(0, 30, 0, 0);
-            sidebar.Size = new Size(205, 481);
-            sidebar.TabIndex = 1;
+            pMenuOpcoes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            pMenuOpcoes.BackColor = Color.FromArgb(23, 24, 29);
+            pMenuOpcoes.Controls.Add(panel2);
+            pMenuOpcoes.Controls.Add(menuContainer);
+            pMenuOpcoes.Controls.Add(funcContainer);
+            pMenuOpcoes.Location = new Point(0, 41);
+            pMenuOpcoes.Name = "pMenuOpcoes";
+            pMenuOpcoes.Padding = new Padding(0, 30, 0, 0);
+            pMenuOpcoes.Size = new Size(205, 481);
+            pMenuOpcoes.TabIndex = 1;
             // 
             // panel2
             // 
@@ -517,7 +517,7 @@
             panel1.Controls.Add(pbMinimizar);
             panel1.Controls.Add(pbFechar);
             panel1.Controls.Add(label1);
-            panel1.Controls.Add(btnHam);
+            panel1.Controls.Add(btnEsconderPalavrasMenu);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
@@ -556,16 +556,16 @@
             label1.TabIndex = 1;
             label1.Text = "MENU | SISTEMA GERENCIADOR";
             // 
-            // btnHam
+            // btnEsconderPalavrasMenu
             // 
-            btnHam.Image = (Image)resources.GetObject("btnHam.Image");
-            btnHam.Location = new Point(0, 3);
-            btnHam.Name = "btnHam";
-            btnHam.Size = new Size(47, 35);
-            btnHam.SizeMode = PictureBoxSizeMode.CenterImage;
-            btnHam.TabIndex = 1;
-            btnHam.TabStop = false;
-            btnHam.Click += btnHam_Click_1;
+            btnEsconderPalavrasMenu.Image = (Image)resources.GetObject("btnEsconderPalavrasMenu.Image");
+            btnEsconderPalavrasMenu.Location = new Point(0, 3);
+            btnEsconderPalavrasMenu.Name = "btnEsconderPalavrasMenu";
+            btnEsconderPalavrasMenu.Size = new Size(47, 35);
+            btnEsconderPalavrasMenu.SizeMode = PictureBoxSizeMode.CenterImage;
+            btnEsconderPalavrasMenu.TabIndex = 1;
+            btnEsconderPalavrasMenu.TabStop = false;
+            btnEsconderPalavrasMenu.Click += btnEsconderPalavrasMenu_Click_1;
             // 
             // FrmPrincipalFF
             // 
@@ -574,7 +574,7 @@
             BackColor = Color.FromArgb(23, 24, 29);
             ClientSize = new Size(869, 522);
             Controls.Add(panel1);
-            Controls.Add(sidebar);
+            Controls.Add(pMenuOpcoes);
             Controls.Add(pictureBox1);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -583,7 +583,7 @@
             Text = "Menu Principal";
             WindowState = FormWindowState.Maximized;
             Load += FrmPrincipalFF_Load;
-            sidebar.ResumeLayout(false);
+            pMenuOpcoes.ResumeLayout(false);
             panel2.ResumeLayout(false);
             menuContainer.ResumeLayout(false);
             panel3.ResumeLayout(false);
@@ -604,12 +604,12 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbMinimizar).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
-            ((System.ComponentModel.ISupportInitialize)btnHam).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btnEsconderPalavrasMenu).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-        private FlowLayoutPanel sidebar;
+        private FlowLayoutPanel pMenuOpcoes;
         private Panel panel2;
         private Button btnocorrencias;
         private Panel panel3;
@@ -644,7 +644,7 @@
         private PictureBox pictureBox1;
         private Panel panel1;
         private Label label1;
-        private PictureBox btnHam;
+        private PictureBox btnEsconderPalavrasMenu;
         private PictureBox pbFechar;
         private PictureBox pbMinimizar;
     }

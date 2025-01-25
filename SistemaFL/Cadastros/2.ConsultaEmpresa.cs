@@ -26,11 +26,9 @@ namespace SistemaFL
         {
             dgdados.DataSource = null;
             dgdados.Rows.Clear();
-        }
-        private void button1_Click(object sender, EventArgs e)
+        }     
+        private void btnlocalizar_Click(object sender, EventArgs e)
         {
-            AlterarCorFundoETextoCabecalho();
-
             var lista = repositorio.Listar(e => e.Descricao.Contains(txtdescricao.Text))
                         .OrderBy(e => e.Descricao) // Ordena alfabeticamente pela Descricao
                         .ToList();
@@ -38,20 +36,27 @@ namespace SistemaFL
             dgdados.DataSource = lista;
 
 
-            AjustarNomesCabecalho(dgdados);
+            AlterarEstilosCabecalho(dgdados);
             dgdados.RowTemplate.Height = 28;  // Define a altura fixa desejada (ajuste conforme necessário)
-
+            
 
             foreach (DataGridViewRow row in dgdados.Rows)
             {
                 AplicarFormatacaoLinha(row);
+                dgdados.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
             }
 
 
         }
-        private void AjustarNomesCabecalho(DataGridView grid)
+        private void AlterarEstilosCabecalho(DataGridView grid)
         {
-            dgdados.Columns["id"].HeaderText = "CÓD";
+            dgdados.EnableHeadersVisualStyles = false;
+            dgdados.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
+            dgdados.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgdados.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular);
+
+            dgdados.Columns["id"].Visible = false;
             dgdados.Columns["Cnpj"].HeaderText = "CNPJ";
             dgdados.Columns["descricao"].HeaderText = "DESCRIÇÃO";
             dgdados.Columns["RazaoSocial"].HeaderText = "RAZÃO SOCIAL";
@@ -70,19 +75,51 @@ namespace SistemaFL
             dgdados.Columns["Estado"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgdados.Columns["Estado"].HeaderText = "ESTADO";
 
-        }
-        private void AlterarCorFundoETextoCabecalho()
-        {
-            dgdados.EnableHeadersVisualStyles = false;
-            dgdados.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
-            dgdados.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-            dgdados.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgdados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
-        }
+        }       
         private void AplicarFormatacaoLinha(DataGridViewRow row)
         {
             row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
+        }    
+        private string FormatCnpj(string cnpj)
+        {
+            // Remove quaisquer caracteres não numéricos
+            cnpj = new string(cnpj.Where(char.IsDigit).ToArray());
+
+            // Verifica se o CNPJ tem o tamanho correto
+            if (cnpj.Length == 14)
+            {
+                return string.Format("{0:00\\.000\\.000\\/0000\\-00}", double.Parse(cnpj));
+            }
+
+            return cnpj; // Retorna o valor original caso não seja um CNPJ válido
+        }
+        private string FormatInscricaoEstadual(string ie)
+        {
+            ie = new string(ie.Where(char.IsDigit).ToArray());
+
+            if (ie.Length == 12)
+            {
+                return string.Format("{0:000\\.000\\.000\\.000}", double.Parse(ie));
+            }
+
+            return ie;
+        }
+        private string FormatCep(string cep)
+        {
+            cep = new string(cep.Where(char.IsDigit).ToArray());
+
+            if (cep.Length == 8)
+            {
+                return string.Format("{0:00000\\-000}", double.Parse(cep));
+            }
+
+            return cep;
+        }       
+        //
+        //Eventos
+        private void FrmConsultaEmpresa_Resize(object sender, EventArgs e)
+        {
+            AjustarPosicaoPictureBox();
         }
         private void dgdados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -118,64 +155,27 @@ namespace SistemaFL
                 }
             }
         }
-        private string FormatCnpj(string cnpj)
-        {
-            // Remove quaisquer caracteres não numéricos
-            cnpj = new string(cnpj.Where(char.IsDigit).ToArray());
-
-            // Verifica se o CNPJ tem o tamanho correto
-            if (cnpj.Length == 14)
-            {
-                return string.Format("{0:00\\.000\\.000\\/0000\\-00}", double.Parse(cnpj));
-            }
-
-            return cnpj; // Retorna o valor original caso não seja um CNPJ válido
-        }
-        private string FormatInscricaoEstadual(string ie)
-        {
-            ie = new string(ie.Where(char.IsDigit).ToArray());
-
-            if (ie.Length == 12)
-            {
-                return string.Format("{0:000\\.000\\.000\\.000}", double.Parse(ie));
-            }
-
-            return ie;
-        }
-        private string FormatCep(string cep)
-        {
-            cep = new string(cep.Where(char.IsDigit).ToArray());
-
-            if (cep.Length == 8)
-            {
-                return string.Format("{0:00000\\-000}", double.Parse(cep));
-            }
-
-            return cep;
-        }
-        //
-        //Botões fechar e maximizar
         private void AjustarPosicaoPictureBox()
         {
             int margem = 10;
 
             // Posição do PictureBox1 (no canto superior direito)
-            int x1 = this.ClientSize.Width - pictureBox1.Width - margem;
+            int x1 = this.ClientSize.Width - pbMaximizar.Width - margem;
             int y1 = margem;
 
-            pictureBox2.Location = new Point(x1, y1);
+            pbFechar.Location = new Point(x1, y1);
 
             // Posição do PictureBox2 (ao lado esquerdo de PictureBox1)
-            int x2 = x1 - pictureBox2.Width - margem;
+            int x2 = x1 - pbFechar.Width - margem;
             int y2 = margem;
 
-            pictureBox1.Location = new Point(x2, y2);
+            pbMaximizar.Location = new Point(x2, y2);
         }
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void pbFechar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void pbMaximizar_Click(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Maximized)
             {
@@ -186,9 +186,6 @@ namespace SistemaFL
                 this.WindowState = FormWindowState.Maximized;
             }
         }
-        private void FrmConsultaEmpresa_Resize(object sender, EventArgs e)
-        {
-            AjustarPosicaoPictureBox();
-        }
+        
     }
 }

@@ -37,10 +37,12 @@
             label4 = new Label();
             label2 = new Label();
             label1 = new Label();
-            pictureBox1 = new PictureBox();
+            pbFechar = new PictureBox();
+            pbMinimizar = new PictureBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbMinimizar).BeginInit();
             SuspendLayout();
             // 
             // txtlogin
@@ -137,16 +139,27 @@
             label1.TabIndex = 16;
             label1.Text = "Login";
             // 
-            // pictureBox1
+            // pbFechar
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(602, 1);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(27, 20);
-            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
-            pictureBox1.TabIndex = 17;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+            pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
+            pbFechar.Location = new Point(597, 7);
+            pbFechar.Name = "pbFechar";
+            pbFechar.Size = new Size(27, 20);
+            pbFechar.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbFechar.TabIndex = 17;
+            pbFechar.TabStop = false;
+            pbFechar.Click += pbFechar_Click;
+            // 
+            // pbMinimizar
+            // 
+            pbMinimizar.Image = (Image)resources.GetObject("pbMinimizar.Image");
+            pbMinimizar.Location = new Point(570, 7);
+            pbMinimizar.Name = "pbMinimizar";
+            pbMinimizar.Size = new Size(27, 20);
+            pbMinimizar.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbMinimizar.TabIndex = 18;
+            pbMinimizar.TabStop = false;
+            pbMinimizar.Click += pbMinimizar_Click;
             // 
             // FrmFuncLogin
             // 
@@ -154,7 +167,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(23, 24, 29);
             ClientSize = new Size(629, 344);
-            Controls.Add(pictureBox1);
+            Controls.Add(pbMinimizar);
+            Controls.Add(pbFechar);
             Controls.Add(label1);
             Controls.Add(label2);
             Controls.Add(panel1);
@@ -170,7 +184,8 @@
             Load += FrmFuncionalidadeLogin_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbMinimizar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -184,6 +199,7 @@
         private Label label2;
         private Label label1;
         private PictureBox pictureBox2;
-        private PictureBox pictureBox1;
+        private PictureBox pbFechar;
+        private PictureBox pbMinimizar;
     }
 }

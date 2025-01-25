@@ -59,7 +59,7 @@
             // txtTotalInvestimento
             // 
             txtTotalInvestimento.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtTotalInvestimento.Location = new Point(182, 55);
+            txtTotalInvestimento.Location = new Point(161, 55);
             txtTotalInvestimento.Margin = new Padding(4, 6, 4, 6);
             txtTotalInvestimento.Name = "txtTotalInvestimento";
             txtTotalInvestimento.ReadOnly = true;
@@ -69,13 +69,13 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.Location = new Point(18, 58);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(163, 20);
+            label1.Size = new Size(135, 20);
             label1.TabIndex = 6;
-            label1.Text = "TOTAL INVESTIMENTO :";
+            label1.Text = "Total Investimento :";
             // 
             // pbMaximizar
             // 
@@ -104,11 +104,11 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Arial", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.Location = new Point(18, 15);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(92, 22);
+            label2.Size = new Size(88, 25);
             label2.TabIndex = 15;
             label2.Text = "Registros";
             // 

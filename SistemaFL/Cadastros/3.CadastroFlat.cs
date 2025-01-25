@@ -284,5 +284,9 @@ namespace SistemaFL
         {
             this.Close();
         }
+        private void pbMinimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
     }
 }

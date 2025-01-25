@@ -33,27 +33,27 @@
             txtdescricao = new TextBox();
             btnlocalizar = new Button();
             dgdados = new DataGridView();
-            pictureBox2 = new PictureBox();
-            pictureBox1 = new PictureBox();
+            pbFechar = new PictureBox();
+            pbMaximizar = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgdados).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbMaximizar).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semilight", 11.25F);
-            label1.Location = new Point(115, 50);
+            label1.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(158, 48);
             label1.Name = "label1";
-            label1.Size = new Size(140, 20);
+            label1.Size = new Size(145, 20);
             label1.TabIndex = 0;
             label1.Text = "Descrição Empresa :";
             // 
             // txtdescricao
             // 
             txtdescricao.Font = new Font("Segoe UI Semilight", 11.25F);
-            txtdescricao.Location = new Point(261, 50);
+            txtdescricao.Location = new Point(304, 47);
             txtdescricao.Name = "txtdescricao";
             txtdescricao.Size = new Size(327, 27);
             txtdescricao.TabIndex = 1;
@@ -64,12 +64,12 @@
             btnlocalizar.FlatStyle = FlatStyle.Flat;
             btnlocalizar.Font = new Font("Segoe UI Semilight", 11.25F);
             btnlocalizar.Image = (Image)resources.GetObject("btnlocalizar.Image");
-            btnlocalizar.Location = new Point(594, 45);
+            btnlocalizar.Location = new Point(653, 45);
             btnlocalizar.Name = "btnlocalizar";
             btnlocalizar.Size = new Size(40, 32);
             btnlocalizar.TabIndex = 2;
             btnlocalizar.UseVisualStyleBackColor = true;
-            btnlocalizar.Click += button1_Click;
+            btnlocalizar.Click += btnlocalizar_Click;
             // 
             // dgdados
             // 
@@ -84,27 +84,27 @@
             dgdados.CellDoubleClick += dgdados_CellDoubleClick;
             dgdados.CellFormatting += dgdados_CellFormatting;
             // 
-            // pictureBox2
+            // pbFechar
             // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(857, 4);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(30, 21);
-            pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
-            pictureBox2.TabIndex = 15;
-            pictureBox2.TabStop = false;
-            pictureBox2.Click += pictureBox2_Click;
+            pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
+            pbFechar.Location = new Point(857, 4);
+            pbFechar.Name = "pbFechar";
+            pbFechar.Size = new Size(30, 21);
+            pbFechar.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbFechar.TabIndex = 15;
+            pbFechar.TabStop = false;
+            pbFechar.Click += pbFechar_Click;
             // 
-            // pictureBox1
+            // pbMaximizar
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(820, 4);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(30, 21);
-            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
-            pictureBox1.TabIndex = 14;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+            pbMaximizar.Image = (Image)resources.GetObject("pbMaximizar.Image");
+            pbMaximizar.Location = new Point(820, 4);
+            pbMaximizar.Name = "pbMaximizar";
+            pbMaximizar.Size = new Size(30, 21);
+            pbMaximizar.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbMaximizar.TabIndex = 14;
+            pbMaximizar.TabStop = false;
+            pbMaximizar.Click += pbMaximizar_Click;
             // 
             // FrmConsultaEmpresa
             // 
@@ -112,8 +112,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(891, 468);
-            Controls.Add(pictureBox2);
-            Controls.Add(pictureBox1);
+            Controls.Add(pbFechar);
+            Controls.Add(pbMaximizar);
             Controls.Add(dgdados);
             Controls.Add(btnlocalizar);
             Controls.Add(txtdescricao);
@@ -128,8 +128,8 @@
             Load += FrmConsultaEmpresa_Load;
             Resize += FrmConsultaEmpresa_Resize;
             ((System.ComponentModel.ISupportInitialize)dgdados).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbMaximizar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -140,7 +140,7 @@
         private TextBox txtdescricao;
         private Button btnlocalizar;
         private DataGridView dgdados;
-        private PictureBox pictureBox2;
-        private PictureBox pictureBox1;
+        private PictureBox pbFechar;
+        private PictureBox pbMaximizar;
     }
 }

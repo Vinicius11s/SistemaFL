@@ -30,8 +30,12 @@ namespace SistemaFL.Funcionalidades
         }
         private void FrmFuncionalidadeLogin_Load(object sender, EventArgs e)
         {
+            VerificaUsuarioAdminCriado();
+            
+        }
+        private void VerificaUsuarioAdminCriado()
+        {
             var admin = repositorio.Recuperar(u => u.id == 1);
-
             if (admin == null) // Se não encontrar um usuário com id 1
             {
                 CriarUsuarioAdmin();
@@ -52,6 +56,8 @@ namespace SistemaFL.Funcionalidades
             Program.serviceProvider.
                         GetRequiredService<ContextoSistema>().SaveChanges();
         }
+        //
+        //Eventos
         private void btnentrar_KeyDown(object sender, KeyEventArgs e)
         {
 
@@ -63,10 +69,6 @@ namespace SistemaFL.Funcionalidades
                 // Aqui, você chama a lógica de validação de login manualmente
                 btnentrar_Click(sender, e);
             }
-        }
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
         private void btnentrar_Click(object sender, EventArgs e)
         {
@@ -90,6 +92,14 @@ namespace SistemaFL.Funcionalidades
             {
                 MessageBox.Show("Por favor informar Login e Senha.");
             }
+        }
+        private void pbFechar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }        
+        private void pbMinimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

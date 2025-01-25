@@ -27,23 +27,11 @@ namespace SistemaFL
         bool funcExpand = false;
         private void FrmPrincipalFF_Load(object sender, EventArgs e)
         {
-            AjustaPictureBox_MaxMinFechar();
-            sidebar.BringToFront();
-
-            var form8 = Program.serviceProvider.GetRequiredService<FrmFuncLogin>();
-            form8.ShowDialog();  // Aguarda o login ser fechado
-
-            if (Sessao.idUsuarioLogado > 0)
-            {
-                var usuario = repositorioFunc.Recuperar(u => u.id == form8.idUsuario);
-            }
-            else
-            {
-                this.Close();
-            }
-
+            AjustaPictureBox_MinimizarEFechar();
+            pMenuOpcoes.BringToFront();
+            GuardaUsuaruioLogado();
         }
-        private void AjustaPictureBox_MaxMinFechar()
+        private void AjustaPictureBox_MinimizarEFechar()
         {
             int margem = 10;
 
@@ -56,14 +44,28 @@ namespace SistemaFL
             pbMinimizar.Location = new Point(x2, y2);
 
         }
+        private void GuardaUsuaruioLogado()
+        {
+            var form8 = Program.serviceProvider.GetRequiredService<FrmFuncLogin>();
+            form8.ShowDialog();  // Aguarda o login ser fechado
+
+            if (Sessao.idUsuarioLogado > 0)
+            {
+                var usuario = repositorioFunc.Recuperar(u => u.id == form8.idUsuario);
+            }
+            else
+            {
+                this.Close();
+            }
+        }
         //
         //Transições
         private void sidebarTransition_Tick(object sender, EventArgs e)
         {
             if (sidebarExpand)
             {
-                sidebar.Width -= 10;
-                if (sidebar.Width <= 47)
+                pMenuOpcoes.Width -= 10;
+                if (pMenuOpcoes.Width <= 47)
                 {
                     sidebarTransition.Stop();
                     sidebarExpand = false; // Atualiza corretamente o estado para "recolhido"
@@ -71,8 +73,8 @@ namespace SistemaFL
             }
             else
             {
-                sidebar.Width += 10;
-                if (sidebar.Width >= 205)
+                pMenuOpcoes.Width += 10;
+                if (pMenuOpcoes.Width >= 205)
                 {
                     sidebarTransition.Stop();
                     sidebarExpand = true; // Atualiza corretamente o estado para "expandido"
@@ -121,7 +123,7 @@ namespace SistemaFL
                 }
             }
         }
-        private void btnHam_Click_1(object sender, EventArgs e)
+        private void btnEsconderPalavrasMenu_Click_1(object sender, EventArgs e)
         {
             sidebarTransition.Start();
 

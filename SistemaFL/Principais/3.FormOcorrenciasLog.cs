@@ -27,13 +27,29 @@ namespace SistemaFL
             this.lancamentoRepositorio = lancamentoRepositorio;
             this.flatRepositorio = flatRepositorio;
         }
-
         private void FrmConsultaOcorrencia_Load(object sender, EventArgs e)
         {
+            AjustaPictureBox_MinimizarFechar();
             dgdadosocorrencias.ReadOnly = true;
-            CarregarDados();                        
+            CarregarDados();
         }
+        private void AjustaPictureBox_MinimizarFechar()
+        {
+            int margem = 10;
 
+            // Posição do pbMaximizar (no canto superior direito)
+            int x1 = this.ClientSize.Width - pbFechar.Width - margem;
+            int y1 = margem;
+
+            pbFechar.Location = new Point(x1, y1);
+
+            // Posição do pbFechar (ao lado esquerdo de pbMaximizar)
+            int x2 = x1 - pbMinimizar.Width - margem;
+            int y2 = margem;          
+
+        }
+        //
+        //DataGrid Últimos Lançamentos
         private void CarregarDados()
         {
             var lista = repositorio.ListarComFlat(e => true)
@@ -87,16 +103,18 @@ namespace SistemaFL
             }
         }
         private void AplicarFormatacaoLinha(DataGridViewRow row)
-        {           
-            row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;            
+        {
+            row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
         }
-        private void fecharjanela_Click(object sender, EventArgs e)
+        //
+        //Eventos
+        private void pbFechar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        private void minimizar_Click(object sender, EventArgs e)
+        private void pbMinimizar_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
+            this.WindowState = FormWindowState.Minimized;   
         }
     }
 }

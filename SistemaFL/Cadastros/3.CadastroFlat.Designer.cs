@@ -54,7 +54,7 @@
             txtdescricao = new TextBox();
             txtid = new TextBox();
             label1 = new Label();
-            pictureBox2 = new PictureBox();
+            pbFechar = new PictureBox();
             panel2 = new Panel();
             btnlocalizar = new Button();
             btnexcluir = new Button();
@@ -62,9 +62,11 @@
             btnsalvar = new Button();
             btnalterar = new Button();
             btnnovo = new Button();
+            pbMinimizar = new PictureBox();
             pdados.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbMinimizar).BeginInit();
             SuspendLayout();
             // 
             // pdados
@@ -95,9 +97,9 @@
             pdados.Controls.Add(txtid);
             pdados.Controls.Add(label1);
             pdados.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            pdados.Location = new Point(0, 0);
+            pdados.Location = new Point(84, 18);
             pdados.Name = "pdados";
-            pdados.Size = new Size(852, 373);
+            pdados.Size = new Size(743, 341);
             pdados.TabIndex = 0;
             // 
             // txtempresaAss
@@ -340,40 +342,41 @@
             label1.TabIndex = 15;
             label1.Text = "Código";
             // 
-            // pictureBox2
+            // pbFechar
             // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(858, 12);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(30, 21);
-            pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
-            pictureBox2.TabIndex = 48;
-            pictureBox2.TabStop = false;
-            pictureBox2.Click += pictureBox2_Click;
+            pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
+            pbFechar.Location = new Point(891, 5);
+            pbFechar.Name = "pbFechar";
+            pbFechar.Size = new Size(30, 21);
+            pbFechar.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbFechar.TabIndex = 48;
+            pbFechar.TabStop = false;
+            pbFechar.Click += pictureBox2_Click;
             // 
             // panel2
             // 
-            panel2.BackColor = Color.White;
+            panel2.BackColor = Color.FromArgb(23, 24, 29);
             panel2.Controls.Add(btnlocalizar);
-            panel2.Controls.Add(btnexcluir);
-            panel2.Controls.Add(btncancelar);
             panel2.Controls.Add(btnsalvar);
             panel2.Controls.Add(btnalterar);
             panel2.Controls.Add(btnnovo);
             panel2.Dock = DockStyle.Bottom;
-            panel2.Location = new Point(0, 370);
+            panel2.ForeColor = Color.Black;
+            panel2.Location = new Point(0, 383);
             panel2.Name = "panel2";
-            panel2.Size = new Size(891, 98);
+            panel2.Size = new Size(923, 85);
             panel2.TabIndex = 1;
             // 
             // btnlocalizar
             // 
-            btnlocalizar.BackColor = Color.FromArgb(23, 24, 29);
-            btnlocalizar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnlocalizar.BackColor = Color.Transparent;
+            btnlocalizar.FlatAppearance.BorderSize = 2;
+            btnlocalizar.FlatStyle = FlatStyle.Flat;
+            btnlocalizar.Font = new Font("Arial", 12F, FontStyle.Bold);
             btnlocalizar.ForeColor = Color.White;
-            btnlocalizar.Location = new Point(709, 19);
+            btnlocalizar.Location = new Point(593, 19);
             btnlocalizar.Name = "btnlocalizar";
-            btnlocalizar.Size = new Size(103, 52);
+            btnlocalizar.Size = new Size(102, 40);
             btnlocalizar.TabIndex = 17;
             btnlocalizar.Text = "Localizar";
             btnlocalizar.UseVisualStyleBackColor = false;
@@ -381,38 +384,42 @@
             // 
             // btnexcluir
             // 
-            btnexcluir.BackColor = Color.FromArgb(23, 24, 29);
+            btnexcluir.BackColor = Color.Transparent;
+            btnexcluir.FlatStyle = FlatStyle.Flat;
             btnexcluir.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnexcluir.ForeColor = Color.White;
-            btnexcluir.Location = new Point(575, 19);
+            btnexcluir.Image = Properties.Resources.icons8_entrada_proibida_31;
+            btnexcluir.Location = new Point(847, 149);
             btnexcluir.Name = "btnexcluir";
-            btnexcluir.Size = new Size(103, 52);
+            btnexcluir.Size = new Size(44, 45);
             btnexcluir.TabIndex = 16;
-            btnexcluir.Text = "Excluir";
             btnexcluir.UseVisualStyleBackColor = false;
             btnexcluir.Click += btnexcluir_Click_1;
             // 
             // btncancelar
             // 
-            btncancelar.BackColor = Color.FromArgb(23, 24, 29);
+            btncancelar.BackColor = Color.Transparent;
+            btncancelar.FlatStyle = FlatStyle.Flat;
             btncancelar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btncancelar.ForeColor = Color.White;
-            btncancelar.Location = new Point(438, 19);
+            btncancelar.Image = Properties.Resources.icons8_borracha_40;
+            btncancelar.Location = new Point(847, 83);
             btncancelar.Name = "btncancelar";
-            btncancelar.Size = new Size(103, 52);
+            btncancelar.Size = new Size(44, 45);
             btncancelar.TabIndex = 15;
-            btncancelar.Text = "Cancelar";
             btncancelar.UseVisualStyleBackColor = false;
             btncancelar.Click += btncancelar_Click_1;
             // 
             // btnsalvar
             // 
-            btnsalvar.BackColor = Color.FromArgb(23, 24, 29);
-            btnsalvar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnsalvar.BackColor = Color.Transparent;
+            btnsalvar.FlatAppearance.BorderSize = 2;
+            btnsalvar.FlatStyle = FlatStyle.Flat;
+            btnsalvar.Font = new Font("Arial", 12F, FontStyle.Bold);
             btnsalvar.ForeColor = Color.White;
-            btnsalvar.Location = new Point(308, 19);
+            btnsalvar.Location = new Point(464, 19);
             btnsalvar.Name = "btnsalvar";
-            btnsalvar.Size = new Size(103, 52);
+            btnsalvar.Size = new Size(102, 40);
             btnsalvar.TabIndex = 14;
             btnsalvar.Text = "Salvar";
             btnsalvar.UseVisualStyleBackColor = false;
@@ -420,12 +427,14 @@
             // 
             // btnalterar
             // 
-            btnalterar.BackColor = Color.FromArgb(23, 24, 29);
-            btnalterar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnalterar.BackColor = Color.Transparent;
+            btnalterar.FlatAppearance.BorderSize = 2;
+            btnalterar.FlatStyle = FlatStyle.Flat;
+            btnalterar.Font = new Font("Arial", 12F, FontStyle.Bold);
             btnalterar.ForeColor = Color.White;
-            btnalterar.Location = new Point(168, 19);
+            btnalterar.Location = new Point(326, 19);
             btnalterar.Name = "btnalterar";
-            btnalterar.Size = new Size(103, 52);
+            btnalterar.Size = new Size(102, 40);
             btnalterar.TabIndex = 13;
             btnalterar.Text = "Alterar";
             btnalterar.UseVisualStyleBackColor = false;
@@ -433,25 +442,41 @@
             // 
             // btnnovo
             // 
-            btnnovo.BackColor = Color.FromArgb(23, 24, 29);
-            btnnovo.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnnovo.BackColor = Color.Transparent;
+            btnnovo.FlatAppearance.BorderSize = 2;
+            btnnovo.FlatStyle = FlatStyle.Flat;
+            btnnovo.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnnovo.ForeColor = Color.White;
-            btnnovo.Location = new Point(31, 19);
+            btnnovo.Location = new Point(187, 19);
             btnnovo.Name = "btnnovo";
-            btnnovo.Size = new Size(103, 52);
+            btnnovo.Size = new Size(102, 40);
             btnnovo.TabIndex = 12;
             btnnovo.Text = "Novo";
             btnnovo.UseVisualStyleBackColor = false;
             btnnovo.Click += btnnovo_Click_1;
+            // 
+            // pbMinimizar
+            // 
+            pbMinimizar.Image = (Image)resources.GetObject("pbMinimizar.Image");
+            pbMinimizar.Location = new Point(861, 5);
+            pbMinimizar.Name = "pbMinimizar";
+            pbMinimizar.Size = new Size(30, 21);
+            pbMinimizar.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbMinimizar.TabIndex = 51;
+            pbMinimizar.TabStop = false;
+            pbMinimizar.Click += pbMinimizar_Click;
             // 
             // FrmCadFlat
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(891, 468);
-            Controls.Add(pictureBox2);
+            ClientSize = new Size(923, 468);
+            Controls.Add(pbMinimizar);
+            Controls.Add(pbFechar);
+            Controls.Add(btnexcluir);
             Controls.Add(panel2);
+            Controls.Add(btncancelar);
             Controls.Add(pdados);
             Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
@@ -463,8 +488,9 @@
             Load += FrmCadFlat_Load;
             pdados.ResumeLayout(false);
             pdados.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
             panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pbMinimizar).EndInit();
             ResumeLayout(false);
         }
 
@@ -502,6 +528,7 @@
         private Button btnnovo;
         private TextBox txtempresaAss;
         private Label labelempresaAss;
-        private PictureBox pictureBox2;
+        private PictureBox pbFechar;
+        private PictureBox pbMinimizar;
     }
 }
