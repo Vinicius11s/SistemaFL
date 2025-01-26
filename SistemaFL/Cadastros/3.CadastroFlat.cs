@@ -24,10 +24,14 @@ namespace SistemaFL
             InitializeComponent();
             this.repositorio = repositorio;
             this.empresaRepositorio = empresaRepositorio;
+
+            tTamanhotela.Tick += tTamanhotela_Tick;
+            tTamanhotela.Start();
         }
 
         private void FrmCadFlat_Load(object sender, EventArgs e)
         {
+            this.Location = new System.Drawing.Point(205, 41);
             limpar();
             pdados.Enabled = false;
             btnnovo.Enabled = true;
@@ -187,6 +191,8 @@ namespace SistemaFL
                 }
             }
         }
+
+
         public Flat carregaPropriedades()
         {
             Flat flat;
@@ -280,13 +286,18 @@ namespace SistemaFL
             txtestado.Text = "";
             txtempresaAss.Text = "";
         }
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void pbFechar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
         private void pbMinimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void tTamanhotela_Tick(object sender, EventArgs e)
+        {
+            Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, 10);
         }
     }
 }

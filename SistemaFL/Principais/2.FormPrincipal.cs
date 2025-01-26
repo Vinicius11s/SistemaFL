@@ -27,23 +27,10 @@ namespace SistemaFL
         bool funcExpand = false;
         private void FrmPrincipalFF_Load(object sender, EventArgs e)
         {
-            AjustaPictureBox_MinimizarEFechar();
             pMenuOpcoes.BringToFront();
             GuardaUsuaruioLogado();
         }
-        private void AjustaPictureBox_MinimizarEFechar()
-        {
-            int margem = 10;
 
-            int x1 = this.ClientSize.Width - pbFechar.Width - margem;
-            int y1 = margem;
-            pbFechar.Location = new Point(x1, y1);
-
-            int x2 = x1 - pbMinimizar.Width - margem;
-            int y2 = margem;
-            pbMinimizar.Location = new Point(x2, y2);
-
-        }
         private void GuardaUsuaruioLogado()
         {
             var form8 = Program.serviceProvider.GetRequiredService<FrmFuncLogin>();
@@ -166,7 +153,7 @@ namespace SistemaFL
         private void btnFuncionalidades_Click(object sender, EventArgs e)
         {
             funcTransition.Start();
-        }      
+        }
         private void btnregistros_Click(object sender, EventArgs e)
         {
             var form = Program.serviceProvider.GetRequiredService<FrmFuncionalidadeRegisto>();
@@ -199,16 +186,16 @@ namespace SistemaFL
         }
         //
         //
-        private void pbFechar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        
         private void pbMinimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
-        
-        
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
 

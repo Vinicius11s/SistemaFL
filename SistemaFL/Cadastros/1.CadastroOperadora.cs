@@ -1,4 +1,4 @@
-﻿using Entidades;
+﻿    using Entidades;
 using Infraestrutura.Contexto;
 using Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,15 +28,13 @@ namespace SistemaFL
             this.repositorio = repositorio;
             this.flatRepositorio = flatRepositorio;
 
-            tTamanhotela.Interval = 50;  // Intervalo de 50ms entre as expansões
+            tTamanhotela.Interval = 5;
             tTamanhotela.Tick += tTamanhotela_Tick;
             tTamanhotela.Start();
         }
-
         private void FrmCadEmpresaFF_Load(object sender, EventArgs e)
         {
             this.Location = new System.Drawing.Point(205, 41);
-
             limpar();
             pdados.Enabled = false;
             passociar.Enabled = false;
@@ -48,6 +46,7 @@ namespace SistemaFL
             btnlocalizar.Enabled = true;
 
         }
+        
         //
         //CRUD
         private void btnnovo_Click(object sender, EventArgs e)
@@ -136,9 +135,9 @@ namespace SistemaFL
                     txtcidade.Text = empresa.Cidade;
                     txtestado.Text = empresa.Estado;
                     txtcep.Text = empresa.Cep;
-
-                    AtualizarDataGridFlatsNaoAssociados();
-                    CarregarFlats(); // Carrega os flats associados ao ComboBox
+                    
+                    CarregarFlatsNaoAssociados();
+                    CarregarComboBoxFlatsAssociados(); // Carrega os flats associados ao ComboBox
                     passociar.Enabled = true;
                     pdados.Enabled = true;
                     btnnovo.Enabled = false;
@@ -156,21 +155,29 @@ namespace SistemaFL
         }
         private void btnexcluir_Click(object sender, EventArgs e)
         {
+
             if (txtid.Text != "")
             {
-                var empresa = carregaPropriedades();
-                repositorio.Excluir(empresa);
-                Program.serviceProvider.
-                    GetRequiredService<ContextoSistema>().SaveChanges();
+                // Exibe a mensagem de confirmação antes de excluir
+                DialogResult result = MessageBox.Show("Tem certeza que deseja excluir este registro?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                MessageBox.Show("Registro excluído com sucesso!");
-                limpar();
-                btnnovo.Enabled = true;
-                btnlocalizar.Enabled = true;
-                btnalterar.Enabled = false;
-                btncancelar.Enabled = false;
-                btnexcluir.Enabled = false;
-                btnsalvar.Enabled = false;
+                // Verifica se o usuário clicou em "Sim"
+                if (result == DialogResult.Yes)
+                {
+                    var empresa = carregaPropriedades();
+                    repositorio.Excluir(empresa);
+                    Program.serviceProvider.
+                        GetRequiredService<ContextoSistema>().SaveChanges();
+
+                    MessageBox.Show("Registro excluído com sucesso!");
+                    limpar();
+                    btnnovo.Enabled = true;
+                    btnlocalizar.Enabled = true;
+                    btnalterar.Enabled = false;
+                    btncancelar.Enabled = false;
+                    btnexcluir.Enabled = false;
+                    btnsalvar.Enabled = false;
+                }
             }
             else
             {
@@ -207,7 +214,7 @@ namespace SistemaFL
                     txtcep.Text = empresa.Cep;
 
                     // Carregar os flats associados à empresa
-                    CarregarFlats(); // Carrega os flats da empresa no ComboBox
+                    CarregarComboBoxFlatsAssociados(); // Carrega os flats da empresa no ComboBox
                 }
             }
             else
@@ -222,56 +229,44 @@ namespace SistemaFL
 
         }
         //
-        //DataGrid AssociarFlat
-        private void CarregarFlats()
+        //DataGrid Flats Não Associados
+        private void CarregarFlatsNaoAssociados()
         {
-            // Carregar os flats associados à empresa
-            var flatsAssociados = flatRepositorio.Listar(f => f.idEmpresa == int.Parse(txtid.Text));
-            cbbflatsassociados.DataSource = flatsAssociados;
-            cbbflatsassociados.DisplayMember = "Descricao"; // Exibe a descrição do flat
-            cbbflatsassociados.ValueMember = "id"; // Usado para o valor do item
-            AlterarEstilosCabecalho(dgAssociarFlat);
-            // Se houver pelo menos um flat associado, seleciona o primeiro
-            if (cbbflatsassociados.Items.Count > 0)
-            {
-                cbbflatsassociados.SelectedIndex = 0; // Seleciona o primeiro flat
-            }
-            else
-            {
-                cbbflatsassociados.SelectedIndex = -1; // Nenhum item será selecionado
-            }
-        }
-        private void AlterarEstilosCabecalho(DataGridView grid)
-        {
-            dgAssociarFlat.EnableHeadersVisualStyles = false;
-            dgAssociarFlat.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
-            dgAssociarFlat.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgAssociarFlat.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 9, FontStyle.Regular);
-        }
+            var flatsNaoAssociados = flatRepositorio.Listar(f => f.idEmpresa == null).ToList();
+            dgAssociarFlat.DataSource = flatsNaoAssociados;
 
-         public Empresa carregaPropriedades()
-        {
-            Empresa empresa;
-            if (txtid.Text != "")
-            {
-                empresa = repositorio.Recuperar(c => c.id == int.Parse(txtid.Text));
-            }
-            else empresa = new Empresa();
-
-            empresa.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
-            empresa.Descricao = txtdescricao.Text;
-            ValidarCnpj(empresa);
-            empresa.RazaoSocial = txtrazaosocial.Text;
-            empresa.InscricaoEstadual = txtinscricaoestadual.Text;
-            empresa.Cep = txtcep.Text;
-            empresa.Rua = txtrua.Text;
-            empresa.Numero = txtnumero.Text;
-            empresa.Cidade = txtcidade.Text;
-            empresa.Estado = txtestado.Text;
-            empresa.Bairro = txtbairro.Text;
-            return empresa;
+            Estilos.AlterarEstiloDataGrid(dgAssociarFlat);
+            AjustarNomesCabecalho(dgAssociarFlat);
         }
-        
+        private void AjustarNomesCabecalho(DataGridView grid)
+        {
+            grid.Columns["id"].Visible = false;
+            grid.Columns["idEmpresa"].Visible = false;
+            grid.Columns["Empresa"].Visible = false;
+            grid.Columns["Lancamentos"].Visible = false;
+            grid.Columns["Ocorrencias"].Visible = false;
+            grid.Columns["Ativo"].Visible = false;
+
+            grid.Columns["Descricao"].HeaderText = "DESCRIÇÃO";
+            grid.Columns["TipoInvestimento"].HeaderText = "TIPO INVESTIMENTO";
+
+            grid.Columns["Unidade"].HeaderText = "UN";
+            grid.Columns["Unidade"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            grid.Columns["Status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            grid.Columns["DataAquisicao"].DefaultCellStyle.Format = "d";
+            grid.Columns["DataAquisicao"].HeaderText = "DATA AQUISIÇÃO";
+
+            grid.Columns["ValorInvestimento"].DefaultCellStyle.Format = "C2";
+            grid.Columns["ValorInvestimento"].HeaderText = "VALOR INVESTIMENTO";
+
+            foreach (DataGridViewColumn coluna in grid.Columns)
+            {
+                coluna.HeaderText = coluna.HeaderText.ToUpper();
+                grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            }
+
+        }
         private void btnassociar_Click(object sender, EventArgs e)
         {
             if (dgAssociarFlat.SelectedRows.Count > 0)
@@ -290,8 +285,8 @@ namespace SistemaFL
 
                     MessageBox.Show("Flat associado à empresa com sucesso!");
 
-                    AtualizarDataGridFlatsNaoAssociados();
-                    CarregarFlats(); // Recarrega os flats no ComboBox
+                    CarregarFlatsNaoAssociados();
+                    CarregarComboBoxFlatsAssociados(); // Recarrega os flats no ComboBox
                 }
                 else
                 {
@@ -321,8 +316,8 @@ namespace SistemaFL
 
                     MessageBox.Show("Flat desassociado com sucesso!");
 
-                    AtualizarDataGridFlatsNaoAssociados();
-                    CarregarFlats();
+                    CarregarFlatsNaoAssociados();
+                    CarregarComboBoxFlatsAssociados();
                     AvancarParaProximoItem();// Recarrega os flats no ComboBox
 
                 }
@@ -336,17 +331,24 @@ namespace SistemaFL
                 MessageBox.Show("Selecione um flat para remover.");
             }
         }
-        private void AtualizarDataGridFlatsNaoAssociados()
+        //
+        //ComboBox Flats Associados
+        private void CarregarComboBoxFlatsAssociados()
         {
-            // Recupera os flats que não têm empresa associada
-            var flatsNaoAssociados = flatRepositorio.Listar(f => f.idEmpresa == null).ToList();
+            var flatsAssociados = flatRepositorio.Listar(f => f.idEmpresa == int.Parse(txtid.Text));
+            cbbflatsassociados.DataSource = flatsAssociados;
 
-            // Atualiza o DataGridView com esses flats
-            dgAssociarFlat.DataSource = flatsNaoAssociados;
+            cbbflatsassociados.DisplayMember = "Descricao"; // Exibe a descrição do flat
+            cbbflatsassociados.ValueMember = "id"; // Usado para o valor do item
 
-            // Se necessário, configurar as colunas do DataGridView para exibir apenas as informações desejadas
-            dgAssociarFlat.Columns["id"].Visible = false; // Ocultar a coluna id, caso não queira exibi-la
-            dgAssociarFlat.Columns["Descricao"].HeaderText = "Descrição do Flat"; // Ajustar o nome da coluna
+            if (cbbflatsassociados.Items.Count > 0)
+            {
+                cbbflatsassociados.SelectedIndex = 0; // Seleciona o primeiro flat
+            }
+            else
+            {
+                cbbflatsassociados.SelectedIndex = -1; // Nenhum item será selecionado
+            }
         }
         private void AvancarParaProximoItem()
         {
@@ -371,6 +373,30 @@ namespace SistemaFL
                 cbbflatsassociados.Text = "";
             }
         }
+        //
+        //
+        public Empresa carregaPropriedades()
+        {
+            Empresa empresa;
+            if (txtid.Text != "")
+            {
+                empresa = repositorio.Recuperar(c => c.id == int.Parse(txtid.Text));
+            }
+            else empresa = new Empresa();
+
+            empresa.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
+            empresa.Descricao = txtdescricao.Text;
+            ValidarCnpj(empresa);
+            empresa.RazaoSocial = txtrazaosocial.Text;
+            empresa.InscricaoEstadual = txtinscricaoestadual.Text;
+            empresa.Cep = txtcep.Text;
+            empresa.Rua = txtrua.Text;
+            empresa.Numero = txtnumero.Text;
+            empresa.Cidade = txtcidade.Text;
+            empresa.Estado = txtestado.Text;
+            empresa.Bairro = txtbairro.Text;
+            return empresa;
+        }
         private void ValidarCnpj(Empresa empresa)
         {
             string cnpj = txtcnpj.Text;
@@ -386,34 +412,7 @@ namespace SistemaFL
 
             empresa.Cnpj = cnpj;
         }
-
-        private void pbFechar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-        private void pbMinimizar_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-        private void tTamanhotela_Tick(object sender, EventArgs e)
-        {
-            // Obtém o tamanho da tela
-            var screenWidth = Screen.PrimaryScreen.WorkingArea.Width;
-            var screenHeight = Screen.PrimaryScreen.WorkingArea.Height;
-
-            // Expande o formulário para a direita e para baixo
-            if (this.Width < screenWidth)
-                this.Width += incremento;
-
-            if (this.Height < screenHeight)
-                this.Height += incremento;
-
-            // Para o timer quando o formulário atingir o tamanho da tela
-            if (this.Width >= screenWidth && this.Height >= screenHeight)
-            {
-                tTamanhotela.Stop();
-            }
-        }
+        //
         void limpar()
         {
             if (cbbflatsassociados.Items.Count > 0)
@@ -444,5 +443,19 @@ namespace SistemaFL
             txtestado.Text = "";
             txtcep.Text = "";
         }
+        private void pbFechar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void pbMinimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+        private void tTamanhotela_Tick(object sender, EventArgs e)
+        {
+            Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, incremento);
+        }
+
+       
     }
 }

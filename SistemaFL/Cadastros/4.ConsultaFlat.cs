@@ -34,7 +34,7 @@ namespace SistemaFL
         {
             CarregarDadosDataGrid();
 
-            Estilos.AlterarEstilosCabecalho(dgdadosFlats);      
+            Estilos.AlterarEstiloDataGrid(dgdadosFlats);      
             
             foreach (DataGridViewRow row in dgdadosFlats.Rows)
             {

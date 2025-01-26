@@ -31,8 +31,6 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipalFF));
             pMenuOpcoes = new FlowLayoutPanel();
-            panel2 = new Panel();
-            btnocorrencias = new Button();
             menuContainer = new FlowLayoutPanel();
             panel3 = new Panel();
             cadastros = new Button();
@@ -44,8 +42,11 @@
             btnlancamentos = new Button();
             panel8 = new Panel();
             btnusuarios = new Button();
+            panel2 = new Panel();
+            btnocorrencias = new Button();
             funcContainer = new FlowLayoutPanel();
             panel4 = new Panel();
+            button1 = new Button();
             btnFuncionalidades = new Button();
             panel9 = new Panel();
             btnregistros = new Button();
@@ -59,23 +60,39 @@
             btnrendimentos = new Button();
             panel14 = new Panel();
             btnpiscofins = new Button();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            panel15 = new Panel();
+            button2 = new Button();
+            button3 = new Button();
+            panel16 = new Panel();
+            button4 = new Button();
+            panel17 = new Panel();
+            button5 = new Button();
+            panel18 = new Panel();
+            button6 = new Button();
+            panel19 = new Panel();
+            button7 = new Button();
+            panel20 = new Panel();
+            button8 = new Button();
+            panel21 = new Panel();
+            button9 = new Button();
             menuTransition = new System.Windows.Forms.Timer(components);
             sidebarTransition = new System.Windows.Forms.Timer(components);
             funcTransition = new System.Windows.Forms.Timer(components);
             pictureBox1 = new PictureBox();
             panel1 = new Panel();
             pbMinimizar = new PictureBox();
-            pbFechar = new PictureBox();
             label1 = new Label();
             btnEsconderPalavrasMenu = new PictureBox();
+            button10 = new Button();
             pMenuOpcoes.SuspendLayout();
-            panel2.SuspendLayout();
             menuContainer.SuspendLayout();
             panel3.SuspendLayout();
             panel5.SuspendLayout();
             panel6.SuspendLayout();
             panel7.SuspendLayout();
             panel8.SuspendLayout();
+            panel2.SuspendLayout();
             funcContainer.SuspendLayout();
             panel4.SuspendLayout();
             panel9.SuspendLayout();
@@ -84,10 +101,17 @@
             panel12.SuspendLayout();
             panel13.SuspendLayout();
             panel14.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
+            panel15.SuspendLayout();
+            panel16.SuspendLayout();
+            panel17.SuspendLayout();
+            panel18.SuspendLayout();
+            panel19.SuspendLayout();
+            panel20.SuspendLayout();
+            panel21.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbMinimizar).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnEsconderPalavrasMenu).BeginInit();
             SuspendLayout();
             // 
@@ -95,41 +119,15 @@
             // 
             pMenuOpcoes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             pMenuOpcoes.BackColor = Color.FromArgb(23, 24, 29);
-            pMenuOpcoes.Controls.Add(panel2);
             pMenuOpcoes.Controls.Add(menuContainer);
+            pMenuOpcoes.Controls.Add(panel2);
             pMenuOpcoes.Controls.Add(funcContainer);
+            pMenuOpcoes.Controls.Add(flowLayoutPanel1);
             pMenuOpcoes.Location = new Point(0, 41);
             pMenuOpcoes.Name = "pMenuOpcoes";
             pMenuOpcoes.Padding = new Padding(0, 30, 0, 0);
             pMenuOpcoes.Size = new Size(205, 481);
             pMenuOpcoes.TabIndex = 1;
-            // 
-            // panel2
-            // 
-            panel2.BackColor = Color.FromArgb(23, 24, 29);
-            panel2.Controls.Add(btnocorrencias);
-            panel2.Location = new Point(3, 33);
-            panel2.Name = "panel2";
-            panel2.Padding = new Padding(0, 30, 0, 0);
-            panel2.Size = new Size(197, 46);
-            panel2.TabIndex = 3;
-            // 
-            // btnocorrencias
-            // 
-            btnocorrencias.BackColor = Color.FromArgb(23, 24, 29);
-            btnocorrencias.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnocorrencias.ForeColor = Color.White;
-            btnocorrencias.Image = (Image)resources.GetObject("btnocorrencias.Image");
-            btnocorrencias.ImageAlign = ContentAlignment.MiddleLeft;
-            btnocorrencias.Location = new Point(-19, -9);
-            btnocorrencias.Name = "btnocorrencias";
-            btnocorrencias.Padding = new Padding(25, 0, 0, 0);
-            btnocorrencias.Size = new Size(238, 61);
-            btnocorrencias.TabIndex = 4;
-            btnocorrencias.Text = "         Ocôrrencias";
-            btnocorrencias.TextAlign = ContentAlignment.MiddleLeft;
-            btnocorrencias.UseVisualStyleBackColor = false;
-            btnocorrencias.Click += btnocorrencias_Click;
             // 
             // menuContainer
             // 
@@ -139,7 +137,7 @@
             menuContainer.Controls.Add(panel6);
             menuContainer.Controls.Add(panel7);
             menuContainer.Controls.Add(panel8);
-            menuContainer.Location = new Point(0, 82);
+            menuContainer.Location = new Point(0, 30);
             menuContainer.Margin = new Padding(0);
             menuContainer.Name = "menuContainer";
             menuContainer.Size = new Size(197, 50);
@@ -194,7 +192,7 @@
             btnempresas.Padding = new Padding(25, 0, 0, 0);
             btnempresas.Size = new Size(238, 71);
             btnempresas.TabIndex = 4;
-            btnempresas.Text = "       Empresas";
+            btnempresas.Text = "       Operadoras";
             btnempresas.TextAlign = ContentAlignment.MiddleLeft;
             btnempresas.UseVisualStyleBackColor = false;
             btnempresas.Click += btnempresas_Click;
@@ -280,6 +278,33 @@
             btnusuarios.UseVisualStyleBackColor = false;
             btnusuarios.Click += btnusuarios_Click;
             // 
+            // panel2
+            // 
+            panel2.BackColor = Color.FromArgb(23, 24, 29);
+            panel2.Controls.Add(btnocorrencias);
+            panel2.Location = new Point(3, 83);
+            panel2.Name = "panel2";
+            panel2.Padding = new Padding(0, 30, 0, 0);
+            panel2.Size = new Size(197, 46);
+            panel2.TabIndex = 3;
+            // 
+            // btnocorrencias
+            // 
+            btnocorrencias.BackColor = Color.FromArgb(23, 24, 29);
+            btnocorrencias.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnocorrencias.ForeColor = Color.White;
+            btnocorrencias.Image = (Image)resources.GetObject("btnocorrencias.Image");
+            btnocorrencias.ImageAlign = ContentAlignment.MiddleLeft;
+            btnocorrencias.Location = new Point(-19, -9);
+            btnocorrencias.Name = "btnocorrencias";
+            btnocorrencias.Padding = new Padding(25, 0, 0, 0);
+            btnocorrencias.Size = new Size(238, 61);
+            btnocorrencias.TabIndex = 4;
+            btnocorrencias.Text = "         Ocôrrencias";
+            btnocorrencias.TextAlign = ContentAlignment.MiddleLeft;
+            btnocorrencias.UseVisualStyleBackColor = false;
+            btnocorrencias.Click += btnocorrencias_Click;
+            // 
             // funcContainer
             // 
             funcContainer.BackColor = Color.FromArgb(32, 33, 36);
@@ -299,12 +324,29 @@
             // panel4
             // 
             panel4.BackColor = Color.FromArgb(23, 24, 29);
+            panel4.Controls.Add(button1);
             panel4.Controls.Add(btnFuncionalidades);
             panel4.Location = new Point(3, 3);
             panel4.Name = "panel4";
             panel4.Padding = new Padding(0, 30, 0, 0);
             panel4.Size = new Size(197, 50);
             panel4.TabIndex = 5;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.FromArgb(23, 24, 29);
+            button1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.White;
+            button1.Image = (Image)resources.GetObject("button1.Image");
+            button1.ImageAlign = ContentAlignment.MiddleLeft;
+            button1.Location = new Point(-21, -14);
+            button1.Name = "button1";
+            button1.Padding = new Padding(25, 0, 0, 0);
+            button1.Size = new Size(238, 79);
+            button1.TabIndex = 5;
+            button1.Text = "         Funcionalidades";
+            button1.TextAlign = ContentAlignment.MiddleLeft;
+            button1.UseVisualStyleBackColor = false;
             // 
             // btnFuncionalidades
             // 
@@ -485,6 +527,221 @@
             btnpiscofins.UseVisualStyleBackColor = false;
             btnpiscofins.Click += btnpiscofins_Click;
             // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.BackColor = Color.FromArgb(32, 33, 36);
+            flowLayoutPanel1.Controls.Add(panel15);
+            flowLayoutPanel1.Controls.Add(panel16);
+            flowLayoutPanel1.Controls.Add(panel17);
+            flowLayoutPanel1.Controls.Add(panel18);
+            flowLayoutPanel1.Controls.Add(panel19);
+            flowLayoutPanel1.Controls.Add(panel20);
+            flowLayoutPanel1.Controls.Add(panel21);
+            flowLayoutPanel1.Location = new Point(0, 182);
+            flowLayoutPanel1.Margin = new Padding(0);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(200, 50);
+            flowLayoutPanel1.TabIndex = 12;
+            // 
+            // panel15
+            // 
+            panel15.BackColor = Color.FromArgb(23, 24, 29);
+            panel15.Controls.Add(button2);
+            panel15.Controls.Add(button3);
+            panel15.Location = new Point(3, 3);
+            panel15.Name = "panel15";
+            panel15.Padding = new Padding(0, 30, 0, 0);
+            panel15.Size = new Size(197, 50);
+            panel15.TabIndex = 5;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.FromArgb(23, 24, 29);
+            button2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button2.ForeColor = Color.White;
+            button2.Image = (Image)resources.GetObject("button2.Image");
+            button2.ImageAlign = ContentAlignment.MiddleLeft;
+            button2.Location = new Point(-21, -14);
+            button2.Name = "button2";
+            button2.Padding = new Padding(25, 0, 0, 0);
+            button2.Size = new Size(238, 79);
+            button2.TabIndex = 5;
+            button2.Text = "         Relatórios";
+            button2.TextAlign = ContentAlignment.MiddleLeft;
+            button2.UseVisualStyleBackColor = false;
+            // 
+            // button3
+            // 
+            button3.BackColor = Color.FromArgb(23, 24, 29);
+            button3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button3.ForeColor = Color.White;
+            button3.Image = (Image)resources.GetObject("button3.Image");
+            button3.ImageAlign = ContentAlignment.MiddleLeft;
+            button3.Location = new Point(-19, -18);
+            button3.Name = "button3";
+            button3.Padding = new Padding(25, 0, 0, 0);
+            button3.Size = new Size(238, 79);
+            button3.TabIndex = 4;
+            button3.Text = "         Funcionalidades";
+            button3.TextAlign = ContentAlignment.MiddleLeft;
+            button3.UseVisualStyleBackColor = false;
+            // 
+            // panel16
+            // 
+            panel16.BackColor = Color.FromArgb(23, 24, 29);
+            panel16.Controls.Add(button4);
+            panel16.Location = new Point(3, 59);
+            panel16.Name = "panel16";
+            panel16.Padding = new Padding(0, 30, 0, 0);
+            panel16.Size = new Size(197, 50);
+            panel16.TabIndex = 6;
+            // 
+            // button4
+            // 
+            button4.BackColor = Color.FromArgb(32, 33, 36);
+            button4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button4.ForeColor = Color.White;
+            button4.Image = (Image)resources.GetObject("button4.Image");
+            button4.ImageAlign = ContentAlignment.MiddleLeft;
+            button4.Location = new Point(-19, -7);
+            button4.Name = "button4";
+            button4.Padding = new Padding(25, 0, 0, 0);
+            button4.Size = new Size(238, 64);
+            button4.TabIndex = 4;
+            button4.Text = "     Registros";
+            button4.TextAlign = ContentAlignment.MiddleLeft;
+            button4.UseVisualStyleBackColor = false;
+            // 
+            // panel17
+            // 
+            panel17.BackColor = Color.FromArgb(23, 24, 29);
+            panel17.Controls.Add(button5);
+            panel17.Location = new Point(3, 115);
+            panel17.Name = "panel17";
+            panel17.Padding = new Padding(0, 30, 0, 0);
+            panel17.Size = new Size(197, 50);
+            panel17.TabIndex = 7;
+            // 
+            // button5
+            // 
+            button5.BackColor = Color.FromArgb(32, 33, 36);
+            button5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button5.ForeColor = Color.White;
+            button5.Image = (Image)resources.GetObject("button5.Image");
+            button5.ImageAlign = ContentAlignment.MiddleLeft;
+            button5.Location = new Point(-19, -7);
+            button5.Name = "button5";
+            button5.Padding = new Padding(25, 0, 0, 0);
+            button5.Size = new Size(238, 64);
+            button5.TabIndex = 4;
+            button5.Text = "     Aluguel + Dividendos";
+            button5.TextAlign = ContentAlignment.MiddleLeft;
+            button5.UseVisualStyleBackColor = false;
+            // 
+            // panel18
+            // 
+            panel18.BackColor = Color.FromArgb(23, 24, 29);
+            panel18.Controls.Add(button6);
+            panel18.Location = new Point(3, 171);
+            panel18.Name = "panel18";
+            panel18.Padding = new Padding(0, 30, 0, 0);
+            panel18.Size = new Size(197, 50);
+            panel18.TabIndex = 8;
+            // 
+            // button6
+            // 
+            button6.BackColor = Color.FromArgb(32, 33, 36);
+            button6.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button6.ForeColor = Color.White;
+            button6.Image = (Image)resources.GetObject("button6.Image");
+            button6.ImageAlign = ContentAlignment.MiddleLeft;
+            button6.Location = new Point(-19, -7);
+            button6.Name = "button6";
+            button6.Padding = new Padding(25, 0, 0, 0);
+            button6.Size = new Size(238, 71);
+            button6.TabIndex = 4;
+            button6.Text = "     Dividendos";
+            button6.TextAlign = ContentAlignment.MiddleLeft;
+            button6.UseVisualStyleBackColor = false;
+            // 
+            // panel19
+            // 
+            panel19.BackColor = Color.FromArgb(23, 24, 29);
+            panel19.Controls.Add(button7);
+            panel19.Location = new Point(3, 227);
+            panel19.Name = "panel19";
+            panel19.Padding = new Padding(0, 30, 0, 0);
+            panel19.Size = new Size(197, 50);
+            panel19.TabIndex = 9;
+            // 
+            // button7
+            // 
+            button7.BackColor = Color.FromArgb(32, 33, 36);
+            button7.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button7.ForeColor = Color.White;
+            button7.Image = (Image)resources.GetObject("button7.Image");
+            button7.ImageAlign = ContentAlignment.MiddleLeft;
+            button7.Location = new Point(-19, -7);
+            button7.Name = "button7";
+            button7.Padding = new Padding(25, 0, 0, 0);
+            button7.Size = new Size(238, 71);
+            button7.TabIndex = 4;
+            button7.Text = "     Fundo de Reserva";
+            button7.TextAlign = ContentAlignment.MiddleLeft;
+            button7.UseVisualStyleBackColor = false;
+            // 
+            // panel20
+            // 
+            panel20.BackColor = Color.FromArgb(23, 24, 29);
+            panel20.Controls.Add(button8);
+            panel20.Location = new Point(3, 283);
+            panel20.Name = "panel20";
+            panel20.Padding = new Padding(0, 30, 0, 0);
+            panel20.Size = new Size(197, 50);
+            panel20.TabIndex = 10;
+            // 
+            // button8
+            // 
+            button8.BackColor = Color.FromArgb(32, 33, 36);
+            button8.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button8.ForeColor = Color.White;
+            button8.Image = (Image)resources.GetObject("button8.Image");
+            button8.ImageAlign = ContentAlignment.MiddleLeft;
+            button8.Location = new Point(-19, -7);
+            button8.Name = "button8";
+            button8.Padding = new Padding(25, 0, 0, 0);
+            button8.Size = new Size(238, 71);
+            button8.TabIndex = 4;
+            button8.Text = "     Rendimentos";
+            button8.TextAlign = ContentAlignment.MiddleLeft;
+            button8.UseVisualStyleBackColor = false;
+            // 
+            // panel21
+            // 
+            panel21.BackColor = Color.FromArgb(23, 24, 29);
+            panel21.Controls.Add(button9);
+            panel21.Location = new Point(3, 339);
+            panel21.Name = "panel21";
+            panel21.Padding = new Padding(0, 30, 0, 0);
+            panel21.Size = new Size(197, 50);
+            panel21.TabIndex = 11;
+            // 
+            // button9
+            // 
+            button9.BackColor = Color.FromArgb(32, 33, 36);
+            button9.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button9.ForeColor = Color.White;
+            button9.Image = (Image)resources.GetObject("button9.Image");
+            button9.ImageAlign = ContentAlignment.MiddleLeft;
+            button9.Location = new Point(-19, -10);
+            button9.Name = "button9";
+            button9.Padding = new Padding(25, 0, 0, 0);
+            button9.Size = new Size(238, 74);
+            button9.TabIndex = 4;
+            button9.Text = "     Pis e Cofins";
+            button9.TextAlign = ContentAlignment.MiddleLeft;
+            button9.UseVisualStyleBackColor = false;
+            // 
             // menuTransition
             // 
             menuTransition.Interval = 10;
@@ -513,9 +770,8 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.White;
+            panel1.BackColor = Color.DarkGray;
             panel1.Controls.Add(pbMinimizar);
-            panel1.Controls.Add(pbFechar);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(btnEsconderPalavrasMenu);
             panel1.Dock = DockStyle.Top;
@@ -526,6 +782,7 @@
             // 
             // pbMinimizar
             // 
+            pbMinimizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbMinimizar.Image = (Image)resources.GetObject("pbMinimizar.Image");
             pbMinimizar.Location = new Point(799, 7);
             pbMinimizar.Name = "pbMinimizar";
@@ -534,17 +791,6 @@
             pbMinimizar.TabIndex = 15;
             pbMinimizar.TabStop = false;
             pbMinimizar.Click += pbMinimizar_Click;
-            // 
-            // pbFechar
-            // 
-            pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
-            pbFechar.Location = new Point(833, 6);
-            pbFechar.Name = "pbFechar";
-            pbFechar.Size = new Size(30, 21);
-            pbFechar.SizeMode = PictureBoxSizeMode.CenterImage;
-            pbFechar.TabIndex = 14;
-            pbFechar.TabStop = false;
-            pbFechar.Click += pbFechar_Click;
             // 
             // label1
             // 
@@ -567,12 +813,31 @@
             btnEsconderPalavrasMenu.TabStop = false;
             btnEsconderPalavrasMenu.Click += btnEsconderPalavrasMenu_Click_1;
             // 
+            // button10
+            // 
+            button10.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button10.BackColor = Color.Transparent;
+            button10.FlatStyle = FlatStyle.Flat;
+            button10.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button10.ForeColor = Color.White;
+            button10.Image = (Image)resources.GetObject("button10.Image");
+            button10.ImageAlign = ContentAlignment.MiddleLeft;
+            button10.Location = new Point(798, 487);
+            button10.Name = "button10";
+            button10.Size = new Size(71, 33);
+            button10.TabIndex = 5;
+            button10.Text = "  Sair";
+            button10.TextAlign = ContentAlignment.MiddleRight;
+            button10.UseVisualStyleBackColor = false;
+            button10.Click += button10_Click;
+            // 
             // FrmPrincipalFF
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(23, 24, 29);
             ClientSize = new Size(869, 522);
+            Controls.Add(button10);
             Controls.Add(panel1);
             Controls.Add(pMenuOpcoes);
             Controls.Add(pictureBox1);
@@ -584,13 +849,13 @@
             WindowState = FormWindowState.Maximized;
             Load += FrmPrincipalFF_Load;
             pMenuOpcoes.ResumeLayout(false);
-            panel2.ResumeLayout(false);
             menuContainer.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel5.ResumeLayout(false);
             panel6.ResumeLayout(false);
             panel7.ResumeLayout(false);
             panel8.ResumeLayout(false);
+            panel2.ResumeLayout(false);
             funcContainer.ResumeLayout(false);
             panel4.ResumeLayout(false);
             panel9.ResumeLayout(false);
@@ -599,11 +864,18 @@
             panel12.ResumeLayout(false);
             panel13.ResumeLayout(false);
             panel14.ResumeLayout(false);
+            flowLayoutPanel1.ResumeLayout(false);
+            panel15.ResumeLayout(false);
+            panel16.ResumeLayout(false);
+            panel17.ResumeLayout(false);
+            panel18.ResumeLayout(false);
+            panel19.ResumeLayout(false);
+            panel20.ResumeLayout(false);
+            panel21.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbMinimizar).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
             ((System.ComponentModel.ISupportInitialize)btnEsconderPalavrasMenu).EndInit();
             ResumeLayout(false);
         }
@@ -645,7 +917,24 @@
         private Panel panel1;
         private Label label1;
         private PictureBox btnEsconderPalavrasMenu;
-        private PictureBox pbFechar;
         private PictureBox pbMinimizar;
+        private Button button1;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private Panel panel15;
+        private Button button2;
+        private Button button3;
+        private Panel panel16;
+        private Button button4;
+        private Panel panel17;
+        private Button button5;
+        private Panel panel18;
+        private Button button6;
+        private Panel panel19;
+        private Button button7;
+        private Panel panel20;
+        private Button button8;
+        private Panel panel21;
+        private Button button9;
+        private Button button10;
     }
 }

@@ -64,8 +64,8 @@
             btnexcluir = new Button();
             btncancelar = new Button();
             passociar = new Panel();
-            btnassociar = new Button();
             dgAssociarFlat = new DataGridView();
+            btnassociar = new Button();
             pbFechar = new PictureBox();
             pbMinimizar = new PictureBox();
             tTamanhotela = new System.Windows.Forms.Timer(components);
@@ -105,7 +105,7 @@
             pdados.Controls.Add(label2);
             pdados.Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             pdados.ForeColor = Color.White;
-            pdados.Location = new Point(69, 60);
+            pdados.Location = new Point(69, 77);
             pdados.Name = "pdados";
             pdados.Size = new Size(922, 192);
             pdados.TabIndex = 0;
@@ -126,6 +126,7 @@
             // 
             // cbbflatsassociados
             // 
+            cbbflatsassociados.Enabled = false;
             cbbflatsassociados.Font = new Font("Segoe UI Semilight", 11.25F);
             cbbflatsassociados.FormattingEnabled = true;
             cbbflatsassociados.Location = new Point(458, 148);
@@ -358,7 +359,7 @@
             btnlocalizar.FlatStyle = FlatStyle.Flat;
             btnlocalizar.Font = new Font("Arial", 12F, FontStyle.Bold);
             btnlocalizar.ForeColor = Color.White;
-            btnlocalizar.Location = new Point(537, 24);
+            btnlocalizar.Location = new Point(655, 24);
             btnlocalizar.Name = "btnlocalizar";
             btnlocalizar.Size = new Size(91, 35);
             btnlocalizar.TabIndex = 5;
@@ -375,7 +376,7 @@
             btnsalvar.FlatStyle = FlatStyle.Flat;
             btnsalvar.Font = new Font("Arial", 12F, FontStyle.Bold);
             btnsalvar.ForeColor = Color.White;
-            btnsalvar.Location = new Point(420, 24);
+            btnsalvar.Location = new Point(514, 24);
             btnsalvar.Name = "btnsalvar";
             btnsalvar.Size = new Size(87, 35);
             btnsalvar.TabIndex = 2;
@@ -392,7 +393,7 @@
             btnalterar.FlatStyle = FlatStyle.Flat;
             btnalterar.Font = new Font("Arial", 12F, FontStyle.Bold);
             btnalterar.ForeColor = Color.White;
-            btnalterar.Location = new Point(296, 24);
+            btnalterar.Location = new Point(357, 24);
             btnalterar.Name = "btnalterar";
             btnalterar.Size = new Size(87, 35);
             btnalterar.TabIndex = 1;
@@ -410,7 +411,7 @@
             btnnovo.FlatStyle = FlatStyle.Flat;
             btnnovo.Font = new Font("Arial", 12F, FontStyle.Bold);
             btnnovo.ForeColor = Color.White;
-            btnnovo.Location = new Point(161, 24);
+            btnnovo.Location = new Point(197, 24);
             btnnovo.Name = "btnnovo";
             btnnovo.Size = new Size(98, 35);
             btnnovo.TabIndex = 0;
@@ -425,7 +426,7 @@
             btnexcluir.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btnexcluir.ForeColor = Color.White;
             btnexcluir.Image = (Image)resources.GetObject("btnexcluir.Image");
-            btnexcluir.Location = new Point(335, 12);
+            btnexcluir.Location = new Point(310, 17);
             btnexcluir.Name = "btnexcluir";
             btnexcluir.Size = new Size(36, 37);
             btnexcluir.TabIndex = 4;
@@ -440,7 +441,7 @@
             btncancelar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btncancelar.ForeColor = Color.White;
             btncancelar.Image = (Image)resources.GetObject("btncancelar.Image");
-            btncancelar.Location = new Point(420, 12);
+            btncancelar.Location = new Point(211, 17);
             btncancelar.Name = "btncancelar";
             btncancelar.Size = new Size(36, 37);
             btncancelar.TabIndex = 3;
@@ -450,13 +451,25 @@
             // passociar
             // 
             passociar.BackColor = Color.White;
-            passociar.Controls.Add(btnassociar);
             passociar.Controls.Add(dgAssociarFlat);
             passociar.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            passociar.Location = new Point(69, 276);
+            passociar.Location = new Point(69, 293);
             passociar.Name = "passociar";
-            passociar.Size = new Size(922, 193);
+            passociar.Size = new Size(922, 223);
             passociar.TabIndex = 2;
+            // 
+            // dgAssociarFlat
+            // 
+            dgAssociarFlat.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgAssociarFlat.BackgroundColor = Color.White;
+            dgAssociarFlat.BorderStyle = BorderStyle.None;
+            dgAssociarFlat.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgAssociarFlat.Location = new Point(19, 22);
+            dgAssociarFlat.Name = "dgAssociarFlat";
+            dgAssociarFlat.ReadOnly = true;
+            dgAssociarFlat.ScrollBars = ScrollBars.Horizontal;
+            dgAssociarFlat.Size = new Size(784, 220);
+            dgAssociarFlat.TabIndex = 1;
             // 
             // btnassociar
             // 
@@ -465,27 +478,18 @@
             btnassociar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnassociar.ForeColor = Color.FromArgb(224, 224, 224);
             btnassociar.Image = (Image)resources.GetObject("btnassociar.Image");
-            btnassociar.Location = new Point(873, 153);
+            btnassociar.Location = new Point(24, 321);
             btnassociar.Name = "btnassociar";
             btnassociar.Size = new Size(37, 27);
             btnassociar.TabIndex = 6;
             btnassociar.UseVisualStyleBackColor = true;
             btnassociar.Click += btnassociar_Click;
             // 
-            // dgAssociarFlat
-            // 
-            dgAssociarFlat.BackgroundColor = Color.White;
-            dgAssociarFlat.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgAssociarFlat.Location = new Point(19, 22);
-            dgAssociarFlat.Name = "dgAssociarFlat";
-            dgAssociarFlat.ReadOnly = true;
-            dgAssociarFlat.Size = new Size(848, 158);
-            dgAssociarFlat.TabIndex = 1;
-            // 
             // pbFechar
             // 
+            pbFechar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
-            pbFechar.Location = new Point(1034, 12);
+            pbFechar.Location = new Point(842, 5);
             pbFechar.Name = "pbFechar";
             pbFechar.Size = new Size(30, 21);
             pbFechar.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -495,8 +499,9 @@
             // 
             // pbMinimizar
             // 
+            pbMinimizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbMinimizar.Image = (Image)resources.GetObject("pbMinimizar.Image");
-            pbMinimizar.Location = new Point(1001, 12);
+            pbMinimizar.Location = new Point(811, 5);
             pbMinimizar.Name = "pbMinimizar";
             pbMinimizar.Size = new Size(30, 21);
             pbMinimizar.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -514,12 +519,13 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1087, 558);
+            Controls.Add(btnassociar);
+            Controls.Add(panel2);
             Controls.Add(pbMinimizar);
             Controls.Add(pbFechar);
             Controls.Add(btnexcluir);
             Controls.Add(passociar);
             Controls.Add(btncancelar);
-            Controls.Add(panel2);
             Controls.Add(pdados);
             Controls.Add(txtid);
             Controls.Add(label1);

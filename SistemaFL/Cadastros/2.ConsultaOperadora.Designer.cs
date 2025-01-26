@@ -28,34 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmConsultaEmpresa));
             label1 = new Label();
             txtdescricao = new TextBox();
             btnlocalizar = new Button();
             dgdados = new DataGridView();
             pbFechar = new PictureBox();
-            pbMaximizar = new PictureBox();
+            tTamanhotela = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)dgdados).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbMaximizar).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(158, 48);
+            label1.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(209, 41);
             label1.Name = "label1";
-            label1.Size = new Size(145, 20);
+            label1.Size = new Size(183, 25);
             label1.TabIndex = 0;
             label1.Text = "Descrição Empresa :";
             // 
             // txtdescricao
             // 
             txtdescricao.Font = new Font("Segoe UI Semilight", 11.25F);
-            txtdescricao.Location = new Point(304, 47);
+            txtdescricao.Location = new Point(398, 40);
             txtdescricao.Name = "txtdescricao";
-            txtdescricao.Size = new Size(327, 27);
+            txtdescricao.Size = new Size(549, 27);
             txtdescricao.TabIndex = 1;
             // 
             // btnlocalizar
@@ -64,7 +64,7 @@
             btnlocalizar.FlatStyle = FlatStyle.Flat;
             btnlocalizar.Font = new Font("Segoe UI Semilight", 11.25F);
             btnlocalizar.Image = (Image)resources.GetObject("btnlocalizar.Image");
-            btnlocalizar.Location = new Point(653, 45);
+            btnlocalizar.Location = new Point(953, 37);
             btnlocalizar.Name = "btnlocalizar";
             btnlocalizar.Size = new Size(40, 32);
             btnlocalizar.TabIndex = 2;
@@ -79,15 +79,17 @@
             dgdados.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdados.Location = new Point(0, 121);
             dgdados.Name = "dgdados";
-            dgdados.Size = new Size(891, 347);
+            dgdados.Size = new Size(1087, 437);
             dgdados.TabIndex = 3;
             dgdados.CellDoubleClick += dgdados_CellDoubleClick;
             dgdados.CellFormatting += dgdados_CellFormatting;
+            dgdados.DataBindingComplete += dgdados_DataBindingComplete;
             // 
             // pbFechar
             // 
+            pbFechar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
-            pbFechar.Location = new Point(857, 4);
+            pbFechar.Location = new Point(835, 4);
             pbFechar.Name = "pbFechar";
             pbFechar.Size = new Size(30, 21);
             pbFechar.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -95,25 +97,18 @@
             pbFechar.TabStop = false;
             pbFechar.Click += pbFechar_Click;
             // 
-            // pbMaximizar
+            // tTamanhotela
             // 
-            pbMaximizar.Image = (Image)resources.GetObject("pbMaximizar.Image");
-            pbMaximizar.Location = new Point(820, 4);
-            pbMaximizar.Name = "pbMaximizar";
-            pbMaximizar.Size = new Size(30, 21);
-            pbMaximizar.SizeMode = PictureBoxSizeMode.CenterImage;
-            pbMaximizar.TabIndex = 14;
-            pbMaximizar.TabStop = false;
-            pbMaximizar.Click += pbMaximizar_Click;
+            tTamanhotela.Interval = 5;
+            tTamanhotela.Tick += tTamanhotela_Tick;
             // 
             // FrmConsultaEmpresa
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(891, 468);
+            ClientSize = new Size(1087, 558);
             Controls.Add(pbFechar);
-            Controls.Add(pbMaximizar);
             Controls.Add(dgdados);
             Controls.Add(btnlocalizar);
             Controls.Add(txtdescricao);
@@ -126,10 +121,8 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Consulta de Empresa";
             Load += FrmConsultaEmpresa_Load;
-            Resize += FrmConsultaEmpresa_Resize;
             ((System.ComponentModel.ISupportInitialize)dgdados).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbMaximizar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -141,6 +134,6 @@
         private Button btnlocalizar;
         private DataGridView dgdados;
         private PictureBox pbFechar;
-        private PictureBox pbMaximizar;
+        private System.Windows.Forms.Timer tTamanhotela;
     }
 }
