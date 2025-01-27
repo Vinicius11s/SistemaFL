@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCadEmpresaFF));
             pdados = new Panel();
+            btnPesquisarCep = new Button();
             btnremover = new Button();
             cbbflatsassociados = new ComboBox();
             label13 = new Label();
@@ -80,6 +81,7 @@
             // pdados
             // 
             pdados.BackColor = Color.White;
+            pdados.Controls.Add(btnPesquisarCep);
             pdados.Controls.Add(btnremover);
             pdados.Controls.Add(cbbflatsassociados);
             pdados.Controls.Add(label13);
@@ -109,6 +111,14 @@
             pdados.Name = "pdados";
             pdados.Size = new Size(922, 192);
             pdados.TabIndex = 0;
+            // 
+            // btnPesquisarCep
+            // 
+            btnPesquisarCep.Location = new Point(445, 89);
+            btnPesquisarCep.Name = "btnPesquisarCep";
+            btnPesquisarCep.Size = new Size(23, 23);
+            btnPesquisarCep.TabIndex = 23;
+            btnPesquisarCep.UseVisualStyleBackColor = true;
             // 
             // btnremover
             // 
@@ -199,7 +209,7 @@
             // 
             // txtnumero
             // 
-            txtnumero.Location = new Point(751, 86);
+            txtnumero.Location = new Point(789, 86);
             txtnumero.Name = "txtnumero";
             txtnumero.Size = new Size(52, 29);
             txtnumero.TabIndex = 15;
@@ -208,7 +218,7 @@
             // 
             label8.AutoSize = true;
             label8.ForeColor = Color.Black;
-            label8.Location = new Point(726, 89);
+            label8.Location = new Point(764, 89);
             label8.Name = "label8";
             label8.Size = new Size(28, 21);
             label8.TabIndex = 14;
@@ -216,7 +226,7 @@
             // 
             // txtrua
             // 
-            txtrua.Location = new Point(458, 86);
+            txtrua.Location = new Point(496, 86);
             txtrua.Name = "txtrua";
             txtrua.Size = new Size(265, 29);
             txtrua.TabIndex = 13;
@@ -225,7 +235,7 @@
             // 
             label7.AutoSize = true;
             label7.ForeColor = Color.Black;
-            label7.Location = new Point(458, 66);
+            label7.Location = new Point(496, 66);
             label7.Name = "label7";
             label7.Size = new Size(36, 21);
             label7.TabIndex = 12;
@@ -587,5 +597,6 @@
         private PictureBox pbFechar;
         private PictureBox pbMinimizar;
         private System.Windows.Forms.Timer tTamanhotela;
+        private Button btnPesquisarCep;
     }
 }

@@ -9,9 +9,12 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.LinkLabel;
 
 namespace SistemaFL
 {
@@ -19,6 +22,7 @@ namespace SistemaFL
     {
         private IFlatRepositorio repositorio;
         private IEmpresaRepositorio empresaRepositorio;
+        decimal valorTotalImovel;
         public FrmCadFlat(IFlatRepositorio repositorio, IEmpresaRepositorio empresaRepositorio)
         {
             InitializeComponent();
@@ -42,16 +46,17 @@ namespace SistemaFL
             btnsalvar.Enabled = false;
         }
         private void btnnovo_Click_1(object sender, EventArgs e)
-        {
+        { 
+            limpar();
+            txtdescricao.Focus();
+        
             pdados.Enabled = true;
             btnnovo.Enabled = false;
             btnlocalizar.Enabled = false;
             btnalterar.Enabled = false;
             btncancelar.Enabled = true;
             btnexcluir.Enabled = false;
-            btnsalvar.Enabled = true;
-            limpar();
-            txtdescricao.Focus();
+            btnsalvar.Enabled = true;            
         }
         private void btnalterar_Click_1(object sender, EventArgs e)
         {
@@ -154,7 +159,7 @@ namespace SistemaFL
                     txtid.Text = flat.id.ToString();
                     txtdescricao.Text = flat.Descricao;
                     cbbStatus.Text = flat.Status.ToString();
-                    txtValorInvestimento.Text = flat.ValorInvestimento.ToString();
+                    txtValoDeCompra.Text = flat.ValorDeCompra.ToString();
                     cbbTipoInvestimento.Text = flat.TipoInvestimento;
                     dtdataaquisicao.Value = flat.DataAquisicao;
                     txtrua.Text = flat.Rua;
@@ -206,71 +211,184 @@ namespace SistemaFL
             }
             else flat = new Flat();//inserir
 
+            valorTotalImovel = 0;
+
             flat.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
             flat.Descricao = txtdescricao.Text;
+            flat.TipoInvestimento = cbbTipoInvestimento.SelectedItem?.ToString() ?? "Indefinido";           
+            AtribuiStatusDoFlat(flat);
             flat.DataAquisicao = dtdataaquisicao.Value;
-            //flat.Status
+            flat.TamanhoUnidadeM2 = ValidaDecimais(flat, txTamanhoM2);
+            flat.Rua = txtrua.Text;
+            flat.Unidade = ValidaInteiros(flat, txtunidade);
+            flat.Bairro = txtbairro.Text;
+            flat.Estado = txtestado.Text;
+            flat.Cidade = txtcidade.Text;
+            flat.NumMatriculaImovel = ValidaInteiros(flat, txtNumMatriculaImovel);
+            flat.ValorDeCompra = ValidaDecimais(flat, txtValoDeCompra);
+            valorTotalImovel += flat.ValorDeCompra;
+            ValidaCheckBox(flat);
+            flat.valorComissao = ValidaDecimais(flat, txtValorComissao);
+            valorTotalImovel += flat.valorComissao;
+
+            ValidaCheckComissao(flat);
+
+            flat.ValorITBI = ValidaDecimais(flat, txtValorITBI);
+            valorTotalImovel += flat.ValorITBI;
+            flat.ValorEscritura = ValidaDecimais(flat, txtValorEscritura);
+            valorTotalImovel += flat.ValorEscritura;
+            flat.ValorRegistro = ValidaDecimais(flat, txtValorDeRegistro);
+            valorTotalImovel += flat.ValorRegistro;
+
+            ValidaCheckLaudemio(flat);
+            flat.ValorLaudemio = ValidaDecimais(flat, txtValorLaudemio);
+            valorTotalImovel += flat.ValorLaudemio;
+
+            flat.ValorAforamento = ValidaDecimais(flat, txtValorAforamento);
+            valorTotalImovel += flat.ValorAforamento;
+
+            flat.ValorTotalImovel = valorTotalImovel;
+
+            flat.idEmpresa = flat.idEmpresa;
+            return flat;
+        }
+
+        void AtribuiStatusDoFlat(Flat flat)
+        {
             if (cbbStatus != null && cbbStatus.SelectedItem != null)
             {
-                if (cbbStatus.Text == "Ativo")
+                string status = cbbStatus.Text;
+
+                switch (status)
                 {
-                    flat.Status = cbbStatus.Text;
-                    flat.Ativo = true;
-                }
-                else
-                {
-                    if (cbbStatus.Text == "Em Construção")
-                    {
-                        flat.Status = cbbStatus.Text;
+                    case "Ativo":
+                        flat.Status = status;
+                        flat.Ativo = true;
+                        break;
+
+                    case "Em Construção":
+                        flat.Status = status;
                         flat.Ativo = true;
 
                         if (!flat.Descricao.EndsWith(" - EM CONSTRUÇÃO"))
                         {
                             flat.Descricao += " - EM CONSTRUÇÃO";
                         }
-                    }
-                    else
-                    {
-                        if (cbbStatus.Text == "Em Reforma")
-                        {
-                            flat.Status = cbbStatus.Text;
-                            flat.Ativo = true;
-                        }
-                        else
-                        {
-                            if (cbbStatus.Text == "Vendido")
-                            {
-                                flat.Status = cbbStatus.Text;
-                                flat.Ativo = false;
+                        break;
 
-                                if (!flat.Descricao.EndsWith(" - VENDIDO"))
-                                {
-                                    flat.Descricao += " - VENDIDO";
-                                }
-                            }
+                    case "Em Reforma":
+                        flat.Status = status;
+                        flat.Ativo = true;
+                        break;
+
+                    case "Vendido":
+                        flat.Status = status;
+                        flat.Ativo = false;
+
+                        if (!flat.Descricao.EndsWith(" - VENDIDO"))
+                        {
+                            flat.Descricao += " - VENDIDO";
                         }
-                    }
-                }
-                decimal valorInvestimento;
-                if (decimal.TryParse(txtValorInvestimento.Text, out valorInvestimento))
-                {
-                    flat.ValorInvestimento = valorInvestimento;
-                    int Unidade;
-                    if (int.TryParse(txtunidade.Text, out Unidade))
-                    {
-                        flat.Unidade = Unidade;
-                    }
-                    else { }
+                        break;
+
+                    default:
+                        // Caso o status não seja nenhum dos listados
+                        break;
                 }
             }
-            flat.TipoInvestimento = cbbTipoInvestimento.SelectedItem?.ToString() ?? "Indefinido";
-            flat.Rua = txtrua.Text;
-            flat.Bairro = txtbairro.Text;
-            flat.Cidade = txtcidade.Text;
-            flat.Estado = txtestado.Text;
-            flat.idEmpresa = flat.idEmpresa;
-            return flat;
         }
+        public decimal ValidaDecimais(Flat flat, TextBox textBox)
+        {
+            decimal valor;
+            if (decimal.TryParse(textBox.Text, out valor))
+            {
+                return valor;
+            }
+            return 0m;
+        }
+        public int ValidaInteiros(Flat flat, TextBox textBox)
+        {
+            int valor;
+            if (int.TryParse(textBox.Text, out valor))
+            {
+                return valor;
+            }
+            return 0;
+        }
+        void AtribuiValorDeCompraUnidade(Flat flat)
+        {
+            decimal valorInvestimento;
+            if (decimal.TryParse(txtValoDeCompra.Text, out valorInvestimento))
+            {
+                flat.ValorDeCompra = valorInvestimento;
+            }
+        }
+
+        void ValidaCheckBox(Flat flat)
+        {
+            bool avisoMostrado = false;
+
+            if (!ckPossuiGaragemSim.Checked && !ckPossuiGaragemNao.Checked && !avisoMostrado)
+            {
+                MessageBox.Show("Por favor, selecione se possui garagem.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                avisoMostrado = true;
+            }
+            else
+            {
+                flat.PossuiGaragem = ckPossuiGaragemSim.Checked;
+            }
+
+            if (!ckRegistradoSim.Checked && !ckRegistradoNao.Checked && !avisoMostrado)
+            {
+                MessageBox.Show("Por favor, selecione se está registrado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                avisoMostrado = true;
+            }
+            else
+            {
+                flat.Registrado = ckRegistradoSim.Checked;
+            }
+
+            if (!ckEscrituradoSim.Checked && !ckEscrituradoNao.Checked && !avisoMostrado)
+            {
+                MessageBox.Show("Por favor, selecione se está escriturado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                avisoMostrado = true;
+            }
+            else
+            {
+                flat.Escriturado = ckEscrituradoSim.Checked;
+            }
+        }
+
+        void ValidaCheckComissao(Flat flat)
+        {
+            bool avisoMostrado = false;
+
+            if (!ckNotaComissao.Checked && !avisoMostrado)
+            {
+                MessageBox.Show("Por favor, selecione se é necessário Nota de Comissão.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                avisoMostrado = true;
+            }
+            else
+            {
+                flat.NotaComissao = ckNotaComissao.Checked;
+            }            
+        }
+        void ValidaCheckLaudemio(Flat flat)
+        {
+            bool avisoMostrado = false;
+
+            if (!ckLaudemioSim.Checked && ckLaudemioNao.Checked && !avisoMostrado)
+            {
+                MessageBox.Show("Por favor, selecione se é necessário Laudêmio", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                avisoMostrado = true;
+            }
+            else
+            {
+                flat.NotaComissao = ckNotaComissao.Checked;
+                txtValorLaudemio.Enabled = true;
+            }
+        }
+
         void limpar()
         {
             txtid.Text = "";
@@ -278,7 +396,7 @@ namespace SistemaFL
             dtdataaquisicao.Value = DateTime.Now;
             cbbStatus.Text = "";
             cbbTipoInvestimento.Text = "";
-            txtValorInvestimento.Text = "";
+            txtValoDeCompra.Text = "";
             txtrua.Text = "";
             txtunidade.Text = "";
             txtbairro.Text = "";
@@ -294,7 +412,6 @@ namespace SistemaFL
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
         private void tTamanhotela_Tick(object sender, EventArgs e)
         {
             Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, 10);

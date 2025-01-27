@@ -73,13 +73,12 @@
             // 
             // dgdados
             // 
-            dgdados.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgdados.BackgroundColor = Color.White;
             dgdados.BorderStyle = BorderStyle.None;
             dgdados.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdados.Location = new Point(0, 121);
+            dgdados.Location = new Point(12, 108);
             dgdados.Name = "dgdados";
-            dgdados.Size = new Size(1087, 437);
+            dgdados.Size = new Size(1063, 448);
             dgdados.TabIndex = 3;
             dgdados.CellDoubleClick += dgdados_CellDoubleClick;
             dgdados.CellFormatting += dgdados_CellFormatting;

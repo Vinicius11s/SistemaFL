@@ -1,4 +1,4 @@
-﻿    using Entidades;
+﻿using Entidades;
 using Infraestrutura.Contexto;
 using Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SistemaFL
 {
@@ -46,7 +47,7 @@ namespace SistemaFL
             btnlocalizar.Enabled = true;
 
         }
-        
+
         //
         //CRUD
         private void btnnovo_Click(object sender, EventArgs e)
@@ -135,7 +136,7 @@ namespace SistemaFL
                     txtcidade.Text = empresa.Cidade;
                     txtestado.Text = empresa.Estado;
                     txtcep.Text = empresa.Cep;
-                    
+
                     CarregarFlatsNaoAssociados();
                     CarregarComboBoxFlatsAssociados(); // Carrega os flats associados ao ComboBox
                     passociar.Enabled = true;
@@ -456,6 +457,9 @@ namespace SistemaFL
             Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, incremento);
         }
 
-       
+        
+           
+
+        
     }
 }

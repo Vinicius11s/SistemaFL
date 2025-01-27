@@ -46,20 +46,20 @@
             txTamanhoM2 = new TextBox();
             label20 = new Label();
             label19 = new Label();
-            textBox6 = new TextBox();
+            txtvalor = new TextBox();
             label18 = new Label();
-            textBox5 = new TextBox();
-            textBox4 = new TextBox();
-            checkBox3 = new CheckBox();
-            checkBox2 = new CheckBox();
+            txtValorAforamento = new TextBox();
+            txtValorLaudemio = new TextBox();
+            ckLaudemioNao = new CheckBox();
+            ckLaudemioSim = new CheckBox();
             label17 = new Label();
             label16 = new Label();
-            textBox3 = new TextBox();
+            txtValorDeRegistro = new TextBox();
             label15 = new Label();
-            textBox2 = new TextBox();
+            txtValorEscritura = new TextBox();
             label13 = new Label();
             txtValorITBI = new TextBox();
-            checkBox1 = new CheckBox();
+            ckNotaComissao = new CheckBox();
             label12 = new Label();
             txtValorComissao = new TextBox();
             txtempresaAss = new TextBox();
@@ -77,7 +77,7 @@
             label5 = new Label();
             cbbStatus = new ComboBox();
             label4 = new Label();
-            txtValorInvestimento = new TextBox();
+            txtValoDeCompra = new TextBox();
             label3 = new Label();
             cbbTipoInvestimento = new ComboBox();
             label6 = new Label();
@@ -120,20 +120,20 @@
             pdados.Controls.Add(txTamanhoM2);
             pdados.Controls.Add(label20);
             pdados.Controls.Add(label19);
-            pdados.Controls.Add(textBox6);
+            pdados.Controls.Add(txtvalor);
             pdados.Controls.Add(label18);
-            pdados.Controls.Add(textBox5);
-            pdados.Controls.Add(textBox4);
-            pdados.Controls.Add(checkBox3);
-            pdados.Controls.Add(checkBox2);
+            pdados.Controls.Add(txtValorAforamento);
+            pdados.Controls.Add(txtValorLaudemio);
+            pdados.Controls.Add(ckLaudemioNao);
+            pdados.Controls.Add(ckLaudemioSim);
             pdados.Controls.Add(label17);
             pdados.Controls.Add(label16);
-            pdados.Controls.Add(textBox3);
+            pdados.Controls.Add(txtValorDeRegistro);
             pdados.Controls.Add(label15);
-            pdados.Controls.Add(textBox2);
+            pdados.Controls.Add(txtValorEscritura);
             pdados.Controls.Add(label13);
             pdados.Controls.Add(txtValorITBI);
-            pdados.Controls.Add(checkBox1);
+            pdados.Controls.Add(ckNotaComissao);
             pdados.Controls.Add(label12);
             pdados.Controls.Add(txtValorComissao);
             pdados.Controls.Add(txtempresaAss);
@@ -151,7 +151,7 @@
             pdados.Controls.Add(label5);
             pdados.Controls.Add(cbbStatus);
             pdados.Controls.Add(label4);
-            pdados.Controls.Add(txtValorInvestimento);
+            pdados.Controls.Add(txtValoDeCompra);
             pdados.Controls.Add(label3);
             pdados.Controls.Add(cbbTipoInvestimento);
             pdados.Controls.Add(label6);
@@ -314,16 +314,16 @@
             label19.TabIndex = 69;
             label19.Text = "Valor Total do Imóvel";
             // 
-            // textBox6
+            // txtvalor
             // 
-            textBox6.Font = new Font("Segoe UI Semilight", 12F);
-            textBox6.Location = new Point(328, 349);
-            textBox6.Margin = new Padding(3, 4, 3, 4);
-            textBox6.MaxLength = 150;
-            textBox6.Name = "textBox6";
-            textBox6.ReadOnly = true;
-            textBox6.Size = new Size(176, 29);
-            textBox6.TabIndex = 68;
+            txtvalor.Font = new Font("Segoe UI Semilight", 12F);
+            txtvalor.Location = new Point(328, 349);
+            txtvalor.Margin = new Padding(3, 4, 3, 4);
+            txtvalor.MaxLength = 150;
+            txtvalor.Name = "txtvalor";
+            txtvalor.ReadOnly = true;
+            txtvalor.Size = new Size(176, 29);
+            txtvalor.TabIndex = 68;
             // 
             // label18
             // 
@@ -335,46 +335,46 @@
             label18.TabIndex = 67;
             label18.Text = "Valor Aforamento";
             // 
-            // textBox5
+            // txtValorAforamento
             // 
-            textBox5.Font = new Font("Segoe UI Semilight", 12F);
-            textBox5.Location = new Point(174, 349);
-            textBox5.Margin = new Padding(3, 4, 3, 4);
-            textBox5.MaxLength = 150;
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(137, 29);
-            textBox5.TabIndex = 66;
+            txtValorAforamento.Font = new Font("Segoe UI Semilight", 12F);
+            txtValorAforamento.Location = new Point(174, 349);
+            txtValorAforamento.Margin = new Padding(3, 4, 3, 4);
+            txtValorAforamento.MaxLength = 150;
+            txtValorAforamento.Name = "txtValorAforamento";
+            txtValorAforamento.Size = new Size(137, 29);
+            txtValorAforamento.TabIndex = 66;
             // 
-            // textBox4
+            // txtValorLaudemio
             // 
-            textBox4.Enabled = false;
-            textBox4.Font = new Font("Segoe UI Semilight", 12F);
-            textBox4.Location = new Point(808, 280);
-            textBox4.Margin = new Padding(3, 4, 3, 4);
-            textBox4.MaxLength = 150;
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(137, 29);
-            textBox4.TabIndex = 65;
+            txtValorLaudemio.Enabled = false;
+            txtValorLaudemio.Font = new Font("Segoe UI Semilight", 12F);
+            txtValorLaudemio.Location = new Point(808, 280);
+            txtValorLaudemio.Margin = new Padding(3, 4, 3, 4);
+            txtValorLaudemio.MaxLength = 150;
+            txtValorLaudemio.Name = "txtValorLaudemio";
+            txtValorLaudemio.Size = new Size(137, 29);
+            txtValorLaudemio.TabIndex = 65;
             // 
-            // checkBox3
+            // ckLaudemioNao
             // 
-            checkBox3.AutoSize = true;
-            checkBox3.Location = new Point(753, 285);
-            checkBox3.Name = "checkBox3";
-            checkBox3.Size = new Size(56, 24);
-            checkBox3.TabIndex = 64;
-            checkBox3.Text = "Não";
-            checkBox3.UseVisualStyleBackColor = true;
+            ckLaudemioNao.AutoSize = true;
+            ckLaudemioNao.Location = new Point(744, 285);
+            ckLaudemioNao.Name = "ckLaudemioNao";
+            ckLaudemioNao.Size = new Size(56, 24);
+            ckLaudemioNao.TabIndex = 64;
+            ckLaudemioNao.Text = "Não";
+            ckLaudemioNao.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // ckLaudemioSim
             // 
-            checkBox2.AutoSize = true;
-            checkBox2.Location = new Point(695, 285);
-            checkBox2.Name = "checkBox2";
-            checkBox2.Size = new Size(52, 24);
-            checkBox2.TabIndex = 63;
-            checkBox2.Text = "Sim";
-            checkBox2.UseVisualStyleBackColor = true;
+            ckLaudemioSim.AutoSize = true;
+            ckLaudemioSim.Location = new Point(693, 285);
+            ckLaudemioSim.Name = "ckLaudemioSim";
+            ckLaudemioSim.Size = new Size(52, 24);
+            ckLaudemioSim.TabIndex = 63;
+            ckLaudemioSim.Text = "Sim";
+            ckLaudemioSim.UseVisualStyleBackColor = true;
             // 
             // label17
             // 
@@ -396,15 +396,15 @@
             label16.TabIndex = 60;
             label16.Text = "Valor de Registro Imóvel";
             // 
-            // textBox3
+            // txtValorDeRegistro
             // 
-            textBox3.Font = new Font("Segoe UI Semilight", 12F);
-            textBox3.Location = new Point(482, 282);
-            textBox3.Margin = new Padding(3, 4, 3, 4);
-            textBox3.MaxLength = 150;
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(175, 29);
-            textBox3.TabIndex = 59;
+            txtValorDeRegistro.Font = new Font("Segoe UI Semilight", 12F);
+            txtValorDeRegistro.Location = new Point(482, 282);
+            txtValorDeRegistro.Margin = new Padding(3, 4, 3, 4);
+            txtValorDeRegistro.MaxLength = 150;
+            txtValorDeRegistro.Name = "txtValorDeRegistro";
+            txtValorDeRegistro.Size = new Size(175, 29);
+            txtValorDeRegistro.TabIndex = 59;
             // 
             // label15
             // 
@@ -416,15 +416,15 @@
             label15.TabIndex = 58;
             label15.Text = "Valor Escritura";
             // 
-            // textBox2
+            // txtValorEscritura
             // 
-            textBox2.Font = new Font("Segoe UI Semilight", 12F);
-            textBox2.Location = new Point(328, 282);
-            textBox2.Margin = new Padding(3, 4, 3, 4);
-            textBox2.MaxLength = 150;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(137, 29);
-            textBox2.TabIndex = 57;
+            txtValorEscritura.Font = new Font("Segoe UI Semilight", 12F);
+            txtValorEscritura.Location = new Point(328, 282);
+            txtValorEscritura.Margin = new Padding(3, 4, 3, 4);
+            txtValorEscritura.MaxLength = 150;
+            txtValorEscritura.Name = "txtValorEscritura";
+            txtValorEscritura.Size = new Size(137, 29);
+            txtValorEscritura.TabIndex = 57;
             // 
             // label13
             // 
@@ -446,15 +446,15 @@
             txtValorITBI.Size = new Size(137, 29);
             txtValorITBI.TabIndex = 53;
             // 
-            // checkBox1
+            // ckNotaComissao
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(19, 318);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(99, 24);
-            checkBox1.TabIndex = 52;
-            checkBox1.Text = "Nota Fiscal";
-            checkBox1.UseVisualStyleBackColor = true;
+            ckNotaComissao.AutoSize = true;
+            ckNotaComissao.Location = new Point(19, 318);
+            ckNotaComissao.Name = "ckNotaComissao";
+            ckNotaComissao.Size = new Size(128, 24);
+            ckNotaComissao.TabIndex = 52;
+            ckNotaComissao.Text = "Nota Comissão";
+            ckNotaComissao.UseVisualStyleBackColor = true;
             // 
             // label12
             // 
@@ -628,15 +628,15 @@
             label4.TabIndex = 30;
             label4.Text = "Status";
             // 
-            // txtValorInvestimento
+            // txtValoDeCompra
             // 
-            txtValorInvestimento.Font = new Font("Segoe UI Semilight", 12F);
-            txtValorInvestimento.Location = new Point(209, 167);
-            txtValorInvestimento.Margin = new Padding(3, 4, 3, 4);
-            txtValorInvestimento.MaxLength = 150;
-            txtValorInvestimento.Name = "txtValorInvestimento";
-            txtValorInvestimento.Size = new Size(171, 29);
-            txtValorInvestimento.TabIndex = 29;
+            txtValoDeCompra.Font = new Font("Segoe UI Semilight", 12F);
+            txtValoDeCompra.Location = new Point(209, 167);
+            txtValoDeCompra.Margin = new Padding(3, 4, 3, 4);
+            txtValoDeCompra.MaxLength = 150;
+            txtValoDeCompra.Name = "txtValoDeCompra";
+            txtValoDeCompra.Size = new Size(171, 29);
+            txtValoDeCompra.TabIndex = 29;
             // 
             // label3
             // 
@@ -894,7 +894,7 @@
         private Label label3;
         private ComboBox cbbTipoInvestimento;
         private Label label4;
-        private TextBox txtValorInvestimento;
+        private TextBox txtValoDeCompra;
         private Label label5;
         private ComboBox cbbStatus;
         private TextBox txtbairro;
@@ -917,23 +917,23 @@
         private Label labelempresaAss;
         private PictureBox pbFechar;
         private PictureBox pbMinimizar;
-        private CheckBox checkBox1;
+        private CheckBox ckNotaComissao;
         private Label label12;
         private TextBox txtValorComissao;
         private Label label13;
         private TextBox txtValorITBI;
         private Label label17;
         private Label label16;
-        private TextBox textBox3;
+        private TextBox txtValorDeRegistro;
         private Label label15;
-        private TextBox textBox2;
+        private TextBox txtValorEscritura;
         private Label label19;
-        private TextBox textBox6;
+        private TextBox txtvalor;
         private Label label18;
-        private TextBox textBox5;
-        private TextBox textBox4;
-        private CheckBox checkBox3;
-        private CheckBox checkBox2;
+        private TextBox txtValorAforamento;
+        private TextBox txtValorLaudemio;
+        private CheckBox ckLaudemioNao;
+        private CheckBox ckLaudemioSim;
         private TextBox txTamanhoM2;
         private Label label20;
         private CheckBox ckRegistradoNao;

@@ -26,7 +26,7 @@ namespace Infraestrutura.Contexto
         {
             //Server Master = DESKTOP-6RMV3GQ
             //Server Local = DESKTOP-I32AP0S
-            var stringConexao = @"Server=DESKTOP-I32AP0S;Database=SistemaFlATS02;Integrated Security=True;TrustServerCertificate=True;";
+            var stringConexao = @"Server=DESKTOP-6RMV3GQ;Database=SistemaFlATS02;Integrated Security=True;TrustServerCertificate=True;";
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(stringConexao);
@@ -62,7 +62,7 @@ namespace Infraestrutura.Contexto
                 f.Property(f => f.Rua).HasMaxLength(100).IsRequired(false); 
                 f.Property(f => f.Bairro).HasMaxLength(50).IsRequired(false); 
                 f.Property(f => f.Cidade).HasMaxLength(50) .IsRequired(false);
-                f.Property(f => f.ValorInvestimento).HasColumnType("decimal(18,2)");
+                f.Property(f => f.ValorDeCompra).HasColumnType("decimal(18,2)");
                 f.Property(f => f.Status).IsRequired();
                 f.Property(f => f.Unidade).IsRequired();
 

@@ -41,7 +41,7 @@ namespace Infraestrutura.Repositorio
                     Endereco = flat.Bairro != null && flat.Bairro != ""
                     ? $"{flat.Rua ?? ""}, {flat.Bairro}"
                     : $"{flat.Rua ?? ""}",
-                    Investimento = flat.ValorInvestimento,
+                    Investimento = flat.ValorDeCompra,
                     Status = flat.Status.ToString()
                 })
                 .OrderBy(flat => flat.Flat)
@@ -49,9 +49,9 @@ namespace Infraestrutura.Repositorio
 
             return dadosInvestimento;
         }
-        public decimal CalcularTotalValorInvestimento()
+        public decimal CalcularTotalValorDeCompra()
         {
-            return _context.Flat.Sum(flat => flat.ValorInvestimento);
+            return _context.Flat.Sum(flat => flat.ValorDeCompra);
         }
         public int CalcularTotalFlats()
         {
@@ -78,7 +78,7 @@ namespace Infraestrutura.Repositorio
                 BANDEIRA = flat.Empresa != null ? flat.Empresa.Descricao : "",
                 EMPREENDIMENTO = flat.Descricao,
                 CODFLAT = flat.id,
-                ValorImovel = flat.ValorInvestimento,
+                ValorImovel = flat.ValorDeCompra,
 
                 AluguelJan = CalculaAlugueisFlatsPorMes(flat.Lancamentos, 1),
                 DividendosJan = CalculaDividendosFlatsPorMes(flat.Lancamentos, 1),
@@ -210,7 +210,7 @@ namespace Infraestrutura.Repositorio
                 BANDEIRA = flat.idEmpresa != null ? flat.Empresa.Descricao : null,
                 EMPREENDIMENTO = flat.Descricao,
                 CODFLAT = flat.id,
-                ValorImovel = flat.ValorInvestimento,
+                ValorImovel = flat.ValorDeCompra,
                 DividendosJan = CalculaDividendosFlatsPorMes(flat.Lancamentos, 1),
                 DividendosFev = CalculaDividendosFlatsPorMes(flat.Lancamentos, 2),
                 DividendosMar = CalculaDividendosFlatsPorMes(flat.Lancamentos, 3),
@@ -321,47 +321,47 @@ namespace Infraestrutura.Repositorio
             {
                 EMPREENDIMENTO = flat.Descricao,
                 CODFLAT = flat.id,
-                ValorImovel = flat.ValorInvestimento,
+                ValorImovel = flat.ValorDeCompra,
 
                 // Calcular os rendimentos e porcentagens para cada mês
                 JANEIRO = CalcularRendimentoPorMes(flat.Lancamentos, 1),
-                PorcentagemJan = CalcularPorcentagemPorMes(flat.Lancamentos, 1, flat.ValorInvestimento),
+                PorcentagemJan = CalcularPorcentagemPorMes(flat.Lancamentos, 1, flat.ValorDeCompra),
 
                 FEVEREIRO = CalcularRendimentoPorMes(flat.Lancamentos, 2),
-                PorcentagemFev = CalcularPorcentagemPorMes(flat.Lancamentos, 2, flat.ValorInvestimento),
+                PorcentagemFev = CalcularPorcentagemPorMes(flat.Lancamentos, 2, flat.ValorDeCompra),
 
                 MARÇO = CalcularRendimentoPorMes(flat.Lancamentos, 3),
-                PorcentagemMar = CalcularPorcentagemPorMes(flat.Lancamentos, 3, flat.ValorInvestimento),
+                PorcentagemMar = CalcularPorcentagemPorMes(flat.Lancamentos, 3, flat.ValorDeCompra),
 
                 ABRIL = CalcularRendimentoPorMes(flat.Lancamentos, 4),
-                PorcentagemAbr = CalcularPorcentagemPorMes(flat.Lancamentos, 4, flat.ValorInvestimento),
+                PorcentagemAbr = CalcularPorcentagemPorMes(flat.Lancamentos, 4, flat.ValorDeCompra),
 
                 MAIO = CalcularRendimentoPorMes(flat.Lancamentos, 5),
-                PorcentagemMai = CalcularPorcentagemPorMes(flat.Lancamentos, 5, flat.ValorInvestimento),
+                PorcentagemMai = CalcularPorcentagemPorMes(flat.Lancamentos, 5, flat.ValorDeCompra),
 
                 JUNHO = CalcularRendimentoPorMes(flat.Lancamentos, 6),
-                PorcentagemJun = CalcularPorcentagemPorMes(flat.Lancamentos, 6, flat.ValorInvestimento),
+                PorcentagemJun = CalcularPorcentagemPorMes(flat.Lancamentos, 6, flat.ValorDeCompra),
 
                 JULHO = CalcularRendimentoPorMes(flat.Lancamentos, 7),
-                PorcentagemJul = CalcularPorcentagemPorMes(flat.Lancamentos, 7, flat.ValorInvestimento),
+                PorcentagemJul = CalcularPorcentagemPorMes(flat.Lancamentos, 7, flat.ValorDeCompra),
 
                 AGOSTO = CalcularRendimentoPorMes(flat.Lancamentos, 8),
-                PorcentagemAgo = CalcularPorcentagemPorMes(flat.Lancamentos, 8, flat.ValorInvestimento),
+                PorcentagemAgo = CalcularPorcentagemPorMes(flat.Lancamentos, 8, flat.ValorDeCompra),
 
                 SETEMBRO = CalcularRendimentoPorMes(flat.Lancamentos, 9),
-                PorcentagemSet = CalcularPorcentagemPorMes(flat.Lancamentos, 9, flat.ValorInvestimento),
+                PorcentagemSet = CalcularPorcentagemPorMes(flat.Lancamentos, 9, flat.ValorDeCompra),
 
                 OUTUBRO = CalcularRendimentoPorMes(flat.Lancamentos, 10),
-                PorcentagemOut = CalcularPorcentagemPorMes(flat.Lancamentos, 10, flat.ValorInvestimento),
+                PorcentagemOut = CalcularPorcentagemPorMes(flat.Lancamentos, 10, flat.ValorDeCompra),
 
                 NOVEMBRO = CalcularRendimentoPorMes(flat.Lancamentos, 11),
-                PorcentagemNov = CalcularPorcentagemPorMes(flat.Lancamentos, 11, flat.ValorInvestimento),
+                PorcentagemNov = CalcularPorcentagemPorMes(flat.Lancamentos, 11, flat.ValorDeCompra),
 
                 DEZEMBRO = CalcularRendimentoPorMes(flat.Lancamentos, 12),
-                PorcentagemDez = CalcularPorcentagemPorMes(flat.Lancamentos, 12, flat.ValorInvestimento),
+                PorcentagemDez = CalcularPorcentagemPorMes(flat.Lancamentos, 12, flat.ValorDeCompra),
 
                 RendimentoAnual = CalculaRendimentoAnualPorFlat(flat.Lancamentos),
-                PorcentagemAnual = CalculaPorcentagemAnualPorFlat(flat.Lancamentos, flat.ValorInvestimento)
+                PorcentagemAnual = CalculaPorcentagemAnualPorFlat(flat.Lancamentos, flat.ValorDeCompra)
             })
             .OrderBy(flat => flat.EMPREENDIMENTO)
             .ToList();
@@ -371,7 +371,7 @@ namespace Infraestrutura.Repositorio
         }
         public IEnumerable<object> ObterDadosTotais()
         {
-            var totalInv = CalcularTotalValorInvestimento();
+            var totalInv = CalcularTotalValorDeCompra();
 
             var totalJan = CalculaLancamentosPorMes(1, false);
             var PorcJan = CalculaLancamentosPorMes(1, true);
@@ -467,7 +467,7 @@ namespace Infraestrutura.Repositorio
             }
             else
             {
-                decimal totalInvestimento = CalcularTotalValorInvestimento();
+                decimal totalInvestimento = CalcularTotalValorDeCompra();
                 if (totalInvestimento != 0)
                 {
                     total = total / totalInvestimento;

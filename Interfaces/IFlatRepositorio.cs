@@ -13,7 +13,7 @@ namespace Interfaces
     {
         //Formulário Registros
         IEnumerable<dynamic> ObterDadosInvestimento();
-        decimal CalcularTotalValorInvestimento();
+        decimal CalcularTotalValorDeCompra();
         int CalcularTotalFlats();
         //
         //Formulário Aluguel + Dividendos
