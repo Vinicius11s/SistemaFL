@@ -66,7 +66,7 @@
             dgdadosPIS.BorderStyle = BorderStyle.None;
             dgdadosPIS.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdadosPIS.Dock = DockStyle.Bottom;
-            dgdadosPIS.Location = new Point(0, 102);
+            dgdadosPIS.Location = new Point(0, 100);
             dgdadosPIS.Name = "dgdadosPIS";
             dgdadosPIS.Size = new Size(789, 295);
             dgdadosPIS.TabIndex = 2;
@@ -94,7 +94,7 @@
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(789, 397);
+            ClientSize = new Size(789, 395);
             Controls.Add(pbFechar);
             Controls.Add(dgdadosPIS);
             Controls.Add(label2);

@@ -46,17 +46,17 @@ namespace SistemaFL
             btnsalvar.Enabled = false;
         }
         private void btnnovo_Click_1(object sender, EventArgs e)
-        { 
+        {
             limpar();
             txtdescricao.Focus();
-        
+
             pdados.Enabled = true;
             btnnovo.Enabled = false;
             btnlocalizar.Enabled = false;
             btnalterar.Enabled = false;
             btncancelar.Enabled = true;
             btnexcluir.Enabled = false;
-            btnsalvar.Enabled = true;            
+            btnsalvar.Enabled = true;
         }
         private void btnalterar_Click_1(object sender, EventArgs e)
         {
@@ -75,6 +75,8 @@ namespace SistemaFL
         }
         private void btnsalvar_Click_1(object sender, EventArgs e)
         {
+            avisoMostrado = false;
+
             try
             {
                 if (txtdescricao.Text != String.Empty)
@@ -89,18 +91,23 @@ namespace SistemaFL
                     {
                         repositorio.Alterar(flat);
                     }
-                    Program.serviceProvider.
-                        GetRequiredService<ContextoSistema>().SaveChanges();
-                    MessageBox.Show("Salvo com sucesso");
 
-                    limpar();
-                    pdados.Enabled = false;
-                    btnnovo.Enabled = true;
-                    btnlocalizar.Enabled = true;
-                    btnalterar.Enabled = false;
-                    btncancelar.Enabled = false;
-                    btnexcluir.Enabled = false;
-                    btnsalvar.Enabled = false;
+                    if(avisoMostrado == false)
+                    {
+                        Program.serviceProvider.
+                                               GetRequiredService<ContextoSistema>().SaveChanges();
+                        MessageBox.Show("Salvo com sucesso");
+
+                        limpar();
+                        pdados.Enabled = false;
+                        btnnovo.Enabled = true;
+                        btnlocalizar.Enabled = true;
+                        btnalterar.Enabled = false;
+                        btncancelar.Enabled = false;
+                        btnexcluir.Enabled = false;
+                        btnsalvar.Enabled = false;
+                    }
+                   
                 }
             }
             catch (Exception ex)
@@ -196,63 +203,8 @@ namespace SistemaFL
                 }
             }
         }
-
-
-        public Flat carregaPropriedades()
-        {
-            Flat flat;
-            if (txtid.Text != "")
-            {
-                //alterar , estou recuperando o registro antigo
-                //para manter a referencia do objeto do entity
-                flat = repositorio.Recuperar(c => c.id ==
-                                int.Parse(txtid.Text));
-
-            }
-            else flat = new Flat();//inserir
-
-            valorTotalImovel = 0;
-
-            flat.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
-            flat.Descricao = txtdescricao.Text;
-            flat.TipoInvestimento = cbbTipoInvestimento.SelectedItem?.ToString() ?? "Indefinido";           
-            AtribuiStatusDoFlat(flat);
-            flat.DataAquisicao = dtdataaquisicao.Value;
-            flat.TamanhoUnidadeM2 = ValidaDecimais(flat, txTamanhoM2);
-            flat.Rua = txtrua.Text;
-            flat.Unidade = ValidaInteiros(flat, txtunidade);
-            flat.Bairro = txtbairro.Text;
-            flat.Estado = txtestado.Text;
-            flat.Cidade = txtcidade.Text;
-            flat.NumMatriculaImovel = ValidaInteiros(flat, txtNumMatriculaImovel);
-            flat.ValorDeCompra = ValidaDecimais(flat, txtValoDeCompra);
-            valorTotalImovel += flat.ValorDeCompra;
-            ValidaCheckBox(flat);
-            flat.valorComissao = ValidaDecimais(flat, txtValorComissao);
-            valorTotalImovel += flat.valorComissao;
-
-            ValidaCheckComissao(flat);
-
-            flat.ValorITBI = ValidaDecimais(flat, txtValorITBI);
-            valorTotalImovel += flat.ValorITBI;
-            flat.ValorEscritura = ValidaDecimais(flat, txtValorEscritura);
-            valorTotalImovel += flat.ValorEscritura;
-            flat.ValorRegistro = ValidaDecimais(flat, txtValorDeRegistro);
-            valorTotalImovel += flat.ValorRegistro;
-
-            ValidaCheckLaudemio(flat);
-            flat.ValorLaudemio = ValidaDecimais(flat, txtValorLaudemio);
-            valorTotalImovel += flat.ValorLaudemio;
-
-            flat.ValorAforamento = ValidaDecimais(flat, txtValorAforamento);
-            valorTotalImovel += flat.ValorAforamento;
-
-            flat.ValorTotalImovel = valorTotalImovel;
-
-            flat.idEmpresa = flat.idEmpresa;
-            return flat;
-        }
-
+        //
+        //Atribuições
         void AtribuiStatusDoFlat(Flat flat)
         {
             if (cbbStatus != null && cbbStatus.SelectedItem != null)
@@ -297,6 +249,101 @@ namespace SistemaFL
                 }
             }
         }
+        void AtribuiValorDeCompraUnidade(Flat flat)
+        {
+            decimal valorInvestimento;
+            if (decimal.TryParse(txtValoDeCompra.Text, out valorInvestimento))
+            {
+                flat.ValorDeCompra = valorInvestimento;
+            }
+        }
+        //
+        //
+        public Flat carregaPropriedades()
+        {
+            Flat flat;
+            if (txtid.Text != "")
+            {
+                //alterar , estou recuperando o registro antigo
+                //para manter a referencia do objeto do entity
+                flat = repositorio.Recuperar(c => c.id ==
+                                int.Parse(txtid.Text));
+
+            }
+            else flat = new Flat();//inserir
+
+            valorTotalImovel = 0;
+
+            flat.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
+            flat.Descricao = txtdescricao.Text;
+            flat.TipoInvestimento = cbbTipoInvestimento.SelectedItem?.ToString() ?? "Indefinido";
+            AtribuiStatusDoFlat(flat);
+            flat.DataAquisicao = dtdataaquisicao.Value;
+            flat.TamanhoUnidadeM2 = ValidaDecimais(flat, txTamanhoM2);
+            flat.Rua = txtrua.Text;
+            flat.Unidade = ValidaInteiros(flat, txtunidade);
+            flat.Bairro = txtbairro.Text;
+            flat.Estado = txtestado.Text;
+            flat.Cidade = txtcidade.Text;
+            flat.NumMatriculaImovel = ValidaInteiros(flat, txtNumMatriculaImovel);
+            flat.ValorDeCompra = ValidaDecimais(flat, txtValoDeCompra);
+            valorTotalImovel += flat.ValorDeCompra;
+            ValidaCheckBox(flat);
+            flat.valorComissao = ValidaDecimais(flat, txtValorComissao);
+            valorTotalImovel += flat.valorComissao;
+            flat.NotaComissao = ckNotaComissao.Checked ? true : false;
+
+            flat.ValorITBI = ValidaDecimais(flat, txtValorITBI);
+            valorTotalImovel += flat.ValorITBI;
+            flat.ValorEscritura = ValidaDecimais(flat, txtValorEscritura);
+            valorTotalImovel += flat.ValorEscritura;
+            flat.ValorRegistro = ValidaDecimais(flat, txtValorDeRegistro);
+            valorTotalImovel += flat.ValorRegistro;
+
+            flat.Laudemio = ckLaudemioSim.Checked ? true : (ckLaudemioNao.Checked ? false : false);
+            flat.ValorLaudemio = ValidaDecimais(flat, txtValorLaudemio);
+            valorTotalImovel += flat.ValorLaudemio;
+
+            flat.ValorAforamento = ValidaDecimais(flat, txtValorAforamento);
+            valorTotalImovel += flat.ValorAforamento;
+
+            flat.ValorTotalImovel = valorTotalImovel;
+
+            flat.idEmpresa = flat.idEmpresa;
+            return flat;
+        }
+        void limpar()
+        {
+            foreach (Control controle in pdados.Controls)
+            {
+                // Verifica se o controle é um TextBox
+                if (controle is TextBox textBox)
+                {
+                    // Limpa o conteúdo do TextBox
+                    textBox.Clear();
+                }
+            }
+                
+        }
+        private void pbFechar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void pbMinimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+        private void tTamanhotela_Tick(object sender, EventArgs e)
+        {
+            Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, 10);
+        }
+        private void ckLaudemioSim_CheckedChanged(object sender, EventArgs e)
+        {
+            txtValorLaudemio.Enabled = true;
+        }
+        //
+        //Validações
+        bool avisoMostrado = false;
         public decimal ValidaDecimais(Flat flat, TextBox textBox)
         {
             decimal valor;
@@ -314,107 +361,74 @@ namespace SistemaFL
                 return valor;
             }
             return 0;
-        }
-        void AtribuiValorDeCompraUnidade(Flat flat)
-        {
-            decimal valorInvestimento;
-            if (decimal.TryParse(txtValoDeCompra.Text, out valorInvestimento))
-            {
-                flat.ValorDeCompra = valorInvestimento;
-            }
-        }
-
+        }      
         void ValidaCheckBox(Flat flat)
-        {
-            bool avisoMostrado = false;
-
-            if (!ckPossuiGaragemSim.Checked && !ckPossuiGaragemNao.Checked && !avisoMostrado)
+        {           
+            // Validação para "Possui Garagem"
+            if (ckPossuiGaragemSim.Checked && ckPossuiGaragemNao.Checked)
             {
-                MessageBox.Show("Por favor, selecione se possui garagem.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                avisoMostrado = true;
+                if (!avisoMostrado)
+                {
+                    MessageBox.Show("Por favor, selecione apenas uma opção para 'Possui Garagem'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    avisoMostrado = true;  // Garante que o aviso seja mostrado apenas uma vez
+                }
+            }
+            else if (!ckPossuiGaragemSim.Checked && !ckPossuiGaragemNao.Checked)
+            {
+                if (!avisoMostrado)
+                {
+                    MessageBox.Show("Por favor, selecione se possui garagem.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    avisoMostrado = true;  // Garante que o aviso seja mostrado apenas uma vez
+                }
             }
             else
             {
                 flat.PossuiGaragem = ckPossuiGaragemSim.Checked;
             }
 
-            if (!ckRegistradoSim.Checked && !ckRegistradoNao.Checked && !avisoMostrado)
+            // Validação para "Está Escriturado"
+            if (ckEscrituradoSim.Checked && ckEscrituradoNao.Checked)
             {
-                MessageBox.Show("Por favor, selecione se está registrado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                avisoMostrado = true;
+                if (!avisoMostrado)
+                {
+                    MessageBox.Show("Por favor, selecione apenas uma opção para 'Está Escriturado'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    avisoMostrado = true;  // Garante que o aviso seja mostrado apenas uma vez
+                }
             }
-            else
+            else if (!ckEscrituradoSim.Checked && !ckEscrituradoNao.Checked)
             {
-                flat.Registrado = ckRegistradoSim.Checked;
-            }
-
-            if (!ckEscrituradoSim.Checked && !ckEscrituradoNao.Checked && !avisoMostrado)
-            {
-                MessageBox.Show("Por favor, selecione se está escriturado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                avisoMostrado = true;
+                if (!avisoMostrado)
+                {
+                    MessageBox.Show("Por favor, selecione se está escriturado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    avisoMostrado = true;  // Garante que o aviso seja mostrado apenas uma vez
+                }
             }
             else
             {
                 flat.Escriturado = ckEscrituradoSim.Checked;
             }
-        }
 
-        void ValidaCheckComissao(Flat flat)
-        {
-            bool avisoMostrado = false;
-
-            if (!ckNotaComissao.Checked && !avisoMostrado)
+            // Validação para "Está Registrado"
+            if (ckRegistradoSim.Checked && ckRegistradoNao.Checked)
             {
-                MessageBox.Show("Por favor, selecione se é necessário Nota de Comissão.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                avisoMostrado = true;
+                if (!avisoMostrado)
+                {
+                    MessageBox.Show("Por favor, selecione apenas uma opção para 'Está Registrado'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    avisoMostrado = true;  // Garante que o aviso seja mostrado apenas uma vez
+                }
+            }
+            else if (!ckRegistradoSim.Checked && !ckRegistradoNao.Checked)
+            {
+                if (!avisoMostrado)
+                {
+                    MessageBox.Show("Por favor, selecione se está registrado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    avisoMostrado = true;  // Garante que o aviso seja mostrado apenas uma vez
+                }
             }
             else
             {
-                flat.NotaComissao = ckNotaComissao.Checked;
-            }            
-        }
-        void ValidaCheckLaudemio(Flat flat)
-        {
-            bool avisoMostrado = false;
-
-            if (!ckLaudemioSim.Checked && ckLaudemioNao.Checked && !avisoMostrado)
-            {
-                MessageBox.Show("Por favor, selecione se é necessário Laudêmio", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                avisoMostrado = true;
+                flat.Registrado = ckRegistradoSim.Checked;
             }
-            else
-            {
-                flat.NotaComissao = ckNotaComissao.Checked;
-                txtValorLaudemio.Enabled = true;
-            }
-        }
-
-        void limpar()
-        {
-            txtid.Text = "";
-            txtdescricao.Text = "";
-            dtdataaquisicao.Value = DateTime.Now;
-            cbbStatus.Text = "";
-            cbbTipoInvestimento.Text = "";
-            txtValoDeCompra.Text = "";
-            txtrua.Text = "";
-            txtunidade.Text = "";
-            txtbairro.Text = "";
-            txtcidade.Text = "";
-            txtestado.Text = "";
-            txtempresaAss.Text = "";
-        }
-        private void pbFechar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-        private void pbMinimizar_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-        private void tTamanhotela_Tick(object sender, EventArgs e)
-        {
-            Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, 10);
         }
     }
 }

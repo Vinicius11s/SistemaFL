@@ -150,10 +150,7 @@ namespace SistemaFL
         }
         //
         //Funcionalidades
-        private void btnFuncionalidades_Click(object sender, EventArgs e)
-        {
-            funcTransition.Start();
-        }
+       
         private void btnregistros_Click(object sender, EventArgs e)
         {
             var form = Program.serviceProvider.GetRequiredService<FrmFuncionalidadeRegisto>();
@@ -186,15 +183,17 @@ namespace SistemaFL
         }
         //
         //
-        
         private void pbMinimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
         private void button10_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void btnFuncionalidad_Click(object sender, EventArgs e)
+        {
+            funcTransition.Start();
         }
     }
 }

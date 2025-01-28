@@ -2,6 +2,7 @@
 using Infraestrutura.Contexto;
 using Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Xml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace SistemaFL
 {
@@ -29,7 +32,7 @@ namespace SistemaFL
             this.repositorio = repositorio;
             this.flatRepositorio = flatRepositorio;
 
-            tTamanhotela.Interval = 5;
+            tTamanhotela.Interval = 1;
             tTamanhotela.Tick += tTamanhotela_Tick;
             tTamanhotela.Start();
         }
@@ -45,10 +48,7 @@ namespace SistemaFL
             btncancelar.Enabled = false;
             btnexcluir.Enabled = false;
             btnlocalizar.Enabled = true;
-
         }
-
-        //
         //CRUD
         private void btnnovo_Click(object sender, EventArgs e)
         {
@@ -59,7 +59,7 @@ namespace SistemaFL
             btncancelar.Enabled = true;
             btnexcluir.Enabled = false;
             btnlocalizar.Enabled = false;
-            txtdescricao.Focus();
+            txtrazaosocial.Focus();
 
         }
         private void btnsalvar_Click(object sender, EventArgs e)
@@ -229,7 +229,6 @@ namespace SistemaFL
             }
 
         }
-        //
         //DataGrid Flats Não Associados
         private void CarregarFlatsNaoAssociados()
         {
@@ -258,8 +257,8 @@ namespace SistemaFL
             grid.Columns["DataAquisicao"].DefaultCellStyle.Format = "d";
             grid.Columns["DataAquisicao"].HeaderText = "DATA AQUISIÇÃO";
 
-            grid.Columns["ValorInvestimento"].DefaultCellStyle.Format = "C2";
-            grid.Columns["ValorInvestimento"].HeaderText = "VALOR INVESTIMENTO";
+            grid.Columns["ValorDeCompra"].DefaultCellStyle.Format = "C2";
+            grid.Columns["ValorDeCompra"].HeaderText = "VALOR DE COMPRA";
 
             foreach (DataGridViewColumn coluna in grid.Columns)
             {
@@ -332,7 +331,6 @@ namespace SistemaFL
                 MessageBox.Show("Selecione um flat para remover.");
             }
         }
-        //
         //ComboBox Flats Associados
         private void CarregarComboBoxFlatsAssociados()
         {
@@ -374,7 +372,6 @@ namespace SistemaFL
                 cbbflatsassociados.Text = "";
             }
         }
-        //
         //
         public Empresa carregaPropriedades()
         {
@@ -455,11 +452,58 @@ namespace SistemaFL
         private void tTamanhotela_Tick(object sender, EventArgs e)
         {
             Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, incremento);
+        }    
+        private async void btnBuscaCep_Click(object sender, EventArgs e)
+        {
+            string cep = txtcep.Text.Trim(); // Pega o CEP digitado no TextBox
+
+            if (string.IsNullOrEmpty(cep) || cep.Length != 8)
+            {
+                MessageBox.Show("Por favor, insira um CEP válido.");
+                return;
+            }
+
+            string url = $"https://viacep.com.br/ws/{cep}/json/";
+
+            try
+            {
+                // Chama a API ViaCEP de forma assíncrona
+                using (HttpClient client = new HttpClient())
+                {
+                    var response = await client.GetStringAsync(url);
+
+                    // Deserializa a resposta JSON em um objeto
+                    var endereco = Newtonsoft.Json.JsonConvert.DeserializeObject<ViaCepResponse>(response);
+
+                    // Preenche os campos com os dados retornados
+                    if (endereco != null && endereco.Erro == null)
+                    {
+                        txtrua.Text = endereco.Logradouro;
+                        txtbairro.Text = endereco.Bairro;
+                        txtcidade.Text = endereco.Localidade;
+                        txtestado.Text = endereco.Uf;
+                        txtnumero.Focus();
+                    }
+                    else
+                    {
+                        MessageBox.Show("CEP não encontrado ou inválido.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao buscar o CEP: {ex.Message}");
+            }
         }
+    }
 
-        
-           
-
-        
+    // Classe para mapear o retorno da API ViaCEP
+    public class ViaCepResponse
+    {
+        public string Logradouro { get; set; }
+        public string Bairro { get; set; }
+        public string Localidade { get; set; }
+        public string Uf { get; set; }
+        public string Erro { get; set; }
     }
 }

@@ -46,7 +46,7 @@
             btnocorrencias = new Button();
             funcContainer = new FlowLayoutPanel();
             panel4 = new Panel();
-            button1 = new Button();
+            btnFuncionalidad = new Button();
             btnFuncionalidades = new Button();
             panel9 = new Panel();
             btnregistros = new Button();
@@ -62,7 +62,7 @@
             btnpiscofins = new Button();
             flowLayoutPanel1 = new FlowLayoutPanel();
             panel15 = new Panel();
-            button2 = new Button();
+            brnRelatorios = new Button();
             button3 = new Button();
             panel16 = new Panel();
             button4 = new Button();
@@ -324,7 +324,7 @@
             // panel4
             // 
             panel4.BackColor = Color.FromArgb(23, 24, 29);
-            panel4.Controls.Add(button1);
+            panel4.Controls.Add(btnFuncionalidad);
             panel4.Controls.Add(btnFuncionalidades);
             panel4.Location = new Point(3, 3);
             panel4.Name = "panel4";
@@ -332,21 +332,22 @@
             panel4.Size = new Size(197, 50);
             panel4.TabIndex = 5;
             // 
-            // button1
+            // btnFuncionalidad
             // 
-            button1.BackColor = Color.FromArgb(23, 24, 29);
-            button1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.White;
-            button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.ImageAlign = ContentAlignment.MiddleLeft;
-            button1.Location = new Point(-21, -14);
-            button1.Name = "button1";
-            button1.Padding = new Padding(25, 0, 0, 0);
-            button1.Size = new Size(238, 79);
-            button1.TabIndex = 5;
-            button1.Text = "         Funcionalidades";
-            button1.TextAlign = ContentAlignment.MiddleLeft;
-            button1.UseVisualStyleBackColor = false;
+            btnFuncionalidad.BackColor = Color.FromArgb(23, 24, 29);
+            btnFuncionalidad.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnFuncionalidad.ForeColor = Color.White;
+            btnFuncionalidad.Image = (Image)resources.GetObject("btnFuncionalidad.Image");
+            btnFuncionalidad.ImageAlign = ContentAlignment.MiddleLeft;
+            btnFuncionalidad.Location = new Point(-21, -14);
+            btnFuncionalidad.Name = "btnFuncionalidad";
+            btnFuncionalidad.Padding = new Padding(25, 0, 0, 0);
+            btnFuncionalidad.Size = new Size(238, 79);
+            btnFuncionalidad.TabIndex = 5;
+            btnFuncionalidad.Text = "         Funcionalidades";
+            btnFuncionalidad.TextAlign = ContentAlignment.MiddleLeft;
+            btnFuncionalidad.UseVisualStyleBackColor = false;
+            btnFuncionalidad.Click += btnFuncionalidad_Click;
             // 
             // btnFuncionalidades
             // 
@@ -363,7 +364,6 @@
             btnFuncionalidades.Text = "         Funcionalidades";
             btnFuncionalidades.TextAlign = ContentAlignment.MiddleLeft;
             btnFuncionalidades.UseVisualStyleBackColor = false;
-            btnFuncionalidades.Click += btnFuncionalidades_Click;
             // 
             // panel9
             // 
@@ -546,7 +546,7 @@
             // panel15
             // 
             panel15.BackColor = Color.FromArgb(23, 24, 29);
-            panel15.Controls.Add(button2);
+            panel15.Controls.Add(brnRelatorios);
             panel15.Controls.Add(button3);
             panel15.Location = new Point(3, 3);
             panel15.Name = "panel15";
@@ -554,21 +554,21 @@
             panel15.Size = new Size(197, 50);
             panel15.TabIndex = 5;
             // 
-            // button2
+            // brnRelatorios
             // 
-            button2.BackColor = Color.FromArgb(23, 24, 29);
-            button2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.ForeColor = Color.White;
-            button2.Image = (Image)resources.GetObject("button2.Image");
-            button2.ImageAlign = ContentAlignment.MiddleLeft;
-            button2.Location = new Point(-21, -14);
-            button2.Name = "button2";
-            button2.Padding = new Padding(25, 0, 0, 0);
-            button2.Size = new Size(238, 79);
-            button2.TabIndex = 5;
-            button2.Text = "         Relatórios";
-            button2.TextAlign = ContentAlignment.MiddleLeft;
-            button2.UseVisualStyleBackColor = false;
+            brnRelatorios.BackColor = Color.FromArgb(23, 24, 29);
+            brnRelatorios.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            brnRelatorios.ForeColor = Color.White;
+            brnRelatorios.Image = (Image)resources.GetObject("brnRelatorios.Image");
+            brnRelatorios.ImageAlign = ContentAlignment.MiddleLeft;
+            brnRelatorios.Location = new Point(-21, -14);
+            brnRelatorios.Name = "brnRelatorios";
+            brnRelatorios.Padding = new Padding(25, 0, 0, 0);
+            brnRelatorios.Size = new Size(238, 79);
+            brnRelatorios.TabIndex = 5;
+            brnRelatorios.Text = "         Relatórios";
+            brnRelatorios.TextAlign = ContentAlignment.MiddleLeft;
+            brnRelatorios.UseVisualStyleBackColor = false;
             // 
             // button3
             // 
@@ -918,10 +918,10 @@
         private Label label1;
         private PictureBox btnEsconderPalavrasMenu;
         private PictureBox pbMinimizar;
-        private Button button1;
+        private Button btnFuncionalidad;
         private FlowLayoutPanel flowLayoutPanel1;
         private Panel panel15;
-        private Button button2;
+        private Button brnRelatorios;
         private Button button3;
         private Panel panel16;
         private Button button4;

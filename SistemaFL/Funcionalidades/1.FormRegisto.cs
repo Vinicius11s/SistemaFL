@@ -113,7 +113,7 @@ namespace SistemaFL.Funcionalidades
         }
         private void CarregarTotalInvestimento()
         {
-            var totalInvestimento = flatRepositorio.CalcularTotalValorInvestimento();
+            var totalInvestimento = flatRepositorio.CalcularTotalValorDeCompra();
             lblTotalInvestimento.Text = totalInvestimento.ToString("C");
         }
         private void CarregarTotalFlats()

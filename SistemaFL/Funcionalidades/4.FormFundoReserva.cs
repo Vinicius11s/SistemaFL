@@ -101,17 +101,17 @@ namespace SistemaFL.Funcionalidades
 
             dgdadosFunRes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgdadosFunRes.ColumnHeadersHeight = 35;  // Ajuste o valor conforme necessário
-            dgdadosFunRes.Columns["CODFLAT"].Visible = false;
+            
         }
         private void AlterarEstilosCelulas(DataGridView grid)
         {
 
-            foreach (DataGridViewColumn col in dgdadosFunRes.Columns)
+            foreach (DataGridViewColumn col in grid.Columns)
             {
                 col.DefaultCellStyle.Padding = new Padding(5, 2, 5, 2);  // Espaçamento interno
             }
 
-            foreach (DataGridViewColumn coluna in dgdadosFunRes.Columns)
+            foreach (DataGridViewColumn coluna in grid.Columns)
             {
                 if (coluna.Name != "CODFLAT")
                 {
@@ -187,6 +187,7 @@ namespace SistemaFL.Funcionalidades
             // Verifica se há linhas no DataGridView
             if (dgdadosFunRes.Rows.Count > 0)
             {
+                dgdadosFunRes.Columns["CODFLAT"].Visible = false;
                 int ultimaLinhaIndex = dgdadosFunRes.Rows.Count - 1;
 
                 if (!dgdadosFunRes.Rows[ultimaLinhaIndex].IsNewRow)

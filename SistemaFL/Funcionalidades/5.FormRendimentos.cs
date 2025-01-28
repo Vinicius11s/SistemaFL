@@ -257,7 +257,7 @@ namespace SistemaFL.Funcionalidades
                         var flat = repositorio.Recuperar(f => f.id == codFlat);
 
                         // Calcular o valor estipulado, passando o objeto flat como parâmetro
-                        decimal valorEstipulado = flat.ValorInvestimento * 0.02m;
+                        decimal valorEstipulado = flat.ValorDeCompra * 0.02m;
 
                         // Pinte o fundo da célula primeiro (garante que a célula tem o fundo correto)
                         e.Graphics.FillRectangle(new SolidBrush(e.CellStyle.BackColor), e.CellBounds);

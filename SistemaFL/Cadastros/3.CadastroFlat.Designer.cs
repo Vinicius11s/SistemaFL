@@ -182,7 +182,7 @@
             txtNumMatriculaImovel.MaxLength = 150;
             txtNumMatriculaImovel.Name = "txtNumMatriculaImovel";
             txtNumMatriculaImovel.Size = new Size(168, 29);
-            txtNumMatriculaImovel.TabIndex = 82;
+            txtNumMatriculaImovel.TabIndex = 10;
             // 
             // ckRegistradoNao
             // 
@@ -190,7 +190,7 @@
             ckRegistradoNao.Location = new Point(851, 167);
             ckRegistradoNao.Name = "ckRegistradoNao";
             ckRegistradoNao.Size = new Size(56, 24);
-            ckRegistradoNao.TabIndex = 81;
+            ckRegistradoNao.TabIndex = 17;
             ckRegistradoNao.Text = "Não";
             ckRegistradoNao.UseVisualStyleBackColor = true;
             // 
@@ -200,7 +200,7 @@
             ckRegistradoSim.Location = new Point(795, 167);
             ckRegistradoSim.Name = "ckRegistradoSim";
             ckRegistradoSim.Size = new Size(52, 24);
-            ckRegistradoSim.TabIndex = 80;
+            ckRegistradoSim.TabIndex = 16;
             ckRegistradoSim.Text = "Sim";
             ckRegistradoSim.UseVisualStyleBackColor = true;
             // 
@@ -211,7 +211,7 @@
             label24.Location = new Point(801, 143);
             label24.Name = "label24";
             label24.Size = new Size(83, 21);
-            label24.TabIndex = 79;
+            label24.TabIndex = 82;
             label24.Text = "Registrado";
             // 
             // ckEscrituradoNao
@@ -220,7 +220,7 @@
             ckEscrituradoNao.Location = new Point(682, 167);
             ckEscrituradoNao.Name = "ckEscrituradoNao";
             ckEscrituradoNao.Size = new Size(56, 24);
-            ckEscrituradoNao.TabIndex = 78;
+            ckEscrituradoNao.TabIndex = 15;
             ckEscrituradoNao.Text = "Não";
             ckEscrituradoNao.UseVisualStyleBackColor = true;
             // 
@@ -230,7 +230,7 @@
             ckEscrituradoSim.Location = new Point(626, 167);
             ckEscrituradoSim.Name = "ckEscrituradoSim";
             ckEscrituradoSim.Size = new Size(52, 24);
-            ckEscrituradoSim.TabIndex = 77;
+            ckEscrituradoSim.TabIndex = 14;
             ckEscrituradoSim.Text = "Sim";
             ckEscrituradoSim.UseVisualStyleBackColor = true;
             // 
@@ -241,7 +241,7 @@
             label23.Location = new Point(632, 143);
             label23.Name = "label23";
             label23.Size = new Size(86, 21);
-            label23.TabIndex = 76;
+            label23.TabIndex = 81;
             label23.Text = "Escriturado";
             // 
             // ckPossuiGaragemNao
@@ -250,7 +250,7 @@
             ckPossuiGaragemNao.Location = new Point(510, 170);
             ckPossuiGaragemNao.Name = "ckPossuiGaragemNao";
             ckPossuiGaragemNao.Size = new Size(56, 24);
-            ckPossuiGaragemNao.TabIndex = 75;
+            ckPossuiGaragemNao.TabIndex = 13;
             ckPossuiGaragemNao.Text = "Não";
             ckPossuiGaragemNao.UseVisualStyleBackColor = true;
             // 
@@ -260,7 +260,7 @@
             ckPossuiGaragemSim.Location = new Point(452, 170);
             ckPossuiGaragemSim.Name = "ckPossuiGaragemSim";
             ckPossuiGaragemSim.Size = new Size(52, 24);
-            ckPossuiGaragemSim.TabIndex = 74;
+            ckPossuiGaragemSim.TabIndex = 12;
             ckPossuiGaragemSim.Text = "Sim";
             ckPossuiGaragemSim.UseVisualStyleBackColor = true;
             // 
@@ -271,14 +271,14 @@
             label22.Location = new Point(448, 146);
             label22.Name = "label22";
             label22.Size = new Size(120, 21);
-            label22.TabIndex = 73;
+            label22.TabIndex = 80;
             label22.Text = "Possui Garagem";
             // 
             // label21
             // 
             label21.AutoSize = true;
             label21.Font = new Font("Segoe UI Semilight", 12F);
-            label21.Location = new Point(1026, 39);
+            label21.Location = new Point(977, 42);
             label21.Name = "label21";
             label21.Size = new Size(31, 21);
             label21.TabIndex = 72;
@@ -291,7 +291,7 @@
             txTamanhoM2.Margin = new Padding(3, 4, 3, 4);
             txTamanhoM2.MaxLength = 150;
             txTamanhoM2.Name = "txTamanhoM2";
-            txTamanhoM2.Size = new Size(135, 29);
+            txTamanhoM2.Size = new Size(69, 29);
             txTamanhoM2.TabIndex = 71;
             // 
             // label20
@@ -316,6 +316,7 @@
             // 
             // txtvalor
             // 
+            txtvalor.Enabled = false;
             txtvalor.Font = new Font("Segoe UI Semilight", 12F);
             txtvalor.Location = new Point(328, 349);
             txtvalor.Margin = new Padding(3, 4, 3, 4);
@@ -323,7 +324,7 @@
             txtvalor.Name = "txtvalor";
             txtvalor.ReadOnly = true;
             txtvalor.Size = new Size(176, 29);
-            txtvalor.TabIndex = 68;
+            txtvalor.TabIndex = 27;
             // 
             // label18
             // 
@@ -343,7 +344,7 @@
             txtValorAforamento.MaxLength = 150;
             txtValorAforamento.Name = "txtValorAforamento";
             txtValorAforamento.Size = new Size(137, 29);
-            txtValorAforamento.TabIndex = 66;
+            txtValorAforamento.TabIndex = 26;
             // 
             // txtValorLaudemio
             // 
@@ -354,7 +355,7 @@
             txtValorLaudemio.MaxLength = 150;
             txtValorLaudemio.Name = "txtValorLaudemio";
             txtValorLaudemio.Size = new Size(137, 29);
-            txtValorLaudemio.TabIndex = 65;
+            txtValorLaudemio.TabIndex = 25;
             // 
             // ckLaudemioNao
             // 
@@ -362,7 +363,7 @@
             ckLaudemioNao.Location = new Point(744, 285);
             ckLaudemioNao.Name = "ckLaudemioNao";
             ckLaudemioNao.Size = new Size(56, 24);
-            ckLaudemioNao.TabIndex = 64;
+            ckLaudemioNao.TabIndex = 24;
             ckLaudemioNao.Text = "Não";
             ckLaudemioNao.UseVisualStyleBackColor = true;
             // 
@@ -372,9 +373,10 @@
             ckLaudemioSim.Location = new Point(693, 285);
             ckLaudemioSim.Name = "ckLaudemioSim";
             ckLaudemioSim.Size = new Size(52, 24);
-            ckLaudemioSim.TabIndex = 63;
+            ckLaudemioSim.TabIndex = 23;
             ckLaudemioSim.Text = "Sim";
             ckLaudemioSim.UseVisualStyleBackColor = true;
+            ckLaudemioSim.CheckedChanged += ckLaudemioSim_CheckedChanged;
             // 
             // label17
             // 
@@ -404,7 +406,7 @@
             txtValorDeRegistro.MaxLength = 150;
             txtValorDeRegistro.Name = "txtValorDeRegistro";
             txtValorDeRegistro.Size = new Size(175, 29);
-            txtValorDeRegistro.TabIndex = 59;
+            txtValorDeRegistro.TabIndex = 22;
             // 
             // label15
             // 
@@ -424,7 +426,7 @@
             txtValorEscritura.MaxLength = 150;
             txtValorEscritura.Name = "txtValorEscritura";
             txtValorEscritura.Size = new Size(137, 29);
-            txtValorEscritura.TabIndex = 57;
+            txtValorEscritura.TabIndex = 21;
             // 
             // label13
             // 
@@ -444,7 +446,7 @@
             txtValorITBI.MaxLength = 150;
             txtValorITBI.Name = "txtValorITBI";
             txtValorITBI.Size = new Size(137, 29);
-            txtValorITBI.TabIndex = 53;
+            txtValorITBI.TabIndex = 20;
             // 
             // ckNotaComissao
             // 
@@ -452,7 +454,7 @@
             ckNotaComissao.Location = new Point(19, 318);
             ckNotaComissao.Name = "ckNotaComissao";
             ckNotaComissao.Size = new Size(128, 24);
-            ckNotaComissao.TabIndex = 52;
+            ckNotaComissao.TabIndex = 19;
             ckNotaComissao.Text = "Nota Comissão";
             ckNotaComissao.UseVisualStyleBackColor = true;
             // 
@@ -474,7 +476,7 @@
             txtValorComissao.MaxLength = 150;
             txtValorComissao.Name = "txtValorComissao";
             txtValorComissao.Size = new Size(137, 29);
-            txtValorComissao.TabIndex = 48;
+            txtValorComissao.TabIndex = 18;
             // 
             // txtempresaAss
             // 
@@ -486,7 +488,7 @@
             txtempresaAss.Name = "txtempresaAss";
             txtempresaAss.ReadOnly = true;
             txtempresaAss.Size = new Size(246, 29);
-            txtempresaAss.TabIndex = 47;
+            txtempresaAss.TabIndex = 28;
             // 
             // labelempresaAss
             // 
@@ -506,7 +508,7 @@
             txtbairro.MaxLength = 150;
             txtbairro.Name = "txtbairro";
             txtbairro.Size = new Size(277, 29);
-            txtbairro.TabIndex = 45;
+            txtbairro.TabIndex = 7;
             // 
             // txtcidade
             // 
@@ -516,7 +518,7 @@
             txtcidade.MaxLength = 150;
             txtcidade.Name = "txtcidade";
             txtcidade.Size = new Size(252, 29);
-            txtcidade.TabIndex = 44;
+            txtcidade.TabIndex = 9;
             // 
             // txtestado
             // 
@@ -526,7 +528,7 @@
             txtestado.MaxLength = 150;
             txtestado.Name = "txtestado";
             txtestado.Size = new Size(55, 29);
-            txtestado.TabIndex = 43;
+            txtestado.TabIndex = 8;
             // 
             // txtunidade
             // 
@@ -536,7 +538,7 @@
             txtunidade.MaxLength = 150;
             txtunidade.Name = "txtunidade";
             txtunidade.Size = new Size(51, 29);
-            txtunidade.TabIndex = 41;
+            txtunidade.TabIndex = 6;
             // 
             // txtrua
             // 
@@ -546,7 +548,7 @@
             txtrua.MaxLength = 150;
             txtrua.Name = "txtrua";
             txtrua.Size = new Size(366, 29);
-            txtrua.TabIndex = 40;
+            txtrua.TabIndex = 5;
             // 
             // label11
             // 
@@ -616,7 +618,7 @@
             cbbStatus.Location = new Point(555, 34);
             cbbStatus.Name = "cbbStatus";
             cbbStatus.Size = new Size(183, 29);
-            cbbStatus.TabIndex = 31;
+            cbbStatus.TabIndex = 3;
             // 
             // label4
             // 
@@ -636,7 +638,7 @@
             txtValoDeCompra.MaxLength = 150;
             txtValoDeCompra.Name = "txtValoDeCompra";
             txtValoDeCompra.Size = new Size(171, 29);
-            txtValoDeCompra.TabIndex = 29;
+            txtValoDeCompra.TabIndex = 11;
             // 
             // label3
             // 
@@ -656,7 +658,7 @@
             cbbTipoInvestimento.Location = new Point(355, 34);
             cbbTipoInvestimento.Name = "cbbTipoInvestimento";
             cbbTipoInvestimento.Size = new Size(191, 29);
-            cbbTipoInvestimento.TabIndex = 27;
+            cbbTipoInvestimento.TabIndex = 2;
             // 
             // label6
             // 
@@ -675,7 +677,7 @@
             dtdataaquisicao.Location = new Point(753, 34);
             dtdataaquisicao.Name = "dtdataaquisicao";
             dtdataaquisicao.Size = new Size(113, 25);
-            dtdataaquisicao.TabIndex = 25;
+            dtdataaquisicao.TabIndex = 4;
             // 
             // label2
             // 
@@ -695,7 +697,7 @@
             txtdescricao.MaxLength = 150;
             txtdescricao.Name = "txtdescricao";
             txtdescricao.Size = new Size(334, 29);
-            txtdescricao.TabIndex = 17;
+            txtdescricao.TabIndex = 1;
             // 
             // txtid
             // 

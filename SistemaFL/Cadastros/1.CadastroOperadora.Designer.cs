@@ -31,7 +31,7 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCadEmpresaFF));
             pdados = new Panel();
-            btnPesquisarCep = new Button();
+            btnBuscaCep = new Button();
             btnremover = new Button();
             cbbflatsassociados = new ComboBox();
             label13 = new Label();
@@ -81,7 +81,7 @@
             // pdados
             // 
             pdados.BackColor = Color.White;
-            pdados.Controls.Add(btnPesquisarCep);
+            pdados.Controls.Add(btnBuscaCep);
             pdados.Controls.Add(btnremover);
             pdados.Controls.Add(cbbflatsassociados);
             pdados.Controls.Add(label13);
@@ -112,13 +112,15 @@
             pdados.Size = new Size(922, 192);
             pdados.TabIndex = 0;
             // 
-            // btnPesquisarCep
+            // btnBuscaCep
             // 
-            btnPesquisarCep.Location = new Point(445, 89);
-            btnPesquisarCep.Name = "btnPesquisarCep";
-            btnPesquisarCep.Size = new Size(23, 23);
-            btnPesquisarCep.TabIndex = 23;
-            btnPesquisarCep.UseVisualStyleBackColor = true;
+            btnBuscaCep.Image = (Image)resources.GetObject("btnBuscaCep.Image");
+            btnBuscaCep.Location = new Point(438, 79);
+            btnBuscaCep.Name = "btnBuscaCep";
+            btnBuscaCep.Size = new Size(38, 35);
+            btnBuscaCep.TabIndex = 23;
+            btnBuscaCep.UseVisualStyleBackColor = true;
+            btnBuscaCep.Click += btnBuscaCep_Click;
             // 
             // btnremover
             // 
@@ -127,7 +129,7 @@
             btnremover.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnremover.ForeColor = Color.FromArgb(224, 224, 224);
             btnremover.Image = (Image)resources.GetObject("btnremover.Image");
-            btnremover.Location = new Point(664, 145);
+            btnremover.Location = new Point(809, 145);
             btnremover.Name = "btnremover";
             btnremover.Size = new Size(35, 34);
             btnremover.TabIndex = 7;
@@ -139,7 +141,7 @@
             cbbflatsassociados.Enabled = false;
             cbbflatsassociados.Font = new Font("Segoe UI Semilight", 11.25F);
             cbbflatsassociados.FormattingEnabled = true;
-            cbbflatsassociados.Location = new Point(458, 148);
+            cbbflatsassociados.Location = new Point(603, 148);
             cbbflatsassociados.Name = "cbbflatsassociados";
             cbbflatsassociados.Size = new Size(200, 28);
             cbbflatsassociados.TabIndex = 22;
@@ -150,7 +152,7 @@
             label13.BackColor = Color.Transparent;
             label13.Font = new Font("Segoe UI Semilight", 11.25F);
             label13.ForeColor = Color.Black;
-            label13.Location = new Point(458, 123);
+            label13.Location = new Point(603, 123);
             label13.Name = "label13";
             label13.Size = new Size(113, 20);
             label13.TabIndex = 8;
@@ -158,16 +160,16 @@
             // 
             // txtcidade
             // 
-            txtcidade.Location = new Point(241, 148);
+            txtcidade.Location = new Point(355, 148);
             txtcidade.Name = "txtcidade";
-            txtcidade.Size = new Size(187, 29);
+            txtcidade.Size = new Size(226, 29);
             txtcidade.TabIndex = 21;
             // 
             // label11
             // 
             label11.AutoSize = true;
             label11.ForeColor = Color.Black;
-            label11.Location = new Point(241, 125);
+            label11.Location = new Point(355, 125);
             label11.Name = "label11";
             label11.Size = new Size(58, 21);
             label11.TabIndex = 20;
@@ -175,16 +177,16 @@
             // 
             // txtestado
             // 
-            txtestado.Location = new Point(176, 148);
+            txtestado.Location = new Point(276, 147);
             txtestado.Name = "txtestado";
-            txtestado.Size = new Size(50, 29);
+            txtestado.Size = new Size(59, 29);
             txtestado.TabIndex = 19;
             // 
             // label10
             // 
             label10.AutoSize = true;
             label10.ForeColor = Color.Black;
-            label10.Location = new Point(174, 125);
+            label10.Location = new Point(274, 124);
             label10.Name = "label10";
             label10.Size = new Size(29, 21);
             label10.TabIndex = 18;
@@ -194,7 +196,7 @@
             // 
             txtbairro.Location = new Point(19, 148);
             txtbairro.Name = "txtbairro";
-            txtbairro.Size = new Size(134, 29);
+            txtbairro.Size = new Size(233, 29);
             txtbairro.TabIndex = 17;
             // 
             // label9
@@ -209,7 +211,7 @@
             // 
             // txtnumero
             // 
-            txtnumero.Location = new Point(789, 86);
+            txtnumero.Location = new Point(789, 83);
             txtnumero.Name = "txtnumero";
             txtnumero.Size = new Size(52, 29);
             txtnumero.TabIndex = 15;
@@ -226,7 +228,7 @@
             // 
             // txtrua
             // 
-            txtrua.Location = new Point(496, 86);
+            txtrua.Location = new Point(494, 83);
             txtrua.Name = "txtrua";
             txtrua.Size = new Size(265, 29);
             txtrua.TabIndex = 13;
@@ -235,7 +237,7 @@
             // 
             label7.AutoSize = true;
             label7.ForeColor = Color.Black;
-            label7.Location = new Point(496, 66);
+            label7.Location = new Point(494, 63);
             label7.Name = "label7";
             label7.Size = new Size(36, 21);
             label7.TabIndex = 12;
@@ -243,7 +245,7 @@
             // 
             // txtcep
             // 
-            txtcep.Location = new Point(254, 86);
+            txtcep.Location = new Point(241, 83);
             txtcep.Name = "txtcep";
             txtcep.Size = new Size(184, 29);
             txtcep.TabIndex = 11;
@@ -252,7 +254,7 @@
             // 
             label6.AutoSize = true;
             label6.ForeColor = Color.Black;
-            label6.Location = new Point(254, 63);
+            label6.Location = new Point(241, 60);
             label6.Name = "label6";
             label6.Size = new Size(37, 21);
             label6.TabIndex = 10;
@@ -279,7 +281,7 @@
             // 
             txtcnpj.Location = new Point(396, 27);
             txtcnpj.Name = "txtcnpj";
-            txtcnpj.Size = new Size(184, 29);
+            txtcnpj.Size = new Size(222, 29);
             txtcnpj.TabIndex = 7;
             // 
             // label4
@@ -294,7 +296,7 @@
             // 
             // txtinscricaoestadual
             // 
-            txtinscricaoestadual.Location = new Point(601, 27);
+            txtinscricaoestadual.Location = new Point(639, 27);
             txtinscricaoestadual.Name = "txtinscricaoestadual";
             txtinscricaoestadual.Size = new Size(202, 29);
             txtinscricaoestadual.TabIndex = 5;
@@ -303,7 +305,7 @@
             // 
             label3.AutoSize = true;
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(601, 4);
+            label3.Location = new Point(639, 4);
             label3.Name = "label3";
             label3.Size = new Size(132, 21);
             label3.TabIndex = 4;
@@ -521,6 +523,7 @@
             // 
             // tTamanhotela
             // 
+            tTamanhotela.Interval = 1;
             tTamanhotela.Tick += tTamanhotela_Tick;
             // 
             // FrmCadEmpresaFF
@@ -597,6 +600,6 @@
         private PictureBox pbFechar;
         private PictureBox pbMinimizar;
         private System.Windows.Forms.Timer tTamanhotela;
-        private Button btnPesquisarCep;
+        private Button btnBuscaCep;
     }
 }
