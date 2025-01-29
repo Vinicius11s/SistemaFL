@@ -50,17 +50,17 @@ namespace SistemaFL
         }
         private void AlterarNomesCabecalho(DataGridView grid)
         {
-            dgdados.Columns["id"].Visible = false;
-            dgdados.Columns["Flats"].Visible = false;
+            grid.Columns["id"].Visible = false;
+            grid.Columns["Flats"].Visible = false;
 
-            dgdados.Columns["descricao"].HeaderText = "DESCRIÇÃO";
-            dgdados.Columns["RazaoSocial"].HeaderText = "RAZÃO SOCIAL";
-            dgdados.Columns["InscricaoEstadual"].HeaderText = "INSC. ESTADUAL";
-            dgdados.Columns["Numero"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgdados.Columns["Numero"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgdados.Columns["Numero"].HeaderText = "Nº";
-            dgdados.Columns["Estado"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgdados.Columns["Estado"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            grid.Columns["descricao"].HeaderText = "DESCRIÇÃO";
+            grid.Columns["RazaoSocial"].HeaderText = "RAZÃO SOCIAL";
+            grid.Columns["InscricaoEstadual"].HeaderText = "INSC. ESTADUAL";
+            grid.Columns["Numero"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            grid.Columns["Numero"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            grid.Columns["Numero"].HeaderText = "Nº";
+            grid.Columns["Estado"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            grid.Columns["Estado"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
         }
         //

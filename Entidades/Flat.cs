@@ -21,6 +21,7 @@ namespace Entidades
         public bool Ativo { get; set; }
         public DateTime DataAquisicao { get; set; }
         public Decimal TamanhoUnidadeM2 { get; set; }
+        public String Cep { get; set; }
         public string Rua { get; set; } = String.Empty;
         public int Unidade { get; set; }
         public string? Bairro { get; set; } = String.Empty;

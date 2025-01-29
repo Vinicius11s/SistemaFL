@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.LinkLabel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace SistemaFL
 {
@@ -83,17 +84,17 @@ namespace SistemaFL
                 {
                     Flat flat = carregaPropriedades();
 
-                    if (flat.id == 0)
+                    if (avisoMostrado == false)
                     {
-                        repositorio.Inserir(flat);
-                    }
-                    else
-                    {
-                        repositorio.Alterar(flat);
-                    }
+                        if (flat.id == 0)
+                        {
+                            repositorio.Inserir(flat);
+                        }
+                        else
+                        {
+                            repositorio.Alterar(flat);
+                        }
 
-                    if(avisoMostrado == false)
-                    {
                         Program.serviceProvider.
                                                GetRequiredService<ContextoSistema>().SaveChanges();
                         MessageBox.Show("Salvo com sucesso");
@@ -107,7 +108,7 @@ namespace SistemaFL
                         btnexcluir.Enabled = false;
                         btnsalvar.Enabled = false;
                     }
-                   
+
                 }
             }
             catch (Exception ex)
@@ -165,15 +166,40 @@ namespace SistemaFL
                 {
                     txtid.Text = flat.id.ToString();
                     txtdescricao.Text = flat.Descricao;
+                    cbbTipoInvestimento.SelectedItem = flat.TipoInvestimento;
                     cbbStatus.Text = flat.Status.ToString();
-                    txtValoDeCompra.Text = flat.ValorDeCompra.ToString();
-                    cbbTipoInvestimento.Text = flat.TipoInvestimento;
                     dtdataaquisicao.Value = flat.DataAquisicao;
+                    txtCep.Text = flat.Cep;
                     txtrua.Text = flat.Rua;
                     txtunidade.Text = flat.Unidade.ToString();
                     txtbairro.Text = flat.Bairro;
-                    txtcidade.Text = flat.Cidade;
                     txtestado.Text = flat.Estado;
+                    txtcidade.Text = flat.Cidade;
+                    txtNumMatriculaImovel.Text = flat.NumMatriculaImovel.ToString();
+                    txtValoDeCompra.Text = flat.ValorDeCompra.ToString();
+                    txTamanhoM2.Text = flat.TamanhoUnidadeM2.ToString();                
+                    txtValorComissao.Text = flat.valorComissao.ToString();
+                    ckNotaComissao.Checked = flat.NotaComissao;
+                    txtValorITBI.Text = flat.ValorITBI.ToString();
+                    txtValorEscritura.Text = flat.ValorEscritura.ToString();
+                    txtValorDeRegistro.Text = flat.ValorRegistro.ToString();
+                    ckLaudemioSim.Checked = flat.Laudemio;
+                    ckLaudemioNao.Checked = !flat.Laudemio;
+                    txtValorLaudemio.Text = flat.ValorLaudemio.ToString();
+                    txtValorAforamento.Text = flat.ValorAforamento.ToString();
+                    txtValorTotalImovel.Text = flat.ValorTotalImovel.ToString();
+
+                    ckPossuiGaragemSim.Checked = flat.PossuiGaragem;
+                    ckPossuiGaragemNao.Checked = !flat.PossuiGaragem;
+
+                    ckEscrituradoSim.Checked = flat.Escriturado;
+                    ckEscrituradoNao.Checked = !flat.Escriturado;
+
+                    ckRegistradoSim.Checked = flat.Registrado;
+                    ckRegistradoNao.Checked = !flat.Registrado;
+
+
+
                     if (flat.idEmpresa != null)
                     {
                         var empresa = empresaRepositorio.Recuperar(e => e.id == flat.idEmpresa);
@@ -279,7 +305,7 @@ namespace SistemaFL
             flat.TipoInvestimento = cbbTipoInvestimento.SelectedItem?.ToString() ?? "Indefinido";
             AtribuiStatusDoFlat(flat);
             flat.DataAquisicao = dtdataaquisicao.Value;
-            flat.TamanhoUnidadeM2 = ValidaDecimais(flat, txTamanhoM2);
+            flat.Cep = txtCep.Text;
             flat.Rua = txtrua.Text;
             flat.Unidade = ValidaInteiros(flat, txtunidade);
             flat.Bairro = txtbairro.Text;
@@ -288,6 +314,7 @@ namespace SistemaFL
             flat.NumMatriculaImovel = ValidaInteiros(flat, txtNumMatriculaImovel);
             flat.ValorDeCompra = ValidaDecimais(flat, txtValoDeCompra);
             valorTotalImovel += flat.ValorDeCompra;
+            flat.TamanhoUnidadeM2 = ValidaDecimais(flat, txTamanhoM2);
             ValidaCheckBox(flat);
             flat.valorComissao = ValidaDecimais(flat, txtValorComissao);
             valorTotalImovel += flat.valorComissao;
@@ -314,6 +341,7 @@ namespace SistemaFL
         }
         void limpar()
         {
+            cbbTipoInvestimento.Text = "";
             foreach (Control controle in pdados.Controls)
             {
                 // Verifica se o controle é um TextBox
@@ -322,8 +350,12 @@ namespace SistemaFL
                     // Limpa o conteúdo do TextBox
                     textBox.Clear();
                 }
+
+                if (controle is CheckBox checkBox)
+                {
+                    checkBox.Checked = false;
+                }
             }
-                
         }
         private void pbFechar_Click(object sender, EventArgs e)
         {
@@ -361,25 +393,19 @@ namespace SistemaFL
                 return valor;
             }
             return 0;
-        }      
+        }
         void ValidaCheckBox(Flat flat)
-        {           
+        {
             // Validação para "Possui Garagem"
             if (ckPossuiGaragemSim.Checked && ckPossuiGaragemNao.Checked)
             {
-                if (!avisoMostrado)
-                {
-                    MessageBox.Show("Por favor, selecione apenas uma opção para 'Possui Garagem'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    avisoMostrado = true;  // Garante que o aviso seja mostrado apenas uma vez
-                }
+                MessageBox.Show("Por favor, selecione apenas uma opção para 'Possui Garagem'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             else if (!ckPossuiGaragemSim.Checked && !ckPossuiGaragemNao.Checked)
             {
-                if (!avisoMostrado)
-                {
-                    MessageBox.Show("Por favor, selecione se possui garagem.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    avisoMostrado = true;  // Garante que o aviso seja mostrado apenas uma vez
-                }
+                MessageBox.Show("Por favor, selecione se possui garagem.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             else
             {
@@ -389,19 +415,13 @@ namespace SistemaFL
             // Validação para "Está Escriturado"
             if (ckEscrituradoSim.Checked && ckEscrituradoNao.Checked)
             {
-                if (!avisoMostrado)
-                {
-                    MessageBox.Show("Por favor, selecione apenas uma opção para 'Está Escriturado'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    avisoMostrado = true;  // Garante que o aviso seja mostrado apenas uma vez
-                }
+                MessageBox.Show("Por favor, selecione apenas uma opção para 'Está Escriturado'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             else if (!ckEscrituradoSim.Checked && !ckEscrituradoNao.Checked)
             {
-                if (!avisoMostrado)
-                {
-                    MessageBox.Show("Por favor, selecione se está escriturado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    avisoMostrado = true;  // Garante que o aviso seja mostrado apenas uma vez
-                }
+                MessageBox.Show("Por favor, selecione se está escriturado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             else
             {
@@ -411,24 +431,64 @@ namespace SistemaFL
             // Validação para "Está Registrado"
             if (ckRegistradoSim.Checked && ckRegistradoNao.Checked)
             {
-                if (!avisoMostrado)
-                {
-                    MessageBox.Show("Por favor, selecione apenas uma opção para 'Está Registrado'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    avisoMostrado = true;  // Garante que o aviso seja mostrado apenas uma vez
-                }
+                MessageBox.Show("Por favor, selecione apenas uma opção para 'Está Registrado'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             else if (!ckRegistradoSim.Checked && !ckRegistradoNao.Checked)
             {
-                if (!avisoMostrado)
-                {
-                    MessageBox.Show("Por favor, selecione se está registrado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    avisoMostrado = true;  // Garante que o aviso seja mostrado apenas uma vez
-                }
+                MessageBox.Show("Por favor, selecione se está registrado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             else
             {
                 flat.Registrado = ckRegistradoSim.Checked;
             }
         }
+
+
+        private async void btnBuscaCep_Click(object sender, EventArgs e)
+        {
+            string cep = txtCep.Text.Trim(); // Pega o CEP digitado no TextBox
+
+            if (string.IsNullOrEmpty(cep) || cep.Length != 8)
+            {
+                MessageBox.Show("Por favor, insira um CEP válido.");
+                return;
+            }
+
+            string url = $"https://viacep.com.br/ws/{cep}/json/";
+
+            try
+            {
+                // Chama a API ViaCEP de forma assíncrona
+                using (HttpClient client = new HttpClient())
+                {
+                    var response = await client.GetStringAsync(url);
+
+                    // Deserializa a resposta JSON em um objeto
+                    var endereco = Newtonsoft.Json.JsonConvert.DeserializeObject<ViaCepResponse>(response);
+
+                    // Preenche os campos com os dados retornados
+                    if (endereco != null && endereco.Erro == null)
+                    {
+                        txtrua.Text = endereco.Logradouro;
+                        txtbairro.Text = endereco.Bairro;
+                        txtcidade.Text = endereco.Localidade;
+                        txtestado.Text = endereco.Uf;
+                        txtunidade.Focus();
+                    }
+                    else
+                    {
+                        MessageBox.Show("CEP não encontrado ou inválido.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao buscar o CEP: {ex.Message}");
+            }
+        }
+
+        
     }
 }

@@ -21,9 +21,15 @@ namespace SistemaFL
             InitializeComponent();
             this.repositorio = repositorio;
             this.empresaRepositorio = empresaRepositorio;
+
+            tTamanhotela.Tick += tTamanhotela_Tick;
+            tTamanhotela.Start();
+
         }
         private void FrmConsultaFlat_Load_1(object sender, EventArgs e)
         {
+            this.Location = new System.Drawing.Point(205, 41);
+
             txtdescricao.Text = "Digite aqui a descrição do Flat";
             txtdescricao.ForeColor = Color.Gray;
 
@@ -33,15 +39,13 @@ namespace SistemaFL
         private void btnlocalizar_Click(object sender, EventArgs e)
         {
             CarregarDadosDataGrid();
+            //bilding Estilos.AlterarEstiloDataGrid(dgdadosFlats);
+            AlterarNomesDoCabecalho(dgdadosFlats);
 
-            Estilos.AlterarEstiloDataGrid(dgdadosFlats);      
-            
-            foreach (DataGridViewRow row in dgdadosFlats.Rows)
-            {
-                AplicarFormatacaoLinha(row);
-                dgdadosFlats.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-            }
+            dgdadosFlats.DataBindingComplete += dgdadosFlats_DataBindingComplete;
+
         }
+
         private void CarregarDadosDataGrid()
         {
             if (txtdescricao.Text == "Digite aqui a descrição do Flat")
@@ -84,7 +88,45 @@ namespace SistemaFL
                 .OrderBy(flat => flat.Descricao)
                 .ToList();
             dgdadosFlats.DataSource = listaFlats;
-        }            
+        }
+        private void AlterarNomesDoCabecalho(DataGridView grid)
+        {
+            grid.Columns["id"].Visible = false;
+
+            grid.Columns["Descricao"].HeaderText = "DESCRIÇÃO";
+            grid.Columns["TipoInvestimento"].HeaderText = "TIPO INVESTIMENTO";
+
+            grid.Columns["DataAquisicao"].DefaultCellStyle.Format = "d";
+            grid.Columns["DataAquisicao"].HeaderText = "DATA AQUISIÇÃO";
+
+            grid.Columns["TamanhoUnidadeM2"].HeaderText = "TAMANHO M2";
+            grid.Columns["NumMatriculaImovel"].HeaderText = "Nº MATRÍCULA";
+            grid.Columns["ValorDeCompra"].HeaderText = "VALOR COMPRA";
+            grid.Columns["PossuiGaragem"].HeaderText = "POSSUI GARAGEM";
+            grid.Columns["valorComissao"].HeaderText = "VALOR COMISSÃO";
+            grid.Columns["NotaComissao"].HeaderText = "NOTA COMISSÃO";
+            grid.Columns["ValorITBI"].HeaderText = "VALOR ITBI";
+            grid.Columns["ValorEscritura"].HeaderText = "VALOR ESCRITURA";
+            grid.Columns["ValorLaudemio"].HeaderText = "VALOR LAUDÊMIO";
+            grid.Columns["ValorRegistro"].HeaderText = "VALOR DE REGISTRO";
+            grid.Columns["ValorAforamento"].HeaderText = "VALOR AFORAMENTO";
+            grid.Columns["ValorTotalImovel"].HeaderText = "VALOR TOTAL IMÓVEL";
+
+            grid.Columns["Unidade"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            grid.Columns["Estado"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+
+        }
+        private void dgdadosFlats_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Estilos.AlterarEstiloDataGrid(dgdadosFlats);
+
+            foreach (DataGridViewRow row in dgdadosFlats.Rows)
+            {
+                AplicarFormatacaoLinha(row);
+                dgdadosFlats.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            }
+        }
         private void AplicarFormatacaoLinha(DataGridViewRow row)
         {
             var statusValue = row.Cells["Status"].Value?.ToString();
@@ -119,10 +161,6 @@ namespace SistemaFL
                 this.Close(); // Fecha o formulário
             };
         }
-        private void FrmConsultaFlat_Resize(object sender, EventArgs e)
-        {
-            Estilos.AjustarPosicaopbMaximizarFechar(this, pbMaximizar, pbFechar );
-        }
         private void pbFechar_Click_1(object sender, EventArgs e)
         {
             this.Close();
@@ -137,6 +175,10 @@ namespace SistemaFL
             {
                 this.WindowState = FormWindowState.Maximized;
             }
+        }
+        private void tTamanhotela_Tick(object sender, EventArgs e)
+        {
+            Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, 10);
         }
     }
 } 

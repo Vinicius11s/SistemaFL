@@ -144,7 +144,7 @@
             cbbflatsassociados.Location = new Point(603, 148);
             cbbflatsassociados.Name = "cbbflatsassociados";
             cbbflatsassociados.Size = new Size(200, 28);
-            cbbflatsassociados.TabIndex = 22;
+            cbbflatsassociados.TabIndex = 11;
             // 
             // label13
             // 
@@ -163,7 +163,7 @@
             txtcidade.Location = new Point(355, 148);
             txtcidade.Name = "txtcidade";
             txtcidade.Size = new Size(226, 29);
-            txtcidade.TabIndex = 21;
+            txtcidade.TabIndex = 10;
             // 
             // label11
             // 
@@ -180,7 +180,7 @@
             txtestado.Location = new Point(276, 147);
             txtestado.Name = "txtestado";
             txtestado.Size = new Size(59, 29);
-            txtestado.TabIndex = 19;
+            txtestado.TabIndex = 9;
             // 
             // label10
             // 
@@ -197,7 +197,7 @@
             txtbairro.Location = new Point(19, 148);
             txtbairro.Name = "txtbairro";
             txtbairro.Size = new Size(233, 29);
-            txtbairro.TabIndex = 17;
+            txtbairro.TabIndex = 8;
             // 
             // label9
             // 
@@ -214,7 +214,7 @@
             txtnumero.Location = new Point(789, 83);
             txtnumero.Name = "txtnumero";
             txtnumero.Size = new Size(52, 29);
-            txtnumero.TabIndex = 15;
+            txtnumero.TabIndex = 7;
             // 
             // label8
             // 
@@ -231,7 +231,7 @@
             txtrua.Location = new Point(494, 83);
             txtrua.Name = "txtrua";
             txtrua.Size = new Size(265, 29);
-            txtrua.TabIndex = 13;
+            txtrua.TabIndex = 6;
             // 
             // label7
             // 
@@ -248,7 +248,7 @@
             txtcep.Location = new Point(241, 83);
             txtcep.Name = "txtcep";
             txtcep.Size = new Size(184, 29);
-            txtcep.TabIndex = 11;
+            txtcep.TabIndex = 5;
             // 
             // label6
             // 
@@ -265,7 +265,7 @@
             txtrazaosocial.Location = new Point(20, 27);
             txtrazaosocial.Name = "txtrazaosocial";
             txtrazaosocial.Size = new Size(355, 29);
-            txtrazaosocial.TabIndex = 9;
+            txtrazaosocial.TabIndex = 1;
             // 
             // label5
             // 
@@ -282,7 +282,7 @@
             txtcnpj.Location = new Point(396, 27);
             txtcnpj.Name = "txtcnpj";
             txtcnpj.Size = new Size(222, 29);
-            txtcnpj.TabIndex = 7;
+            txtcnpj.TabIndex = 2;
             // 
             // label4
             // 
@@ -299,7 +299,7 @@
             txtinscricaoestadual.Location = new Point(639, 27);
             txtinscricaoestadual.Name = "txtinscricaoestadual";
             txtinscricaoestadual.Size = new Size(202, 29);
-            txtinscricaoestadual.TabIndex = 5;
+            txtinscricaoestadual.TabIndex = 3;
             // 
             // label3
             // 
@@ -316,7 +316,7 @@
             txtdescricao.Location = new Point(19, 86);
             txtdescricao.Name = "txtdescricao";
             txtdescricao.Size = new Size(207, 29);
-            txtdescricao.TabIndex = 3;
+            txtdescricao.TabIndex = 4;
             // 
             // label2
             // 
@@ -374,7 +374,7 @@
             btnlocalizar.Location = new Point(655, 24);
             btnlocalizar.Name = "btnlocalizar";
             btnlocalizar.Size = new Size(91, 35);
-            btnlocalizar.TabIndex = 5;
+            btnlocalizar.TabIndex = 15;
             btnlocalizar.Text = "Localizar";
             btnlocalizar.UseVisualStyleBackColor = false;
             btnlocalizar.Click += btnlocalizar_Click;
@@ -391,7 +391,7 @@
             btnsalvar.Location = new Point(514, 24);
             btnsalvar.Name = "btnsalvar";
             btnsalvar.Size = new Size(87, 35);
-            btnsalvar.TabIndex = 2;
+            btnsalvar.TabIndex = 14;
             btnsalvar.Text = "Gravar";
             btnsalvar.UseVisualStyleBackColor = false;
             btnsalvar.Click += btnsalvar_Click;
@@ -408,7 +408,7 @@
             btnalterar.Location = new Point(357, 24);
             btnalterar.Name = "btnalterar";
             btnalterar.Size = new Size(87, 35);
-            btnalterar.TabIndex = 1;
+            btnalterar.TabIndex = 13;
             btnalterar.Text = "Alterar";
             btnalterar.UseVisualStyleBackColor = false;
             btnalterar.Click += btnalterar_Click;
@@ -426,7 +426,7 @@
             btnnovo.Location = new Point(197, 24);
             btnnovo.Name = "btnnovo";
             btnnovo.Size = new Size(98, 35);
-            btnnovo.TabIndex = 0;
+            btnnovo.TabIndex = 12;
             btnnovo.Text = "Novo";
             btnnovo.UseVisualStyleBackColor = false;
             btnnovo.Click += btnnovo_Click;
@@ -441,7 +441,7 @@
             btnexcluir.Location = new Point(310, 17);
             btnexcluir.Name = "btnexcluir";
             btnexcluir.Size = new Size(36, 37);
-            btnexcluir.TabIndex = 4;
+            btnexcluir.TabIndex = 17;
             btnexcluir.UseVisualStyleBackColor = false;
             btnexcluir.Click += btnexcluir_Click;
             // 
@@ -456,7 +456,7 @@
             btncancelar.Location = new Point(211, 17);
             btncancelar.Name = "btncancelar";
             btncancelar.Size = new Size(36, 37);
-            btncancelar.TabIndex = 3;
+            btncancelar.TabIndex = 16;
             btncancelar.UseVisualStyleBackColor = false;
             btncancelar.Click += btncancelar_Click;
             // 
@@ -493,7 +493,7 @@
             btnassociar.Location = new Point(24, 321);
             btnassociar.Name = "btnassociar";
             btnassociar.Size = new Size(37, 27);
-            btnassociar.TabIndex = 6;
+            btnassociar.TabIndex = 18;
             btnassociar.UseVisualStyleBackColor = true;
             btnassociar.Click += btnassociar_Click;
             // 
