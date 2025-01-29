@@ -569,6 +569,7 @@
             brnRelatorios.Text = "         Relatórios";
             brnRelatorios.TextAlign = ContentAlignment.MiddleLeft;
             brnRelatorios.UseVisualStyleBackColor = false;
+            brnRelatorios.Click += brnRelatorios_Click;
             // 
             // button3
             // 

@@ -22,8 +22,14 @@ namespace SistemaFL
         {
             InitializeComponent();
             this.repositorio = repositorio;
+
+            tTamanhotela.Tick += tTamanhotela_Tick;
+            tTamanhotela.Start();
         }
-        
+        private void FrmConsultaLancamento_Load(object sender, EventArgs e)
+        {
+            this.Location = new System.Drawing.Point(205, 41);
+        }
         private void btnlocalizar_Click(object sender, EventArgs e)
         {
             if (txtdescricao.Text == "Digite o número do mês" || txtdescricao.Text == "")
@@ -67,7 +73,7 @@ namespace SistemaFL
             dgdadoslancamento.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgdadoslancamento.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular);
 
-            
+
             dgdadoslancamento.Columns["id"].Visible = false;
             dgdadoslancamento.Columns["idFlat"].Visible = false;
             dgdadoslancamento.Columns["AluguelVenceslau"].Visible = false;
@@ -97,13 +103,10 @@ namespace SistemaFL
         private void AplicarFormatacaoLinha(DataGridViewRow row)
         {
             row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
-        }                              
+        }
         //
         //Eventos
-        private void FrmConsultaLancamento_Resize(object sender, EventArgs e)
-        {
-            AjustarPosicaoPictureBox();
-        }
+     
         private void dgdadoslancamento_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -111,7 +114,7 @@ namespace SistemaFL
                 id = (int)dgdadoslancamento.Rows[e.RowIndex].Cells[0].Value;
                 this.Close();
             }
-        }     
+        }
         private void pbFechar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -124,21 +127,12 @@ namespace SistemaFL
             }
             else this.WindowState = FormWindowState.Maximized;
         }
-        private void AjustarPosicaoPictureBox()
+        
+        private void tTamanhotela_Tick(object sender, EventArgs e)
         {
-            int margem = 10;
-
-            // Posição do PictureBox1 (no canto superior direito)
-            int x1 = this.ClientSize.Width - pbMaximizar.Width - margem;
-            int y1 = margem;
-
-            pbFechar.Location = new Point(x1, y1);
-
-            // Posição do pbFechar (ao lado esquerdo de PictureBox1)
-            int x2 = x1 - pbFechar.Width - margem;
-            int y2 = margem;
-
-            pbMaximizar.Location = new Point(x2, y2);
+            Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, 10);
         }
+
+        
     }
 }

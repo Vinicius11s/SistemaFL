@@ -106,6 +106,19 @@ namespace SistemaFL
         }
 
         //
-        
+        public static void LimparTextBoxes(Panel painel)
+        {
+            // Percorre todos os controles dentro do painel
+            foreach (Control controle in painel.Controls)
+            {
+                // Verifica se o controle é um TextBox
+                if (controle is TextBox)
+                {
+                    // Limpa o conteúdo do TextBox
+                    ((TextBox)controle).Clear();
+                }
+            }
+        }
+
     }
 }

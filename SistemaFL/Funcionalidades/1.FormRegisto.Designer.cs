@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFuncionalidadeRegisto));
             dgdadosFunRegistro = new DataGridView();
             label1 = new Label();
@@ -39,6 +40,7 @@
             lblTotalFlats = new Label();
             label5 = new Label();
             label6 = new Label();
+            tTamanhotela = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)dgdadosFunRegistro).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbMaximizar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
@@ -151,6 +153,11 @@
             label6.TabIndex = 20;
             label6.Text = "______________";
             // 
+            // tTamanhotela
+            // 
+            tTamanhotela.Interval = 1;
+            tTamanhotela.Tick += tTamanhotela_Tick;
+            // 
             // FrmFuncionalidadeRegisto
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
@@ -196,5 +203,6 @@
         private Label lblTotalFlats;
         private Label label5;
         private Label label6;
+        private System.Windows.Forms.Timer tTamanhotela;
     }
 }

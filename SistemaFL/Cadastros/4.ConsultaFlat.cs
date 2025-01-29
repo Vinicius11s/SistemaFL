@@ -45,7 +45,6 @@ namespace SistemaFL
             dgdadosFlats.DataBindingComplete += dgdadosFlats_DataBindingComplete;
 
         }
-
         private void CarregarDadosDataGrid()
         {
             if (txtdescricao.Text == "Digite aqui a descrição do Flat")

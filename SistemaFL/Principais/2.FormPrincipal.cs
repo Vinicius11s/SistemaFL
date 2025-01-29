@@ -150,7 +150,7 @@ namespace SistemaFL
         }
         //
         //Funcionalidades
-       
+
         private void btnregistros_Click(object sender, EventArgs e)
         {
             var form = Program.serviceProvider.GetRequiredService<FrmFuncionalidadeRegisto>();
@@ -183,6 +183,13 @@ namespace SistemaFL
         }
         //
         //
+        private void brnRelatorios_Click(object sender, EventArgs e)
+        {
+            var form = Program.serviceProvider.GetRequiredService<Relatorios.FechamentoAnual>();
+            form.ShowDialog();
+        }
+        //
+        //
         private void pbMinimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
@@ -195,6 +202,8 @@ namespace SistemaFL
         {
             funcTransition.Start();
         }
+
+       
     }
 }
 

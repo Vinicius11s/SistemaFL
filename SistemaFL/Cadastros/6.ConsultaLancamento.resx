@@ -139,7 +139,7 @@
 </value>
   </data>
   <data name="btnlocalizar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>161, 27</value>
+    <value>458, 38</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnlocalizar.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -162,19 +162,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnlocalizar.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="txtdescricao.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 11.25pt</value>
   </data>
   <data name="txtdescricao.Location" type="System.Drawing.Point, System.Drawing">
-    <value>97, 27</value>
+    <value>409, 37</value>
   </data>
   <data name="txtdescricao.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="txtdescricao.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 27</value>
+    <value>45, 27</value>
   </data>
   <data name="txtdescricao.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -189,7 +189,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtdescricao.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -198,7 +198,7 @@
     <value>Segoe UI Semilight, 15.75pt</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>43, 24</value>
+    <value>355, 34</value>
   </data>
   <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -222,19 +222,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="dgdadoslancamento.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
   </data>
   <data name="dgdadoslancamento.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 66</value>
+    <value>0, 89</value>
   </data>
   <data name="dgdadoslancamento.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="dgdadoslancamento.Size" type="System.Drawing.Size, System.Drawing">
-    <value>824, 350</value>
+    <value>1087, 491</value>
   </data>
   <data name="dgdadoslancamento.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -249,7 +249,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;dgdadoslancamento.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
+  </data>
+  <data name="pbFechar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="pbFechar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -261,7 +264,7 @@
 </value>
   </data>
   <data name="pbFechar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>789, 3</value>
+    <value>847, 8</value>
   </data>
   <data name="pbFechar.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 21</value>
@@ -284,42 +287,9 @@
   <data name="&gt;&gt;pbFechar.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="pbMaximizar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAE1SURBVDhPlVPL
-        joJAEOTH+A088RkeAYEEPHgVEz3AF+CdQNCL/oecfF3gAiakNtUCu5sNhq2kMz2Tqe6e7hoFHW63G3Rd
-        h+d5cBwHtm2Pmuu6mM/nGMjL5bLzpoEBlMfjgc1mA1VVEQQBttstVqsVfN8XY1BWw4y73a6jQvaKpmk4
-        nU7I8xxxHCMMQ9zvd7xeL9R1LUafSJJkCCBkpk/TVC5NAUn9qpimKeSyLOXwE5qmkacQQjYMA4fDAVVV
-        yeEnsLq+sUK2LAtFUUwq+w+5f0PbtrJ+AsvuyYvF4ps8Bc/nU8ZI/Mo8BVEUDaPi7P9F3u/3WK/X4lPK
-        o2T2gA3iCGn0KSQqkeO6Xq9vkYzhcrngeDwiyzLRwvl8Fin3UPg7GIAV/DR2k0YdUEi8M5vNwL/wBvAF
-        socI4HnEtH0AAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="pbMaximizar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>757, 4</value>
-  </data>
-  <data name="pbMaximizar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 21</value>
-  </data>
-  <data name="pbMaximizar.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>CenterImage</value>
-  </data>
-  <data name="pbMaximizar.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;pbMaximizar.Name" xml:space="preserve">
-    <value>pbMaximizar</value>
-  </data>
-  <data name="&gt;&gt;pbMaximizar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pbMaximizar.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;pbMaximizar.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
+  <metadata name="tTamanhotela.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -327,7 +297,7 @@
     <value>9, 21</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>824, 416</value>
+    <value>1087, 580</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI Semilight, 12pt</value>
@@ -1650,6 +1620,12 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Consulta Lançamento</value>
+  </data>
+  <data name="&gt;&gt;tTamanhotela.Name" xml:space="preserve">
+    <value>tTamanhotela</value>
+  </data>
+  <data name="&gt;&gt;tTamanhotela.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FrmConsultaLancamento</value>

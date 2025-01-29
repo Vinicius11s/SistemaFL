@@ -53,6 +53,7 @@ namespace SistemaFL
             services.AddScoped<FrmConsultaUsuario>();
             services.AddScoped<FrmPrincipalFF>();
 
+            services.AddScoped<Relatorios.FechamentoAnual>();
 
             services.AddScoped<IEmpresaRepositorio, EmpresaRepositorio>();
             services.AddScoped<IFlatRepositorio, FlatRepositorio>();

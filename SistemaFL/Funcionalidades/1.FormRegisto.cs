@@ -23,9 +23,13 @@ namespace SistemaFL.Funcionalidades
             this.flatRepositorio = flatRepositorio;
             this.Resize += FrmFuncionalidadeRegisto_Resize;
 
+            tTamanhotela.Tick += tTamanhotela_Tick;
+            tTamanhotela.Start();
+
         }
         private void FrmFuncionalidadeRegisto_Load(object sender, EventArgs e)
         {
+            this.Location = new System.Drawing.Point(205, 41);
             AjustarLayoutFormulario();
 
             CarregarDadosGrid();
@@ -217,6 +221,10 @@ namespace SistemaFL.Funcionalidades
         private void pbMinimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+        private void tTamanhotela_Tick(object sender, EventArgs e)
+        {
+            Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, 10);
         }
     }
 }

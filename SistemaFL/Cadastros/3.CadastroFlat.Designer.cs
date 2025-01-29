@@ -700,7 +700,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI Semilight", 12F);
-            label6.Location = new Point(951, 17);
+            label6.Location = new Point(942, 14);
             label6.Name = "label6";
             label6.Size = new Size(113, 21);
             label6.TabIndex = 26;
@@ -710,7 +710,7 @@
             // 
             dtdataaquisicao.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dtdataaquisicao.Format = DateTimePickerFormat.Short;
-            dtdataaquisicao.Location = new Point(951, 41);
+            dtdataaquisicao.Location = new Point(942, 38);
             dtdataaquisicao.Name = "dtdataaquisicao";
             dtdataaquisicao.Size = new Size(113, 25);
             dtdataaquisicao.TabIndex = 5;

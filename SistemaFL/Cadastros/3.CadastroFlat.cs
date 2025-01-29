@@ -177,7 +177,7 @@ namespace SistemaFL
                     txtcidade.Text = flat.Cidade;
                     txtNumMatriculaImovel.Text = flat.NumMatriculaImovel.ToString();
                     txtValoDeCompra.Text = flat.ValorDeCompra.ToString();
-                    txTamanhoM2.Text = flat.TamanhoUnidadeM2.ToString();                
+                    txTamanhoM2.Text = flat.TamanhoUnidadeM2.ToString();
                     txtValorComissao.Text = flat.valorComissao.ToString();
                     ckNotaComissao.Checked = flat.NotaComissao;
                     txtValorITBI.Text = flat.ValorITBI.ToString();
@@ -488,7 +488,6 @@ namespace SistemaFL
                 MessageBox.Show($"Erro ao buscar o CEP: {ex.Message}");
             }
         }
-
-        
+     
     }
 }

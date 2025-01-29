@@ -172,7 +172,7 @@
   <data name="btncancelar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EAAACxABrSO9dQAAAnNJREFUWEft1EtPE1Ech+HuTIwrExYkFSmdAHPazrW36XVKW4nGXgi1Q4oJVIGF
+        DAAACwwBP0AiyAAAAnNJREFUWEft1EtPE1Ech+HuTIwrExYkFSmdAHPazrW36XVKW4nGXgi1Q4oJVIGF
         RCQxRE2MCxcmVi0kuDLq51AXmmg0JALqF3DjUisrE8vtOFPPSQpOW2pmOl3Mm/wWQPn3oUAtZmZmZs2z
         WsFJu91xCn3YXQHA50gHtwOc7j2WDz1Gn+6OAHCnhwG3H4vFYTyehDTjg2536Cn6srEpON4TrJ49l4KB
         YAQmEkmE9EKODz1DDzMmjJuaKsLZ2TlYKFyE4bB4EMkFnqOHdzaS5DMKbnr6Ug2Hl0qPQSEQNhbZCNcV
@@ -195,6 +195,9 @@
         p7DWyg0B2yIDZs8q+QAAAABJRU5ErkJggg==
 </value>
   </data>
+  <metadata name="tTamanhotela.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAkIMAAAEAIAAkMQEAFgAAACgAAACQAAAABgEAAAEAIAAAAAAAwCYBAAAAAAAAAAAAAAAAAAAA

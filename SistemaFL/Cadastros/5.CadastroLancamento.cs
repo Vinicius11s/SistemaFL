@@ -32,10 +32,16 @@ namespace SistemaFL
             this.repositorio = repositorio;
             this.flatRepositorio = flatRepositorio;
             this._context = context;
+
+            tTamanhotela.Tick += tTamanhotela_Tick;
+            tTamanhotela.Start();
         }
         private void FrmCadLancamento_Load(object sender, EventArgs e)
         {
-            limpar();
+            this.Location = new System.Drawing.Point(205, 41);
+
+            Estilos.LimparTextBoxes(plocalizar);
+            Estilos.LimparTextBoxes(plancamento);
             btnnovo.Enabled = true;
             btnalterar.Enabled = false;
             btncancelar.Enabled = false;
@@ -45,18 +51,16 @@ namespace SistemaFL
             btnLocFlatLancamento.Enabled = false;
 
             dtdataLancamento.Enabled = false;
-            labelValorAlguel.Visible = false;
-            txtvaloraluguel.Visible = false;
-            labelValorDiv.Visible = false;
-            txtValorDiv.Visible = false;
-            labelFundoRes.Visible = false;
-            txtValorFunReserva.Visible = false;
+            txtvaloraluguel.Enabled = false;
+            txtValorDiv.Enabled = false;
+            txtValorFunReserva.Enabled = false;
         }
         //
         //CRUD
         private void btnnovo_Click(object sender, EventArgs e)
         {
-            limpar();
+            Estilos.LimparTextBoxes(plocalizar);
+            Estilos.LimparTextBoxes(plancamento);
             btnnovo.Enabled = false;
             btnalterar.Enabled = false;
             btncancelar.Enabled = true;
@@ -64,13 +68,6 @@ namespace SistemaFL
             btnexcluir.Enabled = true;
             btnlocalizar.Enabled = false;
             btnLocFlatLancamento.Enabled = true;
-
-            labelValorAlguel.Visible = false;
-            txtvaloraluguel.Visible = false;
-            labelValorDiv.Visible = false;
-            txtValorDiv.Visible = false;
-            labelFundoRes.Visible = false;
-            txtValorFunReserva.Visible = false;
 
         }
         private void btnalterar_Click(object sender, EventArgs e)
@@ -83,8 +80,15 @@ namespace SistemaFL
                 btnsalvar.Enabled = true;
                 btnexcluir.Enabled = false;
                 btnlocalizar.Enabled = false;
-                btnLocFlatLancamento.Enabled = true;
+                btnLocFlatLancamento.Enabled = false;
 
+                int idFlat;
+                if (int.TryParse(txtidFlat.Text, out idFlat))
+                {
+                    var flat = flatRepositorio.Recuperar(f => f.id == idFlat);
+
+                    verificaInvestimento(flat.TipoInvestimento);
+                }
             }
             else MessageBox.Show("Localize o Lançamento");
         }
@@ -108,7 +112,8 @@ namespace SistemaFL
                         GetRequiredService<ContextoSistema>().SaveChanges();
                     MessageBox.Show("Salvo com sucesso");
 
-                    limpar();
+                    Estilos.LimparTextBoxes(plocalizar);
+                    Estilos.LimparTextBoxes(plancamento);
                     btnnovo.Enabled = true;
                     btnlocalizar.Enabled = true;
                     btnalterar.Enabled = false;
@@ -126,7 +131,8 @@ namespace SistemaFL
         }
         private void btncancelar_Click(object sender, EventArgs e)
         {
-            limpar();
+            Estilos.LimparTextBoxes(plocalizar);
+            Estilos.LimparTextBoxes(plancamento);
             btnnovo.Enabled = true;
             btnalterar.Enabled = false;
             btncancelar.Enabled = false;
@@ -134,13 +140,6 @@ namespace SistemaFL
             btnexcluir.Enabled = false;
             btnlocalizar.Enabled = true;
             btnLocFlatLancamento.Enabled = false;
-
-            labelValorAlguel.Visible = false;
-            txtvaloraluguel.Visible = false;
-            labelValorDiv.Visible = false;
-            txtValorDiv.Visible = false;
-            labelFundoRes.Visible = false;
-            txtValorFunReserva.Visible = false;
         }
         private void btnlocalizar_Click(object sender, EventArgs e)
         {
@@ -167,23 +166,16 @@ namespace SistemaFL
                             txtidFlat.Text = lancamento.idFlat.ToString();
                             txtDescricaoFlat.Text = lancamento.DescricaoFlat;
                             txttipoInvestimento.Text = lancamento.TipoPagamento;
-
-                            labelValorAlguel.Visible = true;
-                            txtvaloraluguel.Visible = true;
-                            labelValorDiv.Visible = true;
-                            txtValorDiv.Visible = true;
-                            labelFundoRes.Visible = true;
-                            txtValorFunReserva.Visible = true;
                         }
                         else MessageBox.Show("Flat nao localizado");
                     }
                     else
                         btnnovo.Enabled = false;
-                    btnlocalizar.Enabled = false;
-                    btnalterar.Enabled = true;
-                    btncancelar.Enabled = true;
-                    btnexcluir.Enabled = true;
-                    btnsalvar.Enabled = false;
+                        btnlocalizar.Enabled = false;
+                        btnalterar.Enabled = true;
+                        btncancelar.Enabled = true;
+                        btnexcluir.Enabled = true;
+                        btnsalvar.Enabled = false;
                 }
                 else
                 {
@@ -211,7 +203,8 @@ namespace SistemaFL
                     contexto.SaveChanges();
 
                     MessageBox.Show("Registro excluído com sucesso!");
-                    limpar();
+                    Estilos.LimparTextBoxes(plocalizar);
+                    Estilos.LimparTextBoxes(plancamento);
                     btnnovo.Enabled = true;
                     btnalterar.Enabled = false;
                     btncancelar.Enabled = false;
@@ -274,7 +267,6 @@ namespace SistemaFL
             }
 
 
-            //validação txtIdFlat
             if (int.TryParse(txtidFlat.Text, out int idFlat))
             {
                 Flat flat;
@@ -311,11 +303,17 @@ namespace SistemaFL
                 if (flat != null)
                 {
                     btncancelar.Enabled = true;
+
                     txtidFlat.Text = flatId.ToString();
                     txtDescricaoFlat.Text = flat.Descricao;
                     txttipoInvestimento.Text = flat.TipoInvestimento;
+                    txtStatus.Text = flat.Status;
+                    txtNumMatriculaImovel.Text = flat.NumMatriculaImovel.ToString();
+                    txtValoDeCompra.Text = flat.ValorDeCompra.ToString();
+
                     MessageBox.Show("Flat selecionado com sucesso!");
                     dtdataLancamento.Enabled = true;
+
                     if (txttipoInvestimento.Text != "")
                     {
                         verificaInvestimento(txttipoInvestimento.Text);
@@ -323,7 +321,6 @@ namespace SistemaFL
                 }
                 else
                 {
-                    plancamento.Enabled = false;
                     plancamento.Enabled = false;
                 }
             }
@@ -336,64 +333,44 @@ namespace SistemaFL
 
             if (!string.IsNullOrEmpty(TipoInvestimento))
             {
+                txtValorFunReserva.Enabled = true;
+
                 switch (TipoInvestimento)
                 {
                     case "Aluguel Fixo":
-                        labelValorAlguel.Visible = true;
-                        txtvaloraluguel.Visible = true;
-                        labelFundoRes.Visible = true;
-                        txtValorFunReserva.Visible = true;
+                        txtvaloraluguel.Enabled = true;
+                        txtValorDiv.Enabled = false;
                         break;
                     case "Dividendos":
-                        labelValorDiv.Visible = true;
-                        txtValorDiv.Visible = true;
-                        labelFundoRes.Visible = true;
-                        txtValorFunReserva.Visible = true;
+                        txtvaloraluguel.Enabled = false;
+                        txtValorDiv.Enabled = true;
                         break;
                     case "Aluguel Fixo + Dividendos":
-                        labelValorAlguel.Visible = true;
-                        txtvaloraluguel.Visible = true;
-                        labelValorDiv.Visible = true;
-                        txtValorDiv.Visible = true;
-                        labelFundoRes.Visible = true;
-                        txtValorFunReserva.Visible = true;
+                        txtvaloraluguel.Enabled = true;
+                        txtValorDiv.Enabled = true;
                         break;
                     case "Aluguel Venceslau":
-                        labelValorAlguel.Visible = true;
-                        txtvaloraluguel.Visible = true;
-                        labelValorDiv.Visible = false;
-                        txtValorDiv.Visible = false;
-                        labelFundoRes.Visible = false;
-                        txtValorFunReserva.Visible = false;
+                        txtvaloraluguel.Enabled = true;
+                        txtValorDiv.Enabled = false;
                         break;
                 }
-
             }
             else
             {
-                labelValorAlguel.Visible = false;
-                txtvaloraluguel.Visible = false;
-                labelValorDiv.Visible = false;
-                txtValorDiv.Visible = false;
-                labelFundoRes.Visible = false;
-                txtValorFunReserva.Visible = false;
+                txtvaloraluguel.Enabled = false;
+                txtValorDiv.Enabled = false;
+                txtValorFunReserva.Enabled = false;
             }
         }
-        void limpar()
-        {
-            dtdataLancamento.Value = DateTime.Now;
-            txtidFlat.Text = "";
-            txtDescricaoFlat.Text = "";
-            txttipoInvestimento.Text = "";
-            txtid.Text = "";
-            txtvaloraluguel.Text = "";
-            txtValorDiv.Text = "";
-            txtValorFunReserva.Text = "";
-
-        }        
         private void pbfechar_Click(object sender, EventArgs e)
         {
             this.Close();
-        } 
+        }
+        private void tTamanhotela_Tick(object sender, EventArgs e)
+        {
+            Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, 10);
+        }
+
+
     }
 }

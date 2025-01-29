@@ -26,7 +26,7 @@ namespace Infraestrutura.Contexto
         {
             //Server Master = DESKTOP-6RMV3GQ
             //Server Local = DESKTOP-I32AP0S
-            var stringConexao = @"Server=DESKTOP-I32AP0S;Database=DBSISFLATS01;Integrated Security=True;TrustServerCertificate=True;";
+            var stringConexao = @"Server=DESKTOP-6RMV3GQ;Database=DBSISFLATS02;Integrated Security=True;TrustServerCertificate=True;";
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(stringConexao);
@@ -35,8 +35,6 @@ namespace Infraestrutura.Contexto
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            // Configuração das entidades de Empresa
             modelBuilder.Entity<Empresa>(e =>   
             {
                 e.Property(e => e.Descricao).IsRequired().HasMaxLength(150);
@@ -52,8 +50,6 @@ namespace Infraestrutura.Contexto
                 e.Property(e => e.InscricaoEstadual).HasMaxLength(20);
                 e.Property(e => e.RazaoSocial).HasMaxLength(150);
             });
-
-            // Configuração das entidades de Flat
             modelBuilder.Entity<Flat>(f =>
             {
                 f.Property(f => f.DataAquisicao).IsRequired();
@@ -71,7 +67,6 @@ namespace Infraestrutura.Contexto
                     .HasForeignKey(f => f.idEmpresa)
                      .OnDelete(DeleteBehavior.SetNull);
             });
-
             modelBuilder.Entity<Lancamento>(l =>
             {
                 l.ToTable("lancamento", tb =>
@@ -89,7 +84,6 @@ namespace Infraestrutura.Contexto
                     .HasForeignKey(p => p.idFlat)
                     .OnDelete(DeleteBehavior.NoAction);
             });
-
             modelBuilder.Entity<Ocorrencia>(o =>
             {
                 o.Property(o => o.oco_valorAntigo).HasColumnType("decimal(18,2)").IsRequired();
@@ -108,8 +102,6 @@ namespace Infraestrutura.Contexto
                     .HasForeignKey(o => o.idFlat)
                     .OnDelete(DeleteBehavior.NoAction);
             });
-
-
             modelBuilder.Entity<Usuario>(u =>
             {
                 u.Property(u => u.Login).IsRequired().HasMaxLength(50);

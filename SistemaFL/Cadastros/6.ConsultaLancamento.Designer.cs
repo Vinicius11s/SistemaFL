@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmConsultaLancamento));
             btnlocalizar = new Button();
             txtdescricao = new TextBox();
             label1 = new Label();
             dgdadoslancamento = new DataGridView();
             pbFechar = new PictureBox();
-            pbMaximizar = new PictureBox();
+            tTamanhotela = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)dgdadoslancamento).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbMaximizar).BeginInit();
             SuspendLayout();
             // 
             // btnlocalizar
@@ -77,12 +77,10 @@
             pbFechar.TabStop = false;
             pbFechar.Click += pbFechar_Click;
             // 
-            // pbMaximizar
+            // tTamanhotela
             // 
-            resources.ApplyResources(pbMaximizar, "pbMaximizar");
-            pbMaximizar.Name = "pbMaximizar";
-            pbMaximizar.TabStop = false;
-            pbMaximizar.Click += pbMaximizar_Click;
+            tTamanhotela.Interval = 1;
+            tTamanhotela.Tick += tTamanhotela_Tick;
             // 
             // FrmConsultaLancamento
             // 
@@ -90,17 +88,15 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             Controls.Add(pbFechar);
-            Controls.Add(pbMaximizar);
             Controls.Add(btnlocalizar);
             Controls.Add(txtdescricao);
             Controls.Add(label1);
             Controls.Add(dgdadoslancamento);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FrmConsultaLancamento";
-            Resize += FrmConsultaLancamento_Resize;
+            Load += FrmConsultaLancamento_Load;
             ((System.ComponentModel.ISupportInitialize)dgdadoslancamento).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbMaximizar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -111,6 +107,6 @@
         private Label label1;
         private DataGridView dgdadoslancamento;
         private PictureBox pbFechar;
-        private PictureBox pbMaximizar;
+        private System.Windows.Forms.Timer tTamanhotela;
     }
 }
