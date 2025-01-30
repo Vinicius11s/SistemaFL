@@ -26,28 +26,17 @@ namespace SistemaFL
             this.repositorio = repositorio;
             this.lancamentoRepositorio = lancamentoRepositorio;
             this.flatRepositorio = flatRepositorio;
+
+            tTamanhotela.Tick += tTamanhotela_Tick;
+            tTamanhotela.Start();
         }
         private void FrmConsultaOcorrencia_Load(object sender, EventArgs e)
         {
-            AjustaPictureBox_MinimizarFechar();
+            this.Location = new System.Drawing.Point(205, 41);
             dgdadosocorrencias.ReadOnly = true;
             CarregarDados();
         }
-        private void AjustaPictureBox_MinimizarFechar()
-        {
-            int margem = 10;
-
-            // Posição do pbMaximizar (no canto superior direito)
-            int x1 = this.ClientSize.Width - pbFechar.Width - margem;
-            int y1 = margem;
-
-            pbFechar.Location = new Point(x1, y1);
-
-            // Posição do pbFechar (ao lado esquerdo de pbMaximizar)
-            int x2 = x1 - pbMinimizar.Width - margem;
-            int y2 = margem;          
-
-        }
+        
         //
         //DataGrid Últimos Lançamentos
         private void CarregarDados()
@@ -62,6 +51,11 @@ namespace SistemaFL
             if (dgdadosocorrencias.Columns.Contains("DescricaoFlat"))
             {
                 dgdadosocorrencias.Columns["DescricaoFlat"].DisplayIndex = 0;
+                dgdadosocorrencias.Columns["oco_valorAntigo"].DisplayIndex = 1;
+                dgdadosocorrencias.Columns["oco_DataLancamentoAntigo"].DisplayIndex = 2;
+                dgdadosocorrencias.Columns["oco_valorAlteracao"].DisplayIndex = 3;
+                dgdadosocorrencias.Columns["oco_DataAlteracao"].DisplayIndex = 4;
+
             }
         }
         private void AjustarFormatacaoDataGrid()
@@ -89,12 +83,14 @@ namespace SistemaFL
             grid.Columns["IdUsuario"].Visible = false;
             grid.Columns["Usuario"].Visible = false;
 
+            grid.Columns["oco_DataLancamentoAntigo"].HeaderText = "DATA MÊS ANTERIOR";
             grid.Columns["oco_valorAntigo"].HeaderText = "VALOR MÊS ANTERIOR";
-            //data anterior
+
             grid.Columns["oco_valorAlteracao"].HeaderText = "VALOR MÊS VIGENTE";
+            //DATA DO PAGAMENTO ?
             grid.Columns["oco_dataAlteracao"].HeaderText = "DATA ALTERAÇÃO";
             grid.Columns["oco_Tabela"].HeaderText = "ENTIDADE";
-            grid.Columns["DescricaoFlat"].HeaderText = "DESCRIÇÃO FLAT";           
+            grid.Columns["DescricaoFlat"].HeaderText = "DESCRIÇÃO FLAT";
             grid.Columns["DescricaoUsuario"].HeaderText = "USUÁRIO";
         }
         private void AlterarEstilosCelulas(DataGridView grid)
@@ -121,7 +117,11 @@ namespace SistemaFL
         }
         private void pbMinimizar_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;   
+            this.WindowState = FormWindowState.Minimized;
+        }
+        private void tTamanhotela_Tick(object sender, EventArgs e)
+        {
+            Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, 10);
         }
     }
 }

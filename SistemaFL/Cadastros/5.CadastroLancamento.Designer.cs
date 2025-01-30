@@ -48,7 +48,7 @@
             labelValorAlguel = new Label();
             dtdataLancamento = new DateTimePicker();
             label4 = new Label();
-            txttipoInvestimento = new TextBox();
+            txtTipoInvestimento = new TextBox();
             label3 = new Label();
             label2 = new Label();
             txtidFlat = new TextBox();
@@ -294,16 +294,16 @@
             label4.TabIndex = 38;
             label4.Text = "Data Pagamento";
             // 
-            // txttipoInvestimento
+            // txtTipoInvestimento
             // 
-            txttipoInvestimento.BackColor = SystemColors.Control;
-            txttipoInvestimento.Enabled = false;
-            txttipoInvestimento.Location = new Point(15, 88);
-            txttipoInvestimento.Margin = new Padding(3, 4, 3, 4);
-            txttipoInvestimento.Name = "txttipoInvestimento";
-            txttipoInvestimento.ReadOnly = true;
-            txttipoInvestimento.Size = new Size(225, 27);
-            txttipoInvestimento.TabIndex = 36;
+            txtTipoInvestimento.BackColor = SystemColors.Control;
+            txtTipoInvestimento.Enabled = false;
+            txtTipoInvestimento.Location = new Point(15, 88);
+            txtTipoInvestimento.Margin = new Padding(3, 4, 3, 4);
+            txtTipoInvestimento.Name = "txtTipoInvestimento";
+            txtTipoInvestimento.ReadOnly = true;
+            txtTipoInvestimento.Size = new Size(225, 27);
+            txtTipoInvestimento.TabIndex = 36;
             // 
             // label3
             // 
@@ -369,7 +369,7 @@
             plocalizar.Controls.Add(txtDescricaoFlat);
             plocalizar.Controls.Add(label2);
             plocalizar.Controls.Add(label3);
-            plocalizar.Controls.Add(txttipoInvestimento);
+            plocalizar.Controls.Add(txtTipoInvestimento);
             plocalizar.Controls.Add(btnLocFlatLancamento);
             plocalizar.Location = new Point(97, 57);
             plocalizar.Margin = new Padding(3, 4, 3, 4);
@@ -600,7 +600,7 @@
         private Label labelValorAlguel;
         private DateTimePicker dtdataLancamento;
         private Label label4;
-        private TextBox txttipoInvestimento;
+        private TextBox txtTipoInvestimento;
         private Label label3;
         private Label label2;
         private TextBox txtidFlat;

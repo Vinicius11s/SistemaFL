@@ -98,22 +98,44 @@ namespace SistemaFL
             grid.Columns["DataAquisicao"].DefaultCellStyle.Format = "d";
             grid.Columns["DataAquisicao"].HeaderText = "DATA AQUISIÇÃO";
 
-            grid.Columns["TamanhoUnidadeM2"].HeaderText = "TAMANHO M2";
+            grid.Columns["TamanhoUnidadeM2"].HeaderText = "TAM. M2";
             grid.Columns["NumMatriculaImovel"].HeaderText = "Nº MATRÍCULA";
+
             grid.Columns["ValorDeCompra"].HeaderText = "VALOR COMPRA";
+            grid.Columns["ValorDeCompra"].DefaultCellStyle.Format = "C2";
+
             grid.Columns["PossuiGaragem"].HeaderText = "POSSUI GARAGEM";
+
             grid.Columns["valorComissao"].HeaderText = "VALOR COMISSÃO";
+            grid.Columns["valorComissao"].DefaultCellStyle.Format = "C2";
+
             grid.Columns["NotaComissao"].HeaderText = "NOTA COMISSÃO";
+
             grid.Columns["ValorITBI"].HeaderText = "VALOR ITBI";
+            grid.Columns["ValorITBI"].DefaultCellStyle.Format = "C2";
+
             grid.Columns["ValorEscritura"].HeaderText = "VALOR ESCRITURA";
+            grid.Columns["ValorEscritura"].DefaultCellStyle.Format = "C2";
+
             grid.Columns["ValorLaudemio"].HeaderText = "VALOR LAUDÊMIO";
+            grid.Columns["ValorLaudemio"].DefaultCellStyle.Format = "C2";
+
             grid.Columns["ValorRegistro"].HeaderText = "VALOR DE REGISTRO";
+            grid.Columns["ValorRegistro"].DefaultCellStyle.Format = "C2";
+
             grid.Columns["ValorAforamento"].HeaderText = "VALOR AFORAMENTO";
+            grid.Columns["ValorAforamento"].DefaultCellStyle.Format = "C2";
+
             grid.Columns["ValorTotalImovel"].HeaderText = "VALOR TOTAL IMÓVEL";
+            grid.Columns["ValorTotalImovel"].DefaultCellStyle.Format = "C2";
+
 
             grid.Columns["Unidade"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             grid.Columns["Estado"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
+            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            grid.Columns["ValorTotalImovel"].Width = 200;
 
         }
         private void dgdadosFlats_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)

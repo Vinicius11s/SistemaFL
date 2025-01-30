@@ -10,6 +10,6 @@ namespace Interfaces
 {
     public interface ILancamentoRepositorio : IBaseRepositorio<Lancamento>
     {
-        IEnumerable<dynamic> ObterDadosRelatorioAnual(string ano);
+        IEnumerable<dynamic> ObterDadosRelatorioAnual(int ano);
     }
 }

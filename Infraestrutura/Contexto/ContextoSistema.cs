@@ -26,7 +26,7 @@ namespace Infraestrutura.Contexto
         {
             //Server Master = DESKTOP-6RMV3GQ
             //Server Local = DESKTOP-I32AP0S
-            var stringConexao = @"Server= DESKTOP-I32AP0S;Database=DBSISFLATS02;Integrated Security=True;TrustServerCertificate=True;";
+            var stringConexao = @"Server= DESKTOP-6RMV3GQ;Database=DBSISFLATS04;Integrated Security=True;TrustServerCertificate=True;";
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(stringConexao);
@@ -152,7 +152,7 @@ namespace Infraestrutura.Contexto
                         'Inserção',
                         f.Descricao AS DescricaoFlat,
                         i.IdUsuario,
-                        u.Nome AS DescricaoUsuario
+                        u.Login AS DescricaoUsuario
                     FROM INSERTED i
                     JOIN Flat f ON f.id = i.idFlat
                     LEFT JOIN Usuario u ON u.id = i.IdUsuario  -- Busca o nome do usuário

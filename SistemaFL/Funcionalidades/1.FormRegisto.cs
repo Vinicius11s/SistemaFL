@@ -21,8 +21,6 @@ namespace SistemaFL.Funcionalidades
             InitializeComponent();
             this.repositorio = repositorio;
             this.flatRepositorio = flatRepositorio;
-            this.Resize += FrmFuncionalidadeRegisto_Resize;
-
             tTamanhotela.Tick += tTamanhotela_Tick;
             tTamanhotela.Start();
 
@@ -42,22 +40,7 @@ namespace SistemaFL.Funcionalidades
         }
         private void AjustarLayoutFormulario()
         {
-            AjustaPictureBox_MaxMinFechar();
             AjustarTamanhoDataGridView();
-        }
-        private void AjustaPictureBox_MaxMinFechar()
-        {
-            int margem = 10;
-
-            // Posição do pbMaximizar (no canto superior direito)
-            int x1 = this.ClientSize.Width - pbFechar.Width - margem;
-            int y1 = margem;
-            pbFechar.Location = new Point(x1, y1);
-
-            // Posição do pbFechar (ao lado esquerdo de pbMaximizar)
-            int x2 = x1 - pbMaximizar.Width - margem;
-            int y2 = margem;
-            pbMaximizar.Location = new Point(x2, y2);
         }
         private void AjustarTamanhoDataGridView()
         {
@@ -198,10 +181,6 @@ namespace SistemaFL.Funcionalidades
             dgdadosFunRegistro.DataSource = null;
             dgdadosFunRegistro.Rows.Clear();
         }
-        private void FrmFuncionalidadeRegisto_Resize(object sender, EventArgs e)
-        {
-            AjustarLayoutFormulario();
-        }
         //
         private void pbFechar_Click(object sender, EventArgs e)
         {
@@ -225,6 +204,13 @@ namespace SistemaFL.Funcionalidades
         private void tTamanhotela_Tick(object sender, EventArgs e)
         {
             Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, 10);
+            dgdadosFunRegistro.Resize += FrmFuncionalidadeRegisto_Resize;
+        }
+        private void FrmFuncionalidadeRegisto_Resize(object sender, EventArgs e)
+        {
+            dgdadosFunRegistro.Width = this.ClientSize.Width - dgdadosFunRegistro.Left - 20;
+            pbFechar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pbMaximizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         }
     }
 }

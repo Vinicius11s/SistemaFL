@@ -94,39 +94,64 @@ namespace SistemaFL
         }
         private void btnsalvar_Click(object sender, EventArgs e)
         {
+            bool lancamentoExistenteMes = false;
             try
             {
-                if (txttipoInvestimento.Text != String.Empty)
+                if (txtidFlat.Text != String.Empty)
                 {
                     Lancamento lancamento = carregaPropriedades();
 
-
                     if (lancamento.id == 0)
                     {
-                        repositorio.Inserir(lancamento);
+                        if(int.TryParse(txtidFlat.Text, out int idFlat))
+                        {
+                            var mesSelecionado = dtdataLancamento.Value.Month;
+                            var anoelecionado = dtdataLancamento.Value.Year;
+
+                            var lancamentoExistente = repositorio.Recuperar(l => l.idFlat == idFlat
+                                && l.DataPagamento.Month == mesSelecionado
+                                && l.DataPagamento.Year == anoelecionado);
+
+                            if (lancamentoExistente != null)
+                            {
+                                MessageBox.Show("Já existe um lançamento para este flat neste mês!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                lancamentoExistenteMes = true; // Retorna sem fazer a inserção
+                            }
+                            else
+                            {
+                                repositorio.Inserir(lancamento);
+                            }
+                        }                                                               
                     }
                     else
                     {
                         repositorio.Alterar(lancamento);
                     }
-                    Program.serviceProvider.
-                        GetRequiredService<ContextoSistema>().SaveChanges();
-                    MessageBox.Show("Salvo com sucesso");
 
-                    Estilos.LimparTextBoxes(plocalizar);
-                    Estilos.LimparTextBoxes(plancamento);
-                    btnnovo.Enabled = true;
-                    btnlocalizar.Enabled = true;
-                    btnalterar.Enabled = false;
-                    btncancelar.Enabled = false;
-                    btnexcluir.Enabled = false;
-                    btnsalvar.Enabled = false;
+                    if(lancamentoExistenteMes == false)
+                    {
+                        Program.serviceProvider.
+                                                GetRequiredService<ContextoSistema>().SaveChanges();
+                        MessageBox.Show("Salvo com sucesso");
+
+                        Estilos.LimparTextBoxes(plocalizar);
+                        Estilos.LimparTextBoxes(plancamento);
+                        btnnovo.Enabled = true;
+                        btnlocalizar.Enabled = true;
+                        btnalterar.Enabled = false;
+                        btncancelar.Enabled = false;
+                        btnexcluir.Enabled = false;
+                        btnsalvar.Enabled = false;
+                    }                
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show("Erro ao salvar, Flat do Tipo Aluguel + Dividendos, Informe valores aos campos");
-
+                if(txtTipoInvestimento.Text == "Aluguel + Dividendos")
+                {
+                    MessageBox.Show("Erro ao salvar, Flat do Tipo Aluguel + Dividendos, Informe valores aos campos");
+                }
+                MessageBox.Show("Erro ao salvar");
                 throw;
             }
         }
@@ -166,7 +191,7 @@ namespace SistemaFL
                         {
                             txtidFlat.Text = lancamento.idFlat.ToString();
                             txtDescricaoFlat.Text = lancamento.DescricaoFlat;
-                            txttipoInvestimento.Text = lancamento.TipoPagamento;
+                            txtTipoInvestimento.Text = lancamento.TipoPagamento;
                         }
                         else MessageBox.Show("Flat nao localizado");
                     }
@@ -188,40 +213,38 @@ namespace SistemaFL
         {
             if (txtid.Text != "")
             {
-                var lancamento = carregaPropriedades();
-                var contexto = Program.serviceProvider.GetRequiredService<ContextoSistema>();
-
-                // Verifica se existem ocorrências relacionadas ao lançamento
-                var temOcorrencias = contexto.Ocorrencia.Any(o => o.idLancamento == lancamento.id);
-
-                if (temOcorrencias)
+                DialogResult result = MessageBox.Show("Tem certeza que deseja excluir este registro?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
                 {
-                    MessageBox.Show("Não é possível excluir o lançamento. Existem ocorrências associadas.");
-                }
-                else
-                {
-                    repositorio.Excluir(lancamento);
-                    contexto.SaveChanges();
+                    var lancamento = carregaPropriedades();
+                    var contexto = Program.serviceProvider.GetRequiredService<ContextoSistema>();
 
-                    MessageBox.Show("Registro excluído com sucesso!");
-                    Estilos.LimparTextBoxes(plocalizar);
-                    Estilos.LimparTextBoxes(plancamento);
-                    btnnovo.Enabled = true;
-                    btnalterar.Enabled = false;
-                    btncancelar.Enabled = false;
-                    btnsalvar.Enabled = false;
-                    btnexcluir.Enabled = false;
-                    btnlocalizar.Enabled = true;
-                    btnLocFlatLancamento.Enabled = false;
+                    // Verifica se existem ocorrências relacionadas ao lançamento
+                    var temOcorrencias = contexto.Ocorrencia.Any(o => o.idLancamento == lancamento.id);
 
-                    labelValorAlguel.Visible = false;
-                    txtvaloraluguel.Visible = false;
-                    labelValorDiv.Visible = false;
-                    txtValorDiv.Visible = false;
-                    labelFundoRes.Visible = false;
-                    txtValorFunReserva.Visible = false;
+                    if (temOcorrencias)
+                    {
+                        MessageBox.Show("Não é possível excluir o lançamento. Existem ocorrências associadas.");
+                    }
+                    else
+                    {
+                        repositorio.Excluir(lancamento);
+                        contexto.SaveChanges();
+
+                        MessageBox.Show("Registro excluído com sucesso!");
+                        Estilos.LimparTextBoxes(plocalizar);
+                        Estilos.LimparTextBoxes(plancamento);
+                        btnnovo.Enabled = true;
+                        btnalterar.Enabled = false;
+                        btncancelar.Enabled = false;
+                        btnsalvar.Enabled = false;
+                        btnexcluir.Enabled = false;
+                        btnlocalizar.Enabled = true;
+                        btnLocFlatLancamento.Enabled = false;
+                    }
                 }
             }
+            else MessageBox.Show("Localize o Lançamento");
         }
         //
         //
@@ -244,7 +267,7 @@ namespace SistemaFL
             lancamento.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
             lancamento.DataPagamento = dtdataLancamento.Value;
 
-            if (txttipoInvestimento.Text == "Aluguel Venceslau")
+            if (txtTipoInvestimento.Text == "Aluguel Venceslau")
             {
                 if (decimal.TryParse(txtvaloraluguel.Text, out decimal valorAluguelVenceslau))
                 {
@@ -307,7 +330,7 @@ namespace SistemaFL
 
                     txtidFlat.Text = flatId.ToString();
                     txtDescricaoFlat.Text = flat.Descricao;
-                    txttipoInvestimento.Text = flat.TipoInvestimento;
+                    txtTipoInvestimento.Text = flat.TipoInvestimento;
                     txtStatus.Text = flat.Status;
                     txtNumMatriculaImovel.Text = flat.NumMatriculaImovel.ToString();
                     txtValoDeCompra.Text = flat.ValorDeCompra.ToString();
@@ -315,9 +338,9 @@ namespace SistemaFL
                     MessageBox.Show("Flat selecionado com sucesso!");
                     dtdataLancamento.Enabled = true;
 
-                    if (txttipoInvestimento.Text != "")
+                    if (txtTipoInvestimento.Text != "")
                     {
-                        verificaInvestimento(txttipoInvestimento.Text);
+                        verificaInvestimento(txtTipoInvestimento.Text);
                     }
                 }
                 else

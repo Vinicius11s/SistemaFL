@@ -31,7 +31,6 @@ namespace SistemaFL
             InitializeComponent();
             this.repositorio = repositorio;
         }
-
         public void GerarRelatorioAnual()
         {
             string anoDigitado = txtAno.Text.Trim(); // Obter o ano digitado pelo usuário
@@ -48,7 +47,7 @@ namespace SistemaFL
                 return;
             }
 
-            var dados = repositorio.ObterDadosRelatorioAnual(anoDigitado).FirstOrDefault();
+            var dados = repositorio.ObterDadosRelatorioAnual(ano).FirstOrDefault();
             if (dados == null)
             {
                 MessageBox.Show($"Não há lançamentos para o ano {ano}.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -115,9 +114,6 @@ namespace SistemaFL
                 doc.Close();
             }
         }
-
-
-
         private void AdicionarCelulaCabecalho(PdfPTable tabela, string texto)
         {
             iTextSharp.text.Font fonteNegrito = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 12, iTextSharp.text.Font.BOLD);
@@ -130,18 +126,19 @@ namespace SistemaFL
 
             tabela.AddCell(celula);
         }
-
-
         private void AdicionarLinhaTabela(PdfPTable tabela, string mes, string valor)
         {
             tabela.AddCell(new PdfPCell(new Phrase(mes)) { HorizontalAlignment = Element.ALIGN_CENTER });
             tabela.AddCell(new PdfPCell(new Phrase(valor)) { HorizontalAlignment = Element.ALIGN_RIGHT });
             tabela.AddCell(new PdfPCell(new Phrase("-")) { HorizontalAlignment = Element.ALIGN_CENTER }); // Coluna de Impostos vazia
         }
-
         private void btnlocalizar_Click(object sender, EventArgs e)
         {
             GerarRelatorioAnual();
+        }
+        private void pbFechar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

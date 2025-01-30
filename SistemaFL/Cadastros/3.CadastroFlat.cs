@@ -137,20 +137,24 @@ namespace SistemaFL
         {
             if (txtid.Text != "")
             {
-                var flat = carregaPropriedades();
-                repositorio.Excluir(flat);
-                Program.serviceProvider.
-                    GetRequiredService<ContextoSistema>().SaveChanges();
+                DialogResult result = MessageBox.Show("Tem certeza que deseja excluir este registro?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    var flat = carregaPropriedades();
+                    repositorio.Excluir(flat);
+                    Program.serviceProvider.
+                        GetRequiredService<ContextoSistema>().SaveChanges();
 
-                MessageBox.Show("Registro excluído com sucesso!");
-                limpar();
-                pdados.Enabled = false;
-                btnnovo.Enabled = true;
-                btnlocalizar.Enabled = true;
-                btnalterar.Enabled = false;
-                btncancelar.Enabled = false;
-                btnexcluir.Enabled = false;
-                btnsalvar.Enabled = false;
+                    MessageBox.Show("Registro excluído com sucesso!");
+                    limpar();
+                    pdados.Enabled = false;
+                    btnnovo.Enabled = true;
+                    btnlocalizar.Enabled = true;
+                    btnalterar.Enabled = false;
+                    btncancelar.Enabled = false;
+                    btnexcluir.Enabled = false;
+                    btnsalvar.Enabled = false;
+                }
             }
             else
             {

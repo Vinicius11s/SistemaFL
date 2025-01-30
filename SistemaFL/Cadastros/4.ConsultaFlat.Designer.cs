@@ -49,7 +49,7 @@
             dgdadosFlats.Location = new Point(0, 105);
             dgdadosFlats.Margin = new Padding(3, 4, 3, 4);
             dgdadosFlats.Name = "dgdadosFlats";
-            dgdadosFlats.Size = new Size(1087, 475);
+            dgdadosFlats.Size = new Size(1025, 475);
             dgdadosFlats.TabIndex = 0;
             dgdadosFlats.CellDoubleClick += dgdadosFlats_CellDoubleClic;
             dgdadosFlats.DataBindingComplete += dgdadosFlats_DataBindingComplete;

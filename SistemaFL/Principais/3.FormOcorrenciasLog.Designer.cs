@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmConsultaOcorrencia));
             label2 = new Label();
             dgdadosocorrencias = new DataGridView();
             pbFechar = new PictureBox();
             pbMinimizar = new PictureBox();
+            tTamanhotela = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)dgdadosocorrencias).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbMinimizar).BeginInit();
@@ -42,7 +44,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semilight", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(322, 13);
+            label2.Location = new Point(335, 25);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(212, 30);
@@ -54,17 +56,17 @@
             dgdadosocorrencias.BackgroundColor = Color.White;
             dgdadosocorrencias.BorderStyle = BorderStyle.None;
             dgdadosocorrencias.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosocorrencias.Dock = DockStyle.Bottom;
-            dgdadosocorrencias.Location = new Point(0, 58);
+            dgdadosocorrencias.Location = new Point(1, 94);
             dgdadosocorrencias.Margin = new Padding(4);
             dgdadosocorrencias.Name = "dgdadosocorrencias";
-            dgdadosocorrencias.Size = new Size(839, 392);
+            dgdadosocorrencias.Size = new Size(1087, 376);
             dgdadosocorrencias.TabIndex = 12;
             // 
             // pbFechar
             // 
+            pbFechar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
-            pbFechar.Location = new Point(797, 12);
+            pbFechar.Location = new Point(713, 12);
             pbFechar.Name = "pbFechar";
             pbFechar.Size = new Size(30, 21);
             pbFechar.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -74,8 +76,9 @@
             // 
             // pbMinimizar
             // 
+            pbMinimizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbMinimizar.Image = (Image)resources.GetObject("pbMinimizar.Image");
-            pbMinimizar.Location = new Point(761, 13);
+            pbMinimizar.Location = new Point(687, 12);
             pbMinimizar.Name = "pbMinimizar";
             pbMinimizar.Size = new Size(30, 21);
             pbMinimizar.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -83,12 +86,17 @@
             pbMinimizar.TabStop = false;
             pbMinimizar.Click += pbMinimizar_Click;
             // 
+            // tTamanhotela
+            // 
+            tTamanhotela.Interval = 1;
+            tTamanhotela.Tick += tTamanhotela_Tick;
+            // 
             // FrmConsultaOcorrencia
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(839, 450);
+            ClientSize = new Size(1087, 558);
             Controls.Add(pbMinimizar);
             Controls.Add(pbFechar);
             Controls.Add(label2);
@@ -114,5 +122,6 @@
         private DataGridView dgdadosocorrencias;
         private PictureBox pbFechar;
         private PictureBox pbMinimizar;
+        private System.Windows.Forms.Timer tTamanhotela;
     }
 }

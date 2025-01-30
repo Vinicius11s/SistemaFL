@@ -165,9 +165,9 @@
             pdados.Controls.Add(label2);
             pdados.Controls.Add(txtdescricao);
             pdados.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            pdados.Location = new Point(0, 63);
+            pdados.Location = new Point(0, 116);
             pdados.Name = "pdados";
-            pdados.Size = new Size(1087, 419);
+            pdados.Size = new Size(1087, 396);
             pdados.TabIndex = 0;
             // 
             // btnBuscaCep
@@ -737,22 +737,22 @@
             // 
             // txtid
             // 
-            txtid.Font = new Font("Segoe UI Semilight", 12F);
-            txtid.Location = new Point(446, 12);
+            txtid.Font = new Font("Segoe UI", 8.25F);
+            txtid.Location = new Point(41, 28);
             txtid.Margin = new Padding(3, 4, 3, 4);
             txtid.Name = "txtid";
             txtid.ReadOnly = true;
-            txtid.Size = new Size(58, 29);
+            txtid.Size = new Size(24, 22);
             txtid.TabIndex = 100;
             txtid.Visible = false;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semilight", 12F);
-            label1.Location = new Point(380, 15);
+            label1.Font = new Font("Segoe UI", 8.25F);
+            label1.Location = new Point(31, 16);
             label1.Name = "label1";
-            label1.Size = new Size(60, 21);
+            label1.Size = new Size(45, 13);
             label1.TabIndex = 15;
             label1.Text = "Código";
             label1.Visible = false;
@@ -790,7 +790,7 @@
             btnlocalizar.FlatStyle = FlatStyle.Flat;
             btnlocalizar.Font = new Font("Arial", 11.25F, FontStyle.Bold);
             btnlocalizar.ForeColor = Color.White;
-            btnlocalizar.Location = new Point(707, 19);
+            btnlocalizar.Location = new Point(730, 19);
             btnlocalizar.Name = "btnlocalizar";
             btnlocalizar.Size = new Size(102, 40);
             btnlocalizar.TabIndex = 17;
@@ -820,7 +820,7 @@
             btnalterar.FlatStyle = FlatStyle.Flat;
             btnalterar.Font = new Font("Arial", 11.25F, FontStyle.Bold);
             btnalterar.ForeColor = Color.White;
-            btnalterar.Location = new Point(440, 19);
+            btnalterar.Location = new Point(417, 19);
             btnalterar.Name = "btnalterar";
             btnalterar.Size = new Size(102, 40);
             btnalterar.TabIndex = 13;
@@ -835,7 +835,7 @@
             btnnovo.FlatStyle = FlatStyle.Flat;
             btnnovo.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnnovo.ForeColor = Color.White;
-            btnnovo.Location = new Point(301, 19);
+            btnnovo.Location = new Point(257, 19);
             btnnovo.Name = "btnnovo";
             btnnovo.Size = new Size(102, 40);
             btnnovo.TabIndex = 12;
@@ -850,7 +850,7 @@
             btnexcluir.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btnexcluir.ForeColor = Color.White;
             btnexcluir.Image = Properties.Resources.icons8_entrada_proibida_31;
-            btnexcluir.Location = new Point(256, 8);
+            btnexcluir.Location = new Point(334, 5);
             btnexcluir.Name = "btnexcluir";
             btnexcluir.Size = new Size(44, 45);
             btnexcluir.TabIndex = 16;
@@ -864,7 +864,7 @@
             btncancelar.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             btncancelar.ForeColor = Color.White;
             btncancelar.Image = Properties.Resources.icons8_borracha_40;
-            btncancelar.Location = new Point(190, 5);
+            btncancelar.Location = new Point(228, 5);
             btncancelar.Name = "btncancelar";
             btncancelar.Size = new Size(44, 45);
             btncancelar.TabIndex = 15;

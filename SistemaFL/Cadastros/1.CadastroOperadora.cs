@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Infraestrutura.Repositorio;
 
 namespace SistemaFL
 {
@@ -159,10 +160,7 @@ namespace SistemaFL
 
             if (txtid.Text != "")
             {
-                // Exibe a mensagem de confirmação antes de excluir
                 DialogResult result = MessageBox.Show("Tem certeza que deseja excluir este registro?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                // Verifica se o usuário clicou em "Sim"
                 if (result == DialogResult.Yes)
                 {
                     var empresa = carregaPropriedades();
@@ -231,40 +229,70 @@ namespace SistemaFL
         }
         //DataGrid Flats Não Associados
         private void CarregarFlatsNaoAssociados()
-        {
-            var flatsNaoAssociados = flatRepositorio.Listar(f => f.idEmpresa == null).ToList();
+        {          
+            var flatsNaoAssociados = flatRepositorio.Listar(f => f.idEmpresa == null)
+               .Select(f => new
+               {
+                   f.id,
+                   f.Descricao,
+                   f.TipoInvestimento,
+                   f.Status,
+                   f.DataAquisicao,
+                   f.TamanhoUnidadeM2,
+                   f.Rua,
+                   f.Unidade,
+                   f.Bairro,
+                   f.Estado,
+                   f.Cidade,
+                   f.NumMatriculaImovel,
+                   f.ValorDeCompra,
+                   PossuiGaragem = f.PossuiGaragem ? "Sim" : "Não",
+                   Escriturado = f.Escriturado ? "Sim" : "Não",
+                   Registrado = f.Registrado ? "Sim" : "Não",
+                   f.valorComissao,
+                   NotaComissao = f.NotaComissao ? "Sim" : "Não",
+                   f.ValorITBI,
+                   f.ValorEscritura,
+                   f.ValorRegistro,
+                   Laudêmio = f.Laudemio ? "Sim" : "Não",
+                   f.ValorLaudemio,
+                   f.ValorAforamento,
+                   f.ValorTotalImovel,
+               })
+               .OrderBy(flat => flat.Descricao)
+               .ToList();
             dgAssociarFlat.DataSource = flatsNaoAssociados;
 
             Estilos.AlterarEstiloDataGrid(dgAssociarFlat);
-            AjustarNomesCabecalho(dgAssociarFlat);
+            AlterarNomesDoCabecalho(dgAssociarFlat);
         }
-        private void AjustarNomesCabecalho(DataGridView grid)
+        private void AlterarNomesDoCabecalho(DataGridView grid)
         {
             grid.Columns["id"].Visible = false;
-            grid.Columns["idEmpresa"].Visible = false;
-            grid.Columns["Empresa"].Visible = false;
-            grid.Columns["Lancamentos"].Visible = false;
-            grid.Columns["Ocorrencias"].Visible = false;
-            grid.Columns["Ativo"].Visible = false;
 
             grid.Columns["Descricao"].HeaderText = "DESCRIÇÃO";
             grid.Columns["TipoInvestimento"].HeaderText = "TIPO INVESTIMENTO";
 
-            grid.Columns["Unidade"].HeaderText = "UN";
-            grid.Columns["Unidade"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            grid.Columns["Status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
             grid.Columns["DataAquisicao"].DefaultCellStyle.Format = "d";
             grid.Columns["DataAquisicao"].HeaderText = "DATA AQUISIÇÃO";
 
-            grid.Columns["ValorDeCompra"].DefaultCellStyle.Format = "C2";
-            grid.Columns["ValorDeCompra"].HeaderText = "VALOR DE COMPRA";
+            grid.Columns["TamanhoUnidadeM2"].HeaderText = "TAM. M2";
+            grid.Columns["NumMatriculaImovel"].HeaderText = "Nº MATRÍCULA";
+            grid.Columns["ValorDeCompra"].HeaderText = "VALOR COMPRA";
+            grid.Columns["PossuiGaragem"].HeaderText = "POSSUI GARAGEM";
+            grid.Columns["valorComissao"].HeaderText = "VALOR COMISSÃO";
+            grid.Columns["NotaComissao"].HeaderText = "NOTA COMISSÃO";
+            grid.Columns["ValorITBI"].HeaderText = "VALOR ITBI";
+            grid.Columns["ValorEscritura"].HeaderText = "VALOR ESCRITURA";
+            grid.Columns["ValorLaudemio"].HeaderText = "VALOR LAUDÊMIO";
+            grid.Columns["ValorRegistro"].HeaderText = "VALOR DE REGISTRO";
+            grid.Columns["ValorAforamento"].HeaderText = "VALOR AFORAMENTO";
+            grid.Columns["ValorTotalImovel"].HeaderText = "VALOR TOTAL IMÓVEL";
 
-            foreach (DataGridViewColumn coluna in grid.Columns)
-            {
-                coluna.HeaderText = coluna.HeaderText.ToUpper();
-                grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-            }
+            grid.Columns["Unidade"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            grid.Columns["Estado"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
         }
         private void btnassociar_Click(object sender, EventArgs e)

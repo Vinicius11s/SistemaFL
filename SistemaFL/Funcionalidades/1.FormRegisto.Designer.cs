@@ -53,10 +53,10 @@
             dgdadosFunRegistro.BorderStyle = BorderStyle.None;
             dgdadosFunRegistro.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdadosFunRegistro.GridColor = Color.FromArgb(23, 24, 29);
-            dgdadosFunRegistro.Location = new Point(2, 88);
+            dgdadosFunRegistro.Location = new Point(2, 100);
             dgdadosFunRegistro.Margin = new Padding(4);
             dgdadosFunRegistro.Name = "dgdadosFunRegistro";
-            dgdadosFunRegistro.Size = new Size(870, 330);
+            dgdadosFunRegistro.Size = new Size(1087, 456);
             dgdadosFunRegistro.TabIndex = 0;
             dgdadosFunRegistro.CellFormatting += dgdadosFunRegistro_CellFormatting;
             dgdadosFunRegistro.DataBindingComplete += dgdadosFunRegistro_DataBindingComplete;
@@ -75,8 +75,9 @@
             // 
             // pbMaximizar
             // 
+            pbMaximizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbMaximizar.Image = (Image)resources.GetObject("pbMaximizar.Image");
-            pbMaximizar.Location = new Point(795, 6);
+            pbMaximizar.Location = new Point(810, 5);
             pbMaximizar.Margin = new Padding(4);
             pbMaximizar.Name = "pbMaximizar";
             pbMaximizar.Size = new Size(35, 25);
@@ -87,8 +88,9 @@
             // 
             // pbFechar
             // 
+            pbFechar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
-            pbFechar.Location = new Point(830, 6);
+            pbFechar.Location = new Point(842, 5);
             pbFechar.Margin = new Padding(4);
             pbFechar.Name = "pbFechar";
             pbFechar.Size = new Size(35, 25);
@@ -163,7 +165,7 @@
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(870, 420);
+            ClientSize = new Size(1087, 558);
             Controls.Add(lblTotalFlats);
             Controls.Add(label5);
             Controls.Add(label6);

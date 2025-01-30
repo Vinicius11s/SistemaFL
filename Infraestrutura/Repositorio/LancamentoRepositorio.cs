@@ -19,7 +19,7 @@ namespace Infraestrutura.Repositorio
             _context = contexto;
         }
 
-        public IEnumerable<object> ObterDadosRelatorioAnual(string ano)
+        public IEnumerable<object> ObterDadosRelatorioAnual(int ano)
         {
           
             

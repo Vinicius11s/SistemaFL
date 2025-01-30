@@ -44,7 +44,7 @@ namespace SistemaFL
                     mes = int.Parse(txtdescricao.Text);
                     if (mes > 0 && mes <= 12)
                     {
-                        var lista = repositorio.Listar(l => l.DataPagamento.Month == mes);
+                        var lista = repositorio.Listar(l => l.DataPagamento.Month == mes && l.DataPagamento.Year == DateTime.Now.Year);
                         dgdadoslancamento.DataSource = lista;
 
                     }
@@ -105,8 +105,7 @@ namespace SistemaFL
             row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
         }
         //
-        //Eventos
-     
+        //Eventos     
         private void dgdadoslancamento_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -126,8 +125,7 @@ namespace SistemaFL
                 this.WindowState = FormWindowState.Normal;
             }
             else this.WindowState = FormWindowState.Maximized;
-        }
-        
+        }       
         private void tTamanhotela_Tick(object sender, EventArgs e)
         {
             Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, 10);

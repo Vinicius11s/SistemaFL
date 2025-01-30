@@ -69,21 +69,25 @@ namespace SistemaFL
         {
             if (txtid.Text != "")
             {
-                var empresa = carregaPropriedades();
-                repositorio.Excluir(empresa);
-                Program.serviceProvider.
-                    GetRequiredService<ContextoSistema>().SaveChanges();
+                DialogResult result = MessageBox.Show("Tem certeza que deseja excluir este registro?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    var empresa = carregaPropriedades();
+                    repositorio.Excluir(empresa);
+                    Program.serviceProvider.
+                        GetRequiredService<ContextoSistema>().SaveChanges();
 
-                MessageBox.Show("Usuário excluído com sucesso");
-                limpar();
-                btnnovo.Enabled = true;
-                btnlocalizar.Enabled = true;
-                btnalterar.Enabled = false;
-                btncancelar.Enabled = false;
-                btnexcluir.Enabled = false;
-                btnsalvar.Enabled = false;
-                txtlogin.Enabled = false;
-                txtsenha.Enabled = false;
+                    MessageBox.Show("Usuário excluído com sucesso");
+                    limpar();
+                    btnnovo.Enabled = true;
+                    btnlocalizar.Enabled = true;
+                    btnalterar.Enabled = false;
+                    btncancelar.Enabled = false;
+                    btnexcluir.Enabled = false;
+                    btnsalvar.Enabled = false;
+                    txtlogin.Enabled = false;
+                    txtsenha.Enabled = false;
+                }
             }
             else
             {
