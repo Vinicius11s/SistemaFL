@@ -185,7 +185,7 @@ namespace SistemaFL
         //
         private void brnRelatorios_Click(object sender, EventArgs e)
         {
-            var form = Program.serviceProvider.GetRequiredService<Relatorios.FechamentoAnual>();
+            var form = Program.serviceProvider.GetRequiredService<FormRelatoriosTributacaoAnual>();
             form.ShowDialog();
         }
         //

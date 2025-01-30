@@ -108,6 +108,10 @@ namespace SistemaFL
                         btnexcluir.Enabled = false;
                         btnsalvar.Enabled = false;
                     }
+                    else
+                    {
+
+                    }
 
                 }
             }
@@ -400,11 +404,13 @@ namespace SistemaFL
             if (ckPossuiGaragemSim.Checked && ckPossuiGaragemNao.Checked)
             {
                 MessageBox.Show("Por favor, selecione apenas uma opção para 'Possui Garagem'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                avisoMostrado = true;
                 return;
             }
             else if (!ckPossuiGaragemSim.Checked && !ckPossuiGaragemNao.Checked)
             {
                 MessageBox.Show("Por favor, selecione se possui garagem.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                avisoMostrado = true;
                 return;
             }
             else
@@ -416,11 +422,13 @@ namespace SistemaFL
             if (ckEscrituradoSim.Checked && ckEscrituradoNao.Checked)
             {
                 MessageBox.Show("Por favor, selecione apenas uma opção para 'Está Escriturado'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                avisoMostrado = true;
                 return;
             }
             else if (!ckEscrituradoSim.Checked && !ckEscrituradoNao.Checked)
             {
                 MessageBox.Show("Por favor, selecione se está escriturado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                avisoMostrado = true;
                 return;
             }
             else
@@ -432,11 +440,13 @@ namespace SistemaFL
             if (ckRegistradoSim.Checked && ckRegistradoNao.Checked)
             {
                 MessageBox.Show("Por favor, selecione apenas uma opção para 'Está Registrado'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                avisoMostrado = true;
                 return;
             }
             else if (!ckRegistradoSim.Checked && !ckRegistradoNao.Checked)
             {
                 MessageBox.Show("Por favor, selecione se está registrado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                avisoMostrado = true;
                 return;
             }
             else

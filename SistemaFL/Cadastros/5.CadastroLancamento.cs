@@ -100,6 +100,7 @@ namespace SistemaFL
                 {
                     Lancamento lancamento = carregaPropriedades();
 
+
                     if (lancamento.id == 0)
                     {
                         repositorio.Inserir(lancamento);

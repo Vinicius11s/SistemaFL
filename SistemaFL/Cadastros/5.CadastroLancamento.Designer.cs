@@ -64,6 +64,13 @@
             plancamento = new Panel();
             pbfechar = new PictureBox();
             tTamanhotela = new System.Windows.Forms.Timer(components);
+            checkBox1 = new CheckBox();
+            label8 = new Label();
+            textBox1 = new TextBox();
+            label9 = new Label();
+            textBox2 = new TextBox();
+            label10 = new Label();
+            textBox3 = new TextBox();
             pbotoes.SuspendLayout();
             plocalizar.SuspendLayout();
             plancamento.SuspendLayout();
@@ -468,12 +475,84 @@
             tTamanhotela.Interval = 1;
             tTamanhotela.Tick += tTamanhotela_Tick;
             // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            checkBox1.Location = new Point(803, 64);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(170, 25);
+            checkBox1.TabIndex = 53;
+            checkBox1.Text = "Outros Lançamentos";
+            checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.Location = new Point(803, 96);
+            label8.Name = "label8";
+            label8.Size = new Size(98, 20);
+            label8.TabIndex = 54;
+            label8.Text = "Valor Aluguel";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(802, 118);
+            textBox1.Margin = new Padding(3, 4, 3, 4);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(171, 27);
+            textBox1.TabIndex = 55;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label9.Location = new Point(804, 153);
+            label9.Name = "label9";
+            label9.Size = new Size(98, 20);
+            label9.TabIndex = 56;
+            label9.Text = "Valor Aluguel";
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(803, 175);
+            textBox2.Margin = new Padding(3, 4, 3, 4);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(171, 27);
+            textBox2.TabIndex = 57;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label10.Location = new Point(805, 216);
+            label10.Name = "label10";
+            label10.Size = new Size(98, 20);
+            label10.TabIndex = 58;
+            label10.Text = "Valor Aluguel";
+            // 
+            // textBox3
+            // 
+            textBox3.Location = new Point(804, 238);
+            textBox3.Margin = new Padding(3, 4, 3, 4);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(171, 27);
+            textBox3.TabIndex = 59;
+            // 
             // FrmCadLancamento
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1087, 580);
+            Controls.Add(label10);
+            Controls.Add(textBox3);
+            Controls.Add(label9);
+            Controls.Add(textBox2);
+            Controls.Add(label8);
+            Controls.Add(textBox1);
+            Controls.Add(checkBox1);
             Controls.Add(txtid);
             Controls.Add(label1);
             Controls.Add(pbfechar);
@@ -537,5 +616,12 @@
         private Label label7;
         private TextBox txtValoDeCompra;
         private TextBox txtStatus;
+        private CheckBox checkBox1;
+        private Label label8;
+        private TextBox textBox1;
+        private Label label9;
+        private TextBox textBox2;
+        private Label label10;
+        private TextBox textBox3;
     }
 }
