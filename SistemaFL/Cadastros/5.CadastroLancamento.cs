@@ -142,6 +142,10 @@ namespace SistemaFL
                         btncancelar.Enabled = false;
                         btnexcluir.Enabled = false;
                         btnsalvar.Enabled = false;
+
+                        txtvaloraluguel.Enabled = false;
+                        txtValorFunReserva.Enabled = false;
+                        txtValorDiv.Enabled = false;
                     }                
                 }
             }

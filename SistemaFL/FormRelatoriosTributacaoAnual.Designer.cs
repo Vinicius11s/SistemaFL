@@ -34,37 +34,40 @@
             pbFechar = new PictureBox();
             btnlocalizar = new Button();
             dataGridView1 = new DataGridView();
-            GerarInformacoes = new Button();
             label2 = new Label();
+            panel1 = new Panel();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // txtAno
             // 
             txtAno.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtAno.Location = new Point(157, 63);
+            txtAno.Location = new Point(208, 114);
             txtAno.Name = "txtAno";
-            txtAno.Size = new Size(77, 29);
+            txtAno.Size = new Size(114, 29);
             txtAno.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(106, 67);
+            label1.Font = new Font("Segoe UI Semilight", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(143, 113);
             label1.Name = "label1";
-            label1.Size = new Size(45, 20);
+            label1.Size = new Size(61, 30);
             label1.TabIndex = 1;
             label1.Text = "Ano :";
             // 
             // pbFechar
             // 
             pbFechar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pbFechar.BackColor = Color.Transparent;
             pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
-            pbFechar.Location = new Point(1056, 1);
+            pbFechar.Location = new Point(1054, 3);
             pbFechar.Name = "pbFechar";
-            pbFechar.Size = new Size(30, 21);
+            pbFechar.Size = new Size(30, 33);
             pbFechar.SizeMode = PictureBoxSizeMode.CenterImage;
             pbFechar.TabIndex = 15;
             pbFechar.TabStop = false;
@@ -75,7 +78,7 @@
             btnlocalizar.FlatAppearance.BorderSize = 0;
             btnlocalizar.Image = (Image)resources.GetObject("btnlocalizar.Image");
             btnlocalizar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnlocalizar.Location = new Point(352, 453);
+            btnlocalizar.Location = new Point(977, 504);
             btnlocalizar.Margin = new Padding(3, 4, 3, 4);
             btnlocalizar.Name = "btnlocalizar";
             btnlocalizar.Size = new Size(98, 31);
@@ -89,32 +92,42 @@
             // 
             dataGridView1.BackgroundColor = Color.White;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(70, 122);
+            dataGridView1.Location = new Point(667, 141);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(267, 362);
+            dataGridView1.Size = new Size(290, 394);
             dataGridView1.TabIndex = 16;
-            // 
-            // GerarInformacoes
-            // 
-            GerarInformacoes.FlatAppearance.BorderSize = 0;
-            GerarInformacoes.FlatStyle = FlatStyle.Flat;
-            GerarInformacoes.Image = (Image)resources.GetObject("GerarInformacoes.Image");
-            GerarInformacoes.Location = new Point(240, 63);
-            GerarInformacoes.Margin = new Padding(3, 4, 3, 4);
-            GerarInformacoes.Name = "GerarInformacoes";
-            GerarInformacoes.Size = new Size(36, 31);
-            GerarInformacoes.TabIndex = 17;
-            GerarInformacoes.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(56, 12);
+            label2.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(24, 23);
             label2.Name = "label2";
-            label2.Size = new Size(281, 25);
+            label2.Size = new Size(298, 22);
             label2.TabIndex = 18;
             label2.Text = "Relatório de Fechamento Anual";
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(23, 24, 29);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(pbFechar);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1087, 73);
+            panel1.TabIndex = 19;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(772, 105);
+            label3.Name = "label3";
+            label3.Size = new Size(97, 15);
+            label3.TabIndex = 20;
+            label3.Text = "Pré-visualização";
             // 
             // FormRelatoriosTributacaoAnual
             // 
@@ -122,10 +135,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1087, 558);
-            Controls.Add(label2);
-            Controls.Add(GerarInformacoes);
+            Controls.Add(label3);
+            Controls.Add(panel1);
             Controls.Add(dataGridView1);
-            Controls.Add(pbFechar);
             Controls.Add(btnlocalizar);
             Controls.Add(label1);
             Controls.Add(txtAno);
@@ -134,6 +146,8 @@
             Text = "Relatórios Anuais";
             ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -145,7 +159,8 @@
         private PictureBox pbFechar;
         private Button btnlocalizar;
         private DataGridView dataGridView1;
-        private Button GerarInformacoes;
         private Label label2;
+        private Panel panel1;
+        private Label label3;
     }
 }

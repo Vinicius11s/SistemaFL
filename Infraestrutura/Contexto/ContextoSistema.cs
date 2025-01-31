@@ -26,7 +26,7 @@ namespace Infraestrutura.Contexto
         {
             //Server Master = DESKTOP-6RMV3GQ
             //Server Local = DESKTOP-I32AP0S
-            var stringConexao = @"Server= DESKTOP-6RMV3GQ;Database=DBSISFLATS04;Integrated Security=True;TrustServerCertificate=True;";
+            var stringConexao = @"Server= DESKTOP-I32AP0S;Database=DBSISFLATS04;Integrated Security=True;TrustServerCertificate=True;";
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(stringConexao);
@@ -118,59 +118,63 @@ namespace Infraestrutura.Contexto
         private void CriaTrigger()
         {
             /*CREATE TRIGGER trg_InsertedNewLancamento
-                ON Lancamento
-                AFTER INSERT
-                AS
-                BEGIN
-                    DECLARE @dataAtual DATETIME = GETDATE();
+            ON Lancamento
+            AFTER INSERT
+            AS
+            BEGIN
+                DECLARE @dataAtual DATETIME = GETDATE();
 
-                    INSERT INTO ocorrencia (
-                        oco_ValorAntigo,
-                        oco_ValorAlteracao,
-                        oco_DataAlteracao,
-                        idLancamento,
-                        idFlat,
-                        oco_Tabela,
-                        oco_Descricao,
-                        DescricaoFlat,
-                        IdUsuario,
-                        DescricaoUsuario
-                    )
-                    SELECT 
-                        ISNULL(ult.ValorAntigo, 0) AS ValorAntigo,
+                INSERT INTO ocorrencia (
+                    oco_ValorAntigo,
+                    oco_ValorAlteracao,
+                    oco_DataAlteracao,
+                    oco_DataLancamentoAntigo, -- Nova coluna adicionada
+                    idLancamento,
+                    idFlat,
+                    oco_Tabela,
+                    oco_Descricao,
+                    DescricaoFlat,
+                    IdUsuario,
+                    DescricaoUsuario
+                )
+                SELECT 
+                    ISNULL(ult.ValorAntigo, 0) AS ValorAntigo,
+                    CASE 
+                        WHEN i.TipoPagamento = 'Aluguel Fixo' THEN i.ValorAluguel
+                        WHEN i.TipoPagamento = 'Dividendos' THEN i.ValorDividendos
+                        WHEN i.TipoPagamento = 'Aluguel Fixo + Dividendos' THEN i.ValorAluguel + i.ValorDividendos
+                        WHEN i.TipoPagamento = 'Fundo de Reserva' THEN i.ValorFundoReserva
+                        ELSE 0
+                    END AS ValorAlteracao,
+                    @dataAtual,
+                    ult.DataLancamentoAntigo, -- Captura a data do último lançamento
+                    i.id,
+                    i.idFlat,
+                    'Lancamento',
+                    'Inserção',
+                    f.Descricao AS DescricaoFlat,
+                    i.IdUsuario,
+                    u.Login AS DescricaoUsuario
+                FROM INSERTED i
+                JOIN Flat f ON f.id = i.idFlat
+                LEFT JOIN Usuario u ON u.id = i.IdUsuario  -- Busca o nome do usuário
+                OUTER APPLY (
+                    SELECT TOP 1
                         CASE 
-                            WHEN i.TipoPagamento = 'Aluguel Fixo' THEN i.ValorAluguel
-                            WHEN i.TipoPagamento = 'Dividendos' THEN i.ValorDividendos
-                            WHEN i.TipoPagamento = 'Aluguel Fixo + Dividendos' THEN i.ValorAluguel + i.ValorDividendos
-                            WHEN i.TipoPagamento = 'Fundo de Reserva' THEN i.ValorFundoReserva
+                            WHEN i.TipoPagamento = 'Aluguel Fixo' THEN l.ValorAluguel
+                            WHEN i.TipoPagamento = 'Dividendos' THEN l.ValorDividendos
+                            WHEN i.TipoPagamento = 'Aluguel Fixo + Dividendos' THEN l.ValorAluguel + l.ValorDividendos
+                            WHEN i.TipoPagamento = 'Fundo de Reserva' THEN l.ValorFundoReserva
                             ELSE 0
-                        END AS ValorAlteracao,
-                        @dataAtual,
-                        i.id,
-                        i.idFlat,
-                        'Lancamento',
-                        'Inserção',
-                        f.Descricao AS DescricaoFlat,
-                        i.IdUsuario,
-                        u.Login AS DescricaoUsuario
-                    FROM INSERTED i
-                    JOIN Flat f ON f.id = i.idFlat
-                    LEFT JOIN Usuario u ON u.id = i.IdUsuario  -- Busca o nome do usuário
-                    OUTER APPLY (
-                        SELECT TOP 1
-                            CASE 
-                                WHEN i.TipoPagamento = 'Aluguel Fixo' THEN l.ValorAluguel
-                                WHEN i.TipoPagamento = 'Dividendos' THEN l.ValorDividendos
-                                WHEN i.TipoPagamento = 'Aluguel Fixo + Dividendos' THEN l.ValorAluguel + l.ValorDividendos
-                                WHEN i.TipoPagamento = 'Fundo de Reserva' THEN l.ValorFundoReserva
-                                ELSE 0
-                            END AS ValorAntigo
-                        FROM lancamento l
-                        WHERE l.idFlat = i.idFlat
-                          AND l.id < i.id
-                        ORDER BY l.DataPagamento DESC
-                    ) ult;
-                END;
+                        END AS ValorAntigo,
+                        l.DataPagamento AS DataLancamentoAntigo -- Captura a data do último lançamento
+                    FROM lancamento l
+                    WHERE l.idFlat = i.idFlat
+                        AND l.id < i.id
+                    ORDER BY l.DataPagamento DESC
+                ) ult;
+            END;
+
                 */
 
         }
