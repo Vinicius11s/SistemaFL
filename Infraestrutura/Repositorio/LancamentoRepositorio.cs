@@ -19,7 +19,8 @@ namespace Infraestrutura.Repositorio
             _context = contexto;
         }
 
-        public IEnumerable<object> ObterDadosRelatorioAnual(int ano)
+        //Primeira Tabela do Relatório
+        public IEnumerable<object> ObterDadosRelatorioMensal(int ano)
         {
           
             
@@ -39,9 +40,6 @@ namespace Infraestrutura.Repositorio
 
             var BCano = BCJan + BCFeb + BCMar + BCAbr + BCMai + BCJun + BCJul + BCAgo + BCSet + BCOut + BCNov + BCDez;
 
-            var PISano = CalcularPIS_Anual(BCano);           
-            var COFano = CalculaCOFINS_Anual(BCano);
-
             var Registros = new List<object>
             {
                 new
@@ -57,11 +55,7 @@ namespace Infraestrutura.Repositorio
                     SETEMBRO = BCSet,
                     OUTUBRO = BCOut,
                     NOVEMBRO = BCNov,
-                    DEZEMBRO = BCDez,
-
-                    PIS = PISano,
-                    COFINS = COFano,
-               
+                    DEZEMBRO = BCDez,               
                 },
              };
             return Registros;
@@ -76,23 +70,55 @@ namespace Infraestrutura.Repositorio
             return total;
 
         }
-        public decimal CalcularPIS_Anual(decimal BC)
+
+        public IEnumerable<object> ObterDadosRelatorioTrimestral(int ano)
         {
-            if (BC != 0)
+
+
+            //Soma Todos Lancamentos feitos por Trimestre (exceto dividendos)
+            var PrimeiroTrimestre = SomaLancamentosPorTrimestre(ano);
+            var SegundoTrimestre = SomaLancamentosPorTrimestre(ano);
+            var TerceiroTrimestre = SomaLancamentosPorTrimestre(ano);
+            var QuartoTrimestre = SomaLancamentosPorTrimestre(ano);
+
+            var Registros = new List<object>
             {
-                decimal resultado = BC * 0.0065M;
-                return Math.Round(resultado, 2);
-            }
-            else return 0;
+                new
+                {
+                    Trimestre1 = PrimeiroTrimestre,
+                    Trimestre2 = SegundoTrimestre,
+                    Trimestre3 = TerceiroTrimestre,
+                    Trimestre4 = QuartoTrimestre,                  
+                },
+             };
+            return Registros;
         }
-        public decimal CalculaCOFINS_Anual(decimal BC)
+        public decimal SomaLancamentosPorTrimestre(int ano)
         {
-            if (BC != 0)
+            decimal totalTrimestral = 0;
+
+            // Agrupar os meses por trimestre
+            var trimestres = new[]
             {
-                decimal resultado = BC * 0.03M;
-                return Math.Round(resultado, 2);
+                new { Meses = new[] { 1, 2, 3 }, Trimestre = 1 },
+                new { Meses = new[] { 4, 5, 6 }, Trimestre = 2 },
+                new { Meses = new[] { 7, 8, 9 }, Trimestre = 3 },
+                new { Meses = new[] { 10, 11, 12 }, Trimestre = 4 }
+            };
+
+            foreach (var trimestre in trimestres)
+            {
+                // Calculando a soma para o trimestre
+                decimal somaTrimestre = _context.Lancamento
+                    .Where(l => trimestre.Meses.Contains(l.DataPagamento.Month) && l.DataPagamento.Year == ano)
+                    .Sum(l => (l.ValorAluguel ?? 0.00M) +
+                              (l.AluguelVenceslau ?? 0.00M) +
+                              (l.ValorFundoReserva ?? 0.00M));
+
+                totalTrimestral += somaTrimestre; // Adiciona a soma do trimestre ao total
             }
-            else return 0;
+
+            return totalTrimestral;
         }
     }
 }
