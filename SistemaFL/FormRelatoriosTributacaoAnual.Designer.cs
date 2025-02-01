@@ -43,7 +43,7 @@
             ckRendimentoBruto = new CheckBox();
             ckRendimentoLiq = new CheckBox();
             ckIRPJ = new CheckBox();
-            ckContrAssist = new CheckBox();
+            ckContrSocial = new CheckBox();
             axAcropdf1 = new AxAcroPDFLib.AxAcroPDF();
             btnVizualizarPDF = new Button();
             tTamanhotela = new System.Windows.Forms.Timer(components);
@@ -58,7 +58,7 @@
             txtAno.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtAno.Location = new Point(77, 131);
             txtAno.Name = "txtAno";
-            txtAno.Size = new Size(68, 27);
+            txtAno.Size = new Size(78, 27);
             txtAno.TabIndex = 0;
             // 
             // label1
@@ -164,7 +164,7 @@
             // 
             ckRendimentoBruto.AutoSize = true;
             ckRendimentoBruto.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ckRendimentoBruto.Location = new Point(33, 320);
+            ckRendimentoBruto.Location = new Point(215, 259);
             ckRendimentoBruto.Name = "ckRendimentoBruto";
             ckRendimentoBruto.Size = new Size(169, 24);
             ckRendimentoBruto.TabIndex = 24;
@@ -175,7 +175,7 @@
             // 
             ckRendimentoLiq.AutoSize = true;
             ckRendimentoLiq.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ckRendimentoLiq.Location = new Point(33, 350);
+            ckRendimentoLiq.Location = new Point(215, 289);
             ckRendimentoLiq.Name = "ckRendimentoLiq";
             ckRendimentoLiq.Size = new Size(181, 24);
             ckRendimentoLiq.TabIndex = 25;
@@ -186,23 +186,23 @@
             // 
             ckIRPJ.AutoSize = true;
             ckIRPJ.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ckIRPJ.Location = new Point(213, 259);
+            ckIRPJ.Location = new Point(33, 319);
             ckIRPJ.Name = "ckIRPJ";
             ckIRPJ.Size = new Size(53, 24);
             ckIRPJ.TabIndex = 26;
             ckIRPJ.Text = "IRPJ";
             ckIRPJ.UseVisualStyleBackColor = true;
             // 
-            // ckContrAssist
+            // ckContrSocial
             // 
-            ckContrAssist.AutoSize = true;
-            ckContrAssist.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ckContrAssist.Location = new Point(213, 289);
-            ckContrAssist.Name = "ckContrAssist";
-            ckContrAssist.Size = new Size(185, 24);
-            ckContrAssist.TabIndex = 27;
-            ckContrAssist.Text = "CONTRIBUIÇÃO SOCIAL";
-            ckContrAssist.UseVisualStyleBackColor = true;
+            ckContrSocial.AutoSize = true;
+            ckContrSocial.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ckContrSocial.Location = new Point(33, 349);
+            ckContrSocial.Name = "ckContrSocial";
+            ckContrSocial.Size = new Size(185, 24);
+            ckContrSocial.TabIndex = 27;
+            ckContrSocial.Text = "CONTRIBUIÇÃO SOCIAL";
+            ckContrSocial.UseVisualStyleBackColor = true;
             // 
             // axAcropdf1
             // 
@@ -251,7 +251,7 @@
             Controls.Add(ckTodos);
             Controls.Add(btnVizualizarPDF);
             Controls.Add(axAcropdf1);
-            Controls.Add(ckContrAssist);
+            Controls.Add(ckContrSocial);
             Controls.Add(ckIRPJ);
             Controls.Add(ckRendimentoLiq);
             Controls.Add(ckRendimentoBruto);
@@ -291,7 +291,7 @@
         private CheckBox ckRendimentoBruto;
         private CheckBox ckRendimentoLiq;
         private CheckBox ckIRPJ;
-        private CheckBox ckContrAssist;
+        private CheckBox ckContrSocial;
         private AxAcroPDFLib.AxAcroPDF axAcropdf1;
         private Button btnVizualizarPDF;
         private System.Windows.Forms.Timer tTamanhotela;

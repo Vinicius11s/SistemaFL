@@ -162,7 +162,9 @@ namespace SistemaFL
         private void btncancelar_Click(object sender, EventArgs e)
         {
             Estilos.LimparTextBoxes(plocalizar);
+            Estilos.LimparTextBoxes(pOutrosLancamentos);
             Estilos.LimparTextBoxes(plancamento);
+            ckOutrosLancamentos.Checked = false;
             btnnovo.Enabled = true;
             btnalterar.Enabled = false;
             btncancelar.Enabled = false;
@@ -215,40 +217,43 @@ namespace SistemaFL
         }
         private void btnexcluir_Click(object sender, EventArgs e)
         {
-            if (txtid.Text != "")
-            {
-                DialogResult result = MessageBox.Show("Tem certeza que deseja excluir este registro?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
+            if(ckOutrosLancamentos.Checked == false)
+            { 
+                if (txtid.Text != "")
                 {
-                    var lancamento = carregaPropriedades();
-                    var contexto = Program.serviceProvider.GetRequiredService<ContextoSistema>();
-
-                    // Verifica se existem ocorrências relacionadas ao lançamento
-                    var temOcorrencias = contexto.Ocorrencia.Any(o => o.idLancamento == lancamento.id);
-
-                    if (temOcorrencias)
+                    DialogResult result = MessageBox.Show("Tem certeza que deseja excluir este registro?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
                     {
-                        MessageBox.Show("Não é possível excluir o lançamento. Existem ocorrências associadas.");
-                    }
-                    else
-                    {
-                        repositorio.Excluir(lancamento);
-                        contexto.SaveChanges();
+                        var lancamento = carregaPropriedades();
+                        var contexto = Program.serviceProvider.GetRequiredService<ContextoSistema>();
 
-                        MessageBox.Show("Registro excluído com sucesso!");
-                        Estilos.LimparTextBoxes(plocalizar);
-                        Estilos.LimparTextBoxes(plancamento);
-                        btnnovo.Enabled = true;
-                        btnalterar.Enabled = false;
-                        btncancelar.Enabled = false;
-                        btnsalvar.Enabled = false;
-                        btnexcluir.Enabled = false;
-                        btnlocalizar.Enabled = true;
-                        btnLocFlatLancamento.Enabled = false;
+                        // Verifica se existem ocorrências relacionadas ao lançamento
+                        var temOcorrencias = contexto.Ocorrencia.Any(o => o.idLancamento == lancamento.id);
+
+                        if (temOcorrencias)
+                        {
+                            MessageBox.Show("Não é possível excluir o lançamento. Existem ocorrências associadas.");
+                        }
+                        else
+                        {
+                            repositorio.Excluir(lancamento);
+                            contexto.SaveChanges();
+
+                            MessageBox.Show("Registro excluído com sucesso!");
+                            Estilos.LimparTextBoxes(plocalizar);
+                            Estilos.LimparTextBoxes(plancamento);
+                            btnnovo.Enabled = true;
+                            btnalterar.Enabled = false;
+                            btncancelar.Enabled = false;
+                            btnsalvar.Enabled = false;
+                            btnexcluir.Enabled = false;
+                            btnlocalizar.Enabled = true;
+                            btnLocFlatLancamento.Enabled = false;
+                        }
                     }
                 }
+                else MessageBox.Show("Localize o Lançamento");
             }
-            else MessageBox.Show("Localize o Lançamento");
         }
         //
         //

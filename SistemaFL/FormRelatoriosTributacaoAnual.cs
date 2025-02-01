@@ -40,7 +40,6 @@ namespace SistemaFL
             var dados = ObterDadosRelatorio(ano.Value);
             if (dados == null) return;
 
-            // Gerar o PDF em memória
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 try
@@ -53,9 +52,17 @@ namespace SistemaFL
 
                         AdicionarTitulo(doc, ano.Value);
                         AdicionarTabela(doc, dados);
-                        AdicionarRodape(doc);
 
-                        // Fecha o documento, gravando o conteúdo no MemoryStream
+                        if (ckIRPJ.Checked)
+                        {
+                            var dadosTrimestrais = repositorio.ObterDadosRelatorioTrimestral(ano.Value);
+                            if (dadosTrimestrais != null)
+                            {
+                                AdicionarTabelaIRPJ(doc, dadosTrimestrais);
+                            }
+                        }
+
+                        AdicionarRodape(doc);
                         doc.Close();
 
                         // Salvar o MemoryStream como um arquivo temporário
@@ -65,11 +72,9 @@ namespace SistemaFL
                         // Carregar o arquivo temporário no controle AxAcroPDF para pré-visualização
                         axAcropdf1.LoadFile(tempFilePath);
 
-                        // Ajusta a visualização do PDF
                         axAcropdf1.setView("FitH");
                         axAcropdf1.setShowToolbar(false);
 
-                        // Exibe mensagem de sucesso
                         MessageBox.Show($"Pré-visualização do relatório do ano {ano} gerada com sucesso!",
                             "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -84,6 +89,7 @@ namespace SistemaFL
                 }
             }
         }
+
         private dynamic ObterDadosRelatorio(int ano)
         {
             var dados = repositorio.ObterDadosRelatorioMensal(ano).FirstOrDefault();
@@ -170,22 +176,7 @@ namespace SistemaFL
                 HorizontalAlignment = Element.ALIGN_CENTER
             };
             tabela.AddCell(celula);
-        }
-        private int? ValidarAno(string anoTexto)
-        {
-            if (string.IsNullOrWhiteSpace(anoTexto))
-            {
-                MessageBox.Show("Por favor, digite um ano.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return null;
-            }
-
-            if (!int.TryParse(anoTexto, out int ano) || ano < 1900 || ano > DateTime.Now.Year)
-            {
-                MessageBox.Show("Por favor, digite um ano válido (exemplo: 2024).", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return null;
-            }
-            return ano;
-        }
+        }      
         private void AdicionarRodape(Document doc)
         {
 
@@ -209,7 +200,29 @@ namespace SistemaFL
             // Adicionar o rodapé ao documento
             doc.Add(rodape);
         }
+        private void AdicionarTabelaIRPJ(Document doc, int ano)
+        {
+            PdfPTable tabelaIRPJ = new PdfPTable(2) { WidthPercentage = 100 };
+            tabelaIRPJ.SetWidths(new float[] { 3, 2 });
 
+            AdicionarCelulaCabecalho(tabelaIRPJ, "Trimestre");
+            AdicionarCelulaCabecalho(tabelaIRPJ, "Valor IRPJ");
+
+            string[] trimestres = { "1° Trimestre", "2° Trimestre", "3° Trimestre", "4° Trimestre" };
+
+            for (int i = 0; i < 4; i++)
+            {
+                decimal irpj = repositorio.CalcularIRPJTrimestre(ano, i + 1);
+
+                tabelaIRPJ.AddCell(new PdfPCell(new Phrase(trimestres[i])) { HorizontalAlignment = Element.ALIGN_CENTER });
+                tabelaIRPJ.AddCell(new PdfPCell(new Phrase(irpj.ToString("C2"))) { HorizontalAlignment = Element.ALIGN_RIGHT });
+            }
+
+            doc.Add(tabelaIRPJ);
+        }
+
+
+        //
         private void btnVizualizarPDF_Click_1(object sender, EventArgs e)
         {
             GerarRelatorioAnual();
@@ -252,10 +265,6 @@ namespace SistemaFL
                     "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void pbFechar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }     
         private void tTamanhotela_Tick(object sender, EventArgs e)
         {
             Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, 10);
@@ -267,16 +276,21 @@ namespace SistemaFL
                 ckCofins.Checked = true;
                 ckPis.Checked = true;
                 ckIRPJ.Checked = true;
-                ckContrAssist.Checked = true;
+                ckContrSocial.Checked = true;
+                ckIRPJ.Checked = true;
+                ckContrSocial.Checked = true;
                 ckRendimentoBruto.Checked = true;
                 ckRendimentoLiq.Checked = true;
+                
             }
             else
             {
                 ckCofins.Checked = false;
                 ckPis.Checked = false;
                 ckIRPJ.Checked = false;
-                ckContrAssist.Checked = false;
+                ckContrSocial.Checked = false;
+                ckIRPJ.Checked = false;
+                ckContrSocial.Checked = false;
                 ckRendimentoBruto.Checked = false;
                 ckRendimentoLiq.Checked = false;
             }
@@ -286,6 +300,21 @@ namespace SistemaFL
         {
             this.Close();
         }
-   
+        private int? ValidarAno(string anoTexto)
+        {
+            if (string.IsNullOrWhiteSpace(anoTexto))
+            {
+                MessageBox.Show("Por favor, digite um ano.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
+            }
+
+            if (!int.TryParse(anoTexto, out int ano) || ano < 1900 || ano > DateTime.Now.Year)
+            {
+                MessageBox.Show("Por favor, digite um ano válido (exemplo: 2024).", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
+            }
+            return ano;
+        }
+
     }
 }

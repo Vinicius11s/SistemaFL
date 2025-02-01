@@ -71,55 +71,69 @@ namespace Infraestrutura.Repositorio
 
         }
 
-        public IEnumerable<object> ObterDadosRelatorioTrimestral(int ano)
+       
+        public decimal CalcularIRPJTrimestre(int ano, int trimestre)
         {
+            decimal valorA = ObterRendimentoTrimestral(ano, trimestre) * 0.32m;
 
+            // Soma os valores de "OutrosRecebimentos" e "GanhoDeCapital" ao valorA
+            valorA += ObterOutrosRecebimentosEGanhoDeCapital(ano, trimestre);
 
-            //Soma Todos Lancamentos feitos por Trimestre (exceto dividendos)
-            var PrimeiroTrimestre = SomaLancamentosPorTrimestre(ano);
-            var SegundoTrimestre = SomaLancamentosPorTrimestre(ano);
-            var TerceiroTrimestre = SomaLancamentosPorTrimestre(ano);
-            var QuartoTrimestre = SomaLancamentosPorTrimestre(ano);
+            decimal valorB = valorA * 0.15m;
+            decimal valorC = valorA > 20000 ? valorA - 60000 : 0;
+            decimal valorD = valorC > 0 ? valorC * 0.10m : 0;
+            decimal valorE = valorB + valorD;
 
-            var Registros = new List<object>
-            {
-                new
-                {
-                    Trimestre1 = PrimeiroTrimestre,
-                    Trimestre2 = SegundoTrimestre,
-                    Trimestre3 = TerceiroTrimestre,
-                    Trimestre4 = QuartoTrimestre,                  
-                },
-             };
-            return Registros;
+            // Subtrai o valor retido na fonte
+            valorE -= ObterValorRetidoNaFonte(ano, trimestre);
+
+            return valorE > 0 ? valorE : 0; // Evita valores negativos
         }
-        public decimal SomaLancamentosPorTrimestre(int ano)
+        public decimal ObterRendimentoTrimestral(int ano, int trimestre)
         {
             decimal totalTrimestral = 0;
 
-            // Agrupar os meses por trimestre
-            var trimestres = new[]
-            {
-                new { Meses = new[] { 1, 2, 3 }, Trimestre = 1 },
-                new { Meses = new[] { 4, 5, 6 }, Trimestre = 2 },
-                new { Meses = new[] { 7, 8, 9 }, Trimestre = 3 },
-                new { Meses = new[] { 10, 11, 12 }, Trimestre = 4 }
-            };
+            // Determinar os meses correspondentes ao trimestre
+            int mesInicial = (trimestre - 1) * 3 + 1; // Exemplo: 1° trimestre → mês 1, 2° trimestre → mês 4, etc.
+            int mesFinal = mesInicial + 2; // Cada trimestre tem 3 meses
 
-            foreach (var trimestre in trimestres)
-            {
-                // Calculando a soma para o trimestre
-                decimal somaTrimestre = _context.Lancamento
-                    .Where(l => trimestre.Meses.Contains(l.DataPagamento.Month) && l.DataPagamento.Year == ano)
-                    .Sum(l => (l.ValorAluguel ?? 0.00M) +
-                              (l.AluguelVenceslau ?? 0.00M) +
-                              (l.ValorFundoReserva ?? 0.00M));
-
-                totalTrimestral += somaTrimestre; // Adiciona a soma do trimestre ao total
-            }
+            totalTrimestral = _context.Lancamento
+                .Where(l => l.DataPagamento.Month >= mesInicial && l.DataPagamento.Month <= mesFinal && l.DataPagamento.Year == ano)
+                .Sum(l => (l.ValorAluguel ?? 0.00M) +
+                          (l.AluguelVenceslau ?? 0.00M) +
+                          (l.ValorFundoReserva ?? 0.00M));
 
             return totalTrimestral;
         }
+        public decimal ObterOutrosRecebimentosEGanhoDeCapital(int ano, int trimestre)
+        {
+            decimal totalTrimestral = 0;
+
+            int mesInicial = (trimestre - 1) * 3 + 1;
+            int mesFinal = mesInicial + 2; 
+
+            totalTrimestral = _context.Lancamento
+                .Where(l => l.DataPagamento.Month >= mesInicial && l.DataPagamento.Month <= mesFinal && l.DataPagamento.Year == ano)
+                .Sum(l => (l.OutrosRecebimentos ?? 0.00M) +
+                          (l.GanhoDeCapital ?? 0.00M));
+
+            return totalTrimestral;
+        }
+        public decimal ObterValorRetidoNaFonte(int ano, int trimestre)
+        {
+            decimal totalTrimestral = 0;
+
+            int mesInicial = (trimestre - 1) * 3 + 1;
+            int mesFinal = mesInicial + 2;
+
+            totalTrimestral = _context.Lancamento
+                .Where(l => l.DataPagamento.Month >= mesInicial && l.DataPagamento.Month <= mesFinal && l.DataPagamento.Year == ano)
+                .Sum(l => (l.ValorRetidoNaFonte ?? 0.00M));
+
+            return totalTrimestral;
+        }
+
+
     }
 }
 

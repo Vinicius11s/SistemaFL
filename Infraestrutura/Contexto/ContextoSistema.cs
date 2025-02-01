@@ -20,6 +20,7 @@ namespace Infraestrutura.Contexto
         public DbSet<Flat> Flat { get; set; }
         public DbSet<Lancamento> Lancamento { get; set; }
         public DbSet<Ocorrencia> Ocorrencia { get; set; }
+        public DbSet<OutrosLancamentos> OutrosLancamentos { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
