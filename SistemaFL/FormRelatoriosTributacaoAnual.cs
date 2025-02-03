@@ -55,12 +55,21 @@ namespace SistemaFL
 
                         if (ckIRPJ.Checked)
                         {
-                            var dadosTrimestrais = repositorio.ObterDadosRelatorioTrimestral(ano.Value);
-                            if (dadosTrimestrais != null)
+                            var dadosTrimestrais = new List<decimal>();
+
+                            for (int trimestre = 1; trimestre <= 4; trimestre++)
                             {
-                                AdicionarTabelaIRPJ(doc, dadosTrimestrais);
+                                decimal valor = repositorio.CalcularIRPJTrimestre(ano.Value, trimestre);
+                                dadosTrimestrais.Add(valor);
+                            }
+
+                            if (dadosTrimestrais.Any())
+                            {
+                                AdicionarTabelaIRPJ(doc, ano.Value);
                             }
                         }
+
+
 
                         AdicionarRodape(doc);
                         doc.Close();
@@ -220,8 +229,7 @@ namespace SistemaFL
 
             doc.Add(tabelaIRPJ);
         }
-
-
+        //
         //
         private void btnVizualizarPDF_Click_1(object sender, EventArgs e)
         {

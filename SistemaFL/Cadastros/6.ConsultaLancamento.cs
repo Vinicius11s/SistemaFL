@@ -17,11 +17,13 @@ namespace SistemaFL
     public partial class FrmConsultaLancamento : Form
     {
         private ILancamentoRepositorio repositorio;
+        private IOutrosLancamentosRepos outrosLancamentos;
         public int id;
-        public FrmConsultaLancamento(ILancamentoRepositorio repositorio)
+        public FrmConsultaLancamento(ILancamentoRepositorio repositorio, IOutrosLancamentosRepos outrosLancamentos)
         {
             InitializeComponent();
             this.repositorio = repositorio;
+            this.outrosLancamentos = outrosLancamentos;
 
             tTamanhotela.Tick += tTamanhotela_Tick;
             tTamanhotela.Start();
@@ -34,37 +36,60 @@ namespace SistemaFL
         {
             if (txtdescricao.Text == "Digite o número do mês" || txtdescricao.Text == "")
             {
-                var lista = repositorio.Listar(e => true);
-                dgdadoslancamento.DataSource = lista;
+                if (ckOutrosLanc.Checked)
+                {
+                    var outros = outrosLancamentos.Listar(e => true);
+                    dgdadoslancamento.DataSource = outros;
+                }
+                else
+                {
+                    var lista = repositorio.Listar(e => true);
+                    dgdadoslancamento.DataSource = lista;
+                }               
             }
             else
             {
                 if (int.TryParse(txtdescricao.Text, out int mes))
                 {
                     mes = int.Parse(txtdescricao.Text);
-                    if (mes > 0 && mes <= 12)
+                    if (ckOutrosLanc.Checked)
                     {
-                        var lista = repositorio.Listar(l => l.DataPagamento.Month == mes && l.DataPagamento.Year == DateTime.Now.Year);
-                        dgdadoslancamento.DataSource = lista;
+                        if (mes > 0 && mes <= 12)
+                        {
+                            var outros = outrosLancamentos.Listar(l => l.DataLancamento.Month == mes && l.DataLancamento.Year == DateTime.Now.Year);
+                            dgdadoslancamento.DataSource = outros;
 
+                        }
+                        else MessageBox.Show("Digite um mês válido.");
                     }
-                    else MessageBox.Show("Digite um mês válido.");
+                    else
+                    {
+                        if (mes > 0 && mes <= 12)
+                        {
+                            var lista = repositorio.Listar(l => l.DataPagamento.Month == mes && l.DataPagamento.Year == DateTime.Now.Year);
+                            dgdadoslancamento.DataSource = lista;
+
+                            AlterarEstilosCabecalho(dgdadoslancamento);
+                            AlterarEstilosCelulas(dgdadoslancamento);
+
+                            foreach (DataGridViewRow row in dgdadoslancamento.Rows)
+                            {
+                                AplicarFormatacaoLinha(row);
+                                dgdadoslancamento.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                            }
+                            if (dgdadoslancamento.Columns.Contains("DescricaoFlat"))
+                            {
+                                dgdadoslancamento.Columns["DescricaoFlat"].DisplayIndex = 0;
+                            }
+                        }
+                        else MessageBox.Show("Digite um mês válido.");
+                    }
+                    
                 }
                 else MessageBox.Show("Digite apenas numeros.");
             }
 
-            AlterarEstilosCabecalho(dgdadoslancamento);
-            AlterarEstilosCelulas(dgdadoslancamento);
-
-            foreach (DataGridViewRow row in dgdadoslancamento.Rows)
-            {
-                AplicarFormatacaoLinha(row);
-                dgdadoslancamento.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            }
-            if (dgdadoslancamento.Columns.Contains("DescricaoFlat"))
-            {
-                dgdadoslancamento.Columns["DescricaoFlat"].DisplayIndex = 0;
-            }
+           
         }
         private void AlterarEstilosCabecalho(DataGridView grid)
         {

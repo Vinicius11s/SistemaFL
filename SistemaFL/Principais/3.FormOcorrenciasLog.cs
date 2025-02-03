@@ -19,13 +19,16 @@ namespace SistemaFL
         private IFlatRepositorio flatRepositorio;
         private IOcorrenciaRepositorio repositorio;
         private ILancamentoRepositorio lancamentoRepositorio;
+        private IOutrosLancamentosRepos outrosLancRepositorio;
         public int id;
-        public FrmConsultaOcorrencia(IOcorrenciaRepositorio repositorio, ILancamentoRepositorio lancamentoRepositorio, IFlatRepositorio flatRepositorio)
+        public FrmConsultaOcorrencia(IOcorrenciaRepositorio repositorio, ILancamentoRepositorio lancamentoRepositorio,
+            IFlatRepositorio flatRepositorio, IOutrosLancamentosRepos outrosLancRepositorio)
         {
             InitializeComponent();
             this.repositorio = repositorio;
             this.lancamentoRepositorio = lancamentoRepositorio;
             this.flatRepositorio = flatRepositorio;
+            this.outrosLancRepositorio = outrosLancRepositorio;
 
             tTamanhotela.Tick += tTamanhotela_Tick;
             tTamanhotela.Start();
@@ -36,7 +39,7 @@ namespace SistemaFL
             dgdadosocorrencias.ReadOnly = true;
             CarregarDados();
         }
-        
+
         //
         //DataGrid Últimos Lançamentos
         private void CarregarDados()
@@ -82,6 +85,8 @@ namespace SistemaFL
             grid.Columns["Flat"].Visible = false;
             grid.Columns["IdUsuario"].Visible = false;
             grid.Columns["Usuario"].Visible = false;
+            grid.Columns["idOutrosLancamentos"].Visible = false;
+            grid.Columns["OutrosLancamentos"].Visible = false;
 
             grid.Columns["oco_DataLancamentoAntigo"].HeaderText = "DATA MÊS ANTERIOR";
             grid.Columns["oco_valorAntigo"].HeaderText = "VALOR MÊS ANTERIOR";
@@ -122,6 +127,18 @@ namespace SistemaFL
         private void tTamanhotela_Tick(object sender, EventArgs e)
         {
             Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, 10);
+        }
+
+        private void btnlocalizar_Click(object sender, EventArgs e)
+        {
+            if (ckOutrosLanc.Checked)
+            {
+                int anoAtual = DateTime.Now.Year;
+                var lista = outrosLancRepositorio.ObterDadosOutrosLancamentos(anoAtual);
+                dgdadosocorrencias.DataSource = lista;
+            }
+
+
         }
     }
 }

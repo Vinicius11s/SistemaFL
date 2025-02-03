@@ -23,6 +23,9 @@ namespace Entidades
         public int idLancamento { get; set; }
         public Lancamento? Lancamento { get; set; }
 
+        public int? idOutrosLancamentos { get; set; }
+        public OutrosLancamentos? OutrosLancamentos { get; set; }
+
         public int idFlat { get; set; }
         public Flat? Flat { get; set; }
         public string? DescricaoFlat { get; set; }

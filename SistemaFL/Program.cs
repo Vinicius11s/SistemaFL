@@ -60,6 +60,7 @@ namespace SistemaFL
             services.AddScoped<ILancamentoRepositorio, LancamentoRepositorio>();
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
             services.AddScoped<IOcorrenciaRepositorio, OcorrenciaRepositorio>();
+            services.AddScoped<IOutrosLancamentosRepos, OutrosLancamentosRepositorio>();
 
         }
     }

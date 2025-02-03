@@ -36,6 +36,7 @@
             dgdadoslancamento = new DataGridView();
             pbFechar = new PictureBox();
             tTamanhotela = new System.Windows.Forms.Timer(components);
+            ckOutrosLanc = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)dgdadoslancamento).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
             SuspendLayout();
@@ -82,11 +83,18 @@
             tTamanhotela.Interval = 1;
             tTamanhotela.Tick += tTamanhotela_Tick;
             // 
+            // ckOutrosLanc
+            // 
+            resources.ApplyResources(ckOutrosLanc, "ckOutrosLanc");
+            ckOutrosLanc.Name = "ckOutrosLanc";
+            ckOutrosLanc.UseVisualStyleBackColor = true;
+            // 
             // FrmConsultaLancamento
             // 
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
+            Controls.Add(ckOutrosLanc);
             Controls.Add(pbFechar);
             Controls.Add(btnlocalizar);
             Controls.Add(txtdescricao);
@@ -108,5 +116,6 @@
         private DataGridView dgdadoslancamento;
         private PictureBox pbFechar;
         private System.Windows.Forms.Timer tTamanhotela;
+        private CheckBox ckOutrosLanc;
     }
 }

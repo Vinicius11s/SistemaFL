@@ -72,6 +72,8 @@
             label10 = new Label();
             txtRetidoFonte = new TextBox();
             pOutrosLancamentos = new Panel();
+            label11 = new Label();
+            txtidOutrosLanc = new TextBox();
             pbotoes.SuspendLayout();
             plocalizar.SuspendLayout();
             plancamento.SuspendLayout();
@@ -487,6 +489,7 @@
             ckOutrosLancamentos.TabIndex = 53;
             ckOutrosLancamentos.Text = "Outros Lançamentos";
             ckOutrosLancamentos.UseVisualStyleBackColor = true;
+            ckOutrosLancamentos.CheckedChanged += ckOutrosLancamentos_CheckedChanged;
             // 
             // label8
             // 
@@ -555,12 +558,36 @@
             pOutrosLancamentos.Size = new Size(226, 220);
             pOutrosLancamentos.TabIndex = 60;
             // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label11.Location = new Point(924, 25);
+            label11.Name = "label11";
+            label11.Size = new Size(70, 20);
+            label11.TabIndex = 61;
+            label11.Text = "Id Outros";
+            label11.Visible = false;
+            // 
+            // txtidOutrosLanc
+            // 
+            txtidOutrosLanc.Enabled = false;
+            txtidOutrosLanc.Location = new Point(935, 46);
+            txtidOutrosLanc.Margin = new Padding(3, 4, 3, 4);
+            txtidOutrosLanc.Name = "txtidOutrosLanc";
+            txtidOutrosLanc.ReadOnly = true;
+            txtidOutrosLanc.Size = new Size(28, 27);
+            txtidOutrosLanc.TabIndex = 62;
+            txtidOutrosLanc.Visible = false;
+            // 
             // FrmCadLancamento
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1087, 580);
+            Controls.Add(label11);
+            Controls.Add(txtidOutrosLanc);
             Controls.Add(pOutrosLancamentos);
             Controls.Add(ckOutrosLancamentos);
             Controls.Add(txtid);
@@ -636,5 +663,7 @@
         private Label label10;
         private TextBox txtRetidoFonte;
         private Panel pOutrosLancamentos;
+        private Label label11;
+        private TextBox txtidOutrosLanc;
     }
 }

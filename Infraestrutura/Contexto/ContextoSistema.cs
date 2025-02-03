@@ -27,7 +27,7 @@ namespace Infraestrutura.Contexto
         {
             //Server Master = DESKTOP-6RMV3GQ
             //Server Local = DESKTOP-I32AP0S
-            var stringConexao = @"Server=DESKTOP-6RMV3GQ;Database=DBSISFLATS04;Integrated Security=True;TrustServerCertificate=True;";
+            var stringConexao = @"Server=DESKTOP-6RMV3GQ;Database=DBSISFLATS06;Integrated Security=True;TrustServerCertificate=True;";
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(stringConexao);
@@ -103,6 +103,21 @@ namespace Infraestrutura.Contexto
                     .HasForeignKey(o => o.idFlat)
                     .OnDelete(DeleteBehavior.NoAction);
             });
+
+            modelBuilder.Entity<OutrosLancamentos>(o =>
+            {
+                o.Property(o => o.DataLancamento).IsRequired();
+                o.Property(o => o.ValorRetidoNaFonte).HasColumnType("decimal(18,2)").IsRequired();
+                o.Property(o => o.GanhoDeCapital).HasColumnType("decimal(18,2)").IsRequired();
+                o.Property(o => o.OutrosRecebimentos).HasColumnType("decimal(18,2)").IsRequired();
+
+                // Relacionamento com Ocorrencias
+                o.HasMany(o => o.Ocorrencias)
+                    .WithOne(o => o.OutrosLancamentos)
+                    .HasForeignKey(o => o.idOutrosLancamentos)
+                    .OnDelete(DeleteBehavior.NoAction);
+            });
+
             modelBuilder.Entity<Usuario>(u =>
             {
                 u.Property(u => u.Login).IsRequired().HasMaxLength(50);
@@ -116,20 +131,19 @@ namespace Infraestrutura.Contexto
                     .OnDelete(DeleteBehavior.NoAction);
             });
         }
-        private void CriaTrigger()
+        private void CriaTriggerLancamento()
         {
-            /*CREATE TRIGGER trg_InsertedNewLancamento
+        /*ALTER TRIGGER trg_InsertedUpdatedLancamento
             ON Lancamento
-            AFTER INSERT
+            AFTER INSERT, UPDATE
             AS
             BEGIN
-                DECLARE @dataAtual DATETIME = GETDATE();
-
+                -- Tratamento para INSERT
                 INSERT INTO ocorrencia (
                     oco_ValorAntigo,
                     oco_ValorAlteracao,
                     oco_DataAlteracao,
-                    oco_DataLancamentoAntigo, -- Nova coluna adicionada
+                    oco_DataLancamentoAntigo,
                     idLancamento,
                     idFlat,
                     oco_Tabela,
@@ -147,8 +161,8 @@ namespace Infraestrutura.Contexto
                         WHEN i.TipoPagamento = 'Fundo de Reserva' THEN i.ValorFundoReserva
                         ELSE 0
                     END AS ValorAlteracao,
-                    @dataAtual,
-                    ult.DataLancamentoAntigo, -- Captura a data do último lançamento
+                    i.DataPagamento,  -- Usa a data informada
+                    ult.DataLancamentoAntigo,
                     i.id,
                     i.idFlat,
                     'Lancamento',
@@ -158,7 +172,7 @@ namespace Infraestrutura.Contexto
                     u.Login AS DescricaoUsuario
                 FROM INSERTED i
                 JOIN Flat f ON f.id = i.idFlat
-                LEFT JOIN Usuario u ON u.id = i.IdUsuario  -- Busca o nome do usuário
+                LEFT JOIN Usuario u ON u.id = i.IdUsuario
                 OUTER APPLY (
                     SELECT TOP 1
                         CASE 
@@ -168,16 +182,62 @@ namespace Infraestrutura.Contexto
                             WHEN i.TipoPagamento = 'Fundo de Reserva' THEN l.ValorFundoReserva
                             ELSE 0
                         END AS ValorAntigo,
-                        l.DataPagamento AS DataLancamentoAntigo -- Captura a data do último lançamento
+                        l.DataPagamento AS DataLancamentoAntigo
                     FROM lancamento l
                     WHERE l.idFlat = i.idFlat
                         AND l.id < i.id
                     ORDER BY l.DataPagamento DESC
                 ) ult;
+
+                -- Tratamento para UPDATE
+                INSERT INTO ocorrencia (
+                    oco_ValorAntigo,
+                    oco_ValorAlteracao,
+                    oco_DataAlteracao,
+                    oco_DataLancamentoAntigo,
+                    idLancamento,
+                    idFlat,
+                    oco_Tabela,
+                    oco_Descricao,
+                    DescricaoFlat,
+                    IdUsuario,
+                    DescricaoUsuario
+                )
+                SELECT 
+                    CASE 
+                        WHEN d.TipoPagamento = 'Aluguel Fixo' THEN d.ValorAluguel
+                        WHEN d.TipoPagamento = 'Dividendos' THEN d.ValorDividendos
+                        WHEN d.TipoPagamento = 'Aluguel Fixo + Dividendos' THEN d.ValorAluguel + d.ValorDividendos
+                        WHEN d.TipoPagamento = 'Fundo de Reserva' THEN d.ValorFundoReserva
+                        ELSE 0
+                    END AS ValorAntigo,
+                    CASE 
+                        WHEN i.TipoPagamento = 'Aluguel Fixo' THEN i.ValorAluguel
+                        WHEN i.TipoPagamento = 'Dividendos' THEN i.ValorDividendos
+                        WHEN i.TipoPagamento = 'Aluguel Fixo + Dividendos' THEN i.ValorAluguel + i.ValorDividendos
+                        WHEN i.TipoPagamento = 'Fundo de Reserva' THEN i.ValorFundoReserva
+                        ELSE 0
+                    END AS ValorAlteracao,
+                    i.DataPagamento,  -- Usa a data informada
+                    d.DataPagamento AS DataLancamentoAntigo,
+                    i.id,
+                    i.idFlat,
+                    'Alteração',  -- Agora a coluna recebe "Alteração"
+                    'Alteração',
+                    f.Descricao AS DescricaoFlat,
+                    i.IdUsuario,
+                    u.Login AS DescricaoUsuario
+                FROM INSERTED i
+                JOIN DELETED d ON i.id = d.id
+                JOIN Flat f ON f.id = i.idFlat
+                LEFT JOIN Usuario u ON u.id = i.IdUsuario
+                WHERE 
+                    (d.ValorAluguel <> i.ValorAluguel OR
+                        d.ValorDividendos <> i.ValorDividendos OR
+                        d.ValorFundoReserva <> i.ValorFundoReserva OR
+                        d.TipoPagamento <> i.TipoPagamento);
             END;
-
-                */
-
+            */
         }
     }
 }

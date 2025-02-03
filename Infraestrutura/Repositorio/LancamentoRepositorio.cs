@@ -60,35 +60,6 @@ namespace Infraestrutura.Repositorio
              };
             return Registros;
         }
-        public decimal SomaLancamentosPorMesExcetoDividendos(int mes, int ano)
-        {
-            decimal total = _context.Lancamento
-                .Where(l => l.DataPagamento.Month == mes && l.DataPagamento.Year == ano )
-                .Sum(l => (l.ValorAluguel ?? 0.00M) +
-                          (l.AluguelVenceslau ?? 0.00M) +
-                          (l.ValorFundoReserva ?? 0.00M));
-            return total;
-
-        }
-
-       
-        public decimal CalcularIRPJTrimestre(int ano, int trimestre)
-        {
-            decimal valorA = ObterRendimentoTrimestral(ano, trimestre) * 0.32m;
-
-            // Soma os valores de "OutrosRecebimentos" e "GanhoDeCapital" ao valorA
-            valorA += ObterOutrosRecebimentosEGanhoDeCapital(ano, trimestre);
-
-            decimal valorB = valorA * 0.15m;
-            decimal valorC = valorA > 20000 ? valorA - 60000 : 0;
-            decimal valorD = valorC > 0 ? valorC * 0.10m : 0;
-            decimal valorE = valorB + valorD;
-
-            // Subtrai o valor retido na fonte
-            valorE -= ObterValorRetidoNaFonte(ano, trimestre);
-
-            return valorE > 0 ? valorE : 0; // Evita valores negativos
-        }
         public decimal ObterRendimentoTrimestral(int ano, int trimestre)
         {
             decimal totalTrimestral = 0;
@@ -105,6 +76,33 @@ namespace Infraestrutura.Repositorio
 
             return totalTrimestral;
         }
+        public decimal SomaLancamentosPorMesExcetoDividendos(int mes, int ano)
+        {
+            decimal total = _context.Lancamento
+                .Where(l => l.DataPagamento.Month == mes && l.DataPagamento.Year == ano )
+                .Sum(l => (l.ValorAluguel ?? 0.00M) +
+                          (l.AluguelVenceslau ?? 0.00M) +
+                          (l.ValorFundoReserva ?? 0.00M));
+            return total;
+
+        }   
+        public decimal CalcularIRPJTrimestre(int ano, int trimestre)
+        {
+            decimal valorA = ObterRendimentoTrimestral(ano, trimestre) * 0.32m;
+
+            // Soma os valores de "OutrosRecebimentos" e "GanhoDeCapital" ao valorA
+            valorA += ObterOutrosRecebimentosEGanhoDeCapital(ano, trimestre);
+
+            decimal valorB = valorA * 0.15m;
+            decimal valorC = valorA > 20000 ? valorA - 60000 : 0;
+            decimal valorD = valorC > 0 ? valorC * 0.10m : 0;
+            decimal valorE = valorB + valorD;
+
+            // Subtrai o valor retido na fonte
+            valorE -= ObterValorRetidoNaFonte(ano, trimestre);
+
+            return valorE > 0 ? valorE : 0; // Evita valores negativos
+        }     
         public decimal ObterOutrosRecebimentosEGanhoDeCapital(int ano, int trimestre)
         {
             decimal totalTrimestral = 0;
@@ -112,8 +110,8 @@ namespace Infraestrutura.Repositorio
             int mesInicial = (trimestre - 1) * 3 + 1;
             int mesFinal = mesInicial + 2; 
 
-            totalTrimestral = _context.Lancamento
-                .Where(l => l.DataPagamento.Month >= mesInicial && l.DataPagamento.Month <= mesFinal && l.DataPagamento.Year == ano)
+            totalTrimestral = _context.OutrosLancamentos
+                .Where(l => l.DataLancamento.Month >= mesInicial && l.DataLancamento.Month <= mesFinal && l.DataLancamento.Year == ano)
                 .Sum(l => (l.OutrosRecebimentos ?? 0.00M) +
                           (l.GanhoDeCapital ?? 0.00M));
 
@@ -126,8 +124,8 @@ namespace Infraestrutura.Repositorio
             int mesInicial = (trimestre - 1) * 3 + 1;
             int mesFinal = mesInicial + 2;
 
-            totalTrimestral = _context.Lancamento
-                .Where(l => l.DataPagamento.Month >= mesInicial && l.DataPagamento.Month <= mesFinal && l.DataPagamento.Year == ano)
+            totalTrimestral = _context.OutrosLancamentos
+                .Where(l => l.DataLancamento.Month >= mesInicial && l.DataLancamento.Month <= mesFinal && l.DataLancamento.Year == ano)
                 .Sum(l => (l.ValorRetidoNaFonte ?? 0.00M));
 
             return totalTrimestral;
