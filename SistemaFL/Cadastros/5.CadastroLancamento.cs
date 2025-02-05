@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using InfraEstrutura.Repositorio;
+using System.Net.Http.Headers;
 
 namespace SistemaFL
 {
@@ -25,15 +26,15 @@ namespace SistemaFL
     {
         private ILancamentoRepositorio repositorio;
         private IFlatRepositorio flatRepositorio;
-        private IOutrosLancamentosRepos outrosLancamentosRepos;
+        private IOutrosLancamentosRepos outrosRepositorio;
         private ContextoSistema _context;
-
-        public FrmCadLancamento(ILancamentoRepositorio repositorio, IFlatRepositorio flatRepositorio, IOutrosLancamentosRepos outrosLancamentosRepos, ContextoSistema context)
+        
+        public FrmCadLancamento(ILancamentoRepositorio repositorio, IFlatRepositorio flatRepositorio, IOutrosLancamentosRepos outrosRepositorio, ContextoSistema context)
         {
             InitializeComponent();
             this.repositorio = repositorio;
             this.flatRepositorio = flatRepositorio;
-            this.outrosLancamentosRepos = outrosLancamentosRepos;
+            this.outrosRepositorio = outrosRepositorio;
             this._context = context;
 
             tTamanhotela.Tick += tTamanhotela_Tick;
@@ -58,43 +59,28 @@ namespace SistemaFL
             txtValorDiv.Enabled = false;
             txtValorFunReserva.Enabled = false;
 
+            ckOutrosLancamentos.Enabled = false;
             pOutrosLancamentos.Enabled = false;
         }
         //
         //CRUD
         private void btnnovo_Click(object sender, EventArgs e)
         {
-            if (ckOutrosLancamentos.Checked)
-            {
-                Estilos.LimparTextBoxes(plocalizar);
-                Estilos.LimparTextBoxes(plancamento);
-                btnnovo.Enabled = false;
-                btnalterar.Enabled = false;
-                btncancelar.Enabled = true;
-                btnsalvar.Enabled = true;
-                btnexcluir.Enabled = true;
-                btnlocalizar.Enabled = false;
-                btnLocFlatLancamento.Enabled = true;
+            ckOutrosLancamentos.Enabled = true;
 
-                plocalizar.Enabled = false;
-                plancamento.Enabled = false;
-                pOutrosLancamentos.Enabled = true;
-            }
-            else
-            {
-                Estilos.LimparTextBoxes(plocalizar);
-                Estilos.LimparTextBoxes(plancamento);
-                btnnovo.Enabled = false;
-                btnalterar.Enabled = false;
-                btncancelar.Enabled = true;
-                btnsalvar.Enabled = true;
-                btnexcluir.Enabled = true;
-                btnlocalizar.Enabled = false;
-                btnLocFlatLancamento.Enabled = true;
+            Estilos.LimparTextBoxes(plocalizar);
+            Estilos.LimparTextBoxes(plancamento);
+            btnnovo.Enabled = false;
+            btnalterar.Enabled = false;
+            btncancelar.Enabled = true;
+            btnsalvar.Enabled = true;
+            btnexcluir.Enabled = true;
+            btnlocalizar.Enabled = false;
+            btnLocFlatLancamento.Enabled = true;
 
-                pOutrosLancamentos.Enabled = false;
-            }
-
+            plocalizar.Enabled = false;
+            plancamento.Enabled = false;
+            pOutrosLancamentos.Enabled = false;
 
         }
         private void btnalterar_Click(object sender, EventArgs e)
@@ -139,96 +125,112 @@ namespace SistemaFL
                 else MessageBox.Show("Localize o Lançamento");
             }
         }
+        bool avisoMostrado = false;
+        bool lancamentoExistente = false;
         private void btnsalvar_Click(object sender, EventArgs e)
         {
-            bool lancamentoExistenteMes = false;
-            try
+            avisoMostrado = false;
+            lancamentoExistente = false;
+
+            if (ckOutrosLancamentos.Checked)
             {
-                if (ckOutrosLancamentos.Checked)
+                if (decimal.TryParse(txtOutrosReceb.Text, out decimal aluguel) && aluguel > 0 ||
+                     decimal.TryParse(txtGanhoCapital.Text, out decimal fundoReserva) && fundoReserva > 0 ||
+                     decimal.TryParse(txtRetidoFonte.Text, out decimal dividendos) && dividendos > 0)
                 {
-                    if (txtidOutrosLanc.Text != String.Empty)
+                    OutrosLancamentos outrosLancamentos = carregaPropriedadesOutrosLancamentos();
+
+                    var mesSelecionado = dtdataLancamento.Value.Month;
+                    var anoSelecionado = dtdataLancamento.Value.Year;
+
+                    var lancamentoExistente = outrosRepositorio.Recuperar(l =>
+                           l.DataLancamento.Month == mesSelecionado &&
+                           l.DataLancamento.Year == anoSelecionado);
+
+                    if (lancamentoExistente != null)
                     {
-                        OutrosLancamentos outros = carregaPropriedadesOutrosLancamentos();
-
-                        if (outros.id == 0)
+                        MessageBox.Show("Já existe um lançamento neste mês!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        avisoMostrado = true;
+                    }
+                    else
+                    {
+                        if (outrosLancamentos.id == 0)
                         {
-                            if (int.TryParse(txtidOutrosLanc.Text, out int idOutroLanc))
-                            {
-                                var mesSelecionado = dtdataLancamento.Value.Month;
-                                var anoelecionado = dtdataLancamento.Value.Year;
-
-                                var lancamentoExistente = outrosLancamentosRepos.Recuperar(l => l.DataLancamento.Month == dtdataLancamento.Value.Month
-                                    && l.DataLancamento.Month == mesSelecionado
-                                    && l.DataLancamento.Year == anoelecionado);
-
-                                if (lancamentoExistente != null)
-                                {
-                                    MessageBox.Show("Já existe um lançamento neste mês!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    lancamentoExistenteMes = true; // Retorna sem fazer a inserção
-                                }
-                                else outrosLancamentosRepos.Inserir(outros);
-                            }
+                            outrosRepositorio.Inserir(outrosLancamentos);
                         }
-                        else outrosLancamentosRepos.Alterar(outros);
+                        else
+                        {
+                            outrosRepositorio.Alterar(outrosLancamentos);
+                        }
                     }
                 }
-                else
-                {
-                    if (txtidFlat.Text != String.Empty)
-                    {
-                        Lancamento lancamento = carregaPropriedades();
-
-                        if (lancamento.id == 0)
-                        {
-                            if (int.TryParse(txtidFlat.Text, out int idFlat))
-                            {
-                                var mesSelecionado = dtdataLancamento.Value.Month;
-                                var anoelecionado = dtdataLancamento.Value.Year;
-
-                                var lancamentoExistente = repositorio.Recuperar(l => l.idFlat == idFlat
-                                    && l.DataPagamento.Month == mesSelecionado
-                                    && l.DataPagamento.Year == anoelecionado);
-
-                                if (lancamentoExistente != null)
-                                {
-                                    MessageBox.Show("Já existe um lançamento para este flat neste mês!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    lancamentoExistenteMes = true; // Retorna sem fazer a inserção
-                                }
-                                else repositorio.Inserir(lancamento);
-                            }
-                        }
-                        else repositorio.Alterar(lancamento);
-                    }
-
-                    if (lancamentoExistenteMes == false)
-                    {
-                        Program.serviceProvider.
-                                                GetRequiredService<ContextoSistema>().SaveChanges();
-                        MessageBox.Show("Salvo com sucesso");
-
-                        Estilos.LimparTextBoxes(plocalizar);
-                        Estilos.LimparTextBoxes(plancamento);
-                        btnnovo.Enabled = true;
-                        btnlocalizar.Enabled = true;
-                        btnalterar.Enabled = false;
-                        btncancelar.Enabled = false;
-                        btnexcluir.Enabled = false;
-                        btnsalvar.Enabled = false;
-
-                        txtvaloraluguel.Enabled = false;
-                        txtValorFunReserva.Enabled = false;
-                        txtValorDiv.Enabled = false;
-                    }
-                }
+                else MessageBox.Show("Preencha ao menos 1 campo com valores!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            catch (Exception)
+            else
             {
-                if (txtTipoInvestimento.Text == "Aluguel + Dividendos")
+                if (!string.IsNullOrWhiteSpace(txtidFlat.Text))
                 {
-                    MessageBox.Show("Erro ao salvar, Flat do Tipo Aluguel + Dividendos, Informe valores aos campos");
+                    Lancamento lancamento = carregaPropriedades();
+
+                    if (lancamento.id == 0)
+                    {
+                        if (int.TryParse(txtidFlat.Text, out int idFlat))
+                        {
+                            var mesSelecionado = dtdataLancamento.Value.Month;
+                            var anoSelecionado = dtdataLancamento.Value.Year;
+
+                            var lancamentoExistente = repositorio.Recuperar(l =>
+                                l.idFlat == idFlat &&
+                                l.DataPagamento.Month == mesSelecionado &&
+                                l.DataPagamento.Year == anoSelecionado);
+
+                            if (lancamentoExistente != null && lancamentoExistente.id != lancamento.id)
+                            {
+                                MessageBox.Show("Já existe um lançamento para este flat neste mês!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                avisoMostrado = true;
+                            }
+                            else
+                            {
+                                if (lancamento.id == 0)
+                                {
+                                    repositorio.Inserir(lancamento);
+                                }
+                                else
+                                {
+                                    repositorio.Alterar(lancamento);
+                                }
+                            }
+                        }
+                    }
                 }
-                MessageBox.Show("Erro ao salvar");
-                throw;
+
+            }
+            if (avisoMostrado == false)
+            {
+                // Se não houver erro, salva as alterações
+                Program.serviceProvider.GetRequiredService<ContextoSistema>().SaveChanges();
+                MessageBox.Show("Salvo com sucesso");
+
+                // Limpar campos e resetar botões
+                Estilos.LimparTextBoxes(plocalizar);
+                Estilos.LimparTextBoxes(plancamento);
+                Estilos.LimparTextBoxes(pOutrosLancamentos);
+
+                btnnovo.Enabled = true;
+                btnlocalizar.Enabled = true;
+                btnalterar.Enabled = false;
+                btncancelar.Enabled = false;
+                btnexcluir.Enabled = false;
+                btnsalvar.Enabled = false;
+                btnLocFlatLancamento.Enabled = false;
+
+                pOutrosLancamentos.Enabled = false;
+                ckOutrosLancamentos.Checked = false;
+                dtdataLancamento.Enabled = false;
+
+                txtvaloraluguel.Enabled = false;
+                txtValorFunReserva.Enabled = false;
+                txtValorDiv.Enabled = false;
             }
         }
         private void btncancelar_Click(object sender, EventArgs e)
@@ -238,6 +240,7 @@ namespace SistemaFL
             Estilos.LimparTextBoxes(plancamento);
 
             ckOutrosLancamentos.Checked = false;
+            ckOutrosLancamentos.Enabled = false;
             btnnovo.Enabled = true;
             btnalterar.Enabled = false;
             btncancelar.Enabled = false;
@@ -257,41 +260,59 @@ namespace SistemaFL
 
             if (form2.id > 0)
             {
-                //no clique do botão localizar vamos fazer um select * from empresa where id
-                var lancamento = repositorio.Recuperar(e => e.id == form2.id);
-                if (lancamento != null)
+                if (form2.tipoLancamento == "L")
                 {
-                    txtid.Text = lancamento.id.ToString();
-                    dtdataLancamento.Value = lancamento.DataPagamento;
-                    txtvaloraluguel.Text = lancamento.ValorAluguel.ToString();
-                    txtValorDiv.Text = lancamento.ValorDividendos.ToString();
-                    txtValorFunReserva.Text = lancamento.ValorFundoReserva.ToString();
-
-                    if (lancamento.idFlat >= 0)
+                    // É um Lançamento
+                    var lancamento = repositorio.Recuperar(e => e.id == form2.id);
+                    if (lancamento != null)
                     {
-                        var flat = flatRepositorio.Recuperar(e => e.id == lancamento.idFlat);
-                        if (flat != null)
+                        txtid.Text = lancamento.id.ToString();
+                        dtdataLancamento.Value = lancamento.DataPagamento;
+                        txtvaloraluguel.Text = lancamento.ValorAluguel.ToString();
+                        txtValorDiv.Text = lancamento.ValorDividendos.ToString();
+                        txtValorFunReserva.Text = lancamento.ValorFundoReserva.ToString();
+
+                        if (lancamento.idFlat >= 0)
                         {
-                            txtidFlat.Text = lancamento.idFlat.ToString();
-                            txtDescricaoFlat.Text = lancamento.DescricaoFlat;
-                            txtTipoInvestimento.Text = lancamento.TipoPagamento;
+                            var flat = flatRepositorio.Recuperar(e => e.id == lancamento.idFlat);
+                            if (flat != null)
+                            {
+                                txtidFlat.Text = lancamento.idFlat.ToString();
+                                txtDescricaoFlat.Text = lancamento.DescricaoFlat;
+                                txtTipoInvestimento.Text = lancamento.TipoPagamento;
+                            }
+                            else MessageBox.Show("Flat não localizado.");
                         }
-                        else MessageBox.Show("Flat nao localizado");
                     }
-                    else
-                        btnnovo.Enabled = false;
-                    btnlocalizar.Enabled = false;
-                    btnalterar.Enabled = true;
-                    btncancelar.Enabled = true;
-                    btnexcluir.Enabled = true;
-                    btnsalvar.Enabled = false;
                 }
-                else
+                else if (form2.tipoLancamento == "O")
                 {
-                    MessageBox.Show("Lancamento não encontrado.");
+                    // É um Outro Lançamento
+                    var outros = outrosRepositorio.Recuperar(o => o.id == form2.id);
+                    if (outros != null)
+                    {
+                        dtdataLancamento.Value = outros.DataLancamento;
+                        ckOutrosLancamentos.Checked = true;
+                        txtidOutrosLanc.Text = outros.id.ToString();
+                        txtOutrosReceb.Text = outros.OutrosRecebimentos.ToString();
+                        txtGanhoCapital.Text = outros.GanhoDeCapital.ToString();
+                        txtRetidoFonte.Text = outros.ValorRetidoNaFonte.ToString();
+                    }
                 }
+                btnnovo.Enabled = false;
+                btnlocalizar.Enabled = false;
+                btnalterar.Enabled = true;
+                btncancelar.Enabled = true;
+                btnexcluir.Enabled = true;
+                btnsalvar.Enabled = false;
+            }
+            else
+            {
+                MessageBox.Show("Lançamento não localizado.");
             }
         }
+
+
         private void btnexcluir_Click(object sender, EventArgs e)
         {
             if (ckOutrosLancamentos.Checked == false)
@@ -350,7 +371,7 @@ namespace SistemaFL
                         }
                         else
                         {
-                            outrosLancamentosRepos.Excluir(outroslancamentos);
+                            outrosRepositorio.Excluir(outroslancamentos);
                             contexto.SaveChanges();
 
                             MessageBox.Show("Registro excluído com sucesso!");
@@ -432,7 +453,7 @@ namespace SistemaFL
             // Verifica se o id do lançamento já existe
             if (!string.IsNullOrWhiteSpace(txtidOutrosLanc.Text) && int.TryParse(txtidOutrosLanc.Text, out int id))
             {
-                outrosLancamentos = outrosLancamentosRepos.Recuperar(c => c.id == id) ?? new OutrosLancamentos();
+                outrosLancamentos = outrosRepositorio.Recuperar(c => c.id == id) ?? new OutrosLancamentos();
 
             }
             else outrosLancamentos = new OutrosLancamentos();
@@ -463,11 +484,13 @@ namespace SistemaFL
         }
         private void btnLocFlatLancamento_Click_1(object sender, EventArgs e)
         {
+            ckOutrosLancamentos.Enabled = false;
             var form2 = Program.serviceProvider.GetRequiredService<FrmConsultaFlat>();
             form2.ShowDialog();
 
             var flat = flatRepositorio.Recuperar(f => f.id == form2.id); // Aqui o repositório está usando a entidade Flat
             int flatId = form2.id;
+
             if (flatId >= 0)
             {
                 if (flat != null)
@@ -483,6 +506,7 @@ namespace SistemaFL
 
                     MessageBox.Show("Flat selecionado com sucesso!");
                     dtdataLancamento.Enabled = true;
+                    plancamento.Enabled = true;
 
                     if (txtTipoInvestimento.Text != "")
                     {
@@ -525,12 +549,6 @@ namespace SistemaFL
                         break;
                 }
             }
-            else
-            {
-                txtvaloraluguel.Enabled = false;
-                txtValorDiv.Enabled = false;
-                txtValorFunReserva.Enabled = false;
-            }
         }
         private void pbfechar_Click(object sender, EventArgs e)
         {
@@ -546,13 +564,18 @@ namespace SistemaFL
             {
                 ckOutrosLancamentos.Checked = true;
                 pOutrosLancamentos.Enabled = true;
+                dtdataLancamento.Enabled = true;
 
             }
             else
             {
                 ckOutrosLancamentos.Checked = false;
                 pOutrosLancamentos.Enabled = false;
+                dtdataLancamento.Enabled = false;
+
             }
         }
+
+       
     }
 }

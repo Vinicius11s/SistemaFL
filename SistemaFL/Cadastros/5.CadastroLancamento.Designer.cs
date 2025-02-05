@@ -102,10 +102,10 @@
             btnlocalizar.FlatStyle = FlatStyle.Flat;
             btnlocalizar.Font = new Font("Arial", 11.25F, FontStyle.Bold);
             btnlocalizar.ForeColor = Color.White;
-            btnlocalizar.Location = new Point(638, 23);
+            btnlocalizar.Location = new Point(534, 26);
             btnlocalizar.Margin = new Padding(3, 4, 3, 4);
             btnlocalizar.Name = "btnlocalizar";
-            btnlocalizar.Size = new Size(193, 34);
+            btnlocalizar.Size = new Size(182, 34);
             btnlocalizar.TabIndex = 17;
             btnlocalizar.Text = "Localizar Lançamentos";
             btnlocalizar.UseVisualStyleBackColor = false;
@@ -118,10 +118,10 @@
             btnsalvar.FlatStyle = FlatStyle.Flat;
             btnsalvar.Font = new Font("Arial", 11.25F, FontStyle.Bold);
             btnsalvar.ForeColor = Color.White;
-            btnsalvar.Location = new Point(489, 23);
+            btnsalvar.Location = new Point(394, 26);
             btnsalvar.Margin = new Padding(3, 4, 3, 4);
             btnsalvar.Name = "btnsalvar";
-            btnsalvar.Size = new Size(105, 34);
+            btnsalvar.Size = new Size(86, 34);
             btnsalvar.TabIndex = 14;
             btnsalvar.Text = "Salvar";
             btnsalvar.UseVisualStyleBackColor = false;
@@ -134,10 +134,10 @@
             btnalterar.FlatStyle = FlatStyle.Flat;
             btnalterar.Font = new Font("Arial", 11.25F, FontStyle.Bold);
             btnalterar.ForeColor = Color.White;
-            btnalterar.Location = new Point(351, 23);
+            btnalterar.Location = new Point(258, 26);
             btnalterar.Margin = new Padding(3, 4, 3, 4);
             btnalterar.Name = "btnalterar";
-            btnalterar.Size = new Size(105, 34);
+            btnalterar.Size = new Size(90, 34);
             btnalterar.TabIndex = 13;
             btnalterar.Text = "Alterar";
             btnalterar.UseVisualStyleBackColor = false;
@@ -150,10 +150,10 @@
             btnnovo.FlatStyle = FlatStyle.Flat;
             btnnovo.Font = new Font("Arial", 11.25F, FontStyle.Bold);
             btnnovo.ForeColor = Color.White;
-            btnnovo.Location = new Point(127, 23);
+            btnnovo.Location = new Point(64, 26);
             btnnovo.Margin = new Padding(3, 4, 3, 4);
             btnnovo.Name = "btnnovo";
-            btnnovo.Size = new Size(181, 34);
+            btnnovo.Size = new Size(157, 34);
             btnnovo.TabIndex = 12;
             btnnovo.Text = "Novo Lançamento";
             btnnovo.UseVisualStyleBackColor = false;
@@ -191,7 +191,7 @@
             // 
             // txtValorFunReserva
             // 
-            txtValorFunReserva.Location = new Point(392, 92);
+            txtValorFunReserva.Location = new Point(392, 67);
             txtValorFunReserva.Margin = new Padding(3, 4, 3, 4);
             txtValorFunReserva.Name = "txtValorFunReserva";
             txtValorFunReserva.Size = new Size(171, 27);
@@ -199,7 +199,7 @@
             // 
             // txtValorDiv
             // 
-            txtValorDiv.Location = new Point(205, 92);
+            txtValorDiv.Location = new Point(205, 67);
             txtValorDiv.Margin = new Padding(3, 4, 3, 4);
             txtValorDiv.Name = "txtValorDiv";
             txtValorDiv.Size = new Size(171, 27);
@@ -209,7 +209,7 @@
             // 
             labelValorDiv.AutoSize = true;
             labelValorDiv.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelValorDiv.Location = new Point(205, 68);
+            labelValorDiv.Location = new Point(205, 43);
             labelValorDiv.Name = "labelValorDiv";
             labelValorDiv.Size = new Size(122, 20);
             labelValorDiv.TabIndex = 47;
@@ -219,7 +219,7 @@
             // 
             labelFundoRes.AutoSize = true;
             labelFundoRes.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelFundoRes.Location = new Point(392, 68);
+            labelFundoRes.Location = new Point(392, 43);
             labelFundoRes.Name = "labelFundoRes";
             labelFundoRes.Size = new Size(143, 20);
             labelFundoRes.TabIndex = 46;
@@ -252,7 +252,7 @@
             btnLocFlatLancamento.BackColor = Color.White;
             btnLocFlatLancamento.FlatStyle = FlatStyle.Flat;
             btnLocFlatLancamento.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnLocFlatLancamento.Location = new Point(16, 141);
+            btnLocFlatLancamento.Location = new Point(92, 193);
             btnLocFlatLancamento.Margin = new Padding(3, 4, 3, 4);
             btnLocFlatLancamento.Name = "btnLocFlatLancamento";
             btnLocFlatLancamento.Size = new Size(224, 32);
@@ -263,7 +263,7 @@
             // 
             // txtvaloraluguel
             // 
-            txtvaloraluguel.Location = new Point(13, 92);
+            txtvaloraluguel.Location = new Point(13, 67);
             txtvaloraluguel.Margin = new Padding(3, 4, 3, 4);
             txtvaloraluguel.Name = "txtvaloraluguel";
             txtvaloraluguel.Size = new Size(171, 27);
@@ -273,7 +273,7 @@
             // 
             labelValorAlguel.AutoSize = true;
             labelValorAlguel.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelValorAlguel.Location = new Point(14, 70);
+            labelValorAlguel.Location = new Point(14, 45);
             labelValorAlguel.Name = "labelValorAlguel";
             labelValorAlguel.Size = new Size(98, 20);
             labelValorAlguel.TabIndex = 40;
@@ -282,7 +282,7 @@
             // dtdataLancamento
             // 
             dtdataLancamento.Format = DateTimePickerFormat.Short;
-            dtdataLancamento.Location = new Point(16, 30);
+            dtdataLancamento.Location = new Point(782, 78);
             dtdataLancamento.Margin = new Padding(3, 4, 3, 4);
             dtdataLancamento.Name = "dtdataLancamento";
             dtdataLancamento.Size = new Size(137, 27);
@@ -292,7 +292,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(13, 8);
+            label4.Location = new Point(779, 56);
             label4.Name = "label4";
             label4.Size = new Size(120, 20);
             label4.TabIndex = 38;
@@ -374,11 +374,10 @@
             plocalizar.Controls.Add(label2);
             plocalizar.Controls.Add(label3);
             plocalizar.Controls.Add(txtTipoInvestimento);
-            plocalizar.Controls.Add(btnLocFlatLancamento);
             plocalizar.Location = new Point(76, 57);
             plocalizar.Margin = new Padding(3, 4, 3, 4);
             plocalizar.Name = "plocalizar";
-            plocalizar.Size = new Size(665, 192);
+            plocalizar.Size = new Size(665, 128);
             plocalizar.TabIndex = 50;
             // 
             // txtStatus
@@ -448,9 +447,7 @@
             // 
             // plancamento
             // 
-            plancamento.Controls.Add(label4);
             plancamento.Controls.Add(txtValorFunReserva);
-            plancamento.Controls.Add(dtdataLancamento);
             plancamento.Controls.Add(txtValorDiv);
             plancamento.Controls.Add(labelValorAlguel);
             plancamento.Controls.Add(labelValorDiv);
@@ -483,7 +480,7 @@
             // 
             ckOutrosLancamentos.AutoSize = true;
             ckOutrosLancamentos.Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ckOutrosLancamentos.Location = new Point(813, 80);
+            ckOutrosLancamentos.Location = new Point(779, 135);
             ckOutrosLancamentos.Name = "ckOutrosLancamentos";
             ckOutrosLancamentos.Size = new Size(170, 25);
             ckOutrosLancamentos.TabIndex = 53;
@@ -495,7 +492,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(16, 15);
+            label8.Location = new Point(15, 13);
             label8.Name = "label8";
             label8.Size = new Size(151, 20);
             label8.TabIndex = 54;
@@ -503,7 +500,7 @@
             // 
             // txtOutrosReceb
             // 
-            txtOutrosReceb.Location = new Point(15, 37);
+            txtOutrosReceb.Location = new Point(11, 37);
             txtOutrosReceb.Margin = new Padding(3, 4, 3, 4);
             txtOutrosReceb.Name = "txtOutrosReceb";
             txtOutrosReceb.Size = new Size(171, 27);
@@ -513,7 +510,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label9.Location = new Point(15, 79);
+            label9.Location = new Point(14, 84);
             label9.Name = "label9";
             label9.Size = new Size(162, 20);
             label9.TabIndex = 56;
@@ -521,7 +518,7 @@
             // 
             // txtGanhoCapital
             // 
-            txtGanhoCapital.Location = new Point(14, 101);
+            txtGanhoCapital.Location = new Point(14, 108);
             txtGanhoCapital.Margin = new Padding(3, 4, 3, 4);
             txtGanhoCapital.Name = "txtGanhoCapital";
             txtGanhoCapital.Size = new Size(171, 27);
@@ -531,7 +528,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label10.Location = new Point(15, 144);
+            label10.Location = new Point(11, 151);
             label10.Name = "label10";
             label10.Size = new Size(152, 20);
             label10.TabIndex = 58;
@@ -539,7 +536,7 @@
             // 
             // txtRetidoFonte
             // 
-            txtRetidoFonte.Location = new Point(14, 168);
+            txtRetidoFonte.Location = new Point(14, 178);
             txtRetidoFonte.Margin = new Padding(3, 4, 3, 4);
             txtRetidoFonte.Name = "txtRetidoFonte";
             txtRetidoFonte.Size = new Size(171, 27);
@@ -553,7 +550,7 @@
             pOutrosLancamentos.Controls.Add(label8);
             pOutrosLancamentos.Controls.Add(label9);
             pOutrosLancamentos.Controls.Add(txtGanhoCapital);
-            pOutrosLancamentos.Location = new Point(786, 121);
+            pOutrosLancamentos.Location = new Point(756, 176);
             pOutrosLancamentos.Name = "pOutrosLancamentos";
             pOutrosLancamentos.Size = new Size(226, 220);
             pOutrosLancamentos.TabIndex = 60;
@@ -586,14 +583,17 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1087, 580);
+            Controls.Add(label4);
             Controls.Add(label11);
             Controls.Add(txtidOutrosLanc);
+            Controls.Add(dtdataLancamento);
             Controls.Add(pOutrosLancamentos);
             Controls.Add(ckOutrosLancamentos);
             Controls.Add(txtid);
             Controls.Add(label1);
             Controls.Add(pbfechar);
             Controls.Add(btnexcluir);
+            Controls.Add(btnLocFlatLancamento);
             Controls.Add(txtidFlat);
             Controls.Add(plancamento);
             Controls.Add(btncancelar);

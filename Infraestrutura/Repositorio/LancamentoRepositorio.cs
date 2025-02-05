@@ -86,6 +86,8 @@ namespace Infraestrutura.Repositorio
             return total;
 
         }   
+        //
+        //Segunda Tabela
         public decimal CalcularIRPJTrimestre(int ano, int trimestre)
         {
             decimal valorA = ObterRendimentoTrimestral(ano, trimestre) * 0.32m;
@@ -129,6 +131,13 @@ namespace Infraestrutura.Repositorio
                 .Sum(l => (l.ValorRetidoNaFonte ?? 0.00M));
 
             return totalTrimestral;
+        }
+        //
+        public decimal CalcularContrSocialTrimestre(int ano, int trimestre)
+        {
+            decimal valorA = ObterRendimentoTrimestral(ano, trimestre) * 0.09m;
+
+            return valorA; // Evita valores negativos
         }
 
 

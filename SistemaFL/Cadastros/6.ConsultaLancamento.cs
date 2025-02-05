@@ -18,7 +18,9 @@ namespace SistemaFL
     {
         private ILancamentoRepositorio repositorio;
         private IOutrosLancamentosRepos outrosLancamentos;
-        public int id;
+        public int id { get; set; }
+        public string tipoLancamento { get; set; }  // "L" para Lançamento, "O" para Outros Lançamentos
+
         public FrmConsultaLancamento(ILancamentoRepositorio repositorio, IOutrosLancamentosRepos outrosLancamentos)
         {
             InitializeComponent();
@@ -34,6 +36,7 @@ namespace SistemaFL
         }
         private void btnlocalizar_Click(object sender, EventArgs e)
         {
+
             if (txtdescricao.Text == "Digite o número do mês" || txtdescricao.Text == "")
             {
                 if (ckOutrosLanc.Checked)
@@ -133,12 +136,28 @@ namespace SistemaFL
         //Eventos     
         private void dgdadoslancamento_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (dgdadoslancamento.SelectedRows.Count > 0)
             {
-                id = (int)dgdadoslancamento.Rows[e.RowIndex].Cells[0].Value;
-                this.Close();
+                id = Convert.ToInt32(dgdadoslancamento.SelectedRows[0].Cells["id"].Value);
+
+                // Aqui, você define o tipo com base na origem do dado (Lançamento ou Outros Lançamentos)
+                if (ckOutrosLanc.Checked == false)
+                {
+                    tipoLancamento = "L";
+                }
+                else if (ckOutrosLanc.Checked)
+                {
+                    tipoLancamento = "O";
+                }
+
+                this.Close(); // Fecha o formulário após a seleção
+            }
+            else
+            {
+                MessageBox.Show("Selecione um lançamento.");
             }
         }
+    
         private void pbFechar_Click(object sender, EventArgs e)
         {
             this.Close();

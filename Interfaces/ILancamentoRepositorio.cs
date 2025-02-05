@@ -12,5 +12,6 @@ namespace Interfaces
     {
         IEnumerable<dynamic> ObterDadosRelatorioMensal(int ano);
         public decimal CalcularIRPJTrimestre(int ano, int trimestre);
+        public decimal CalcularContrSocialTrimestre(int ano, int trimestre);
     }
 }

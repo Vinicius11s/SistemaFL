@@ -33,6 +33,7 @@ namespace SistemaFL
             tTamanhotela.Tick += tTamanhotela_Tick;
             tTamanhotela.Start();
         }
+        bool avisoMostrado = false;
 
         private void FrmCadFlat_Load(object sender, EventArgs e)
         {
@@ -241,48 +242,61 @@ namespace SistemaFL
         //Atribuições
         void AtribuiStatusDoFlat(Flat flat)
         {
-            if (cbbStatus != null && cbbStatus.SelectedItem != null)
+            if (cbbStatus == null || cbbStatus.SelectedItem == null)
             {
-                string status = cbbStatus.Text;
-
-                switch (status)
+                if (!avisoMostrado)
                 {
-                    case "Ativo":
-                        flat.Status = status;
-                        flat.Ativo = true;
-                        break;
-
-                    case "Em Construção":
-                        flat.Status = status;
-                        flat.Ativo = true;
-
-                        if (!flat.Descricao.EndsWith(" - EM CONSTRUÇÃO"))
-                        {
-                            flat.Descricao += " - EM CONSTRUÇÃO";
-                        }
-                        break;
-
-                    case "Em Reforma":
-                        flat.Status = status;
-                        flat.Ativo = true;
-                        break;
-
-                    case "Vendido":
-                        flat.Status = status;
-                        flat.Ativo = false;
-
-                        if (!flat.Descricao.EndsWith(" - VENDIDO"))
-                        {
-                            flat.Descricao += " - VENDIDO";
-                        }
-                        break;
-
-                    default:
-                        // Caso o status não seja nenhum dos listados
-                        break;
+                    MessageBox.Show("Selecione um status para o flat.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    avisoMostrado = true;
                 }
+                return;
+            }
+
+            string status = cbbStatus.Text;
+
+            switch (status)
+            {
+                case "Ativo":
+                    flat.Status = status;
+                    flat.Ativo = true;
+                    break;
+
+                case "Em Construção":
+                    flat.Status = status;
+                    flat.Ativo = true;
+
+                    if (!flat.Descricao.EndsWith(" - EM CONSTRUÇÃO"))
+                    {
+                        flat.Descricao += " - EM CONSTRUÇÃO";
+                    }
+                    break;
+
+                case "Em Reforma":
+                    flat.Status = status;
+                    flat.Ativo = true;
+                    break;
+
+                case "Vendido":
+                    flat.Status = status;
+                    flat.Ativo = false;
+
+                    if (!flat.Descricao.EndsWith(" - VENDIDO"))
+                    {
+                        flat.Descricao += " - VENDIDO";
+                    }
+                    break;
+
+                default:
+                    if (!avisoMostrado)
+                    {
+                        MessageBox.Show("Status inválido. Por favor, selecione um status válido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        avisoMostrado = true;
+                    }
+                    break;
             }
         }
+
+
         void AtribuiValorDeCompraUnidade(Flat flat)
         {
             decimal valorInvestimento;
@@ -311,7 +325,7 @@ namespace SistemaFL
             flat.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
             flat.Descricao = txtdescricao.Text;
             flat.TipoInvestimento = cbbTipoInvestimento.SelectedItem?.ToString() ?? "Indefinido";
-            AtribuiStatusDoFlat(flat);
+            AtribuiStatusDoFlat(flat);            
             flat.DataAquisicao = dtdataaquisicao.Value;
             flat.Cep = txtCep.Text;
             flat.Rua = txtrua.Text;
@@ -350,6 +364,7 @@ namespace SistemaFL
         void limpar()
         {
             cbbTipoInvestimento.Text = "";
+            cbbStatus.Text = "";
             foreach (Control controle in pdados.Controls)
             {
                 // Verifica se o controle é um TextBox
@@ -383,7 +398,6 @@ namespace SistemaFL
         }
         //
         //Validações
-        bool avisoMostrado = false;
         public decimal ValidaDecimais(Flat flat, TextBox textBox)
         {
             decimal valor;
@@ -404,62 +418,63 @@ namespace SistemaFL
         }
         void ValidaCheckBox(Flat flat)
         {
-            // Validação para "Possui Garagem"
-            if (ckPossuiGaragemSim.Checked && ckPossuiGaragemNao.Checked)
+            if (avisoMostrado == false)
             {
-                MessageBox.Show("Por favor, selecione apenas uma opção para 'Possui Garagem'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                avisoMostrado = true;
-                return;
-            }
-            else if (!ckPossuiGaragemSim.Checked && !ckPossuiGaragemNao.Checked)
-            {
-                MessageBox.Show("Por favor, selecione se possui garagem.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                avisoMostrado = true;
-                return;
-            }
-            else
-            {
-                flat.PossuiGaragem = ckPossuiGaragemSim.Checked;
-            }
+                // Validação para "Possui Garagem"
+                if (ckPossuiGaragemSim.Checked && ckPossuiGaragemNao.Checked)
+                {
+                    MessageBox.Show("Por favor, selecione apenas uma opção para 'Possui Garagem'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    avisoMostrado = true;
+                    return;
+                }
+                else if (!ckPossuiGaragemSim.Checked && !ckPossuiGaragemNao.Checked)
+                {
+                    MessageBox.Show("Por favor, selecione se possui garagem.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    avisoMostrado = true;
+                    return;
+                }
+                else
+                {
+                    flat.PossuiGaragem = ckPossuiGaragemSim.Checked;
+                }
 
-            // Validação para "Está Escriturado"
-            if (ckEscrituradoSim.Checked && ckEscrituradoNao.Checked)
-            {
-                MessageBox.Show("Por favor, selecione apenas uma opção para 'Está Escriturado'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                avisoMostrado = true;
-                return;
-            }
-            else if (!ckEscrituradoSim.Checked && !ckEscrituradoNao.Checked)
-            {
-                MessageBox.Show("Por favor, selecione se está escriturado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                avisoMostrado = true;
-                return;
-            }
-            else
-            {
-                flat.Escriturado = ckEscrituradoSim.Checked;
-            }
+                // Validação para "Está Escriturado"
+                if (ckEscrituradoSim.Checked && ckEscrituradoNao.Checked)
+                {
+                    MessageBox.Show("Por favor, selecione apenas uma opção para 'Está Escriturado'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    avisoMostrado = true;
+                    return;
+                }
+                else if (!ckEscrituradoSim.Checked && !ckEscrituradoNao.Checked)
+                {
+                    MessageBox.Show("Por favor, selecione se está escriturado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    avisoMostrado = true;
+                    return;
+                }
+                else
+                {
+                    flat.Escriturado = ckEscrituradoSim.Checked;
+                }
 
-            // Validação para "Está Registrado"
-            if (ckRegistradoSim.Checked && ckRegistradoNao.Checked)
-            {
-                MessageBox.Show("Por favor, selecione apenas uma opção para 'Está Registrado'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                avisoMostrado = true;
-                return;
-            }
-            else if (!ckRegistradoSim.Checked && !ckRegistradoNao.Checked)
-            {
-                MessageBox.Show("Por favor, selecione se está registrado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                avisoMostrado = true;
-                return;
-            }
-            else
-            {
-                flat.Registrado = ckRegistradoSim.Checked;
+                // Validação para "Está Registrado"
+                if (ckRegistradoSim.Checked && ckRegistradoNao.Checked)
+                {
+                    MessageBox.Show("Por favor, selecione apenas uma opção para 'Está Registrado'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    avisoMostrado = true;
+                    return;
+                }
+                else if (!ckRegistradoSim.Checked && !ckRegistradoNao.Checked)
+                {
+                    MessageBox.Show("Por favor, selecione se está registrado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    avisoMostrado = true;
+                    return;
+                }
+                else
+                {
+                    flat.Registrado = ckRegistradoSim.Checked;
+                }
             }
         }
-
-
         private async void btnBuscaCep_Click(object sender, EventArgs e)
         {
             string cep = txtCep.Text.Trim(); // Pega o CEP digitado no TextBox

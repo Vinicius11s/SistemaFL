@@ -37,6 +37,7 @@ namespace SistemaFL
             tTamanhotela.Tick += tTamanhotela_Tick;
             tTamanhotela.Start();
         }
+        bool avisoMostrado = false;
         private void FrmCadEmpresaFF_Load(object sender, EventArgs e)
         {
             this.Location = new System.Drawing.Point(205, 41);
@@ -64,49 +65,58 @@ namespace SistemaFL
 
         }
         private void btnsalvar_Click(object sender, EventArgs e)
+{
+    try
+    {
+        if (txtrazaosocial.Text != String.Empty)
         {
-            try
-            {
-                if (txtdescricao.Text != String.Empty)
-                {
-                    Empresa empresa = carregaPropriedades();
-                    var empresaExistente = repositorio.RecuperarPorCnpj(empresa.Cnpj);
-                    if (empresaExistente != null && empresaExistente.id != empresa.id)
-                    {
-                        MessageBox.Show("Este CNPJ já está cadastrado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return; // Impede o salvamento
-                    }
+            Empresa empresa = carregaPropriedades();
 
+            var empresaExistente = repositorio.RecuperarPorCnpj(empresa.Cnpj);
+            if (empresaExistente != null && empresaExistente.id != empresa.id)
+            {
+                MessageBox.Show("Este CNPJ já está cadastrado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                avisoMostrado = true;
+            }
+
+            if (!avisoMostrado)
+            {
+                // Verificar se houve alterações no objeto antes de salvar
+                if (repositorio..ChangeTracker.HasChanges())
+                {
                     if (empresa.id == 0)
                     {
                         repositorio.Inserir(empresa);
                     }
-                    else
-                    if (empresa.id != 0) // Se está atualizando
+                    else if (empresa.id != 0) // Se está atualizando
                     {
                         repositorio.Alterar(empresa);
                     }
+
                     Program.serviceProvider.
                         GetRequiredService<ContextoSistema>().SaveChanges();
                     MessageBox.Show("Salvo com sucesso");
-
-                    limpar();
-                    btnnovo.Enabled = true;
-                    btnlocalizar.Enabled = true;
-                    btnalterar.Enabled = false;
-                    btncancelar.Enabled = false;
-                    btnexcluir.Enabled = false;
-                    btnsalvar.Enabled = false;
-                    pdados.Enabled = false;
-                    passociar.Enabled = false;
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro ao salvar" + ex.Message);
-                throw;
+                else MessageBox.Show("Todas as alterações já foram salvas.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                limpar();
+                btnnovo.Enabled = true;
+                btnlocalizar.Enabled = true;
+                btnalterar.Enabled = false;
+                btncancelar.Enabled = false;
+                btnexcluir.Enabled = false;
+                btnsalvar.Enabled = false;
+                pdados.Enabled = false;
+                passociar.Enabled = false;
             }
         }
+        else MessageBox.Show("É necessário informar Razão Social para concluir o cadastro. ", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+     }
+    catch (Exception ex)
+    {
+        MessageBox.Show("Erro ao salvar: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    }
+}
         private void btncancelar_Click(object sender, EventArgs e)
         {
             limpar();
@@ -311,20 +321,14 @@ namespace SistemaFL
                     flatRepositorio.Alterar(flat);
                     Program.serviceProvider.GetRequiredService<ContextoSistema>().SaveChanges();
 
-                    MessageBox.Show("Flat associado à empresa com sucesso!");
+                    MessageBox.Show("Flat associado à empresa com sucesso. Alterações Salvas!");
 
                     CarregarFlatsNaoAssociados();
                     CarregarComboBoxFlatsAssociados(); // Recarrega os flats no ComboBox
                 }
-                else
-                {
-                    MessageBox.Show("Flat não encontrado.");
-                }
+                else MessageBox.Show("Flat não encontrado.");
             }
-            else
-            {
-                MessageBox.Show("Selecione um flat para associar.");
-            }
+            else MessageBox.Show("Selecione um flat para associar.");
         }
         private void btnremover_Click(object sender, EventArgs e)
         {
@@ -427,16 +431,27 @@ namespace SistemaFL
         {
             string cnpj = txtcnpj.Text;
 
-            // Remove quaisquer caracteres não numéricos, como pontuação (ponto, barra, etc.)
-            cnpj = new string(cnpj.Where(char.IsDigit).ToArray());
-
-            // Verifica se o CNPJ tem 13 dígitos
-            if (cnpj.Length != 14)
+            if (cnpj.Any(c => !char.IsDigit(c) && c != ' ')) // Permite espaços
             {
-                MessageBox.Show("O CNPJ digitado não contém 14 dígitos.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("O CNPJ deve conter apenas números. Remova caracteres como pontos, barras e traços.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                avisoMostrado = true;
             }
 
-            empresa.Cnpj = cnpj;
+            // Remove quaisquer espaços e mantém apenas números
+            cnpj = new string(cnpj.Where(char.IsDigit).ToArray());
+
+            // Verifica se o CNPJ tem 14 dígitos
+            if (cnpj.Length != 14)
+            {
+                MessageBox.Show("O CNPJ digitado não contém 14 dígitos.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            if(avisoMostrado == false)
+            {
+                empresa.Cnpj = cnpj;
+            }
         }
         //
         void limpar()
