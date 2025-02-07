@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 using Entidades;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Infraestrutura.Contexto
 {
@@ -133,110 +135,116 @@ namespace Infraestrutura.Contexto
         }
         private void CriaTriggerLancamento()
         {
-        /*ALTER TRIGGER trg_InsertedUpdatedLancamento
+        /* ALTER TRIGGER trg_InsertedUpdatedLancamento
             ON Lancamento
             AFTER INSERT, UPDATE
             AS
             BEGIN
-                -- Tratamento para INSERT
-                INSERT INTO ocorrencia (
-                    oco_ValorAntigo,
-                    oco_ValorAlteracao,
-                    oco_DataAlteracao,
-                    oco_DataLancamentoAntigo,
-                    idLancamento,
-                    idFlat,
-                    oco_Tabela,
-                    oco_Descricao,
-                    DescricaoFlat,
-                    IdUsuario,
-                    DescricaoUsuario
-                )
-                SELECT 
-                    ISNULL(ult.ValorAntigo, 0) AS ValorAntigo,
-                    CASE 
-                        WHEN i.TipoPagamento = 'Aluguel Fixo' THEN i.ValorAluguel
-                        WHEN i.TipoPagamento = 'Dividendos' THEN i.ValorDividendos
-                        WHEN i.TipoPagamento = 'Aluguel Fixo + Dividendos' THEN i.ValorAluguel + i.ValorDividendos
-                        WHEN i.TipoPagamento = 'Fundo de Reserva' THEN i.ValorFundoReserva
-                        ELSE 0
-                    END AS ValorAlteracao,
-                    i.DataPagamento,  -- Usa a data informada
-                    ult.DataLancamentoAntigo,
-                    i.id,
-                    i.idFlat,
-                    'Lancamento',
-                    'Inserção',
-                    f.Descricao AS DescricaoFlat,
-                    i.IdUsuario,
-                    u.Login AS DescricaoUsuario
-                FROM INSERTED i
-                JOIN Flat f ON f.id = i.idFlat
-                LEFT JOIN Usuario u ON u.id = i.IdUsuario
-                OUTER APPLY (
-                    SELECT TOP 1
-                        CASE 
-                            WHEN i.TipoPagamento = 'Aluguel Fixo' THEN l.ValorAluguel
-                            WHEN i.TipoPagamento = 'Dividendos' THEN l.ValorDividendos
-                            WHEN i.TipoPagamento = 'Aluguel Fixo + Dividendos' THEN l.ValorAluguel + l.ValorDividendos
-                            WHEN i.TipoPagamento = 'Fundo de Reserva' THEN l.ValorFundoReserva
+                --Tratamento para INSERT(Somente novos lançamentos)
+                IF NOT EXISTS(SELECT 1 FROM deleted)
+                BEGIN
+                    INSERT INTO ocorrencia(
+                        oco_ValorAntigo,
+                        oco_ValorAlteracao,
+                        oco_DataAlteracao,
+                        oco_DataLancamentoAntigo,
+                        idLancamento,
+                        idFlat,
+                        oco_Tabela,
+                        oco_Descricao,
+                        DescricaoFlat,
+                        IdUsuario,
+                        DescricaoUsuario
+                    )
+                    SELECT
+                        ISNULL(ult.ValorAntigo, 0) AS ValorAntigo,
+                        CASE
+                            WHEN i.TipoPagamento = 'Aluguel Fixo' THEN i.ValorAluguel
+                            WHEN i.TipoPagamento = 'Dividendos' THEN i.ValorDividendos
+                            WHEN i.TipoPagamento = 'Aluguel Fixo + Dividendos' THEN i.ValorAluguel + i.ValorDividendos
+                            WHEN i.TipoPagamento = 'Fundo de Reserva' THEN i.ValorFundoReserva
+                            ELSE 0
+                        END AS ValorAlteracao,
+                        i.DataPagamento,  
+                        ult.DataLancamentoAntigo,
+                        i.id,
+                        i.idFlat,
+                        'Lancamento',
+                        'Inserção',
+                        f.Descricao AS DescricaoFlat,
+                        i.IdUsuario,
+                        u.Login AS DescricaoUsuario
+                    FROM INSERTED i
+                    JOIN Flat f ON f.id = i.idFlat
+                    LEFT JOIN Usuario u ON u.id = i.IdUsuario
+                    OUTER APPLY(
+                        SELECT TOP 1
+                            CASE
+                                WHEN i.TipoPagamento = 'Aluguel Fixo' THEN l.ValorAluguel
+                                WHEN i.TipoPagamento = 'Dividendos' THEN l.ValorDividendos
+                                WHEN i.TipoPagamento = 'Aluguel Fixo + Dividendos' THEN l.ValorAluguel + l.ValorDividendos
+                                WHEN i.TipoPagamento = 'Fundo de Reserva' THEN l.ValorFundoReserva
+                                ELSE 0
+                            END AS ValorAntigo,
+                            l.DataPagamento AS DataLancamentoAntigo
+                        FROM lancamento l
+                        WHERE l.idFlat = i.idFlat
+                            AND l.id<i.id
+                        ORDER BY l.DataPagamento DESC
+                    ) ult;
+                        END
+
+                        -- Tratamento para UPDATE(Somente se houver alteração nos valores)
+                ELSE
+                BEGIN
+                    INSERT INTO ocorrencia(
+                        oco_ValorAntigo,
+                        oco_ValorAlteracao,
+                        oco_DataAlteracao,
+                        oco_DataLancamentoAntigo,
+                        idLancamento,
+                        idFlat,
+                        oco_Tabela,
+                        oco_Descricao,
+                        DescricaoFlat,
+                        IdUsuario,
+                        DescricaoUsuario
+                    )
+                    SELECT
+                        CASE
+                            WHEN d.TipoPagamento = 'Aluguel Fixo' THEN d.ValorAluguel
+                            WHEN d.TipoPagamento = 'Dividendos' THEN d.ValorDividendos
+                            WHEN d.TipoPagamento = 'Aluguel Fixo + Dividendos' THEN d.ValorAluguel + d.ValorDividendos
+                            WHEN d.TipoPagamento = 'Fundo de Reserva' THEN d.ValorFundoReserva
                             ELSE 0
                         END AS ValorAntigo,
-                        l.DataPagamento AS DataLancamentoAntigo
-                    FROM lancamento l
-                    WHERE l.idFlat = i.idFlat
-                        AND l.id < i.id
-                    ORDER BY l.DataPagamento DESC
-                ) ult;
-
-                -- Tratamento para UPDATE
-                INSERT INTO ocorrencia (
-                    oco_ValorAntigo,
-                    oco_ValorAlteracao,
-                    oco_DataAlteracao,
-                    oco_DataLancamentoAntigo,
-                    idLancamento,
-                    idFlat,
-                    oco_Tabela,
-                    oco_Descricao,
-                    DescricaoFlat,
-                    IdUsuario,
-                    DescricaoUsuario
-                )
-                SELECT 
-                    CASE 
-                        WHEN d.TipoPagamento = 'Aluguel Fixo' THEN d.ValorAluguel
-                        WHEN d.TipoPagamento = 'Dividendos' THEN d.ValorDividendos
-                        WHEN d.TipoPagamento = 'Aluguel Fixo + Dividendos' THEN d.ValorAluguel + d.ValorDividendos
-                        WHEN d.TipoPagamento = 'Fundo de Reserva' THEN d.ValorFundoReserva
-                        ELSE 0
-                    END AS ValorAntigo,
-                    CASE 
-                        WHEN i.TipoPagamento = 'Aluguel Fixo' THEN i.ValorAluguel
-                        WHEN i.TipoPagamento = 'Dividendos' THEN i.ValorDividendos
-                        WHEN i.TipoPagamento = 'Aluguel Fixo + Dividendos' THEN i.ValorAluguel + i.ValorDividendos
-                        WHEN i.TipoPagamento = 'Fundo de Reserva' THEN i.ValorFundoReserva
-                        ELSE 0
-                    END AS ValorAlteracao,
-                    i.DataPagamento,  -- Usa a data informada
-                    d.DataPagamento AS DataLancamentoAntigo,
-                    i.id,
-                    i.idFlat,
-                    'Alteração',  -- Agora a coluna recebe "Alteração"
-                    'Alteração',
-                    f.Descricao AS DescricaoFlat,
-                    i.IdUsuario,
-                    u.Login AS DescricaoUsuario
-                FROM INSERTED i
-                JOIN DELETED d ON i.id = d.id
-                JOIN Flat f ON f.id = i.idFlat
-                LEFT JOIN Usuario u ON u.id = i.IdUsuario
-                WHERE 
-                    (d.ValorAluguel <> i.ValorAluguel OR
-                        d.ValorDividendos <> i.ValorDividendos OR
-                        d.ValorFundoReserva <> i.ValorFundoReserva OR
-                        d.TipoPagamento <> i.TipoPagamento);
-            END;
+                        CASE
+                            WHEN i.TipoPagamento = 'Aluguel Fixo' THEN i.ValorAluguel
+                            WHEN i.TipoPagamento = 'Dividendos' THEN i.ValorDividendos
+                            WHEN i.TipoPagamento = 'Aluguel Fixo + Dividendos' THEN i.ValorAluguel + i.ValorDividendos
+                            WHEN i.TipoPagamento = 'Fundo de Reserva' THEN i.ValorFundoReserva
+                            ELSE 0
+                        END AS ValorAlteracao,
+                        i.DataPagamento,  
+                        d.DataPagamento AS DataLancamentoAntigo,
+                        i.id,
+                        i.idFlat,
+                        'Alteração',
+                        'Alteração',
+                        f.Descricao AS DescricaoFlat,
+                        i.IdUsuario,
+                        u.Login AS DescricaoUsuario
+                    FROM INSERTED i
+                    JOIN DELETED d ON i.id = d.id
+                    JOIN Flat f ON f.id = i.idFlat
+                    LEFT JOIN Usuario u ON u.id = i.IdUsuario
+                    WHERE
+                        d.ValorAluguel<> i.ValorAluguel OR
+                        d.ValorDividendos<> i.ValorDividendos OR
+                        d.ValorFundoReserva<> i.ValorFundoReserva OR
+                        d.TipoPagamento<> i.TipoPagamento;
+                        END
+                    END;
             */
         }
     }
