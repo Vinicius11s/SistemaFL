@@ -20,7 +20,6 @@ namespace SistemaFL
         private IOutrosLancamentosRepos outrosLancamentos;
         public int id { get; set; }
         public string tipoLancamento { get; set; }  // "L" para Lançamento, "O" para Outros Lançamentos
-
         public FrmConsultaLancamento(ILancamentoRepositorio repositorio, IOutrosLancamentosRepos outrosLancamentos)
         {
             InitializeComponent();
@@ -39,15 +38,21 @@ namespace SistemaFL
 
             if (txtdescricao.Text == "Digite o número do mês" || txtdescricao.Text == "")
             {
+                Estilos.AlterarEstiloDataGrid(dgdadoslancamento);
+                foreach (DataGridViewRow row in dgdadoslancamento.Rows)          
+                    Estilos.AplicarFormatacaoLinha(row);
+                
                 if (ckOutrosLanc.Checked)
                 {
                     var outros = outrosLancamentos.Listar(e => true);
                     dgdadoslancamento.DataSource = outros;
+                    AlterarNomesCabecalhoOutrosLancamentos(dgdadoslancamento);
                 }
                 else
                 {
                     var lista = repositorio.Listar(e => true);
                     dgdadoslancamento.DataSource = lista;
+                    AlterarNomesCabecalhoLancamentos(dgdadoslancamento);
                 }               
             }
             else
@@ -57,10 +62,14 @@ namespace SistemaFL
                     mes = int.Parse(txtdescricao.Text);
                     if (ckOutrosLanc.Checked)
                     {
+                        Estilos.AlterarEstiloDataGrid(dgdadoslancamento);
+                        foreach (DataGridViewRow row in dgdadoslancamento.Rows)
+                            Estilos.AplicarFormatacaoLinha(row);
                         if (mes > 0 && mes <= 12)
                         {
                             var outros = outrosLancamentos.Listar(l => l.DataLancamento.Month == mes && l.DataLancamento.Year == DateTime.Now.Year);
                             dgdadoslancamento.DataSource = outros;
+                            AlterarNomesCabecalhoOutrosLancamentos(dgdadoslancamento);
 
                         }
                         else MessageBox.Show("Digite um mês válido.");
@@ -69,17 +78,16 @@ namespace SistemaFL
                     {
                         if (mes > 0 && mes <= 12)
                         {
+                            Estilos.AlterarEstiloDataGrid(dgdadoslancamento);
+                            foreach (DataGridViewRow row in dgdadoslancamento.Rows)
+                                Estilos.AplicarFormatacaoLinha(row);
+                            
                             var lista = repositorio.Listar(l => l.DataPagamento.Month == mes && l.DataPagamento.Year == DateTime.Now.Year);
                             dgdadoslancamento.DataSource = lista;
+                            AlterarNomesCabecalhoLancamentos(dgdadoslancamento);
 
-                            AlterarEstilosCabecalho(dgdadoslancamento);
-                            AlterarEstilosCelulas(dgdadoslancamento);
+                            dgdadoslancamento.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
-                            foreach (DataGridViewRow row in dgdadoslancamento.Rows)
-                            {
-                                AplicarFormatacaoLinha(row);
-                                dgdadoslancamento.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                            }
                             if (dgdadoslancamento.Columns.Contains("DescricaoFlat"))
                             {
                                 dgdadoslancamento.Columns["DescricaoFlat"].DisplayIndex = 0;
@@ -94,13 +102,27 @@ namespace SistemaFL
 
            
         }
-        private void AlterarEstilosCabecalho(DataGridView grid)
+        private void AlterarNomesCabecalhoOutrosLancamentos(DataGridView grid)
         {
-            dgdadoslancamento.EnableHeadersVisualStyles = false;
-            dgdadoslancamento.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
-            dgdadoslancamento.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgdadoslancamento.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular);
+            dgdadoslancamento.Columns["id"].Visible = false;
+            dgdadoslancamento.Columns["idUsuario"].Visible = false;
+            dgdadoslancamento.Columns["Usuario"].Visible = false;
+            dgdadoslancamento.Columns["Ocorrencias"].Visible = false;
 
+            dgdadoslancamento.Columns["DataLancamento"].HeaderText = "DATA LANÇAMENTO";
+            dgdadoslancamento.Columns["OutrosRecebimentos"].HeaderText = "OUTROS RECEBIMENTOS   ";
+            dgdadoslancamento.Columns["GanhoDeCapital"].HeaderText = "GANHO DE CAPITAL";
+            dgdadoslancamento.Columns["ValorRetidoNaFonte"].HeaderText = "RETIDO NA FONTE";
+
+            foreach (DataGridViewColumn column in grid.Columns)
+            {
+                grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                if(column.Name != "DataLancamento")                
+                   column.DefaultCellStyle.Format = "C2";             
+            }
+        }
+        private void AlterarNomesCabecalhoLancamentos(DataGridView grid)
+        {
 
             dgdadoslancamento.Columns["id"].Visible = false;
             dgdadoslancamento.Columns["idFlat"].Visible = false;
@@ -116,6 +138,13 @@ namespace SistemaFL
             dgdadoslancamento.Columns["ValorDividendos"].HeaderText = "VALOR DIVIDENDOS";
             dgdadoslancamento.Columns["ValorFundoReserva"].HeaderText = "FUNDO RESERVA";
             dgdadoslancamento.Columns["DescricaoFlat"].HeaderText = "DESCRIÇÃO FLAT";
+
+            foreach (DataGridViewColumn column in grid.Columns)
+            {
+                grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                if (column.Name != "DataPagamento" && column.Name != "TipoPagamento")
+                    column.DefaultCellStyle.Format = "C2";
+            }
 
         }
         private void AlterarEstilosCelulas(DataGridView grid)
@@ -156,8 +185,7 @@ namespace SistemaFL
             {
                 MessageBox.Show("Selecione um lançamento.");
             }
-        }
-    
+        }  
         private void pbFechar_Click(object sender, EventArgs e)
         {
             this.Close();

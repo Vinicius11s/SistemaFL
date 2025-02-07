@@ -30,10 +30,9 @@ namespace SistemaFL
             pMenuOpcoes.BringToFront();
             GuardaUsuaruioLogado();
         }
-
         private void GuardaUsuaruioLogado()
         {
-            var form8 = Program.serviceProvider.GetRequiredService<FrmFuncLogin>();
+            /*var form8 = Program.serviceProvider.GetRequiredService<FrmFuncLogin>();
             form8.ShowDialog();  // Aguarda o login ser fechado
 
             if (Sessao.idUsuarioLogado > 0)
@@ -43,9 +42,8 @@ namespace SistemaFL
             else
             {
                 this.Close();
-            }
+            }*/
         }
-        //
         //Transições
         private void sidebarTransition_Tick(object sender, EventArgs e)
         {
@@ -115,14 +113,12 @@ namespace SistemaFL
             //sidebarTransition.Start();
 
         }
-        //
         //Ocorrências
         private void btnocorrencias_Click(object sender, EventArgs e)
         {
             var form = Program.serviceProvider.GetRequiredService<FrmConsultaOcorrencia>();
             form.ShowDialog();
         }
-        //
         //Cadastros
         private void cadastros_Click(object sender, EventArgs e)
         {
@@ -148,9 +144,7 @@ namespace SistemaFL
             var form = Program.serviceProvider.GetRequiredService<FrmCadUsuario>();
             form.ShowDialog();
         }
-        //
         //Funcionalidades
-
         private void btnregistros_Click(object sender, EventArgs e)
         {
             var form = Program.serviceProvider.GetRequiredService<FrmFuncionalidadeRegisto>();
@@ -182,13 +176,11 @@ namespace SistemaFL
             form.ShowDialog();
         }
         //
-        //
         private void brnRelatorios_Click(object sender, EventArgs e)
         {
             var form = Program.serviceProvider.GetRequiredService<FormRelatoriosTributacaoAnual>();
             form.ShowDialog();
         }
-        //
         //
         private void pbMinimizar_Click(object sender, EventArgs e)
         {

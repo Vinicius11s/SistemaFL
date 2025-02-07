@@ -48,6 +48,7 @@
             btnVizualizarPDF = new Button();
             tTamanhotela = new System.Windows.Forms.Timer(components);
             ckTodos = new CheckBox();
+            ckRendimentos = new CheckBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbFecharr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)axAcropdf1).BeginInit();
@@ -74,12 +75,13 @@
             // btnSalvarPDF
             // 
             btnSalvarPDF.FlatAppearance.BorderSize = 0;
+            btnSalvarPDF.FlatStyle = FlatStyle.Flat;
             btnSalvarPDF.Image = (Image)resources.GetObject("btnSalvarPDF.Image");
             btnSalvarPDF.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSalvarPDF.Location = new Point(981, 131);
+            btnSalvarPDF.Location = new Point(1025, 149);
             btnSalvarPDF.Margin = new Padding(3, 4, 3, 4);
             btnSalvarPDF.Name = "btnSalvarPDF";
-            btnSalvarPDF.Size = new Size(45, 49);
+            btnSalvarPDF.Size = new Size(50, 44);
             btnSalvarPDF.TabIndex = 14;
             btnSalvarPDF.TextAlign = ContentAlignment.MiddleRight;
             btnSalvarPDF.UseVisualStyleBackColor = true;
@@ -132,7 +134,7 @@
             // 
             ckPis.AutoSize = true;
             ckPis.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ckPis.Location = new Point(33, 259);
+            ckPis.Location = new Point(33, 289);
             ckPis.Name = "ckPis";
             ckPis.Size = new Size(48, 24);
             ckPis.TabIndex = 21;
@@ -142,10 +144,10 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI Semilight", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.Location = new Point(33, 201);
             label4.Name = "label4";
-            label4.Size = new Size(122, 17);
+            label4.Size = new Size(142, 20);
             label4.TabIndex = 22;
             label4.Text = "Campos Disponíveis:";
             // 
@@ -153,7 +155,7 @@
             // 
             ckCofins.AutoSize = true;
             ckCofins.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ckCofins.Location = new Point(33, 289);
+            ckCofins.Location = new Point(33, 319);
             ckCofins.Name = "ckCofins";
             ckCofins.Size = new Size(78, 24);
             ckCofins.TabIndex = 23;
@@ -164,7 +166,7 @@
             // 
             ckRendimentoBruto.AutoSize = true;
             ckRendimentoBruto.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ckRendimentoBruto.Location = new Point(215, 259);
+            ckRendimentoBruto.Location = new Point(208, 289);
             ckRendimentoBruto.Name = "ckRendimentoBruto";
             ckRendimentoBruto.Size = new Size(169, 24);
             ckRendimentoBruto.TabIndex = 24;
@@ -175,7 +177,7 @@
             // 
             ckRendimentoLiq.AutoSize = true;
             ckRendimentoLiq.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ckRendimentoLiq.Location = new Point(215, 289);
+            ckRendimentoLiq.Location = new Point(208, 319);
             ckRendimentoLiq.Name = "ckRendimentoLiq";
             ckRendimentoLiq.Size = new Size(181, 24);
             ckRendimentoLiq.TabIndex = 25;
@@ -186,7 +188,7 @@
             // 
             ckIRPJ.AutoSize = true;
             ckIRPJ.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ckIRPJ.Location = new Point(33, 319);
+            ckIRPJ.Location = new Point(33, 349);
             ckIRPJ.Name = "ckIRPJ";
             ckIRPJ.Size = new Size(53, 24);
             ckIRPJ.TabIndex = 26;
@@ -197,7 +199,7 @@
             // 
             ckContrSocial.AutoSize = true;
             ckContrSocial.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ckContrSocial.Location = new Point(33, 349);
+            ckContrSocial.Location = new Point(208, 259);
             ckContrSocial.Name = "ckContrSocial";
             ckContrSocial.Size = new Size(185, 24);
             ckContrSocial.TabIndex = 27;
@@ -242,12 +244,24 @@
             ckTodos.UseVisualStyleBackColor = true;
             ckTodos.CheckedChanged += ckTodos_CheckedChanged;
             // 
+            // ckRendimentos
+            // 
+            ckRendimentos.AutoSize = true;
+            ckRendimentos.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ckRendimentos.Location = new Point(33, 259);
+            ckRendimentos.Name = "ckRendimentos";
+            ckRendimentos.Size = new Size(128, 24);
+            ckRendimentos.TabIndex = 31;
+            ckRendimentos.Text = "RENDIMENTOS";
+            ckRendimentos.UseVisualStyleBackColor = true;
+            // 
             // FormRelatoriosTributacaoAnual
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1087, 710);
+            Controls.Add(ckRendimentos);
             Controls.Add(ckTodos);
             Controls.Add(btnVizualizarPDF);
             Controls.Add(axAcropdf1);
@@ -296,5 +310,6 @@
         private Button btnVizualizarPDF;
         private System.Windows.Forms.Timer tTamanhotela;
         private CheckBox ckTodos;
+        private CheckBox ckRendimentos;
     }
 }

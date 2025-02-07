@@ -65,58 +65,61 @@ namespace SistemaFL
 
         }
         private void btnsalvar_Click(object sender, EventArgs e)
-{
-    try
-    {
-        if (txtrazaosocial.Text != String.Empty)
         {
-            Empresa empresa = carregaPropriedades();
-
-            var empresaExistente = repositorio.RecuperarPorCnpj(empresa.Cnpj);
-            if (empresaExistente != null && empresaExistente.id != empresa.id)
+            try
             {
-                MessageBox.Show("Este CNPJ já está cadastrado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                avisoMostrado = true;
-            }
-
-            if (!avisoMostrado)
-            {
-                // Verificar se houve alterações no objeto antes de salvar
-                if (repositorio..ChangeTracker.HasChanges())
+                if (!string.IsNullOrEmpty(txtrazaosocial.Text))
                 {
-                    if (empresa.id == 0)
+                    Empresa empresa = carregaPropriedades();
+
+                    var empresaExistente = repositorio.RecuperarPorCnpj(empresa.Cnpj);
+                    if (empresaExistente != null && empresaExistente.id != empresa.id)
                     {
-                        repositorio.Inserir(empresa);
-                    }
-                    else if (empresa.id != 0) // Se está atualizando
-                    {
-                        repositorio.Alterar(empresa);
+                        MessageBox.Show("Este CNPJ já está cadastrado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
                     }
 
-                    Program.serviceProvider.
-                        GetRequiredService<ContextoSistema>().SaveChanges();
-                    MessageBox.Show("Salvo com sucesso");
+                    var contexto = Program.serviceProvider.GetRequiredService<ContextoSistema>();
+
+                    if (contexto.ChangeTracker.HasChanges())
+                    {
+                        if (empresa.id == 0)
+                        {
+                            repositorio.Inserir(empresa);
+                        }
+                        else
+                        {
+                            repositorio.Alterar(empresa);
+                        }
+
+                        contexto.SaveChanges();
+                        MessageBox.Show("Salvo com sucesso", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Todas as alterações já foram salvas.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                    limpar();
+                    btnnovo.Enabled = true;
+                    btnlocalizar.Enabled = true;
+                    btnalterar.Enabled = false;
+                    btncancelar.Enabled = false;
+                    btnexcluir.Enabled = false;
+                    btnsalvar.Enabled = false;
+                    pdados.Enabled = false;
+                    passociar.Enabled = false;
                 }
-                else MessageBox.Show("Todas as alterações já foram salvas.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                limpar();
-                btnnovo.Enabled = true;
-                btnlocalizar.Enabled = true;
-                btnalterar.Enabled = false;
-                btncancelar.Enabled = false;
-                btnexcluir.Enabled = false;
-                btnsalvar.Enabled = false;
-                pdados.Enabled = false;
-                passociar.Enabled = false;
+                else
+                {
+                    MessageBox.Show("É necessário informar Razão Social para concluir o cadastro.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao salvar: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        else MessageBox.Show("É necessário informar Razão Social para concluir o cadastro. ", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
-     }
-    catch (Exception ex)
-    {
-        MessageBox.Show("Erro ao salvar: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-    }
-}
         private void btncancelar_Click(object sender, EventArgs e)
         {
             limpar();

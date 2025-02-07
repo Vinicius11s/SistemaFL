@@ -21,6 +21,7 @@ namespace SistemaFL
         private ILancamentoRepositorio lancamentoRepositorio;
         private IOutrosLancamentosRepos outrosLancRepositorio;
         public int id;
+
         public FrmConsultaOcorrencia(IOcorrenciaRepositorio repositorio, ILancamentoRepositorio lancamentoRepositorio,
             IFlatRepositorio flatRepositorio, IOutrosLancamentosRepos outrosLancRepositorio)
         {
@@ -37,12 +38,25 @@ namespace SistemaFL
         {
             this.Location = new System.Drawing.Point(205, 41);
             dgdadosocorrencias.ReadOnly = true;
-            CarregarDados();
         }
+        private void btnlocalizar_Click(object sender, EventArgs e)
+        {
+            int anoAtual = DateTime.Now.Year;
 
-        //
+            if (ckOutrosLanc.Checked)
+            {
+                var lista = outrosLancRepositorio.ObterDadosOutrosLancamentos(anoAtual);
+                dgdadosocorrencias.DataSource = lista;
+                Estilos.AlterarEstiloDataGrid(dgdadosocorrencias);
+                AlterarNomesCabecalhoOutrosLancamentos(dgdadosocorrencias);
+            }
+            else
+            {
+                CarregarDadosOcorrenciaNormais();
+            }
+        }
         //DataGrid Últimos Lançamentos
-        private void CarregarDados()
+        private void CarregarDadosOcorrenciaNormais()
         {
             var lista = repositorio.ListarComFlat(e => true)
                 .AsNoTracking()
@@ -58,25 +72,19 @@ namespace SistemaFL
                 dgdadosocorrencias.Columns["oco_DataLancamentoAntigo"].DisplayIndex = 2;
                 dgdadosocorrencias.Columns["oco_valorAlteracao"].DisplayIndex = 3;
                 dgdadosocorrencias.Columns["oco_DataAlteracao"].DisplayIndex = 4;
-
             }
+            AlterarNomesCabecalho(dgdadosocorrencias);
         }
         private void AjustarFormatacaoDataGrid()
         {
-            AlterarEstilosCabecalho(dgdadosocorrencias);
-            AlterarEstilosCelulas(dgdadosocorrencias);
+            Estilos.AlterarEstiloDataGrid(dgdadosocorrencias);
             foreach (DataGridViewRow row in dgdadosocorrencias.Rows)
             {
-                AplicarFormatacaoLinha(row);
+                Estilos.AplicarFormatacaoLinha(row);
             }
         }
-        private void AlterarEstilosCabecalho(DataGridView grid)
-        {
-            grid.EnableHeadersVisualStyles = false;
-            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
-            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular);
-
+        private void AlterarNomesCabecalho(DataGridView grid)
+        {         
             grid.Columns["id"].Visible = false;
             grid.Columns["idFlat"].Visible = false;
             grid.Columns["oco_Descricao"].Visible = false;
@@ -97,6 +105,34 @@ namespace SistemaFL
             grid.Columns["oco_Tabela"].HeaderText = "ENTIDADE";
             grid.Columns["DescricaoFlat"].HeaderText = "DESCRIÇÃO FLAT";
             grid.Columns["DescricaoUsuario"].HeaderText = "USUÁRIO";
+
+            foreach (DataGridViewColumn column in grid.Columns)
+            {
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                if(column.Name == "oco_valorAntigo" || column.Name == "oco_valorAlteracao")
+                {
+                    column.DefaultCellStyle.Format = "C2";
+                }
+            }
+
+        }
+        private void AlterarNomesCabecalhoOutrosLancamentos(DataGridView grid)
+        {
+            grid.Columns["id"].Visible = false;
+            grid.Columns["idUsuario"].Visible = false;
+            grid.Columns["Usuario"].Visible = false;
+            grid.Columns["Ocorrencias"].Visible = false;
+
+            grid.Columns["DataLancamento"].HeaderText = "DATA LANÇAMENTO";
+            grid.Columns["OutrosRecebimentos"].HeaderText = "OUTROS RECEBIMENTOS   ";
+            grid.Columns["GanhoDeCapital"].HeaderText = "GANHO DE CAPITAL";
+            grid.Columns["ValorRetidoNaFonte"].HeaderText = "RETIDO NA FONTE";
+
+            foreach (DataGridViewColumn column in grid.Columns)
+            {
+                if (column.Name != "DataLancamento")
+                    column.DefaultCellStyle.Format = "C2";
+            }
         }
         private void AlterarEstilosCelulas(DataGridView grid)
         {
@@ -129,16 +165,6 @@ namespace SistemaFL
             Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, 10);
         }
 
-        private void btnlocalizar_Click(object sender, EventArgs e)
-        {
-            if (ckOutrosLanc.Checked)
-            {
-                int anoAtual = DateTime.Now.Year;
-                var lista = outrosLancRepositorio.ObterDadosOutrosLancamentos(anoAtual);
-                dgdadosocorrencias.DataSource = lista;
-            }
-
-
-        }
+       
     }
 }

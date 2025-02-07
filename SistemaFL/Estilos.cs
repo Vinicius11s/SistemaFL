@@ -34,7 +34,7 @@ namespace SistemaFL
         {        
             row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;          
         }
-
+        //
         public static void ReAjustarTamanhoFormulario(Form form, System.Windows.Forms.Timer timer, int incremento)
         {
             var screenWidth = Screen.PrimaryScreen.WorkingArea.Width;
@@ -69,7 +69,7 @@ namespace SistemaFL
 
             pbMaximizar.Location = new Point(x2, y2);
         }
-
+        //
         public static string FormatCnpj(string cnpj)
         {
             // Remove quaisquer caracteres não numéricos
@@ -104,7 +104,6 @@ namespace SistemaFL
 
             return cep;
         }
-
         //
         public static void LimparTextBoxes(Panel painel)
         {

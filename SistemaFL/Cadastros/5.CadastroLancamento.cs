@@ -226,6 +226,7 @@ namespace SistemaFL
 
                 pOutrosLancamentos.Enabled = false;
                 ckOutrosLancamentos.Checked = false;
+                ckOutrosLancamentos.Enabled = false;
                 dtdataLancamento.Enabled = false;
 
                 txtvaloraluguel.Enabled = false;
@@ -311,8 +312,6 @@ namespace SistemaFL
                 MessageBox.Show("Lançamento não localizado.");
             }
         }
-
-
         private void btnexcluir_Click(object sender, EventArgs e)
         {
             if (ckOutrosLancamentos.Checked == false)

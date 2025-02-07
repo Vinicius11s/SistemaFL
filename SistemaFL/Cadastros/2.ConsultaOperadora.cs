@@ -29,11 +29,22 @@ namespace SistemaFL
         private void FrmConsultaEmpresa_Load(object sender, EventArgs e)
         {
             this.Location = new System.Drawing.Point(205, 41);
+
+            txtdescricao.Text = "Digite aqui a descrição da Operadora";
+            txtdescricao.ForeColor = Color.Gray;
+
+            dgdados.SuspendLayout(); // Suspende o layout do DataGridView
             dgdados.DataSource = null;
+            dgdados.ResumeLayout();  // Retoma o layout após a alteração
             dgdados.Rows.Clear();
         }
         private void btnlocalizar_Click(object sender, EventArgs e)
         {
+            if (txtdescricao.Text == "Digite aqui a descrição da Operadora")
+            {
+                txtdescricao.Text = "";
+            }
+
             CarregarDados();
             AlterarNomesCabecalho(dgdados);
 

@@ -23,52 +23,19 @@ namespace SistemaFL.Funcionalidades
             InitializeComponent();
             this.flatRepositório = flatRepositorio;
             this.lançamentoRepositório = lancamentoRepositorio;
+
+            tTamanhotela.Tick += tTamanhotela_Tick;
+            tTamanhotela.Start();
+
         }
         private void FrmFuncAluguelDividendo_Load(object sender, EventArgs e)
+
         {
-            AjustarLayoutFormulario();
+            this.Location = new System.Drawing.Point(205, 41);
             CarregarGridDados();
             AdicionarLinhaTotal();
             dgdadosAlugDiv.DataBindingComplete += dgdadosAlugDiv_DataBindingComplete;
             CarregarGridTotais();
-        }
-        //
-        //Ajustar Layout do Formulário
-        private void AjustarLayoutFormulario()
-        {
-            AjustaPictureBox_MaxMinFechar();
-            AjustarTamanhoDataGridView();
-        }
-        private void AjustaPictureBox_MaxMinFechar()
-        {
-            int margem = 10;
-
-            // Posição do pbMaximizar (no canto superior direito)
-            int x1 = this.ClientSize.Width - pbFechar.Width - margem;
-            int y1 = margem;
-
-            pbFechar.Location = new Point(x1, y1);
-
-            // Posição do pbFechar (ao lado esquerdo de pbMaximizar)
-            int x2 = x1 - pbMaximizar.Width - margem;
-            int y2 = margem;
-
-            pbMaximizar.Location = new Point(x2, y2);
-
-            // Posição do pbMinimizar (ao lado esquerdo de pbFechar)
-            int x3 = x2 - pbMinimizar.Width - margem;
-            int y3 = margem;
-
-            pbMinimizar.Location = new Point(x3, y3);
-
-        }
-        private void AjustarTamanhoDataGridView()
-        {
-            int margemDireita = SystemInformation.VerticalResizeBorderThickness;
-            int margemInferior = SystemInformation.HorizontalResizeBorderThickness;
-
-            dgdadosAlugDiv.Width = this.ClientSize.Width - dgdadosAlugDiv.Left - margemDireita;
-            dgdadosAlugDiv.Top = this.ClientSize.Height - dgdadosAlugDiv.Height - margemInferior;
         }
         //
         //DataGrid Dados
@@ -149,7 +116,7 @@ namespace SistemaFL.Funcionalidades
                 {
                     col.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
                 }
-            }          
+            }
         }
         private void AdicionarLinhaTotal()
         {
@@ -212,6 +179,8 @@ namespace SistemaFL.Funcionalidades
                 AplicarFormatacaoLinha(row);
             }
             AplicarNegritoUltimaLinha();
+            this.Resize += FrmFuncAluguelDividendo_Resize;
+
         }
         private void AplicarFormatacaoLinha(DataGridViewRow row)
         {
@@ -402,9 +371,15 @@ namespace SistemaFL.Funcionalidades
 
             return tabela;
         }
-        private void dgdadosAlugDiv_Resize(object sender, EventArgs e)
+        private void tTamanhotela_Tick(object sender, EventArgs e)
         {
-            AjustaPictureBox_MaxMinFechar();
+            Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, 10);
+
+        }
+        private void FrmFuncAluguelDividendo_Resize(object sender, EventArgs e)
+        {
+            dgdadosAlugDiv.Width = this.ClientSize.Width - dgdadosAlugDiv.Left - 215;
+            dgtotalmes.Width = this.ClientSize.Width - dgtotalmes.Left - 215;
         }
     }
 }

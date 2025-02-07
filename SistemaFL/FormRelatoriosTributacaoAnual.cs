@@ -128,8 +128,10 @@
                 }
                 private void AdicionarTabela(Document doc, dynamic dados)
                 {
-                    int numColunas = 2;
+                    int numColunas = 1;
 
+                    if (ckRendimentos.Checked)
+                        numColunas++;
                     if (ckPis.Checked)
                         numColunas++;
                     if (ckCofins.Checked)
@@ -140,9 +142,13 @@
                     // Defina larguras das colunas com base nas colunas visíveis
                     float[] larguras = new float[numColunas];
                     larguras[0] = 3; // Mês
-                    larguras[1] = 2; // RENDIMENTOS
-                    int coluna = 2;
+                    int coluna = 1;
 
+                    if (ckRendimentos.Checked)
+                    {
+                        larguras[coluna] = 2; // RENDIMENTOS
+                        coluna++;
+                    }
                     if (ckPis.Checked)
                     {
                         larguras[coluna] = 2;
@@ -155,7 +161,9 @@
                     tabela.SetWidths(larguras);
 
                     AdicionarCelulaCabecalho(tabela, "MÊS");
-                    AdicionarCelulaCabecalho(tabela, "RENDIMENTOS");
+
+                    if (ckRendimentos.Checked)
+                        AdicionarCelulaCabecalho(tabela, "RENDIMENTOS");
 
                     if (ckPis.Checked)
                         AdicionarCelulaCabecalho(tabela, "PIS (0.65%)");
@@ -171,9 +179,10 @@
                         decimal pis = valorMes * 0.0065m;
                         decimal cofins = valorMes * 0.03m;
 
-                        // Adicionando as células para cada coluna, de forma condicional
                         tabela.AddCell(new PdfPCell(new Phrase(mes)) { HorizontalAlignment = Element.ALIGN_CENTER });
-                        tabela.AddCell(new PdfPCell(new Phrase(valorMes.ToString("C2"))) { HorizontalAlignment = Element.ALIGN_RIGHT });
+
+                        if (ckRendimentos.Checked)
+                            tabela.AddCell(new PdfPCell(new Phrase(valorMes.ToString("C2"))) { HorizontalAlignment = Element.ALIGN_RIGHT });
 
                         if (ckPis.Checked)
                             tabela.AddCell(new PdfPCell(new Phrase(pis.ToString("C2"))) { HorizontalAlignment = Element.ALIGN_RIGHT });

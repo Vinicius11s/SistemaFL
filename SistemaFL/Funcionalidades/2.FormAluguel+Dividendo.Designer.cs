@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFuncAluguelDividendo));
             dgdadosAlugDiv = new DataGridView();
             dgtotalmes = new DataGridView();
             pbFechar = new PictureBox();
-            pbMaximizar = new PictureBox();
             label1 = new Label();
             pbMinimizar = new PictureBox();
+            tTamanhotela = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)dgdadosAlugDiv).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgtotalmes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbMaximizar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbMinimizar).BeginInit();
             SuspendLayout();
             // 
@@ -48,50 +48,38 @@
             dgdadosAlugDiv.BackgroundColor = Color.White;
             dgdadosAlugDiv.BorderStyle = BorderStyle.None;
             dgdadosAlugDiv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosAlugDiv.Location = new Point(0, 51);
+            dgdadosAlugDiv.Location = new Point(0, 72);
             dgdadosAlugDiv.Margin = new Padding(3, 10, 3, 4);
             dgdadosAlugDiv.Name = "dgdadosAlugDiv";
             dgdadosAlugDiv.ReadOnly = true;
             dgdadosAlugDiv.ScrollBars = ScrollBars.Horizontal;
-            dgdadosAlugDiv.Size = new Size(900, 357);
+            dgdadosAlugDiv.Size = new Size(872, 361);
             dgdadosAlugDiv.TabIndex = 0;
             dgdadosAlugDiv.ColumnHeaderMouseClick += dgdadosAlugDiv_ColumnHeaderMouseClick;
             dgdadosAlugDiv.DataBindingComplete += dgdadosAlugDiv_DataBindingComplete;
-            dgdadosAlugDiv.Resize += dgdadosAlugDiv_Resize;
             // 
             // dgtotalmes
             // 
             dgtotalmes.BackgroundColor = Color.White;
             dgtotalmes.BorderStyle = BorderStyle.None;
             dgtotalmes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgtotalmes.Dock = DockStyle.Bottom;
-            dgtotalmes.Location = new Point(0, 352);
+            dgtotalmes.Location = new Point(0, 509);
             dgtotalmes.Name = "dgtotalmes";
             dgtotalmes.ReadOnly = true;
-            dgtotalmes.Size = new Size(900, 69);
+            dgtotalmes.Size = new Size(1045, 92);
             dgtotalmes.TabIndex = 1;
             // 
             // pbFechar
             // 
+            pbFechar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
-            pbFechar.Location = new Point(871, 6);
+            pbFechar.Location = new Point(842, 5);
             pbFechar.Name = "pbFechar";
             pbFechar.Size = new Size(30, 21);
             pbFechar.SizeMode = PictureBoxSizeMode.CenterImage;
             pbFechar.TabIndex = 11;
             pbFechar.TabStop = false;
             pbFechar.Click += pbFechar_Click;
-            // 
-            // pbMaximizar
-            // 
-            pbMaximizar.Image = (Image)resources.GetObject("pbMaximizar.Image");
-            pbMaximizar.Location = new Point(841, 6);
-            pbMaximizar.Name = "pbMaximizar";
-            pbMaximizar.Size = new Size(30, 21);
-            pbMaximizar.SizeMode = PictureBoxSizeMode.CenterImage;
-            pbMaximizar.TabIndex = 10;
-            pbMaximizar.TabStop = false;
-            pbMaximizar.Click += pbMaximizar_Click;
             // 
             // label1
             // 
@@ -106,8 +94,9 @@
             // 
             // pbMinimizar
             // 
+            pbMinimizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbMinimizar.Image = (Image)resources.GetObject("pbMinimizar.Image");
-            pbMinimizar.Location = new Point(810, 6);
+            pbMinimizar.Location = new Point(813, 5);
             pbMinimizar.Name = "pbMinimizar";
             pbMinimizar.Size = new Size(30, 21);
             pbMinimizar.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -115,16 +104,20 @@
             pbMinimizar.TabStop = false;
             pbMinimizar.Click += pbMinimizar_Click;
             // 
+            // tTamanhotela
+            // 
+            tTamanhotela.Interval = 1;
+            tTamanhotela.Tick += tTamanhotela_Tick;
+            // 
             // FrmFuncAluguelDividendo
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(900, 421);
+            ClientSize = new Size(1087, 601);
             Controls.Add(pbMinimizar);
             Controls.Add(label1);
             Controls.Add(pbFechar);
-            Controls.Add(pbMaximizar);
             Controls.Add(dgtotalmes);
             Controls.Add(dgdadosAlugDiv);
             Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -135,10 +128,10 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Aluguel + Dividendos";
             Load += FrmFuncAluguelDividendo_Load;
+            Resize += FrmFuncAluguelDividendo_Resize;
             ((System.ComponentModel.ISupportInitialize)dgdadosAlugDiv).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgtotalmes).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbMaximizar).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbMinimizar).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -149,8 +142,8 @@
         private DataGridView dgdadosAlugDiv;
         private DataGridView dgtotalmes;
         private PictureBox pbFechar;
-        private PictureBox pbMaximizar;
         private Label label1;
         private PictureBox pbMinimizar;
+        private System.Windows.Forms.Timer tTamanhotela;
     }
 }

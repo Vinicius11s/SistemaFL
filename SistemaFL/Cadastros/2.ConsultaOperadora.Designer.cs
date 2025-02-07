@@ -46,14 +46,14 @@
             label1.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.Location = new Point(152, 43);
             label1.Name = "label1";
-            label1.Size = new Size(183, 25);
+            label1.Size = new Size(105, 25);
             label1.TabIndex = 0;
-            label1.Text = "Descrição Empresa :";
+            label1.Text = "Descrição :";
             // 
             // txtdescricao
             // 
             txtdescricao.Font = new Font("Segoe UI Semilight", 11.25F);
-            txtdescricao.Location = new Point(340, 42);
+            txtdescricao.Location = new Point(263, 44);
             txtdescricao.Name = "txtdescricao";
             txtdescricao.Size = new Size(472, 27);
             txtdescricao.TabIndex = 1;
@@ -64,7 +64,7 @@
             btnlocalizar.FlatStyle = FlatStyle.Flat;
             btnlocalizar.Font = new Font("Segoe UI Semilight", 11.25F);
             btnlocalizar.Image = (Image)resources.GetObject("btnlocalizar.Image");
-            btnlocalizar.Location = new Point(824, 39);
+            btnlocalizar.Location = new Point(747, 41);
             btnlocalizar.Name = "btnlocalizar";
             btnlocalizar.Size = new Size(41, 32);
             btnlocalizar.TabIndex = 2;
