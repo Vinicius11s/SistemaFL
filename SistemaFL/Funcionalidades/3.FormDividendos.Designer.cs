@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFuncDividendos));
             dgdadosDiv = new DataGridView();
             pbFechar = new PictureBox();
-            pbMaximizar = new PictureBox();
             label1 = new Label();
             pbMinimizar = new PictureBox();
+            tTamanhotela = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)dgdadosDiv).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbMaximizar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbMinimizar).BeginInit();
             SuspendLayout();
             // 
@@ -46,16 +46,17 @@
             dgdadosDiv.BackgroundColor = Color.White;
             dgdadosDiv.BorderStyle = BorderStyle.None;
             dgdadosDiv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosDiv.Location = new Point(0, 64);
+            dgdadosDiv.Location = new Point(0, 77);
             dgdadosDiv.Margin = new Padding(3, 4, 3, 4);
             dgdadosDiv.Name = "dgdadosDiv";
-            dgdadosDiv.Size = new Size(903, 360);
+            dgdadosDiv.Size = new Size(903, 343);
             dgdadosDiv.TabIndex = 0;
             dgdadosDiv.ColumnHeaderMouseClick += dgdadosDiv_ColumnHeaderMouseClick;
             dgdadosDiv.DataBindingComplete += dgdadosDiv_DataBindingComplete;
             // 
             // pbFechar
             // 
+            pbFechar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
             pbFechar.Location = new Point(863, 5);
             pbFechar.Name = "pbFechar";
@@ -65,38 +66,33 @@
             pbFechar.TabStop = false;
             pbFechar.Click += pbFechar_Click;
             // 
-            // pbMaximizar
-            // 
-            pbMaximizar.Image = (Image)resources.GetObject("pbMaximizar.Image");
-            pbMaximizar.Location = new Point(831, 5);
-            pbMaximizar.Name = "pbMaximizar";
-            pbMaximizar.Size = new Size(30, 21);
-            pbMaximizar.SizeMode = PictureBoxSizeMode.CenterImage;
-            pbMaximizar.TabIndex = 12;
-            pbMaximizar.TabStop = false;
-            pbMaximizar.Click += pbMaximizar_Click;
-            // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Segoe UI Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(14, 14);
+            label1.Location = new Point(24, 21);
             label1.Name = "label1";
-            label1.Size = new Size(106, 25);
+            label1.Size = new Size(111, 30);
             label1.TabIndex = 14;
             label1.Text = "Dividendos";
             // 
             // pbMinimizar
             // 
+            pbMinimizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbMinimizar.Image = (Image)resources.GetObject("pbMinimizar.Image");
-            pbMinimizar.Location = new Point(799, 5);
+            pbMinimizar.Location = new Point(833, 5);
             pbMinimizar.Name = "pbMinimizar";
             pbMinimizar.Size = new Size(30, 21);
             pbMinimizar.SizeMode = PictureBoxSizeMode.CenterImage;
             pbMinimizar.TabIndex = 15;
             pbMinimizar.TabStop = false;
             pbMinimizar.Click += pbMinimizar_Click;
+            // 
+            // tTamanhotela
+            // 
+            tTamanhotela.Interval = 1;
+            tTamanhotela.Tick += tTamanhotela_Tick;
             // 
             // FrmFuncDividendos
             // 
@@ -107,7 +103,6 @@
             Controls.Add(pbMinimizar);
             Controls.Add(label1);
             Controls.Add(pbFechar);
-            Controls.Add(pbMaximizar);
             Controls.Add(dgdadosDiv);
             Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
@@ -120,7 +115,6 @@
             Resize += FrmFuncDividendos_Resize;
             ((System.ComponentModel.ISupportInitialize)dgdadosDiv).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbMaximizar).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbMinimizar).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -130,8 +124,8 @@
 
         private DataGridView dgdadosDiv;
         private PictureBox pbFechar;
-        private PictureBox pbMaximizar;
         private Label label1;
         private PictureBox pbMinimizar;
+        private System.Windows.Forms.Timer tTamanhotela;
     }
 }

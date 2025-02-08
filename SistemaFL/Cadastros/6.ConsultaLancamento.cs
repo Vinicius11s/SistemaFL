@@ -200,9 +200,9 @@ namespace SistemaFL
         }       
         private void tTamanhotela_Tick(object sender, EventArgs e)
         {
-            Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, 10);
+            Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela);
         }
 
-        
+
     }
 }

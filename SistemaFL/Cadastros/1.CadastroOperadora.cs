@@ -497,8 +497,8 @@ namespace SistemaFL
         }
         private void tTamanhotela_Tick(object sender, EventArgs e)
         {
-            Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, incremento);
-        }    
+            Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela);
+        }
         private async void btnBuscaCep_Click(object sender, EventArgs e)
         {
             string cep = txtcep.Text.Trim(); // Pega o CEP digitado no TextBox

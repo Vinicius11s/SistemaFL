@@ -1,4 +1,5 @@
 ﻿using Interfaces;
+using Microsoft.Web.WebView2.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ namespace SistemaFL.Funcionalidades
 {
     public partial class FrmFuncFundoReserva : Form
     {
+        private bool ordenacaoAscendente = true;
         private IFlatRepositorio flatRepositorio;
         private ILancamentoRepositorio lancamentoRepositorio;
         public FrmFuncFundoReserva(IFlatRepositorio flatRepositorio, ILancamentoRepositorio lancamentoRepositorio)
@@ -20,12 +22,14 @@ namespace SistemaFL.Funcionalidades
             InitializeComponent();
             this.flatRepositorio = flatRepositorio;
             this.lancamentoRepositorio = lancamentoRepositorio;
-            this.Resize += FrmFuncFundoReserva_Resize;
+
+            tTamanhotela.Tick += tTamanhotela_Tick;
+            tTamanhotela.Start();
 
         }
         private void FrmFuncFundoReserva_Load(object sender, EventArgs e)
         {
-            AjustarLayoutFormulario();
+            this.Location = new System.Drawing.Point(205, 41);
             CarregarDataGridDados();
             AdicionarLinhaTotal();
 
@@ -35,83 +39,15 @@ namespace SistemaFL.Funcionalidades
             {
                 dgdadosFunRes.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             }
-        }
-        //
-        //Ajustar Layout do Formulário
-        private void AjustarLayoutFormulario()
-        {
-            AjustaPictureBox_MaxMinFechar();
-            AjustarTamanhoDataGridView();
-        }
-        private void AjustaPictureBox_MaxMinFechar()
-        {
-            int margem = 10;
-
-            // Posição do pbMaximizar (no canto superior direito)
-            int x1 = this.ClientSize.Width - pbFechar.Width - margem;
-            int y1 = margem;
-
-            pbFechar.Location = new Point(x1, y1);
-
-            // Posição do pbFechar (ao lado esquerdo de pbMaximizar)
-            int x2 = x1 - pbMaximizar.Width - margem;
-            int y2 = margem;
-
-            pbMaximizar.Location = new Point(x2, y2);
-
-            // Posição do pbMinimizar (ao lado esquerdo de pbFechar)
-            int x3 = x2 - pbMinimizar.Width - margem;
-            int y3 = margem;
-
-            pbMinimizar.Location = new Point(x3, y3);
-
-        }
-        private void AjustarTamanhoDataGridView()
-        {
-            int margemDireita = SystemInformation.VerticalResizeBorderThickness;
-            int margemInferior = SystemInformation.HorizontalResizeBorderThickness;
-
-            dgdadosFunRes.Width = this.ClientSize.Width - dgdadosFunRes.Left - margemDireita;
-            dgdadosFunRes.Top = this.ClientSize.Height - dgdadosFunRes.Height - margemInferior;
-        }
-        //
-        //DataGrid Dados
+        }       
         private void CarregarDataGridDados()
         {
             var dados = flatRepositorio.ObterDadosFunReserva();
             DataTable dt = ConverterDynamicParaDataTable(dados);
             dgdadosFunRes.DataSource = dt;
 
-            AplicarFormatacaoGridDados();
-
-        }
-        private void AplicarFormatacaoGridDados()
-        {
-            AlterarEstilosCabecalho();
-            AlterarEstilosCelulas(dgdadosFunRes);
-        }
-        private void AlterarEstilosCabecalho()
-        {
-
-            // Desativa o estilo visual para permitir personalização
-            dgdadosFunRes.EnableHeadersVisualStyles = false;
-            dgdadosFunRes.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
-            dgdadosFunRes.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgdadosFunRes.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular);
-
-            dgdadosFunRes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgdadosFunRes.ColumnHeadersHeight = 35;  // Ajuste o valor conforme necessário
-            
-        }
-        private void AlterarEstilosCelulas(DataGridView grid)
-        {
-
-            foreach (DataGridViewColumn col in grid.Columns)
-            {
-                col.DefaultCellStyle.Padding = new Padding(5, 2, 5, 2);  // Espaçamento interno
-            }
-
-            foreach (DataGridViewColumn coluna in grid.Columns)
+            Estilos.AlterarEstiloDataGrid(dgdadosFunRes);
+            foreach (DataGridViewColumn coluna in dgdadosFunRes.Columns)
             {
                 if (coluna.Name != "CODFLAT")
                 {
@@ -119,7 +55,8 @@ namespace SistemaFL.Funcionalidades
                 }
             }
 
-        }
+
+        }       
         private void AdicionarLinhaTotal()
         {
             DataTable dt = (DataTable)dgdadosFunRes.DataSource;
@@ -168,20 +105,7 @@ namespace SistemaFL.Funcionalidades
 
             dgdadosFunRes.AllowUserToAddRows = false;
             dgdadosFunRes.Refresh();
-        }
-        //
-        //Após o carregamento
-        private void dgdadosFunRes_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            foreach (DataGridViewRow row in dgdadosFunRes.Rows)
-            {
-                AplicarFormatacaoLinha(row);
-            }
-        }
-        private void AplicarFormatacaoLinha(DataGridViewRow row)
-        {
-            row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
-        }
+        }      
         private void AplicarNegritoUltimaLinha()
         {
             // Verifica se há linhas no DataGridView
@@ -203,9 +127,13 @@ namespace SistemaFL.Funcionalidades
                 }
             }
         }
-        //
-        //Eventos
-        private bool ordenacaoAscendente = true; // Variável para controlar a alternância da ordenação
+        private void dgdadosFunRes_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow row in dgdadosFunRes.Rows)
+            {
+                Estilos.AplicarFormatacaoLinha(row);
+            }
+        }
         private void dgdadosFunRes_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             // Obtendo o DataTable vinculado ao DataGridView
@@ -248,11 +176,6 @@ namespace SistemaFL.Funcionalidades
 
             ordenacaoAscendente = !ordenacaoAscendente;
         }
-        private void FrmFuncFundoReserva_Resize(object sender, EventArgs e)
-        {
-            AjustaPictureBox_MaxMinFechar();
-        }
-        //
         public DataTable ConverterDynamicParaDataTable(IEnumerable<dynamic> lista)
         {
             DataTable tabela = new DataTable();
@@ -284,25 +207,21 @@ namespace SistemaFL.Funcionalidades
 
             return tabela;
         }
+        private void FrmFuncFundoReserva_Resize(object sender, EventArgs e)
+        {
+            Estilos.AjustarMargemDataGrid(dgdadosFunRes, this);
+        }            
         private void pbFechar_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-        private void pbMaximizar_Click(object sender, EventArgs e)
-        {
-            if (this.WindowState == FormWindowState.Maximized)
-            {
-                this.WindowState = FormWindowState.Normal;
-            }
-            else
-            {
-                this.WindowState = FormWindowState.Maximized;
-            }
-        }
+        }       
         private void pbMinimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
+        private void tTamanhotela_Tick(object sender, EventArgs e)
+        {
+            Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela);
+        }
     }
 }

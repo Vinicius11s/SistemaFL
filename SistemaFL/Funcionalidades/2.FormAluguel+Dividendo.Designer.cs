@@ -48,12 +48,12 @@
             dgdadosAlugDiv.BackgroundColor = Color.White;
             dgdadosAlugDiv.BorderStyle = BorderStyle.None;
             dgdadosAlugDiv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosAlugDiv.Location = new Point(0, 72);
+            dgdadosAlugDiv.Location = new Point(0, 88);
             dgdadosAlugDiv.Margin = new Padding(3, 10, 3, 4);
             dgdadosAlugDiv.Name = "dgdadosAlugDiv";
             dgdadosAlugDiv.ReadOnly = true;
             dgdadosAlugDiv.ScrollBars = ScrollBars.Horizontal;
-            dgdadosAlugDiv.Size = new Size(872, 361);
+            dgdadosAlugDiv.Size = new Size(872, 562);
             dgdadosAlugDiv.TabIndex = 0;
             dgdadosAlugDiv.ColumnHeaderMouseClick += dgdadosAlugDiv_ColumnHeaderMouseClick;
             dgdadosAlugDiv.DataBindingComplete += dgdadosAlugDiv_DataBindingComplete;
@@ -63,10 +63,10 @@
             dgtotalmes.BackgroundColor = Color.White;
             dgtotalmes.BorderStyle = BorderStyle.None;
             dgtotalmes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgtotalmes.Location = new Point(0, 509);
+            dgtotalmes.Location = new Point(0, 682);
             dgtotalmes.Name = "dgtotalmes";
             dgtotalmes.ReadOnly = true;
-            dgtotalmes.Size = new Size(1045, 92);
+            dgtotalmes.Size = new Size(1045, 69);
             dgtotalmes.TabIndex = 1;
             // 
             // pbFechar
@@ -84,11 +84,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semilight", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Segoe UI Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(10, 9);
+            label1.Location = new Point(24, 21);
             label1.Name = "label1";
-            label1.Size = new Size(187, 25);
+            label1.Size = new Size(203, 30);
             label1.TabIndex = 15;
             label1.Text = "Aluguel + Dividendos";
             // 
@@ -114,7 +114,7 @@
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1087, 601);
+            ClientSize = new Size(1087, 749);
             Controls.Add(pbMinimizar);
             Controls.Add(label1);
             Controls.Add(pbFechar);

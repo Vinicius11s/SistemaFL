@@ -12,6 +12,7 @@ using System.Globalization;
 using System.Reflection.Metadata.Ecma335;
 using Azure.Core;
 using System.Text.RegularExpressions;
+using System.Data;
 
 namespace Infraestrutura.Repositorio
 {
@@ -51,7 +52,9 @@ namespace Infraestrutura.Repositorio
         }
         public decimal CalcularTotalValorDeCompra()
         {
-            return _context.Flat.Sum(flat => flat.ValorDeCompra);
+            return _context.Flat
+               .Where(flat => flat.Status != "Vendido") // Filtra os que NÃO estão vendidos
+               .Sum(flat => flat.ValorDeCompra);
         }
         public int CalcularTotalFlats()
         {
@@ -308,162 +311,160 @@ namespace Infraestrutura.Repositorio
 
             return new List<dynamic> { resultado };
         }
-
         //
         //Formulário Rendimentos
-        public IEnumerable<dynamic> ObterDadosRendimentos()
-        {
-            var flats = _context.Flat
-                .Include(flat => flat.Lancamentos)
+        public IEnumerable<dynamic> ObterDadosRendimentos(int ano)
+            {
+                var flats = _context.Flat
+                    .Include(flat => flat.Lancamentos)
+                    .ToList();
+
+                var dadosRendimentos = flats.Select(flat => new
+                {
+                    EMPREENDIMENTO = flat.Descricao,
+                    CODFLAT = flat.id,
+                    ValorImovel = flat.ValorDeCompra,
+
+                    // Calcular os rendimentos e porcentagens para cada mês
+                    JANEIRO = CalcularRendimentoPorMes(flat.Lancamentos, 1, ano),
+                    PorcentagemJan = CalcularPorcentagemPorMes(flat.Lancamentos, 1, ano, flat.ValorDeCompra),
+
+                    FEVEREIRO = CalcularRendimentoPorMes(flat.Lancamentos, 2, ano),
+                    PorcentagemFev = CalcularPorcentagemPorMes(flat.Lancamentos, 2, ano, flat.ValorDeCompra),
+
+                    MARÇO = CalcularRendimentoPorMes(flat.Lancamentos, 3, ano),
+                    PorcentagemMar = CalcularPorcentagemPorMes(flat.Lancamentos, 3, ano, flat.ValorDeCompra),
+
+                    ABRIL = CalcularRendimentoPorMes(flat.Lancamentos, 4, ano),
+                    PorcentagemAbr = CalcularPorcentagemPorMes(flat.Lancamentos, 4, ano, flat.ValorDeCompra),
+
+                    MAIO = CalcularRendimentoPorMes(flat.Lancamentos, 5, ano),
+                    PorcentagemMai = CalcularPorcentagemPorMes(flat.Lancamentos, 5, ano, flat.ValorDeCompra),
+
+                    JUNHO = CalcularRendimentoPorMes(flat.Lancamentos, 6, ano),
+                    PorcentagemJun = CalcularPorcentagemPorMes(flat.Lancamentos, 6, ano, flat.ValorDeCompra),
+
+                    JULHO = CalcularRendimentoPorMes(flat.Lancamentos, 7, ano),
+                    PorcentagemJul = CalcularPorcentagemPorMes(flat.Lancamentos, 7, ano, flat.ValorDeCompra),
+
+                    AGOSTO = CalcularRendimentoPorMes(flat.Lancamentos, 8, ano),
+                    PorcentagemAgo = CalcularPorcentagemPorMes(flat.Lancamentos, 8, ano, flat.ValorDeCompra),
+
+                    SETEMBRO = CalcularRendimentoPorMes(flat.Lancamentos, 9, ano),
+                    PorcentagemSet = CalcularPorcentagemPorMes(flat.Lancamentos, 9, ano, flat.ValorDeCompra),
+
+                    OUTUBRO = CalcularRendimentoPorMes(flat.Lancamentos, 10, ano),
+                    PorcentagemOut = CalcularPorcentagemPorMes(flat.Lancamentos, 10, ano, flat.ValorDeCompra),
+
+                    NOVEMBRO = CalcularRendimentoPorMes(flat.Lancamentos, 11, ano),
+                    PorcentagemNov = CalcularPorcentagemPorMes(flat.Lancamentos, 11, ano, flat.ValorDeCompra),
+
+                    DEZEMBRO = CalcularRendimentoPorMes(flat.Lancamentos, 12, ano),
+                    PorcentagemDez = CalcularPorcentagemPorMes(flat.Lancamentos, 12, ano, flat.ValorDeCompra),
+
+                    RendimentoAnual = CalculaRendimentoAnualPorFlat(flat.Lancamentos, ano),
+                    PorcentagemAnual = CalculaPorcentagemAnualPorFlat(flat.Lancamentos, flat.ValorDeCompra, ano)
+                })
+                .OrderBy(flat => flat.EMPREENDIMENTO)
                 .ToList();
 
-            var dadosRendimentos = flats.Select(flat => new
-            {
-                EMPREENDIMENTO = flat.Descricao,
-                CODFLAT = flat.id,
-                ValorImovel = flat.ValorDeCompra,
 
-                // Calcular os rendimentos e porcentagens para cada mês
-                JANEIRO = CalcularRendimentoPorMes(flat.Lancamentos, 1),
-                PorcentagemJan = CalcularPorcentagemPorMes(flat.Lancamentos, 1, flat.ValorDeCompra),
-
-                FEVEREIRO = CalcularRendimentoPorMes(flat.Lancamentos, 2),
-                PorcentagemFev = CalcularPorcentagemPorMes(flat.Lancamentos, 2, flat.ValorDeCompra),
-
-                MARÇO = CalcularRendimentoPorMes(flat.Lancamentos, 3),
-                PorcentagemMar = CalcularPorcentagemPorMes(flat.Lancamentos, 3, flat.ValorDeCompra),
-
-                ABRIL = CalcularRendimentoPorMes(flat.Lancamentos, 4),
-                PorcentagemAbr = CalcularPorcentagemPorMes(flat.Lancamentos, 4, flat.ValorDeCompra),
-
-                MAIO = CalcularRendimentoPorMes(flat.Lancamentos, 5),
-                PorcentagemMai = CalcularPorcentagemPorMes(flat.Lancamentos, 5, flat.ValorDeCompra),
-
-                JUNHO = CalcularRendimentoPorMes(flat.Lancamentos, 6),
-                PorcentagemJun = CalcularPorcentagemPorMes(flat.Lancamentos, 6, flat.ValorDeCompra),
-
-                JULHO = CalcularRendimentoPorMes(flat.Lancamentos, 7),
-                PorcentagemJul = CalcularPorcentagemPorMes(flat.Lancamentos, 7, flat.ValorDeCompra),
-
-                AGOSTO = CalcularRendimentoPorMes(flat.Lancamentos, 8),
-                PorcentagemAgo = CalcularPorcentagemPorMes(flat.Lancamentos, 8, flat.ValorDeCompra),
-
-                SETEMBRO = CalcularRendimentoPorMes(flat.Lancamentos, 9),
-                PorcentagemSet = CalcularPorcentagemPorMes(flat.Lancamentos, 9, flat.ValorDeCompra),
-
-                OUTUBRO = CalcularRendimentoPorMes(flat.Lancamentos, 10),
-                PorcentagemOut = CalcularPorcentagemPorMes(flat.Lancamentos, 10, flat.ValorDeCompra),
-
-                NOVEMBRO = CalcularRendimentoPorMes(flat.Lancamentos, 11),
-                PorcentagemNov = CalcularPorcentagemPorMes(flat.Lancamentos, 11, flat.ValorDeCompra),
-
-                DEZEMBRO = CalcularRendimentoPorMes(flat.Lancamentos, 12),
-                PorcentagemDez = CalcularPorcentagemPorMes(flat.Lancamentos, 12, flat.ValorDeCompra),
-
-                RendimentoAnual = CalculaRendimentoAnualPorFlat(flat.Lancamentos),
-                PorcentagemAnual = CalculaPorcentagemAnualPorFlat(flat.Lancamentos, flat.ValorDeCompra)
-            })
-            .OrderBy(flat => flat.EMPREENDIMENTO)
-            .ToList();
-
-
-            return dadosRendimentos;
-        }
-        public IEnumerable<object> ObterDadosTotais()
+                return dadosRendimentos;
+            }
+        public IEnumerable<object> ObterDadosTotais(int ano)
         {
             var totalInv = CalcularTotalValorDeCompra();
 
-            var totalJan = CalculaLancamentosPorMes(1, false);
-            var PorcJan = CalculaLancamentosPorMes(1, true);
+            var totalJan = CalculaLancamentosPorMes(1, ano, false);
+            var PorcJan = CalculaLancamentosPorMes(1, ano, true);
 
-            var totalFev = CalculaLancamentosPorMes(2, false);
-            var PorcFev = CalculaLancamentosPorMes(2, true);
+            var totalFev = CalculaLancamentosPorMes(2, ano, false);
+            var PorcFev = CalculaLancamentosPorMes(2, ano, true);
 
-            var totalMar = CalculaLancamentosPorMes(3, false);
-            var PorcMar = CalculaLancamentosPorMes(3, true);
+            var totalMar = CalculaLancamentosPorMes(3, ano, false);
+            var PorcMar = CalculaLancamentosPorMes(3, ano, true);
 
-            var totalAbr = CalculaLancamentosPorMes(4, false);
-            var PorcAbr = CalculaLancamentosPorMes(4, true);
+            var totalAbr = CalculaLancamentosPorMes(4, ano, false);
+            var PorcAbr = CalculaLancamentosPorMes(4, ano, true);
 
-            var totalMai = CalculaLancamentosPorMes(5, false);
-            var PorcMai = CalculaLancamentosPorMes(5, true);
+            var totalMai = CalculaLancamentosPorMes(5, ano, false);
+            var PorcMai = CalculaLancamentosPorMes(5, ano, true);
 
-            var totalJun = CalculaLancamentosPorMes(6, false);
-            var PorcJun = CalculaLancamentosPorMes(6, true);
+            var totalJun = CalculaLancamentosPorMes(6, ano, false);
+            var PorcJun = CalculaLancamentosPorMes(6, ano, true);
 
-            var totalJul = CalculaLancamentosPorMes(7, false);
-            var PorcJul = CalculaLancamentosPorMes(7, true);
+            var totalJul = CalculaLancamentosPorMes(7, ano, false);
+            var PorcJul = CalculaLancamentosPorMes(7, ano, true);
 
-            var totalAgo = CalculaLancamentosPorMes(8, false);
-            var PorcAgo = CalculaLancamentosPorMes(8, true);
+            var totalAgo = CalculaLancamentosPorMes(8, ano, false);
+            var PorcAgo = CalculaLancamentosPorMes(8, ano, true);
 
-            var totalSet = CalculaLancamentosPorMes(9, false);
-            var PorcSet = CalculaLancamentosPorMes(9, true);
+            var totalSet = CalculaLancamentosPorMes(9, ano, false);
+            var PorcSet = CalculaLancamentosPorMes(9, ano, true);
 
-            var totalOut = CalculaLancamentosPorMes(10, false);
-            var PorcOut = CalculaLancamentosPorMes(10, true);
+            var totalOut = CalculaLancamentosPorMes(10, ano, false);
+            var PorcOut = CalculaLancamentosPorMes(10, ano, true);
 
-            var totalNov = CalculaLancamentosPorMes(11, false);
-            var PorcNov = CalculaLancamentosPorMes(11, true);
+            var totalNov = CalculaLancamentosPorMes(11, ano, false);
+            var PorcNov = CalculaLancamentosPorMes(11, ano, true);
 
-            var totalDez = CalculaLancamentosPorMes(12, false);
-            var PorcDez = CalculaLancamentosPorMes(12, true);
+            var totalDez = CalculaLancamentosPorMes(12, ano, false);
+            var PorcDez = CalculaLancamentosPorMes(12, ano, true);
 
             var dadosTotais = new List<object>
-    {
-        new
-        {
-            TOTAL = totalInv,
+            {
+                new
+                {
+                    TOTAL = totalInv,
 
-            JANEIRO = totalJan,
-            PorcentagemJan = PorcJan,
+                    JANEIRO = totalJan,
+                    PorcentagemJan = PorcJan,
 
-            FEVEREIRO = totalFev,
-            PorcentagemFev = PorcFev,
+                    FEVEREIRO = totalFev,
+                    PorcentagemFev = PorcFev,
 
-            MARÇO = totalMar,
-            PorcentagemMar = PorcMar,
+                    MARÇO = totalMar,
+                    PorcentagemMar = PorcMar,
 
-            ABRIL = totalAbr,
-            PorcentagemAbr = PorcAbr,
+                    ABRIL = totalAbr,
+                    PorcentagemAbr = PorcAbr,
 
-            MAIO = totalMai,
-            PorcentagemMai = PorcMai,
+                    MAIO = totalMai,
+                    PorcentagemMai = PorcMai,
 
-            JUNHO = totalJun,
-            PorcentagemJun = PorcJun,
+                    JUNHO = totalJun,
+                    PorcentagemJun = PorcJun,
 
-            JULHO = totalJul,
-            PorcentagemJul = PorcJul,
+                    JULHO = totalJul,
+                    PorcentagemJul = PorcJul,
 
-            AGOSTO = totalAgo,
-            PorcentagemAgo = PorcAgo,
+                    AGOSTO = totalAgo,
+                    PorcentagemAgo = PorcAgo,
 
-            SETEMBRO = totalSet,
-            PorcentagemSet = PorcSet,
+                    SETEMBRO = totalSet,
+                    PorcentagemSet = PorcSet,
 
-            OUTUBRO = totalOut,
-            PorcentagemOut = PorcOut,
+                    OUTUBRO = totalOut,
+                    PorcentagemOut = PorcOut,
 
-            NOVEMBRO = totalNov,
-            PorcentagemNov = PorcNov,
+                    NOVEMBRO = totalNov,
+                    PorcentagemNov = PorcNov,
 
-            Dezembro = totalDez,
-            PorcentagemDez = PorcDez
-        }
-    };
+                    Dezembro = totalDez,
+                    PorcentagemDez = PorcDez
+                }
+            };
             return dadosTotais;
         }
-        public decimal CalculaLancamentosPorMes(int mes, bool porcentagem)
+        public decimal CalculaLancamentosPorMes(int mes, int ano, bool porcentagem)
         {
             // Filtra os lançamentos no mês especificado e exclui o tipo "Aluguel Vencelau"
             var total = _context.Lancamento
-                .Where(l => l.DataPagamento.Month == mes && l.TipoPagamento != "Aluguel Vencelau")
+                .Where(l => l.DataPagamento.Month == mes && l.DataPagamento.Year == ano && l.TipoPagamento != "Aluguel Vencelau")
                 .Sum(l => (l.ValorAluguel ?? 0) + (l.ValorDividendos ?? 0) + (l.ValorFundoReserva ?? 0));
             if (porcentagem == false)
             {
                 return total;
-
             }
             else
             {
@@ -474,54 +475,52 @@ namespace Infraestrutura.Repositorio
                     return total;
                 }
                 else return 0;
-
-
             }
         }
-        public static decimal CalcularRendimentoPorMes(IEnumerable<Lancamento>? lancamentos, int mes)
+        public static decimal CalcularRendimentoPorMes(IEnumerable<Lancamento>? lancamentos, int mes, int ano)
         {
             if (lancamentos == null || mes < 1 || mes > 12)
                 return 0.00M;
 
             return lancamentos
-                .Where(l => l.DataPagamento.Month == mes)
+                .Where(l => l.DataPagamento.Month == mes && l.DataPagamento.Year == ano)
                 .Sum(l => (l.ValorDividendos ?? 0.00M) +
                           (l.ValorAluguel ?? 0.00M) +
                           (l.ValorFundoReserva ?? 0.00M));
         }
-        public static decimal CalcularPorcentagemPorMes(IEnumerable<Lancamento>? lancamentos, int mes, decimal valorImovel)
+        public static decimal CalcularPorcentagemPorMes(IEnumerable<Lancamento>? lancamentos, int mes, int ano, decimal valorImovel)
         {
             if (lancamentos == null || valorImovel <= 0 || mes < 1 || mes > 12)
                 return 0.00M;
 
             decimal rendimentoMes = lancamentos
-                .Where(l => l.DataPagamento.Month == mes)
+                .Where(l => l.DataPagamento.Month == mes && l.DataPagamento.Year == ano)
                 .Sum(l => (l.ValorAluguel ?? 0.00M) +
                           (l.ValorDividendos ?? 0.00M) +
                           (l.ValorFundoReserva ?? 0.00M));
 
             return (rendimentoMes / valorImovel) * 100;
         }
-        public static decimal CalculaRendimentoAnualPorFlat(IEnumerable<Lancamento>? lancamentos)
+        public static decimal CalculaRendimentoAnualPorFlat(IEnumerable<Lancamento>? lancamentos, int ano)
         {
             if (lancamentos == null)
                 return 0.00M;
 
             decimal rendimentoAno = lancamentos
-                .Where(l => l.DataPagamento.Year == DateTime.Now.Year)
+                .Where(l => l.DataPagamento.Year == ano)
                 .Sum(l => (l.ValorAluguel ?? 0.00M) +
                           (l.ValorDividendos ?? 0.00M) +
                           (l.ValorFundoReserva ?? 0.00M));
 
             return rendimentoAno;
         }
-        public static decimal CalculaPorcentagemAnualPorFlat(IEnumerable<Lancamento> lancamentos, decimal valorImovel)
+        public static decimal CalculaPorcentagemAnualPorFlat(IEnumerable<Lancamento> lancamentos, decimal valorImovel, int ano)
         {
             if (lancamentos == null || valorImovel <= 0)
                 return 0.00M;
 
             decimal rendimentoAno = lancamentos
-                .Where(l => l.DataPagamento.Year == DateTime.Now.Year)
+                .Where(l => l.DataPagamento.Year == ano)
                 .Sum(l => (l.ValorAluguel ?? 0.00M) +
                           (l.ValorDividendos ?? 0.00M) +
                           (l.ValorFundoReserva ?? 0.00M));

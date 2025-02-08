@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFuncionalidadeRegisto));
             dgdadosFunRegistro = new DataGridView();
             label1 = new Label();
-            pbMaximizar = new PictureBox();
             pbFechar = new PictureBox();
             label2 = new Label();
             lblTotalInvestimento = new Label();
@@ -41,9 +40,10 @@
             label5 = new Label();
             label6 = new Label();
             tTamanhotela = new System.Windows.Forms.Timer(components);
+            pbMinimizar = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgdadosFunRegistro).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbMaximizar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbMinimizar).BeginInit();
             SuspendLayout();
             // 
             // dgdadosFunRegistro
@@ -53,10 +53,10 @@
             dgdadosFunRegistro.BorderStyle = BorderStyle.None;
             dgdadosFunRegistro.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdadosFunRegistro.GridColor = Color.FromArgb(23, 24, 29);
-            dgdadosFunRegistro.Location = new Point(2, 100);
+            dgdadosFunRegistro.Location = new Point(2, 120);
             dgdadosFunRegistro.Margin = new Padding(4);
             dgdadosFunRegistro.Name = "dgdadosFunRegistro";
-            dgdadosFunRegistro.Size = new Size(1087, 456);
+            dgdadosFunRegistro.Size = new Size(1063, 436);
             dgdadosFunRegistro.TabIndex = 0;
             dgdadosFunRegistro.CellFormatting += dgdadosFunRegistro_CellFormatting;
             dgdadosFunRegistro.DataBindingComplete += dgdadosFunRegistro_DataBindingComplete;
@@ -66,25 +66,12 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(18, 52);
+            label1.Location = new Point(224, 72);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(135, 20);
             label1.TabIndex = 6;
             label1.Text = "Total Investimento :";
-            // 
-            // pbMaximizar
-            // 
-            pbMaximizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            pbMaximizar.Image = (Image)resources.GetObject("pbMaximizar.Image");
-            pbMaximizar.Location = new Point(810, 5);
-            pbMaximizar.Margin = new Padding(4);
-            pbMaximizar.Name = "pbMaximizar";
-            pbMaximizar.Size = new Size(35, 25);
-            pbMaximizar.SizeMode = PictureBoxSizeMode.CenterImage;
-            pbMaximizar.TabIndex = 8;
-            pbMaximizar.TabStop = false;
-            pbMaximizar.Click += pbMaximizar_Click;
             // 
             // pbFechar
             // 
@@ -102,18 +89,18 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(18, 15);
+            label2.Font = new Font("Segoe UI Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(24, 21);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(88, 25);
+            label2.Size = new Size(93, 30);
             label2.TabIndex = 15;
             label2.Text = "Registros";
             // 
             // lblTotalInvestimento
             // 
             lblTotalInvestimento.AutoSize = true;
-            lblTotalInvestimento.Location = new Point(156, 51);
+            lblTotalInvestimento.Location = new Point(362, 71);
             lblTotalInvestimento.Name = "lblTotalInvestimento";
             lblTotalInvestimento.Size = new Size(0, 21);
             lblTotalInvestimento.TabIndex = 16;
@@ -121,7 +108,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(18, 58);
+            label3.Location = new Point(224, 78);
             label3.Name = "label3";
             label3.Size = new Size(269, 21);
             label3.TabIndex = 17;
@@ -130,7 +117,7 @@
             // lblTotalFlats
             // 
             lblTotalFlats.AutoSize = true;
-            lblTotalFlats.Location = new Point(401, 51);
+            lblTotalFlats.Location = new Point(608, 71);
             lblTotalFlats.Name = "lblTotalFlats";
             lblTotalFlats.Size = new Size(0, 21);
             lblTotalFlats.TabIndex = 19;
@@ -139,7 +126,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semilight", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(322, 52);
+            label5.Location = new Point(528, 72);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Size = new Size(80, 20);
@@ -149,7 +136,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(322, 57);
+            label6.Location = new Point(528, 77);
             label6.Name = "label6";
             label6.Size = new Size(108, 21);
             label6.TabIndex = 20;
@@ -160,12 +147,25 @@
             tTamanhotela.Interval = 1;
             tTamanhotela.Tick += tTamanhotela_Tick;
             // 
+            // pbMinimizar
+            // 
+            pbMinimizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pbMinimizar.Image = (Image)resources.GetObject("pbMinimizar.Image");
+            pbMinimizar.Location = new Point(814, 5);
+            pbMinimizar.Name = "pbMinimizar";
+            pbMinimizar.Size = new Size(30, 21);
+            pbMinimizar.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbMinimizar.TabIndex = 21;
+            pbMinimizar.TabStop = false;
+            pbMinimizar.Click += pbMinimizar_Click_1;
+            // 
             // FrmFuncionalidadeRegisto
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1087, 558);
+            Controls.Add(pbMinimizar);
             Controls.Add(lblTotalFlats);
             Controls.Add(label5);
             Controls.Add(label6);
@@ -174,7 +174,6 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(pbFechar);
-            Controls.Add(pbMaximizar);
             Controls.Add(dgdadosFunRegistro);
             Font = new Font("Segoe UI Semilight", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
@@ -187,8 +186,8 @@
             Load += FrmFuncionalidadeRegisto_Load;
             Resize += FrmFuncionalidadeRegisto_Resize;
             ((System.ComponentModel.ISupportInitialize)dgdadosFunRegistro).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbMaximizar).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbMinimizar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -197,7 +196,6 @@
 
         private DataGridView dgdadosFunRegistro;
         private Label label1;
-        private PictureBox pbMaximizar;
         private PictureBox pbFechar;
         private Label label2;
         private Label lblTotalInvestimento;
@@ -206,5 +204,6 @@
         private Label label5;
         private Label label6;
         private System.Windows.Forms.Timer tTamanhotela;
+        private PictureBox pbMinimizar;
     }
 }

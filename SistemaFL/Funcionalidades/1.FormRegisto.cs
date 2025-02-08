@@ -28,7 +28,7 @@ namespace SistemaFL.Funcionalidades
         private void FrmFuncionalidadeRegisto_Load(object sender, EventArgs e)
         {
             this.Location = new System.Drawing.Point(205, 41);
-            AjustarLayoutFormulario();
+            AjustarTamanhoDataGridView();
 
             CarregarDadosGrid();
             CarregarTotalInvestimento();
@@ -38,10 +38,6 @@ namespace SistemaFL.Funcionalidades
             dgdadosFunRegistro.CellFormatting += dgdadosFunRegistro_CellFormatting;
             dgdadosFunRegistro.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
-        private void AjustarLayoutFormulario()
-        {
-            AjustarTamanhoDataGridView();
-        }
         private void AjustarTamanhoDataGridView()
         {
             int margemDireita = SystemInformation.VerticalResizeBorderThickness;
@@ -50,54 +46,35 @@ namespace SistemaFL.Funcionalidades
             dgdadosFunRegistro.Width = this.ClientSize.Width - dgdadosFunRegistro.Left - margemDireita;
             dgdadosFunRegistro.Top = this.ClientSize.Height - dgdadosFunRegistro.Height - margemInferior;
         }
-        //
-        //DataGrid Dados
         private void CarregarDadosGrid()
         {
             var dados = flatRepositorio.ObterDadosInvestimento();
             dgdadosFunRegistro.DataSource = dados;
-            AplicarFormatacaoGridDados();
-        }
-        private void AplicarFormatacaoGridDados()
-        {
-            AlterarEstilosCabecalho();
-            AlterarEstilosCelulas();
-        }
-        private void AlterarEstilosCabecalho()
-        {
-            dgdadosFunRegistro.EnableHeadersVisualStyles = false;
-            dgdadosFunRegistro.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
-            dgdadosFunRegistro.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgdadosFunRegistro.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular);
 
+            Estilos.AlterarEstiloDataGrid(dgdadosFunRegistro);
+            AlterarNomesCabecalho();
+
+            foreach (DataGridViewRow row in dgdadosFunRegistro.Rows)
+            {
+                AplicarFormatacaoLinha(row);
+            }
+        }     
+        private void AlterarNomesCabecalho()
+        {
             dgdadosFunRegistro.Columns["IdFlat"].Visible = false;
             dgdadosFunRegistro.Columns["CnpjRecebimento"].HeaderText = "CNPJ(RECEBIMENTO)";
-            dgdadosFunRegistro.Columns["Empresa"].HeaderText = "EMPRESA";
-
             dgdadosFunRegistro.Columns["DtAquisicao"].HeaderText = "DT AQUISIÇÃO";
             dgdadosFunRegistro.Columns["DtAquisicao"].DefaultCellStyle.Format = "d";
-
-            dgdadosFunRegistro.Columns["Flat"].HeaderText = "FLAT";
-
-            dgdadosFunRegistro.Columns["Unid"].HeaderText = "UNID";
             dgdadosFunRegistro.Columns["Unid"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
             dgdadosFunRegistro.Columns["TipoInvestimento"].HeaderText = "TIPO INVESTIMENTO";
-            dgdadosFunRegistro.Columns["Cidade"].HeaderText = "CIDADE";
-            dgdadosFunRegistro.Columns["Endereco"].HeaderText = "ENDEREÇO";
-
-            dgdadosFunRegistro.Columns["Investimento"].HeaderText = "INVESTIMENTO";
             dgdadosFunRegistro.Columns["Investimento"].DefaultCellStyle.Format = "C2";
 
-            dgdadosFunRegistro.Columns["Status"].HeaderText = "STATUS";
-        }
-        private void AlterarEstilosCelulas()
-        {
             foreach (DataGridViewColumn col in dgdadosFunRegistro.Columns)
             {
                 col.DefaultCellStyle.Padding = new Padding(5, 2, 5, 2);  // Espaçamento interno
             }
-        }
+
+        }     
         private void CarregarTotalInvestimento()
         {
             var totalInvestimento = flatRepositorio.CalcularTotalValorDeCompra();
@@ -107,20 +84,7 @@ namespace SistemaFL.Funcionalidades
         {
             var totalFlats = flatRepositorio.CalcularTotalFlats();
             lblTotalFlats.Text = totalFlats.ToString();
-        }
-        //
-        //Formatações do grid
-        private void dgdadosFunRegistro_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (dgdadosFunRegistro.Columns[e.ColumnIndex].Name == "CnpjRecebimento")
-            {
-                if (e.Value != null && e.Value is string cnpj)
-                {
-                    // Aplica a máscara de CNPJ ao valor
-                    e.Value = FormatarCnpj(cnpj);
-                }
-            }
-        }
+        }       
         private string FormatarCnpj(string cnpj)
         {
             // Remove quaisquer caracteres não numéricos
@@ -133,17 +97,7 @@ namespace SistemaFL.Funcionalidades
             }
 
             return cnpj; // Retorna o valor original caso não seja um CNPJ válido
-        }
-        //
-        //Após o carregamento
-        private void dgdadosFunRegistro_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            foreach (DataGridViewRow row in dgdadosFunRegistro.Rows)
-            {
-                AplicarFormatacaoLinha(row);
-                dgdadosFunRegistro.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-            }
-        }
+        }      
         private void AplicarFormatacaoLinha(DataGridViewRow row)
         {
 
@@ -167,8 +121,20 @@ namespace SistemaFL.Funcionalidades
                 row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
             }
         }
-        //
-        //Eventos
+        private void dgdadosFunRegistro_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow row in dgdadosFunRegistro.Rows)
+            {
+                AplicarFormatacaoLinha(row);
+                dgdadosFunRegistro.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            }
+        }
+        private void FrmFuncionalidadeRegisto_Resize(object sender, EventArgs e)
+        {
+            dgdadosFunRegistro.Width = this.ClientSize.Width - dgdadosFunRegistro.Left - 210;
+            pbFechar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pbMinimizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+        }
         private void dgdadosFunRegistro_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -181,36 +147,29 @@ namespace SistemaFL.Funcionalidades
             dgdadosFunRegistro.DataSource = null;
             dgdadosFunRegistro.Rows.Clear();
         }
-        //
+        private void dgdadosFunRegistro_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgdadosFunRegistro.Columns[e.ColumnIndex].Name == "CnpjRecebimento")
+            {
+                if (e.Value != null && e.Value is string cnpj)
+                {
+                    // Aplica a máscara de CNPJ ao valor
+                    e.Value = FormatarCnpj(cnpj);
+                }
+            }
+        }
         private void pbFechar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        private void pbMaximizar_Click(object sender, EventArgs e)
-        {
-            if (this.WindowState == FormWindowState.Maximized)
-            {
-                this.WindowState = FormWindowState.Normal;
-            }
-            else
-            {
-                this.WindowState = FormWindowState.Maximized;
-            }
-        }
-        private void pbMinimizar_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
         private void tTamanhotela_Tick(object sender, EventArgs e)
         {
-            Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, 10);
+            Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela);
             dgdadosFunRegistro.Resize += FrmFuncionalidadeRegisto_Resize;
-        }
-        private void FrmFuncionalidadeRegisto_Resize(object sender, EventArgs e)
+        }      
+        private void pbMinimizar_Click_1(object sender, EventArgs e)
         {
-            dgdadosFunRegistro.Width = this.ClientSize.Width - dgdadosFunRegistro.Left - 20;
-            pbFechar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            pbMaximizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

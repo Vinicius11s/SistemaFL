@@ -819,13 +819,13 @@
             button10.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button10.BackColor = Color.Transparent;
             button10.FlatStyle = FlatStyle.Flat;
-            button10.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button10.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button10.ForeColor = Color.White;
             button10.Image = (Image)resources.GetObject("button10.Image");
             button10.ImageAlign = ContentAlignment.MiddleLeft;
-            button10.Location = new Point(798, 487);
+            button10.Location = new Point(799, 490);
             button10.Name = "button10";
-            button10.Size = new Size(71, 33);
+            button10.Size = new Size(70, 30);
             button10.TabIndex = 5;
             button10.Text = "  Sair";
             button10.TextAlign = ContentAlignment.MiddleRight;

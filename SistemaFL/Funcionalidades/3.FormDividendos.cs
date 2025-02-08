@@ -15,108 +15,57 @@ namespace SistemaFL.Funcionalidades
 {
     public partial class FrmFuncDividendos : Form
     {
+        private bool ordenacaoAscendente = true;
         private IFlatRepositorio flatRepositorio;
         private ILancamentoRepositorio lancamentoRepositorio;
-
         public FrmFuncDividendos(IFlatRepositorio flatRepositorio, ILancamentoRepositorio lancamentoRepositorio)
         {
             InitializeComponent();
             this.flatRepositorio = flatRepositorio;
             this.lancamentoRepositorio = lancamentoRepositorio;
+
+            tTamanhotela.Tick += tTamanhotela_Tick;
+            tTamanhotela.Start();
         }
         private void FrmFuncDividendos_Load(object sender, EventArgs e)
         {
-            AjustarLayoutFormulario();
+            this.Location = new System.Drawing.Point(205, 41);
             CarregarDataGridDados();
             AdicionarLinhaTotal();
             dgdadosDiv.DataBindingComplete += dgdadosDiv_DataBindingComplete;
         }
-        //
-        //Ajustar Layout do Formulário
-        private void AjustarLayoutFormulario()
-        {
-            AjustaPictureBox_MaxMinFechar();
-            AjustarTamanhoDataGridView();
-        }
-        private void AjustaPictureBox_MaxMinFechar()
-        {
-            int margem = 10;
-
-            // Posição do pbMaximizar (no canto superior direito)
-            int x1 = this.ClientSize.Width - pbFechar.Width - margem;
-            int y1 = margem;
-
-            pbFechar.Location = new Point(x1, y1);
-
-            // Posição do pbFechar (ao lado esquerdo de pbMaximizar)
-            int x2 = x1 - pbMaximizar.Width - margem;
-            int y2 = margem;
-
-            pbMaximizar.Location = new Point(x2, y2);
-
-            // Posição do pbMinimizar (ao lado esquerdo de pbFechar)
-            int x3 = x2 - pbMinimizar.Width - margem;
-            int y3 = margem;
-
-            pbMinimizar.Location = new Point(x3, y3);
-
-        }
-        private void AjustarTamanhoDataGridView()
-        {
-            int margemDireita = SystemInformation.VerticalResizeBorderThickness;
-            int margemInferior = SystemInformation.HorizontalResizeBorderThickness;
-
-            dgdadosDiv.Width = this.ClientSize.Width - dgdadosDiv.Left - margemDireita;
-            dgdadosDiv.Top = this.ClientSize.Height - dgdadosDiv.Height - margemInferior;
-        }
-        //
-        //DataGrid Dados
         private void CarregarDataGridDados()
         {
             var dados = flatRepositorio.ObterDadosDividendos();
             DataTable dt = ConverterDynamicParaDataTable(dados);
             dgdadosDiv.DataSource = dt;
 
-            AplicarFormatacaoGridDados();
-        }
-        private void AplicarFormatacaoGridDados()
-        {
-            AlterarEstilosCabecalho(dgdadosDiv);
-            AlterarEstilosCelulas(dgdadosDiv);
-        }
-        private void AlterarEstilosCabecalho(DataGridView grid)
-        {
-            grid.EnableHeadersVisualStyles = false;
-            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(23, 24, 29);
-            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular);
+            Estilos.AlterarEstiloDataGrid(dgdadosDiv);
+            AlterarNomesDoCabecalho(dgdadosDiv);
 
-            if (dgdadosDiv.Rows.Count > 0)
-            {
-                dgdadosDiv.Columns["CODFLAT"].Visible = false;
-                dgdadosDiv.Columns["ValorImovel"].HeaderText = "VALOR IMÓVEL";
-                dgdadosDiv.Columns["DividendosJan"].HeaderText = "JANEIRO DIVIDENDOS";
-                dgdadosDiv.Columns["DividendosFev"].HeaderText = "FEVEREIRO DIVIDENDOS";
-                dgdadosDiv.Columns["DividendosMar"].HeaderText = "MARÇO DIVIDENDOS";
-                dgdadosDiv.Columns["DividendosAbr"].HeaderText = "ABRIL DIVIDENDOS";
-                dgdadosDiv.Columns["DividendosMai"].HeaderText = "MAIO DIVIDENDOS";
-                dgdadosDiv.Columns["DividendosJun"].HeaderText = "JUNHO DIVIDENDOS";
-                dgdadosDiv.Columns["DividendosJul"].HeaderText = "JULHO DIVIDENDOS";
-                dgdadosDiv.Columns["DividendosAgo"].HeaderText = "AGOSTO DIVIDENDOS";
-                dgdadosDiv.Columns["DividendosSet"].HeaderText = "SETEMBRO DIVIDENDOS";
-                dgdadosDiv.Columns["DividendosOut"].HeaderText = "OUTUBRO DIVIDENDOS";
-                dgdadosDiv.Columns["DividendosNov"].HeaderText = "NOVEMBRO DIVIDENDOS";
-                dgdadosDiv.Columns["DividendosDez"].HeaderText = "DEZEMBRO DIVIDENDOS";
-            }
-        }
-        private void AlterarEstilosCelulas(DataGridView grid)
-        {
+        }       
+        private void AlterarNomesDoCabecalho(DataGridView grid)
+        {                 
+            dgdadosDiv.Columns["CODFLAT"].Visible = false;
+            dgdadosDiv.Columns["ValorImovel"].HeaderText = "VALOR IMÓVEL";
+            dgdadosDiv.Columns["DividendosJan"].HeaderText = "JANEIRO DIVIDENDOS";
+            dgdadosDiv.Columns["DividendosFev"].HeaderText = "FEVEREIRO DIVIDENDOS";
+            dgdadosDiv.Columns["DividendosMar"].HeaderText = "MARÇO DIVIDENDOS";
+            dgdadosDiv.Columns["DividendosAbr"].HeaderText = "ABRIL DIVIDENDOS";
+            dgdadosDiv.Columns["DividendosMai"].HeaderText = "MAIO DIVIDENDOS";
+            dgdadosDiv.Columns["DividendosJun"].HeaderText = "JUNHO DIVIDENDOS";
+            dgdadosDiv.Columns["DividendosJul"].HeaderText = "JULHO DIVIDENDOS";
+            dgdadosDiv.Columns["DividendosAgo"].HeaderText = "AGOSTO DIVIDENDOS";
+            dgdadosDiv.Columns["DividendosSet"].HeaderText = "SETEMBRO DIVIDENDOS";
+            dgdadosDiv.Columns["DividendosOut"].HeaderText = "OUTUBRO DIVIDENDOS";
+            dgdadosDiv.Columns["DividendosNov"].HeaderText = "NOVEMBRO DIVIDENDOS";
+            dgdadosDiv.Columns["DividendosDez"].HeaderText = "DEZEMBRO DIVIDENDOS";
+
             grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             dgdadosDiv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
 
             foreach (DataGridViewColumn col in grid.Columns)
             {
-                col.DefaultCellStyle.Padding = new Padding(5, 2, 5, 2);  // Espaçamento interno
                 if (col.Name != "CODFLAT")
                 {
                     col.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
@@ -124,7 +73,7 @@ namespace SistemaFL.Funcionalidades
 
                 }
             }
-        }
+        }     
         private void AdicionarLinhaTotal()
         {
             DataTable dt = (DataTable)dgdadosDiv.DataSource;
@@ -173,21 +122,7 @@ namespace SistemaFL.Funcionalidades
 
             dgdadosDiv.AllowUserToAddRows = false;
             dgdadosDiv.Refresh();
-        }
-        //
-        //Após o carregamento do DataGrid
-        private void dgdadosDiv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            foreach (DataGridViewRow row in dgdadosDiv.Rows)
-            {
-                AplicarFormatacaoLinha(row);
-            }
-            AplicarNegritoUltimaLinha();
-        }
-        private void AplicarFormatacaoLinha(DataGridViewRow row)
-        {
-            row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
-        }
+        }   
         private void AplicarNegritoUltimaLinha()
         {
             // Verifica se há linhas no DataGridView
@@ -208,9 +143,14 @@ namespace SistemaFL.Funcionalidades
                 }
             }
         }
-        //
-        //Eventos
-        private bool ordenacaoAscendente = true; // Variável para controlar a alternância da ordenação
+        private void dgdadosDiv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow row in dgdadosDiv.Rows)
+            {
+                Estilos.AplicarFormatacaoLinha(row);
+            }
+            AplicarNegritoUltimaLinha();
+        }
         private void dgdadosDiv_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
 
@@ -256,27 +196,10 @@ namespace SistemaFL.Funcionalidades
 
             ordenacaoAscendente = !ordenacaoAscendente;
         }
-        private void pbMaximizar_Click(object sender, EventArgs e)
+        private void FrmFuncDividendos_Resize(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Maximized)
-            {
-                this.WindowState = FormWindowState.Normal;
-            }
-            else
-            {
-                this.WindowState = FormWindowState.Maximized;
-            }
+            Estilos.AjustarMargemDataGrid(dgdadosDiv, this);
         }
-        private void pbFechar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-        private void pbMinimizar_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-        //
-        //Conversão Dynamic para Table
         public DataTable ConverterDynamicParaDataTable(IEnumerable<dynamic> lista)
         {
             DataTable tabela = new DataTable();
@@ -308,9 +231,17 @@ namespace SistemaFL.Funcionalidades
 
             return tabela;
         }
-        private void FrmFuncDividendos_Resize(object sender, EventArgs e)
+        private void tTamanhotela_Tick(object sender, EventArgs e)
         {
-            AjustaPictureBox_MaxMinFechar();
+            Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela);
         }
+        private void pbFechar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void pbMinimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }                    
     }
 }

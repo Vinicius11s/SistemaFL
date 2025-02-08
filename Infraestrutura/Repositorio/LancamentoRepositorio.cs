@@ -22,9 +22,6 @@ namespace Infraestrutura.Repositorio
         //Primeira Tabela do Relatório
         public IEnumerable<object> ObterDadosRelatorioMensal(int ano)
         {
-          
-            
-            //Soma Todos Lancamentos feitos por Mes (exceto dividendos)
             var BCJan = SomaLancamentosPorMesExcetoDividendos(1, ano);
             var BCFeb = SomaLancamentosPorMesExcetoDividendos(2, ano);
             var BCMar = SomaLancamentosPorMesExcetoDividendos(3, ano);
@@ -85,7 +82,17 @@ namespace Infraestrutura.Repositorio
                           (l.ValorFundoReserva ?? 0.00M));
             return total;
 
-        }   
+        }
+        public decimal SomaLancamentosAnoTodoExcetoDividendos(int ano)
+        {
+            decimal total = _context.Lancamento
+                .Where(l => l.DataPagamento.Year == ano)
+                .Sum(l => (l.ValorAluguel ?? 0.00M) +
+                          (l.AluguelVenceslau ?? 0.00M) +
+                          (l.ValorFundoReserva ?? 0.00M));
+            return total;
+
+        }
         //
         //Segunda Tabela
         public decimal CalcularIRPJTrimestre(int ano, int trimestre)

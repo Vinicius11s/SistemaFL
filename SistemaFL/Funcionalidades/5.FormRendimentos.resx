@@ -127,16 +127,26 @@
         p7DWyg0B2yIDZs8q+QAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="pbMaximizar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnlocalizar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAE1SURBVDhPlVPL
-        joJAEOTH+A088RkeAYEEPHgVEz3AF+CdQNCL/oecfF3gAiakNtUCu5sNhq2kMz2Tqe6e7hoFHW63G3Rd
-        h+d5cBwHtm2Pmuu6mM/nGMjL5bLzpoEBlMfjgc1mA1VVEQQBttstVqsVfN8XY1BWw4y73a6jQvaKpmk4
-        nU7I8xxxHCMMQ9zvd7xeL9R1LUafSJJkCCBkpk/TVC5NAUn9qpimKeSyLOXwE5qmkacQQjYMA4fDAVVV
-        yeEnsLq+sUK2LAtFUUwq+w+5f0PbtrJ+AsvuyYvF4ps8Bc/nU8ZI/Mo8BVEUDaPi7P9F3u/3WK/X4lPK
-        o2T2gA3iCGn0KSQqkeO6Xq9vkYzhcrngeDwiyzLRwvl8Fin3UPg7GIAV/DR2k0YdUEi8M5vNwL/wBvAF
-        socI4HnEtH0AAAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
+        qAAAAKgBefSzxgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGESURBVEhL3ZVL
+        LgRBGIAnBAsJkVi5iJ21DeJ5CTa4AxlWHnEBjzgDkTiCnTcnEBIWVvi+1pXU9EzPdCqZBV/yJV1d1fX6
+        q/6u/Xv6cQlP8BY/cm/wGBexD5OYx0f87uADzqL04sTvYzk9uI1xJ85+F1dz9/AO4zZb6ErfsO2q4s7d
+        ikksYwpdQTyQlq7CbQmNLnAYOzGKLxgPsIlNDGDYc2depXM5xLhzvcImPC2hQbttKbKC5/iJ4fsvHMMG
+        TtFKA5rCIBqTA3zGGWzAjh1gJyt1gVd0gLWslMY4elCGslIBX1ppo1TW0Uk62a6wjw5wnZUiDMgTGiAD
+        ZcBSuEcHOMpKER4pj5aV6pE7w2WsihML38/5ooiXIzQIeomqMIIhZZijWuYir3fcudffNNAJO79Ev3EX
+        XElLTFDxAOqsSj8A6+Jkt4GluCxTrSm3jnFMDJ4nxFTtPfE57ti27oCpvi2uwp+GeLKKOb+VtpnGJFzV
+        Ahpsz/Z7rs++sy75l/kXqNV+AJG9jn9Chx7gAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <metadata name="tTamanhotela.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="pbMinimizar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DAAACwwBP0AiyAAAABZJREFUOE9jGAXDCfwnA4+CUQAFDAwA/pAM9AvHt3sAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

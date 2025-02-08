@@ -34,24 +34,22 @@ namespace SistemaFL
         {        
             row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;          
         }
+        public static void AjustarMargemDataGrid(DataGridView grid, Form form)
+        {
+            grid.Width = form.ClientSize.Width - grid.Left - 215;
+        }
         //
-        public static void ReAjustarTamanhoFormulario(Form form, System.Windows.Forms.Timer timer, int incremento)
+        public static void ReAjustarTamanhoFormulario(Form form, System.Windows.Forms.Timer timer)
         {
             var screenWidth = Screen.PrimaryScreen.WorkingArea.Width;
             var screenHeight = Screen.PrimaryScreen.WorkingArea.Height;
 
-            // Expande o formulário gradualmente
-            if (form.Width < screenWidth)
-                form.Width += incremento;
+            // Define o tamanho diretamente
+            form.Width = screenWidth;
+            form.Height = screenHeight;
 
-            if (form.Height < screenHeight)
-                form.Height += incremento;
-
-            // Para o timer quando o formulário atingir o tamanho da tela
-            if (form.Width >= screenWidth && form.Height >= screenHeight)
-            {
-                timer.Stop();
-            }
+            // Para o Timer imediatamente, pois a expansão já foi concluída
+            timer.Stop();
         }
         public static void AjustarPosicaopbMaximizarFechar(Form form, PictureBox pbMaximizar, PictureBox pbFechar)
         {

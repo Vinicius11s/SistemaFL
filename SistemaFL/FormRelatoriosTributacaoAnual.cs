@@ -81,7 +81,7 @@
                                 {
                                     AdicionarTabelaTributos(doc, ano.Value, dadosIRPJ, dadosContrSocial);
                                 }
-
+                                AdicionarRendimentos(doc, dadosIRPJ, dadosContrSocial, ano.Value);
                                 AdicionarRodape(doc);
                                 doc.Close();
 
@@ -106,6 +106,8 @@
                         }
                     }
                 }
+
+
                 private dynamic ObterDadosRelatorio(int ano)
                 {
                     var dados = repositorio.ObterDadosRelatorioMensal(ano).FirstOrDefault();
@@ -115,8 +117,6 @@
                     }
                     return dados;
                 }
-                //
-                //Adicionar ao doc
                 private void AdicionarTitulo(Document doc, int ano)
                 {
                     var fonteTitulo = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 16, iTextSharp.text.Font.BOLD);
@@ -207,13 +207,8 @@
 
                     iTextSharp.text.Font rodapeFonte = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 6f, iTextSharp.text.Font.NORMAL);
 
-                    // Obter a data e hora atual
                     string dataHoraAtual = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
-
-                    // Obter o nome do usuário logado da classe Sessao
                     string nomeUsuario = Sessao.nomeUsuarioLogado;
-
-                    // Montar o texto do rodapé
                     string textoRodape = $"Sistema Gerenciador de Investimentos - criado em {dataHoraAtual} - {nomeUsuario}";
 
                     // Criar o parágrafo com o texto do rodapé
@@ -222,7 +217,9 @@
                         Alignment = Element.ALIGN_LEFT
                     };
 
-                    // Adicionar o rodapé ao documento
+                    float margemInferior = 20f;
+
+                    rodape.SetAbsolutePosition(doc.Left, doc.Bottom - margemInferior);
                     doc.Add(rodape);
                 }
                 private void AdicionarTabelaIRPJ(Document doc, int ano)
@@ -273,50 +270,68 @@
 
                     doc.Add(tabela);
                 }
-                //
-                //
-
-                private void btnSalvarPDF_Click(object sender, EventArgs e)
+                private void AdicionarRendimentos(Document doc, List<decimal> dadosIRPJ, List<decimal> dadosContrSocial, int ano)
                 {
-                    // Caminho do arquivo temporário que foi gerado
-                    string tempFilePath = Path.Combine(Path.GetTempPath(), $"TempRelatorio_{txtAno.Text}.pdf");
-
-                    // Verifique se o arquivo temporário foi gerado
-                    if (File.Exists(tempFilePath))
+                    if (ckRendimentos.Checked)
                     {
-                        // Exibir uma caixa de diálogo para o usuário escolher onde salvar o arquivo
-                        SaveFileDialog saveFileDialog = new SaveFileDialog
-                        {
-                            FileName = $"Relatorio_Tributacao_Anual_{txtAno.Text}.pdf",
-                            Filter = "PDF Files (*.pdf)|*.pdf",
-                            DefaultExt = "pdf"
-                        };
+                        decimal rendimentoBruto = repositorio.SomaLancamentosAnoTodoExcetoDividendos(ano);
 
-                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        decimal totalImpostos = dadosIRPJ.Sum() + dadosContrSocial.Sum();
+
+                        doc.Add(new Paragraph("\n\n"));
+
+                        // Adicionar texto "RENDIMENTO BRUTO"
+                        doc.Add(new Paragraph($"RENDIMENTO BRUTO: {rendimentoBruto.ToString("C2")}"));
+
+                        // Adicionar texto "RENDIMENTO LÍQUIDO" se os checkboxes de impostos estiverem marcados
+                        if (ckIRPJ.Checked || ckContrSocial.Checked)
                         {
-                            // Salvar o arquivo no local escolhido pelo usuário
-                            try
+                            decimal rendimentoLiquido = rendimentoBruto - totalImpostos;
+                            doc.Add(new Paragraph($"RENDIMENTO LÍQUIDO: {rendimentoLiquido.ToString("C2")}"));
+                        }
+                    }
+                }
+                private void btnSalvarPDF_Click(object sender, EventArgs e)
+                        {
+                            // Caminho do arquivo temporário que foi gerado
+                            string tempFilePath = Path.Combine(Path.GetTempPath(), $"TempRelatorio_{txtAno.Text}.pdf");
+
+                            // Verifique se o arquivo temporário foi gerado
+                            if (File.Exists(tempFilePath))
                             {
-                                File.Copy(tempFilePath, saveFileDialog.FileName, overwrite: true);
-                                MessageBox.Show($"Relatório salvo com sucesso em: {saveFileDialog.FileName}",
-                                    "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                // Exibir uma caixa de diálogo para o usuário escolher onde salvar o arquivo
+                                SaveFileDialog saveFileDialog = new SaveFileDialog
+                                {
+                                    FileName = $"Relatorio_Tributacao_Anual_{txtAno.Text}.pdf",
+                                    Filter = "PDF Files (*.pdf)|*.pdf",
+                                    DefaultExt = "pdf"
+                                };
+
+                                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                                {
+                                    // Salvar o arquivo no local escolhido pelo usuário
+                                    try
+                                    {
+                                        File.Copy(tempFilePath, saveFileDialog.FileName, overwrite: true);
+                                        MessageBox.Show($"Relatório salvo com sucesso em: {saveFileDialog.FileName}",
+                                            "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        MessageBox.Show($"Erro ao salvar o relatório: {ex.Message}",
+                                            "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                }
                             }
-                            catch (Exception ex)
+                            else
                             {
-                                MessageBox.Show($"Erro ao salvar o relatório: {ex.Message}",
+                                MessageBox.Show("Não foi possível encontrar o arquivo gerado para salvar.",
                                     "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Não foi possível encontrar o arquivo gerado para salvar.",
-                            "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
                 private void tTamanhotela_Tick(object sender, EventArgs e)
                 {
-                    Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela, 10);
+                    Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela);
                 }
                 private void ckTodos_CheckedChanged(object sender, EventArgs e)
                 {
