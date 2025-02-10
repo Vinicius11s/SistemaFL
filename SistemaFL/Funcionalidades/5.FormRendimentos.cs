@@ -74,12 +74,14 @@ namespace SistemaFL.Funcionalidades
             grid.Columns["NOVEMBRO"].HeaderText = "RENDIMENTO NOV";
             grid.Columns["DEZEMBRO"].HeaderText = "RENDIMENTO DEZ";
 
+            
+
         }
         private void AlterarEstilosCelulasGridDados(DataGridView grid)
         {
             grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
 
-            foreach (DataGridViewColumn col in dgdadosRendimentos.Columns)
+            foreach (DataGridViewColumn col in grid.Columns)
             {
                 col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 col.DefaultCellStyle.Padding = new Padding(5, 2, 5, 2);  // Espaçamento interno
@@ -89,22 +91,18 @@ namespace SistemaFL.Funcionalidades
             {
                 if (coluna.Name.StartsWith("Porcentagem"))
                 {
-                    coluna.DefaultCellStyle.Format = "N2";//DUAS CASAS
+                    coluna.DefaultCellStyle.Format = "N2"; // Duas casas decimais
                     coluna.HeaderText = "%";
                 }
-            }
-            dgdadosRendimentos.Columns["RendimentoAnual"].HeaderText = "RENDIMENTO ANUAL";
-            dgdadosRendimentos.Columns["PorcentagemAnual"].HeaderText = "MÉDIA(%) ANUAL";
-            dgdadosRendimentos.Columns["PorcentagemAnual"].DefaultCellStyle.Format = "N2";
-
-            foreach (DataGridViewColumn coluna in dgdadosRendimentos.Columns)
-            {
-                if (coluna.Name != "MediaAnual")
+                else if (coluna.Name != "PorcentagemAnual") // Aplica o formato de moeda somente em colunas que não sejam de porcentagem
                 {
                     coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
                 }
             }
 
+            grid.Columns["RendimentoAnual"].HeaderText = "RENDIMENTO ANUAL";
+            grid.Columns["PorcentagemAnual"].HeaderText = "MÉDIA(%) ANUAL";
+            grid.Columns["PorcentagemAnual"].DefaultCellStyle.Format = "N2";
         }
         private void dgdadosRendimentos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
@@ -167,6 +165,9 @@ namespace SistemaFL.Funcionalidades
             dgdadosTotais.EnableHeadersVisualStyles = false;
             dgdadosTotais.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
             dgdadosTotais.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+
+            dgdadosTotais.Columns["RendimentoAno"].HeaderText = "RENDIMENTO ANO";
+
         }
         private void AlterarEstiloCelulasGridTotais(DataGridView grid)
         {
@@ -192,10 +193,10 @@ namespace SistemaFL.Funcionalidades
             if (e.ColumnIndex >= 0 && e.ColumnIndex < dgdadosRendimentos.Columns.Count)
             {
                 List<string> colunasRendimento = new List<string>
-                {
-                    "JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO", "JULHO", "AGOSTO",
-                    "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"
-                };
+            {
+                "JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO",
+                "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"
+            };
 
                 if (colunasRendimento.Contains(dgdadosRendimentos.Columns[e.ColumnIndex].Name) && e.RowIndex >= 0)
                 {
@@ -213,8 +214,8 @@ namespace SistemaFL.Funcionalidades
                         // Usar o repositório para recuperar o objeto flat com base no CODFLAT
                         var flat = repositorio.Recuperar(f => f.id == codFlat);
 
-                        // Calcular o valor estipulado, passando o objeto flat como parâmetro
-                        decimal valorEstipulado = flat.ValorDeCompra * 0.02m;
+                        // Calcular o valor estipulado como 1% do valor de compra
+                        decimal valorEstipulado = flat.ValorDeCompra * 0.01m;
 
                         // Pinte o fundo da célula primeiro (garante que a célula tem o fundo correto)
                         e.Graphics.FillRectangle(new SolidBrush(e.CellStyle.BackColor), e.CellBounds);
@@ -224,23 +225,32 @@ namespace SistemaFL.Funcionalidades
 
                         // Calcule a largura da barra com base no valor da célula
                         float porcentagem = (float)(valorColuna / valorEstipulado);
-                        int larguraBarra = (int)(e.CellBounds.Width * porcentagem);
+                        int larguraBarra = (int)(e.CellBounds.Width * Math.Min(porcentagem, 1)); // Máximo 100%
+
+                        // Definir cor da barra com base no valor
+                        Color corBarra = (valorColuna > valorEstipulado) ? Color.Green : Color.LightGreen;
 
                         // Se o valor for maior que zero, desenhe a barra
                         if (valorColuna > 0)
                         {
-                            using (SolidBrush brush = new SolidBrush(Color.LightGreen)) // Barra verde clara
+                            using (SolidBrush brush = new SolidBrush(corBarra))
                             {
                                 // Desenha a barra na célula (sem modificar a largura da célula)
                                 e.Graphics.FillRectangle(brush, e.CellBounds.X, e.CellBounds.Y, larguraBarra, e.CellBounds.Height);
                             }
                         }
 
-                        // Desenha o texto sobre a barra (valor da coluna), ajustado para exibir no topo da célula
+                        // Desenha o texto centralizado na célula (horizontalmente e verticalmente)
                         using (SolidBrush brushText = new SolidBrush(Color.Black))
                         {
                             string texto = valorColuna.ToString("C"); // Formata como moeda
-                            e.Graphics.DrawString(texto, e.CellStyle.Font, brushText, e.CellBounds.X + 5, e.CellBounds.Y + 5);
+
+                            // Medir tamanho do texto para centralização
+                            SizeF tamanhoTexto = e.Graphics.MeasureString(texto, e.CellStyle.Font);
+                            float xTexto = e.CellBounds.X + (e.CellBounds.Width - tamanhoTexto.Width) / 2;
+                            float yTexto = e.CellBounds.Y + (e.CellBounds.Height - tamanhoTexto.Height) / 2;
+
+                            e.Graphics.DrawString(texto, e.CellStyle.Font, brushText, xTexto, yTexto);
                         }
 
                         // Desenha a borda ao redor da célula (somente borda, não sobrescreve o conteúdo)
@@ -250,10 +260,13 @@ namespace SistemaFL.Funcionalidades
                     }
                 }
             }
+
         }
         private void FrmFuncRendimentoscs_Resize(object sender, EventArgs e)
         {
-            Estilos.AjustarMargemDataGrid(dgdadosTotais, this);
+            dgdadosRendimentos.Width = this.ClientSize.Width - dgdadosRendimentos.Left - 245; // Mantém a largura ajustada às bordas laterais
+            dgdadosTotais.Width = this.ClientSize.Width - dgdadosTotais.Left - 215; // Mantém a largura ajustada às bordas laterais
+            dgdadosTotais.Top = this.ClientSize.Height - dgdadosTotais.Height - 10;
         }
         private void pbFechar_Click(object sender, EventArgs e)
         {

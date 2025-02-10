@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Infraestrutura.Seguranca;
 using Interfaces;
 
 namespace SistemaFL.Funcionalidades
@@ -15,6 +16,9 @@ namespace SistemaFL.Funcionalidades
     {
         private IFlatRepositorio repositorio;
         private ILancamentoRepositorio lancamentoRepositorio;
+
+        decimal valorPis;
+        decimal valorCofins;
         public FrmFuncPISeCOFINS(IFlatRepositorio repositorio, ILancamentoRepositorio lancamentoRepositorio)
         {
             InitializeComponent();
@@ -24,12 +28,56 @@ namespace SistemaFL.Funcionalidades
 
         private void FrmFuncPISeCOFINS_Load(object sender, EventArgs e)
         {
+            AtribuiValorPadraoDePiseCofins();
+            ConcatenaValoresDePisCofinsAosLabels();
+            ckAlterarBases.Checked = false;
+            OcultarMostrarAlterarBase();
             var dados = repositorio.ObterDadosPISeCOFINS();
             dgdadosPIS.DataSource = dados;
 
             AlterarEstilosCabecalho(dgdadosPIS);
             dgdadosPIS.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+        }
+        private void ConcatenaValoresDePisCofinsAosLabels()
+        {
+            lblPisTopo.Text = $"PIS {valorPis:N2} %";
+            lblCofinsTopo.Text = $"COFINS {valorCofins:N2} %";
+        }
+        private void AtribuiValorPadraoDePiseCofins()
+        {
+            if (Sessao.basePis == null)
+            {
+                Sessao.basePis = 0.0065m;
+                valorPis = (decimal)(Sessao.basePis * 100m);
+            }
+            if (Sessao.baseCofins == null)
+            {
+                Sessao.baseCofins = 0.03m;
+                valorCofins = (decimal)(Sessao.baseCofins * 100m);
+            }
+        }
+        private void OcultarMostrarAlterarBase()
+        {
+            if (ckAlterarBases.Checked)
+            {
+                lblpis.Visible = true;
+                txtPis.Visible = true;
 
+                lblcofins.Visible = true;
+                txtCofins.Visible = true;
+
+                btnSalvar.Visible = true;
+            }
+            else
+            {
+                lblpis.Visible = false;
+                txtPis.Visible = false;
+
+                lblcofins.Visible = false;
+                txtCofins.Visible = false;
+
+                btnSalvar.Visible = false;
+            }
         }
         private void AlterarEstilosCabecalho(DataGridView grid)
         {
@@ -78,5 +126,45 @@ namespace SistemaFL.Funcionalidades
         {
             this.Close();
         }
+        private void ckAlterarBases_CheckedChanged(object sender, EventArgs e)
+        {
+            OcultarMostrarAlterarBase();
+        }
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+            if (ckAlterarBases.Checked)
+            {
+                if (decimal.TryParse(txtPis.Text, out decimal novoValorPis))
+                {
+                    Sessao.basePis = novoValorPis / 100m;
+                }
+                else
+                {
+                    MessageBox.Show("Valor digitado para o campo Pis inválido", "Erro");
+                    return;
+                }
+
+                if (decimal.TryParse(txtCofins.Text, out decimal novoValorCofins))
+                {
+                    Sessao.baseCofins = novoValorCofins / 100m;
+                }
+                else
+                {
+                    MessageBox.Show("Valor digitado para o campo Cofins inválido", "Erro");
+                    return;
+                }
+            }
+
+            valorPis = (decimal)(Sessao.basePis ?? 0.0065m * 100m);
+            valorCofins = (decimal)(Sessao.baseCofins ?? 0.03m * 100m);
+            ConcatenaValoresDePisCofinsAosLabels();
+
+            ckAlterarBases.Checked = false;
+
+            var dados = repositorio.ObterDadosPISeCOFINS();
+            dgdadosPIS.DataSource = dados;
+            dgdadosPIS.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+        }
+
     }
 }

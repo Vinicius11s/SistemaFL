@@ -9,6 +9,9 @@ namespace Infraestrutura.Seguranca
     public static class Sessao
     {
         public static int idUsuarioLogado { get; set; }
-        public static string nomeUsuarioLogado { get; set; }
+        public static string? NomeUsuarioLogado { get; set; }
+
+        public static decimal? basePis { get; set; }
+        public static decimal? baseCofins { get; set; }
     }
 }

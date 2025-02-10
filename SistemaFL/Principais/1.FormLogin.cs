@@ -80,7 +80,7 @@ namespace SistemaFL.Funcionalidades
                 if (usuario != null)
                 {
                     Sessao.idUsuarioLogado = usuario.id;
-                    Sessao.nomeUsuarioLogado = usuario.Login;
+                    Sessao.NomeUsuarioLogado = usuario.Login;
                     this.Close();  // Fecha o formulário apenas se o login for bem-sucedido
                 }
                 else

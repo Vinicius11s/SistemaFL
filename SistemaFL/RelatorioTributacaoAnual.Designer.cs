@@ -1,6 +1,6 @@
 ﻿namespace SistemaFL
 {
-    partial class FormRelatoriosTributacaoAnual
+    partial class RelatorioTributacaoAnual
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRelatoriosTributacaoAnual));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RelatorioTributacaoAnual));
             txtAno = new TextBox();
             label1 = new Label();
             btnSalvarPDF = new Button();
@@ -49,9 +49,11 @@
             tTamanhotela = new System.Windows.Forms.Timer(components);
             ckTodos = new CheckBox();
             ckRendimentos = new CheckBox();
+            pictureBox1 = new PictureBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbFecharr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)axAcropdf1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // txtAno
@@ -101,6 +103,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(23, 24, 29);
+            panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(pbFecharr);
             panel1.Controls.Add(label2);
             panel1.Dock = DockStyle.Top;
@@ -255,6 +258,16 @@
             ckRendimentos.Text = "RENDIMENTOS";
             ckRendimentos.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(829, 9);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(19, 20);
+            pictureBox1.TabIndex = 20;
+            pictureBox1.TabStop = false;
+            // 
             // FormRelatoriosTributacaoAnual
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -285,6 +298,7 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbFecharr).EndInit();
             ((System.ComponentModel.ISupportInitialize)axAcropdf1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -311,5 +325,6 @@
         private System.Windows.Forms.Timer tTamanhotela;
         private CheckBox ckTodos;
         private CheckBox ckRendimentos;
+        private PictureBox pictureBox1;
     }
 }

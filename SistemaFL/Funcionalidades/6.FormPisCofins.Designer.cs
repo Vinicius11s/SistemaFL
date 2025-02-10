@@ -29,46 +29,51 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFuncPISeCOFINS));
-            label1 = new Label();
-            label2 = new Label();
+            lblPisTopo = new Label();
+            lblCofinsTopo = new Label();
             dgdadosPIS = new DataGridView();
             sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
             pbFechar = new PictureBox();
+            ckAlterarBases = new CheckBox();
+            txtPis = new TextBox();
+            txtCofins = new TextBox();
+            btnSalvar = new Button();
+            lblpis = new Label();
+            lblcofins = new Label();
             ((System.ComponentModel.ISupportInitialize)dgdadosPIS).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
             SuspendLayout();
             // 
-            // label1
+            // lblPisTopo
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold);
-            label1.ForeColor = Color.Black;
-            label1.Location = new Point(239, 34);
-            label1.Name = "label1";
-            label1.Size = new Size(107, 30);
-            label1.TabIndex = 0;
-            label1.Text = "PIS 0,65%";
+            lblPisTopo.AutoSize = true;
+            lblPisTopo.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold);
+            lblPisTopo.ForeColor = Color.Black;
+            lblPisTopo.Location = new Point(374, 44);
+            lblPisTopo.Name = "lblPisTopo";
+            lblPisTopo.Size = new Size(42, 30);
+            lblPisTopo.TabIndex = 0;
+            lblPisTopo.Text = "PIS";
             // 
-            // label2
+            // lblCofinsTopo
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold);
-            label2.ForeColor = Color.Black;
-            label2.Location = new Point(360, 34);
-            label2.Name = "label2";
-            label2.Size = new Size(122, 30);
-            label2.TabIndex = 1;
-            label2.Text = "COFINS 3%";
+            lblCofinsTopo.AutoSize = true;
+            lblCofinsTopo.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold);
+            lblCofinsTopo.ForeColor = Color.Black;
+            lblCofinsTopo.Location = new Point(490, 44);
+            lblCofinsTopo.Name = "lblCofinsTopo";
+            lblCofinsTopo.Size = new Size(86, 30);
+            lblCofinsTopo.TabIndex = 1;
+            lblCofinsTopo.Text = "COFINS";
             // 
             // dgdadosPIS
             // 
             dgdadosPIS.BackgroundColor = Color.White;
-            dgdadosPIS.BorderStyle = BorderStyle.None;
+            dgdadosPIS.BorderStyle = BorderStyle.Fixed3D;
             dgdadosPIS.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosPIS.Dock = DockStyle.Bottom;
-            dgdadosPIS.Location = new Point(0, 100);
+            dgdadosPIS.Location = new Point(2, 136);
             dgdadosPIS.Name = "dgdadosPIS";
-            dgdadosPIS.Size = new Size(789, 295);
+            dgdadosPIS.Size = new Size(1027, 358);
             dgdadosPIS.TabIndex = 2;
             dgdadosPIS.CellFormatting += dgdadosPIS_CellFormatting_1;
             // 
@@ -80,7 +85,7 @@
             // pbFechar
             // 
             pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
-            pbFechar.Location = new Point(757, 5);
+            pbFechar.Location = new Point(842, 5);
             pbFechar.Margin = new Padding(4, 3, 4, 3);
             pbFechar.Name = "pbFechar";
             pbFechar.Size = new Size(27, 20);
@@ -89,16 +94,80 @@
             pbFechar.TabStop = false;
             pbFechar.Click += pbFechar_Click;
             // 
+            // ckAlterarBases
+            // 
+            ckAlterarBases.AutoSize = true;
+            ckAlterarBases.Font = new Font("Segoe UI Light", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ckAlterarBases.Location = new Point(12, 109);
+            ckAlterarBases.Name = "ckAlterarBases";
+            ckAlterarBases.Size = new Size(160, 21);
+            ckAlterarBases.TabIndex = 13;
+            ckAlterarBases.Text = "Alterar Base Pis e Cofins";
+            ckAlterarBases.UseVisualStyleBackColor = true;
+            ckAlterarBases.CheckedChanged += ckAlterarBases_CheckedChanged;
+            // 
+            // txtPis
+            // 
+            txtPis.Location = new Point(376, 77);
+            txtPis.Name = "txtPis";
+            txtPis.Size = new Size(42, 29);
+            txtPis.TabIndex = 14;
+            // 
+            // txtCofins
+            // 
+            txtCofins.Location = new Point(508, 76);
+            txtCofins.Name = "txtCofins";
+            txtCofins.Size = new Size(42, 29);
+            txtCofins.TabIndex = 15;
+            // 
+            // btnSalvar
+            // 
+            btnSalvar.FlatAppearance.BorderColor = Color.Black;
+            btnSalvar.FlatAppearance.BorderSize = 2;
+            btnSalvar.FlatStyle = FlatStyle.Popup;
+            btnSalvar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSalvar.Location = new Point(603, 76);
+            btnSalvar.Name = "btnSalvar";
+            btnSalvar.Size = new Size(45, 30);
+            btnSalvar.TabIndex = 16;
+            btnSalvar.Text = "OK";
+            btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.Click += btnSalvar_Click;
+            // 
+            // lblpis
+            // 
+            lblpis.AutoSize = true;
+            lblpis.Location = new Point(422, 80);
+            lblpis.Name = "lblpis";
+            lblpis.Size = new Size(23, 21);
+            lblpis.TabIndex = 17;
+            lblpis.Text = "%";
+            // 
+            // lblcofins
+            // 
+            lblcofins.AutoSize = true;
+            lblcofins.Location = new Point(553, 78);
+            lblcofins.Name = "lblcofins";
+            lblcofins.Size = new Size(23, 21);
+            lblcofins.TabIndex = 18;
+            lblcofins.Text = "%";
+            // 
             // FrmFuncPISeCOFINS
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(789, 395);
+            ClientSize = new Size(1087, 749);
+            Controls.Add(lblcofins);
+            Controls.Add(lblpis);
+            Controls.Add(btnSalvar);
+            Controls.Add(txtCofins);
+            Controls.Add(txtPis);
+            Controls.Add(ckAlterarBases);
             Controls.Add(pbFechar);
             Controls.Add(dgdadosPIS);
-            Controls.Add(label2);
-            Controls.Add(label1);
+            Controls.Add(lblCofinsTopo);
+            Controls.Add(lblPisTopo);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ForeColor = SystemColors.InfoText;
             FormBorderStyle = FormBorderStyle.None;
@@ -116,10 +185,16 @@
 
         #endregion
 
-        private Label label1;
-        private Label label2;
+        private Label lblPisTopo;
+        private Label lblCofinsTopo;
         private DataGridView dgdadosPIS;
         private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
         private PictureBox pbFechar;
+        private CheckBox ckAlterarBases;
+        private TextBox txtPis;
+        private TextBox txtCofins;
+        private Button btnSalvar;
+        private Label lblpis;
+        private Label lblcofins;
     }
 }

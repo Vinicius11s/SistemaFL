@@ -13,6 +13,7 @@ using System.Reflection.Metadata.Ecma335;
 using Azure.Core;
 using System.Text.RegularExpressions;
 using System.Data;
+using Infraestrutura.Seguranca;
 
 namespace Infraestrutura.Repositorio
 {
@@ -373,6 +374,7 @@ namespace Infraestrutura.Repositorio
             }
         public IEnumerable<object> ObterDadosTotais(int ano)
         {
+            decimal totalAno;
             var totalInv = CalcularTotalValorDeCompra();
 
             var totalJan = CalculaLancamentosPorMes(1, ano, false);
@@ -410,6 +412,9 @@ namespace Infraestrutura.Repositorio
 
             var totalDez = CalculaLancamentosPorMes(12, ano, false);
             var PorcDez = CalculaLancamentosPorMes(12, ano, true);
+
+            totalAno = totalJan + totalFev + totalMar + totalAbr + totalAbr + totalMai + totalJun + totalJul + totalAgo + totalSet + totalOut +
+                totalNov + totalDez;
 
             var dadosTotais = new List<object>
             {
@@ -450,8 +455,10 @@ namespace Infraestrutura.Repositorio
                     NOVEMBRO = totalNov,
                     PorcentagemNov = PorcNov,
 
-                    Dezembro = totalDez,
-                    PorcentagemDez = PorcDez
+                    DEZEMBRO = totalDez,
+                    PorcentagemDez = PorcDez,
+
+                    RendimentoAno = totalAno
                 }
             };
             return dadosTotais;
@@ -744,7 +751,7 @@ namespace Infraestrutura.Repositorio
         {
             if (BC != 0)
             {
-                decimal resultado = BC * 0.0065M;
+                decimal resultado = BC * (decimal)(Sessao.basePis ?? 0.0065m);
                 return Math.Round(resultado, 2);
             }
             else return 0;             
@@ -753,7 +760,7 @@ namespace Infraestrutura.Repositorio
         {
             if (BC != 0)
             {
-                decimal resultado = BC * 0.03M;
+                decimal resultado = BC * (decimal)(Sessao.baseCofins ?? 0.03M);
                 return Math.Round(resultado, 2);
             }
             else return 0;

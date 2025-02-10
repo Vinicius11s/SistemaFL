@@ -25,6 +25,7 @@ namespace SistemaFL
         bool menuExpand = false;
         bool sidebarExpand = true;
         bool funcExpand = false;
+        bool relatorioExpand = false;
         private void FrmPrincipalFF_Load(object sender, EventArgs e)
         {
             pMenuOpcoes.BringToFront();
@@ -176,12 +177,6 @@ namespace SistemaFL
             form.ShowDialog();
         }
         //
-        private void brnRelatorios_Click(object sender, EventArgs e)
-        {
-            var form = Program.serviceProvider.GetRequiredService<FormRelatoriosTributacaoAnual>();
-            form.ShowDialog();
-        }
-        //
         private void pbMinimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
@@ -195,7 +190,45 @@ namespace SistemaFL
             funcTransition.Start();
         }
 
-       
+        private void brnRelatorios_Click_1(object sender, EventArgs e)
+        {
+            relatoriosTransition.Start();
+
+        }
+
+        private void relatoriosTransition_Tick(object sender, EventArgs e)
+        {
+            if (!relatorioExpand)
+            {
+                relatContainer.Height += 10;
+                if (relatContainer.Height >= 171)
+                {
+                    relatoriosTransition.Stop();
+                    relatorioExpand = true;
+                }
+            }
+            else
+            {
+                relatContainer.Height -= 10;
+                if (relatContainer.Height <= 55)
+                {
+                    relatoriosTransition.Stop();
+                    relatorioExpand = false;
+                }
+            }
+        }
+
+        private void btnRelatorioFiscalAnual_Click(object sender, EventArgs e)
+        {
+            var form = Program.serviceProvider.GetRequiredService<RelatorioTributacaoAnual>();
+            form.ShowDialog();
+        }
+
+        private void btnflatindividual_Click(object sender, EventArgs e)
+        {
+            var form = Program.serviceProvider.GetRequiredService<RelatorioFlatIndividual>();
+            form.ShowDialog();
+        }
     }
 }
 

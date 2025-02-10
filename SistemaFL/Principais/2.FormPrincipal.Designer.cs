@@ -60,31 +60,23 @@
             btnrendimentos = new Button();
             panel14 = new Panel();
             btnpiscofins = new Button();
-            flowLayoutPanel1 = new FlowLayoutPanel();
+            relatContainer = new FlowLayoutPanel();
             panel15 = new Panel();
             brnRelatorios = new Button();
             button3 = new Button();
             panel16 = new Panel();
-            button4 = new Button();
+            btnRelatorioFiscalAnual = new Button();
             panel17 = new Panel();
-            button5 = new Button();
-            panel18 = new Panel();
-            button6 = new Button();
-            panel19 = new Panel();
-            button7 = new Button();
-            panel20 = new Panel();
-            button8 = new Button();
-            panel21 = new Panel();
-            button9 = new Button();
+            btnflatindividual = new Button();
             menuTransition = new System.Windows.Forms.Timer(components);
             sidebarTransition = new System.Windows.Forms.Timer(components);
             funcTransition = new System.Windows.Forms.Timer(components);
-            pictureBox1 = new PictureBox();
             panel1 = new Panel();
             pbMinimizar = new PictureBox();
             label1 = new Label();
             btnEsconderPalavrasMenu = new PictureBox();
             button10 = new Button();
+            relatoriosTransition = new System.Windows.Forms.Timer(components);
             pMenuOpcoes.SuspendLayout();
             menuContainer.SuspendLayout();
             panel3.SuspendLayout();
@@ -101,15 +93,10 @@
             panel12.SuspendLayout();
             panel13.SuspendLayout();
             panel14.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
+            relatContainer.SuspendLayout();
             panel15.SuspendLayout();
             panel16.SuspendLayout();
             panel17.SuspendLayout();
-            panel18.SuspendLayout();
-            panel19.SuspendLayout();
-            panel20.SuspendLayout();
-            panel21.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbMinimizar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnEsconderPalavrasMenu).BeginInit();
@@ -122,7 +109,7 @@
             pMenuOpcoes.Controls.Add(menuContainer);
             pMenuOpcoes.Controls.Add(panel2);
             pMenuOpcoes.Controls.Add(funcContainer);
-            pMenuOpcoes.Controls.Add(flowLayoutPanel1);
+            pMenuOpcoes.Controls.Add(relatContainer);
             pMenuOpcoes.Location = new Point(0, 41);
             pMenuOpcoes.Name = "pMenuOpcoes";
             pMenuOpcoes.Padding = new Padding(0, 30, 0, 0);
@@ -527,21 +514,17 @@
             btnpiscofins.UseVisualStyleBackColor = false;
             btnpiscofins.Click += btnpiscofins_Click;
             // 
-            // flowLayoutPanel1
+            // relatContainer
             // 
-            flowLayoutPanel1.BackColor = Color.FromArgb(32, 33, 36);
-            flowLayoutPanel1.Controls.Add(panel15);
-            flowLayoutPanel1.Controls.Add(panel16);
-            flowLayoutPanel1.Controls.Add(panel17);
-            flowLayoutPanel1.Controls.Add(panel18);
-            flowLayoutPanel1.Controls.Add(panel19);
-            flowLayoutPanel1.Controls.Add(panel20);
-            flowLayoutPanel1.Controls.Add(panel21);
-            flowLayoutPanel1.Location = new Point(0, 182);
-            flowLayoutPanel1.Margin = new Padding(0);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(200, 50);
-            flowLayoutPanel1.TabIndex = 12;
+            relatContainer.BackColor = Color.FromArgb(32, 33, 36);
+            relatContainer.Controls.Add(panel15);
+            relatContainer.Controls.Add(panel16);
+            relatContainer.Controls.Add(panel17);
+            relatContainer.Location = new Point(0, 182);
+            relatContainer.Margin = new Padding(0);
+            relatContainer.Name = "relatContainer";
+            relatContainer.Size = new Size(200, 55);
+            relatContainer.TabIndex = 13;
             // 
             // panel15
             // 
@@ -569,7 +552,7 @@
             brnRelatorios.Text = "         Relatórios";
             brnRelatorios.TextAlign = ContentAlignment.MiddleLeft;
             brnRelatorios.UseVisualStyleBackColor = false;
-            brnRelatorios.Click += brnRelatorios_Click;
+            brnRelatorios.Click += brnRelatorios_Click_1;
             // 
             // button3
             // 
@@ -590,158 +573,56 @@
             // panel16
             // 
             panel16.BackColor = Color.FromArgb(23, 24, 29);
-            panel16.Controls.Add(button4);
+            panel16.Controls.Add(btnRelatorioFiscalAnual);
             panel16.Location = new Point(3, 59);
             panel16.Name = "panel16";
             panel16.Padding = new Padding(0, 30, 0, 0);
             panel16.Size = new Size(197, 50);
             panel16.TabIndex = 6;
             // 
-            // button4
+            // btnRelatorioFiscalAnual
             // 
-            button4.BackColor = Color.FromArgb(32, 33, 36);
-            button4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button4.ForeColor = Color.White;
-            button4.Image = (Image)resources.GetObject("button4.Image");
-            button4.ImageAlign = ContentAlignment.MiddleLeft;
-            button4.Location = new Point(-19, -7);
-            button4.Name = "button4";
-            button4.Padding = new Padding(25, 0, 0, 0);
-            button4.Size = new Size(238, 64);
-            button4.TabIndex = 4;
-            button4.Text = "     Registros";
-            button4.TextAlign = ContentAlignment.MiddleLeft;
-            button4.UseVisualStyleBackColor = false;
+            btnRelatorioFiscalAnual.BackColor = Color.FromArgb(32, 33, 36);
+            btnRelatorioFiscalAnual.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnRelatorioFiscalAnual.ForeColor = Color.White;
+            btnRelatorioFiscalAnual.Image = (Image)resources.GetObject("btnRelatorioFiscalAnual.Image");
+            btnRelatorioFiscalAnual.ImageAlign = ContentAlignment.MiddleLeft;
+            btnRelatorioFiscalAnual.Location = new Point(-19, -7);
+            btnRelatorioFiscalAnual.Name = "btnRelatorioFiscalAnual";
+            btnRelatorioFiscalAnual.Padding = new Padding(25, 0, 0, 0);
+            btnRelatorioFiscalAnual.Size = new Size(238, 64);
+            btnRelatorioFiscalAnual.TabIndex = 4;
+            btnRelatorioFiscalAnual.Text = "     Fiscal Anual ";
+            btnRelatorioFiscalAnual.TextAlign = ContentAlignment.MiddleLeft;
+            btnRelatorioFiscalAnual.UseVisualStyleBackColor = false;
+            btnRelatorioFiscalAnual.Click += btnRelatorioFiscalAnual_Click;
             // 
             // panel17
             // 
             panel17.BackColor = Color.FromArgb(23, 24, 29);
-            panel17.Controls.Add(button5);
+            panel17.Controls.Add(btnflatindividual);
             panel17.Location = new Point(3, 115);
             panel17.Name = "panel17";
             panel17.Padding = new Padding(0, 30, 0, 0);
             panel17.Size = new Size(197, 50);
             panel17.TabIndex = 7;
             // 
-            // button5
+            // btnflatindividual
             // 
-            button5.BackColor = Color.FromArgb(32, 33, 36);
-            button5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button5.ForeColor = Color.White;
-            button5.Image = (Image)resources.GetObject("button5.Image");
-            button5.ImageAlign = ContentAlignment.MiddleLeft;
-            button5.Location = new Point(-19, -7);
-            button5.Name = "button5";
-            button5.Padding = new Padding(25, 0, 0, 0);
-            button5.Size = new Size(238, 64);
-            button5.TabIndex = 4;
-            button5.Text = "     Aluguel + Dividendos";
-            button5.TextAlign = ContentAlignment.MiddleLeft;
-            button5.UseVisualStyleBackColor = false;
-            // 
-            // panel18
-            // 
-            panel18.BackColor = Color.FromArgb(23, 24, 29);
-            panel18.Controls.Add(button6);
-            panel18.Location = new Point(3, 171);
-            panel18.Name = "panel18";
-            panel18.Padding = new Padding(0, 30, 0, 0);
-            panel18.Size = new Size(197, 50);
-            panel18.TabIndex = 8;
-            // 
-            // button6
-            // 
-            button6.BackColor = Color.FromArgb(32, 33, 36);
-            button6.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button6.ForeColor = Color.White;
-            button6.Image = (Image)resources.GetObject("button6.Image");
-            button6.ImageAlign = ContentAlignment.MiddleLeft;
-            button6.Location = new Point(-19, -7);
-            button6.Name = "button6";
-            button6.Padding = new Padding(25, 0, 0, 0);
-            button6.Size = new Size(238, 71);
-            button6.TabIndex = 4;
-            button6.Text = "     Dividendos";
-            button6.TextAlign = ContentAlignment.MiddleLeft;
-            button6.UseVisualStyleBackColor = false;
-            // 
-            // panel19
-            // 
-            panel19.BackColor = Color.FromArgb(23, 24, 29);
-            panel19.Controls.Add(button7);
-            panel19.Location = new Point(3, 227);
-            panel19.Name = "panel19";
-            panel19.Padding = new Padding(0, 30, 0, 0);
-            panel19.Size = new Size(197, 50);
-            panel19.TabIndex = 9;
-            // 
-            // button7
-            // 
-            button7.BackColor = Color.FromArgb(32, 33, 36);
-            button7.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button7.ForeColor = Color.White;
-            button7.Image = (Image)resources.GetObject("button7.Image");
-            button7.ImageAlign = ContentAlignment.MiddleLeft;
-            button7.Location = new Point(-19, -7);
-            button7.Name = "button7";
-            button7.Padding = new Padding(25, 0, 0, 0);
-            button7.Size = new Size(238, 71);
-            button7.TabIndex = 4;
-            button7.Text = "     Fundo de Reserva";
-            button7.TextAlign = ContentAlignment.MiddleLeft;
-            button7.UseVisualStyleBackColor = false;
-            // 
-            // panel20
-            // 
-            panel20.BackColor = Color.FromArgb(23, 24, 29);
-            panel20.Controls.Add(button8);
-            panel20.Location = new Point(3, 283);
-            panel20.Name = "panel20";
-            panel20.Padding = new Padding(0, 30, 0, 0);
-            panel20.Size = new Size(197, 50);
-            panel20.TabIndex = 10;
-            // 
-            // button8
-            // 
-            button8.BackColor = Color.FromArgb(32, 33, 36);
-            button8.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button8.ForeColor = Color.White;
-            button8.Image = (Image)resources.GetObject("button8.Image");
-            button8.ImageAlign = ContentAlignment.MiddleLeft;
-            button8.Location = new Point(-19, -7);
-            button8.Name = "button8";
-            button8.Padding = new Padding(25, 0, 0, 0);
-            button8.Size = new Size(238, 71);
-            button8.TabIndex = 4;
-            button8.Text = "     Rendimentos";
-            button8.TextAlign = ContentAlignment.MiddleLeft;
-            button8.UseVisualStyleBackColor = false;
-            // 
-            // panel21
-            // 
-            panel21.BackColor = Color.FromArgb(23, 24, 29);
-            panel21.Controls.Add(button9);
-            panel21.Location = new Point(3, 339);
-            panel21.Name = "panel21";
-            panel21.Padding = new Padding(0, 30, 0, 0);
-            panel21.Size = new Size(197, 50);
-            panel21.TabIndex = 11;
-            // 
-            // button9
-            // 
-            button9.BackColor = Color.FromArgb(32, 33, 36);
-            button9.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button9.ForeColor = Color.White;
-            button9.Image = (Image)resources.GetObject("button9.Image");
-            button9.ImageAlign = ContentAlignment.MiddleLeft;
-            button9.Location = new Point(-19, -10);
-            button9.Name = "button9";
-            button9.Padding = new Padding(25, 0, 0, 0);
-            button9.Size = new Size(238, 74);
-            button9.TabIndex = 4;
-            button9.Text = "     Pis e Cofins";
-            button9.TextAlign = ContentAlignment.MiddleLeft;
-            button9.UseVisualStyleBackColor = false;
+            btnflatindividual.BackColor = Color.FromArgb(32, 33, 36);
+            btnflatindividual.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnflatindividual.ForeColor = Color.White;
+            btnflatindividual.Image = (Image)resources.GetObject("btnflatindividual.Image");
+            btnflatindividual.ImageAlign = ContentAlignment.MiddleLeft;
+            btnflatindividual.Location = new Point(-19, -7);
+            btnflatindividual.Name = "btnflatindividual";
+            btnflatindividual.Padding = new Padding(25, 0, 0, 0);
+            btnflatindividual.Size = new Size(238, 64);
+            btnflatindividual.TabIndex = 4;
+            btnflatindividual.Text = "     Flat Individual";
+            btnflatindividual.TextAlign = ContentAlignment.MiddleLeft;
+            btnflatindividual.UseVisualStyleBackColor = false;
+            btnflatindividual.Click += btnflatindividual_Click;
             // 
             // menuTransition
             // 
@@ -757,17 +638,6 @@
             // 
             funcTransition.Interval = 10;
             funcTransition.Tick += funcTransition_Tick_1;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(869, 522);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 2;
-            pictureBox1.TabStop = false;
             // 
             // panel1
             // 
@@ -832,16 +702,22 @@
             button10.UseVisualStyleBackColor = false;
             button10.Click += button10_Click;
             // 
+            // relatoriosTransition
+            // 
+            relatoriosTransition.Interval = 10;
+            relatoriosTransition.Tick += relatoriosTransition_Tick;
+            // 
             // FrmPrincipalFF
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(23, 24, 29);
+            BackgroundImage = Properties.Resources.predio1;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(869, 522);
             Controls.Add(button10);
             Controls.Add(panel1);
             Controls.Add(pMenuOpcoes);
-            Controls.Add(pictureBox1);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FrmPrincipalFF";
@@ -865,15 +741,10 @@
             panel12.ResumeLayout(false);
             panel13.ResumeLayout(false);
             panel14.ResumeLayout(false);
-            flowLayoutPanel1.ResumeLayout(false);
+            relatContainer.ResumeLayout(false);
             panel15.ResumeLayout(false);
             panel16.ResumeLayout(false);
             panel17.ResumeLayout(false);
-            panel18.ResumeLayout(false);
-            panel19.ResumeLayout(false);
-            panel20.ResumeLayout(false);
-            panel21.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbMinimizar).EndInit();
@@ -920,14 +791,6 @@
         private PictureBox btnEsconderPalavrasMenu;
         private PictureBox pbMinimizar;
         private Button btnFuncionalidad;
-        private FlowLayoutPanel flowLayoutPanel1;
-        private Panel panel15;
-        private Button brnRelatorios;
-        private Button button3;
-        private Panel panel16;
-        private Button button4;
-        private Panel panel17;
-        private Button button5;
         private Panel panel18;
         private Button button6;
         private Panel panel19;
@@ -937,5 +800,14 @@
         private Panel panel21;
         private Button button9;
         private Button button10;
+        private FlowLayoutPanel relatContainer;
+        private Panel panel15;
+        private Button brnRelatorios;
+        private Button button3;
+        private Panel panel16;
+        private Button btnRelatorioFiscalAnual;
+        private Panel panel17;
+        private Button btnflatindividual;
+        private System.Windows.Forms.Timer relatoriosTransition;
     }
 }

@@ -16,11 +16,11 @@
 
         namespace SistemaFL
         {
-            public partial class FormRelatoriosTributacaoAnual : Form
+            public partial class RelatorioTributacaoAnual : Form
             {
                 private ILancamentoRepositorio repositorio;
                 private string caminhoArquivoPDF;
-                public FormRelatoriosTributacaoAnual(ILancamentoRepositorio repositorio)
+                public RelatorioTributacaoAnual(ILancamentoRepositorio repositorio)
                 {
                     InitializeComponent();
                     this.repositorio = repositorio;
@@ -82,7 +82,7 @@
                                     AdicionarTabelaTributos(doc, ano.Value, dadosIRPJ, dadosContrSocial);
                                 }
                                 AdicionarRendimentos(doc, dadosIRPJ, dadosContrSocial, ano.Value);
-                                AdicionarRodape(doc);
+                                AdicionarRodape(doc, writer);
                                 doc.Close();
 
                                 string tempFilePath = Path.Combine(Path.GetTempPath(), $"TempRelatorio_{ano}.pdf");
@@ -106,8 +106,6 @@
                         }
                     }
                 }
-
-
                 private dynamic ObterDadosRelatorio(int ano)
                 {
                     var dados = repositorio.ObterDadosRelatorioMensal(ano).FirstOrDefault();
@@ -139,14 +137,13 @@
 
                     PdfPTable tabela = new PdfPTable(numColunas) { WidthPercentage = 100 };
 
-                    // Defina larguras das colunas com base nas colunas visíveis
                     float[] larguras = new float[numColunas];
-                    larguras[0] = 3; // Mês
+                    larguras[0] = 3; 
                     int coluna = 1;
 
                     if (ckRendimentos.Checked)
                     {
-                        larguras[coluna] = 2; // RENDIMENTOS
+                        larguras[coluna] = 2; 
                         coluna++;
                     }
                     if (ckPis.Checked)
@@ -176,8 +173,9 @@
                     foreach (string mes in meses)
                     {
                         decimal valorMes = Convert.ToDecimal(dados.GetType().GetProperty(mes)?.GetValue(dados) ?? 0);
-                        decimal pis = valorMes * 0.0065m;
-                        decimal cofins = valorMes * 0.03m;
+                        decimal pis = (decimal)(valorMes * (Sessao.basePis ?? 0.0065m));
+                        decimal cofins = (decimal)(valorMes * (Sessao.baseCofins ?? 0.03m));
+                        
 
                         tabela.AddCell(new PdfPCell(new Phrase(mes)) { HorizontalAlignment = Element.ALIGN_CENTER });
 
@@ -201,50 +199,48 @@
                         HorizontalAlignment = Element.ALIGN_CENTER
                     };
                     tabela.AddCell(celula);
-                }      
-                private void AdicionarRodape(Document doc)
+                }
+                private void AdicionarRodape(Document doc, PdfWriter writer)
                 {
-
                     iTextSharp.text.Font rodapeFonte = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 6f, iTextSharp.text.Font.NORMAL);
 
                     string dataHoraAtual = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
-                    string nomeUsuario = Sessao.nomeUsuarioLogado;
+                    string nomeUsuario = Sessao.NomeUsuarioLogado;
                     string textoRodape = $"Sistema Gerenciador de Investimentos - criado em {dataHoraAtual} - {nomeUsuario}";
 
-                    // Criar o parágrafo com o texto do rodapé
-                    Paragraph rodape = new Paragraph(textoRodape, rodapeFonte)
-                    {
-                        Alignment = Element.ALIGN_LEFT
-                    };
+                    PdfContentByte cb = writer.DirectContent;
+                    ColumnText ct = new ColumnText(cb);
 
-                    float margemInferior = 20f;
+                    ct.SetSimpleColumn(new Phrase(textoRodape, rodapeFonte),
+                                       doc.Left, doc.Bottom - 10, 
+                                       doc.Right, doc.Bottom + 10, 
+                                       10, Element.ALIGN_LEFT); 
 
-                    rodape.SetAbsolutePosition(doc.Left, doc.Bottom - margemInferior);
-                    doc.Add(rodape);
+                    ct.Go();
                 }
                 private void AdicionarTabelaIRPJ(Document doc, int ano)
-                {
-                    // Adiciona duas quebras de linha antes da tabela
-                    doc.Add(new Paragraph("\n\n"));
+                        {
+                            // Adiciona duas quebras de linha antes da tabela
+                            doc.Add(new Paragraph("\n\n"));
 
-                    PdfPTable tabelaIRPJ = new PdfPTable(2) { WidthPercentage = 100 };
-                    tabelaIRPJ.SetWidths(new float[] { 3, 2 });
+                            PdfPTable tabelaIRPJ = new PdfPTable(2) { WidthPercentage = 100 };
+                            tabelaIRPJ.SetWidths(new float[] { 3, 2 });
 
-                    AdicionarCelulaCabecalho(tabelaIRPJ, "Trimestre");
-                    AdicionarCelulaCabecalho(tabelaIRPJ, "Valor IRPJ");
+                            AdicionarCelulaCabecalho(tabelaIRPJ, "Trimestre");
+                            AdicionarCelulaCabecalho(tabelaIRPJ, "Valor IRPJ");
 
-                    string[] trimestres = { "1° Trimestre", "2° Trimestre", "3° Trimestre", "4° Trimestre" };
+                            string[] trimestres = { "1° Trimestre", "2° Trimestre", "3° Trimestre", "4° Trimestre" };
 
-                    for (int i = 0; i < 4; i++)
-                    {
-                        decimal irpj = repositorio.CalcularIRPJTrimestre(ano, i + 1);
+                            for (int i = 0; i < 4; i++)
+                            {
+                                decimal irpj = repositorio.CalcularIRPJTrimestre(ano, i + 1);
 
-                        tabelaIRPJ.AddCell(new PdfPCell(new Phrase(trimestres[i])) { HorizontalAlignment = Element.ALIGN_CENTER });
-                        tabelaIRPJ.AddCell(new PdfPCell(new Phrase(irpj.ToString("C2"))) { HorizontalAlignment = Element.ALIGN_RIGHT });
-                    }
+                                tabelaIRPJ.AddCell(new PdfPCell(new Phrase(trimestres[i])) { HorizontalAlignment = Element.ALIGN_CENTER });
+                                tabelaIRPJ.AddCell(new PdfPCell(new Phrase(irpj.ToString("C2"))) { HorizontalAlignment = Element.ALIGN_RIGHT });
+                            }
 
-                    doc.Add(tabelaIRPJ);
-                }
+                            doc.Add(tabelaIRPJ);
+                        }
                 private void AdicionarTabelaTributos(Document doc, int ano, List<decimal> dadosIRPJ, List<decimal> dadosContrSocial)
                 {
                     doc.Add(new Paragraph("\n\n")); // Adiciona espaço antes da tabela
@@ -337,6 +333,7 @@
                 {
                     if (ckTodos.Checked)
                     {
+                        ckRendimentos.Checked = true;
                         ckCofins.Checked = true;
                         ckPis.Checked = true;
                         ckIRPJ.Checked = true;
@@ -349,6 +346,7 @@
                     }
                     else
                     {
+                        ckRendimentos.Checked = false;
                         ckCofins.Checked = false;
                         ckPis.Checked = false;
                         ckIRPJ.Checked = false;

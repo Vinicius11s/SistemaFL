@@ -50,7 +50,6 @@
             dgdadosTotais.BackgroundColor = Color.White;
             dgdadosTotais.BorderStyle = BorderStyle.None;
             dgdadosTotais.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosTotais.Dock = DockStyle.Bottom;
             dgdadosTotais.Location = new Point(0, 447);
             dgdadosTotais.Margin = new Padding(4);
             dgdadosTotais.Name = "dgdadosTotais";
@@ -61,7 +60,7 @@
             // 
             pbFechar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
-            pbFechar.Location = new Point(659, 12);
+            pbFechar.Location = new Point(842, 5);
             pbFechar.Margin = new Padding(4, 3, 4, 3);
             pbFechar.Name = "pbFechar";
             pbFechar.Size = new Size(27, 20);
@@ -87,26 +86,27 @@
             dgdadosRendimentos.BackgroundColor = Color.White;
             dgdadosRendimentos.BorderStyle = BorderStyle.None;
             dgdadosRendimentos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosRendimentos.Location = new Point(0, 131);
+            dgdadosRendimentos.Location = new Point(0, 109);
             dgdadosRendimentos.Name = "dgdadosRendimentos";
-            dgdadosRendimentos.Size = new Size(900, 305);
+            dgdadosRendimentos.Size = new Size(1087, 562);
             dgdadosRendimentos.TabIndex = 17;
             dgdadosRendimentos.CellPainting += dgdadosRendimentos_CellPainting;
             dgdadosRendimentos.DataBindingComplete += dgdadosRendimentos_DataBindingComplete;
             // 
             // txtano
             // 
-            txtano.Font = new Font("Segoe UI Semilight", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtano.Location = new Point(319, 35);
+            txtano.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtano.Location = new Point(390, 43);
             txtano.Name = "txtano";
-            txtano.Size = new Size(100, 25);
+            txtano.Size = new Size(58, 29);
             txtano.TabIndex = 18;
+            txtano.Text = "2025";
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(273, 36);
+            label1.Location = new Point(344, 45);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(46, 21);
@@ -119,7 +119,7 @@
             btnlocalizar.FlatStyle = FlatStyle.Flat;
             btnlocalizar.Font = new Font("Segoe UI Semilight", 11.25F);
             btnlocalizar.Image = (Image)resources.GetObject("btnlocalizar.Image");
-            btnlocalizar.Location = new Point(437, 33);
+            btnlocalizar.Location = new Point(454, 44);
             btnlocalizar.Name = "btnlocalizar";
             btnlocalizar.Size = new Size(33, 26);
             btnlocalizar.TabIndex = 20;
@@ -135,7 +135,7 @@
             // 
             pbMinimizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbMinimizar.Image = (Image)resources.GetObject("pbMinimizar.Image");
-            pbMinimizar.Location = new Point(629, 11);
+            pbMinimizar.Location = new Point(812, 4);
             pbMinimizar.Name = "pbMinimizar";
             pbMinimizar.Size = new Size(30, 21);
             pbMinimizar.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -148,7 +148,7 @@
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(900, 514);
+            ClientSize = new Size(1087, 749);
             Controls.Add(pbMinimizar);
             Controls.Add(btnlocalizar);
             Controls.Add(label1);
