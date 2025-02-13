@@ -32,9 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RelatorioTributacaoAnual));
             txtAno = new TextBox();
             label1 = new Label();
-            btnSalvarPDF = new Button();
             label2 = new Label();
             panel1 = new Panel();
+            pictureBox1 = new PictureBox();
             pbFecharr = new PictureBox();
             label3 = new Label();
             ckPis = new CheckBox();
@@ -49,11 +49,11 @@
             tTamanhotela = new System.Windows.Forms.Timer(components);
             ckTodos = new CheckBox();
             ckRendimentos = new CheckBox();
-            pictureBox1 = new PictureBox();
+            btnSalvarPDF = new Button();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbFecharr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)axAcropdf1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // txtAno
@@ -73,21 +73,6 @@
             label1.Size = new Size(42, 21);
             label1.TabIndex = 1;
             label1.Text = "Ano:";
-            // 
-            // btnSalvarPDF
-            // 
-            btnSalvarPDF.FlatAppearance.BorderSize = 0;
-            btnSalvarPDF.FlatStyle = FlatStyle.Flat;
-            btnSalvarPDF.Image = (Image)resources.GetObject("btnSalvarPDF.Image");
-            btnSalvarPDF.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSalvarPDF.Location = new Point(1025, 149);
-            btnSalvarPDF.Margin = new Padding(3, 4, 3, 4);
-            btnSalvarPDF.Name = "btnSalvarPDF";
-            btnSalvarPDF.Size = new Size(50, 44);
-            btnSalvarPDF.TabIndex = 14;
-            btnSalvarPDF.TextAlign = ContentAlignment.MiddleRight;
-            btnSalvarPDF.UseVisualStyleBackColor = true;
-            btnSalvarPDF.Click += btnSalvarPDF_Click;
             // 
             // label2
             // 
@@ -112,6 +97,16 @@
             panel1.Size = new Size(1087, 73);
             panel1.TabIndex = 19;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(829, 9);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(19, 20);
+            pictureBox1.TabIndex = 20;
+            pictureBox1.TabStop = false;
+            // 
             // pbFecharr
             // 
             pbFecharr.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -127,7 +122,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(534, 113);
+            label3.Location = new Point(534, 104);
             label3.Name = "label3";
             label3.Size = new Size(97, 15);
             label3.TabIndex = 20;
@@ -258,17 +253,22 @@
             ckRendimentos.Text = "RENDIMENTOS";
             ckRendimentos.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
+            // btnSalvarPDF
             // 
-            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(829, 9);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(19, 20);
-            pictureBox1.TabIndex = 20;
-            pictureBox1.TabStop = false;
+            btnSalvarPDF.FlatAppearance.BorderSize = 0;
+            btnSalvarPDF.FlatStyle = FlatStyle.Flat;
+            btnSalvarPDF.Image = (Image)resources.GetObject("btnSalvarPDF.Image");
+            btnSalvarPDF.ImageAlign = ContentAlignment.MiddleLeft;
+            btnSalvarPDF.Location = new Point(477, 642);
+            btnSalvarPDF.Margin = new Padding(3, 4, 3, 4);
+            btnSalvarPDF.Name = "btnSalvarPDF";
+            btnSalvarPDF.Size = new Size(39, 39);
+            btnSalvarPDF.TabIndex = 14;
+            btnSalvarPDF.TextAlign = ContentAlignment.MiddleRight;
+            btnSalvarPDF.UseVisualStyleBackColor = true;
+            btnSalvarPDF.Click += btnSalvarPDF_Click;
             // 
-            // FormRelatoriosTributacaoAnual
+            // RelatorioTributacaoAnual
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -291,14 +291,14 @@
             Controls.Add(label1);
             Controls.Add(txtAno);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "FormRelatoriosTributacaoAnual";
+            Name = "RelatorioTributacaoAnual";
             Text = "Relatórios Anuais";
             Load += FormRelatoriosTributacaoAnual_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbFecharr).EndInit();
             ((System.ComponentModel.ISupportInitialize)axAcropdf1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -309,7 +309,6 @@
         private Label label1;
         private PictureBox pbFechar;
         private PictureBox pbFecharr;
-        private Button btnSalvarPDF;
         private Label label2;
         private Panel panel1;
         private Label label3;
@@ -326,5 +325,6 @@
         private CheckBox ckTodos;
         private CheckBox ckRendimentos;
         private PictureBox pictureBox1;
+        private Button btnSalvarPDF;
     }
 }

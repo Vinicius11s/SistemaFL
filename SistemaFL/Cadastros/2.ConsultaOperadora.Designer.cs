@@ -76,7 +76,7 @@
             dgdados.BackgroundColor = Color.White;
             dgdados.BorderStyle = BorderStyle.None;
             dgdados.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdados.Location = new Point(12, 108);
+            dgdados.Location = new Point(-1, 108);
             dgdados.Name = "dgdados";
             dgdados.Size = new Size(1063, 448);
             dgdados.TabIndex = 3;
@@ -120,6 +120,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Consulta de Empresa";
             Load += FrmConsultaEmpresa_Load;
+            Resize += FrmConsultaEmpresa_Resize;
             ((System.ComponentModel.ISupportInitialize)dgdados).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
             ResumeLayout(false);

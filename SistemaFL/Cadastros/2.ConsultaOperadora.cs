@@ -49,7 +49,7 @@ namespace SistemaFL
             AlterarNomesCabecalho(dgdados);
 
             dgdados.DataBindingComplete += dgdados_DataBindingComplete;
-           
+
         }
         private void CarregarDados()
         {
@@ -74,7 +74,6 @@ namespace SistemaFL
             grid.Columns["Estado"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
         }
-        //
         //Eventos
         private void dgdados_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
@@ -123,13 +122,14 @@ namespace SistemaFL
         {
             Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela);
         }
-        //
         private void pbFechar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        
 
-        
+        private void FrmConsultaEmpresa_Resize(object sender, EventArgs e)
+        {
+            Estilos.AjustarMargemDataGrid(dgdados, this);
+        }
     }
 }

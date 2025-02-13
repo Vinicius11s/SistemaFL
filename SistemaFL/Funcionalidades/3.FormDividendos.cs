@@ -45,34 +45,38 @@ namespace SistemaFL.Funcionalidades
 
         }       
         private void AlterarNomesDoCabecalho(DataGridView grid)
-        {                 
-            dgdadosDiv.Columns["CODFLAT"].Visible = false;
-            dgdadosDiv.Columns["ValorImovel"].HeaderText = "VALOR IMÓVEL";
-            dgdadosDiv.Columns["DividendosJan"].HeaderText = "JANEIRO DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosFev"].HeaderText = "FEVEREIRO DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosMar"].HeaderText = "MARÇO DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosAbr"].HeaderText = "ABRIL DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosMai"].HeaderText = "MAIO DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosJun"].HeaderText = "JUNHO DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosJul"].HeaderText = "JULHO DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosAgo"].HeaderText = "AGOSTO DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosSet"].HeaderText = "SETEMBRO DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosOut"].HeaderText = "OUTUBRO DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosNov"].HeaderText = "NOVEMBRO DIVIDENDOS";
-            dgdadosDiv.Columns["DividendosDez"].HeaderText = "DEZEMBRO DIVIDENDOS";
-
-            grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-            dgdadosDiv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-
-            foreach (DataGridViewColumn col in grid.Columns)
+        {               
+            if(grid.Rows.Count > 0)
             {
-                if (col.Name != "CODFLAT")
-                {
-                    col.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
-                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dgdadosDiv.Columns["CODFLAT"].Visible = false;
+                dgdadosDiv.Columns["ValorImovel"].HeaderText = "VALOR IMÓVEL";
+                dgdadosDiv.Columns["DividendosJan"].HeaderText = "JANEIRO DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosFev"].HeaderText = "FEVEREIRO DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosMar"].HeaderText = "MARÇO DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosAbr"].HeaderText = "ABRIL DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosMai"].HeaderText = "MAIO DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosJun"].HeaderText = "JUNHO DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosJul"].HeaderText = "JULHO DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosAgo"].HeaderText = "AGOSTO DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosSet"].HeaderText = "SETEMBRO DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosOut"].HeaderText = "OUTUBRO DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosNov"].HeaderText = "NOVEMBRO DIVIDENDOS";
+                dgdadosDiv.Columns["DividendosDez"].HeaderText = "DEZEMBRO DIVIDENDOS";
 
+                grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                dgdadosDiv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
+                foreach (DataGridViewColumn col in grid.Columns)
+                {
+                    if (col.Name != "CODFLAT")
+                    {
+                        col.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
+                        col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+                    }
                 }
             }
+           
         }     
         private void AdicionarLinhaTotal()
         {

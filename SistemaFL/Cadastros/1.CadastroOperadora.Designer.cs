@@ -111,13 +111,15 @@
             pdados.Name = "pdados";
             pdados.Size = new Size(922, 192);
             pdados.TabIndex = 0;
+            pdados.Paint += pdados_Paint;
             // 
             // btnBuscaCep
             // 
+            btnBuscaCep.FlatStyle = FlatStyle.Flat;
             btnBuscaCep.Image = (Image)resources.GetObject("btnBuscaCep.Image");
-            btnBuscaCep.Location = new Point(438, 79);
+            btnBuscaCep.Location = new Point(434, 83);
             btnBuscaCep.Name = "btnBuscaCep";
-            btnBuscaCep.Size = new Size(38, 35);
+            btnBuscaCep.Size = new Size(29, 28);
             btnBuscaCep.TabIndex = 23;
             btnBuscaCep.UseVisualStyleBackColor = true;
             btnBuscaCep.Click += btnBuscaCep_Click;
@@ -129,7 +131,7 @@
             btnremover.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnremover.ForeColor = Color.FromArgb(224, 224, 224);
             btnremover.Image = (Image)resources.GetObject("btnremover.Image");
-            btnremover.Location = new Point(809, 145);
+            btnremover.Location = new Point(850, 144);
             btnremover.Name = "btnremover";
             btnremover.Size = new Size(35, 34);
             btnremover.TabIndex = 7;
@@ -143,7 +145,7 @@
             cbbflatsassociados.FormattingEnabled = true;
             cbbflatsassociados.Location = new Point(603, 148);
             cbbflatsassociados.Name = "cbbflatsassociados";
-            cbbflatsassociados.Size = new Size(200, 28);
+            cbbflatsassociados.Size = new Size(242, 28);
             cbbflatsassociados.TabIndex = 11;
             // 
             // label13
@@ -211,16 +213,16 @@
             // 
             // txtnumero
             // 
-            txtnumero.Location = new Point(789, 83);
+            txtnumero.Location = new Point(787, 83);
             txtnumero.Name = "txtnumero";
-            txtnumero.Size = new Size(52, 29);
+            txtnumero.Size = new Size(54, 29);
             txtnumero.TabIndex = 7;
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.ForeColor = Color.Black;
-            label8.Location = new Point(764, 89);
+            label8.Location = new Point(760, 89);
             label8.Name = "label8";
             label8.Size = new Size(28, 21);
             label8.TabIndex = 14;
@@ -228,7 +230,7 @@
             // 
             // txtrua
             // 
-            txtrua.Location = new Point(494, 83);
+            txtrua.Location = new Point(480, 83);
             txtrua.Name = "txtrua";
             txtrua.Size = new Size(265, 29);
             txtrua.TabIndex = 6;
@@ -237,7 +239,7 @@
             // 
             label7.AutoSize = true;
             label7.ForeColor = Color.Black;
-            label7.Location = new Point(494, 63);
+            label7.Location = new Point(480, 60);
             label7.Name = "label7";
             label7.Size = new Size(36, 21);
             label7.TabIndex = 12;
@@ -435,6 +437,7 @@
             // 
             btnexcluir.BackColor = Color.Transparent;
             btnexcluir.FlatAppearance.BorderSize = 2;
+            btnexcluir.FlatStyle = FlatStyle.Flat;
             btnexcluir.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btnexcluir.ForeColor = Color.White;
             btnexcluir.Image = (Image)resources.GetObject("btnexcluir.Image");
@@ -449,7 +452,7 @@
             // 
             btncancelar.BackColor = Color.Transparent;
             btncancelar.FlatAppearance.BorderSize = 2;
-            btncancelar.FlatStyle = FlatStyle.Popup;
+            btncancelar.FlatStyle = FlatStyle.Flat;
             btncancelar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             btncancelar.ForeColor = Color.White;
             btncancelar.Image = (Image)resources.GetObject("btncancelar.Image");
@@ -501,9 +504,9 @@
             // 
             pbFechar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
-            pbFechar.Location = new Point(842, 5);
+            pbFechar.Location = new Point(856, 5);
             pbFechar.Name = "pbFechar";
-            pbFechar.Size = new Size(30, 21);
+            pbFechar.Size = new Size(26, 21);
             pbFechar.SizeMode = PictureBoxSizeMode.CenterImage;
             pbFechar.TabIndex = 49;
             pbFechar.TabStop = false;
@@ -513,9 +516,9 @@
             // 
             pbMinimizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbMinimizar.Image = (Image)resources.GetObject("pbMinimizar.Image");
-            pbMinimizar.Location = new Point(811, 5);
+            pbMinimizar.Location = new Point(836, 5);
             pbMinimizar.Name = "pbMinimizar";
-            pbMinimizar.Size = new Size(30, 21);
+            pbMinimizar.Size = new Size(20, 21);
             pbMinimizar.SizeMode = PictureBoxSizeMode.CenterImage;
             pbMinimizar.TabIndex = 50;
             pbMinimizar.TabStop = false;

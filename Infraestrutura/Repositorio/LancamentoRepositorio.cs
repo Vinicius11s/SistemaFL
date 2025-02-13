@@ -139,7 +139,6 @@ namespace Infraestrutura.Repositorio
 
             return totalTrimestral;
         }
-        //
         public decimal CalcularContrSocialTrimestre(int ano, int trimestre)
         {
             decimal valorA = ObterRendimentoTrimestral(ano, trimestre) * 0.09m;

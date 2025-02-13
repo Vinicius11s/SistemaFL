@@ -288,43 +288,43 @@
                     }
                 }
                 private void btnSalvarPDF_Click(object sender, EventArgs e)
+                {
+                    // Caminho do arquivo temporário que foi gerado
+                    string tempFilePath = Path.Combine(Path.GetTempPath(), $"TempRelatorio_{txtAno.Text}.pdf");
+
+                    // Verifique se o arquivo temporário foi gerado
+                    if (File.Exists(tempFilePath))
+                    {
+                        // Exibir uma caixa de diálogo para o usuário escolher onde salvar o arquivo
+                        SaveFileDialog saveFileDialog = new SaveFileDialog
                         {
-                            // Caminho do arquivo temporário que foi gerado
-                            string tempFilePath = Path.Combine(Path.GetTempPath(), $"TempRelatorio_{txtAno.Text}.pdf");
+                            FileName = $"Relatorio_Tributacao_Anual_{txtAno.Text}.pdf",
+                            Filter = "PDF Files (*.pdf)|*.pdf",
+                            DefaultExt = "pdf"
+                        };
 
-                            // Verifique se o arquivo temporário foi gerado
-                            if (File.Exists(tempFilePath))
+                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            // Salvar o arquivo no local escolhido pelo usuário
+                            try
                             {
-                                // Exibir uma caixa de diálogo para o usuário escolher onde salvar o arquivo
-                                SaveFileDialog saveFileDialog = new SaveFileDialog
-                                {
-                                    FileName = $"Relatorio_Tributacao_Anual_{txtAno.Text}.pdf",
-                                    Filter = "PDF Files (*.pdf)|*.pdf",
-                                    DefaultExt = "pdf"
-                                };
-
-                                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                                {
-                                    // Salvar o arquivo no local escolhido pelo usuário
-                                    try
-                                    {
-                                        File.Copy(tempFilePath, saveFileDialog.FileName, overwrite: true);
-                                        MessageBox.Show($"Relatório salvo com sucesso em: {saveFileDialog.FileName}",
-                                            "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        MessageBox.Show($"Erro ao salvar o relatório: {ex.Message}",
-                                            "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    }
-                                }
+                                File.Copy(tempFilePath, saveFileDialog.FileName, overwrite: true);
+                                MessageBox.Show($"Relatório salvo com sucesso em: {saveFileDialog.FileName}",
+                                    "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
-                            else
+                            catch (Exception ex)
                             {
-                                MessageBox.Show("Não foi possível encontrar o arquivo gerado para salvar.",
+                                MessageBox.Show($"Erro ao salvar o relatório: {ex.Message}",
                                     "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Não foi possível encontrar o arquivo gerado para salvar.",
+                            "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
                 private void tTamanhotela_Tick(object sender, EventArgs e)
                 {
                     Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela);

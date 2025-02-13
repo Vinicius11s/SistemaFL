@@ -109,93 +109,6 @@ namespace SistemaFL
                 }
             }
         }
-        private void btnEsconderPalavrasMenu_Click_1(object sender, EventArgs e)
-        {
-            //sidebarTransition.Start();
-
-        }
-        //Ocorrências
-        private void btnocorrencias_Click(object sender, EventArgs e)
-        {
-            var form = Program.serviceProvider.GetRequiredService<FrmConsultaOcorrencia>();
-            form.ShowDialog();
-        }
-        //Cadastros
-        private void cadastros_Click(object sender, EventArgs e)
-        {
-            menuTransition.Start();
-        }
-        private void btnempresas_Click(object sender, EventArgs e)
-        {
-            var form = Program.serviceProvider.GetRequiredService<FrmCadEmpresaFF>();
-            form.ShowDialog();
-        }
-        private void btnflats_Click(object sender, EventArgs e)
-        {
-            var form = Program.serviceProvider.GetRequiredService<FrmCadFlat>();
-            form.ShowDialog();
-        }
-        private void btnlancamentos_Click(object sender, EventArgs e)
-        {
-            var form = Program.serviceProvider.GetRequiredService<FrmCadLancamento>();
-            form.ShowDialog();
-        }
-        private void btnusuarios_Click(object sender, EventArgs e)
-        {
-            var form = Program.serviceProvider.GetRequiredService<FrmCadUsuario>();
-            form.ShowDialog();
-        }
-        //Funcionalidades
-        private void btnregistros_Click(object sender, EventArgs e)
-        {
-            var form = Program.serviceProvider.GetRequiredService<FrmFuncionalidadeRegisto>();
-            form.ShowDialog();
-        }
-        private void btnalugueldividendos_Click(object sender, EventArgs e)
-        {
-            var form = Program.serviceProvider.GetRequiredService<FrmFuncAluguelDividendo>();
-            form.ShowDialog();
-        }
-        private void btndividendos_Click(object sender, EventArgs e)
-        {
-            var form = Program.serviceProvider.GetRequiredService<FrmFuncDividendos>();
-            form.ShowDialog();
-        }
-        private void btnfundoreserva_Click(object sender, EventArgs e)
-        {
-            var form = Program.serviceProvider.GetRequiredService<FrmFuncFundoReserva>();
-            form.ShowDialog();
-        }
-        private void btnrendimentos_Click(object sender, EventArgs e)
-        {
-            var form = Program.serviceProvider.GetRequiredService<FrmFuncRendimentoscs>();
-            form.ShowDialog();
-        }
-        private void btnpiscofins_Click(object sender, EventArgs e)
-        {
-            var form = Program.serviceProvider.GetRequiredService<FrmFuncPISeCOFINS>();
-            form.ShowDialog();
-        }
-        //
-        private void pbMinimizar_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-        private void button10_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-        private void btnFuncionalidad_Click(object sender, EventArgs e)
-        {
-            funcTransition.Start();
-        }
-
-        private void brnRelatorios_Click_1(object sender, EventArgs e)
-        {
-            relatoriosTransition.Start();
-
-        }
-
         private void relatoriosTransition_Tick(object sender, EventArgs e)
         {
             if (!relatorioExpand)
@@ -217,18 +130,141 @@ namespace SistemaFL
                 }
             }
         }
+        private void btnEsconderPalavrasMenu_Click_1(object sender, EventArgs e)
+        {
+            //sidebarTransition.Start();
 
+        }
+        //Ocorrências
+        private void btnocorrencias_Click(object sender, EventArgs e)
+        {
+            EsconderControlesAbrirForm();
+            var form = Program.serviceProvider.GetRequiredService<FrmConsultaOcorrencia>();
+            form.FormClosed += (s, args) => MostrarBotoes();
+            form.ShowDialog();
+        }
+        //Cadastros
+        private void cadastros_Click(object sender, EventArgs e)
+        {
+            menuTransition.Start();
+        }
+        private void btnempresas_Click(object sender, EventArgs e)
+        {
+            EsconderControlesAbrirForm();
+            var form = Program.serviceProvider.GetRequiredService<FrmCadEmpresaFF>();
+            form.FormClosed += (s, args) => MostrarBotoes();
+            form.ShowDialog();
+        }
+        private void btnflats_Click(object sender, EventArgs e)
+        {
+            EsconderControlesAbrirForm();
+            var form = Program.serviceProvider.GetRequiredService<FrmCadFlat>();
+            form.FormClosed += (s, args) => MostrarBotoes();
+            form.ShowDialog();
+        }
+        private void btnlancamentos_Click(object sender, EventArgs e)
+        {
+            EsconderControlesAbrirForm();
+            var form = Program.serviceProvider.GetRequiredService<FrmCadLancamento>();
+            form.FormClosed += (s, args) => MostrarBotoes();
+            form.ShowDialog();
+        }
+        private void btnusuarios_Click(object sender, EventArgs e)
+        {
+            EsconderControlesAbrirForm();
+            var form = Program.serviceProvider.GetRequiredService<FrmCadUsuario>();
+            form.FormClosed += (s, args) => MostrarBotoes();
+            form.ShowDialog();
+        }
+        //Funcionalidades
+        private void btnregistros_Click(object sender, EventArgs e)
+        {
+            EsconderControlesAbrirForm();
+            var form = Program.serviceProvider.GetRequiredService<FrmFuncionalidadeRegisto>();
+            form.FormClosed += (s, args) => MostrarBotoes();
+            form.ShowDialog();
+        }
+        private void btnalugueldividendos_Click(object sender, EventArgs e)
+        {
+            EsconderControlesAbrirForm();
+            var form = Program.serviceProvider.GetRequiredService<FrmFuncAluguelDividendo>();
+            form.FormClosed += (s, args) => MostrarBotoes();
+            form.ShowDialog();
+        }
+        private void btndividendos_Click(object sender, EventArgs e)
+        {
+            EsconderControlesAbrirForm();
+            var form = Program.serviceProvider.GetRequiredService<FrmFuncDividendos>();
+            form.FormClosed += (s, args) => MostrarBotoes();
+            form.ShowDialog();
+        }
+        private void btnfundoreserva_Click(object sender, EventArgs e)
+        {
+            EsconderControlesAbrirForm();
+            var form = Program.serviceProvider.GetRequiredService<FrmFuncFundoReserva>();
+            form.FormClosed += (s, args) => MostrarBotoes();
+            form.ShowDialog();
+        }
+        private void btnrendimentos_Click(object sender, EventArgs e)
+        {
+            EsconderControlesAbrirForm();
+            var form = Program.serviceProvider.GetRequiredService<FrmFuncRendimentoscs>();
+            form.FormClosed += (s, args) => MostrarBotoes();
+            form.ShowDialog();
+        }
+        private void btnpiscofins_Click(object sender, EventArgs e)
+        {
+            EsconderControlesAbrirForm();
+            var form = Program.serviceProvider.GetRequiredService<FrmFuncPISeCOFINS>();
+            form.FormClosed += (s, args) => MostrarBotoes();
+            form.ShowDialog();
+        }
+        //     
+        private void btnFuncionalidad_Click(object sender, EventArgs e)
+        {
+            funcTransition.Start();
+        }
+        private void brnRelatorios_Click_1(object sender, EventArgs e)
+        {
+            relatoriosTransition.Start();
+        }
         private void btnRelatorioFiscalAnual_Click(object sender, EventArgs e)
         {
+            EsconderControlesAbrirForm();
             var form = Program.serviceProvider.GetRequiredService<RelatorioTributacaoAnual>();
+            form.FormClosed += (s, args) => MostrarBotoes();
             form.ShowDialog();
         }
-
         private void btnflatindividual_Click(object sender, EventArgs e)
         {
-            var form = Program.serviceProvider.GetRequiredService<RelatorioFlatIndividual>();
+            EsconderControlesAbrirForm();
+            var form = Program.serviceProvider.GetRequiredService<RelatorioTributacaoAnual>();
+            form.FormClosed += (s, args) => MostrarBotoes();
             form.ShowDialog();
         }
+        //
+        private void pbFechar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void pbMinimizar_Click_1(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+        private void EsconderControlesAbrirForm()
+        {
+            pbMinimizar.Visible = false;
+            pbFechar.Visible = false;
+            pMenuOpcoes.Visible = false;
+            pEnsconderBotoes.Visible = true;
+        }
+        private void MostrarBotoes()
+        {
+            pbMinimizar.Visible = true;
+            pbFechar.Visible = true;
+            pMenuOpcoes.Visible = true;
+            pEnsconderBotoes.Visible = true;
+        }       
     }
 }
 

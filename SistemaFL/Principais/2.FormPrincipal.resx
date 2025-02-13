@@ -295,8 +295,18 @@
   </metadata>
   <data name="pbMinimizar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAABZJREFUOE9jGAXDCfwnA4+CUQAFDAwA/pAM9AvHt3sAAAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DAAACwwBP0AiyAAAADhJREFUOE9jGAWjgJ7g////dUC8mwxcCzUCAoACfEBMCeCFGgUBQIFaIMZmMyGM
+        6rJRMApoChgYAGHCsHPQsAzVAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="pbFechar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DAAACwwBP0AiyAAAALdJREFUSEvtlNEOwiAMRfkJzfxE97n64OfUU9MmRFaQIcaHnaQZ0NtbMgjp4D8R
+        kStxtmkT1WqNTesgXAnlTjSbqMa0ymrLMYhOxO0lF3kQF0sVkHvXLpaqg7DZhLV95g4FYRPGY+YOhUUT
+        4jvmDgb5Ieo3H39806pglO9aGd95DmZbDcLb1QVG834RBsWBEsXBm7wPCsPbwnisCQWhucPaviYIm+YO
+        uf4miOY+dgrCec/1wY9J6QlBOtW1DWf1NwAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="btnEsconderPalavrasMenu.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -304,16 +314,6 @@
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
         DAAACwwBP0AiyAAAADRJREFUSEtjGAWDD0hKSjbQGtPHklEwCmgHpKSk/tMaQ60aBaOAFgBbqUltPFrU
         j0jAwAAAPHdv0j1chnYAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="button10.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAB
-        CQAAAQkBux2dpgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADYSURBVEhL1dU/
-        DgFREMdxbmBVOnqNI0hcQilxAjcQN9JvodQrXEQjkTzfJ29irFnsY4hf8kn2/dmZZP+2QgiuzEmNdDDI
-        0EfbLCrIBEfEQY7SLCzIUm3OYxUWRBpsYV2GOlM0arCx1uuQcTrP3iDIZxuQLuYo0niBeLDW+54h9w1I
-        D/u0sEpzRTzGUPa9gtw2ILr4AaPqSU2QawOii58wg/Vk1Lm8UI8a7NQgV/nTBr6XKE343WQ16feYqgW/
-        F81C/uxbVEW+9rnOZxUWxPeXGRG/n/77QusMkV779FDQnZwAAAAASUVORK5CYII=
 </value>
   </data>
   <metadata name="relatoriosTransition.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

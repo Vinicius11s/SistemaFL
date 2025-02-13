@@ -73,10 +73,11 @@
             funcTransition = new System.Windows.Forms.Timer(components);
             panel1 = new Panel();
             pbMinimizar = new PictureBox();
+            pbFechar = new PictureBox();
             label1 = new Label();
             btnEsconderPalavrasMenu = new PictureBox();
-            button10 = new Button();
             relatoriosTransition = new System.Windows.Forms.Timer(components);
+            pEnsconderBotoes = new Panel();
             pMenuOpcoes.SuspendLayout();
             menuContainer.SuspendLayout();
             panel3.SuspendLayout();
@@ -99,6 +100,7 @@
             panel17.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbMinimizar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnEsconderPalavrasMenu).BeginInit();
             SuspendLayout();
             // 
@@ -643,6 +645,7 @@
             // 
             panel1.BackColor = Color.DarkGray;
             panel1.Controls.Add(pbMinimizar);
+            panel1.Controls.Add(pbFechar);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(btnEsconderPalavrasMenu);
             panel1.Dock = DockStyle.Top;
@@ -655,13 +658,23 @@
             // 
             pbMinimizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbMinimizar.Image = (Image)resources.GetObject("pbMinimizar.Image");
-            pbMinimizar.Location = new Point(799, 7);
+            pbMinimizar.Location = new Point(823, 7);
             pbMinimizar.Name = "pbMinimizar";
-            pbMinimizar.Size = new Size(30, 21);
-            pbMinimizar.SizeMode = PictureBoxSizeMode.CenterImage;
-            pbMinimizar.TabIndex = 15;
+            pbMinimizar.Size = new Size(20, 28);
+            pbMinimizar.TabIndex = 24;
             pbMinimizar.TabStop = false;
-            pbMinimizar.Click += pbMinimizar_Click;
+            pbMinimizar.Click += pbMinimizar_Click_1;
+            // 
+            // pbFechar
+            // 
+            pbFechar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
+            pbFechar.Location = new Point(843, 7);
+            pbFechar.Name = "pbFechar";
+            pbFechar.Size = new Size(25, 28);
+            pbFechar.TabIndex = 23;
+            pbFechar.TabStop = false;
+            pbFechar.Click += pbFechar_Click;
             // 
             // label1
             // 
@@ -684,28 +697,17 @@
             btnEsconderPalavrasMenu.TabStop = false;
             btnEsconderPalavrasMenu.Click += btnEsconderPalavrasMenu_Click_1;
             // 
-            // button10
-            // 
-            button10.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button10.BackColor = Color.Transparent;
-            button10.FlatStyle = FlatStyle.Flat;
-            button10.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button10.ForeColor = Color.White;
-            button10.Image = (Image)resources.GetObject("button10.Image");
-            button10.ImageAlign = ContentAlignment.MiddleLeft;
-            button10.Location = new Point(799, 490);
-            button10.Name = "button10";
-            button10.Size = new Size(70, 30);
-            button10.TabIndex = 5;
-            button10.Text = "  Sair";
-            button10.TextAlign = ContentAlignment.MiddleRight;
-            button10.UseVisualStyleBackColor = false;
-            button10.Click += button10_Click;
-            // 
             // relatoriosTransition
             // 
             relatoriosTransition.Interval = 10;
             relatoriosTransition.Tick += relatoriosTransition_Tick;
+            // 
+            // pEnsconderBotoes
+            // 
+            pEnsconderBotoes.Location = new Point(0, 41);
+            pEnsconderBotoes.Name = "pEnsconderBotoes";
+            pEnsconderBotoes.Size = new Size(205, 481);
+            pEnsconderBotoes.TabIndex = 6;
             // 
             // FrmPrincipalFF
             // 
@@ -715,9 +717,9 @@
             BackgroundImage = Properties.Resources.predio1;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(869, 522);
-            Controls.Add(button10);
             Controls.Add(panel1);
             Controls.Add(pMenuOpcoes);
+            Controls.Add(pEnsconderBotoes);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FrmPrincipalFF";
@@ -748,6 +750,7 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbMinimizar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
             ((System.ComponentModel.ISupportInitialize)btnEsconderPalavrasMenu).EndInit();
             ResumeLayout(false);
         }
@@ -789,7 +792,6 @@
         private Panel panel1;
         private Label label1;
         private PictureBox btnEsconderPalavrasMenu;
-        private PictureBox pbMinimizar;
         private Button btnFuncionalidad;
         private Panel panel18;
         private Button button6;
@@ -799,7 +801,6 @@
         private Button button8;
         private Panel panel21;
         private Button button9;
-        private Button button10;
         private FlowLayoutPanel relatContainer;
         private Panel panel15;
         private Button brnRelatorios;
@@ -809,5 +810,8 @@
         private Panel panel17;
         private Button btnflatindividual;
         private System.Windows.Forms.Timer relatoriosTransition;
+        private PictureBox pbMinimizar;
+        private PictureBox pbFechar;
+        private Panel pEnsconderBotoes;
     }
 }

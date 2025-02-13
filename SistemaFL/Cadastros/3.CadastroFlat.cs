@@ -21,6 +21,7 @@ namespace SistemaFL
 {
     public partial class FrmCadFlat : Form
     {
+        bool avisoMostrado = false;
         private IFlatRepositorio repositorio;
         private IEmpresaRepositorio empresaRepositorio;
         decimal valorTotalImovel;
@@ -33,12 +34,12 @@ namespace SistemaFL
             tTamanhotela.Tick += tTamanhotela_Tick;
             tTamanhotela.Start();
         }
-        bool avisoMostrado = false;
-
         private void FrmCadFlat_Load(object sender, EventArgs e)
         {
             this.Location = new System.Drawing.Point(205, 41);
             limpar();
+            ckPool.Enabled = false;
+            ckPlataforma.Enabled = false;
             pdados.Enabled = false;
             btnnovo.Enabled = true;
             btnlocalizar.Enabled = true;
@@ -50,15 +51,17 @@ namespace SistemaFL
         private void btnnovo_Click_1(object sender, EventArgs e)
         {
             limpar();
-            txtdescricao.Focus();
+            ckPool.Enabled = true;
+            ckPlataforma.Enabled = true;
+            ckPool.Focus();
 
-            pdados.Enabled = true;
+            pdados.Enabled = false;
             btnnovo.Enabled = false;
             btnlocalizar.Enabled = false;
             btnalterar.Enabled = false;
             btncancelar.Enabled = true;
             btnexcluir.Enabled = false;
-            btnsalvar.Enabled = true;
+            btnsalvar.Enabled = false;
         }
         private void btnalterar_Click_1(object sender, EventArgs e)
         {
@@ -173,42 +176,66 @@ namespace SistemaFL
                 var flat = repositorio.Recuperar(e => e.id == form2.id);
                 if (flat != null)
                 {
+                    
+                    if (flat.TipoCadastro == 1)
+                    {
+                        ckPool.Checked = true;
+                    }
+                    else if (flat.TipoCadastro == 2)
+                    {
+                        ckPlataforma.Checked = true;
+                    }
+
                     txtid.Text = flat.id.ToString();
                     txtdescricao.Text = flat.Descricao;
+                    txtunidade.Text = flat.Unidade.ToString();
+                    txtTipoUnidade.Text = flat.TipoUnidade.ToString();
                     cbbTipoInvestimento.SelectedItem = flat.TipoInvestimento;
                     cbbStatus.Text = flat.Status.ToString();
                     dtdataaquisicao.Value = flat.DataAquisicao;
+
+
                     txtCep.Text = flat.Cep;
                     txtrua.Text = flat.Rua;
-                    txtunidade.Text = flat.Unidade.ToString();
+                    txtNum.Text = flat.Numero;
                     txtbairro.Text = flat.Bairro;
                     txtestado.Text = flat.Estado;
                     txtcidade.Text = flat.Cidade;
+
+
                     txtNumMatriculaImovel.Text = flat.NumMatriculaImovel.ToString();
-                    txtValoDeCompra.Text = flat.ValorDeCompra.ToString();
-                    txTamanhoM2.Text = flat.TamanhoUnidadeM2.ToString();
+                    txtNumUCEnergia.Text = flat.NumUCEnergia.ToString();
+                    txtNumCadastroPref.Text = flat.NumCadastroPrefeitura.ToString();
+                    txTamanhoM2.Text = flat.TamanhoUnM2.ToString();
+                    ckPossuiGaragemSim.Checked = flat.PossuiGaragem;
+                    ckPossuiGaragemNao.Checked = !flat.PossuiGaragem;
+                    ckEscrituradoSim.Checked = flat.Escriturado;
+                    ckEscrituradoNao.Checked = !flat.Escriturado;
+                    ckRegistradoSim.Checked = flat.Registrado;
+                    ckRegistradoNao.Checked = !flat.Registrado;
                     txtValorComissao.Text = flat.valorComissao.ToString();
                     ckNotaComissao.Checked = flat.NotaComissao;
-                    txtValorITBI.Text = flat.ValorITBI.ToString();
+
                     txtValorEscritura.Text = flat.ValorEscritura.ToString();
-                    txtValorDeRegistro.Text = flat.ValorRegistro.ToString();
+                    txtValorITBI.Text = flat.ValorITBI.ToString();
                     ckLaudemioSim.Checked = flat.Laudemio;
                     ckLaudemioNao.Checked = !flat.Laudemio;
                     txtValorLaudemio.Text = flat.ValorLaudemio.ToString();
                     txtValorAforamento.Text = flat.ValorAforamento.ToString();
-                    txtValorTotalImovel.Text = flat.ValorTotalImovel.ToString();
+                    txtValorDeRegistro.Text = flat.ValorRegistro.ToString();
+                    txtValoDeCompra.Text = flat.ValorDeCompra.ToString();
 
-                    ckPossuiGaragemSim.Checked = flat.PossuiGaragem;
-                    ckPossuiGaragemNao.Checked = !flat.PossuiGaragem;
-
-                    ckEscrituradoSim.Checked = flat.Escriturado;
-                    ckEscrituradoNao.Checked = !flat.Escriturado;
-
-                    ckRegistradoSim.Checked = flat.Registrado;
-                    ckRegistradoNao.Checked = !flat.Registrado;
-
-
-
+                    txtMesReajuste.Text = flat.MesReajusteAluguel.ToString();
+                    if(flat.IPTU == "Locador")
+                    {
+                        ckLocador.Checked = true;
+                    }
+                    else if(flat.IPTU == "Locatário")
+                    {
+                        ckLocatario.Checked = true;
+                    }   
+                    
+                    txtValorTotalImovel.Text = flat.ValorTotalImovel.ToString();                   
                     if (flat.idEmpresa != null)
                     {
                         var empresa = empresaRepositorio.Recuperar(e => e.id == flat.idEmpresa);
@@ -216,14 +243,9 @@ namespace SistemaFL
                         {
                             txtempresaAss.Text = empresa.Descricao; // Define a descrição da empresa no TextBox
                         }
-                        else
-                        {
-                        }
                     }
-                    else
-                    {
-                        txtempresaAss.Text = "Sem empresa associada"; // Caso o flat não tenha empresa associada
-                    }
+                    else txtempresaAss.Text = "Sem empresa associada"; // Caso o flat não tenha empresa associada
+
                     pdados.Enabled = false;
                     btnnovo.Enabled = false;
                     btnlocalizar.Enabled = false;
@@ -232,13 +254,9 @@ namespace SistemaFL
                     btnexcluir.Enabled = true;
                     btnsalvar.Enabled = false;
                 }
-                else
-                {
-                    MessageBox.Show("Empresa não encontrada.");
-                }
+                else MessageBox.Show("Empresa não encontrada.");
             }
         }
-        //
         //Atribuições
         void AtribuiStatusDoFlat(Flat flat)
         {
@@ -295,8 +313,6 @@ namespace SistemaFL
                     break;
             }
         }
-
-
         void AtribuiValorDeCompraUnidade(Flat flat)
         {
             decimal valorInvestimento;
@@ -305,8 +321,6 @@ namespace SistemaFL
                 flat.ValorDeCompra = valorInvestimento;
             }
         }
-        //
-        //
         public Flat carregaPropriedades()
         {
             Flat flat;
@@ -323,41 +337,45 @@ namespace SistemaFL
             valorTotalImovel = 0;
 
             flat.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
+            AtribuiTipoCadastro(flat);
+
             flat.Descricao = txtdescricao.Text;
+            flat.Unidade = ValidaInteiros(flat, txtunidade);
+            flat.TipoUnidade = txtTipoUnidade.Text;
             flat.TipoInvestimento = cbbTipoInvestimento.SelectedItem?.ToString() ?? "Indefinido";
-            AtribuiStatusDoFlat(flat);            
+            AtribuiStatusDoFlat(flat);
             flat.DataAquisicao = dtdataaquisicao.Value;
+
+
             flat.Cep = txtCep.Text;
             flat.Rua = txtrua.Text;
-            flat.Unidade = ValidaInteiros(flat, txtunidade);
+            flat.Numero = txtNum.Text;
             flat.Bairro = txtbairro.Text;
             flat.Estado = txtestado.Text;
             flat.Cidade = txtcidade.Text;
+
+
             flat.NumMatriculaImovel = ValidaInteiros(flat, txtNumMatriculaImovel);
-            flat.ValorDeCompra = ValidaDecimais(flat, txtValoDeCompra);
-            valorTotalImovel += flat.ValorDeCompra;
-            flat.TamanhoUnidadeM2 = ValidaDecimais(flat, txTamanhoM2);
+            flat.NumUCEnergia = txtNumUCEnergia.Text;
+            flat.NumCadastroPrefeitura = txtNumCadastroPref.Text;
+            flat.TamanhoUnM2 = ValidaDecimais(flat, txTamanhoM2);
             ValidaCheckBox(flat);
-            flat.valorComissao = ValidaDecimais(flat, txtValorComissao);
             valorTotalImovel += flat.valorComissao;
+            flat.valorComissao = ValidaDecimais(flat, txtValorComissao);
             flat.NotaComissao = ckNotaComissao.Checked ? true : false;
 
-            flat.ValorITBI = ValidaDecimais(flat, txtValorITBI);
-            valorTotalImovel += flat.ValorITBI;
-            flat.ValorEscritura = ValidaDecimais(flat, txtValorEscritura);
-            valorTotalImovel += flat.ValorEscritura;
-            flat.ValorRegistro = ValidaDecimais(flat, txtValorDeRegistro);
-            valorTotalImovel += flat.ValorRegistro;
-
+            flat.ValorEscritura = ValidaDecimais(flat, txtValorEscritura); valorTotalImovel += flat.ValorEscritura;
+            flat.ValorITBI = ValidaDecimais(flat, txtValorITBI); valorTotalImovel += flat.ValorITBI;
             flat.Laudemio = ckLaudemioSim.Checked ? true : (ckLaudemioNao.Checked ? false : false);
-            flat.ValorLaudemio = ValidaDecimais(flat, txtValorLaudemio);
-            valorTotalImovel += flat.ValorLaudemio;
+            flat.ValorLaudemio = ValidaDecimais(flat, txtValorLaudemio); valorTotalImovel += flat.ValorLaudemio;
+            flat.ValorAforamento = ValidaDecimais(flat, txtValorAforamento); valorTotalImovel += flat.ValorAforamento;
+            flat.ValorRegistro = ValidaDecimais(flat, txtValorDeRegistro); valorTotalImovel += flat.ValorRegistro;
+            flat.ValorDeCompra = ValidaDecimais(flat, txtValoDeCompra); valorTotalImovel += flat.ValorDeCompra;
 
-            flat.ValorAforamento = ValidaDecimais(flat, txtValorAforamento);
-            valorTotalImovel += flat.ValorAforamento;
 
+            flat.MesReajusteAluguel = txtMesReajuste.Text;
+            AtribuiIPTU(flat);                       
             flat.ValorTotalImovel = valorTotalImovel;
-
             flat.idEmpresa = flat.idEmpresa;
             return flat;
         }
@@ -379,6 +397,8 @@ namespace SistemaFL
                     checkBox.Checked = false;
                 }
             }
+            ckPool.Checked = false;
+            ckPlataforma.Checked = false;
         }
         private void pbFechar_Click(object sender, EventArgs e)
         {
@@ -396,7 +416,6 @@ namespace SistemaFL
         {
             txtValorLaudemio.Enabled = true;
         }
-        //
         //Validações
         public decimal ValidaDecimais(Flat flat, TextBox textBox)
         {
@@ -475,6 +494,34 @@ namespace SistemaFL
                 }
             }
         }
+        void AtribuiIPTU(Flat flat)
+        {
+           if(avisoMostrado == false)
+            {
+                if (ckLocador.Checked)
+                {
+                    flat.IPTU = "Locador";
+                }
+                else if (ckLocatario.Checked)
+                {
+                    flat.IPTU = "Locatário";
+                }
+            }
+        }
+        void AtribuiTipoCadastro(Flat flat)
+        {
+            if (avisoMostrado == false)
+            {
+                if (ckPool.Checked)
+                {
+                    flat.TipoCadastro = 1;
+                }
+                else if (ckPlataforma.Checked)
+                {
+                    flat.TipoCadastro = 2;
+                }
+            }
+        }
         private async void btnBuscaCep_Click(object sender, EventArgs e)
         {
             string cep = txtCep.Text.Trim(); // Pega o CEP digitado no TextBox
@@ -504,7 +551,7 @@ namespace SistemaFL
                         txtbairro.Text = endereco.Bairro;
                         txtcidade.Text = endereco.Localidade;
                         txtestado.Text = endereco.Uf;
-                        txtunidade.Focus();
+                        txtNum.Focus();
                     }
                     else
                     {
@@ -517,6 +564,55 @@ namespace SistemaFL
                 MessageBox.Show($"Erro ao buscar o CEP: {ex.Message}");
             }
         }
-     
+        private void ckPool_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckPool.Checked)
+            {
+                ckPlataforma.Enabled = false;
+                pdados.Enabled = true;
+                btnnovo.Enabled = false;
+                btnlocalizar.Enabled = false;
+                btnalterar.Enabled = false;
+                btncancelar.Enabled = true;
+                btnexcluir.Enabled = false;
+                btnsalvar.Enabled = true;
+            }
+            else
+            {
+                ckPlataforma.Enabled = true;
+                pdados.Enabled = false;
+                btnnovo.Enabled = false;
+                btnlocalizar.Enabled = false;
+                btnalterar.Enabled = false;
+                btncancelar.Enabled = true;
+                btnexcluir.Enabled = false;
+                btnsalvar.Enabled = true;
+            }
+        }
+        private void ckPlataforma_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckPlataforma.Checked)
+            {
+                ckPool.Enabled = false;
+                pdados.Enabled = true;
+                btnnovo.Enabled = false;
+                btnlocalizar.Enabled = false;
+                btnalterar.Enabled = false;
+                btncancelar.Enabled = true;
+                btnexcluir.Enabled = false;
+                btnsalvar.Enabled = true;
+            }
+            else
+            {
+                ckPool.Enabled = true;
+                pdados.Enabled = false;
+                btnnovo.Enabled = false;
+                btnlocalizar.Enabled = false;
+                btnalterar.Enabled = false;
+                btncancelar.Enabled = true;
+                btnexcluir.Enabled = false;
+                btnsalvar.Enabled = true;
+            }
+        }
     }
 }

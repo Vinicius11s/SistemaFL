@@ -26,7 +26,6 @@ namespace SistemaFL
 
         private IEmpresaRepositorio repositorio;
         private IFlatRepositorio flatRepositorio;
-
         public FrmCadEmpresaFF(IEmpresaRepositorio repositorio, IFlatRepositorio flatRepositorio)
         {
             InitializeComponent();
@@ -81,24 +80,21 @@ namespace SistemaFL
 
                     var contexto = Program.serviceProvider.GetRequiredService<ContextoSistema>();
 
-                    if (contexto.ChangeTracker.HasChanges())
+                    if (empresa.id == 0)
                     {
-                        if (empresa.id == 0)
-                        {
-                            repositorio.Inserir(empresa);
-                        }
-                        else
-                        {
-                            repositorio.Alterar(empresa);
-                        }
-
-                        contexto.SaveChanges();
-                        MessageBox.Show("Salvo com sucesso", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        repositorio.Inserir(empresa);
                     }
                     else
                     {
-                        MessageBox.Show("Todas as alterações já foram salvas.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        repositorio.Alterar(empresa);
                     }
+
+                    contexto.SaveChanges();
+                    MessageBox.Show("Salvo com sucesso", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+
+
 
                     limpar();
                     btnnovo.Enabled = true;
@@ -242,7 +238,7 @@ namespace SistemaFL
         }
         //DataGrid Flats Não Associados
         private void CarregarFlatsNaoAssociados()
-        {          
+        {
             var flatsNaoAssociados = flatRepositorio.Listar(f => f.idEmpresa == null)
                .Select(f => new
                {
@@ -251,7 +247,7 @@ namespace SistemaFL
                    f.TipoInvestimento,
                    f.Status,
                    f.DataAquisicao,
-                   f.TamanhoUnidadeM2,
+                   f.TamanhoUnM2,
                    f.Rua,
                    f.Unidade,
                    f.Bairro,
@@ -289,7 +285,7 @@ namespace SistemaFL
             grid.Columns["DataAquisicao"].DefaultCellStyle.Format = "d";
             grid.Columns["DataAquisicao"].HeaderText = "DATA AQUISIÇÃO";
 
-            grid.Columns["TamanhoUnidadeM2"].HeaderText = "TAM. M2";
+            grid.Columns["TamanhoUnM2"].HeaderText = "TAM. M2";
             grid.Columns["NumMatriculaImovel"].HeaderText = "Nº MATRÍCULA";
             grid.Columns["ValorDeCompra"].HeaderText = "VALOR COMPRA";
             grid.Columns["PossuiGaragem"].HeaderText = "POSSUI GARAGEM";
@@ -407,7 +403,6 @@ namespace SistemaFL
                 cbbflatsassociados.Text = "";
             }
         }
-        //
         public Empresa carregaPropriedades()
         {
             Empresa empresa;
@@ -451,12 +446,11 @@ namespace SistemaFL
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-            if(avisoMostrado == false)
+            if (avisoMostrado == false)
             {
                 empresa.Cnpj = cnpj;
             }
         }
-        //
         void limpar()
         {
             if (cbbflatsassociados.Items.Count > 0)
@@ -540,6 +534,10 @@ namespace SistemaFL
             {
                 MessageBox.Show($"Erro ao buscar o CEP: {ex.Message}");
             }
+        }
+        private void pdados_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 

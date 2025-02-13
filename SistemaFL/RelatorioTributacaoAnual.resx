@@ -118,23 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnSalvarPDF.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EQAACxEBf2RfkQAAAXNJREFUWEftlztKBEEURVtBTcRMM2MDwcAlGBgYCuIi/IR+EzFyIQbiFhQDt6D4
-        CQwN3ICBInruaEHRPNrX1V0d1YEDM9PcV5fuYuiqCoVCOlN4hM/4ifcYuMRvp4soVnH992N3VO4G44W6
-        FtzAL9wefevIMdYX6qNg+O0MxzAZPdZ4EdlnQXmOk5iE9lw8TPZdUF7jDLamPkjmKCjvcB5bYQ3KVVC+
-        4hK6sYa8YWANtdH/8xSnUWyhNTf4gm6sAXIFUxjHW7RmxrqxwlJ3cRO9G1t/JQt4gda8um6s8BC6scJD
-        6MYKD6EbKzyEbqzwELqxwu+oN5FZTEXZHdQsaw03VriX16Q/dtFaw40VDnduGfcTVVbMobWGm6bwCVrX
-        PSobsK67aQqXgh6awqWgh6ZwKejBOjQFchX8QDdPWB8QyFXwAd0cYn1AIFfBPXSjA7XOrPGAQI6CVziB
-        rVDJA9TjjvdHXwU18xF151qXKxQKI6rqB3orn0lvCSUfAAAAAElFTkSuQmCC
-</value>
-  </data>
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAA4SURBVDhPYxgFo4Ce4P///3VAvJsMXAs1AgKAAnxATAng
-        hRoFAUCBWiDGZjMhjOqyUTAKaAoYGABhwrBz0LAM1QAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EQAACxEBf2RfkQAAADhJREFUOE9jGAWjgJ7g////dUC8mwxcCzUCAoACfEBMCeCFGgUBQIFaIMZmMyGM
+        6rJRMApoChgYAGHCsHPQsAzVAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="pbFecharr.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -157,6 +145,15 @@
   <metadata name="tTamanhotela.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="btnSalvarPDF.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAC2SURBVEhL7ZRRCsIwEERzCcUjeW5FiuKXfvjvRXTGdKAW
+        t7GSLFL2wdBtuuwrpE0KZnBA9rn0hdJdLoO2xB4vnyPS5dKXRx93QuyGm5iHxRlZv+7exVzjsyZf+Qmh
+        6IpQJDFrrrFmz09M/ZtDga7DWi/0CR6vk+e6hlmskAuiPuWGbBAL9ZkUG8BYXpKS4txiQ4/k30hJNTHh
+        flp7OqaqeA7/K74jaqodzjbZIi3knMnZgTcpPQH1j3pWdVPfPwAAAABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>97</value>
   </metadata>

@@ -60,7 +60,7 @@ namespace SistemaFL
                     f.TipoInvestimento,
                     f.Status,
                     f.DataAquisicao,
-                    f.TamanhoUnidadeM2,
+                    f.TamanhoUnM2,
                     f.Rua,
                     f.Unidade,
                     f.Bairro,
@@ -98,7 +98,7 @@ namespace SistemaFL
             grid.Columns["DataAquisicao"].DefaultCellStyle.Format = "d";
             grid.Columns["DataAquisicao"].HeaderText = "DATA AQUISIÇÃO";
 
-            grid.Columns["TamanhoUnidadeM2"].HeaderText = "TAM. M2";
+            grid.Columns["TamanhoUNM2"].HeaderText = "TAM. M2";
             grid.Columns["NumMatriculaImovel"].HeaderText = "Nº MATRÍCULA";
 
             grid.Columns["ValorDeCompra"].HeaderText = "VALOR COMPRA";
@@ -200,6 +200,11 @@ namespace SistemaFL
         private void tTamanhotela_Tick(object sender, EventArgs e)
         {
             Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela);
+        }
+
+        private void FrmConsultaFlat_Resize(object sender, EventArgs e)
+        {
+            Estilos.AjustarMargemDataGrid(dgdadosFlats, this);
         }
     }
 } 

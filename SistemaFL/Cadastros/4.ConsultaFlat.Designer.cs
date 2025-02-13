@@ -89,7 +89,7 @@
             // 
             pbFechar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
-            pbFechar.Location = new Point(847, 8);
+            pbFechar.Location = new Point(850, 8);
             pbFechar.Name = "pbFechar";
             pbFechar.Size = new Size(30, 21);
             pbFechar.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -121,6 +121,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Consulta Flats";
             Load += FrmConsultaFlat_Load_1;
+            Resize += FrmConsultaFlat_Resize;
             ((System.ComponentModel.ISupportInitialize)dgdadosFlats).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
             ResumeLayout(false);
