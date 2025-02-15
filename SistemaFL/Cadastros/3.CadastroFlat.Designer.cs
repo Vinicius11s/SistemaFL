@@ -504,7 +504,7 @@
             // 
             label19.AutoSize = true;
             label19.Font = new Font("Segoe UI Semilight", 12F);
-            label19.Location = new Point(356, 334);
+            label19.Location = new Point(321, 334);
             label19.Name = "label19";
             label19.Size = new Size(152, 21);
             label19.TabIndex = 69;
@@ -514,7 +514,7 @@
             // 
             txtValorTotalImovel.Enabled = false;
             txtValorTotalImovel.Font = new Font("Segoe UI Semilight", 12F);
-            txtValorTotalImovel.Location = new Point(362, 359);
+            txtValorTotalImovel.Location = new Point(327, 359);
             txtValorTotalImovel.Margin = new Padding(3, 4, 3, 4);
             txtValorTotalImovel.MaxLength = 150;
             txtValorTotalImovel.Name = "txtValorTotalImovel";
@@ -562,6 +562,7 @@
             ckLaudemioNao.TabIndex = 29;
             ckLaudemioNao.Text = "Não";
             ckLaudemioNao.UseVisualStyleBackColor = true;
+            ckLaudemioNao.CheckedChanged += ckLaudemioNao_CheckedChanged;
             // 
             // ckLaudemioSim
             // 
@@ -951,7 +952,7 @@
             btnlocalizar.FlatStyle = FlatStyle.Flat;
             btnlocalizar.Font = new Font("Arial", 11.25F, FontStyle.Bold);
             btnlocalizar.ForeColor = Color.White;
-            btnlocalizar.Location = new Point(730, 19);
+            btnlocalizar.Location = new Point(745, 19);
             btnlocalizar.Name = "btnlocalizar";
             btnlocalizar.Size = new Size(102, 40);
             btnlocalizar.TabIndex = 38;
@@ -966,7 +967,7 @@
             btnsalvar.FlatStyle = FlatStyle.Flat;
             btnsalvar.Font = new Font("Arial", 11.25F, FontStyle.Bold);
             btnsalvar.ForeColor = Color.White;
-            btnsalvar.Location = new Point(578, 19);
+            btnsalvar.Location = new Point(573, 19);
             btnsalvar.Name = "btnsalvar";
             btnsalvar.Size = new Size(102, 40);
             btnsalvar.TabIndex = 37;
@@ -981,7 +982,7 @@
             btnalterar.FlatStyle = FlatStyle.Flat;
             btnalterar.Font = new Font("Arial", 11.25F, FontStyle.Bold);
             btnalterar.ForeColor = Color.White;
-            btnalterar.Location = new Point(417, 19);
+            btnalterar.Location = new Point(401, 19);
             btnalterar.Name = "btnalterar";
             btnalterar.Size = new Size(102, 40);
             btnalterar.TabIndex = 36;
@@ -996,7 +997,7 @@
             btnnovo.FlatStyle = FlatStyle.Flat;
             btnnovo.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnnovo.ForeColor = Color.White;
-            btnnovo.Location = new Point(257, 19);
+            btnnovo.Location = new Point(233, 19);
             btnnovo.Name = "btnnovo";
             btnnovo.Size = new Size(102, 40);
             btnnovo.TabIndex = 35;

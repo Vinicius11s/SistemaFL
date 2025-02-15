@@ -49,7 +49,7 @@
             dgdadosDiv.Location = new Point(0, 77);
             dgdadosDiv.Margin = new Padding(3, 4, 3, 4);
             dgdadosDiv.Name = "dgdadosDiv";
-            dgdadosDiv.Size = new Size(903, 343);
+            dgdadosDiv.Size = new Size(1090, 480);
             dgdadosDiv.TabIndex = 0;
             dgdadosDiv.ColumnHeaderMouseClick += dgdadosDiv_ColumnHeaderMouseClick;
             dgdadosDiv.DataBindingComplete += dgdadosDiv_DataBindingComplete;
@@ -58,7 +58,7 @@
             // 
             pbFechar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
-            pbFechar.Location = new Point(702, 12);
+            pbFechar.Location = new Point(856, 5);
             pbFechar.Name = "pbFechar";
             pbFechar.Size = new Size(30, 21);
             pbFechar.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -81,9 +81,9 @@
             // 
             pbMinimizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbMinimizar.Image = (Image)resources.GetObject("pbMinimizar.Image");
-            pbMinimizar.Location = new Point(672, 12);
+            pbMinimizar.Location = new Point(837, 5);
             pbMinimizar.Name = "pbMinimizar";
-            pbMinimizar.Size = new Size(30, 21);
+            pbMinimizar.Size = new Size(23, 21);
             pbMinimizar.SizeMode = PictureBoxSizeMode.CenterImage;
             pbMinimizar.TabIndex = 15;
             pbMinimizar.TabStop = false;
@@ -99,7 +99,7 @@
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(900, 421);
+            ClientSize = new Size(1087, 558);
             Controls.Add(pbMinimizar);
             Controls.Add(label1);
             Controls.Add(pbFechar);

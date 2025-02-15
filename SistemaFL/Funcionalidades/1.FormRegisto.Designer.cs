@@ -77,10 +77,10 @@
             // 
             pbFechar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
-            pbFechar.Location = new Point(842, 5);
+            pbFechar.Location = new Point(856, 5);
             pbFechar.Margin = new Padding(4);
             pbFechar.Name = "pbFechar";
-            pbFechar.Size = new Size(35, 25);
+            pbFechar.Size = new Size(26, 21);
             pbFechar.SizeMode = PictureBoxSizeMode.CenterImage;
             pbFechar.TabIndex = 9;
             pbFechar.TabStop = false;
@@ -151,9 +151,9 @@
             // 
             pbMinimizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbMinimizar.Image = (Image)resources.GetObject("pbMinimizar.Image");
-            pbMinimizar.Location = new Point(814, 5);
+            pbMinimizar.Location = new Point(838, 5);
             pbMinimizar.Name = "pbMinimizar";
-            pbMinimizar.Size = new Size(30, 21);
+            pbMinimizar.Size = new Size(20, 21);
             pbMinimizar.SizeMode = PictureBoxSizeMode.CenterImage;
             pbMinimizar.TabIndex = 21;
             pbMinimizar.TabStop = false;

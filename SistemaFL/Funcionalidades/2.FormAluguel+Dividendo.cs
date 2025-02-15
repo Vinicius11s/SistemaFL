@@ -192,9 +192,6 @@ namespace SistemaFL.Funcionalidades
 
             dgtotalmes.Columns["Descricao"].HeaderText = "DESCRIÇÃO";
             dgtotalmes.Columns["Descricao"].HeaderCell.Style.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-
-
-
         }
         private void AlterarEstilosCelulasGridTotais(DataGridView grid)
         {

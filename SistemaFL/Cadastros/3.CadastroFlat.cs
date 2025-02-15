@@ -67,6 +67,8 @@ namespace SistemaFL
         {
             if (txtid.Text != "")
             {
+                ckPool.Enabled = true;
+                ckPlataforma.Enabled = true;
                 pdados.Enabled = true;
                 btnnovo.Enabled = false;
                 btnlocalizar.Enabled = false;
@@ -129,6 +131,8 @@ namespace SistemaFL
         private void btncancelar_Click_1(object sender, EventArgs e)
         {
             limpar();
+            ckPool.Enabled = false;
+            ckPlataforma.Enabled = false;
             pdados.Enabled = false;
             btnnovo.Enabled = true;
             btnlocalizar.Enabled = true;
@@ -176,7 +180,7 @@ namespace SistemaFL
                 var flat = repositorio.Recuperar(e => e.id == form2.id);
                 if (flat != null)
                 {
-                    
+
                     if (flat.TipoCadastro == 1)
                     {
                         ckPool.Checked = true;
@@ -226,16 +230,16 @@ namespace SistemaFL
                     txtValoDeCompra.Text = flat.ValorDeCompra.ToString();
 
                     txtMesReajuste.Text = flat.MesReajusteAluguel.ToString();
-                    if(flat.IPTU == "Locador")
+                    if (flat.IPTU == "Locador")
                     {
                         ckLocador.Checked = true;
                     }
-                    else if(flat.IPTU == "Locatário")
+                    else if (flat.IPTU == "Locatário")
                     {
                         ckLocatario.Checked = true;
-                    }   
-                    
-                    txtValorTotalImovel.Text = flat.ValorTotalImovel.ToString();                   
+                    }
+
+                    txtValorTotalImovel.Text = flat.ValorTotalImovel.ToString();
                     if (flat.idEmpresa != null)
                     {
                         var empresa = empresaRepositorio.Recuperar(e => e.id == flat.idEmpresa);
@@ -335,7 +339,14 @@ namespace SistemaFL
             else flat = new Flat();//inserir
 
             valorTotalImovel = 0;
-
+            if (ckPool.Checked)
+            {
+                flat.TipoCadastro = 1;
+            }
+            else if (ckPlataforma.Checked)
+            {
+                flat.TipoCadastro = 2;
+            }
             flat.id = txtid.Text == "" ? 0 : int.Parse(txtid.Text);
             AtribuiTipoCadastro(flat);
 
@@ -374,7 +385,7 @@ namespace SistemaFL
 
 
             flat.MesReajusteAluguel = txtMesReajuste.Text;
-            AtribuiIPTU(flat);                       
+            AtribuiIPTU(flat);
             flat.ValorTotalImovel = valorTotalImovel;
             flat.idEmpresa = flat.idEmpresa;
             return flat;
@@ -414,7 +425,11 @@ namespace SistemaFL
         }
         private void ckLaudemioSim_CheckedChanged(object sender, EventArgs e)
         {
-            txtValorLaudemio.Enabled = true;
+            if (ckLaudemioSim.Checked)
+            {
+                txtValorLaudemio.Enabled = true;
+            }
+            else txtValorLaudemio.Enabled = false;
         }
         //Validações
         public decimal ValidaDecimais(Flat flat, TextBox textBox)
@@ -496,7 +511,7 @@ namespace SistemaFL
         }
         void AtribuiIPTU(Flat flat)
         {
-           if(avisoMostrado == false)
+            if (avisoMostrado == false)
             {
                 if (ckLocador.Checked)
                 {
@@ -612,6 +627,13 @@ namespace SistemaFL
                 btncancelar.Enabled = true;
                 btnexcluir.Enabled = false;
                 btnsalvar.Enabled = true;
+            }
+        }
+        private void ckLaudemioNao_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckLaudemioNao.Checked)
+            {
+                txtValorLaudemio.Enabled = false;
             }
         }
     }

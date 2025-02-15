@@ -24,8 +24,9 @@ namespace SistemaFL.Funcionalidades
             InitializeComponent();
             this.repositorio = repositorio;
             this.lancamentoRepositorio = lancamentoRepositorio;
-        }
 
+
+        }
         private void FrmFuncPISeCOFINS_Load(object sender, EventArgs e)
         {
             AtribuiValorPadraoDePiseCofins();
@@ -166,5 +167,9 @@ namespace SistemaFL.Funcionalidades
             dgdadosPIS.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
 
+        private void tTamanhotela_Tick(object sender, EventArgs e)
+        {
+            //Estilos.ReAjustarTamanhoFormulario();
+        }
     }
 }

@@ -64,6 +64,7 @@ namespace SistemaFL.Funcionalidades
             dgdadosFunRegistro.Columns["IdFlat"].Visible = false;
             dgdadosFunRegistro.Columns["CnpjRecebimento"].HeaderText = "CNPJ(RECEBIMENTO)";
             dgdadosFunRegistro.Columns["DtAquisicao"].HeaderText = "DT AQUISIÇÃO";
+            dgdadosFunRegistro.Columns["Endereco"].HeaderText = "ENDEREÇO";
             dgdadosFunRegistro.Columns["DtAquisicao"].DefaultCellStyle.Format = "d";
             dgdadosFunRegistro.Columns["Unid"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgdadosFunRegistro.Columns["TipoInvestimento"].HeaderText = "TIPO INVESTIMENTO";

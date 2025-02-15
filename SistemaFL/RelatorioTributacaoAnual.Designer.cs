@@ -81,9 +81,9 @@
             label2.ForeColor = Color.White;
             label2.Location = new Point(24, 23);
             label2.Name = "label2";
-            label2.Size = new Size(298, 22);
+            label2.Size = new Size(153, 22);
             label2.TabIndex = 18;
-            label2.Text = "Relatório de Fechamento Anual";
+            label2.Text = "Relatório Fiscal";
             // 
             // panel1
             // 

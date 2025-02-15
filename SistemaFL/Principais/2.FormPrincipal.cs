@@ -238,7 +238,7 @@ namespace SistemaFL
         private void btnflatindividual_Click(object sender, EventArgs e)
         {
             EsconderControlesAbrirForm();
-            var form = Program.serviceProvider.GetRequiredService<RelatorioTributacaoAnual>();
+            var form = Program.serviceProvider.GetRequiredService<RelatorioFlatIndividual>();
             form.FormClosed += (s, args) => MostrarBotoes();
             form.ShowDialog();
         }

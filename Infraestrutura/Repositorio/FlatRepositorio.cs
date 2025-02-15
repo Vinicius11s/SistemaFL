@@ -41,7 +41,7 @@ namespace Infraestrutura.Repositorio
                     TipoInvestimento = flat.TipoInvestimento,
                     Cidade = flat.Cidade,
                     Endereco = flat.Bairro != null && flat.Bairro != ""
-                    ? $"{flat.Rua ?? ""}, {flat.Bairro}"
+                    ? $"{flat.Rua ?? ""}, {flat.Numero ?? ""}, {flat.Bairro}"
                     : $"{flat.Rua ?? ""}",
                     Investimento = flat.ValorDeCompra,
                     Status = flat.Status.ToString()

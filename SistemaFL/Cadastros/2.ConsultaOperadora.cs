@@ -126,10 +126,13 @@ namespace SistemaFL
         {
             this.Close();
         }
-
         private void FrmConsultaEmpresa_Resize(object sender, EventArgs e)
         {
-            Estilos.AjustarMargemDataGrid(dgdados, this);
+            dgdados.Width = this.ClientSize.Width - dgdados.Left - 210;
+        }
+        private void pbMinimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

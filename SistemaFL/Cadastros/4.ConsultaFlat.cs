@@ -52,33 +52,45 @@ namespace SistemaFL
                 txtdescricao.Text = "";
             }
 
-            var listaFlats = repositorio.Listar(f => f.Descricao.Contains(txtdescricao.Text))
+            if (cbbTipoCad.SelectedItem == null || cbbTipoCad.SelectedIndex == 0)
+            {
+                var listaFlats = repositorio.Listar(f => f.Descricao.Contains(txtdescricao.Text))
                 .Select(f => new
                 {
                     f.id,
                     f.Descricao,
+                    f.Unidade,
+                    f.TipoUnidade,
                     f.TipoInvestimento,
                     f.Status,
                     f.DataAquisicao,
-                    f.TamanhoUnM2,
+                    f.Cep,
                     f.Rua,
-                    f.Unidade,
+                    f.Numero,
                     f.Bairro,
                     f.Estado,
                     f.Cidade,
+
                     f.NumMatriculaImovel,
-                    f.ValorDeCompra,
+                    f.NumUCEnergia,
+                    f.NumCadastroPrefeitura,
+                    f.TamanhoUnM2,
                     PossuiGaragem = f.PossuiGaragem ? "Sim" : "Não",
                     Escriturado = f.Escriturado ? "Sim" : "Não",
                     Registrado = f.Registrado ? "Sim" : "Não",
                     f.valorComissao,
                     NotaComissao = f.NotaComissao ? "Sim" : "Não",
-                    f.ValorITBI,
+
                     f.ValorEscritura,
-                    f.ValorRegistro,
+                    f.ValorITBI,
                     Laudêmio = f.Laudemio ? "Sim" : "Não",
                     f.ValorLaudemio,
                     f.ValorAforamento,
+                    f.ValorRegistro,
+                    f.ValorDeCompra,
+
+                    f.MesReajusteAluguel,
+                    f.IPTU,
                     f.ValorTotalImovel,
                     Empresa = f.idEmpresa.HasValue
                           ? empresaRepositorio.BuscarPorId(f.idEmpresa.Value)?.Descricao
@@ -86,7 +98,112 @@ namespace SistemaFL
                 })
                 .OrderBy(flat => flat.Descricao)
                 .ToList();
-            dgdadosFlats.DataSource = listaFlats;
+                dgdadosFlats.DataSource = listaFlats;
+            }
+            else
+            {
+                if (cbbTipoCad.SelectedIndex == 1)
+                {
+                    var listaFlats = repositorio.Listar(f =>
+                    f.Descricao.Contains(txtdescricao.Text)
+                    && f.TipoCadastro == 1
+                    && f.Ativo == true)
+                    .Select(f => new
+                    {
+                        f.id,
+                        f.Descricao,
+                        f.Unidade,
+                        f.TipoUnidade,
+                        f.TipoInvestimento,
+                        f.Status,
+                        f.DataAquisicao,
+                        f.Cep,
+                        f.Rua,
+                        f.Numero,
+                        f.Bairro,
+                        f.Estado,
+                        f.Cidade,
+
+                        f.NumMatriculaImovel,
+                        f.NumUCEnergia,
+                        f.NumCadastroPrefeitura,
+                        f.TamanhoUnM2,
+                        PossuiGaragem = f.PossuiGaragem ? "Sim" : "Não",
+                        Escriturado = f.Escriturado ? "Sim" : "Não",
+                        Registrado = f.Registrado ? "Sim" : "Não",
+                        f.valorComissao,
+                        NotaComissao = f.NotaComissao ? "Sim" : "Não",
+
+                        f.ValorEscritura,
+                        f.ValorITBI,
+                        Laudêmio = f.Laudemio ? "Sim" : "Não",
+                        f.ValorLaudemio,
+                        f.ValorAforamento,
+                        f.ValorRegistro,
+                        f.ValorDeCompra,
+
+                        f.MesReajusteAluguel,
+                        f.IPTU,
+                        f.ValorTotalImovel,
+                        Empresa = f.idEmpresa.HasValue
+                              ? empresaRepositorio.BuscarPorId(f.idEmpresa.Value)?.Descricao
+                              : "Não Associado" // Verificando se o idEmpresa é válido
+                    })
+                    .OrderBy(flat => flat.Descricao)
+                    .ToList();
+                    dgdadosFlats.DataSource = listaFlats;
+                }
+                else
+                {
+                    var listaFlats = repositorio.Listar(f => f.Descricao.Contains(txtdescricao.Text) && f.TipoCadastro == 2
+                    && f.Ativo == true)
+                    .Select(f => new
+                    {
+                        f.id,
+                        f.Descricao,
+                        f.Unidade,
+                        f.TipoUnidade,
+                        f.TipoInvestimento,
+                        f.Status,
+                        f.DataAquisicao,
+                        f.Cep,
+                        f.Rua,
+                        f.Numero,
+                        f.Bairro,
+                        f.Estado,
+                        f.Cidade,
+
+                        f.NumMatriculaImovel,
+                        f.NumUCEnergia,
+                        f.NumCadastroPrefeitura,
+                        f.TamanhoUnM2,
+                        PossuiGaragem = f.PossuiGaragem ? "Sim" : "Não",
+                        Escriturado = f.Escriturado ? "Sim" : "Não",
+                        Registrado = f.Registrado ? "Sim" : "Não",
+                        f.valorComissao,
+                        NotaComissao = f.NotaComissao ? "Sim" : "Não",
+
+                        f.ValorEscritura,
+                        f.ValorITBI,
+                        Laudêmio = f.Laudemio ? "Sim" : "Não",
+                        f.ValorLaudemio,
+                        f.ValorAforamento,
+                        f.ValorRegistro,
+                        f.ValorDeCompra,
+
+                        f.MesReajusteAluguel,
+                        f.IPTU,
+                        f.ValorTotalImovel,
+
+                        Empresa = f.idEmpresa.HasValue
+                              ? empresaRepositorio.BuscarPorId(f.idEmpresa.Value)?.Descricao
+                              : "Não Associado" // Verificando se o idEmpresa é válido
+                    })
+                .OrderBy(flat => flat.Descricao)
+                .ToList();
+                dgdadosFlats.DataSource = listaFlats;
+                }
+            }                  
         }
         private void AlterarNomesDoCabecalho(DataGridView grid)
         {
@@ -129,6 +246,12 @@ namespace SistemaFL
             grid.Columns["ValorTotalImovel"].HeaderText = "VALOR TOTAL IMÓVEL";
             grid.Columns["ValorTotalImovel"].DefaultCellStyle.Format = "C2";
 
+            grid.Columns["TipoUnidade"].HeaderText = "TIPO UN";
+            grid.Columns["Numero"].HeaderText = "N°";
+            grid.Columns["NumUCEnergia"].HeaderText = "N° U.C ENERGIA";
+            grid.Columns["NumCadastroPrefeitura"].HeaderText = "N° CAD. PREFEITURA";
+            grid.Columns["MesReajusteAluguel"].HeaderText = "MÊS REAJ. ALUGUEL";
+            grid.Columns["Empresa"].HeaderText = "OPERADORA";
 
             grid.Columns["Unidade"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             grid.Columns["Estado"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -170,7 +293,6 @@ namespace SistemaFL
                 row.DefaultCellStyle.BackColor = (row.Index % 2 == 0) ? Color.White : Color.Gainsboro;
             }
         }
-        //
         //Eventos
         private void dgdadosFlats_CellDoubleClic(object sender, DataGridViewCellEventArgs e)
         {
@@ -201,7 +323,6 @@ namespace SistemaFL
         {
             Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela);
         }
-
         private void FrmConsultaFlat_Resize(object sender, EventArgs e)
         {
             Estilos.AjustarMargemDataGrid(dgdadosFlats, this);

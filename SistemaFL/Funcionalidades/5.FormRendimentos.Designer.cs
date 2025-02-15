@@ -50,17 +50,17 @@
             dgdadosTotais.BackgroundColor = Color.White;
             dgdadosTotais.BorderStyle = BorderStyle.None;
             dgdadosTotais.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosTotais.Location = new Point(0, 447);
+            dgdadosTotais.Location = new Point(0, 666);
             dgdadosTotais.Margin = new Padding(4);
             dgdadosTotais.Name = "dgdadosTotais";
-            dgdadosTotais.Size = new Size(900, 67);
+            dgdadosTotais.Size = new Size(1045, 80);
             dgdadosTotais.TabIndex = 1;
             // 
             // pbFechar
             // 
             pbFechar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
-            pbFechar.Location = new Point(842, 5);
+            pbFechar.Location = new Point(856, 5);
             pbFechar.Margin = new Padding(4, 3, 4, 3);
             pbFechar.Name = "pbFechar";
             pbFechar.Size = new Size(27, 20);
@@ -95,10 +95,10 @@
             // 
             // txtano
             // 
-            txtano.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtano.Font = new Font("Segoe UI Light", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtano.Location = new Point(390, 43);
             txtano.Name = "txtano";
-            txtano.Size = new Size(58, 29);
+            txtano.Size = new Size(57, 33);
             txtano.TabIndex = 18;
             txtano.Text = "2025";
             // 
@@ -119,9 +119,9 @@
             btnlocalizar.FlatStyle = FlatStyle.Flat;
             btnlocalizar.Font = new Font("Segoe UI Semilight", 11.25F);
             btnlocalizar.Image = (Image)resources.GetObject("btnlocalizar.Image");
-            btnlocalizar.Location = new Point(454, 44);
+            btnlocalizar.Location = new Point(447, 45);
             btnlocalizar.Name = "btnlocalizar";
-            btnlocalizar.Size = new Size(33, 26);
+            btnlocalizar.Size = new Size(29, 26);
             btnlocalizar.TabIndex = 20;
             btnlocalizar.UseVisualStyleBackColor = true;
             btnlocalizar.Click += btnlocalizar_Click;
@@ -135,9 +135,9 @@
             // 
             pbMinimizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbMinimizar.Image = (Image)resources.GetObject("pbMinimizar.Image");
-            pbMinimizar.Location = new Point(812, 4);
+            pbMinimizar.Location = new Point(832, 5);
             pbMinimizar.Name = "pbMinimizar";
-            pbMinimizar.Size = new Size(30, 21);
+            pbMinimizar.Size = new Size(27, 20);
             pbMinimizar.SizeMode = PictureBoxSizeMode.CenterImage;
             pbMinimizar.TabIndex = 22;
             pbMinimizar.TabStop = false;

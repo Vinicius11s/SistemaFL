@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFuncPISeCOFINS));
             lblPisTopo = new Label();
             lblCofinsTopo = new Label();
             dgdadosPIS = new DataGridView();
-            sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
             pbFechar = new PictureBox();
             ckAlterarBases = new CheckBox();
             txtPis = new TextBox();
@@ -40,8 +40,11 @@
             btnSalvar = new Button();
             lblpis = new Label();
             lblcofins = new Label();
+            pbMinimizar = new PictureBox();
+            tTamanhotela = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)dgdadosPIS).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbMinimizar).BeginInit();
             SuspendLayout();
             // 
             // lblPisTopo
@@ -71,21 +74,17 @@
             dgdadosPIS.BackgroundColor = Color.White;
             dgdadosPIS.BorderStyle = BorderStyle.Fixed3D;
             dgdadosPIS.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdadosPIS.Location = new Point(2, 136);
+            dgdadosPIS.Location = new Point(1, 153);
             dgdadosPIS.Name = "dgdadosPIS";
-            dgdadosPIS.Size = new Size(1027, 358);
+            dgdadosPIS.Size = new Size(1027, 341);
             dgdadosPIS.TabIndex = 2;
             dgdadosPIS.CellFormatting += dgdadosPIS_CellFormatting_1;
             // 
-            // sqlCommand1
-            // 
-            sqlCommand1.CommandTimeout = 30;
-            sqlCommand1.EnableOptimizedParameterBinding = false;
-            // 
             // pbFechar
             // 
+            pbFechar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pbFechar.Image = (Image)resources.GetObject("pbFechar.Image");
-            pbFechar.Location = new Point(842, 5);
+            pbFechar.Location = new Point(856, 5);
             pbFechar.Margin = new Padding(4, 3, 4, 3);
             pbFechar.Name = "pbFechar";
             pbFechar.Size = new Size(27, 20);
@@ -152,12 +151,28 @@
             lblcofins.TabIndex = 18;
             lblcofins.Text = "%";
             // 
+            // pbMinimizar
+            // 
+            pbMinimizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pbMinimizar.Image = (Image)resources.GetObject("pbMinimizar.Image");
+            pbMinimizar.Location = new Point(830, 5);
+            pbMinimizar.Name = "pbMinimizar";
+            pbMinimizar.Size = new Size(27, 20);
+            pbMinimizar.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbMinimizar.TabIndex = 23;
+            pbMinimizar.TabStop = false;
+            // 
+            // tTamanhotela
+            // 
+            tTamanhotela.Tick += tTamanhotela_Tick;
+            // 
             // FrmFuncPISeCOFINS
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1087, 749);
+            Controls.Add(pbMinimizar);
             Controls.Add(lblcofins);
             Controls.Add(lblpis);
             Controls.Add(btnSalvar);
@@ -179,6 +194,7 @@
             Load += FrmFuncPISeCOFINS_Load;
             ((System.ComponentModel.ISupportInitialize)dgdadosPIS).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbMinimizar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -188,7 +204,6 @@
         private Label lblPisTopo;
         private Label lblCofinsTopo;
         private DataGridView dgdadosPIS;
-        private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
         private PictureBox pbFechar;
         private CheckBox ckAlterarBases;
         private TextBox txtPis;
@@ -196,5 +211,7 @@
         private Button btnSalvar;
         private Label lblpis;
         private Label lblcofins;
+        private PictureBox pbMinimizar;
+        private System.Windows.Forms.Timer tTamanhotela;
     }
 }

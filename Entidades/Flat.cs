@@ -15,7 +15,6 @@ namespace Entidades
         }
 
         public int id { get; set; }
-
         public int TipoCadastro { get; set; }// 1=Pool / 2-Plataforma
 
         public String Descricao { get; set; } = String.Empty;

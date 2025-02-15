@@ -156,21 +156,20 @@ namespace SistemaFL.Funcionalidades
             var dadosTotais = repositorio.ObterDadosTotais(ano);
             dgdadosTotais.DataSource = dadosTotais;
 
-            AlterarEstilosCabecalhoGridTotais();
+            AlterarEstiloCabecalhoGridTotais(dgdadosTotais);
             AlterarEstiloCelulasGridTotais(dgdadosTotais);
         }
-        private void AlterarEstilosCabecalhoGridTotais()
+        private void AlterarEstiloCabecalhoGridTotais(DataGridView grid)
         {
-            dgdadosTotais.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dgdadosTotais.EnableHeadersVisualStyles = false;
-            dgdadosTotais.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
-            dgdadosTotais.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 11, FontStyle.Bold);
-
-            dgdadosTotais.Columns["RendimentoAno"].HeaderText = "RENDIMENTO ANO";
+            grid.EnableHeadersVisualStyles = false;
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
+            grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
 
         }
         private void AlterarEstiloCelulasGridTotais(DataGridView grid)
         {
+            grid.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
             foreach (var coluna in grid.Columns.Cast<DataGridViewColumn>())
             {
                 if (coluna.Name.StartsWith("Porcentagem"))
@@ -179,8 +178,10 @@ namespace SistemaFL.Funcionalidades
                     coluna.HeaderText = "%";
                 }
             }
-            foreach (DataGridViewColumn coluna in dgdadosTotais.Columns)
+            foreach (DataGridViewColumn coluna in grid.Columns)
             {
+                grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
                 if (!coluna.Name.StartsWith("Porcentagem"))
                 {
                     coluna.DefaultCellStyle.Format = "C2";  // Formato de moeda (R$)
@@ -200,52 +201,39 @@ namespace SistemaFL.Funcionalidades
 
                 if (colunasRendimento.Contains(dgdadosRendimentos.Columns[e.ColumnIndex].Name) && e.RowIndex >= 0)
                 {
-                    // Identificar a linha atual sendo processada
                     int rowIndex = e.RowIndex;
 
-                    // Recuperar o valor de CODFLAT da célula correspondente na linha
                     var codFlatValue = dgdadosRendimentos.Rows[rowIndex].Cells["CODFLAT"].Value;
 
                     if (codFlatValue != null)
                     {
-                        // Converter para o tipo apropriado (supondo que seja um inteiro)
                         int codFlat = Convert.ToInt32(codFlatValue);
 
-                        // Usar o repositório para recuperar o objeto flat com base no CODFLAT
                         var flat = repositorio.Recuperar(f => f.id == codFlat);
 
-                        // Calcular o valor estipulado como 1% do valor de compra
                         decimal valorEstipulado = flat.ValorDeCompra * 0.01m;
 
-                        // Pinte o fundo da célula primeiro (garante que a célula tem o fundo correto)
                         e.Graphics.FillRectangle(new SolidBrush(e.CellStyle.BackColor), e.CellBounds);
 
-                        // Obtenha o valor da célula
                         decimal valorColuna = Convert.ToDecimal(dgdadosRendimentos.Rows[rowIndex].Cells[e.ColumnIndex].Value);
 
-                        // Calcule a largura da barra com base no valor da célula
                         float porcentagem = (float)(valorColuna / valorEstipulado);
                         int larguraBarra = (int)(e.CellBounds.Width * Math.Min(porcentagem, 1)); // Máximo 100%
 
-                        // Definir cor da barra com base no valor
-                        Color corBarra = (valorColuna > valorEstipulado) ? Color.Green : Color.LightGreen;
+                        Color corBarra = (valorColuna > valorEstipulado) ? Color.LightGreen : Color.LightGreen;
 
-                        // Se o valor for maior que zero, desenhe a barra
                         if (valorColuna > 0)
                         {
                             using (SolidBrush brush = new SolidBrush(corBarra))
                             {
-                                // Desenha a barra na célula (sem modificar a largura da célula)
                                 e.Graphics.FillRectangle(brush, e.CellBounds.X, e.CellBounds.Y, larguraBarra, e.CellBounds.Height);
                             }
                         }
 
-                        // Desenha o texto centralizado na célula (horizontalmente e verticalmente)
                         using (SolidBrush brushText = new SolidBrush(Color.Black))
                         {
                             string texto = valorColuna.ToString("C"); // Formata como moeda
 
-                            // Medir tamanho do texto para centralização
                             SizeF tamanhoTexto = e.Graphics.MeasureString(texto, e.CellStyle.Font);
                             float xTexto = e.CellBounds.X + (e.CellBounds.Width - tamanhoTexto.Width) / 2;
                             float yTexto = e.CellBounds.Y + (e.CellBounds.Height - tamanhoTexto.Height) / 2;
@@ -253,7 +241,6 @@ namespace SistemaFL.Funcionalidades
                             e.Graphics.DrawString(texto, e.CellStyle.Font, brushText, xTexto, yTexto);
                         }
 
-                        // Desenha a borda ao redor da célula (somente borda, não sobrescreve o conteúdo)
                         e.Paint(e.ClipBounds, DataGridViewPaintParts.Border);
 
                         e.Handled = true;
@@ -264,9 +251,10 @@ namespace SistemaFL.Funcionalidades
         }
         private void FrmFuncRendimentoscs_Resize(object sender, EventArgs e)
         {
-            dgdadosRendimentos.Width = this.ClientSize.Width - dgdadosRendimentos.Left - 245; // Mantém a largura ajustada às bordas laterais
+            dgdadosRendimentos.Width = this.ClientSize.Width - dgdadosRendimentos.Left - 215; // Mantém a largura ajustada às bordas laterais
             dgdadosTotais.Width = this.ClientSize.Width - dgdadosTotais.Left - 215; // Mantém a largura ajustada às bordas laterais
-            dgdadosTotais.Top = this.ClientSize.Height - dgdadosTotais.Height - 10;
+
+            
         }
         private void pbFechar_Click(object sender, EventArgs e)
         {

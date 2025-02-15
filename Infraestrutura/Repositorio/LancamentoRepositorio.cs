@@ -76,8 +76,9 @@ namespace Infraestrutura.Repositorio
         public decimal SomaLancamentosPorMesExcetoDividendos(int mes, int ano)
         {
             decimal total = _context.Lancamento
-                .Where(l => l.DataPagamento.Month == mes && l.DataPagamento.Year == ano )
+                .Where(l => l.DataPagamento.Month == mes && l.DataPagamento.Year == ano)
                 .Sum(l => (l.ValorAluguel ?? 0.00M) +
+                          (l.ValorDividendos ?? 0.00M) +
                           (l.AluguelVenceslau ?? 0.00M) +
                           (l.ValorFundoReserva ?? 0.00M));
             return total;
