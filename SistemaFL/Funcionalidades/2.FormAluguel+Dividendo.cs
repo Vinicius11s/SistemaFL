@@ -50,47 +50,50 @@ namespace SistemaFL.Funcionalidades
            
         }      
         private void AlterarNomesCabecalho()
-        {          
-            dgdadosAlugDiv.Columns["CODFLAT"].Visible = false;
+        {
+            if (dgdadosAlugDiv.Rows.Count > 0)
+            {
+                dgdadosAlugDiv.Columns["CODFLAT"].Visible = false;
 
-            dgdadosAlugDiv.Columns["ValorImovel"].HeaderText = "VALOR DO IMÓVEL";
-            dgdadosAlugDiv.Columns["ValorImovel"].DefaultCellStyle.Format = "C2";
+                dgdadosAlugDiv.Columns["ValorImovel"].HeaderText = "VALOR DO IMÓVEL";
+                dgdadosAlugDiv.Columns["ValorImovel"].DefaultCellStyle.Format = "C2";
 
-            dgdadosAlugDiv.Columns["AluguelJan"].HeaderText = "ALUGUEL JAN";
-            dgdadosAlugDiv.Columns["DividendosJan"].HeaderText = "DIVIDENDOS JAN";
+                dgdadosAlugDiv.Columns["AluguelJan"].HeaderText = "ALUGUEL JAN";
+                dgdadosAlugDiv.Columns["DividendosJan"].HeaderText = "DIVIDENDOS JAN";
 
-            dgdadosAlugDiv.Columns["AluguelFev"].HeaderText = "ALUGUEL FEV";
-            dgdadosAlugDiv.Columns["DividendosFev"].HeaderText = "DIVIDENDOS FEV";
+                dgdadosAlugDiv.Columns["AluguelFev"].HeaderText = "ALUGUEL FEV";
+                dgdadosAlugDiv.Columns["DividendosFev"].HeaderText = "DIVIDENDOS FEV";
 
-            dgdadosAlugDiv.Columns["AluguelMar"].HeaderText = "ALUGUEL MAR";
-            dgdadosAlugDiv.Columns["DividendosMar"].HeaderText = "DIVIDENDOS MAR";
+                dgdadosAlugDiv.Columns["AluguelMar"].HeaderText = "ALUGUEL MAR";
+                dgdadosAlugDiv.Columns["DividendosMar"].HeaderText = "DIVIDENDOS MAR";
 
-            dgdadosAlugDiv.Columns["AluguelAbr"].HeaderText = "ALUGUEL ABR";
-            dgdadosAlugDiv.Columns["DividendosAbr"].HeaderText = "DIVIDENDOS ABR";
+                dgdadosAlugDiv.Columns["AluguelAbr"].HeaderText = "ALUGUEL ABR";
+                dgdadosAlugDiv.Columns["DividendosAbr"].HeaderText = "DIVIDENDOS ABR";
 
-            dgdadosAlugDiv.Columns["AluguelMai"].HeaderText = "ALUGUEL MAI";
-            dgdadosAlugDiv.Columns["DividendosMai"].HeaderText = "DIVIDENDOS MAI";
+                dgdadosAlugDiv.Columns["AluguelMai"].HeaderText = "ALUGUEL MAI";
+                dgdadosAlugDiv.Columns["DividendosMai"].HeaderText = "DIVIDENDOS MAI";
 
-            dgdadosAlugDiv.Columns["AluguelJun"].HeaderText = "ALUGUEL JUN";
-            dgdadosAlugDiv.Columns["DividendosJun"].HeaderText = "DIVIDENDOS JUN";
+                dgdadosAlugDiv.Columns["AluguelJun"].HeaderText = "ALUGUEL JUN";
+                dgdadosAlugDiv.Columns["DividendosJun"].HeaderText = "DIVIDENDOS JUN";
 
-            dgdadosAlugDiv.Columns["AluguelJul"].HeaderText = "ALUGUEL JUL";
-            dgdadosAlugDiv.Columns["DividendosJul"].HeaderText = "DIVIDENDOS JUL";
+                dgdadosAlugDiv.Columns["AluguelJul"].HeaderText = "ALUGUEL JUL";
+                dgdadosAlugDiv.Columns["DividendosJul"].HeaderText = "DIVIDENDOS JUL";
 
-            dgdadosAlugDiv.Columns["AluguelAgo"].HeaderText = "ALUGUEL AGO";
-            dgdadosAlugDiv.Columns["DividendosAgo"].HeaderText = "DIVIDENDOS AGO";
+                dgdadosAlugDiv.Columns["AluguelAgo"].HeaderText = "ALUGUEL AGO";
+                dgdadosAlugDiv.Columns["DividendosAgo"].HeaderText = "DIVIDENDOS AGO";
 
-            dgdadosAlugDiv.Columns["AluguelSet"].HeaderText = "ALUGUEL SET";
-            dgdadosAlugDiv.Columns["DividendosSet"].HeaderText = "DIVIDENDOS SET";
+                dgdadosAlugDiv.Columns["AluguelSet"].HeaderText = "ALUGUEL SET";
+                dgdadosAlugDiv.Columns["DividendosSet"].HeaderText = "DIVIDENDOS SET";
 
-            dgdadosAlugDiv.Columns["AluguelOut"].HeaderText = "ALUGUEL OUT";
-            dgdadosAlugDiv.Columns["DividendosOut"].HeaderText = "DIVIDENDOS OUT";
+                dgdadosAlugDiv.Columns["AluguelOut"].HeaderText = "ALUGUEL OUT";
+                dgdadosAlugDiv.Columns["DividendosOut"].HeaderText = "DIVIDENDOS OUT";
 
-            dgdadosAlugDiv.Columns["AluguelNov"].HeaderText = "ALUGUEL NOV";
-            dgdadosAlugDiv.Columns["DividendosNov"].HeaderText = "DIVIDENDOS NOV";
+                dgdadosAlugDiv.Columns["AluguelNov"].HeaderText = "ALUGUEL NOV";
+                dgdadosAlugDiv.Columns["DividendosNov"].HeaderText = "DIVIDENDOS NOV";
 
-            dgdadosAlugDiv.Columns["AluguelDez"].HeaderText = "ALUGUEL DEZ";
-            dgdadosAlugDiv.Columns["DividendosDez"].HeaderText = "DIVIDENDOS DEZ";
+                dgdadosAlugDiv.Columns["AluguelDez"].HeaderText = "ALUGUEL DEZ";
+                dgdadosAlugDiv.Columns["DividendosDez"].HeaderText = "DIVIDENDOS DEZ";
+            }
 
             foreach (DataGridViewColumn col in dgdadosAlugDiv.Columns)
             {

@@ -19,6 +19,7 @@ namespace Infraestrutura.Contexto
         }       
 
         public DbSet<Empresa> Empresa { get; set; }
+        public DbSet<Fiscal> Fiscal { get; set; }
         public DbSet<Flat> Flat { get; set; }
         public DbSet<Lancamento> Lancamento { get; set; }
         public DbSet<Ocorrencia> Ocorrencia { get; set; }
@@ -29,7 +30,7 @@ namespace Infraestrutura.Contexto
         {
             //Server Master = DESKTOP-6RMV3GQ
             //Server Local = DESKTOP-I32AP0S
-            var stringConexao = @"Server=DESKTOP-6RMV3GQ;Database=DBSISFLATS09;Integrated Security=True;TrustServerCertificate=True;";
+            var stringConexao = @"Server=DESKTOP-6RMV3GQ;Database=DBSISFLATS11;Integrated Security=True;TrustServerCertificate=True;";
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(stringConexao);
@@ -53,6 +54,17 @@ namespace Infraestrutura.Contexto
                 e.Property(e => e.InscricaoEstadual).HasMaxLength(20);
                 e.Property(e => e.RazaoSocial).HasMaxLength(150);
             });
+
+            modelBuilder.Entity<Fiscal>(f =>
+            {
+                f.Property(f => f.basePis)
+                .HasColumnType("decimal(18,6)");
+
+                f.Property(f => f.baseCofins)
+                .HasColumnType("decimal(18,6)");  // Verifique o nome correto da tabela no banco
+                                                    // Outros mapeamentos, se necessário
+            });
+
             modelBuilder.Entity<Flat>(f =>
             {
                 f.Property(f => f.DataAquisicao).IsRequired();

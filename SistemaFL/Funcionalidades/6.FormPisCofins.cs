@@ -7,8 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Entidades;
+using Infraestrutura.Contexto;
 using Infraestrutura.Seguranca;
 using Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace SistemaFL.Funcionalidades
 {
@@ -16,46 +19,76 @@ namespace SistemaFL.Funcionalidades
     {
         private IFlatRepositorio repositorio;
         private ILancamentoRepositorio lancamentoRepositorio;
+        private IFiscalRepositorio fiscalRepositorio;
 
         decimal valorPis;
         decimal valorCofins;
-        public FrmFuncPISeCOFINS(IFlatRepositorio repositorio, ILancamentoRepositorio lancamentoRepositorio)
+        public FrmFuncPISeCOFINS(IFlatRepositorio repositorio, ILancamentoRepositorio lancamentoRepositori, IFiscalRepositorio fiscalRepositorio)
         {
             InitializeComponent();
             this.repositorio = repositorio;
             this.lancamentoRepositorio = lancamentoRepositorio;
+            this.fiscalRepositorio = fiscalRepositorio;
 
-
+            tTamanhotela.Tick += tTamanhotela_Tick;
+            tTamanhotela.Start();
         }
         private void FrmFuncPISeCOFINS_Load(object sender, EventArgs e)
         {
-            AtribuiValorPadraoDePiseCofins();
-            ConcatenaValoresDePisCofinsAosLabels();
+            this.Location = new System.Drawing.Point(205, 41);
+
+            AtribuiValorPadraoDePiseCofins();      
             ckAlterarBases.Checked = false;
             OcultarMostrarAlterarBase();
+
             var dados = repositorio.ObterDadosPISeCOFINS();
             dgdadosPIS.DataSource = dados;
 
             AlterarEstilosCabecalho(dgdadosPIS);
             dgdadosPIS.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
-        private void ConcatenaValoresDePisCofinsAosLabels()
-        {
-            lblPisTopo.Text = $"PIS {valorPis:N2} %";
-            lblCofinsTopo.Text = $"COFINS {valorCofins:N2} %";
-        }
         private void AtribuiValorPadraoDePiseCofins()
         {
-            if (Sessao.basePis == null)
+            Fiscal fiscal = fiscalRepositorio.Recuperar(x => true);
+
+            if (fiscal != null)
             {
-                Sessao.basePis = 0.0065m;
-                valorPis = (decimal)(Sessao.basePis * 100m);
+                if (!fiscal.basePis.HasValue)
+                {
+                    fiscal.basePis = 0.0065m;  
+                }
+
+                if (!fiscal.baseCofins.HasValue)
+                {
+                    fiscal.baseCofins = 0.03m;  
+                }
+                var contexto = Program.serviceProvider.GetRequiredService<ContextoSistema>();
+                contexto.SaveChanges();  
             }
-            if (Sessao.baseCofins == null)
+            else
             {
-                Sessao.baseCofins = 0.03m;
-                valorCofins = (decimal)(Sessao.baseCofins * 100m);
+                fiscal = new Fiscal
+                {
+                    basePis = 0.0065m,
+                    baseCofins = 0.03m
+                };
+                var contexto = Program.serviceProvider.GetRequiredService<ContextoSistema>();
+                contexto.Fiscal.Add(fiscal);
+                contexto.SaveChanges();
             }
+            ConcatenaValoresDePisCofinsAosLabels(fiscal);
+        }
+        private void ConcatenaValoresDePisCofinsAosLabels(Fiscal fiscal)
+        {
+            if(fiscal != null)
+            {
+                
+                decimal valorLBLpis = (decimal)(fiscal.basePis * 100);
+                decimal valorLBLcofins = (decimal)(fiscal.baseCofins * 100);
+                lblPisTopo.Text = $"PIS {valorLBLpis:N2} %";
+                lblCofinsTopo.Text = $"COFINS {valorLBLcofins:N2} %";
+            }
+            
         }
         private void OcultarMostrarAlterarBase()
         {
@@ -133,43 +166,56 @@ namespace SistemaFL.Funcionalidades
         }
         private void btnSalvar_Click(object sender, EventArgs e)
         {
+            var contexto = Program.serviceProvider.GetRequiredService<ContextoSistema>();
+
+            // Busca o registro existente no banco
+            Fiscal fiscal = contexto.Fiscal.Find(1);
+
+            if (fiscal == null)
+            {
+                MessageBox.Show("Registro fiscal não encontrado!", "Erro");
+                return;
+            }
+
             if (ckAlterarBases.Checked)
             {
-                if (decimal.TryParse(txtPis.Text, out decimal novoValorPis))
+                if (!decimal.TryParse(txtPis.Text, out decimal novoValorPis) && decimal.TryParse(txtCofins.Text, out decimal novoValorCofins))
                 {
-                    Sessao.basePis = novoValorPis / 100m;
+                    fiscal.baseCofins = novoValorCofins / 100m;
+                }
+                else if (decimal.TryParse(txtPis.Text, out novoValorPis) && !decimal.TryParse(txtCofins.Text, out novoValorCofins))
+                {
+                    fiscal.basePis = novoValorPis / 100m;
+                }
+                else if (decimal.TryParse(txtPis.Text, out novoValorPis) && decimal.TryParse(txtCofins.Text, out novoValorCofins))
+                {
+                    // Atualiza ambos os valores
+                    fiscal.basePis = novoValorPis / 100m;
+                    fiscal.baseCofins = novoValorCofins / 100m;
                 }
                 else
                 {
-                    MessageBox.Show("Valor digitado para o campo Pis inválido", "Erro");
-                    return;
-                }
-
-                if (decimal.TryParse(txtCofins.Text, out decimal novoValorCofins))
-                {
-                    Sessao.baseCofins = novoValorCofins / 100m;
-                }
-                else
-                {
-                    MessageBox.Show("Valor digitado para o campo Cofins inválido", "Erro");
+                    MessageBox.Show("Valores digitados inválidos para os campos Pis e Cofins", "Erro");
                     return;
                 }
             }
 
-            valorPis = (decimal)(Sessao.basePis ?? 0.0065m * 100m);
-            valorCofins = (decimal)(Sessao.baseCofins ?? 0.03m * 100m);
-            ConcatenaValoresDePisCofinsAosLabels();
+            valorPis = (decimal)((fiscal.basePis ?? 0.0065m) * 100m);
+            valorCofins = (decimal)((fiscal.baseCofins ?? 0.03m) * 100m);
 
+            ConcatenaValoresDePisCofinsAosLabels(fiscal);
             ckAlterarBases.Checked = false;
+
+            fiscalRepositorio.Alterar(fiscal);
+            contexto.SaveChanges();
 
             var dados = repositorio.ObterDadosPISeCOFINS();
             dgdadosPIS.DataSource = dados;
             dgdadosPIS.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
-
         private void tTamanhotela_Tick(object sender, EventArgs e)
         {
-            //Estilos.ReAjustarTamanhoFormulario();
+            Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela);
         }
     }
 }

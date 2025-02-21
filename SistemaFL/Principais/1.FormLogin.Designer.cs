@@ -33,16 +33,16 @@
             txtsenha = new TextBox();
             btnentrar = new Button();
             panel1 = new Panel();
-            pictureBox2 = new PictureBox();
             label4 = new Label();
             label2 = new Label();
             label1 = new Label();
             pbFechar = new PictureBox();
             pbMinimizar = new PictureBox();
+            pictureBox1 = new PictureBox();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbMinimizar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // txtlogin
@@ -51,7 +51,7 @@
             txtlogin.BorderStyle = BorderStyle.FixedSingle;
             txtlogin.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtlogin.ForeColor = SystemColors.ControlLightLight;
-            txtlogin.Location = new Point(272, 120);
+            txtlogin.Location = new Point(277, 120);
             txtlogin.Margin = new Padding(3, 4, 3, 4);
             txtlogin.MaxLength = 150;
             txtlogin.Name = "txtlogin";
@@ -64,7 +64,7 @@
             txtsenha.BorderStyle = BorderStyle.FixedSingle;
             txtsenha.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtsenha.ForeColor = SystemColors.ControlLightLight;
-            txtsenha.Location = new Point(272, 184);
+            txtsenha.Location = new Point(277, 184);
             txtsenha.Margin = new Padding(3, 4, 3, 4);
             txtsenha.MaxLength = 150;
             txtsenha.Name = "txtsenha";
@@ -75,9 +75,9 @@
             // btnentrar
             // 
             btnentrar.FlatStyle = FlatStyle.Flat;
-            btnentrar.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnentrar.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnentrar.ForeColor = SystemColors.ButtonShadow;
-            btnentrar.Location = new Point(272, 253);
+            btnentrar.Location = new Point(277, 253);
             btnentrar.Name = "btnentrar";
             btnentrar.Size = new Size(325, 37);
             btnentrar.TabIndex = 13;
@@ -89,29 +89,18 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(23, 24, 29);
-            panel1.Controls.Add(pictureBox2);
-            panel1.Dock = DockStyle.Left;
+            panel1.Controls.Add(pictureBox1);
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(250, 344);
             panel1.TabIndex = 14;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(12, 59);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(225, 231);
-            pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
-            pictureBox2.TabIndex = 0;
-            pictureBox2.TabStop = false;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.Gray;
-            label4.Location = new Point(272, 96);
+            label4.Location = new Point(277, 96);
             label4.Name = "label4";
             label4.Size = new Size(46, 20);
             label4.TabIndex = 10;
@@ -122,7 +111,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.Gray;
-            label2.Location = new Point(272, 160);
+            label2.Location = new Point(277, 160);
             label2.Name = "label2";
             label2.Size = new Size(49, 20);
             label2.TabIndex = 15;
@@ -133,7 +122,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Historic", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Silver;
-            label1.Location = new Point(376, 35);
+            label1.Location = new Point(381, 35);
             label1.Name = "label1";
             label1.Size = new Size(106, 47);
             label1.TabIndex = 16;
@@ -161,6 +150,16 @@
             pbMinimizar.TabStop = false;
             pbMinimizar.Click += pbMinimizar_Click;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.default_765x625;
+            pictureBox1.Location = new Point(-61, 26);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(384, 306);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
             // FrmFuncLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -183,9 +182,9 @@
             Text = "FrmFuncionalidadeLogin";
             Load += FrmFuncionalidadeLogin_Load;
             panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbMinimizar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -198,8 +197,8 @@
         private Label label4;
         private Label label2;
         private Label label1;
-        private PictureBox pictureBox2;
         private PictureBox pbFechar;
         private PictureBox pbMinimizar;
+        private PictureBox pictureBox1;
     }
 }

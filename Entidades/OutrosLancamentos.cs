@@ -24,5 +24,8 @@ namespace Entidades
 
         public virtual ICollection<Ocorrencia> Ocorrencias { get; set; }
 
+        public Decimal? basePis { get; set; }
+        public Decimal? baseCofins { get; set; }
+
     }
 }

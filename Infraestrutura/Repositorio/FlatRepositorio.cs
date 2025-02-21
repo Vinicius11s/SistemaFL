@@ -749,21 +749,26 @@ namespace Infraestrutura.Repositorio
         }
         public decimal CalcularPIS(decimal BC)
         {
-            if (BC != 0)
+            var fiscal = _context.Fiscal.FirstOrDefault(); // Obtém a primeira instância de Fiscal
+
+            if (BC > 0 && fiscal?.basePis != null)
             {
-                decimal resultado = BC * (decimal)(Sessao.basePis ?? 0.0065m);
+                decimal resultado = BC * fiscal.basePis.Value;
                 return Math.Round(resultado, 2);
             }
-            else return 0;             
+            return 0;
         }
         public decimal CalculaCOFINS(decimal BC)
         {
-            if (BC != 0)
+            var fiscal = _context.Fiscal.FirstOrDefault(); // Obtém a primeira instância de Fiscal
+
+            if (BC > 0 && fiscal?.baseCofins != null)
             {
-                decimal resultado = BC * (decimal)(Sessao.baseCofins ?? 0.03M);
+                decimal resultado = BC * fiscal.baseCofins.Value;
                 return Math.Round(resultado, 2);
             }
-            else return 0;
+            return 0;
         }
+
     }
 }

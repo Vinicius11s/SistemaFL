@@ -21,30 +21,64 @@ namespace SistemaFL
         {
             InitializeComponent();
             this.repositorioFunc = repositorioFunc;
+            pCarregamento.Visible = false;
         }
         bool menuExpand = false;
         bool sidebarExpand = true;
         bool funcExpand = false;
         bool relatorioExpand = false;
-        private void FrmPrincipalFF_Load(object sender, EventArgs e)
+        private async void FrmPrincipalFF_Load(object sender, EventArgs e)
         {
+            pMenuOpcoes.Visible = false;
+            pCarregamento.Visible = false;
+
+            CentralizarPainel(pCarregamento);
+            pCarregamento.Visible = true;
+
+            await CarregarTelaCarregamento();
+
+            pMenuOpcoes.Visible = true;
             pMenuOpcoes.BringToFront();
+
             GuardaUsuaruioLogado();
+        }
+        private void CentralizarPainel(Panel painel)
+        {
+            // Centraliza o painel de carregamento na tela
+            painel.Left = (this.ClientSize.Width - painel.Width) / 2;
+            painel.Top = (this.ClientSize.Height - painel.Height) / 2;
+        }
+        private async Task CarregarTelaCarregamento()
+        {
+            int larguraMaxima = 568;
+            pBarraProgresso.Width = 0;
+            pBarraProgresso.BackColor = ColorTranslator.FromHtml("#FFFFFF");
+
+            for (int i = 0; i <= 100; i += 5)
+            {
+                pBarraProgresso.Width = (larguraMaxima * i) / 100;
+                label1.Text = "Carregando... " + i.ToString() + "%";
+
+                Application.DoEvents(); // Atualiza a interface durante o carregamento
+
+                await Task.Delay(50); // Simula o tempo de carregamento
+            }
+
+            await Task.Delay(2000);
+
+            pCarregamento.Visible = false;
         }
         private void GuardaUsuaruioLogado()
         {
-            /*var form8 = Program.serviceProvider.GetRequiredService<FrmFuncLogin>();
-            form8.ShowDialog();  // Aguarda o login ser fechado
+            var form8 = Program.serviceProvider.GetRequiredService<FrmFuncLogin>();
+            form8.ShowDialog();
 
             if (Sessao.idUsuarioLogado > 0)
             {
                 var usuario = repositorioFunc.Recuperar(u => u.id == form8.idUsuario);
             }
-            else
-            {
-                this.Close();
-            }*/
-        }
+            else this.Close();
+    }
         //Transições
         private void sidebarTransition_Tick(object sender, EventArgs e)
         {
@@ -93,7 +127,7 @@ namespace SistemaFL
             if (!funcExpand)
             {
                 funcContainer.Height += 10;
-                if (funcContainer.Height >= 403)
+                if (funcContainer.Height >= 400)
                 {
                     funcTransition.Stop();
                     funcExpand = true;
@@ -264,7 +298,7 @@ namespace SistemaFL
             pbFechar.Visible = true;
             pMenuOpcoes.Visible = true;
             pEnsconderBotoes.Visible = true;
-        }       
+        }
     }
 }
 

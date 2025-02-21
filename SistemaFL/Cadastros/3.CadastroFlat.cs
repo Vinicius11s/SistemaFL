@@ -96,10 +96,7 @@ namespace SistemaFL
                         {
                             repositorio.Inserir(flat);
                         }
-                        else
-                        {
-                            repositorio.Alterar(flat);
-                        }
+                        else repositorio.Alterar(flat);
 
                         Program.serviceProvider.
                                                GetRequiredService<ContextoSistema>().SaveChanges();
@@ -113,12 +110,9 @@ namespace SistemaFL
                         btncancelar.Enabled = false;
                         btnexcluir.Enabled = false;
                         btnsalvar.Enabled = false;
-                    }
-                    else
-                    {
-
-                    }
-
+                        ckPool.Enabled = false;
+                        ckPlataforma.Enabled = false;
+                    }                                     
                 }
             }
             catch (Exception ex)

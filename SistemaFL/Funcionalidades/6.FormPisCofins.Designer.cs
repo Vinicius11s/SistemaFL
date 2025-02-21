@@ -71,12 +71,13 @@
             // 
             // dgdadosPIS
             // 
+            dgdadosPIS.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgdadosPIS.BackgroundColor = Color.White;
-            dgdadosPIS.BorderStyle = BorderStyle.Fixed3D;
+            dgdadosPIS.BorderStyle = BorderStyle.None;
             dgdadosPIS.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdadosPIS.Location = new Point(1, 153);
             dgdadosPIS.Name = "dgdadosPIS";
-            dgdadosPIS.Size = new Size(1027, 341);
+            dgdadosPIS.Size = new Size(1027, 384);
             dgdadosPIS.TabIndex = 2;
             dgdadosPIS.CellFormatting += dgdadosPIS_CellFormatting_1;
             // 
@@ -171,7 +172,7 @@
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1087, 749);
+            ClientSize = new Size(1087, 549);
             Controls.Add(pbMinimizar);
             Controls.Add(lblcofins);
             Controls.Add(lblpis);

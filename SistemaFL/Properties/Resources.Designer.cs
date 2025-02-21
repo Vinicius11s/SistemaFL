@@ -63,6 +63,16 @@ namespace SistemaFL.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap default_765x625 {
+            get {
+                object obj = ResourceManager.GetObject("default_765x625", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_borracha_40 {
             get {
                 object obj = ResourceManager.GetObject("icons8-borracha-40", resourceCulture);

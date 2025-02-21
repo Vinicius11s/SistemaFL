@@ -7,7 +7,8 @@
         using System.Windows.Forms;
         using AxAcroPDFLib;
         using Entidades;
-        using Infraestrutura.Repositorio;
+using Infraestrutura.Contexto;
+using Infraestrutura.Repositorio;
         using Infraestrutura.Seguranca;
         using Interfaces;
         using iTextSharp.text;
@@ -18,6 +19,7 @@
         {
             public partial class RelatorioTributacaoAnual : Form
             {
+                private readonly ContextoSistema _context = new ContextoSistema();
                 private ILancamentoRepositorio repositorio;
                 private string caminhoArquivoPDF;
                 public RelatorioTributacaoAnual(ILancamentoRepositorio repositorio)
@@ -126,6 +128,8 @@
                 }
                 private void AdicionarTabela(Document doc, dynamic dados)
                 {
+                    Fiscal fiscal = _context.Fiscal.FirstOrDefault();
+
                     int numColunas = 1;
 
                     if (ckRendimentos.Checked)
@@ -169,12 +173,13 @@
 
                     string[] meses = { "JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO", "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO" };
 
-                    // Adicionando as linhas
                     foreach (string mes in meses)
                     {
+                        
                         decimal valorMes = Convert.ToDecimal(dados.GetType().GetProperty(mes)?.GetValue(dados) ?? 0);
-                        decimal pis = (decimal)(valorMes * (Sessao.basePis ?? 0.0065m));
-                        decimal cofins = (decimal)(valorMes * (Sessao.baseCofins ?? 0.03m));
+                
+                        decimal pis = (decimal)(valorMes * (fiscal.basePis ?? 0.0065m));
+                        decimal cofins = (decimal)(valorMes * (fiscal.baseCofins ?? 0.03m));
                         
 
                         tabela.AddCell(new PdfPCell(new Phrase(mes)) { HorizontalAlignment = Element.ALIGN_CENTER });

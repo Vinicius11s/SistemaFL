@@ -72,12 +72,16 @@
             sidebarTransition = new System.Windows.Forms.Timer(components);
             funcTransition = new System.Windows.Forms.Timer(components);
             panel1 = new Panel();
+            lblMenuOp = new Label();
             pbMinimizar = new PictureBox();
             pbFechar = new PictureBox();
-            label1 = new Label();
             btnEsconderPalavrasMenu = new PictureBox();
             relatoriosTransition = new System.Windows.Forms.Timer(components);
             pEnsconderBotoes = new Panel();
+            pCarregamento = new Panel();
+            label1 = new Label();
+            pBarraProgresso = new Panel();
+            pictureBox1 = new PictureBox();
             pMenuOpcoes.SuspendLayout();
             menuContainer.SuspendLayout();
             panel3.SuspendLayout();
@@ -102,6 +106,8 @@
             ((System.ComponentModel.ISupportInitialize)pbMinimizar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnEsconderPalavrasMenu).BeginInit();
+            pCarregamento.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // pMenuOpcoes
@@ -644,15 +650,25 @@
             // panel1
             // 
             panel1.BackColor = Color.DarkGray;
+            panel1.Controls.Add(lblMenuOp);
             panel1.Controls.Add(pbMinimizar);
             panel1.Controls.Add(pbFechar);
-            panel1.Controls.Add(label1);
             panel1.Controls.Add(btnEsconderPalavrasMenu);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(869, 41);
             panel1.TabIndex = 4;
+            // 
+            // lblMenuOp
+            // 
+            lblMenuOp.AutoSize = true;
+            lblMenuOp.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblMenuOp.Location = new Point(53, 9);
+            lblMenuOp.Name = "lblMenuOp";
+            lblMenuOp.Size = new Size(239, 21);
+            lblMenuOp.TabIndex = 1;
+            lblMenuOp.Text = "MENU | SISTEMA GERENCIADOR";
             // 
             // pbMinimizar
             // 
@@ -676,16 +692,6 @@
             pbFechar.TabStop = false;
             pbFechar.Click += pbFechar_Click;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(53, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(239, 21);
-            label1.TabIndex = 1;
-            label1.Text = "MENU | SISTEMA GERENCIADOR";
-            // 
             // btnEsconderPalavrasMenu
             // 
             btnEsconderPalavrasMenu.Image = (Image)resources.GetObject("btnEsconderPalavrasMenu.Image");
@@ -704,10 +710,56 @@
             // 
             // pEnsconderBotoes
             // 
+            pEnsconderBotoes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             pEnsconderBotoes.Location = new Point(0, 41);
             pEnsconderBotoes.Name = "pEnsconderBotoes";
             pEnsconderBotoes.Size = new Size(205, 481);
             pEnsconderBotoes.TabIndex = 6;
+            // 
+            // pCarregamento
+            // 
+            pCarregamento.BackgroundImage = (Image)resources.GetObject("pCarregamento.BackgroundImage");
+            pCarregamento.BackgroundImageLayout = ImageLayout.Stretch;
+            pCarregamento.Controls.Add(label1);
+            pCarregamento.Controls.Add(pBarraProgresso);
+            pCarregamento.Controls.Add(pictureBox1);
+            pCarregamento.Location = new Point(285, 130);
+            pCarregamento.Name = "pCarregamento";
+            pCarregamento.Size = new Size(629, 344);
+            pCarregamento.TabIndex = 7;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI Light", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.Transparent;
+            label1.Location = new Point(32, 270);
+            label1.Name = "label1";
+            label1.Size = new Size(102, 21);
+            label1.TabIndex = 9;
+            label1.Text = "Carregando...";
+            // 
+            // pBarraProgresso
+            // 
+            pBarraProgresso.BackColor = Color.Transparent;
+            pBarraProgresso.BorderStyle = BorderStyle.FixedSingle;
+            pBarraProgresso.ForeColor = Color.Cornsilk;
+            pBarraProgresso.Location = new Point(32, 293);
+            pBarraProgresso.Name = "pBarraProgresso";
+            pBarraProgresso.Size = new Size(568, 27);
+            pBarraProgresso.TabIndex = 8;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(0, -6);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(662, 334);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 6;
+            pictureBox1.TabStop = false;
             // 
             // FrmPrincipalFF
             // 
@@ -717,6 +769,7 @@
             BackgroundImage = Properties.Resources.predio1;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(869, 522);
+            Controls.Add(pCarregamento);
             Controls.Add(panel1);
             Controls.Add(pMenuOpcoes);
             Controls.Add(pEnsconderBotoes);
@@ -752,6 +805,9 @@
             ((System.ComponentModel.ISupportInitialize)pbMinimizar).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
             ((System.ComponentModel.ISupportInitialize)btnEsconderPalavrasMenu).EndInit();
+            pCarregamento.ResumeLayout(false);
+            pCarregamento.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -790,7 +846,7 @@
         private Button btnpiscofins;
         private PictureBox pictureBox1;
         private Panel panel1;
-        private Label label1;
+        private Label lblMenuOp;
         private PictureBox btnEsconderPalavrasMenu;
         private Button btnFuncionalidad;
         private Panel panel18;
@@ -813,5 +869,8 @@
         private PictureBox pbMinimizar;
         private PictureBox pbFechar;
         private Panel pEnsconderBotoes;
+        private Panel pCarregamento;
+        private Panel pBarraProgresso;
+        private Label label1;
     }
 }

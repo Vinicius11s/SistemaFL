@@ -307,10 +307,9 @@ namespace SistemaFL
                 btnexcluir.Enabled = true;
                 btnsalvar.Enabled = false;
             }
-            else
-            {
-                MessageBox.Show("Lançamento não localizado.");
-            }
+            
+            
+            
         }
         private void btnexcluir_Click(object sender, EventArgs e)
         {
@@ -388,7 +387,6 @@ namespace SistemaFL
                 }
             }
         }
-        //
         //
         public Lancamento carregaPropriedades()
         {
@@ -573,8 +571,6 @@ namespace SistemaFL
                 dtdataLancamento.Enabled = false;
 
             }
-        }
-
-       
+        }  
     }
 }
