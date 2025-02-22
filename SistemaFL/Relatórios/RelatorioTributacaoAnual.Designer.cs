@@ -291,6 +291,7 @@
             Controls.Add(label1);
             Controls.Add(txtAno);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "RelatorioTributacaoAnual";
             Text = "Relatórios Anuais";
             Load += FormRelatoriosTributacaoAnual_Load;

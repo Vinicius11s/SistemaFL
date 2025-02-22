@@ -278,6 +278,7 @@
             Controls.Add(label3);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "RelatorioFlatIndividual";
             Text = "RelatorioFlatIndividual";
             Load += RelatorioFlatIndividual_Load;

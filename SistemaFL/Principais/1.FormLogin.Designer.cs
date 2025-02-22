@@ -33,16 +33,17 @@
             txtsenha = new TextBox();
             btnentrar = new Button();
             panel1 = new Panel();
+            label3 = new Label();
+            pictureBox1 = new PictureBox();
             label4 = new Label();
             label2 = new Label();
             label1 = new Label();
             pbFechar = new PictureBox();
             pbMinimizar = new PictureBox();
-            pictureBox1 = new PictureBox();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbMinimizar).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // txtlogin
@@ -89,11 +90,32 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(23, 24, 29);
+            panel1.Controls.Add(label3);
             panel1.Controls.Add(pictureBox1);
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(250, 344);
             panel1.TabIndex = 14;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Calisto MT", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(43, 224);
+            label3.Name = "label3";
+            label3.Size = new Size(151, 31);
+            label3.TabIndex = 1;
+            label3.Text = "SIMETRIA";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(73, 97);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(104, 106);
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
             // 
             // label4
             // 
@@ -150,16 +172,6 @@
             pbMinimizar.TabStop = false;
             pbMinimizar.Click += pbMinimizar_Click;
             // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources.default_765x625;
-            pictureBox1.Location = new Point(-61, 26);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(384, 306);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            // 
             // FrmFuncLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -182,9 +194,10 @@
             Text = "FrmFuncionalidadeLogin";
             Load += FrmFuncionalidadeLogin_Load;
             panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbFechar).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbMinimizar).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -200,5 +213,6 @@
         private PictureBox pbFechar;
         private PictureBox pbMinimizar;
         private PictureBox pictureBox1;
+        private Label label3;
     }
 }

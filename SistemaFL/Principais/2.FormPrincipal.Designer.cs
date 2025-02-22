@@ -79,6 +79,7 @@
             relatoriosTransition = new System.Windows.Forms.Timer(components);
             pEnsconderBotoes = new Panel();
             pCarregamento = new Panel();
+            pictureBox2 = new PictureBox();
             label1 = new Label();
             pBarraProgresso = new Panel();
             pictureBox1 = new PictureBox();
@@ -107,6 +108,7 @@
             ((System.ComponentModel.ISupportInitialize)pbFechar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnEsconderPalavrasMenu).BeginInit();
             pCarregamento.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -720,13 +722,24 @@
             // 
             pCarregamento.BackgroundImage = (Image)resources.GetObject("pCarregamento.BackgroundImage");
             pCarregamento.BackgroundImageLayout = ImageLayout.Stretch;
+            pCarregamento.Controls.Add(pictureBox2);
             pCarregamento.Controls.Add(label1);
             pCarregamento.Controls.Add(pBarraProgresso);
             pCarregamento.Controls.Add(pictureBox1);
-            pCarregamento.Location = new Point(285, 130);
+            pCarregamento.Location = new Point(206, 99);
             pCarregamento.Name = "pCarregamento";
             pCarregamento.Size = new Size(629, 344);
             pCarregamento.TabIndex = 7;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.BackColor = Color.Transparent;
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(146, 119);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(49, 51);
+            pictureBox2.TabIndex = 10;
+            pictureBox2.TabStop = false;
             // 
             // label1
             // 
@@ -754,9 +767,9 @@
             // 
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(0, -6);
+            pictureBox1.Location = new Point(0, 38);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(662, 334);
+            pictureBox1.Size = new Size(626, 249);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 6;
             pictureBox1.TabStop = false;
@@ -807,6 +820,7 @@
             ((System.ComponentModel.ISupportInitialize)btnEsconderPalavrasMenu).EndInit();
             pCarregamento.ResumeLayout(false);
             pCarregamento.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
@@ -872,5 +886,6 @@
         private Panel pCarregamento;
         private Panel pBarraProgresso;
         private Label label1;
+        private PictureBox pictureBox2;
     }
 }
