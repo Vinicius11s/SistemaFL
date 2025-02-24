@@ -30,7 +30,11 @@ namespace Infraestrutura.Contexto
         {
             //Server Master = DESKTOP-6RMV3GQ
             //Server Local = DESKTOP-I32AP0S
-            var stringConexao = @"Server=DESKTOP-6RMV3GQ;Database=DBSISFLATS11;Integrated Security=True;TrustServerCertificate=True;";
+            //Server Antigo = 192.168.42.182,1433
+
+            var stringConexao = "Server=192.168.42.182,1433;Database=DBSISFLATS11;User Id=admgestor;Password=@int20imobi;TrustServerCertificate=True;";
+            //var stringConexao = @"Server=DESKTOP-6RMV3GQ;Database=DBSISFLATS11;Integrated Security=True;TrustServerCertificate=True;";
+
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(stringConexao);
