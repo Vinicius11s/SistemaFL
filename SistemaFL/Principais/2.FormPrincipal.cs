@@ -78,7 +78,7 @@ namespace SistemaFL
                 var usuario = repositorioFunc.Recuperar(u => u.id == form8.idUsuario);
             }
             else this.Close();
-    }
+        }
         //Transições
         private void sidebarTransition_Tick(object sender, EventArgs e)
         {
@@ -298,7 +298,7 @@ namespace SistemaFL
             pbFechar.Visible = true;
             pMenuOpcoes.Visible = true;
             pEnsconderBotoes.Visible = true;
-        }
+        }    
     }
 }
 
