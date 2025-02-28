@@ -1,19 +1,19 @@
-﻿        using System;
-        using System.Collections.Generic;
-        using System.Data;
-        using System.Drawing;
-        using System.IO;
-        using System.Linq;
-        using System.Windows.Forms;
-        using AxAcroPDFLib;
-        using Entidades;
-using Infraestrutura.Contexto;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using AxAcroPDFLib;
 using Infraestrutura.Repositorio;
-        using Infraestrutura.Seguranca;
-        using Interfaces;
-        using iTextSharp.text;
-        using iTextSharp.text.pdf;
-        using static System.Runtime.InteropServices.JavaScript.JSType;
+using Infraestrutura.Seguranca;
+using Interfaces;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Entidades;
+using Infraestrutura.Contexto;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
         namespace SistemaFL
         {

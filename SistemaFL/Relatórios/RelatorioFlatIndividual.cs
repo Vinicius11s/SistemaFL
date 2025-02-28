@@ -34,6 +34,16 @@ namespace SistemaFL
             tTamanhotela.Tick += tTamanhotela_Tick;
             tTamanhotela.Start();
         }
+        private void RelatorioFlatIndividual_Load(object sender, EventArgs e)
+        {
+            this.Location = new System.Drawing.Point(205, 41);
+            pdescricao.Enabled = false;
+
+            ckTodos.Enabled = false;
+            ckDadosImovel.Enabled = false;
+            ckRendimentos.Enabled = false;
+            btnVizualizarPdf.Enabled = false;
+        }
         private void btnlocalizarImóvel_Click(object sender, EventArgs e)
         {
             var form = Program.serviceProvider.GetRequiredService<FrmConsultaFlat>();
@@ -78,64 +88,62 @@ namespace SistemaFL
 
             using (MemoryStream memoryStream = new MemoryStream())
             {
-                Document doc = null;
-                PdfWriter writer = null; // Declara writer fora do try para acesso no finally
-
                 try
                 {
-                    // Criar documento PDF
-                    doc = new Document(PageSize.A4);
-                    writer = PdfWriter.GetInstance(doc, memoryStream);
-                    doc.Open();
-
-                    // Criar caminho do PDF temporário
-                    string caminhoPDF = Path.Combine(Path.GetTempPath(), "RelatorioFlat.pdf");
-
-                    // Adicionar título
-                    AdicionarTitulo(doc);
-
-                    var flat = repositorio.Recuperar(e => e.Descricao == txtdescricaoimovel.Text);
-
-                    if (ckDadosImovel.Checked)
+                    using (Document doc = new Document(PageSize.A4))
                     {
-                        AdicionarDadosImovel(doc, flat);
+                        PdfWriter writer = PdfWriter.GetInstance(doc, memoryStream);
+                        doc.Open();
+                        // Criar documento PDF
+
+                        // Criar caminho do PDF temporário
+                        string caminhoPDF = Path.Combine(Path.GetTempPath(), "RelatorioFlat.pdf");
+
+                        // Adicionar título
+                        AdicionarTitulo(doc);
+
+                        var flat = repositorio.Recuperar(e => e.Descricao == txtdescricaoimovel.Text);
+
+                        if (ckDadosImovel.Checked)
+                        {
+                            AdicionarDadosImovel(doc, flat);
+                        }
+
+                        if (ckRendimentos.Checked)
+                        {
+                            var lancamentos = lancamentoRepositorio.Listar(l => l.idFlat == flat.id);
+                            if (lancamentos.Count > 0)
+                            {
+                                AdicionarLancamentos(doc, lancamentos);
+
+                            }
+                        }
+                        AdicionarRodape(doc, writer);
+                        doc.Close();
+
+                        string tempFilePath = Path.Combine(Path.GetTempPath(), $"TempRelatorio_{flat.Descricao}.pdf");
+                        File.WriteAllBytes(tempFilePath, memoryStream.ToArray());
+
+                        axAcropdf1.LoadFile(tempFilePath);
+                        axAcropdf1.setView("FitH");
+                        axAcropdf1.setShowToolbar(false);
+
+                        MessageBox.Show($"Pré-visualização do relatório gerada com sucesso!",
+                            "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-
-                    // Listar os lançamentos relacionados ao flat
-                    var lancamentos = lancamentoRepositorio.Listar(l => l.idFlat == flat.id);
-                    AdicionarLancamentos(doc, lancamentos);
-
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Erro ao gerar PDF: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    if (doc != null)
-                    {
-                        PdfContentByte cb = writer.DirectContent;
-                        cb.BeginText();  // Start text block
-
-                        AdicionarRodape(doc, writer);  // Add footer
-
-                        cb.EndText();  // End text block (this was missing)
-
-                        doc.Close();  // Close the document
-                    }
-
-                    // Salvar PDF e abrir para visualização
-                    SalvarEVisualizarPDF(memoryStream);
-                }
+                }              
             }
-        }
+        }    
         private void AdicionarTitulo(Document doc)
         {
-            iTextSharp.text.Font fonteTitulo = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 16, iTextSharp.text.Font.BOLD);
-            Paragraph titulo = new Paragraph("Relatório Imóvel Individual", fonteTitulo)
+            var fonteTitulo = new iTextSharp.text.Font(iTextSharp.text.Font.HELVETICA, 16, iTextSharp.text.Font.BOLD);
+            var titulo = new Paragraph($"Relatório Imóvel Individual\n\n", fonteTitulo)
             {
-                Alignment = Element.ALIGN_CENTER,
-                SpacingAfter = 20
+                Alignment = Element.ALIGN_CENTER
             };
             doc.Add(titulo);
         }
@@ -163,7 +171,9 @@ namespace SistemaFL
                 doc.Add(new Paragraph($"Plataforma: {(flat.Empresa != null ? flat.Empresa.RazaoSocial : "Não associada")}", fonteNormal));
             }
 
-            doc.Add(new Paragraph($"N° Matrícula: {flat.NumMatriculaImovel} | N° U.C Energia: {flat.NumUCEnergia} | N° Cadastro Prefeitura: {flat.NumCadastroPrefeitura}", fonteNormal)); //N Unidade Consumidora Energia , N Cad Prefeitura
+            doc.Add(new Paragraph($"N° Matrícula: {flat.NumMatriculaImovel}", fonteNormal));
+            doc.Add(new Paragraph($"N° UN Consumidora Energia: {flat.NumUCEnergia:C}", fonteNormal));
+            doc.Add(new Paragraph($"N° Cadastro Prefeitura: {flat.NumCadastroPrefeitura:C}", fonteNormal));
 
             doc.Add(new Paragraph($"Tipo Investimento: {flat.TipoInvestimento}", fonteNormal));
             doc.Add(new Paragraph(string.Format("Tamanho do Imóvel: {0} m² | Possui Garagem: {1} | Escriturado: {2} | Registrado: {3}",
@@ -171,6 +181,10 @@ namespace SistemaFL
                 flat.PossuiGaragem ? "Sim" : "Não",
                 flat.Escriturado ? "Sim" : "Não",
                 flat.Registrado ? "Sim" : "Não"), fonteNormal));
+
+            doc.Add(new Paragraph($"Mês Reajuste Aluguel: {flat.MesReajusteAluguel}", fonteNormal));
+            doc.Add(new Paragraph($"IPTU: {flat.IPTU}", fonteNormal));
+
             doc.Add(new Paragraph($"Valor de Comissão: {flat.valorComissao} | Nota: {(flat.NotaComissao ? "Sim" : "Não")}", fonteNormal));
 
             doc.Add(new Paragraph($"Valor da Escritura: {flat.ValorEscritura:C}", fonteNormal));
@@ -281,35 +295,21 @@ namespace SistemaFL
                                10, Element.ALIGN_LEFT);
 
             ct.Go();
-        }
-        private void SalvarEVisualizarPDF(MemoryStream memoryStream)
-        {
-            string tempFilePath = Path.Combine(Path.GetTempPath(), $"TempRelatorioFlatIndividual.pdf");
-            File.WriteAllBytes(tempFilePath, memoryStream.ToArray());
-
-            axAcropdf1.LoadFile(tempFilePath);
-            axAcropdf1.setView("FitH");
-            axAcropdf1.setShowToolbar(false);
-
-            MessageBox.Show("Pré-visualização do relatório gerada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        private void RelatorioFlatIndividual_Load(object sender, EventArgs e)
-        {
-            this.Location = new System.Drawing.Point(205, 41);
-            pdescricao.Enabled = false;
-
-            ckTodos.Enabled = false;
-            ckDadosImovel.Enabled = false;
-            ckRendimentos.Enabled = false;
-            btnVizualizarPdf.Enabled = false;
-        }
+        }      
         private void tTamanhotela_Tick(object sender, EventArgs e)
         {
             Estilos.ReAjustarTamanhoFormulario(this, tTamanhotela);
         }
         private void pbFechar_Click(object sender, EventArgs e)
         {
+            txtdescricaoimovel.Text = "";
+            ckTodos.Checked = false;
+            ckDadosImovel.Checked = false;
+            ckRendimentos.Checked = false;
+            btnlocalizarImóvel.Enabled = true;
+
             this.Close();
+            
         }
         private void pbMinimizar_Click(object sender, EventArgs e)
         {
@@ -330,13 +330,10 @@ namespace SistemaFL
         }
         private void btnSalvarPDF_Click(object sender, EventArgs e)
         {
-            // Caminho do arquivo temporário que foi gerado
-            string tempFilePath = Path.Combine(Path.GetTempPath(), $"TempRelatorio_{txtdescricaoimovel.Text}.pdf");
+            string tempFilePath = Path.Combine(Path.GetTempPath(), $"TempRelatorioFlatIndividual{txtdescricaoimovel.Text}.pdf");
 
-            // Verifique se o arquivo temporário foi gerado
             if (File.Exists(tempFilePath))
             {
-                // Exibir uma caixa de diálogo para o usuário escolher onde salvar o arquivo
                 SaveFileDialog saveFileDialog = new SaveFileDialog
                 {
                     FileName = $"Relatorio_Tributacao_Anual_{txtdescricaoimovel.Text}.pdf",
@@ -346,7 +343,6 @@ namespace SistemaFL
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Salvar o arquivo no local escolhido pelo usuário
                     try
                     {
                         File.Copy(tempFilePath, saveFileDialog.FileName, overwrite: true);
